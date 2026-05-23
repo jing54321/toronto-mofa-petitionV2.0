@@ -8984,7 +8984,7 @@ function AppInner() {
     emigration_cert: "emigration_cert_en",
   };
 
-  const goTo = (id) => {
+  const goTo = (id:any) => {
     if (!id || typeof id !== "string") return;
     const resolved = lang === "en" && EN_ROUTE_MAP[id] ? EN_ROUTE_MAP[id] : id;
     // 존재하지 않는 노드 방어

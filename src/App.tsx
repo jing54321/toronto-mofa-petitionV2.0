@@ -9495,7 +9495,7 @@ function AppInner() {
               {page.service && (
                 <div
                   className="service-chip"
-                  style={{ "--chip-color": serviceColor }}
+                  style={{ "--chip-color": serviceColor } as React.CSSProperties}
                 >
                   {services.find((s:any) => s.id === page.service + "_start")
                     ?.icon ??

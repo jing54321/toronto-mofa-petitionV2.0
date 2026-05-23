@@ -9164,13 +9164,13 @@ function AppInner() {
               const getSnippet = (node:any) => {
                 const candidates = [
                   ...(Array.isArray(node.docs)
-                    ? node.docs.filter((d) => !d.trim().startsWith("▸"))
+                    ? node.docs.filter((d:any) => !d.trim().startsWith("▸"))
                     : []),
                   ...(Array.isArray(node.notices)
                     ? node.notices.slice(0, 2)
                     : []),
                 ];
-                const matched = candidates.find((t) =>
+                const matched = candidates.find((t:any) =>
                   t.toLowerCase().includes(q)
                 );
                 if (!matched) return null;
@@ -9454,7 +9454,7 @@ function AppInner() {
                   </div>
                 </div>
               </div>
-              {(page.items ?? []).map((item, i) => (
+              {(page.items ?? []).map((item:any, i:any) => (
                 <div key={i} className="faq-item">
                   <button
                     className={`faq-question ${openFaq === i ? "open" : ""}`}
@@ -9497,13 +9497,13 @@ function AppInner() {
                   className="service-chip"
                   style={{ "--chip-color": serviceColor }}
                 >
-                  {services.find((s) => s.id === page.service + "_start")
+                  {services.find((s:any) => s.id === page.service + "_start")
                     ?.icon ??
-                    services.find((s) => s.id.startsWith(page.service))?.icon ??
+                    services.find((s:any) => s.id.startsWith(page.service))?.icon ??
                     "🔹"}{" "}
-                  {services.find((s) => s.id === page.service + "_start")
+                  {services.find((s:any) => s.id === page.service + "_start")
                     ?.title ??
-                    services.find((s) => s.id.startsWith(page.service))
+                    services.find((s:any) => s.id.startsWith(page.service))
                       ?.title ??
                     page.service}
                 </div>
@@ -9511,7 +9511,7 @@ function AppInner() {
               <div className="q-title">{page.question ?? ""}</div>
               {page.sub && <div className="q-sub">{page.sub}</div>}
               <div className="option-list">
-                {pageOptions.map((opt) => (
+                {pageOptions.map((opt:any) => (
                   <button
                     key={opt.id}
                     className="option-card"
@@ -9534,15 +9534,15 @@ function AppInner() {
             (() => {
               const svcIcon =
                 services.find(
-                  (s) =>
+                  (s:any) =>
                     s.id === page.service + "_start" ||
                     s.id.startsWith(page.service ?? "")
                 )?.icon ?? "";
               const mainDocs = pageDocs.filter(
-                (d) => typeof d === "string" && !d.trim().startsWith("▸")
+                (d:any) => typeof d === "string" && !d.trim().startsWith("▸")
               );
               const extraDocs = pageDocs.filter(
-                (d) => typeof d === "string" && d.trim().startsWith("▸")
+                (d:any) => typeof d === "string" && d.trim().startsWith("▸")
               );
               return (
                 <div>
@@ -9622,7 +9622,7 @@ function AppInner() {
                               ? "해당자 추가 서류"
                               : "Additional (if applicable)"}
                           </div>
-                          {extraDocs.map((doc, i) => (
+                          {extraDocs.map((doc:any, i:any) => (
                             <div
                               key={i}
                               className="doc-item"
@@ -9660,7 +9660,7 @@ function AppInner() {
                         </span>
                       </div>
                       <div className="info-card-body">
-                        {pageCosts.map((c, i) => (
+                        {pageCosts.map((c:any, i:any) => (
                           <div key={i} className="cost-row">
                             <span
                               className="cost-label"
@@ -9704,7 +9704,7 @@ function AppInner() {
                         </span>
                       </div>
                       <div className="info-card-body">
-                        {pageNotices.map((n, i) => {
+                        {pageNotices.map((n:any, i:any) => {
                           const text = typeof n === "string" ? n : "";
                           const isWarn = text.startsWith("⚠️");
                           return (

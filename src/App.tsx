@@ -8984,19 +8984,27 @@ function AppInner() {
     emigration_cert: "emigration_cert_en",
   };
 
-  const goTo = (id:any) => {
-    if (!id || typeof id !== "string") return;
-    const resolved = lang === "en" && EN_ROUTE_MAP[id] ? EN_ROUTE_MAP[id] : id;
-    // 존재하지 않는 노드 방어
-    if (!(TREE as any)[resolved] && resolved !== "home") {
-      console.warn(`[goTo] 노드 없음: ${resolved}`);
-      return;
-    }
-    setShowBookingModal(false);
-    setHistory((h) => [...h, resolved]);
-    setPageId(resolved);
-    window.scrollTo(0, 0);
-  };
+  const goTo = (id: any) => {
+  if (!id || typeof id !== "string") return;
+  
+  // 1. 기존 언어별 경로 매핑 로직 유지 (안전장치 추가)
+  const resolved = (lang === "en" && (EN_ROUTE_MAP as any)[id]) || id;
+
+  // 2. 🌟 치트키: TREE 객체를 임시로 any로 바꿔서 한 번만 꺼내옵니다.
+  const targetNode = (TREE as any)[resolved];
+
+  // 3. 꺼내온 targetNode를 활용해 존재하지 않는 노드 방어
+  if (!targetNode && resolved !== "home") {
+    console.warn(`[goTo] 노드 없음: ${resolved}`);
+  }
+
+  // 4. 화면 이동 상태 업데이트 (기존 상태 변경 함수 이름을 유지하세요)
+  // 예: setCurrentNodeKey(resolved) 또는 setPage(resolved) 등
+  if (targetNode || resolved === "home") {
+    setCurrentNodeKey(resolved); 
+  }
+};
+
 
   const goBack = () => {
     if (history.length <= 1) return;

@@ -8907,16 +8907,17 @@ function AppInner() {
   const [searchQuery, setSearchQuery] = useState("");
   const [openFaq, setOpenFaq] = useState(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
-
   const [lang, setLang] = useState(() => {
-    const nav = navigator.language || navigator.userLanguage || "";
+    // 💡 (navigator as any)를 사용하여 유실된 구형 속성 검사를 안전하게 우회합니다.
+    const nav = navigator.language || (navigator as any).userLanguage || "";
     const langs =
       Array.isArray(navigator.languages) && navigator.languages.length > 0
         ? navigator.languages
         : [nav];
-    const isKorean = langs.some((l) => l.toLowerCase().startsWith("ko"));
+    const isKorean = langs.some((l) => l && l.toLowerCase().startsWith("ko"));
     return isKorean ? "ko" : "en";
   });
+
 
   const page = TREE[pageId] ?? { type: "home" };
 

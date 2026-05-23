@@ -9029,10 +9029,11 @@ function AppInner() {
   const breadcrumb = Array.isArray(page.breadcrumb) ? page.breadcrumb : [];
   const progressPct =
     pageId === "home" ? 0 : Math.min(100, (breadcrumb.length / 5) * 100);
-  const serviceColor =
-    page.service && SERVICE_COLORS[page.service]
-      ? SERVICE_COLORS[page.service]
+    const serviceColor =
+    page.service && (SERVICE_COLORS as any)[page.service]
+      ? (SERVICE_COLORS as any)[page.service]
       : "#003478";
+
 
   // 언어에 따라 서비스 카드 배열 선택
   const services = lang === "ko" ? KO_SERVICES : EN_SERVICES;

@@ -8984,26 +8984,23 @@ function AppInner() {
     emigration_cert: "emigration_cert_en",
   };
 
-  const goTo = (id: any) => {
-  if (!id || typeof id !== "string") return;
-  
-  // 1. 기존 언어별 경로 매핑 로직 유지 (안전장치 추가)
-  const resolved = (lang === "en" && (EN_ROUTE_MAP as any)[id]) || id;
+    const goTo = (id: any) => {
+    if (!id || typeof id !== "string") return;
+    
+    // 💡 EN_ROUTE_MAP 뒤에 (as any)를 붙여서 타입스크립트 차단 에러를 완벽하게 우회합니다.
+    const resolved = lang === "en" && (EN_ROUTE_MAP as any)[id] ? (EN_ROUTE_MAP as any)[id] : id;
+    
+    // 존재하지 않는 노드 방어
+    if (!(TREE as any)[resolved] && resolved !== "home") {
+      console.warn(`[goTo] 노드 없음: ${resolved}`);
+      return;
+    }
+    setShowBookingModal(false);
+    setHistory((h) => [...h, resolved]);
+    setPageId(resolved); // 🌟 원래 사용하시던 진짜 함수 이름이 그대로 유지됩니다!
+    window.scrollTo(0, 0);
+  };
 
-  // 2. 🌟 치트키: TREE 객체를 임시로 any로 바꿔서 한 번만 꺼내옵니다.
-  const targetNode = (TREE as any)[resolved];
-
-  // 3. 꺼내온 targetNode를 활용해 존재하지 않는 노드 방어
-  if (!targetNode && resolved !== "home") {
-    console.warn(`[goTo] 노드 없음: ${resolved}`);
-  }
-
-  // 4. 화면 이동 상태 업데이트 (기존 상태 변경 함수 이름을 유지하세요)
-  // 예: setCurrentNodeKey(resolved) 또는 setPage(resolved) 등
-  if (targetNode || resolved === "home") {
-    setCurrentNodeKey(resolved); 
-  }
-};
 
 
   const goBack = () => {

@@ -1266,7 +1266,7 @@ const TREE = {
     bookingLabel: "사전 예약하기 (당일 방문) →",
   },
 
-  passport_urgent_minor: {
+  passport_urgent_minor_2: {
     type: "result",
     service: "passport",
     breadcrumb: ["홈", "여권", "미성년자", "긴급", "단수여권"],

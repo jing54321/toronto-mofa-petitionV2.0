@@ -1,67 +1,55 @@
 //import { useState, Component } from "react";
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 // ─── COLOR PALETTE ────────────────────────────────────────────────────────────
 // Navy: #003478  Red: #CD2E3A  Light blue: #E8EEF7  Gray: #F5F6F8
 
 // ─── ERROR BOUNDARY ───────────────────────────────────────────────────────────
-class ErrorBoundary extends React.Component {
-  constructor(props:any) {
+
+// 1. Props 인터페이스에 children의 타입을 반드시 명시해 줍니다.
+interface ErrorBoundaryProps {
+  children?: ReactNode; // 하위 컴포넌트들이 들어올 수 있도록 설정
+}
+
+// 2. State 인터페이스 선언 (이전 에러 해결용)
+interface ErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+// 3. Component 뒤에 정의한 두 개의 인터페이스를 차례대로 주입합니다.
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
-    (this as any).state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null };
   }
-  static getDerivedStateFromError(error:any) {
+
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
     return { hasError: true, error };
   }
+
+  componentDidCatch(error: Error, info: React.ErrorInfo) {
+    console.error("ErrorBoundary caught an error", error, info);
+  }
+
   render() {
-    if ((this.state as any).hasError) {
+    if (this.state.hasError) {
       return (
-        <div
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: "2rem",
-            fontFamily: "sans-serif",
-            background: "#F5F6F8",
-          }}
-        >
+        <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem", fontFamily: "sans-serif", background: "#F5F6F8" }}>
           <div style={{ fontSize: "40px", marginBottom: "16px" }}>⚠️</div>
-          <h2 style={{ color: "#003478", marginBottom: "8px" }}>
-            오류가 발생했습니다
-          </h2>
-          <p
-            style={{
-              color: "#667",
-              fontSize: "14px",
-              marginBottom: "24px",
-              textAlign: "center",
-            }}
-          >
+          <h2 style={{ color: "#003478", marginBottom: "8px" }}>오류가 발생했습니다</h2>
+          <p style={{ color: "#667", fontSize: "14px", marginBottom: "24px", textAlign: "center" }}>
             Something went wrong. Please try refreshing the page.
           </p>
           <button
-            onClick={() => {
-              this.setState({ hasError: false });
-              window.location.reload();
-            }}
-            style={{
-              background: "#003478",
-              color: "#fff",
-              border: "none",
-              borderRadius: "10px",
-              padding: "12px 28px",
-              fontSize: "15px",
-              fontWeight: 700,
-              cursor: "pointer",
-            }}
+            onClick={() => { this.setState({ hasError: false }); window.location.reload(); }}
+            style={{ background: "#003478", color: "#fff", border: "none", borderRadius: "10px", padding: "12px 28px", fontSize: "15px", fontWeight: 700, cursor: "pointer" }}
           >
             🏠 홈으로 / Go Home
           </button>
         </div>
       );
     }
+    // 이제 타입스크립트가 이 children의 정체를 알고 있으므로 에러 없이 통과됩니다.
     return this.props.children;
   }
 }

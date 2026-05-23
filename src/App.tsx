@@ -9598,7 +9598,7 @@ function AppInner() {
                       )}
                     </div>
                     <div className="info-card-body">
-                      {mainDocs.map((doc, i) => (
+                      {mainDocs.map((doc:any, i:any) => (
                         <div key={i} className="doc-item">
                           <div className="doc-num">{i + 1}</div>
                           <span style={{ fontWeight: 500 }}>{doc}</span>
@@ -9731,7 +9731,7 @@ function AppInner() {
                           {lang === "ko" ? "우편 신청 주소" : "Postal Address"}
                         </strong>
                         <br />
-                        {(page.postalInfo ?? "").split("\n").map((l, i) => (
+                        {(page.postalInfo ?? "").split("\n").map((l:any, i:any) => (
                           <span key={i}>
                             {l}
                             <br />

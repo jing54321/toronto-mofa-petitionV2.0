@@ -9161,7 +9161,7 @@ function AppInner() {
                   : [];
 
               // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 40자)
-              const getSnippet = (node) => {
+              const getSnippet = (node:any) => {
                 const candidates = [
                   ...(Array.isArray(node.docs)
                     ? node.docs.filter((d) => !d.trim().startsWith("▸"))

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 
 // ─── ERROR BOUNDARY ───────────────────────────────────────────────────────────
 class ErrorBoundary extends React.Component {
-  constructor(props) {
+  constructor(props:any) {
     super(props);
     this.state = { hasError: false, error: null };
   }

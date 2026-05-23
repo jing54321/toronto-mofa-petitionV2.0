@@ -9343,18 +9343,18 @@ function AppInner() {
                             : "Or browse by category"}
                         </div>
                         <div className="service-grid">
-                          {services.map((s) => (
+                          {services.map((s:any) => (
                             <button
                               key={s.id}
                               className="service-card"
                               style={{
                                 "--sc-accent":
-                                  SERVICE_COLORS[
+                                  (SERVICE_COLORS as any)[
                                     s.id
                                       .replace("_start", "")
                                       .replace("_en", "")
                                   ] ?? "#003478",
-                              }}
+                              } as React.CSSProperties }
                               onClick={() => {
                                 setSearchQuery("");
                                 goTo(s.id);
@@ -9374,16 +9374,16 @@ function AppInner() {
                   ) : (
                     /* 검색어 없을 때 기본 카드 그리드 */
                     <div className="service-grid">
-                      {services.map((s) => (
+                      {services.map((s:any) => (
                         <button
                           key={s.id}
                           className="service-card"
                           style={{
                             "--sc-accent":
-                              SERVICE_COLORS[
+                              (SERVICE_COLORS as any)[
                                 s.id.replace("_start", "").replace("_en", "")
                               ] ?? "#003478",
-                          }}
+                          }as React.CSSProperties}
                           onClick={() => goTo(s.id)}
                         >
                           <div className="sc-header">

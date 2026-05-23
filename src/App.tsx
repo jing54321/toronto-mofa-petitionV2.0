@@ -9280,7 +9280,7 @@ function AppInner() {
                                   }}
                                 >
                                   <div className="search-result-title">
-                                    {node.title ?? ""}
+                                    {(node as any).title ?? ""}
                                   </div>
                                   <div className="search-result-path">
                                     {path}
@@ -9851,7 +9851,7 @@ function AppInner() {
                     page.booking &&
                     (() => {
                       const checkDocs = pageDocs.filter(
-                        (d) =>
+                        (d:any) =>
                           typeof d === "string" && !d.trim().startsWith("▸")
                       );
                       return (
@@ -9879,7 +9879,7 @@ function AppInner() {
                             <div className="modal-body">
                               {checkDocs.length > 0 && (
                                 <div className="modal-checklist">
-                                  {checkDocs.slice(0, 6).map((doc, i) => (
+                                  {checkDocs.slice(0, 6).map((doc:any, i:any) => (
                                     <div key={i} className="modal-check-item">
                                       <div className="modal-check-num">
                                         {i + 1}

@@ -8988,7 +8988,7 @@ function AppInner() {
     if (!id || typeof id !== "string") return;
     const resolved = lang === "en" && EN_ROUTE_MAP[id] ? EN_ROUTE_MAP[id] : id;
     // 존재하지 않는 노드 방어
-    if (!TREE[resolved] && resolved !== "home") {
+    if (!(TREE as any)[resolved] && resolved !== "home") {
       console.warn(`[goTo] 노드 없음: ${resolved}`);
       return;
     }

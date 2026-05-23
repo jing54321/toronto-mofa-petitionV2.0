@@ -9266,8 +9266,8 @@ function AppInner() {
                             {searchResults.map(({ id, node }) => {
                               const snippet = getSnippet(node);
                               const path = (
-                                Array.isArray(node.breadcrumb)
-                                  ? node.breadcrumb
+                                Array.isArray((node as any).breadcrumb)
+                                  ? (node as any).breadcrumb
                                   : []
                               ).join(" › ");
                               return (

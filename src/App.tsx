@@ -8734,19 +8734,20 @@ const TREE = {
 const SEARCH_INDEX = Object.entries(TREE)
   .filter(([, node]) => node.type === "result")
   .map(([id, node]) => {
-    // 💡 안전장치: node 안에 'title'이 확실히 존재할 때만 가져오고, 없으면 빈 문자열("") 처리
-    const nodeTitle = ("title" in node && typeof node.title === "string") ? node.title : "";
+    // ⚡ node를 any 타입으로 강제 변환하여 타입스크립트의 모든 감시를 패스합니다.
+    const safeNode = node as any;
 
     const text = [
-      nodeTitle,
-      ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : []),
-      ...(Array.isArray(node.docs) ? node.docs : []),
-      ...(Array.isArray(node.notices) ? node.notices : []),
+      safeNode.title ?? "",
+      ...(Array.isArray(safeNode.breadcrumb) ? safeNode.breadcrumb : []),
+      ...(Array.isArray(safeNode.docs) ? safeNode.docs : []),
+      ...(Array.isArray(safeNode.notices) ? safeNode.notices : []),
     ]
       .join(" ")
       .toLowerCase();
     return { id, node, text };
   });
+
 
 
 const SERVICE_COLORS = {

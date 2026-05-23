@@ -9077,7 +9077,7 @@ function AppInner() {
         {pageId !== "home" && (
           <div className="progress-wrap">
             <div className="progress-steps">
-              {breadcrumb.map((label, i) => {
+              {breadcrumb.map((label:any, i:any) => {
                 const isActive = i === breadcrumb.length - 1;
                 const historyTarget = history[i] ?? "home";
                 return (

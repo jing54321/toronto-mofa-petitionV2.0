@@ -8734,8 +8734,11 @@ const TREE = {
 const SEARCH_INDEX = Object.entries(TREE)
   .filter(([, node]) => node.type === "result")
   .map(([id, node]) => {
+    // 💡 안전장치: node 안에 'title'이 확실히 존재할 때만 가져오고, 없으면 빈 문자열("") 처리
+    const nodeTitle = ("title" in node && typeof node.title === "string") ? node.title : "";
+
     const text = [
-      node.title ?? "",
+      nodeTitle,
       ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : []),
       ...(Array.isArray(node.docs) ? node.docs : []),
       ...(Array.isArray(node.notices) ? node.notices : []),
@@ -8744,6 +8747,7 @@ const SEARCH_INDEX = Object.entries(TREE)
       .toLowerCase();
     return { id, node, text };
   });
+
 
 const SERVICE_COLORS = {
   passport: "#003478",

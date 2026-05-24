@@ -29,15 +29,14 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
     console.error("ErrorBoundary caught an error", error, info);
-  }
+  } // 👈 메서드가 끝나고 클래스는 계속 유지됩니다.
 
-}
   render(): React.ReactNode {
     if (this.state.hasError) {
       return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem", fontFamily: "sans-serif", background: "#F5F6F8" }}>
           <div style={{ fontSize: "40px", marginBottom: "16px" }}>⚠️</div>
-          <h2 style={{ color: "#003478", marginBottom: "8px" }}>오류가 발생했습니다</h2>
+          <h2 style={{ color: "#003478", marginBottom: "#8px" }}>오류가 발생했습니다</h2>
           <p style={{ color: "#667", fontSize: "14px", marginBottom: "24px", textAlign: "center" }}>
             Something went wrong. Please try refreshing the page.
           </p>
@@ -52,7 +51,8 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     }
     return this.props.children;
   }
-}
+} // 👈 클래스가 여기서 완벽하게 닫힙니다.
+
 const LAST_UPDATED = "2026년 5월";  // ← 업데이트 시 이 값만 수정
 
 const STYLES = `

@@ -52,7 +52,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     }
     return this.props.children;
   }
-
+}
 const LAST_UPDATED = "2026년 5월";  // ← 업데이트 시 이 값만 수정
 
 const STYLES = `

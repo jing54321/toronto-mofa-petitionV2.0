@@ -5744,9 +5744,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               : [];
 
             // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 40자)
-            const getSnippet = (node) => {
+            const getSnippet = (node:any) => {
               const candidates = [
-                ...(Array.isArray(node.docs) ? node.docs.filter(d => !d.trim().startsWith("▸")) : []),
+                ...(Array.isArray(node.docs) ? node.docs.filter(d:any => !d.trim().startsWith("▸")) : []),
                 ...(Array.isArray(node.notices) ? node.notices.slice(0, 2) : []),
               ];
               const matched = candidates.find((t: any) => t.toLowerCase().includes(q));

@@ -5551,7 +5551,9 @@ function AppInner() {
   });
 
 
-  const page = TREE[pageId] ?? { type: "home" };
+  // ⭕ 5554행을 이 코드로 교체하세요.
+const page = (TREE as any)[pageId] ?? { type: "home" };
+
 
   // 타입 안전 헬퍼 — 배열 필드 보장
   const pageDocs    = Array.isArray(page.docs)    ? page.docs    : [];

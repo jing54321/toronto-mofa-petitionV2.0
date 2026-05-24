@@ -31,7 +31,8 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     console.error("ErrorBoundary caught an error", error, info);
   }
 
-  render() {
+}
+  render(): React.ReactNode {
     if (this.state.hasError) {
       return (
         <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem", fontFamily: "sans-serif", background: "#F5F6F8" }}>
@@ -49,12 +50,10 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
         </div>
       );
     }
-    // 이제 타입스크립트가 이 children의 정체를 알고 있으므로 에러 없이 통과됩니다.
     return this.props.children;
   }
-}
 
-const LAST_UPDATED = "2026년 5월"; // ← 업데이트 시 이 값만 수정
+const LAST_UPDATED = "2026년 5월";  // ← 업데이트 시 이 값만 수정
 
 const STYLES = `
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@400;500;600&display=swap');
@@ -637,24 +636,9 @@ const TREE = {
     question: "신청자의 연령은?",
     sub: "만 18세를 기준으로 서류 및 절차가 달라집니다.",
     options: [
-      {
-        id: "passport_adult",
-        icon: "👤",
-        title: "만 18세 이상 (성인)",
-        desc: "본인 직접 신청",
-      },
-      {
-        id: "passport_minor",
-        icon: "👶",
-        title: "만 18세 미만 (미성년자)",
-        desc: "법정대리인 동반 또는 서류 필요",
-      },
-      {
-        id: "passport_travel_doc",
-        icon: "📋",
-        title: "여행증명서",
-        desc: "여권 분실 + 신분확인 불가 시 긴급 귀국 전용 서류",
-      },
+      { id: "passport_adult", icon: "👤", title: "만 18세 이상 (성인)", desc: "본인 직접 신청" },
+      { id: "passport_minor", icon: "👶", title: "만 18세 미만 (미성년자)", desc: "법정대리인 동반 또는 서류 필요" },
+      { id: "passport_travel_doc", icon: "📋", title: "여행증명서", desc: "여권 분실 + 신분확인 불가 시 긴급 귀국 전용 서류" },
     ],
   },
 
@@ -665,24 +649,9 @@ const TREE = {
     question: "현재 여권 상태는?",
     sub: "여권 유무에 따라 준비 서류가 다릅니다.",
     options: [
-      {
-        id: "passport_adult_have",
-        icon: "✅",
-        title: "재발급 (여권 있음)",
-        desc: "만료 임박 또는 만료된 여권",
-      },
-      {
-        id: "passport_adult_lost",
-        icon: "❌",
-        title: "분실 재발급",
-        desc: "경찰 신고 후 재발급",
-      },
-      {
-        id: "passport_adult_new",
-        icon: "🆕",
-        title: "신규 발급 (여권 없음)",
-        desc: "최초 여권 발급 — 반드시 방문 신청",
-      },
+      { id: "passport_adult_have", icon: "✅", title: "재발급 (여권 있음)", desc: "만료 임박 또는 만료된 여권" },
+      { id: "passport_adult_lost", icon: "❌", title: "분실 재발급", desc: "경찰 신고 후 재발급" },
+      { id: "passport_adult_new", icon: "🆕", title: "신규 발급 (여권 없음)", desc: "최초 여권 발급 — 반드시 방문 신청" },
     ],
   },
 
@@ -693,18 +662,8 @@ const TREE = {
     question: "⚡ 일주일 이내에 긴급하게 필요하신가요?",
     sub: "긴급 여부에 따라 발급 방법이 달라집니다. 단수여권은 1회용이며 당일 발급됩니다.",
     options: [
-      {
-        id: "passport_urgent_who",
-        icon: "🚨",
-        title: "긴급 — 1주일 이내 필요",
-        desc: "단수여권(사진부착식) 당일 발급 — 긴급 귀국·출국 사유 필요",
-      },
-      {
-        id: "passport_adult_have_normal",
-        icon: "📅",
-        title: "일반 발급 (여유 있음)",
-        desc: "일반 전자여권 3~4주 / DHL 특급 약 2주",
-      },
+      { id: "passport_urgent_who", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권(사진부착식) 당일 발급 — 긴급 귀국·출국 사유 필요" },
+      { id: "passport_adult_have_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
     ],
   },
 
@@ -715,18 +674,8 @@ const TREE = {
     question: "⚡ 일주일 이내에 긴급하게 필요하신가요?",
     sub: "신규 발급은 기존 여권이 없으므로 온라인 신청 불가, 반드시 방문 신청입니다.",
     options: [
-      {
-        id: "passport_urgent_who",
-        icon: "🚨",
-        title: "긴급 — 1주일 이내 필요",
-        desc: "단수여권(사진부착식) 당일 발급 — 긴급 귀국·출국 사유 필요",
-      },
-      {
-        id: "passport_new_normal",
-        icon: "📅",
-        title: "일반 발급 (여유 있음)",
-        desc: "일반 전자여권 3~4주 / DHL 특급 약 2주",
-      },
+      { id: "passport_urgent_who_new", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권(사진부착식) 당일 발급 — 긴급 귀국·출국 사유 필요" },
+      { id: "passport_new_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
     ],
   },
 
@@ -737,22 +686,12 @@ const TREE = {
     question: "⚡ 일주일 이내에 긴급하게 필요하신가요?",
     sub: "분실 시에도 긴급 단수여권 발급이 가능합니다. 먼저 경찰 분실 신고를 완료하세요.",
     options: [
-      {
-        id: "passport_urgent_lost_who",
-        icon: "🚨",
-        title: "긴급 — 1주일 이내 필요",
-        desc: "단수여권 당일 발급 또는 여행증명서 (신분확인 불가 시)",
-      },
-      {
-        id: "passport_lost_normal",
-        icon: "📅",
-        title: "일반 발급 (여유 있음)",
-        desc: "일반 전자여권 3~4주 / DHL 특급 약 2주",
-      },
+      { id: "passport_urgent_lost_who", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권 당일 발급 또는 여행증명서 (신분확인 불가 시)" },
+      { id: "passport_lost_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
     ],
   },
 
-  // ── 성인 긴급 — 체류신분 분기 ──
+  // ── 성인 긴급 — 체류신분 분기 (재발급/분실용 — eTA 포함) ──
   passport_urgent_who: {
     type: "question",
     service: "passport",
@@ -760,31 +699,87 @@ const TREE = {
     question: "캐나다 체류 신분은?",
     sub: "체류신분에 따라 지참해야 하는 서류가 달라집니다.",
     options: [
-      {
-        id: "passport_urgent_pr",
-        icon: "🟢",
-        title: "영주권자 (PR Card)",
-        desc: "Permanent Resident",
-      },
-      {
-        id: "passport_urgent_citizen",
-        icon: "🍁",
-        title: "시민권자",
-        desc: "Canadian Citizen — 국적상실신고 관련 주의사항 있음",
-      },
-      {
-        id: "passport_urgent_visa",
-        icon: "📋",
-        title: "비자 소지자",
-        desc: "학생·취업·방문 비자 등",
-      },
-      {
-        id: "passport_urgent_eta",
-        icon: "✈️",
-        title: "단기 방문자 (eTA)",
-        desc: "한국에서 캐나다로 관광·방문 중인 경우",
-      },
+      { id: "passport_urgent_pr", icon: "🟢", title: "영주권자 (PR Card)", desc: "Permanent Resident" },
+      { id: "passport_urgent_citizen", icon: "🍁", title: "시민권자", desc: "Canadian Citizen — 국적상실신고 관련 주의사항 있음" },
+      { id: "passport_urgent_visa", icon: "📋", title: "비자 소지자", desc: "학생·취업·방문 비자 등" },
+      { id: "passport_urgent_eta", icon: "✈️", title: "단기 방문자 (eTA)", desc: "한국에서 캐나다로 관광·방문 중인 경우" },
     ],
+  },
+
+  // ── 성인 긴급 — 신규 전용 (eTA 제외) ──
+  passport_urgent_who_new: {
+    type: "question",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "긴급", "신청 사유"],
+    question: "어떤 이유로 처음 여권을 발급받으시나요?",
+    sub: "긴급 단수여권도 신규 사유에 따라 지참 서류가 다릅니다.",
+    options: [
+      { id: "passport_urgent_new_dual", icon: "🧬", title: "선천적 복수국적자 — 한국 여권 미발급", desc: "캐나다 출생, 성인 전 한국 여권 발급 없이 성인이 된 경우" },
+      { id: "passport_urgent_new_recovery", icon: "🇰🇷", title: "국적 회복 후 첫 여권 신청", desc: "국적회복 허가를 받은 후 처음 여권 신청" },
+    ],
+  },
+
+  passport_urgent_new_dual: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "긴급", "선천적 복수국적자"],
+    title: "⚡ 긴급 단수여권 — 신규 · 선천적 복수국적자",
+    docs: [
+      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "기본증명서 (상세) — 한국 발급, 3개월 이내 (부/모 한국인 표기 확인)",
+      "가족관계증명서 (상세) — 한국 발급, 3개월 이내",
+      "캐나다 출생증명서 (Birth Certificate) 원본 + 사본",
+      "캐나다 여권 또는 시민권증서 원본 + 사본",
+      "부 또는 모의 한국 여권 또는 신분증 사본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
+      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
+      "  ▸ 만 18~37세 남성: 병역 관련 서류 — 방문 전 반드시 전화 상담 (416-920-3809)",
+    ],
+    costs: [
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
+    ],
+    time: "당일 발급 — 영사 심사 후 결정",
+    notices: [
+      "⚠️ 한국 출생신고(가족관계등록부 등재)가 완료되어 있어야 합니다. 미등록 시 당일 발급 불가 — 사전 전화 필수 (416-920-3809).",
+      "⚠️ 만 18~37세 남성 복수국적자: 병역 서류 미비 시 발급 거부될 수 있음 — 방문 전 반드시 전화 상담.",
+      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
+      "단수여권은 1회용 — 귀국 후 반드시 정식 전자여권 별도 신청.",
+      "수령: 방문 당일 직접 수령만 가능 (우편·DHL 불가).",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
+  },
+
+  passport_urgent_new_recovery: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "긴급", "국적 회복"],
+    title: "⚡ 긴급 단수여권 — 신규 · 국적 회복 후",
+    docs: [
+      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "국적회복 허가서 원본 + 사본 (법무부 발급)",
+      "기본증명서 (상세) — 3개월 이내",
+      "가족관계증명서 (상세) — 3개월 이내",
+      "캐나다 여권 또는 PR Card 원본 + 사본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
+      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
+    ],
+    costs: [
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
+    ],
+    time: "당일 발급 — 영사 심사 후 결정",
+    notices: [
+      "⚠️ 국적회복 허가서 없이는 발급 불가 — 사전 준비 필수.",
+      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
+      "단수여권은 1회용 — 귀국 후 반드시 정식 전자여권 별도 신청.",
+      "수령: 방문 당일 직접 수령만 가능 (우편·DHL 불가).",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
   },
 
   passport_urgent_lost_who: {
@@ -794,30 +789,10 @@ const TREE = {
     question: "캐나다 체류 신분은?",
     sub: "⚠️ 분실 시 경찰 신고(Police Report)를 먼저 완료하세요. 체류신분에 따라 서류가 달라집니다.",
     options: [
-      {
-        id: "passport_urgent_lost_pr",
-        icon: "🟢",
-        title: "영주권자 (PR Card)",
-        desc: "PR카드 분실 여부에 따라 서류 다름",
-      },
-      {
-        id: "passport_urgent_lost_citizen",
-        icon: "🍁",
-        title: "시민권자",
-        desc: "시민권증서 지참 필요",
-      },
-      {
-        id: "passport_urgent_lost_visa",
-        icon: "📋",
-        title: "비자 소지자",
-        desc: "비자 사본·기본증명서 등으로 신분 확인",
-      },
-      {
-        id: "passport_urgent_lost_eta",
-        icon: "✈️",
-        title: "단기 방문자 (eTA)",
-        desc: "항공권 + eTA 승인서류 필수",
-      },
+      { id: "passport_urgent_lost_pr", icon: "🟢", title: "영주권자 (PR Card)", desc: "PR카드 분실 여부에 따라 서류 다름" },
+      { id: "passport_urgent_lost_citizen", icon: "🍁", title: "시민권자", desc: "시민권증서 지참 필요" },
+      { id: "passport_urgent_lost_visa", icon: "📋", title: "비자 소지자", desc: "비자 사본·기본증명서 등으로 신분 확인" },
+      { id: "passport_urgent_lost_eta", icon: "✈️", title: "단기 방문자 (eTA)", desc: "항공권 + eTA 승인서류 필수" },
     ],
   },
 
@@ -1066,24 +1041,11 @@ const TREE = {
     question: "부모 친권 상황은?",
     sub: "긴급 상황이라도 친권 상황에 따라 지참 서류가 달라집니다. 방문 전 미리 확인하세요.",
     options: [
-      {
-        id: "passport_urgent_minor_married",
-        icon: "👨‍👩‍👧",
-        title: "부모 혼인 중 (공동친권)",
-        desc: "부·모 여권 사본 모두 필요",
-      },
-      {
-        id: "passport_urgent_minor_sole",
-        icon: "👤",
-        title: "이혼 후 단독친권",
-        desc: "단독친권자만 방문·서명",
-      },
-      {
-        id: "passport_urgent_minor_korea",
-        icon: "🇰🇷",
-        title: "법정대리인이 한국에 거주",
-        desc: "인감도장 + 인감증명서 필요 — 긴급 시 사전 전화 필수",
-      },
+      { id: "passport_urgent_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "부·모 여권 사본 모두 필요" },
+      { id: "passport_urgent_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "단독친권자만 방문·서명" },
+      { id: "passport_urgent_minor_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },
+      { id: "passport_urgent_minor_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 방문" },
+      { id: "passport_urgent_minor_korea", icon: "🇰🇷", title: "법정대리인이 한국에 거주", desc: "인감도장 + 인감증명서 필요 — 긴급 시 사전 전화 필수" },
     ],
   },
 
@@ -1150,7 +1112,71 @@ const TREE = {
     bookingLabel: "사전 예약하기 (당일 방문) →",
   },
 
-  passport_urgent_minor_korea: {
+  passport_urgent_minor_joint: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "긴급", "이혼·공동친권"],
+    title: "⚡ 미성년자 긴급 단수여권 — 이혼 후 공동친권",
+    docs: [
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드 — 여행국가명 또는 출발예정일 기재)",
+      "자녀 여권 원본 + 흑백 사본 (있는 경우) / 없으면 기본증명서 또는 가족관계증명서",
+      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기재, 방문하는 친권자가 서명",
+      "방문하는 공동친권자 여권 원본",
+      "비방문 공동친권자 여권 사본 1부",
+      "공동친권 확인: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)",
+      "자녀 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
+      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
+    ],
+    costs: [
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
+    ],
+    time: "당일 발급 — 영사 심사 후 결정",
+    notices: [
+      "⚠️ 공동친권: 양쪽 친권자 모두의 동의가 필요합니다 — 한 쪽이 반대하면 발급 제한.",
+      "⚠️ 비방문 친권자 여권 사본 반드시 지참.",
+      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
+      "단수여권 1회용 — 여행 목적 달성 후 정식 전자여권 별도 신청.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
+  },
+
+  passport_urgent_minor_single: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "긴급", "한부모"],
+    title: "⚡ 미성년자 긴급 단수여권 — 한부모 (사별 / 미혼)",
+    docs: [
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "자녀 여권 원본 + 흑백 사본 (있는 경우) / 없으면 기본증명서 또는 가족관계증명서",
+      "법정대리인 동의서 — 생존 친권자만 인적사항 기재 및 서명",
+      "생존 친권자 여권 원본",
+      "자녀 체류자격 증빙서류 원본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
+      "긴급 출국 사유 증빙서류",
+      "  ▸ 사별의 경우: 사망한 배우자의 사망증명서",
+      "  ▸ 기본증명서 (상세) — 단독친권 또는 사망 사실 표기된 것",
+    ],
+    costs: [
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
+    ],
+    time: "당일 발급 — 영사 심사 후 결정",
+    notices: [
+      "⚠️ 생존 친권자만 방문·서명 가능.",
+      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
+      "기본증명서(상세)에 단독친권 또는 사망 사실이 표기되어야 합니다.",
+      "단수여권 1회용 — 여행 목적 달성 후 정식 전자여권 별도 신청.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
+  },
+
+    passport_urgent_minor_korea: {
     type: "result",
     service: "passport",
     breadcrumb: ["홈", "여권", "미성년자", "긴급", "법정대리인 한국 거주"],
@@ -1202,14 +1228,8 @@ const TREE = {
     ],
     costs: [
       { label: "일반 긴급여권 수수료", value: "CAD $48.00 (현금)" },
-      {
-        label: "친족 사망·위독 등 인도적 사유 (감면)",
-        value: "CAD $15.00 (현금)",
-      },
-      {
-        label: "감면 조건",
-        value: "사전 또는 방문 후 6개월 이내 증빙서류 제출 시 적용",
-      },
+      { label: "친족 사망·위독 등 인도적 사유 (감면)", value: "CAD $15.00 (현금)" },
+      { label: "감면 조건", value: "사전 또는 방문 후 6개월 이내 증빙서류 제출 시 적용" },
     ],
     time: "당일 발급 (방문 즉시) — 영사 심사 후 발급 결정",
     notices: [
@@ -1244,14 +1264,8 @@ const TREE = {
     ],
     costs: [
       { label: "일반 긴급여권 수수료", value: "CAD $48.00 (현금)" },
-      {
-        label: "친족 사망·위독 등 인도적 사유 (감면)",
-        value: "CAD $15.00 (현금)",
-      },
-      {
-        label: "감면 조건",
-        value: "사전 또는 방문 후 6개월 이내 증빙서류 제출 시 적용",
-      },
+      { label: "친족 사망·위독 등 인도적 사유 (감면)", value: "CAD $15.00 (현금)" },
+      { label: "감면 조건", value: "사전 또는 방문 후 6개월 이내 증빙서류 제출 시 적용" },
     ],
     time: "당일 발급 (영사 심사 후 결정)",
     notices: [
@@ -1266,7 +1280,7 @@ const TREE = {
     bookingLabel: "사전 예약하기 (당일 방문) →",
   },
 
-  passport_urgent_minor_2: {
+  passport_urgent_minor: {
     type: "result",
     service: "passport",
     breadcrumb: ["홈", "여권", "미성년자", "긴급", "단수여권"],
@@ -1286,10 +1300,7 @@ const TREE = {
     costs: [
       { label: "만 8~17세 긴급여권", value: "CAD $48.00 (현금)" },
       { label: "만 8세 미만 긴급여권", value: "CAD $48.00 (현금)" },
-      {
-        label: "친족 사망·위독 등 인도적 사유 (감면)",
-        value: "CAD $15.00 (현금)",
-      },
+      { label: "친족 사망·위독 등 인도적 사유 (감면)", value: "CAD $15.00 (현금)" },
     ],
     time: "당일 발급 (영사 심사 후 결정)",
     notices: [
@@ -1320,7 +1331,9 @@ const TREE = {
       "여권용 사진 1매 — 사진관 촬영본 지참",
       "긴급 귀국 사유 증빙서류 (항공권 / 진단서 / 사망증명서 등)",
     ],
-    costs: [{ label: "여행증명서 수수료", value: "CAD $15.00 (현금)" }],
+    costs: [
+      { label: "여행증명서 수수료", value: "CAD $15.00 (현금)" },
+    ],
     time: "당일 발급 (영사 심사 후 결정)",
     notices: [
       "여행증명서는 한국 귀국만을 위한 1회용 긴급서류입니다 — 다른 국가 방문에는 사용 불가.",
@@ -1340,30 +1353,10 @@ const TREE = {
     question: "캐나다 체류 신분은?",
     sub: "체류 신분에 따라 준비할 증빙서류가 달라집니다.",
     options: [
-      {
-        id: "passport_have_pr",
-        icon: "🟢",
-        title: "영주권자 (PR Card 소지)",
-        desc: "Permanent Resident",
-      },
-      {
-        id: "passport_have_citizen",
-        icon: "🍁",
-        title: "시민권자",
-        desc: "Canadian Citizen",
-      },
-      {
-        id: "passport_have_visa",
-        icon: "📋",
-        title: "비자 소지자",
-        desc: "학생/취업/방문 비자 등",
-      },
-      {
-        id: "passport_have_visitor",
-        icon: "✈️",
-        title: "단기 방문자 (eTA)",
-        desc: "관광·단기 방문으로 입국한 여행자",
-      },
+      { id: "passport_have_pr", icon: "🟢", title: "영주권자 (PR Card 소지)", desc: "Permanent Resident" },
+      { id: "passport_have_citizen", icon: "🍁", title: "시민권자", desc: "Canadian Citizen" },
+      { id: "passport_have_visa", icon: "📋", title: "비자 소지자", desc: "학생/취업/방문 비자 등" },
+      { id: "passport_have_visitor", icon: "✈️", title: "단기 방문자 (eTA)", desc: "관광·단기 방문으로 입국한 여행자" },
     ],
   },
 
@@ -1371,28 +1364,120 @@ const TREE = {
     type: "question",
     service: "passport",
     breadcrumb: ["홈", "여권", "성인", "신규", "일반"],
-    question: "캐나다 체류 신분은?",
-    sub: "신규 발급은 기본증명서·가족관계증명서가 반드시 필요합니다.",
+    question: "어떤 이유로 처음 여권을 발급받으시나요?",
+    sub: "성인이 캐나다에서 한국 여권을 처음 발급받는 경우는 상황이 한정되어 있습니다. 해당하는 경우를 선택하세요.",
     options: [
-      {
-        id: "passport_new_pr",
-        icon: "🟢",
-        title: "영주권자 (PR Card 소지)",
-        desc: "Permanent Resident",
-      },
-      {
-        id: "passport_new_citizen",
-        icon: "🍁",
-        title: "시민권자",
-        desc: "Canadian Citizen",
-      },
-      {
-        id: "passport_new_visa",
-        icon: "📋",
-        title: "비자 소지자",
-        desc: "학생/취업/방문 비자 등",
-      },
+      { id: "passport_new_dual", icon: "🧬", title: "선천적 복수국적자 — 한국 여권 미발급", desc: "캐나다 출생 또는 성인 전 한국 여권 발급 없이 성인이 된 경우" },
+      { id: "passport_new_recovery", icon: "🇰🇷", title: "국적 회복 후 첫 여권 신청", desc: "국적회복 허가를 받은 후 처음 여권 신청" },
     ],
+  },
+
+  // ── 신규 — 선천적 복수국적자 ──
+  passport_new_dual: {
+    type: "question",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "선천적 복수국적자"],
+    question: "발급된 여권을 어떻게 받으시겠어요?",
+    sub: "신규 발급은 반드시 방문 신청입니다. 수령 방법을 선택하세요.",
+    options: [
+      { id: "passport_new_dual_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_new_dual_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+    ],
+  },
+
+  passport_new_dual_visit: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "복수국적자", "방문수령"],
+    title: "여권 신규 발급 — 선천적 복수국적자 · 방문 수령",
+    docs: [
+      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력)",
+      "기본증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
+      "  ▸ 기본증명서에 부 또는 모가 한국인임이 표기되어야 합니다",
+      "가족관계증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
+      "캐나다 출생증명서 (Birth Certificate) 원본 + 사본",
+      "캐나다 여권 또는 시민권증서 원본 + 사본",
+      "부 또는 모의 한국 여권 또는 신분증 사본 (한국 국적 확인용)",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 가능)",
+      "  ▸ 한국 출생신고가 안 된 경우: 출생신고 먼저 완료 후 신청 (가족관계등록 메뉴 참조)",
+      "  ▸ 만 18~37세 남성: 병역 관련 서류 추가 필요 — 방문 전 전화 상담 권장 (416-920-3809)",
+    ],
+    costs: [
+      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
+      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
+    ],
+    time: "약 3~4주 후 방문 수령",
+    notices: [
+      "⚠️ 한국 출생신고(가족관계등록부 등재)가 완료되어 있어야 여권 신청 가능합니다. 미등록 시 가족관계등록 메뉴에서 출생신고를 먼저 진행하세요.",
+      "⚠️ 만 18~37세 남성 복수국적자: 재외국민2세 국외여행허가 또는 병역 관련 서류가 필요할 수 있습니다. 방문 전 전화 상담 필수 (416-920-3809).",
+      "기본증명서·가족관계증명서는 정부24(gov.kr) 온라인 발급 또는 한국 주민센터에서 발급하세요.",
+      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
+      "영문 이름은 신청서에 반드시 대문자로 정확히 기재.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (여권 → 신규 발급) →",
+  },
+
+  passport_new_dual_xpress: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "복수국적자", "우편수령"],
+    title: "여권 신규 발급 — 선천적 복수국적자 · 우편 수령",
+    docs: [
+      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력)",
+      "기본증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
+      "  ▸ 기본증명서에 부 또는 모가 한국인임이 표기되어야 합니다",
+      "가족관계증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
+      "캐나다 출생증명서 (Birth Certificate) 원본 + 사본",
+      "캐나다 여권 또는 시민권증서 원본 + 사본",
+      "부 또는 모의 한국 여권 또는 신분증 사본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 가능)",
+      "Canada Post Xpresspost 등기 봉투 (별도 구매, 수취인 주소·Tracking 기재)",
+      "우편수령 신청서",
+      "  ▸ 만 18~37세 남성: 병역 관련 서류 — 방문 전 전화 상담 필수 (416-920-3809)",
+    ],
+    costs: [
+      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
+      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
+    ],
+    time: "약 3~4주 + 우편 배송 기간",
+    notices: [
+      "⚠️ 한국 출생신고가 완료되어 있어야 여권 신청 가능합니다.",
+      "⚠️ 만 18~37세 남성 복수국적자: 병역 관련 서류 필요 — 방문 전 전화 상담 필수 (416-920-3809).",
+      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
+      "우편 분실에 대해 영사관은 책임지지 않습니다 — Xpresspost 등기 봉투 사용 권장.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (여권 → 신규 발급) →",
+  },
+
+  // ── 신규 — 국적 회복 ──
+  passport_new_recovery: {
+    type: "result",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "성인", "신규", "국적 회복"],
+    title: "여권 신규 발급 — 국적 회복 후 첫 여권 신청",
+    docs: [
+      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력)",
+      "국적회복 허가서 원본 + 사본 (법무부 발급)",
+      "기본증명서 (상세, 주민번호 전부 공개) — 3개월 이내",
+      "가족관계증명서 (상세) — 3개월 이내",
+      "캐나다 여권 또는 PR Card 원본 + 사본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 가능)",
+      "  ▸ 우편 수령 희망 시: Canada Post Xpresspost 등기 봉투 + 우편수령 신청서",
+    ],
+    costs: [
+      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
+      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
+    ],
+    time: "약 3~4주",
+    notices: [
+      "⚠️ 국적회복 허가서는 법무부에서 발급 — 영사관에서 발급 불가.",
+      "국적 회복 절차는 홈 → 국적 → 한국 국적 회복 메뉴를 참조하세요.",
+      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (여권 → 신규 발급) →",
   },
 
   passport_lost_normal: {
@@ -1400,26 +1485,12 @@ const TREE = {
     service: "passport",
     breadcrumb: ["홈", "여권", "성인", "분실", "일반"],
     question: "캐나다 체류 신분은?",
-    sub: "분실 신고(Police Report)를 먼저 완료한 후 방문하세요.",
+    sub: "분실 신고(Police Report)를 먼저 완료한 후 방문하세요. 체류신분에 따라 지참 서류가 달라집니다.",
     options: [
-      {
-        id: "passport_lost_pr",
-        icon: "🟢",
-        title: "영주권자 (PR Card)",
-        desc: "Permanent Resident",
-      },
-      {
-        id: "passport_lost_citizen",
-        icon: "🍁",
-        title: "시민권자",
-        desc: "Canadian Citizen",
-      },
-      {
-        id: "passport_lost_visa",
-        icon: "📋",
-        title: "비자 소지자",
-        desc: "학생/취업 비자 등",
-      },
+      { id: "passport_lost_pr", icon: "🟢", title: "영주권자 (PR Card)", desc: "Permanent Resident" },
+      { id: "passport_lost_citizen", icon: "🍁", title: "시민권자", desc: "Canadian Citizen" },
+      { id: "passport_lost_visa", icon: "📋", title: "비자 소지자", desc: "학생·취업·방문 비자 등" },
+      { id: "passport_lost_eta", icon: "✈️", title: "단기 방문자 (eTA)", desc: "한국에서 캐나다로 관광·방문 중인 경우" },
     ],
   },
 
@@ -1430,24 +1501,9 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
     options: [
-      {
-        id: "passport_have_pr_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_have_pr_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_have_pr_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_have_pr_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_have_pr_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_have_pr_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
@@ -1458,24 +1514,9 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
     options: [
-      {
-        id: "passport_have_citizen_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_have_citizen_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_have_citizen_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_have_citizen_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_have_citizen_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_have_citizen_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
@@ -1486,24 +1527,9 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
     options: [
-      {
-        id: "passport_have_visa_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_have_visa_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_have_visa_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_have_visa_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_have_visa_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_have_visa_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
@@ -1514,110 +1540,14 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "단기 방문자는 귀국 일정이 촉박할 수 있습니다. 확인 후 선택하세요.",
     options: [
-      {
-        id: "passport_have_visitor_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_have_visitor_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_have_visitor_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_have_visitor_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_have_visitor_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_have_visitor_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
-  passport_new_pr: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "영주권자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
-    options: [
-      {
-        id: "passport_new_pr_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_new_pr_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_new_pr_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
-    ],
-  },
 
-  passport_new_citizen: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "시민권자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
-    options: [
-      {
-        id: "passport_new_citizen_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_new_citizen_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_new_citizen_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
-    ],
-  },
 
-  passport_new_visa: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "비자소지자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
-    options: [
-      {
-        id: "passport_new_visa_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_new_visa_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_new_visa_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
-    ],
-  },
 
   passport_lost_pr: {
     type: "question",
@@ -1626,24 +1556,9 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "분실 재발급 후 수령 방법을 선택하세요.",
     options: [
-      {
-        id: "passport_lost_pr_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_lost_pr_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_lost_pr_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_lost_pr_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_lost_pr_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_lost_pr_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
@@ -1654,24 +1569,9 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "분실 재발급 후 수령 방법을 선택하세요.",
     options: [
-      {
-        id: "passport_lost_citizen_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_lost_citizen_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_lost_citizen_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_lost_citizen_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_lost_citizen_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_lost_citizen_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
@@ -1682,1437 +1582,343 @@ const TREE = {
     question: "발급된 여권을 어떻게 받으시겠어요?",
     sub: "분실 재발급 후 수령 방법을 선택하세요.",
     options: [
-      {
-        id: "passport_lost_visa_visit",
-        icon: "🏛️",
-        title: "영사관 직접 방문 수령",
-        desc: "접수증 지참 후 예약 없이 픽업 가능",
-      },
-      {
-        id: "passport_lost_visa_xpress",
-        icon: "📮",
-        title: "우편 수령 (Canada Post Xpresspost)",
-        desc: "등기 봉투 별도 구매 후 지참",
-      },
-      {
-        id: "passport_lost_visa_dhl",
-        icon: "🚀",
-        title: "DHL 특급 (약 2주, 비용 별도)",
-        desc: "사전 DHL 결제 후 영수증 지참",
-      },
+      { id: "passport_lost_visa_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_lost_visa_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "passport_lost_visa_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
     ],
   },
 
   passport_have_pr_visit: {
-    type: "result",
-    service: "passport",
+    type: "result", service: "passport",
     breadcrumb: ["홈", "여권", "재발급", "영주권자", "방문수령"],
     title: "여권 재발급 — 영주권자 · 방문 수령",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 후 작성 가능)",
-      "현재 여권 원본 + 흑백 사본 1부 (어둡거나 컬러 복사 불가)",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능, 진한색 상의)",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
+    docs: ["여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 후 작성 가능)","현재 여권 원본 + 흑백 사본 1부 (어둡거나 컬러 복사 불가)","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능, 진한색 상의)"],
+    costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }],
     time: "약 3~4주 후 방문 수령",
-    notices: [
-      "여권 수령 시 별도 예약 없이 접수증 지참 후 픽업 가능 (오후 픽업 시간 확인 권장).",
-      "PR Card 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.",
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.",
-      "온라인 재발급도 가능합니다 (기존 전자여권 소지자 + 공동인증서 보유 시).",
-    ],
+    notices: ["여권 수령 시 별도 예약 없이 접수증 지참 후 픽업 가능 (오후 픽업 시간 확인 권장).","PR Card 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","온라인 재발급도 가능합니다 (기존 전자여권 소지자 + 공동인증서 보유 시)."],
     booking: "https://www.torbooking.com/book",
-    onlineRenewal:
-      "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/view.do?seq=1344521",
+    onlineRenewal: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/view.do?seq=1344521",
   },
 
   passport_have_pr_xpress: {
-    type: "result",
-    service: "passport",
+    type: "result", service: "passport",
     breadcrumb: ["홈", "여권", "재발급", "영주권자", "Xpresspost"],
     title: "여권 재발급 — 영주권자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성)",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
-      "우편수령신청서 (영사관 홈페이지 다운로드, 자필 작성)",
-      "Canada Post Xpresspost 봉투 — Canada Post에서 구매 후 수취인 주소·이름 기재하여 지참 (1인: 소형, 2인 이상: 대형)",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "Xpresspost 봉투 (Canada Post)", value: "별도 구매" },
-    ],
+    docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 여권 원본 + 흑백 사본 1부","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","우편수령신청서 (영사관 홈페이지 다운로드, 자필 작성)","Canada Post Xpresspost 봉투 — Canada Post에서 구매 후 수취인 주소·이름 기재하여 지참 (1인: 소형, 2인 이상: 대형)"],
+    costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "Xpresspost 봉투 (Canada Post)", value: "별도 구매" }],
     time: "약 3~4주 발급 + 우편 배송 기간 (3~5일)",
-    notices: [
-      "Xpresspost 봉투는 Canada Post(우체국)에서 미리 구매하여 수취인 정보를 기재해 오세요.",
-      "우편 분실·파손에 대해 영사관은 책임지지 않습니다.",
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.",
-      "PR Card 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.",
-    ],
+    notices: ["Xpresspost 봉투는 Canada Post(우체국)에서 미리 구매하여 수취인 정보를 기재해 오세요.","우편 분실·파손에 대해 영사관은 책임지지 않습니다.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","PR Card 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수."],
     booking: "https://www.torbooking.com/book",
   },
 
   passport_have_pr_dhl: {
-    type: "result",
-    service: "passport",
+    type: "result", service: "passport",
     breadcrumb: ["홈", "여권", "재발급", "영주권자", "DHL특급"],
     title: "여권 재발급 — 영주권자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성)",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
-      "DHL 긴급여권 서비스 결제 영수증 출력본 — 방문 전 온라인 결제 필수",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도 (온라인 결제)" },
-    ],
+    docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 여권 원본 + 흑백 사본 1부","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","DHL 긴급여권 서비스 결제 영수증 출력본 — 방문 전 온라인 결제 필수"],
+    costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }],
     time: "약 2주 (DHL 특급 배송 기준)",
-    notices: [
-      "방문 전 반드시 DHL 긴급여권 서비스를 온라인으로 결제하고 영수증을 출력해 오세요.",
-      "DHL 서비스는 한국→영사관 배송 단축 서비스이며, 자택 직접 배송이 아닙니다.",
-      "여권 완성 후 영사관에서 방문 수령하거나 Xpresspost로 별도 우편 수령 가능.",
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.",
-    ],
+    notices: ["방문 전 반드시 DHL 긴급여권 서비스를 온라인으로 결제하고 영수증을 출력해 오세요.","DHL 서비스는 한국→영사관 배송 단축 서비스이며, 자택 직접 배송이 아닙니다.","여권 완성 후 영사관에서 방문 수령하거나 Xpresspost로 별도 우편 수령 가능.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가."],
     booking: "https://www.torbooking.com/book",
-    onlineLink:
-      "https://www.dhl.com/kr-ko/home/our-divisions/ecommerce/sending-parcels.html",
+    onlineLink: "https://www.dhl.com/kr-ko/home/our-divisions/ecommerce/sending-parcels.html",
   },
 
-  passport_have_citizen_visit: {
-    type: "result",
+  passport_have_citizen_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "시민권자", "방문수령"], title: "여권 재발급 — 시민권자 · 방문 수령", docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 한국 여권 원본 + 흑백 사본 1부","캐나다 여권 원본 + 흑백 사본 1부","캐나다 시민권증서 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주 후 방문 수령", notices: ["시민권 취득 시 한국 국적이 법적으로 상실됩니다 — 국적상실신고를 별도로 진행하세요.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","온라인 재발급도 가능합니다 (기존 전자여권 소지자 + 공동인증서 보유 시)."], booking: "https://www.torbooking.com/book", onlineRenewal: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/view.do?seq=1344521" },
+  passport_have_citizen_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "시민권자", "Xpresspost"], title: "여권 재발급 — 시민권자 · Xpresspost 우편 수령", docs: ["여권발급신청서","현재 한국 여권 원본 + 흑백 사본 1부","캐나다 여권 원본 + 흑백 사본 1부","캐나다 시민권증서 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","우편수령신청서 (홈페이지 다운로드, 자필 작성)","Canada Post Xpresspost 봉투 — 수취인 주소·이름 기재 후 지참"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 발급 + 우편 배송 기간", notices: ["시민권 취득 시 한국 국적 상실 — 국적상실신고 별도 진행 필요.","우편 분실·파손에 대해 영사관은 책임지지 않습니다.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가."], booking: "https://www.torbooking.com/book" },
+  passport_have_citizen_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "시민권자", "DHL특급"], title: "여권 재발급 — 시민권자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","현재 한국 여권 원본 + 흑백 사본 1부","캐나다 여권 원본 + 흑백 사본 1부","캐나다 시민권증서 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }], time: "약 2주", notices: ["시민권 취득 시 한국 국적 상실 — 국적상실신고 별도 진행 필요.","방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.","DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님)."], booking: "https://www.torbooking.com/book" },
+
+  passport_have_visa_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "비자소지자", "방문수령"], title: "여권 재발급 — 비자 소지자 · 방문 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","캐나다 비자 원본 + 흑백 사본 1부 (비자 분실 시 재학·재직증명서 등 대체)","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","병역 증빙서류 (만 25~37세 병역의무자, 전산 확인 불가 시만 해당)"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },{ label: "병역미필자 알뜰 (24면)", value: "CAD $41.00 (현금)" }], time: "약 3~4주 후 방문 수령", notices: ["사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","비자 분실 시 여권과(416-920-3809)에 사전 전화 상담 권장.","만 25~37세 남성 병역의무자는 병역 증빙서류 필요할 수 있습니다."], booking: "https://www.torbooking.com/book" },
+  passport_have_visa_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "비자소지자", "Xpresspost"], title: "여권 재발급 — 비자 소지자 · Xpresspost 우편 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","캐나다 비자 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (만 25~37세, 해당자만)","우편수령신청서 (홈페이지 다운로드)","Canada Post Xpresspost 봉투 — 수취인 정보 기재 후 지참"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 발급 + 우편 배송 기간", notices: ["우편 분실·파손에 대해 영사관은 책임지지 않습니다.","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
+  passport_have_visa_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "비자소지자", "DHL특급"], title: "여권 재발급 — 비자 소지자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","캐나다 비자 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (만 25~37세, 해당자만)","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }], time: "약 2주", notices: ["방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.","DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님).","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
+
+  passport_have_visitor_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "단기방문자", "방문수령"], title: "여권 재발급 — 단기 방문자 (eTA) · 방문 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","왕복 항공권 (e-ticket) 출력본","eTA 승인서류 출력본","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주 (귀국 일정과 비교 후 DHL 특급 고려 권장)", notices: ["귀국 일정이 촉박한 경우 DHL 특급(약 2주) 또는 단수여권(당일)을 고려하세요.","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
+  passport_have_visitor_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "단기방문자", "Xpresspost"], title: "여권 재발급 — 단기 방문자 (eTA) · Xpresspost 우편 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","왕복 항공권 (e-ticket) 출력본","eTA 승인서류 출력본","최근 6개월 이내 여권용 사진 2매","우편수령신청서 (홈페이지 다운로드)","Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간 (귀국 일정 확인 필수)", notices: ["귀국 일정과 발급 소요시간을 꼭 비교해 DHL 또는 단수여권 대안을 검토하세요.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
+  passport_have_visitor_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "단기방문자", "DHL특급"], title: "여권 재발급 — 단기 방문자 (eTA) · DHL 특급 (약 2주)", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","왕복 항공권 (e-ticket) 출력본","eTA 승인서류 출력본","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }], time: "약 2주 (단기 방문자에게 권장 옵션)", notices: ["방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.","DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님)."], booking: "https://www.torbooking.com/book" },
+
+
+
+
+  passport_lost_pr_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "영주권자", "방문수령"], title: "여권 분실 재발급 — 영주권자 · 방문 수령", docs: ["여권발급신청서","여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","기본증명서 (상세) — 분실 여권으로 가족관계 확인 불가 시 추가"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주 후 방문 수령", notices: ["반드시 현지 경찰서에서 분실 신고(Police Report)를 먼저 완료 후 방문하세요.","PR Card도 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
+  passport_lost_pr_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "영주권자", "Xpresspost"], title: "여권 분실 재발급 — 영주권자 · Xpresspost 우편 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","기본증명서 (상세) — 해당 시","우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간", notices: ["경찰 분실 신고 먼저 완료 후 방문.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
+  passport_lost_pr_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "영주권자", "DHL특급"], title: "여권 분실 재발급 — 영주권자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도" }], time: "약 2주", notices: ["경찰 분실 신고 먼저 완료 후 방문.","방문 전 DHL 온라인 결제 후 영수증 출력 필수."], booking: "https://www.torbooking.com/book" },
+
+  passport_lost_citizen_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "시민권자", "방문수령"], title: "여권 분실 재발급 — 시민권자 · 방문 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 여권 원본 또는 시민권증서 원본","최근 6개월 이내 여권용 사진 2매"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["경찰 분실 신고 먼저 완료 후 방문.","한국 국적은 시민권 취득 시 이미 상실된 상태입니다.","긴급 귀국 필요 시 여행증명서 발급도 가능합니다."], booking: "https://www.torbooking.com/book" },
+  passport_lost_citizen_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "시민권자", "Xpresspost"], title: "여권 분실 재발급 — 시민권자 · Xpresspost 우편 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 여권 원본 또는 시민권증서 원본","최근 6개월 이내 여권용 사진 2매","우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간", notices: ["경찰 분실 신고 먼저 완료 후 방문.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
+  passport_lost_citizen_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "시민권자", "DHL특급"], title: "여권 분실 재발급 — 시민권자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 여권 원본 또는 시민권증서 원본","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도" }], time: "약 2주", notices: ["경찰 분실 신고 먼저 완료 후 방문.","방문 전 DHL 온라인 결제 후 영수증 출력 필수."], booking: "https://www.torbooking.com/book" },
+
+  passport_lost_visa_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "비자소지자", "방문수령"], title: "여권 분실 재발급 — 비자 소지자 · 방문 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 비자 원본 (비자도 분실 시 재학·재직증명서 등 대체)","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","병역 증빙서류 (만 25~37세, 해당자만)"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" }], time: "약 3~4주 후 방문 수령", notices: ["경찰 분실 신고 먼저 완료 후 방문.","비자도 함께 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수."], booking: "https://www.torbooking.com/book" },
+  passport_lost_visa_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "비자소지자", "Xpresspost"], title: "여권 분실 재발급 — 비자 소지자 · Xpresspost 우편 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 비자 원본 (분실 시 대체 서류)","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (해당자만)","우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간", notices: ["경찰 분실 신고 먼저 완료 후 방문.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
+  passport_lost_visa_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "비자소지자", "DHL특급"], title: "여권 분실 재발급 — 비자 소지자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 비자 원본 (분실 시 대체 서류)","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (해당자만)","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도" }], time: "약 2주", notices: ["경찰 분실 신고 먼저 완료 후 방문.","방문 전 DHL 온라인 결제 후 영수증 출력 필수."], booking: "https://www.torbooking.com/book" },
+
+  // ── 분실 일반 — eTA 단기방문자 수령방법 분기 ──
+  passport_lost_eta: {
+    type: "question",
     service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "시민권자", "방문수령"],
-    title: "여권 재발급 — 시민권자 · 방문 수령",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성)",
-      "현재 한국 여권 원본 + 흑백 사본 1부",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
+    breadcrumb: ["홈", "여권", "성인", "분실", "일반", "단기방문(eTA)"],
+    question: "발급된 여권을 어떻게 받으시겠어요?",
+    sub: "단기 방문 중 여권을 분실한 경우, 수령 방법을 선택하세요.",
+    options: [
+      { id: "passport_lost_eta_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
+      { id: "passport_lost_eta_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
     ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주 후 방문 수령",
-    notices: [
-      "시민권 취득 시 한국 국적이 법적으로 상실됩니다 — 국적상실신고를 별도로 진행하세요.",
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.",
-      "온라인 재발급도 가능합니다 (기존 전자여권 소지자 + 공동인증서 보유 시).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineRenewal:
-      "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/view.do?seq=1344521",
-  },
-  passport_have_citizen_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "시민권자", "Xpresspost"],
-    title: "여권 재발급 — 시민권자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "현재 한국 여권 원본 + 흑백 사본 1부",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "우편수령신청서 (홈페이지 다운로드, 자필 작성)",
-      "Canada Post Xpresspost 봉투 — 수취인 주소·이름 기재 후 지참",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 발급 + 우편 배송 기간",
-    notices: [
-      "시민권 취득 시 한국 국적 상실 — 국적상실신고 별도 진행 필요.",
-      "우편 분실·파손에 대해 영사관은 책임지지 않습니다.",
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_have_citizen_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "시민권자", "DHL특급"],
-    title: "여권 재발급 — 시민권자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "현재 한국 여권 원본 + 흑백 사본 1부",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도 (온라인 결제)" },
-    ],
-    time: "약 2주",
-    notices: [
-      "시민권 취득 시 한국 국적 상실 — 국적상실신고 별도 진행 필요.",
-      "방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.",
-      "DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님).",
-    ],
-    booking: "https://www.torbooking.com/book",
   },
 
-  passport_have_visa_visit: {
+  passport_lost_eta_visit: {
     type: "result",
     service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "비자소지자", "방문수령"],
-    title: "여권 재발급 — 비자 소지자 · 방문 수령",
+    breadcrumb: ["홈", "여권", "성인", "분실", "일반", "단기방문(eTA)", "방문수령"],
+    title: "여권 분실 재발급 — 단기방문(eTA) · 영사관 방문 수령",
     docs: [
-      "여권발급신청서",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "캐나다 비자 원본 + 흑백 사본 1부 (비자 분실 시 재학·재직증명서 등 대체)",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
-      "병역 증빙서류 (만 25~37세 병역의무자, 전산 확인 불가 시만 해당)",
+      "여권발급신청서 (컬러 출력, 자필 작성)",
+      "여권 분실 신고서 (Police Report) — 방문 전 경찰서 발급 필수",
+      "왕복 항공권 (e-ticket) 출력본 — 귀국 일정 확인용",
+      "eTA 승인서류 출력본 (이메일 조회 가능)",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
+      "  ▸ 기본증명서 (상세) — 신분 추가 확인 필요 시",
     ],
     costs: [
       { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
       { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-      { label: "병역미필자 알뜰 (24면)", value: "CAD $41.00 (현금)" },
     ],
-    time: "약 3~4주 후 방문 수령",
+    time: "접수 후 약 3~4주 — 단기 방문 중이라면 귀국 일정 감안 필요",
     notices: [
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.",
-      "비자 분실 시 여권과(416-920-3809)에 사전 전화 상담 권장.",
-      "만 25~37세 남성 병역의무자는 병역 증빙서류 필요할 수 있습니다.",
+      "⚠️ 단기 방문 중 여권 분실 시 귀국 일정이 촉박할 수 있습니다 — 항공권을 반드시 지참하세요.",
+      "⚠️ 처리 기간(3~4주)이 귀국 일정보다 긴 경우 긴급 단수여권 발급을 검토하세요 (뒤로 가서 '긴급' 선택).",
+      "⚠️ 경찰 분실 신고(Police Report) 없이는 접수 불가 — 방문 전 반드시 완료.",
+      "eTA는 여권번호에 연동되므로 새 여권 발급 후 캐나다 재입국 시 eTA 재신청 필요.",
+      "여권 수령 후 접수증 지참하여 예약 없이 영사관 방문해 수령.",
     ],
     booking: "https://www.torbooking.com/book",
-  },
-  passport_have_visa_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "비자소지자", "Xpresspost"],
-    title: "여권 재발급 — 비자 소지자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "캐나다 비자 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "병역 증빙서류 (만 25~37세, 해당자만)",
-      "우편수령신청서 (홈페이지 다운로드)",
-      "Canada Post Xpresspost 봉투 — 수취인 정보 기재 후 지참",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 발급 + 우편 배송 기간",
-    notices: [
-      "우편 분실·파손에 대해 영사관은 책임지지 않습니다.",
-      "사본은 흑백으로 밝게 복사.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_have_visa_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "비자소지자", "DHL특급"],
-    title: "여권 재발급 — 비자 소지자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "캐나다 비자 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "병역 증빙서류 (만 25~37세, 해당자만)",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도 (온라인 결제)" },
-    ],
-    time: "약 2주",
-    notices: [
-      "방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.",
-      "DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님).",
-      "사본은 흑백으로 밝게 복사.",
-    ],
-    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (여권 분실 재발급) →",
   },
 
-  passport_have_visitor_visit: {
+  passport_lost_eta_xpress: {
     type: "result",
     service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "단기방문자", "방문수령"],
-    title: "여권 재발급 — 단기 방문자 (eTA) · 방문 수령",
+    breadcrumb: ["홈", "여권", "성인", "분실", "일반", "단기방문(eTA)", "우편수령"],
+    title: "여권 분실 재발급 — 단기방문(eTA) · 우편 수령",
     docs: [
-      "여권발급신청서",
-      "현재 여권 원본 + 흑백 사본 1부",
+      "여권발급신청서 (컬러 출력, 자필 작성)",
+      "여권 분실 신고서 (Police Report) — 방문 전 경찰서 발급 필수",
       "왕복 항공권 (e-ticket) 출력본",
       "eTA 승인서류 출력본",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
+      "여권용 사진 1매 — 반드시 사진관 촬영본",
+      "Canada Post Xpresspost 등기 봉투 (별도 구매, 수취인 주소·Tracking 기재)",
+      "  ▸ 기본증명서 (상세) — 신분 추가 확인 필요 시",
     ],
     costs: [
       { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
       { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
     ],
-    time: "약 3~4주 (귀국 일정과 비교 후 DHL 특급 고려 권장)",
+    time: "접수 후 약 3~4주 + 우편 배송 기간",
     notices: [
-      "귀국 일정이 촉박한 경우 DHL 특급(약 2주) 또는 단수여권(당일)을 고려하세요.",
-      "사본은 흑백으로 밝게 복사.",
+      "⚠️ 단기 방문 중 귀국 일정이 촉박하다면 우편보다 방문 수령 또는 긴급 단수여권을 선택하세요.",
+      "⚠️ 경찰 분실 신고(Police Report) 없이는 접수 불가.",
+      "eTA는 여권번호 연동 — 새 여권 발급 후 캐나다 재입국 시 eTA 재신청 필요.",
+      "우편 분실에 대해 영사관은 책임지지 않습니다 — Xpresspost 등기 봉투 사용 권장.",
     ],
     booking: "https://www.torbooking.com/book",
-  },
-  passport_have_visitor_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "단기방문자", "Xpresspost"],
-    title: "여권 재발급 — 단기 방문자 (eTA) · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "왕복 항공권 (e-ticket) 출력본",
-      "eTA 승인서류 출력본",
-      "최근 6개월 이내 여권용 사진 2매",
-      "우편수령신청서 (홈페이지 다운로드)",
-      "Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간 (귀국 일정 확인 필수)",
-    notices: [
-      "귀국 일정과 발급 소요시간을 꼭 비교해 DHL 또는 단수여권 대안을 검토하세요.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_have_visitor_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "단기방문자", "DHL특급"],
-    title: "여권 재발급 — 단기 방문자 (eTA) · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "왕복 항공권 (e-ticket) 출력본",
-      "eTA 승인서류 출력본",
-      "최근 6개월 이내 여권용 사진 2매",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도 (온라인 결제)" },
-    ],
-    time: "약 2주 (단기 방문자에게 권장 옵션)",
-    notices: [
-      "방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.",
-      "DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님).",
-    ],
-    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (여권 분실 재발급) →",
   },
 
-  passport_new_pr_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "영주권자", "방문수령"],
-    title: "여권 신규 발급 — 영주권자 · 방문 수령",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력 후 작성)",
-      "기본증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
-      "가족관계증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능, 진한색 상의)",
-      "주민등록증 또는 기타 신분증 사본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주 후 방문 수령",
-    notices: [
-      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
-      "기본증명서·가족관계증명서는 한국에서 발급하여 가져오세요 (정부24 온라인 발급 또는 주민센터).",
-      "영문 이름은 변경 시에만 기재, 반드시 대문자로 작성.",
-      "사진은 흰색 상의 착용 시 사용 불가.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_new_pr_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "영주권자", "Xpresspost"],
-    title: "여권 신규 발급 — 영주권자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "주민등록증 또는 기타 신분증 사본",
-      "우편수령신청서 (홈페이지 다운로드)",
-      "Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간",
-    notices: [
-      "신규 발급은 반드시 방문 신청.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다.",
-      "사진은 흰색 상의 착용 시 사용 불가.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_new_pr_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "영주권자", "DHL특급"],
-    title: "여권 신규 발급 — 영주권자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "주민등록증 또는 기타 신분증 사본",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도 (온라인 결제)" },
-    ],
-    time: "약 2주",
-    notices: [
-      "신규 발급은 반드시 방문 신청.",
-      "방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
+  passport_minor: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자"], question: "자녀의 현재 여권 상태는?", sub: "여권 유무와 분실 여부에 따라 준비 서류가 달라집니다.", options: [{ id: "passport_minor_have", icon: "✅", title: "재발급 (여권 있음)", desc: "만료 임박 또는 만료된 여권" },{ id: "passport_minor_lost", icon: "❌", title: "분실 재발급", desc: "경찰 분실 신고 후 재발급" },{ id: "passport_minor_new", icon: "🆕", title: "신규 발급 (여권 없음)", desc: "최초 여권 발급" }] },
+  passport_minor_have: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급"], question: "⚡ 일주일 이내에 긴급하게 필요하신가요?", sub: "긴급 시 단수여권(사진부착식) 당일 발급 가능합니다. 단, 사진관 촬영 사진 지참 필수.", options: [{ id: "passport_minor_urgent_who", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권 당일 발급 — 법정대리인 동반 + 긴급 사유 증빙서류 필요" },{ id: "passport_minor_have_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" }] },
+  passport_minor_new: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규"], question: "⚡ 일주일 이내에 긴급하게 필요하신가요?", sub: "신규 발급 시에도 긴급 단수여권 당일 발급이 가능합니다.", options: [{ id: "passport_minor_urgent_who", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권 당일 발급 — 법정대리인 동반 + 긴급 사유 증빙서류 필요" },{ id: "passport_minor_new_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" }] },
+  passport_minor_lost: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실"], question: "⚡ 일주일 이내에 긴급하게 필요하신가요?", sub: "분실 시에도 단수여권 당일 발급 가능합니다. 경찰 분실 신고(Police Report) 먼저 완료하세요.", options: [{ id: "passport_minor_urgent_lost_who", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권 당일 발급 — 친권 상황에 따라 서류 다름" },{ id: "passport_minor_lost_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주" }] },
 
-  passport_new_citizen_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "시민권자", "방문수령"],
-    title: "여권 신규 발급 — 시민권자 · 방문 수령",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "시민권 취득 시 한국 국적 자동 상실 — 국적상실신고 별도 진행 필요.",
-      "신규 발급은 반드시 방문 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_new_citizen_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "시민권자", "Xpresspost"],
-    title: "여권 신규 발급 — 시민권자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간",
-    notices: [
-      "시민권 취득 시 국적상실신고 별도 진행.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_new_citizen_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "시민권자", "DHL특급"],
-    title: "여권 신규 발급 — 시민권자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도" },
-    ],
-    time: "약 2주",
-    notices: [
-      "시민권 취득 시 국적상실신고 별도 진행.",
-      "방문 전 DHL 온라인 결제 후 영수증 출력 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_new_visa_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "비자소지자", "방문수령"],
-    title: "여권 신규 발급 — 비자 소지자 · 방문 수령",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본",
-      "캐나다 비자 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
-      "주민등록증 또는 기타 신분증 사본",
-      "병역 증빙서류 (만 25~37세 병역의무자, 해당자만)",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-      { label: "병역미필자 알뜰 (24면)", value: "CAD $41.00 (현금)" },
-    ],
-    time: "약 3~4주 후 방문 수령",
-    notices: [
-      "신규 발급은 반드시 방문 신청.",
-      "기본증명서·가족관계증명서는 한국에서 발급해 오세요.",
-      "만 25~37세 남성 병역의무자는 병역 증빙서류 필요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_new_visa_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "비자소지자", "Xpresspost"],
-    title: "여권 신규 발급 — 비자 소지자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "캐나다 비자 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "주민등록증 또는 기타 신분증 사본",
-      "병역 증빙서류 (해당자만)",
-      "우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간",
-    notices: ["우편 분실에 대해 영사관은 책임지지 않습니다."],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_new_visa_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "신규", "비자소지자", "DHL특급"],
-    title: "여권 신규 발급 — 비자 소지자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "캐나다 비자 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "주민등록증 또는 기타 신분증 사본",
-      "병역 증빙서류 (해당자만)",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도" },
-    ],
-    time: "약 2주",
-    notices: ["방문 전 DHL 온라인 결제 후 영수증 출력 필수."],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_lost_pr_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "영주권자", "방문수령"],
-    title: "여권 분실 재발급 — 영주권자 · 방문 수령",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
-      "기본증명서 (상세) — 분실 여권으로 가족관계 확인 불가 시 추가",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주 후 방문 수령",
-    notices: [
-      "반드시 현지 경찰서에서 분실 신고(Police Report)를 먼저 완료 후 방문하세요.",
-      "PR Card도 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.",
-      "사본은 흑백으로 밝게 복사.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_lost_pr_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "영주권자", "Xpresspost"],
-    title: "여권 분실 재발급 — 영주권자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "기본증명서 (상세) — 해당 시",
-      "우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_lost_pr_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "영주권자", "DHL특급"],
-    title: "여권 분실 재발급 — 영주권자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "유효한 PR Card 원본 + 흑백 사본 1부",
-      "최근 6개월 이내 여권용 사진 2매",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도" },
-    ],
-    time: "약 2주",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "방문 전 DHL 온라인 결제 후 영수증 출력 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_lost_citizen_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "시민권자", "방문수령"],
-    title: "여권 분실 재발급 — 시민권자 · 방문 수령",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "캐나다 여권 원본 또는 시민권증서 원본",
-      "최근 6개월 이내 여권용 사진 2매",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "한국 국적은 시민권 취득 시 이미 상실된 상태입니다.",
-      "긴급 귀국 필요 시 여행증명서 발급도 가능합니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_lost_citizen_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "시민권자", "Xpresspost"],
-    title: "여권 분실 재발급 — 시민권자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "캐나다 여권 원본 또는 시민권증서 원본",
-      "최근 6개월 이내 여권용 사진 2매",
-      "우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_lost_citizen_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "시민권자", "DHL특급"],
-    title: "여권 분실 재발급 — 시민권자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "캐나다 여권 원본 또는 시민권증서 원본",
-      "최근 6개월 이내 여권용 사진 2매",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도" },
-    ],
-    time: "약 2주",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "방문 전 DHL 온라인 결제 후 영수증 출력 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_lost_visa_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "비자소지자", "방문수령"],
-    title: "여권 분실 재발급 — 비자 소지자 · 방문 수령",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "캐나다 비자 원본 (비자도 분실 시 재학·재직증명서 등 대체)",
-      "최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)",
-      "병역 증빙서류 (만 25~37세, 해당자만)",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },
-    ],
-    time: "약 3~4주 후 방문 수령",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "비자도 함께 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_lost_visa_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "비자소지자", "Xpresspost"],
-    title: "여권 분실 재발급 — 비자 소지자 · Xpresspost 우편 수령",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "캐나다 비자 원본 (분실 시 대체 서류)",
-      "최근 6개월 이내 여권용 사진 2매",
-      "병역 증빙서류 (해당자만)",
-      "우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "Xpresspost 봉투", value: "별도 구매" },
-    ],
-    time: "약 3~4주 + 우편 배송 기간",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_lost_visa_dhl: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "분실", "비자소지자", "DHL특급"],
-    title: "여권 분실 재발급 — 비자 소지자 · DHL 특급 (약 2주)",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "캐나다 비자 원본 (분실 시 대체 서류)",
-      "최근 6개월 이내 여권용 사진 2매",
-      "병역 증빙서류 (해당자만)",
-      "DHL 긴급여권 서비스 결제 영수증 출력본",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "DHL 특급 배송비", value: "별도" },
-    ],
-    time: "약 2주",
-    notices: [
-      "경찰 분실 신고 먼저 완료 후 방문.",
-      "방문 전 DHL 온라인 결제 후 영수증 출력 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_minor: {
+  passport_minor_urgent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "긴급", "단수여권"], title: "⚡ 미성년자 긴급 단수여권 — 당일 발급", docs: ["여권발급신청서 (영사관 비치, 법정대리인 서명)","자녀 여권 원본 + 흑백 사본 (기존 여권 있는 경우)","자녀 체류자격 증빙서류 (PR카드 / 비자 / 시민권증서)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (전산 확인 불가 시)","법정대리인 동의서 (방문하는 부 또는 모 서명)","방문하는 법정대리인(부 또는 모) 여권 원본","여권용 사진 2매 — 반드시 사진관 촬영본 지참 (만 5세 이하 포함, 영사관 촬영 불가)","긴급 출국 사유 증빙서류 (항공권, 진단서, 사망증명서 등)"], costs: [{ label: "단수여권 수수료", value: "CAD $48.00" },{ label: "친족 사망·위독 등 인도적 사유", value: "CAD $15.00 (할인)" }], time: "당일 발급 (방문 즉시)", notices: ["단수여권은 1회용 — 사용 목적 달성 시 효력 소멸, 이후 정식 전자여권을 별도 신청하세요.","사진은 반드시 사진관에서 촬영해 오세요 — 영사관 무료촬영 불가.","긴급 출국 사유 증빙서류 반드시 지참.","이혼·단독친권의 경우에도 동일하게 적용 — 친권자 확인 서류 지참."], booking: "https://www.torbooking.com/book", bookingLabel: "사전 예약하기 (당일 방문) →" },
+  passport_minor_urgent_lost_who: {
     type: "question",
     service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자"],
-    question: "자녀의 현재 여권 상태는?",
-    sub: "여권 유무와 분실 여부에 따라 준비 서류가 달라집니다.",
+    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "친권 상황"],
+    question: "부모 친권 상황은?",
+    sub: "⚠️ 경찰 분실 신고(Police Report)를 먼저 완료하세요. 친권 상황에 따라 지참 서류가 달라집니다.",
     options: [
-      {
-        id: "passport_minor_have",
-        icon: "✅",
-        title: "재발급 (여권 있음)",
-        desc: "만료 임박 또는 만료된 여권",
-      },
-      {
-        id: "passport_minor_lost",
-        icon: "❌",
-        title: "분실 재발급",
-        desc: "경찰 분실 신고 후 재발급",
-      },
-      {
-        id: "passport_minor_new",
-        icon: "🆕",
-        title: "신규 발급 (여권 없음)",
-        desc: "최초 여권 발급",
-      },
-    ],
-  },
-  passport_minor_have: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급"],
-    question: "⚡ 일주일 이내에 긴급하게 필요하신가요?",
-    sub: "긴급 시 단수여권(사진부착식) 당일 발급 가능합니다. 단, 사진관 촬영 사진 지참 필수.",
-    options: [
-      {
-        id: "passport_minor_urgent_who",
-        icon: "🚨",
-        title: "긴급 — 1주일 이내 필요",
-        desc: "단수여권 당일 발급 — 법정대리인 동반 + 긴급 사유 증빙서류 필요",
-      },
-      {
-        id: "passport_minor_have_normal",
-        icon: "📅",
-        title: "일반 발급 (여유 있음)",
-        desc: "일반 전자여권 3~4주 / DHL 특급 약 2주",
-      },
-    ],
-  },
-  passport_minor_new: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규"],
-    question: "⚡ 일주일 이내에 긴급하게 필요하신가요?",
-    sub: "신규 발급 시에도 긴급 단수여권 당일 발급이 가능합니다.",
-    options: [
-      {
-        id: "passport_minor_urgent_who",
-        icon: "🚨",
-        title: "긴급 — 1주일 이내 필요",
-        desc: "단수여권 당일 발급 — 법정대리인 동반 + 긴급 사유 증빙서류 필요",
-      },
-      {
-        id: "passport_minor_new_normal",
-        icon: "📅",
-        title: "일반 발급 (여유 있음)",
-        desc: "일반 전자여권 3~4주 / DHL 특급 약 2주",
-      },
-    ],
-  },
-  passport_minor_lost: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실"],
-    question: "⚡ 일주일 이내에 긴급하게 필요하신가요?",
-    sub: "분실 시에도 단수여권 당일 발급 가능합니다. 경찰 분실 신고(Police Report) 먼저 완료하세요.",
-    options: [
-      {
-        id: "passport_minor_urgent_lost",
-        icon: "🚨",
-        title: "긴급 — 1주일 이내 필요",
-        desc: "단수여권 당일 발급",
-      },
-      {
-        id: "passport_minor_lost_normal",
-        icon: "📅",
-        title: "일반 발급 (여유 있음)",
-        desc: "일반 전자여권 3~4주",
-      },
+      { id: "passport_minor_urgent_lost_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "부·모 여권 사본 모두 필요" },
+      { id: "passport_minor_urgent_lost_sole", icon: "👤", title: "이혼 — 단독친권", desc: "단독친권자만 방문·서명" },
+      { id: "passport_minor_urgent_lost_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },
+      { id: "passport_minor_urgent_lost_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 방문" },
+      { id: "passport_minor_urgent_lost_korea", icon: "🇰🇷", title: "법정대리인이 한국에 거주", desc: "인감도장 + 인감증명서 — 긴급 시 사전 전화 필수" },
     ],
   },
 
-  passport_minor_urgent: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "단수여권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 당일 발급",
+  passport_minor_urgent_lost_married: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "공동친권"],
+    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 부모 혼인 중",
     docs: [
-      "여권발급신청서 (영사관 비치, 법정대리인 서명)",
-      "자녀 여권 원본 + 흑백 사본 (기존 여권 있는 경우)",
-      "자녀 체류자격 증빙서류 (PR카드 / 비자 / 시민권증서)",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (전산 확인 불가 시)",
-      "법정대리인 동의서 (방문하는 부 또는 모 서명)",
-      "방문하는 법정대리인(부 또는 모) 여권 원본",
-      "여권용 사진 2매 — 반드시 사진관 촬영본 지참 (만 5세 이하 포함, 영사관 촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권, 진단서, 사망증명서 등)",
-    ],
-    costs: [
-      { label: "단수여권 수수료", value: "CAD $48.00" },
-      { label: "친족 사망·위독 등 인도적 사유", value: "CAD $15.00 (할인)" },
-    ],
-    time: "당일 발급 (방문 즉시)",
-    notices: [
-      "단수여권은 1회용 — 사용 목적 달성 시 효력 소멸, 이후 정식 전자여권을 별도 신청하세요.",
-      "사진은 반드시 사진관에서 촬영해 오세요 — 영사관 무료촬영 불가.",
-      "긴급 출국 사유 증빙서류 반드시 지참.",
-      "이혼·단독친권의 경우에도 동일하게 적용 — 친권자 확인 서류 지참.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-  passport_minor_urgent_lost: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "단수여권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 분실 시",
-    docs: [
-      "여권발급신청서 (영사관 비치, 법정대리인 서명)",
-      "여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수",
-      "자녀 체류자격 증빙서류 원본",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "법정대리인 동의서 + 방문하는 법정대리인 여권 원본",
-      "여권용 사진 2매 — 반드시 사진관 촬영본 지참 (영사관 촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권, 진단서 등)",
-    ],
-    costs: [
-      { label: "단수여권 수수료", value: "CAD $48.00" },
-      { label: "친족 사망·위독 등 인도적 사유", value: "CAD $15.00 (할인)" },
-    ],
-    time: "당일 발급 (방문 즉시)",
-    notices: [
-      "반드시 경찰서 분실 신고(Police Report) 먼저 완료 후 방문하세요.",
-      "단수여권은 1회용 — 귀국 후 정식 전자여권 별도 신청 필요.",
-      "사진은 반드시 사진관에서 촬영해 오세요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_minor_have_normal: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급", "일반"],
-    question: "부모님의 혼인·친권 상황은?",
-    sub: "친권자가 누구인지에 따라 필요한 서류와 절차가 달라집니다.",
-    options: [
-      {
-        id: "passport_minor_married",
-        icon: "👫",
-        title: "부모님이 혼인 중 (공동친권)",
-        desc: "부모 중 1인이 방문 신청 가능",
-      },
-      {
-        id: "passport_minor_divorced_sole",
-        icon: "👤",
-        title: "이혼 — 단독친권자 있음",
-        desc: "단독친권자만 신청 가능",
-      },
-      {
-        id: "passport_minor_divorced_joint",
-        icon: "⚖️",
-        title: "이혼 — 공동친권 (두 분 모두 친권)",
-        desc: "양쪽 동의 필요",
-      },
-      {
-        id: "passport_minor_single",
-        icon: "🙋",
-        title: "한부모 (사별 / 미혼)",
-        desc: "생존 친권자 단독 신청",
-      },
-      {
-        id: "passport_minor_korea_parent",
-        icon: "🇰🇷",
-        title: "법정대리인이 한국에 계심",
-        desc: "인감도장·증명서 필요",
-      },
-    ],
-  },
-  passport_minor_new_normal: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규", "일반"],
-    question: "부모님의 혼인·친권 상황은?",
-    sub: "신규 발급 시에도 친권자 확인이 필요합니다. 한국 출생신고가 완료된 경우에만 신청 가능합니다.",
-    options: [
-      {
-        id: "passport_minor_new_married",
-        icon: "👫",
-        title: "부모님이 혼인 중 (공동친권)",
-        desc: "부모 중 1인이 방문 신청 가능",
-      },
-      {
-        id: "passport_minor_new_divorced_sole",
-        icon: "👤",
-        title: "이혼 — 단독친권자 있음",
-        desc: "단독친권자만 신청 가능",
-      },
-      {
-        id: "passport_minor_new_divorced_joint",
-        icon: "⚖️",
-        title: "이혼 — 공동친권 (두 분 모두 친권)",
-        desc: "양쪽 동의 필요",
-      },
-      {
-        id: "passport_minor_new_single",
-        icon: "🙋",
-        title: "한부모 (사별 / 미혼)",
-        desc: "생존 친권자 단독 신청",
-      },
-      {
-        id: "passport_minor_new_korea_parent",
-        icon: "🇰🇷",
-        title: "법정대리인이 한국에 계심",
-        desc: "인감도장·증명서 필요",
-      },
-    ],
-  },
-  passport_minor_lost_normal: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "일반"],
-    question: "부모님의 혼인·친권 상황은?",
-    sub: "분실 신고(Police Report) 완료 후 아래 해당 케이스를 선택하세요.",
-    options: [
-      {
-        id: "passport_minor_lost_married",
-        icon: "👫",
-        title: "부모님이 혼인 중 (공동친권)",
-        desc: "부모 중 1인이 방문 신청 가능",
-      },
-      {
-        id: "passport_minor_lost_divorced_sole",
-        icon: "👤",
-        title: "이혼 — 단독친권자 있음",
-        desc: "단독친권자만 신청 가능",
-      },
-      {
-        id: "passport_minor_lost_divorced_joint",
-        icon: "⚖️",
-        title: "이혼 — 공동친권",
-        desc: "양쪽 동의 필요",
-      },
-      {
-        id: "passport_minor_lost_single",
-        icon: "🙋",
-        title: "한부모 (사별 / 미혼)",
-        desc: "생존 친권자 단독 신청",
-      },
-    ],
-  },
-
-  passport_minor_married: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급", "혼인중·공동친권"],
-    title: "미성년자 여권 재발급 — 부모 혼인 중 (공동친권)",
-    docs: [
-      "여권발급신청서 (자녀 명의, 영사관 비치, 법정대리인 자필 작성)",
-      "자녀 여권 원본 + 흑백 사본 1부",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본 (PR카드 / 비자 / 시민권증서)",
-      "법정대리인 동의서 — 부모 2인 모두 인적사항 기입, 부모 중 1인 서명",
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "여권 분실 신고서 (Police Report) — 방문 전 경찰서 발급 필수",
+      "법정대리인 동의서 — 부모 2인 인적사항 기재, 방문하는 1인 서명",
       "방문하는 부 또는 모의 여권 원본",
-      "부·모 여권 사본 각 1부 (방문하지 않는 부 또는 모 포함)",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (전산 확인 불가 시)",
-      "만 5세 미만: 여권용 사진 2매 — 사진관 촬영본 지참 필수 (영사관 무료촬영 불가)",
-      "만 5세 이상: 영사관 무료촬영 가능 (사진 미지참 시 자녀 동반 필요)",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
+      "비방문 부 또는 모의 여권 사본 1부",
+      "자녀 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
+      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
+      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
+      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
     ],
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "DHL 특급 (선택)", value: "별도 DHL 요금" },
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
     ],
-    time: "약 3~4주 (DHL 특급 선택 시 약 2주)",
+    time: "당일 발급 — 영사 심사 후 결정",
     notices: [
-      "공동친권: 동의서에 부모 2인 모두 인적사항 기재 — 방문은 1인만 해도 됩니다.",
-      "1인 1예약 = 업무건수 기준 — 자녀 2명 신청 시 예약 2자리 필요.",
-      "캐나다 출생 자녀는 반드시 한국 출생신고 완료 후에만 여권 신청 가능.",
-      "사본은 흑백으로 밝게 복사 — 어둡거나 컬러 사본 접수 불가.",
+      "⚠️ Police Report 없이는 접수 불가 — 반드시 방문 전 경찰 신고 완료.",
+      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
+      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
     ],
     booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
   },
-  passport_minor_divorced_sole: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급", "이혼·단독친권"],
-    title: "미성년자 여권 재발급 — 이혼 후 단독친권",
+
+  passport_minor_urgent_lost_sole: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "단독친권"],
+    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 이혼 단독친권",
     docs: [
-      "여권발급신청서 (자녀 명의, 영사관 비치, 단독친권자 자필 작성)",
-      "자녀 여권 원본 + 흑백 사본 1부",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 단독친권자만 인적사항 기입 및 서명",
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "여권 분실 신고서 (Police Report) — 방문 전 필수",
+      "법정대리인 동의서 — 단독친권자만 인적사항 기재 및 서명",
       "단독친권자 여권 원본",
-      "단독친권 확인 서류: 자녀 기본증명서(상세) — 친권자가 1인으로 명시된 것 (3개월 이내)",
-      "자녀 가족관계증명서 (상세) — 3개월 이내",
-      "이혼판결문 또는 협의이혼 확인서 사본 (친권자 지정 내용 포함, 영문 판결문은 번역 필요)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
+      "단독친권 확인: 자녀 기본증명서 (상세) — 친권자 1인 명시, 3개월 이내",
+      "자녀 체류자격 증빙서류 원본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본",
+      "긴급 출국 사유 증빙서류",
     ],
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-      { label: "DHL 특급 (선택)", value: "별도 DHL 요금" },
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
     ],
-    time: "약 3~4주 (DHL 특급 시 약 2주)",
+    time: "당일 발급 — 영사 심사 후 결정",
     notices: [
-      "단독친권자만 방문 신청 가능 — 비친권자(다른 부모)의 동의 불필요.",
-      "기본증명서(상세)에 단독친권자가 명확히 표기되어야 합니다.",
-      "이혼 판결문이 영문인 경우 자필 번역 가능 (번역자 성명·서명·날짜 기재).",
-      "캐나다 법원 공동양육 협정이 있더라도 한국 법상 단독친권자 기준으로 처리됩니다 — 불명확 시 사전 전화 상담 권장 (416-920-3809).",
+      "⚠️ Police Report 없이는 접수 불가.",
+      "⚠️ 사진은 사진관 촬영본 필수.",
+      "기본증명서(상세)에 단독친권자가 명시되어야 합니다.",
+      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
     ],
     booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
   },
-  passport_minor_divorced_joint: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급", "이혼·공동친권"],
-    title: "미성년자 여권 재발급 — 이혼 후 공동친권",
+
+  passport_minor_urgent_lost_joint: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "공동친권(이혼)"],
+    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 이혼 공동친권",
     docs: [
-      "여권발급신청서",
-      "자녀 여권 원본 + 흑백 사본 1부",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자가 서명",
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "여권 분실 신고서 (Police Report) — 방문 전 필수",
+      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기재, 방문 친권자 서명",
       "방문하는 공동친권자 여권 원본",
       "비방문 공동친권자 여권 사본 1부",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "공동친권 확인 서류: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "공동친권: 양쪽 친권자 모두의 동의가 필요합니다 — 동의서에 2인 모두 기재.",
-      "한 쪽 친권자가 여권 발급에 반대(부동의 의사 표시)한 경우 발급이 제한될 수 있습니다.",
-      "비방문 친권자가 한국에 있는 경우 인감도장이 날인된 동의서 + 인감증명서 필요 — 사전 전화 상담 권장.",
-      "이혼 판결문 영문본은 자필 번역 가능 (번역자 성명·날짜 기재).",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_single: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급", "한부모(사별·미혼)"],
-    title: "미성년자 여권 재발급 — 한부모 (사별 또는 미혼)",
-    docs: [
-      "여권발급신청서",
-      "자녀 여권 원본 + 흑백 사본 1부",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 생존 친권자만 인적사항 기입 및 서명",
-      "생존 친권자 여권 원본",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "사별의 경우: 사망한 부 또는 모의 사망증명서 (번역 필요 시 자필 번역)",
-      "미혼의 경우: 자녀 기본증명서에 친권자가 1인으로 표기된 것으로 확인 가능",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "사망증명서가 영문인 경우 자필 번역 가능 (번역자 성명·서명·날짜 기재).",
-      "기본증명서(상세)에 사망 또는 단독친권이 표기되어야 합니다.",
-      "불명확한 경우 방문 전 전화 상담 권장 (416-920-3809).",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_korea_parent: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "재발급", "법정대리인 한국"],
-    title: "미성년자 여권 재발급 — 법정대리인이 한국에 거주",
-    docs: [
-      "여권발급신청서 (자녀 명의, 영사관 비치, 캐나다 측 성인이 대리 작성)",
-      "자녀 여권 원본 + 흑백 사본 1부",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 한국의 부 또는 모가 서명, 서명란에 반드시 인감도장 날인 (서명만 불가)",
-      "법정대리인 인감증명서 — 발급일로부터 6개월 이내",
-      "법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)",
-      "부·모 여권 사본 각 1부 (공동친권의 경우 두 분 모두)",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.",
-      "인감증명서는 발급일로부터 6개월 이내 서류만 인정.",
-      "공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요.",
-      "한국 서류는 방문 전 미리 준비해 오세요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_minor_new_married: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규", "혼인중·공동친권"],
-    title: "미성년자 여권 신규 발급 — 부모 혼인 중 (공동친권)",
-    docs: [
-      "여권발급신청서",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본 (신규 발급 필수)",
-      "자녀 체류자격 증빙서류 원본 + 사본 (PR카드 / 비자 / 시민권증서 / 캐나다 출생증명서)",
-      "법정대리인 동의서 — 부모 2인 모두 인적사항 기입, 부모 중 1인 서명",
-      "방문하는 부 또는 모의 여권 원본",
-      "부·모 여권 사본 각 1부 (방문하지 않는 부 또는 모 포함)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "캐나다 출생 자녀는 반드시 한국 출생신고 완료 후에만 여권 신청 가능.",
-      "기본증명서·가족관계증명서는 한국에서 발급해 오세요 (정부24 온라인 또는 주민센터).",
-      "신규 발급은 온라인 신청 불가 — 반드시 방문 신청.",
-      "공동친권: 동의서에 부모 2인 모두 기재, 방문은 1인으로 가능.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_new_divorced_sole: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규", "이혼·단독친권"],
-    title: "미성년자 여권 신규 발급 — 이혼 후 단독친권",
-    docs: [
-      "여권발급신청서",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (친권자 1인 명시)",
-      "자녀 체류자격 증빙서류 원본 + 사본",
-      "법정대리인 동의서 — 단독친권자만 기입 및 서명",
-      "단독친권자 여권 원본",
-      "이혼판결문 또는 협의이혼 확인서 (단독친권 명시, 영문본은 자필 번역)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-      "우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.",
-      "기본증명서에 단독친권자가 명시되어야 합니다.",
-      "신규 발급은 반드시 방문 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_new_divorced_joint: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규", "이혼·공동친권"],
-    title: "미성년자 여권 신규 발급 — 이혼 후 공동친권",
-    docs: [
-      "여권발급신청서",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "자녀 체류자격 증빙서류 원본 + 사본",
-      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자 서명",
-      "방문하는 공동친권자 여권 원본 + 비방문 공동친권자 여권 사본",
       "공동친권 확인: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
+      "자녀 체류자격 증빙서류 원본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본",
+      "긴급 출국 사유 증빙서류",
     ],
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
     ],
-    time: "약 3~4주",
+    time: "당일 발급 — 영사 심사 후 결정",
     notices: [
-      "공동친권: 양쪽 모두 동의 필요 — 한 쪽이 반대하면 발급 제한.",
-      "캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.",
-      "신규 발급은 반드시 방문 신청.",
+      "⚠️ Police Report 없이는 접수 불가.",
+      "⚠️ 공동친권: 양쪽 모두 동의 필요 — 한 쪽이 반대하면 발급 제한.",
+      "⚠️ 사진은 사진관 촬영본 필수.",
+      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
     ],
     booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_new_single: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규", "한부모"],
-    title: "미성년자 여권 신규 발급 — 한부모 (사별 또는 미혼)",
-    docs: [
-      "여권발급신청서",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "자녀 체류자격 증빙서류 원본 + 사본",
-      "법정대리인 동의서 — 생존 친권자 기입 및 서명",
-      "생존 친권자 여권 원본",
-      "사별의 경우: 사망한 배우자의 사망증명서 (영문본은 자필 번역)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.",
-      "기본증명서에 단독친권 또는 사망 사실이 표기되어야 합니다.",
-      "신규 발급은 반드시 방문 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_new_korea_parent: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "신규", "법정대리인 한국"],
-    title: "미성년자 여권 신규 발급 — 법정대리인이 한국에 거주",
-    docs: [
-      "여권발급신청서",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본",
-      "자녀 체류자격 증빙서류 원본 + 사본",
-      "법정대리인 동의서 — 서명란에 반드시 인감도장 날인 (서명만 불가)",
-      "법정대리인 인감증명서 — 발급일로부터 6개월 이내",
-      "법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)",
-      "부·모 여권 사본 각 1부 (공동친권의 경우 두 분 모두)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.",
-      "법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만 접수 불가.",
-      "인감증명서는 발급일로부터 6개월 이내.",
-      "공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요.",
-    ],
-    booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
   },
 
-  passport_minor_lost_married: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "혼인중·공동친권"],
-    title: "미성년자 여권 분실 재발급 — 부모 혼인 중",
+  passport_minor_urgent_lost_single: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "한부모"],
+    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 한부모",
     docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 부모 2인 인적사항 기입, 1인 서명",
-      "방문하는 부 또는 모의 여권 원본 + 부·모 여권 사본 각 1부",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "반드시 경찰서 분실 신고(Police Report) 완료 후 방문하세요.",
-      "공동친권: 동의서에 부모 2인 모두 기재, 방문은 1인으로 가능.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_lost_divorced_sole: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "이혼·단독친권"],
-    title: "미성년자 여권 분실 재발급 — 이혼 후 단독친권",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 단독친권자만 기입 및 서명",
-      "단독친권자 여권 원본",
-      "자녀 기본증명서 (상세) — 단독친권자 표기 확인 (3개월 이내)",
-      "자녀 가족관계증명서 (상세) — 3개월 이내",
-      "이혼판결문 또는 협의이혼 확인서 (단독친권 명시)",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "경찰 분실 신고(Police Report) 먼저 완료 후 방문.",
-      "단독친권자만 방문 신청 가능.",
-      "이혼 판결문 영문본은 자필 번역 가능.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_lost_divorced_joint: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "이혼·공동친권"],
-    title: "미성년자 여권 분실 재발급 — 이혼 후 공동친권",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자 서명",
-      "방문 친권자 여권 원본 + 비방문 친권자 여권 사본",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "공동친권 확인: 이혼 판결문 또는 협의이혼 확인서",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
-    ],
-    time: "약 3~4주",
-    notices: [
-      "경찰 분실 신고(Police Report) 먼저 완료 후 방문.",
-      "공동친권: 양쪽 모두 동의 필요.",
-      "한 쪽이 여권 발급 반대 의사 표시를 한 경우 발급 제한 — 법원 명령이 있어야 가능.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  passport_minor_lost_single: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "한부모"],
-    title: "미성년자 여권 분실 재발급 — 한부모 (사별 또는 미혼)",
-    docs: [
-      "여권발급신청서",
-      "여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수",
-      "자녀 체류자격 증빙서류 원본 + 흑백 사본",
-      "법정대리인 동의서 — 생존 친권자 기입 및 서명",
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "여권 분실 신고서 (Police Report) — 방문 전 필수",
+      "법정대리인 동의서 — 생존 친권자만 인적사항 기재 및 서명",
       "생존 친권자 여권 원본",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "사별의 경우: 사망한 배우자의 사망증명서",
-      "만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능",
+      "자녀 기본증명서 (상세) — 단독친권 또는 사망 사실 표기, 3개월 이내",
+      "자녀 체류자격 증빙서류 원본",
+      "여권용 사진 1매 — 반드시 사진관 촬영본",
+      "긴급 출국 사유 증빙서류",
+      "  ▸ 사별의 경우: 사망한 배우자의 사망증명서",
     ],
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },
-      { label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
     ],
-    time: "약 3~4주",
+    time: "당일 발급 — 영사 심사 후 결정",
     notices: [
-      "경찰 분실 신고(Police Report) 먼저 완료 후 방문.",
-      "기본증명서에 단독친권 또는 사망 사실이 표기되어야 합니다.",
+      "⚠️ Police Report 없이는 접수 불가.",
+      "⚠️ 사진은 사진관 촬영본 필수.",
+      "기본증명서(상세)에 단독친권 또는 사망 사실이 표기되어야 합니다.",
+      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
     ],
     booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
   },
+
+  passport_minor_urgent_lost_korea: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "법정대리인 한국"],
+    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 법정대리인 한국 거주",
+    docs: [
+      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
+      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
+      "여권 분실 신고서 (Police Report) — 방문 전 필수",
+      "법정대리인 동의서 — 한국 거주 부 또는 모가 서명, 서명란에 반드시 인감도장 날인",
+      "법정대리인 인감증명서 — 6개월 이내 발급본",
+      "법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)",
+      "자녀 체류자격 증빙서류 원본",
+      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
+      "여권용 사진 1매 — 반드시 사진관 촬영본",
+      "긴급 출국 사유 증빙서류",
+    ],
+    costs: [
+      { label: "긴급여권 수수료", value: "CAD $48.00 (현금)" },
+      { label: "친족 사망·위독 인도적 사유 감면", value: "CAD $15.00 (현금)" },
+    ],
+    time: "당일 발급 — 영사 심사 후 결정",
+    notices: [
+      "⚠️ Police Report 없이는 접수 불가.",
+      "⚠️ 긴급 상황에서 인감도장·인감증명서 준비가 어려울 수 있습니다 — 반드시 사전 전화 필수 (416-920-3809).",
+      "⚠️ 사진은 사진관 촬영본 필수.",
+      "법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.",
+      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "사전 예약하기 (당일 방문) →",
+  },
+
+    passport_minor_urgent_lost: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "단수여권"], title: "⚡ 미성년자 긴급 단수여권 — 분실 시", docs: ["여권발급신청서 (영사관 비치, 법정대리인 서명)","여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","법정대리인 동의서 + 방문하는 법정대리인 여권 원본","여권용 사진 2매 — 반드시 사진관 촬영본 지참 (영사관 촬영 불가)","긴급 출국 사유 증빙서류 (항공권, 진단서 등)"], costs: [{ label: "단수여권 수수료", value: "CAD $48.00" },{ label: "친족 사망·위독 등 인도적 사유", value: "CAD $15.00 (할인)" }], time: "당일 발급 (방문 즉시)", notices: ["반드시 경찰서 분실 신고(Police Report) 먼저 완료 후 방문하세요.","단수여권은 1회용 — 귀국 후 정식 전자여권 별도 신청 필요.","사진은 반드시 사진관에서 촬영해 오세요."], booking: "https://www.torbooking.com/book", bookingLabel: "사전 예약하기 (당일 방문) →" },
+
+  passport_minor_have_normal: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "일반"], question: "부모님의 혼인·친권 상황은?", sub: "친권자가 누구인지에 따라 필요한 서류와 절차가 달라집니다.", options: [{ id: "passport_minor_married", icon: "👫", title: "부모님이 혼인 중 (공동친권)", desc: "부모 중 1인이 방문 신청 가능" },{ id: "passport_minor_divorced_sole", icon: "👤", title: "이혼 — 단독친권자 있음", desc: "단독친권자만 신청 가능" },{ id: "passport_minor_divorced_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },{ id: "passport_minor_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 신청" },{ id: "passport_minor_korea_parent", icon: "🇰🇷", title: "법정대리인이 한국에 계심", desc: "인감도장·증명서 필요" }] },
+  passport_minor_new_normal: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "일반"], question: "부모님의 혼인·친권 상황은?", sub: "신규 발급 시에도 친권자 확인이 필요합니다. 한국 출생신고가 완료된 경우에만 신청 가능합니다.", options: [{ id: "passport_minor_new_married", icon: "👫", title: "부모님이 혼인 중 (공동친권)", desc: "부모 중 1인이 방문 신청 가능" },{ id: "passport_minor_new_divorced_sole", icon: "👤", title: "이혼 — 단독친권자 있음", desc: "단독친권자만 신청 가능" },{ id: "passport_minor_new_divorced_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },{ id: "passport_minor_new_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 신청" },{ id: "passport_minor_new_korea_parent", icon: "🇰🇷", title: "법정대리인이 한국에 계심", desc: "인감도장·증명서 필요" }] },
+  passport_minor_lost_normal: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "일반"], question: "부모님의 혼인·친권 상황은?", sub: "분실 신고(Police Report) 완료 후 아래 해당 케이스를 선택하세요.", options: [{ id: "passport_minor_lost_married", icon: "👫", title: "부모님이 혼인 중 (공동친권)", desc: "부모 중 1인이 방문 신청 가능" },{ id: "passport_minor_lost_divorced_sole", icon: "👤", title: "이혼 — 단독친권자 있음", desc: "단독친권자만 신청 가능" },{ id: "passport_minor_lost_divorced_joint", icon: "⚖️", title: "이혼 — 공동친권", desc: "양쪽 동의 필요" },{ id: "passport_minor_lost_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 신청" },{ id: "passport_minor_lost_korea_parent", icon: "🇰🇷", title: "법정대리인이 한국에 계심", desc: "인감도장·증명서 필요" }] },
+
+  passport_minor_married: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "혼인중·공동친권"], title: "미성년자 여권 재발급 — 부모 혼인 중 (공동친권)", docs: ["여권발급신청서 (자녀 명의, 영사관 비치, 법정대리인 자필 작성)","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본 (PR카드 / 비자 / 시민권증서)","법정대리인 동의서 — 부모 2인 모두 인적사항 기입, 부모 중 1인 서명","방문하는 부 또는 모의 여권 원본","부·모 여권 사본 각 1부 (방문하지 않는 부 또는 모 포함)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (전산 확인 불가 시)","만 5세 미만: 여권용 사진 2매 — 사진관 촬영본 지참 필수 (영사관 무료촬영 불가)","만 5세 이상: 영사관 무료촬영 가능 (사진 미지참 시 자녀 동반 필요)","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "DHL 특급 (선택)", value: "별도 DHL 요금" }], time: "약 3~4주 (DHL 특급 선택 시 약 2주)", notices: ["공동친권: 동의서에 부모 2인 모두 인적사항 기재 — 방문은 1인만 해도 됩니다.","1인 1예약 = 업무건수 기준 — 자녀 2명 신청 시 예약 2자리 필요.","캐나다 출생 자녀는 반드시 한국 출생신고 완료 후에만 여권 신청 가능.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 사본 접수 불가."], booking: "https://www.torbooking.com/book" },
+  passport_minor_divorced_sole: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "이혼·단독친권"], title: "미성년자 여권 재발급 — 이혼 후 단독친권", docs: ["여권발급신청서 (자녀 명의, 영사관 비치, 단독친권자 자필 작성)","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 단독친권자만 인적사항 기입 및 서명","단독친권자 여권 원본","단독친권 확인 서류: 자녀 기본증명서(상세) — 친권자가 1인으로 명시된 것 (3개월 이내)","자녀 가족관계증명서 (상세) — 3개월 이내","이혼판결문 또는 협의이혼 확인서 사본 (친권자 지정 내용 포함, 영문 판결문은 번역 필요)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" },{ label: "DHL 특급 (선택)", value: "별도 DHL 요금" }], time: "약 3~4주 (DHL 특급 시 약 2주)", notices: ["단독친권자만 방문 신청 가능 — 비친권자(다른 부모)의 동의 불필요.","기본증명서(상세)에 단독친권자가 명확히 표기되어야 합니다.","이혼 판결문이 영문인 경우 자필 번역 가능 (번역자 성명·서명·날짜 기재).","캐나다 법원 공동양육 협정이 있더라도 한국 법상 단독친권자 기준으로 처리됩니다 — 불명확 시 사전 전화 상담 권장 (416-920-3809)."], booking: "https://www.torbooking.com/book" },
+  passport_minor_divorced_joint: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "이혼·공동친권"], title: "미성년자 여권 재발급 — 이혼 후 공동친권", docs: ["여권발급신청서","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자가 서명","방문하는 공동친권자 여권 원본","비방문 공동친권자 여권 사본 1부","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","공동친권 확인 서류: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["공동친권: 양쪽 친권자 모두의 동의가 필요합니다 — 동의서에 2인 모두 기재.","한 쪽 친권자가 여권 발급에 반대(부동의 의사 표시)한 경우 발급이 제한될 수 있습니다.","비방문 친권자가 한국에 있는 경우 인감도장이 날인된 동의서 + 인감증명서 필요 — 사전 전화 상담 권장.","이혼 판결문 영문본은 자필 번역 가능 (번역자 성명·날짜 기재)."], booking: "https://www.torbooking.com/book" },
+  passport_minor_single: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "한부모(사별·미혼)"], title: "미성년자 여권 재발급 — 한부모 (사별 또는 미혼)", docs: ["여권발급신청서","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 생존 친권자만 인적사항 기입 및 서명","생존 친권자 여권 원본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","사별의 경우: 사망한 부 또는 모의 사망증명서 (번역 필요 시 자필 번역)","미혼의 경우: 자녀 기본증명서에 친권자가 1인으로 표기된 것으로 확인 가능","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["사망증명서가 영문인 경우 자필 번역 가능 (번역자 성명·서명·날짜 기재).","기본증명서(상세)에 사망 또는 단독친권이 표기되어야 합니다.","불명확한 경우 방문 전 전화 상담 권장 (416-920-3809)."], booking: "https://www.torbooking.com/book" },
+  passport_minor_korea_parent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "법정대리인 한국"], title: "미성년자 여권 재발급 — 법정대리인이 한국에 거주", docs: ["여권발급신청서 (자녀 명의, 영사관 비치, 캐나다 측 성인이 대리 작성)","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 한국의 부 또는 모가 서명, 서명란에 반드시 인감도장 날인 (서명만 불가)","법정대리인 인감증명서 — 발급일로부터 6개월 이내","법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)","부·모 여권 사본 각 1부 (공동친권의 경우 두 분 모두)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.","인감증명서는 발급일로부터 6개월 이내 서류만 인정.","공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요.","한국 서류는 방문 전 미리 준비해 오세요."], booking: "https://www.torbooking.com/book" },
+
+  passport_minor_lost_korea_parent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "법정대리인 한국"], title: "미성년자 여권 분실 재발급 — 법정대리인이 한국에 거주", docs: ["여권발급신청서 (자녀 명의, 자필 작성)","여권 분실 신고서 (Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 한국의 부 또는 모가 서명, 서명란에 반드시 인감도장 날인","법정대리인 인감증명서 — 발급일로부터 6개월 이내","법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["⚠️ 경찰 분실 신고(Police Report) 먼저 완료 후 방문.","⚠️ 법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.","인감증명서는 발급일로부터 6개월 이내 서류만 인정.","공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요."], booking: "https://www.torbooking.com/book" },
+  passport_minor_new_married: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "혼인중·공동친권"], title: "미성년자 여권 신규 발급 — 부모 혼인 중 (공동친권)", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본 (신규 발급 필수)","자녀 체류자격 증빙서류 원본 + 사본 (PR카드 / 비자 / 시민권증서 / 캐나다 출생증명서)","법정대리인 동의서 — 부모 2인 모두 인적사항 기입, 부모 중 1인 서명","방문하는 부 또는 모의 여권 원본","부·모 여권 사본 각 1부 (방문하지 않는 부 또는 모 포함)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 반드시 한국 출생신고 완료 후에만 여권 신청 가능.","기본증명서·가족관계증명서는 한국에서 발급해 오세요 (정부24 온라인 또는 주민센터).","신규 발급은 온라인 신청 불가 — 반드시 방문 신청.","공동친권: 동의서에 부모 2인 모두 기재, 방문은 1인으로 가능."], booking: "https://www.torbooking.com/book" },
+  passport_minor_new_divorced_sole: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "이혼·단독친권"], title: "미성년자 여권 신규 발급 — 이혼 후 단독친권", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (친권자 1인 명시)","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 단독친권자만 기입 및 서명","단독친권자 여권 원본","이혼판결문 또는 협의이혼 확인서 (단독친권 명시, 영문본은 자필 번역)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","기본증명서에 단독친권자가 명시되어야 합니다.","신규 발급은 반드시 방문 신청."], booking: "https://www.torbooking.com/book" },
+  passport_minor_new_divorced_joint: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "이혼·공동친권"], title: "미성년자 여권 신규 발급 — 이혼 후 공동친권", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자 서명","방문하는 공동친권자 여권 원본 + 비방문 공동친권자 여권 사본","공동친권 확인: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["공동친권: 양쪽 모두 동의 필요 — 한 쪽이 반대하면 발급 제한.","캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","신규 발급은 반드시 방문 신청."], booking: "https://www.torbooking.com/book" },
+  passport_minor_new_single: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "한부모"], title: "미성년자 여권 신규 발급 — 한부모 (사별 또는 미혼)", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 생존 친권자 기입 및 서명","생존 친권자 여권 원본","사별의 경우: 사망한 배우자의 사망증명서 (영문본은 자필 번역)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","기본증명서에 단독친권 또는 사망 사실이 표기되어야 합니다.","신규 발급은 반드시 방문 신청."], booking: "https://www.torbooking.com/book" },
+  passport_minor_new_korea_parent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "법정대리인 한국"], title: "미성년자 여권 신규 발급 — 법정대리인이 한국에 거주", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 서명란에 반드시 인감도장 날인 (서명만 불가)","법정대리인 인감증명서 — 발급일로부터 6개월 이내","법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)","부·모 여권 사본 각 1부 (공동친권의 경우 두 분 모두)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만 접수 불가.","인감증명서는 발급일로부터 6개월 이내.","공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요."], booking: "https://www.torbooking.com/book" },
+
+  passport_minor_lost_married: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "혼인중·공동친권"], title: "미성년자 여권 분실 재발급 — 부모 혼인 중", docs: ["여권발급신청서","여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 부모 2인 인적사항 기입, 1인 서명","방문하는 부 또는 모의 여권 원본 + 부·모 여권 사본 각 1부","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["반드시 경찰서 분실 신고(Police Report) 완료 후 방문하세요.","공동친권: 동의서에 부모 2인 모두 기재, 방문은 1인으로 가능."], booking: "https://www.torbooking.com/book" },
+  passport_minor_lost_divorced_sole: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "이혼·단독친권"], title: "미성년자 여권 분실 재발급 — 이혼 후 단독친권", docs: ["여권발급신청서","여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 단독친권자만 기입 및 서명","단독친권자 여권 원본","자녀 기본증명서 (상세) — 단독친권자 표기 확인 (3개월 이내)","자녀 가족관계증명서 (상세) — 3개월 이내","이혼판결문 또는 협의이혼 확인서 (단독친권 명시)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["경찰 분실 신고(Police Report) 먼저 완료 후 방문.","단독친권자만 방문 신청 가능.","이혼 판결문 영문본은 자필 번역 가능."], booking: "https://www.torbooking.com/book" },
+  passport_minor_lost_divorced_joint: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "이혼·공동친권"], title: "미성년자 여권 분실 재발급 — 이혼 후 공동친권", docs: ["여권발급신청서","여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자 서명","방문 친권자 여권 원본 + 비방문 친권자 여권 사본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","공동친권 확인: 이혼 판결문 또는 협의이혼 확인서","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["경찰 분실 신고(Police Report) 먼저 완료 후 방문.","공동친권: 양쪽 모두 동의 필요.","한 쪽이 여권 발급 반대 의사 표시를 한 경우 발급 제한 — 법원 명령이 있어야 가능."], booking: "https://www.torbooking.com/book" },
+  passport_minor_lost_single: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "한부모"], title: "미성년자 여권 분실 재발급 — 한부모 (사별 또는 미혼)", docs: ["여권발급신청서","여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 생존 친권자 기입 및 서명","생존 친권자 여권 원본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","사별의 경우: 사망한 배우자의 사망증명서","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "일반여권 (58면)", value: "CAD $52.00 (현금)" },{ label: "알뜰여권 (26면)", value: "CAD $49.00 (현금)" }], time: "약 3~4주", notices: ["경찰 분실 신고(Police Report) 먼저 완료 후 방문.","기본증명서에 단독친권 또는 사망 사실이 표기되어야 합니다."], booking: "https://www.torbooking.com/book" },
 
   // ══ FAMILY REGISTER (가족관계등록) — 재설계된 트리 ══
   family_start: {
@@ -3122,54 +1928,14 @@ const TREE = {
     question: "어떤 업무가 필요하신가요?",
     sub: "신고 업무는 우편 접수도 가능합니다. 증명서 발급은 공동인증서가 있으면 정부24에서 온라인 무료 발급 가능합니다.",
     options: [
-      {
-        id: "family_cert",
-        icon: "📄",
-        title: "증명서 발급",
-        desc: "기본증명서·가족관계증명서·혼인관계증명서 등 — 온라인/방문/우편",
-      },
-      {
-        id: "family_birth",
-        icon: "👶",
-        title: "출생신고",
-        desc: "캐나다 출생 자녀의 한국 등록부 등재",
-      },
-      {
-        id: "family_marriage",
-        icon: "💍",
-        title: "혼인신고",
-        desc: "캐나다에서 혼인한 경우 한국 등록부 반영",
-      },
-      {
-        id: "family_divorce",
-        icon: "📝",
-        title: "이혼신고",
-        desc: "캐나다 이혼 후 한국 등록부 반영",
-      },
-      {
-        id: "family_death",
-        icon: "🕊️",
-        title: "사망신고",
-        desc: "캐나다에서 사망한 한국 국민",
-      },
-      {
-        id: "family_recognition",
-        icon: "👨",
-        title: "인지신고",
-        desc: "혼인 외 출생 자녀를 부가 법적으로 인정",
-      },
-      {
-        id: "family_adoption",
-        icon: "🤝",
-        title: "입양·파양신고",
-        desc: "캐나다에서 진행된 입양 또는 파양",
-      },
-      {
-        id: "family_other",
-        icon: "📋",
-        title: "기타 등록부 정정·변경",
-        desc: "개명·등록기준지 변경·등록부 정정 등",
-      },
+      { id: "family_cert", icon: "📄", title: "증명서 발급", desc: "기본증명서·가족관계증명서·혼인관계증명서 등 — 온라인/방문/우편" },
+      { id: "family_birth", icon: "👶", title: "출생신고", desc: "캐나다 출생 자녀의 한국 등록부 등재" },
+      { id: "family_marriage", icon: "💍", title: "혼인신고", desc: "캐나다에서 혼인한 경우 한국 등록부 반영" },
+      { id: "family_divorce", icon: "📝", title: "이혼신고", desc: "캐나다 이혼 후 한국 등록부 반영" },
+      { id: "family_death", icon: "🕊️", title: "사망신고", desc: "캐나다에서 사망한 한국 국민" },
+      { id: "family_recognition", icon: "👨", title: "인지신고", desc: "혼인 외 출생 자녀를 부가 법적으로 인정" },
+      { id: "family_adoption", icon: "🤝", title: "입양·파양신고", desc: "캐나다에서 진행된 입양 또는 파양" },
+      { id: "family_other", icon: "📋", title: "기타 등록부 정정·변경", desc: "개명·등록기준지 변경·등록부 정정 등" },
     ],
   },
 
@@ -3181,18 +1947,8 @@ const TREE = {
     question: "어떤 방법으로 발급받으시겠어요?",
     sub: "공동인증서가 있으면 정부24에서 즉시 무료 발급 가능합니다. 없으면 방문 또는 우편으로 신청하세요.",
     options: [
-      {
-        id: "family_cert_online",
-        icon: "💻",
-        title: "온라인 발급 (정부24)",
-        desc: "공동인증서 필요 — 즉시·무료·영사관 방문 불필요",
-      },
-      {
-        id: "family_cert_visit",
-        icon: "🏛️",
-        title: "방문 또는 우편 신청",
-        desc: "공동인증서 없는 경우 — 수수료 현금 납부",
-      },
+      { id: "family_cert_online", icon: "💻", title: "온라인 발급 (정부24)", desc: "공동인증서 필요 — 즉시·무료·영사관 방문 불필요" },
+      { id: "family_cert_visit", icon: "🏛️", title: "방문 또는 우편 신청", desc: "공동인증서 없는 경우 — 수수료 현금 납부" },
     ],
   },
 
@@ -3240,8 +1996,7 @@ const TREE = {
       "수령 후 6개월 이내 픽업 — 이후 개인정보 보호 목적으로 파쇄됩니다.",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   // ── 출생신고 ──
@@ -3252,24 +2007,9 @@ const TREE = {
     question: "부모의 국적 구성은?",
     sub: "부모 국적에 따라 필요 서류와 절차가 달라집니다. 혼인신고가 아직 안 된 경우 혼인신고를 먼저 완료해야 합니다.",
     options: [
-      {
-        id: "family_birth_korean",
-        icon: "🇰🇷",
-        title: "부모 모두 한국인",
-        desc: "혼인신고 완료 필수",
-      },
-      {
-        id: "family_birth_mixed",
-        icon: "🌏",
-        title: "한국인 + 외국인 부모",
-        desc: "외국인 배우자 서류 추가 필요",
-      },
-      {
-        id: "family_birth_unmarried",
-        icon: "👤",
-        title: "미혼 한국인 부 또는 모",
-        desc: "혼인신고 없이 출생신고 — 인지신고 병행 가능",
-      },
+      { id: "family_birth_korean", icon: "🇰🇷", title: "부모 모두 한국인", desc: "혼인신고 완료 필수" },
+      { id: "family_birth_mixed", icon: "🌏", title: "한국인 + 외국인 부모", desc: "외국인 배우자 서류 추가 필요" },
+      { id: "family_birth_unmarried", icon: "👤", title: "미혼 한국인 부 또는 모", desc: "혼인신고 없이 출생신고 — 인지신고 병행 가능" },
     ],
   },
 
@@ -3296,8 +2036,7 @@ const TREE = {
       "우편 접수 가능 (온타리오·마니토바주 변호사 공증 사본 허용).",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   family_birth_mixed: {
@@ -3326,8 +2065,7 @@ const TREE = {
       "우편 접수 가능.",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   family_birth_unmarried: {
@@ -3362,18 +2100,8 @@ const TREE = {
     question: "배우자 국적은?",
     sub: "혼인한 지역의 관할 영사관에 신고해야 합니다. 온타리오·마니토바주 혼인 → 주토론토 총영사관.",
     options: [
-      {
-        id: "family_marriage_korean",
-        icon: "🇰🇷",
-        title: "한국인 + 한국인",
-        desc: "양쪽 모두 한국 국적인 경우",
-      },
-      {
-        id: "family_marriage_mixed",
-        icon: "🌏",
-        title: "한국인 + 외국인",
-        desc: "배우자 중 한 명이 외국 국적인 경우",
-      },
+      { id: "family_marriage_korean", icon: "🇰🇷", title: "한국인 + 한국인", desc: "양쪽 모두 한국 국적인 경우" },
+      { id: "family_marriage_mixed", icon: "🌏", title: "한국인 + 외국인", desc: "배우자 중 한 명이 외국 국적인 경우" },
     ],
   },
 
@@ -3402,8 +2130,7 @@ const TREE = {
       "우편 접수 가능 (온타리오·마니토바주 변호사 공증 사본 허용).",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   family_marriage_mixed: {
@@ -3431,8 +2158,7 @@ const TREE = {
       "우편 접수 가능.",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   // ── 이혼신고 ──
@@ -3457,8 +2183,7 @@ const TREE = {
       "이혼 후 미성년 자녀의 친권·양육권 내용도 이혼판결문에 포함되어 있어야 합니다.",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   // ── 사망신고 ──
@@ -3485,8 +2210,7 @@ const TREE = {
       "사망신고 완료 후 상속·국적 관련 업무 처리 시 기본증명서에 사망 사실이 반영됩니다.",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   // ── 인지신고 (신규) ──
@@ -3525,18 +2249,8 @@ const TREE = {
     question: "입양인가요, 파양인가요?",
     sub: "캐나다에서 진행된 입양·파양을 한국 가족관계등록부에 반영하는 신고입니다.",
     options: [
-      {
-        id: "family_adoption_new",
-        icon: "🤝",
-        title: "입양신고",
-        desc: "캐나다 법원 입양 결정을 한국 등록부에 반영",
-      },
-      {
-        id: "family_adoption_cancel",
-        icon: "📝",
-        title: "파양신고",
-        desc: "입양 관계 해소를 한국 등록부에 반영",
-      },
+      { id: "family_adoption_new", icon: "🤝", title: "입양신고", desc: "캐나다 법원 입양 결정을 한국 등록부에 반영" },
+      { id: "family_adoption_cancel", icon: "📝", title: "파양신고", desc: "입양 관계 해소를 한국 등록부에 반영" },
     ],
   },
 
@@ -3598,24 +2312,9 @@ const TREE = {
     question: "어떤 업무인가요?",
     sub: "아래 업무들은 모두 법원 허가 또는 별도 절차가 필요합니다. 방문 전 전화 상담을 권장합니다.",
     options: [
-      {
-        id: "family_name_change",
-        icon: "✏️",
-        title: "개명 허가 신청",
-        desc: "이름 변경 — 법원 허가 필요",
-      },
-      {
-        id: "family_register_fix",
-        icon: "🔧",
-        title: "가족관계등록부 정정 허가 신청",
-        desc: "등록부 오류 수정 — 법원 허가 필요",
-      },
-      {
-        id: "family_base_change",
-        icon: "📍",
-        title: "등록기준지(구 본적) 변경 신고",
-        desc: "등록기준지를 다른 주소로 변경",
-      },
+      { id: "family_name_change", icon: "✏️", title: "개명 허가 신청", desc: "이름 변경 — 법원 허가 필요" },
+      { id: "family_register_fix", icon: "🔧", title: "가족관계등록부 정정 허가 신청", desc: "등록부 오류 수정 — 법원 허가 필요" },
+      { id: "family_base_change", icon: "📍", title: "등록기준지(구 본적) 변경 신고", desc: "등록기준지를 다른 주소로 변경" },
     ],
   },
 
@@ -3695,24 +2394,9 @@ const TREE = {
     question: "국적 관련해서 어떤 상황이신가요?",
     sub: "정확한 안내를 위해 본인 상황에 가장 가까운 것을 선택해 주세요.",
     options: [
-      {
-        id: "nationality_want_give_up",
-        icon: "🍁",
-        title: "한국 국적 포기",
-        desc: "캐나다 시민권 취득 후 국적 정리, 또는 선천적 복수국적자 국적 이탈",
-      },
-      {
-        id: "nationality_want_keep",
-        icon: "🇰🇷",
-        title: "한국 국적 유지",
-        desc: "복수국적 유지 신고, 또는 국적선택 (한국 선택)",
-      },
-      {
-        id: "nationality_want_recover",
-        icon: "🔄",
-        title: "한국 국적 회복",
-        desc: "과거 시민권 취득으로 국적 상실 후 다시 한국 국적 취득",
-      },
+      { id: "nationality_want_give_up", icon: "🍁", title: "한국 국적 포기", desc: "캐나다 시민권 취득 후 국적 정리, 또는 선천적 복수국적자 국적 이탈" },
+      { id: "nationality_want_keep", icon: "🇰🇷", title: "한국 국적 유지", desc: "복수국적 유지 신고, 또는 국적선택 (한국 선택)" },
+      { id: "nationality_want_recover", icon: "🔄", title: "한국 국적 회복", desc: "과거 시민권 취득으로 국적 상실 후 다시 한국 국적 취득" },
     ],
   },
 
@@ -3724,18 +2408,8 @@ const TREE = {
     question: "어떤 경우에 해당하시나요?",
     sub: "취득 경위에 따라 신고 종류가 달라집니다.",
     options: [
-      {
-        id: "nationality_loss",
-        icon: "🍁",
-        title: "내가 직접 캐나다 시민권을 취득했어요 (후천적)",
-        desc: "한국에서 태어나 이민 후 시민권 취득 → 국적상실 신고",
-      },
-      {
-        id: "nationality_renounce_check",
-        icon: "👶",
-        title: "태어날 때부터 한국+캐나다 이중국적이었어요 (선천적)",
-        desc: "캐나다에서 출생 또는 부모 중 한 명이 한국인 → 국적이탈 신고",
-      },
+      { id: "nationality_loss", icon: "🍁", title: "내가 직접 캐나다 시민권을 취득했어요 (후천적)", desc: "한국에서 태어나 이민 후 시민권 취득 → 국적상실 신고" },
+      { id: "nationality_renounce_check", icon: "👶", title: "태어날 때부터 한국+캐나다 이중국적이었어요 (선천적)", desc: "캐나다에서 출생 또는 부모 중 한 명이 한국인 → 국적이탈 신고" },
     ],
   },
 
@@ -3747,30 +2421,10 @@ const TREE = {
     question: "성별과 현재 나이는?",
     sub: "성별과 나이에 따라 국적이탈 신청 가능 여부와 절차가 달라집니다.",
     options: [
-      {
-        id: "nationality_renounce_female",
-        icon: "👩",
-        title: "여성 — 만 22세 생일 이전",
-        desc: "국적이탈 신고 가능 기간",
-      },
-      {
-        id: "nationality_renounce_female_over22",
-        icon: "👩",
-        title: "여성 — 만 22세 생일 이후",
-        desc: "국적선택명령 대상 — 특수 절차 안내",
-      },
-      {
-        id: "nationality_renounce_male_under18",
-        icon: "👨",
-        title: "남성 — 만 18세가 되는 해 3월 31일 이전",
-        desc: "국적이탈 신고 가능 기간",
-      },
-      {
-        id: "nationality_renounce_male_over18",
-        icon: "👨",
-        title: "남성 — 만 18세가 되는 해 3월 31일 이후",
-        desc: "병역 해소 여부에 따라 달라짐",
-      },
+      { id: "nationality_renounce_female", icon: "👩", title: "여성 — 만 22세 생일 이전", desc: "국적이탈 신고 가능 기간" },
+      { id: "nationality_renounce_female_over22", icon: "👩", title: "여성 — 만 22세 생일 이후", desc: "국적선택명령 대상 — 특수 절차 안내" },
+      { id: "nationality_renounce_male_under18", icon: "👨", title: "남성 — 만 18세가 되는 해 3월 31일 이전", desc: "국적이탈 신고 가능 기간" },
+      { id: "nationality_renounce_male_over18", icon: "👨", title: "남성 — 만 18세가 되는 해 3월 31일 이후", desc: "병역 해소 여부에 따라 달라짐" },
     ],
   },
 
@@ -3832,8 +2486,7 @@ const TREE = {
     type: "result",
     service: "nationality",
     breadcrumb: ["홈", "국적", "국적이탈", "남성·18세 이전"],
-    title:
-      "국적이탈 신고 — 선천적 복수국적 남성 (만 18세 되는 해 3월 31일 이전)",
+    title: "국적이탈 신고 — 선천적 복수국적 남성 (만 18세 되는 해 3월 31일 이전)",
     docs: [
       "국적이탈신고서 (소정 양식)",
       "본인 한국 여권 원본 + 사본 (없는 경우 기본증명서로 대체 가능 — 사전 문의)",
@@ -3864,18 +2517,8 @@ const TREE = {
     question: "병역 상황은 어떻게 되시나요?",
     sub: "만 18세가 되는 해 3월 31일 이후에는 병역 해소 여부에 따라 처리 방법이 달라집니다.",
     options: [
-      {
-        id: "nationality_renounce_male_discharged",
-        icon: "✅",
-        title: "병역을 마쳤거나 면제받았어요",
-        desc: "현역·상근·보충역 복무 완료 또는 면제·제2국민역 편입",
-      },
-      {
-        id: "nationality_renounce_male_pending",
-        icon: "⚠️",
-        title: "아직 병역을 마치지 않았어요",
-        desc: "현재 병역 미필 상태",
-      },
+      { id: "nationality_renounce_male_discharged", icon: "✅", title: "병역을 마쳤거나 면제받았어요", desc: "현역·상근·보충역 복무 완료 또는 면제·제2국민역 편입" },
+      { id: "nationality_renounce_male_pending", icon: "⚠️", title: "아직 병역을 마치지 않았어요", desc: "현재 병역 미필 상태" },
     ],
   },
 
@@ -3950,8 +2593,7 @@ const TREE = {
       "우편 신청 가능 (온타리오/마니토바 변호사 공증 사본 허용).",
     ],
     booking: "https://www.torbooking.com/book",
-    postalInfo:
-      "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
+    postalInfo: "가족관계/국적과\nConsulate General of the Republic of Korea\n555 Avenue Road, Toronto, ON M4V 2J7",
   },
 
   // ── 유지 분기 ──
@@ -3962,18 +2604,8 @@ const TREE = {
     question: "어떤 상황이신가요?",
     sub: "복수국적을 유지하는 방법은 상황에 따라 다릅니다.",
     options: [
-      {
-        id: "nationality_retain",
-        icon: "✅",
-        title: "국적보유 신고 (복수국적 유지)",
-        desc: "국적보유 신고 또는 국적선택(한국 선택)",
-      },
-      {
-        id: "nationality_choice",
-        icon: "🔄",
-        title: "국적선택 신고 (한국 선택)",
-        desc: "외국국적불행사서약으로 한국 국적 유지",
-      },
+      { id: "nationality_retain", icon: "✅", title: "국적보유 신고 (복수국적 유지)", desc: "국적보유 신고 또는 국적선택(한국 선택)" },
+      { id: "nationality_choice", icon: "🔄", title: "국적선택 신고 (한국 선택)", desc: "외국국적불행사서약으로 한국 국적 유지" },
     ],
   },
 
@@ -4033,18 +2665,8 @@ const TREE = {
     question: "현재 나이가 만 65세 이상이신가요?",
     sub: "나이에 따라 국적회복 절차와 복수국적 허용 여부가 달라집니다.",
     options: [
-      {
-        id: "nationality_recover_65",
-        icon: "🏠",
-        title: "만 65세 이상 — 복수국적 허용",
-        desc: "한국 영주귀국 목적 — 복수국적 허용 (캐나다 국적 유지 가능)",
-      },
-      {
-        id: "nationality_recover_under65",
-        icon: "📋",
-        title: "만 65세 미만 — 외국 국적 포기 원칙",
-        desc: "원칙적으로 외국 국적 포기 후 국적회복 가능 — 예외 케이스 있음",
-      },
+      { id: "nationality_recover_65", icon: "🏠", title: "만 65세 이상 — 복수국적 허용", desc: "한국 영주귀국 목적 — 복수국적 허용 (캐나다 국적 유지 가능)" },
+      { id: "nationality_recover_under65", icon: "📋", title: "만 65세 미만 — 외국 국적 포기 원칙", desc: "원칙적으로 외국 국적 포기 후 국적회복 가능 — 예외 케이스 있음" },
     ],
   },
 
@@ -4110,24 +2732,9 @@ const TREE = {
     question: "어떤 인증서가 필요하신가요?",
     sub: "공동인증서와 금융인증서 모두 영사관 방문 1회로 신청합니다. 방문 후 이메일로 안내를 받아 집/사무실 컴퓨터에서 다운로드합니다.",
     options: [
-      {
-        id: "cert_joint_who",
-        icon: "🔐",
-        title: "공동인증서 (구 공인인증서)",
-        desc: "전자민원·가족관계증명서 온라인 발급·인터넷뱅킹·연말정산 등",
-      },
-      {
-        id: "cert_financial_who",
-        icon: "🏦",
-        title: "금융인증서",
-        desc: "인터넷뱅킹 전용 — 2024.5.1부터 영사관 신청 가능",
-      },
-      {
-        id: "cert_nonface",
-        icon: "📱",
-        title: "비대면 앱 신청",
-        desc: "영사관 방문 없이 스마트폰 앱으로 발급 — 전자여권 필수",
-      },
+      { id: "cert_joint_who", icon: "🔐", title: "공동인증서 (구 공인인증서)", desc: "전자민원·가족관계증명서 온라인 발급·인터넷뱅킹·연말정산 등" },
+      { id: "cert_financial_who", icon: "🏦", title: "금융인증서", desc: "인터넷뱅킹 전용 — 2024.5.1부터 영사관 신청 가능" },
+      { id: "cert_nonface", icon: "📱", title: "비대면 앱 신청", desc: "영사관 방문 없이 스마트폰 앱으로 발급 — 전자여권 필수" },
     ],
   },
 
@@ -4139,18 +2746,8 @@ const TREE = {
     question: "신청자가 성인인가요, 미성년자인가요?",
     sub: "미성년자(만 19세 미만)는 법정대리인(대한민국 국적자)이 반드시 함께 방문해야 합니다.",
     options: [
-      {
-        id: "cert_joint_adult",
-        icon: "👤",
-        title: "성인 (만 19세 이상)",
-        desc: "본인 단독 방문 신청",
-      },
-      {
-        id: "cert_joint_minor",
-        icon: "👦",
-        title: "미성년자 (만 19세 미만)",
-        desc: "미성년자 + 법정대리인 동반 방문 필수",
-      },
+      { id: "cert_joint_adult", icon: "👤", title: "성인 (만 19세 이상)", desc: "본인 단독 방문 신청" },
+      { id: "cert_joint_minor", icon: "👦", title: "미성년자 (만 19세 미만)", desc: "미성년자 + 법정대리인 동반 방문 필수" },
     ],
   },
 
@@ -4216,18 +2813,8 @@ const TREE = {
     question: "신청자가 성인인가요, 미성년자인가요?",
     sub: "미성년자(만 19세 미만)는 법정대리인(대한민국 국적자)이 반드시 함께 방문해야 합니다.",
     options: [
-      {
-        id: "cert_financial_adult",
-        icon: "👤",
-        title: "성인 (만 19세 이상)",
-        desc: "본인 단독 방문 신청",
-      },
-      {
-        id: "cert_financial_minor",
-        icon: "👦",
-        title: "미성년자 (만 19세 미만)",
-        desc: "미성년자 + 법정대리인 동반 방문 필수",
-      },
+      { id: "cert_financial_adult", icon: "👤", title: "성인 (만 19세 이상)", desc: "본인 단독 방문 신청" },
+      { id: "cert_financial_minor", icon: "👦", title: "미성년자 (만 19세 미만)", desc: "미성년자 + 법정대리인 동반 방문 필수" },
     ],
   },
 
@@ -4311,8 +2898,7 @@ const TREE = {
       "앱 신청이 어려운 경우 영사관 방문 신청(공동인증서 또는 금융인증서)을 이용하세요.",
     ],
     booking: null,
-    onlineLink:
-      "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_27012/view.do?seq=3",
+    onlineLink: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_27012/view.do?seq=3",
   },
 
   // ══ VARIOUS CERTIFICATES (각종 증명서 발급) — 재설계된 트리 ══
@@ -4323,54 +2909,14 @@ const TREE = {
     question: "어떤 증명서가 필요하신가요?",
     sub: "공동인증서가 있으면 정부24(gov.kr)에서 대부분의 서류를 온라인으로 즉시 무료 발급할 수 있습니다.",
     options: [
-      {
-        id: "vcert_online",
-        icon: "💻",
-        title: "온라인 발급 가능 서류 목록",
-        desc: "공동인증서로 정부24에서 즉시·무료·영사관 방문 불필요",
-      },
-      {
-        id: "vcert_immigration",
-        icon: "🛬",
-        title: "출입국사실증명서",
-        desc: "한국 입출국 기록 확인 — 방문 또는 온라인",
-      },
-      {
-        id: "vcert_criminal",
-        icon: "🔍",
-        title: "신원조사(범죄경력)증명서",
-        desc: "비자·시민권 신청·신원확인 용도 — 경찰청 처리 7일",
-      },
-      {
-        id: "vcert_driving",
-        icon: "🚗",
-        title: "영문 운전경력증명서",
-        desc: "캐나다 운전면허 교환 시 필요 — 방문 또는 온라인",
-      },
-      {
-        id: "vcert_military_c",
-        icon: "🪖",
-        title: "병적증명서",
-        desc: "병역 이행 여부 확인 → 병무 메뉴에서 안내",
-      },
-      {
-        id: "vcert_resident",
-        icon: "🏠",
-        title: "주민등록 등본·초본",
-        desc: "주민등록 현황 확인 — 방문 또는 온라인",
-      },
-      {
-        id: "vcert_tax",
-        icon: "💰",
-        title: "납세·소득 증명서",
-        desc: "납세증명(국세·지방세·관세)·소득금액증명 — 해외이주신고 등에 필요",
-      },
-      {
-        id: "vcert_passport_info",
-        icon: "📋",
-        title: "여권정보증명서",
-        desc: "2020.12.20 이후 발급 여권 소지자 — 주민번호 대체 서류",
-      },
+      { id: "vcert_online", icon: "💻", title: "온라인 발급 가능 서류 목록", desc: "공동인증서로 정부24에서 즉시·무료·영사관 방문 불필요" },
+      { id: "vcert_immigration", icon: "🛬", title: "출입국사실증명서", desc: "한국 입출국 기록 확인 — 방문 또는 온라인" },
+      { id: "vcert_criminal", icon: "🔍", title: "신원조사(범죄경력)증명서", desc: "비자·시민권 신청·신원확인 용도 — 경찰청 처리 7일" },
+      { id: "vcert_driving", icon: "🚗", title: "영문 운전경력증명서", desc: "캐나다 운전면허 교환 시 필요 — 방문 또는 온라인" },
+      { id: "vcert_military_c", icon: "🪖", title: "병적증명서", desc: "병역 이행 여부 확인 → 병무 메뉴에서 안내" },
+      { id: "vcert_resident", icon: "🏠", title: "주민등록 등본·초본", desc: "주민등록 현황 확인 — 방문 또는 온라인" },
+      { id: "vcert_tax", icon: "💰", title: "납세·소득 증명서", desc: "납세증명(국세·지방세·관세)·소득금액증명 — 해외이주신고 등에 필요" },
+      { id: "vcert_passport_info", icon: "📋", title: "여권정보증명서", desc: "2020.12.20 이후 발급 여권 소지자 — 주민번호 대체 서류" },
     ],
   },
 
@@ -4434,36 +2980,16 @@ const TREE = {
     question: "어떤 용도로 필요하신가요?",
     sub: "2015년 4월부터 '신원조사(범죄경력)증명서'로 명칭이 변경되었습니다. 용도에 따라 신청서 서식(별지 1-1·1-2·1-3호)이 다릅니다.",
     options: [
-      {
-        id: "vcert_criminal_visa",
-        icon: "✈️",
-        title: "외국 비자·영주권 신청용",
-        desc: "캐나다 이민·비자 신청 시 한국 범죄경력 확인 — 별지 1-1호",
-      },
-      {
-        id: "vcert_criminal_citizenship",
-        icon: "🍁",
-        title: "캐나다 시민권 신청용",
-        desc: "시민권 신청 시 제출 — 별지 1-2호",
-      },
-      {
-        id: "vcert_criminal_identity",
-        icon: "🔍",
-        title: "신원확인용",
-        desc: "영주권·시민권 소지자 신원 확인 — 별지 1-3호",
-      },
+      { id: "vcert_criminal_visa", icon: "✈️", title: "외국 비자·영주권 신청용", desc: "캐나다 이민·비자 신청 시 한국 범죄경력 확인 — 별지 1-1호" },
+      { id: "vcert_criminal_citizenship", icon: "🍁", title: "캐나다 시민권 신청용", desc: "시민권 신청 시 제출 — 별지 1-2호" },
+      { id: "vcert_criminal_identity", icon: "🔍", title: "신원확인용", desc: "영주권·시민권 소지자 신원 확인 — 별지 1-3호" },
     ],
   },
 
   vcert_criminal_visa: {
     type: "result",
     service: "various_cert",
-    breadcrumb: [
-      "홈",
-      "각종 증명서 발급",
-      "신원조사 증명서",
-      "비자·영주권 신청용",
-    ],
+    breadcrumb: ["홈", "각종 증명서 발급", "신원조사 증명서", "비자·영주권 신청용"],
     title: "신원조사(범죄경력)증명서 — 외국 비자·영주권 신청용 (별지 1-1호)",
     docs: [
       "신청서 별지 1-1호 (소정 양식 — 영사관 홈페이지 다운로드)",
@@ -4649,134 +3175,18 @@ const TREE = {
     onlineLink: "https://www.gov.kr",
   },
 
-  visa_start: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자 (사증)"],
-    question: "한국 혈통이 있으신가요?",
-    sub: "한국법상 부모 중 한 명이라도 한국 국적이었던 적이 있으면, 지금은 캐나다인이 되셨어도 본인이 선천적으로 한국 국적을 보유할 수 있습니다. 비자 신청 전 반드시 확인이 필요합니다.",
-    options: [
-      {
-        id: "visa_ko_heritage_yes",
-        icon: "🧬",
-        title: "네 — 부모 또는 조부모가 한국인이었던 적 있어요",
-        desc: "현재 캐나다인이 되셨더라도 해당됩니다",
-      },
-      {
-        id: "visa_ko_heritage_unsure",
-        icon: "🤔",
-        title: "잘 모르겠어요",
-        desc: "부모님 중 한 분이 한국인이었을 수도 있어요",
-      },
-      {
-        id: "visa_ko_heritage_no",
-        icon: "🌐",
-        title: "전혀 없어요",
-        desc: "부모·조부모 모두 한국 국적인 적 없음",
-      },
-    ],
-  },
+  visa_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)"], question: "한국 혈통이 있으신가요?", sub: "한국법상 부모 중 한 명이라도 한국 국적이었던 적이 있으면, 지금은 캐나다인이 되셨어도 본인이 선천적으로 한국 국적을 보유할 수 있습니다. 비자 신청 전 반드시 확인이 필요합니다.", options: [{ id: "visa_ko_heritage_yes", icon: "🧬", title: "네 — 부모 또는 조부모가 한국인이었던 적 있어요", desc: "현재 캐나다인이 되셨더라도 해당됩니다" },{ id: "visa_ko_heritage_unsure", icon: "🤔", title: "잘 모르겠어요", desc: "부모님 중 한 분이 한국인이었을 수도 있어요" },{ id: "visa_ko_heritage_no", icon: "🌐", title: "전혀 없어요", desc: "부모·조부모 모두 한국 국적인 적 없음" }] },
 
-  visa_ko_heritage_yes: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자 (사증)", "한국 혈통"],
-    question: "어떤 상황이신가요?",
-    sub: "한국 혈통이 있으시면 비자 신청 전 국적 상태를 먼저 확인해야 합니다.",
-    options: [
-      {
-        id: "visa_f4_start",
-        icon: "⚠️",
-        title: "국적 상태를 아직 확인하지 않았어요",
-        desc: "선천적 한국 국적 보유 여부 — 먼저 확인 필수",
-      },
-      {
-        id: "visa_f4_family",
-        icon: "👨‍👩‍👧",
-        title: "배우자 또는 자녀가 F-4 재외동포 비자 소지자예요",
-        desc: "동반 비자 (F-3) 신청",
-      },
-      {
-        id: "visa_f4_confirmed",
-        icon: "✅",
-        title: "국적상실 확인 완료 — F-4 비자 신청하러 왔어요",
-        desc: "기본증명서에 국적상실 표기된 경우",
-      },
-    ],
-  },
+  visa_ko_heritage_yes: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통"], question: "어떤 상황이신가요?", sub: "한국 혈통이 있으시면 비자 신청 전 국적 상태를 먼저 확인해야 합니다.", options: [{ id: "visa_f4_start", icon: "⚠️", title: "국적 상태를 아직 확인하지 않았어요", desc: "선천적 한국 국적 보유 여부 — 먼저 확인 필수" },{ id: "visa_f4_family", icon: "👨‍👩‍👧", title: "배우자 또는 자녀가 F-4 재외동포 비자 소지자예요", desc: "동반 비자 (F-3) 신청" },{ id: "visa_f4_confirmed", icon: "✅", title: "국적상실 확인 완료 — F-4 비자 신청하러 왔어요", desc: "기본증명서에 국적상실 표기된 경우" }] },
 
-  visa_ko_heritage_unsure: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자 (사증)", "혈통 불확실"],
-    title: "⚠️ 비자 신청 전 부모님께 먼저 확인하세요",
-    docs: [
-      "부모님 중 한 분이라도 한국 국적이었던 적이 있는지 확인하세요",
-      "  ▸ 현재 캐나다 시민권자이더라도, 본인 출생 당시 한국인이었다면 해당됩니다",
-      "  ▸ 출생신고를 한 적 없어도, 출생 당시 부모 중 한 명이 한국인이었으면 본인도 한국 국적입니다",
-      "확인 결과에 따라:",
-      "  ▸ 한국 혈통 있음 → 뒤로 가서 '네' 선택",
-      "  ▸ 한국 혈통 없음 → 뒤로 가서 '전혀 없어요' 선택",
-    ],
-    costs: [{ label: "수수료", value: "해당 없음 — 상담 안내" }],
-    time: "부모님께 확인 후 다시 방문",
-    notices: [
-      "⚠️ 한국 국적을 보유한 상태에서 비자를 신청하면 접수가 거부됩니다.",
-      "⚠️ 만 18~37세 남성이고 한국 국적이라면 병역 의무가 있을 수 있습니다.",
-      "여전히 불확실하다면 영사관(416-920-3809) 또는 국적과 상담 예약을 이용하세요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "국적 상담 예약하기 →",
-  },
+  visa_ko_heritage_unsure: { type: "result", service: "visa", breadcrumb: ["홈", "비자 (사증)", "혈통 불확실"], title: "⚠️ 비자 신청 전 부모님께 먼저 확인하세요", docs: ["부모님 중 한 분이라도 한국 국적이었던 적이 있는지 확인하세요", "  ▸ 현재 캐나다 시민권자이더라도, 본인 출생 당시 한국인이었다면 해당됩니다", "  ▸ 출생신고를 한 적 없어도, 출생 당시 부모 중 한 명이 한국인이었으면 본인도 한국 국적입니다", "확인 결과에 따라:", "  ▸ 한국 혈통 있음 → 뒤로 가서 '네' 선택", "  ▸ 한국 혈통 없음 → 뒤로 가서 '전혀 없어요' 선택"], costs: [{ label: "수수료", value: "해당 없음 — 상담 안내" }], time: "부모님께 확인 후 다시 방문", notices: ["⚠️ 한국 국적을 보유한 상태에서 비자를 신청하면 접수가 거부됩니다.", "⚠️ 만 18~37세 남성이고 한국 국적이라면 병역 의무가 있을 수 있습니다.", "여전히 불확실하다면 영사관(416-920-3809) 또는 국적과 상담 예약을 이용하세요."], booking: "https://www.torbooking.com/book", bookingLabel: "국적 상담 예약하기 →" },
 
-  visa_ko_heritage_no: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"],
-    question: "방문 목적은 무엇인가요?",
-    sub: "한국 혈통이 없는 외국인의 비자 종류를 선택해 주세요.",
-    options: [
-      {
-        id: "visa_c3_start",
-        icon: "🏠",
-        title: "한국 국민의 가족 / 긴급 방문",
-        desc: "배우자·자녀·장례식·임종 등 → C-3-1",
-      },
-      {
-        id: "visa_other_start",
-        icon: "📋",
-        title: "취업·유학·출장·기타 목적",
-        desc: "E-2 원어민교사, E-7 취업, F-1-D 디지털노마드, D-2/D-4 유학 등",
-      },
-    ],
-  },
-  visa_start_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["Home", "Visa"],
-    question: "Do you have Korean heritage?",
-    sub: "Under Korean law, if either of your parents is/was EVER a Korean national — even if they later became Canadian — you may hold Korean citizenship automatically. This affects whether you need a visa at all.",
-    options: [
-      {
-        id: "visa_heritage_yes_en",
-        icon: "🧬",
-        title: "Yes — a parent or grandparent was Korean",
-        desc: "Includes cases where they later gave up Korean citizenship",
-      },
-      {
-        id: "visa_heritage_unsure_en",
-        icon: "🤔",
-        title: "Not sure — one of my parents may have been Korean",
-        desc: "Best to confirm before applying for any visa",
-      },
-      {
-        id: "visa_heritage_no_en",
-        icon: "🌐",
-        title: "No Korean heritage at all",
-        desc: "Neither parent nor grandparent was ever Korean",
-      },
-    ],
-  },
+  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "한국 혈통이 없는 외국인의 비자 종류를 선택해 주세요.", options: [{ id: "visa_c3_start", icon: "🏠", title: "한국 국민의 가족 / 긴급 방문", desc: "배우자·자녀·장례식·임종 등 → C-3-1" },{ id: "visa_other_start", icon: "📋", title: "취업·유학·출장·기타 목적", desc: "E-2 원어민교사, E-7 취업, F-1-D 디지털노마드, D-2/D-4 유학 등" }] },
+  visa_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa"], question: "Do you have Korean heritage?", sub: "Under Korean law, if either of your parents is/was EVER a Korean national — even if they later became Canadian — you may hold Korean citizenship automatically. This affects whether you need a visa at all.", options: [
+    { id: "visa_heritage_yes_en", icon: "🧬", title: "Yes — a parent or grandparent was Korean", desc: "Includes cases where they later gave up Korean citizenship" },
+    { id: "visa_heritage_unsure_en", icon: "🤔", title: "Not sure — one of my parents may have been Korean", desc: "Best to confirm before applying for any visa" },
+    { id: "visa_heritage_no_en", icon: "🌐", title: "No Korean heritage at all", desc: "Neither parent nor grandparent was ever Korean" },
+  ] },
 
   visa_heritage_yes_en: {
     type: "question",
@@ -4785,24 +3195,9 @@ const TREE = {
     question: "What is your situation?",
     sub: "Since you have Korean heritage, you need to check your citizenship status before applying for any visa. Select the option that best describes you.",
     options: [
-      {
-        id: "visa_dual_check_en",
-        icon: "⚠️",
-        title: "I haven't checked my Korean citizenship status yet",
-        desc: "You may hold Korean nationality — check this first before anything else",
-      },
-      {
-        id: "visa_f4_family_en",
-        icon: "👨‍👩‍👧",
-        title: "My spouse/child holds an F-4 Overseas Korean Visa",
-        desc: "Accompanying family → F-3 Dependent Visa",
-      },
-      {
-        id: "visa_f4_en",
-        icon: "🇰🇷",
-        title: "I confirmed I hold / held Korean nationality — F-4 Visa",
-        desc: "Overseas Korean (재외동포) visa for those with Korean heritage",
-      },
+      { id: "visa_dual_check_en", icon: "⚠️", title: "I haven't checked my Korean citizenship status yet", desc: "You may hold Korean nationality — check this first before anything else" },
+      { id: "visa_f4_family_en", icon: "👨‍👩‍👧", title: "My spouse/child holds an F-4 Overseas Korean Visa", desc: "Accompanying family → F-3 Dependent Visa" },
+      { id: "visa_f4_en", icon: "🇰🇷", title: "I confirmed I hold / held Korean nationality — F-4 Visa", desc: "Overseas Korean (재외동포) visa for those with Korean heritage" },
     ],
   },
 
@@ -4839,482 +3234,51 @@ const TREE = {
     question: "What brings you to Korea?",
     sub: "Since you have no Korean heritage, select your purpose of visit. Canadian citizens can enter Korea visa-free for up to 6 months.",
     options: [
-      {
-        id: "visa_c3_start_en",
-        icon: "🏠",
-        title: "Family of a Korean national / Emergency visit",
-        desc: "Spouse, child, funeral, critical illness → C-3-1 Short-Term Visa",
-      },
-      {
-        id: "visa_other_start_en",
-        icon: "📋",
-        title: "Work, Study, Business or Other Purpose",
-        desc: "E-2 English teacher, E-7 work, F-1-D Digital Nomad, D-2 student, etc.",
-      },
-      {
-        id: "visa_no_heritage_en",
-        icon: "🌐",
-        title: "Visiting or Transiting Korea",
-        desc: "Canadian citizens: visa-free · Tourist / Short-Stay / Transit (TWOV)",
-      },
-      {
-        id: "visa_keta_en",
-        icon: "📱",
-        title: "K-ETA — Do I need one?",
-        desc: "Canadian passport holders: K-ETA currently exempted until Dec 31, 2026",
-      },
+      { id: "visa_c3_start_en", icon: "🏠", title: "Family of a Korean national / Emergency visit", desc: "Spouse, child, funeral, critical illness → C-3-1 Short-Term Visa" },
+      { id: "visa_other_start_en", icon: "📋", title: "Work, Study, Business or Other Purpose", desc: "E-2 English teacher, E-7 work, F-1-D Digital Nomad, D-2 student, etc." },
+      { id: "visa_no_heritage_en", icon: "🌐", title: "Visiting or Transiting Korea", desc: "Canadian citizens: visa-free · Tourist / Short-Stay / Transit (TWOV)" },
+      { id: "visa_keta_en", icon: "📱", title: "K-ETA — Do I need one?", desc: "Canadian passport holders: K-ETA currently exempted until Dec 31, 2026" },
     ],
   },
 
-  visa_f4_start: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)"],
-    question: "⚠️ 먼저 확인하세요 — 선천적 이중국적 여부",
-    sub: "한국법상 부모 중 한 명이라도 한국 국민이면, 출생신고를 하지 않았어도 자동으로 한국 국적을 보유합니다.",
-    options: [
-      {
-        id: "visa_dual_check",
-        icon: "🧬",
-        title: "부모 또는 조부모 중 한 명이 한국 국적이었음",
-        desc: "⚠️ 이 경우 본인도 한국 국적일 수 있습니다 — 먼저 확인 필요",
-      },
-      {
-        id: "visa_f4_confirmed",
-        icon: "✅",
-        title: "이미 한국 국적상실 신고 완료 — F-4 신청하러 왔습니다",
-        desc: "국적상실이 기본증명서에 표기된 경우",
-      },
-    ],
-  },
-  visa_dual_check: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)", "이중국적 확인"],
-    title: "⚠️ 비자 신청 전 국적 확인 필수",
-    docs: [
-      "📌 한국 「국적법」에 따르면 (1998.6.14 이후 출생자) — 1998년 6월 14일 이후 출생자: 부모 중 한 명이 한국인이면 출생신고 여부와 관계없이 자동으로 한국 국적 보유 (선천적 이중국적자)",
-      "📌 1998년 6월 13일 이전 출생자: 부(父)가 한국인이면 부계혈통 원칙에 따라 한국 국적 보유",
-      "⚠️ 이 경우 한국 국적자이므로 F-4 비자 신청 불가 — 비자가 아닌 여권을 신청해야 합니다",
-    ],
-    costs: [{ label: "수수료", value: "해당 없음 (비자 아님)" }],
-    time: "확인 후 적절한 서비스로 안내",
-    notices: [
-      "출생신고를 한 번도 하지 않았다면 → 출생신고 후 한국 여권 신청",
-      "출생신고는 했으나 국적선택을 하지 않았다면 → 국적선택신고 또는 국적이탈신고 필요 (만 22세 이전)",
-      "이미 국적상실 처리가 완료됐다면 → 기본증명서(상세) 확인 후 F-4 비자 신청 가능",
-      "병역의무자(남성 만 18~37세)의 경우 국적이탈 전 병역 문제 해결 필수",
-      "정확한 확인을 위해 방문 전 여권과 또는 국적과에 전화 상담 권장 (416-920-3809)",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "가족관계 / 국적 상담 예약 →",
-  },
-  visa_dual_check_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Korean Heritage Check"],
-    title: "⚠️ Check Your Korean Citizenship Status First",
-    docs: [
-      "📌 Under Korean Nationality Law (born on or after June 14, 1998):",
-      "  ▸ You automatically hold Korean citizenship if EITHER parent is/was a Korean national at the time of your birth",
-      "  ▸ This applies even if: you were born in Canada · you never visited Korea · you were never registered in Korea",
-      "  ▸ This applies even if: your parent LATER became Canadian — what matters is their nationality AT YOUR BIRTH",
-      "📌 Example — this case applies to you if:",
-      "  ▸ Your mother was Korean when you were born, and later naturalised as Canadian → you may hold Korean citizenship",
-      "  ▸ Your father was Korean when you were born, even if he later gave up Korean citizenship → you may hold Korean citizenship",
-      "📌 If born before June 13, 1998: Korean citizenship passed through the father (paternal line only).",
-      "⚠️ If this applies to you: you are a Korean national — you CANNOT apply for a visa. You must apply for a Korean passport.",
-    ],
-    costs: [{ label: "Fee", value: "N/A — Confirm status first" }],
-    time: "Confirm your status, then proceed to the correct service",
-    notices: [
-      "⚠️ If your parent was Korean at the time of your birth: you likely hold Korean citizenship regardless of what they hold now.",
-      "⚠️ Male aged 18–37 with Korean citizenship: military service obligations may apply — resolve this before renouncing.",
-      "Never registered your birth in Korea → File a birth registration (출생신고) at this Consulate first, then apply for a Korean passport.",
-      "Registered but never chose nationality → File a nationality selection (국적선택) or renunciation (국적이탈) — generally before age 22 for males, 22 for females.",
-      "Nationality loss already confirmed on your Basic Certificate (기본증명서) → You are now eligible to apply for an F-4 Overseas Korean Visa or a regular visa.",
-      "Unsure? Call the Consulate before visiting: 416-920-3809",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "Book Appointment (Nationality Dept.) →",
-  },
+  visa_f4_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)"], question: "⚠️ 먼저 확인하세요 — 선천적 이중국적 여부", sub: "한국법상 부모 중 한 명이라도 한국 국민이면, 출생신고를 하지 않았어도 자동으로 한국 국적을 보유합니다.", options: [{ id: "visa_dual_check", icon: "🧬", title: "부모 또는 조부모 중 한 명이 한국 국적이었음", desc: "⚠️ 이 경우 본인도 한국 국적일 수 있습니다 — 먼저 확인 필요" },{ id: "visa_f4_confirmed", icon: "✅", title: "이미 한국 국적상실 신고 완료 — F-4 신청하러 왔습니다", desc: "국적상실이 기본증명서에 표기된 경우" }] },
+  visa_dual_check: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "이중국적 확인"], title: "⚠️ 비자 신청 전 국적 확인 필수", docs: ["📌 한국 「국적법」에 따르면 (1998.6.14 이후 출생자) — 1998년 6월 14일 이후 출생자: 부모 중 한 명이 한국인이면 출생신고 여부와 관계없이 자동으로 한국 국적 보유 (선천적 이중국적자)","📌 1998년 6월 13일 이전 출생자: 부(父)가 한국인이면 부계혈통 원칙에 따라 한국 국적 보유","⚠️ 이 경우 한국 국적자이므로 F-4 비자 신청 불가 — 비자가 아닌 여권을 신청해야 합니다"], costs: [{ label: "수수료", value: "해당 없음 (비자 아님)" }], time: "확인 후 적절한 서비스로 안내", notices: ["출생신고를 한 번도 하지 않았다면 → 출생신고 후 한국 여권 신청","출생신고는 했으나 국적선택을 하지 않았다면 → 국적선택신고 또는 국적이탈신고 필요 (만 22세 이전)","이미 국적상실 처리가 완료됐다면 → 기본증명서(상세) 확인 후 F-4 비자 신청 가능","병역의무자(남성 만 18~37세)의 경우 국적이탈 전 병역 문제 해결 필수","정확한 확인을 위해 방문 전 여권과 또는 국적과에 전화 상담 권장 (416-920-3809)"], booking: "https://www.torbooking.com/book", bookingLabel: "가족관계 / 국적 상담 예약 →" },
+  visa_dual_check_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Korean Heritage Check"], title: "⚠️ Check Your Korean Citizenship Status First", docs: [
+    "📌 Under Korean Nationality Law (born on or after June 14, 1998):",
+    "  ▸ You automatically hold Korean citizenship if EITHER parent is/was a Korean national at the time of your birth",
+    "  ▸ This applies even if: you were born in Canada · you never visited Korea · you were never registered in Korea",
+    "  ▸ This applies even if: your parent LATER became Canadian — what matters is their nationality AT YOUR BIRTH",
+    "📌 Example — this case applies to you if:",
+    "  ▸ Your mother was Korean when you were born, and later naturalised as Canadian → you may hold Korean citizenship",
+    "  ▸ Your father was Korean when you were born, even if he later gave up Korean citizenship → you may hold Korean citizenship",
+    "📌 If born before June 13, 1998: Korean citizenship passed through the father (paternal line only).",
+    "⚠️ If this applies to you: you are a Korean national — you CANNOT apply for a visa. You must apply for a Korean passport.",
+  ], costs: [{ label: "Fee", value: "N/A — Confirm status first" }], time: "Confirm your status, then proceed to the correct service", notices: [
+    "⚠️ If your parent was Korean at the time of your birth: you likely hold Korean citizenship regardless of what they hold now.",
+    "⚠️ Male aged 18–37 with Korean citizenship: military service obligations may apply — resolve this before renouncing.",
+    "Never registered your birth in Korea → File a birth registration (출생신고) at this Consulate first, then apply for a Korean passport.",
+    "Registered but never chose nationality → File a nationality selection (국적선택) or renunciation (국적이탈) — generally before age 22 for males, 22 for females.",
+    "Nationality loss already confirmed on your Basic Certificate (기본증명서) → You are now eligible to apply for an F-4 Overseas Korean Visa or a regular visa.",
+    "Unsure? Call the Consulate before visiting: 416-920-3809",
+  ], booking: "https://www.torbooking.com/book", bookingLabel: "Book Appointment (Nationality Dept.) →" },
 
-  visa_f4_confirmed: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)", "신청"],
-    question: "본인의 한국 혈통 유형은?",
-    sub: "국적상실이 기본증명서에 표기된 것을 먼저 확인하세요.",
-    options: [
-      {
-        id: "visa_f4_former_sex",
-        icon: "📜",
-        title: "본인이 직접 한국 국적을 보유했던 분",
-        desc: "시민권 취득으로 한국 국적 상실·이탈한 분",
-      },
-      {
-        id: "visa_f4_child",
-        icon: "👶",
-        title: "한국계 부모·조부모에게서 태어난 2세",
-        desc: "부 또는 모(조부모)가 한국 국적이었던 외국 국적자",
-      },
-    ],
-  },
-  visa_f4_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "F-4 Overseas Korean"],
-    question: "Which category applies to you?",
-    sub: "You must have already completed Korean nationality renunciation/loss (국적상실 신고) before applying.",
-    options: [
-      {
-        id: "visa_f4_former_en",
-        icon: "📜",
-        title: "I previously held Korean citizenship (personally)",
-        desc: "You lost/renounced Korean citizenship after acquiring Canadian citizenship",
-      },
-      {
-        id: "visa_f4_child_en",
-        icon: "👶",
-        title: "My parent(s) or grandparent(s) held Korean citizenship",
-        desc: "You were born a foreign national with Korean heritage",
-      },
-    ],
-  },
-  visa_f4_former_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "F-4 Overseas Korean",
-      "Former Korean National",
-    ],
-    question: "What is your gender and age?",
-    sub: "Males under 41 require additional documents related to military service history.",
-    options: [
-      {
-        id: "visa_f4_former_female_en",
-        icon: "👩",
-        title: "Female — or Male aged 41 or older",
-        desc: "No additional military service documents required",
-      },
-      {
-        id: "visa_f4_former_male41_en",
-        icon: "👨",
-        title: "Male under 41 years old",
-        desc: "RCMP Criminal Record Check + additional military-related docs required",
-      },
-    ],
-  },
-  visa_f4_former_female_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "F-4 Overseas Korean",
-      "Former Korean National",
-    ],
-    title: "F-4 Overseas Korean Visa — Former Korean National",
-    docs: [
-      "Visa Application Form (printed from Korea Visa Portal: visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy (min. 6 months validity)",
-      "Canadian Citizenship Certificate — original + photocopy, front and back (if born Canadian: 'Certified Copy of Birth Registration' or 'Statement of Live Birth' — original + copy)",
-      "Basic Certificate / 기본증명서 (Detailed, all resident numbers visible) — issued within 3 months, showing nationality loss/renunciation date",
-      "Family Relationship Certificate / 가족관계증명서 (Detailed) — issued within 3 months (if loss reported before 2008, submit 제적등본 instead)",
-      "1 passport-type photo (3.5×4.5cm, white background, taken within 6 months, date-stamped on back)",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "You MUST complete Korean nationality renunciation/loss (국적상실 신고) BEFORE applying.",
-      "Visa validity: up to 5 years; each entry allows up to 2 years of stay.",
-      "Mail applications accepted: include a certified cheque (CAD $117) and a prepaid return envelope.",
-      "Visa status check: Korea Visa Portal (visa.go.kr).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_former_male41_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "F-4 Overseas Korean",
-      "Former Korean National (Male under 41)",
-    ],
-    title: "F-4 Overseas Korean Visa — Male Under 41 (Former Korean National)",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "Canadian Citizenship Certificate — original + photocopy",
-      "Basic Certificate / 기본증명서 (Detailed) — issued within 3 months, showing nationality loss date",
-      "Family Relationship Certificate / 가족관계증명서 (Detailed) — issued within 3 months",
-      "Both parents' Basic Certificate + Family Relationship Certificate (Detailed) — issued within 3 months",
-      "RCMP Criminal Record Check — fingerprint-based (NOT name-based), issued within 6 months",
-      "1 passport-type photo",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "⚠️ RCMP Criminal Record Check must be fingerprint-based (not name-based search).",
-      "Males who gave up Korean nationality without fulfilling military duty AFTER May 1, 2018 cannot apply for F-4 until the year they turn 41.",
-      "Visa validity: up to 5 years; each entry allows up to 2 years of stay.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_child_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "F-4 Overseas Korean",
-      "Korean Heritage (2nd Gen+)",
-    ],
-    question: "What is your gender and age?",
-    sub: "Males aged 18–59 must submit an RCMP Criminal Record Check.",
-    options: [
-      {
-        id: "visa_f4_child_general_en",
-        icon: "👩",
-        title: "Female — or under 18 — or 60 and over",
-        desc: "RCMP Criminal Record Check not required",
-      },
-      {
-        id: "visa_f4_child_male_en",
-        icon: "👨",
-        title: "Male aged 18–59",
-        desc: "RCMP Criminal Record Check required",
-      },
-    ],
-  },
-  visa_f4_child_general_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Korean Heritage"],
-    title: "F-4 Overseas Korean Visa — Korean Heritage (2nd Generation+)",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "Canadian Citizenship Certificate — original + photocopy",
-      "Your birth certificate — Certified Copy of Birth Registration (must list both parents' names)",
-      "Korean parent's or grandparent's Basic Certificate + Family Relationship Certificate (Detailed) — issued within 3 months",
-      "1 passport-type photo",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "If you submit proof of Korean language proficiency, you may receive up to 2 years stay per entry.",
-      "Visa validity: up to 5 years.",
-      "Mail applications accepted (certified cheque CAD $117 + prepaid return envelope).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_child_male_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "F-4 Overseas Korean",
-      "Korean Heritage (Male 18–59)",
-    ],
-    title: "F-4 Overseas Korean Visa — Korean Heritage, Male aged 18–59",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "Canadian Citizenship Certificate — original + photocopy",
-      "Your birth certificate — Certified Copy of Birth Registration",
-      "Korean parent's or grandparent's Basic Certificate + Family Relationship Certificate (Detailed) — issued within 3 months",
-      "RCMP Criminal Record Check — fingerprint-based, issued within 6 months",
-      "1 passport-type photo",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "⚠️ RCMP Criminal Record Check must be fingerprint-based — name-based checks are NOT accepted.",
-      "Visa validity: up to 5 years.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
+  visa_f4_confirmed: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "신청"], question: "본인의 한국 혈통 유형은?", sub: "국적상실이 기본증명서에 표기된 것을 먼저 확인하세요.", options: [{ id: "visa_f4_former_sex", icon: "📜", title: "본인이 직접 한국 국적을 보유했던 분", desc: "시민권 취득으로 한국 국적 상실·이탈한 분" },{ id: "visa_f4_child", icon: "👶", title: "한국계 부모·조부모에게서 태어난 2세", desc: "부 또는 모(조부모)가 한국 국적이었던 외국 국적자" }] },
+  visa_f4_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean"], question: "Which category applies to you?", sub: "You must have already completed Korean nationality renunciation/loss (국적상실 신고) before applying.", options: [{ id: "visa_f4_former_en", icon: "📜", title: "I previously held Korean citizenship (personally)", desc: "You lost/renounced Korean citizenship after acquiring Canadian citizenship" },{ id: "visa_f4_child_en", icon: "👶", title: "My parent(s) or grandparent(s) held Korean citizenship", desc: "You were born a foreign national with Korean heritage" }] },
+  visa_f4_former_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Former Korean National"], question: "What is your gender and age?", sub: "Males under 41 require additional documents related to military service history.", options: [{ id: "visa_f4_former_female_en", icon: "👩", title: "Female — or Male aged 41 or older", desc: "No additional military service documents required" },{ id: "visa_f4_former_male41_en", icon: "👨", title: "Male under 41 years old", desc: "RCMP Criminal Record Check + additional military-related docs required" }] },
+  visa_f4_former_female_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Former Korean National"], title: "F-4 Overseas Korean Visa — Former Korean National", docs: ["Visa Application Form (printed from Korea Visa Portal: visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy (min. 6 months validity)","Canadian Citizenship Certificate — original + photocopy, front and back (if born Canadian: 'Certified Copy of Birth Registration' or 'Statement of Live Birth' — original + copy)","Basic Certificate / 기본증명서 (Detailed, all resident numbers visible) — issued within 3 months, showing nationality loss/renunciation date","Family Relationship Certificate / 가족관계증명서 (Detailed) — issued within 3 months (if loss reported before 2008, submit 제적등본 instead)","1 passport-type photo (3.5×4.5cm, white background, taken within 6 months, date-stamped on back)"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["You MUST complete Korean nationality renunciation/loss (국적상실 신고) BEFORE applying.","Visa validity: up to 5 years; each entry allows up to 2 years of stay.","Mail applications accepted: include a certified cheque (CAD $117) and a prepaid return envelope.","Visa status check: Korea Visa Portal (visa.go.kr)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_former_male41_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Former Korean National (Male under 41)"], title: "F-4 Overseas Korean Visa — Male Under 41 (Former Korean National)", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","Canadian Citizenship Certificate — original + photocopy","Basic Certificate / 기본증명서 (Detailed) — issued within 3 months, showing nationality loss date","Family Relationship Certificate / 가족관계증명서 (Detailed) — issued within 3 months","Both parents' Basic Certificate + Family Relationship Certificate (Detailed) — issued within 3 months","RCMP Criminal Record Check — fingerprint-based (NOT name-based), issued within 6 months","1 passport-type photo"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["⚠️ RCMP Criminal Record Check must be fingerprint-based (not name-based search).","Males who gave up Korean nationality without fulfilling military duty AFTER May 1, 2018 cannot apply for F-4 until the year they turn 41.","Visa validity: up to 5 years; each entry allows up to 2 years of stay."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_child_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Korean Heritage (2nd Gen+)"], question: "What is your gender and age?", sub: "Males aged 18–59 must submit an RCMP Criminal Record Check.", options: [{ id: "visa_f4_child_general_en", icon: "👩", title: "Female — or under 18 — or 60 and over", desc: "RCMP Criminal Record Check not required" },{ id: "visa_f4_child_male_en", icon: "👨", title: "Male aged 18–59", desc: "RCMP Criminal Record Check required" }] },
+  visa_f4_child_general_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Korean Heritage"], title: "F-4 Overseas Korean Visa — Korean Heritage (2nd Generation+)", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","Canadian Citizenship Certificate — original + photocopy","Your birth certificate — Certified Copy of Birth Registration (must list both parents' names)","Korean parent's or grandparent's Basic Certificate + Family Relationship Certificate (Detailed) — issued within 3 months","1 passport-type photo"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["If you submit proof of Korean language proficiency, you may receive up to 2 years stay per entry.","Visa validity: up to 5 years.","Mail applications accepted (certified cheque CAD $117 + prepaid return envelope)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_child_male_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Korean Heritage (Male 18–59)"], title: "F-4 Overseas Korean Visa — Korean Heritage, Male aged 18–59", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","Canadian Citizenship Certificate — original + photocopy","Your birth certificate — Certified Copy of Birth Registration","Korean parent's or grandparent's Basic Certificate + Family Relationship Certificate (Detailed) — issued within 3 months","RCMP Criminal Record Check — fingerprint-based, issued within 6 months","1 passport-type photo"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["⚠️ RCMP Criminal Record Check must be fingerprint-based — name-based checks are NOT accepted.","Visa validity: up to 5 years."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
-  visa_f4_family_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "F-3 Dependent Visa"],
-    question: "What is your relationship to the F-4 visa holder?",
-    sub: "Spouse or minor children (under 18) of an F-4 Overseas Korean visa holder may apply for an F-3 Dependent Visa.",
-    options: [
-      {
-        id: "visa_f3_spouse_en",
-        icon: "💑",
-        title: "Spouse of an F-4 visa holder",
-        desc: "Up to 1 year stay",
-      },
-      {
-        id: "visa_f3_child_en",
-        icon: "👶",
-        title: "Minor child (under 18) of an F-4 visa holder",
-        desc: "Up to 1 year stay",
-      },
-    ],
-  },
-  visa_f3_spouse_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Spouse"],
-    title: "F-3 Dependent Visa — Spouse of F-4 Holder",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo",
-      "Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back",
-      "Marriage certificate — Korean marriage registration (혼인관계증명서, Detailed, within 3 months), OR Canadian marriage registration",
-      "Family Relationship Certificate of both spouses (Detailed) — within 3 months",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $78 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "Stay period: up to 1 year (within the F-4 holder's visa validity).",
-      "⚠️ Visa validity: issued for a maximum of 3 months from the date of issuance. You must enter Korea within 3 months — unused visas are cancelled.",
-      "⚠️ If you are of Korean heritage yourself, you may be eligible to apply for F-4 directly.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_f3_child_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Minor Child"],
-    title: "F-3 Dependent Visa — Minor Child (Under 18) of F-4 Holder",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr, with photo attached)",
-      "Valid passport — original + photocopy",
-      "1 passport-type photo",
-      "Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back",
-      "Child's birth certificate — Certified Copy of Birth Registration",
-      "Parent's Family Relationship Certificate or Marriage Certificate (Detailed) — within 3 months",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $78 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "Minor children are defined as 0–18 years old.",
-      "Stay period: up to 1 year (within F-4 holder's visa validity).",
-      "⚠️ Visa validity: issued for a maximum of 3 months from the date of issuance. You must enter Korea within 3 months — unused visas are cancelled.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
+  visa_f4_family_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa"], question: "What is your relationship to the F-4 visa holder?", sub: "Spouse or minor children (under 18) of an F-4 Overseas Korean visa holder may apply for an F-3 Dependent Visa.", options: [{ id: "visa_f3_spouse_en", icon: "💑", title: "Spouse of an F-4 visa holder", desc: "Up to 1 year stay" },{ id: "visa_f3_child_en", icon: "👶", title: "Minor child (under 18) of an F-4 visa holder", desc: "Up to 1 year stay" }] },
+  visa_f3_spouse_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Spouse"], title: "F-3 Dependent Visa — Spouse of F-4 Holder", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","1 passport-type photo","Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back","Marriage certificate — Korean marriage registration (혼인관계증명서, Detailed, within 3 months), OR Canadian marriage registration","Family Relationship Certificate of both spouses (Detailed) — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $78 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["Stay period: up to 1 year (within the F-4 holder's visa validity).","⚠️ Visa validity: issued for a maximum of 3 months from the date of issuance. You must enter Korea within 3 months — unused visas are cancelled.","⚠️ If you are of Korean heritage yourself, you may be eligible to apply for F-4 directly."], booking: "https://www.torbooking.com/book" },
+  visa_f3_child_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Minor Child"], title: "F-3 Dependent Visa — Minor Child (Under 18) of F-4 Holder", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy","1 passport-type photo","Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back","Child's birth certificate — Certified Copy of Birth Registration","Parent's Family Relationship Certificate or Marriage Certificate (Detailed) — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $78 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["Minor children are defined as 0–18 years old.","Stay period: up to 1 year (within F-4 holder's visa validity).","⚠️ Visa validity: issued for a maximum of 3 months from the date of issuance. You must enter Korea within 3 months — unused visas are cancelled."], booking: "https://www.torbooking.com/book" },
 
-  visa_c3_start_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)"],
-    question: "What is the purpose of your visit?",
-    sub: "Canadian citizens can visit Korea visa-free for up to 6 months. Only apply if you require a visa for your nationality.",
-    options: [
-      {
-        id: "visa_c3_family_en",
-        icon: "👨‍👩‍👧",
-        title: "Visiting a Korean national family member",
-        desc: "Spouse or child is a Korean national",
-      },
-      {
-        id: "visa_c3_emergency_en",
-        icon: "🚨",
-        title: "Emergency / Humanitarian visit",
-        desc: "Funeral, critical illness, emergency surgery",
-      },
-      {
-        id: "visa_c3_other_en",
-        icon: "📋",
-        title: "Other short-term visit (wedding, adoption, etc.)",
-        desc: "Your own wedding, court appearance for adoption, etc.",
-      },
-    ],
-  },
-  visa_c3_family_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "Short-Term Visit (C-3-1)",
-      "Family of Korean National",
-    ],
-    title: "C-3-1 Short-Term Visa — Family of a Korean National",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr — include SIN number, fill in all details)",
-      "Valid passport — original + photocopy",
-      "1 passport-type photo",
-      "Proof of family relationship with Korean national",
-      "If of Korean heritage: Basic Certificate showing nationality loss date — within 3 months",
-    ],
-    costs: [
-      { label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" },
-    ],
-    time: "Approx. 12–15 business days",
-    notices: [
-      "⚠️ If you are of Korean heritage, you must complete Korean nationality renunciation BEFORE applying.",
-      "C-series visas CANNOT be converted to another visa type inside Korea.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_c3_emergency_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "Home",
-      "Visa",
-      "Short-Term Visit (C-3-1)",
-      "Emergency / Humanitarian",
-    ],
-    title: "C-3-1 Short-Term Visa — Emergency / Humanitarian Visit",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr)",
-      "Valid passport — original + photocopy",
-      "1 passport-type photo",
-      "Family relationship proof",
-      "Urgency evidence: Funeral → death certificate; Critical illness → doctor's letter; Emergency surgery → surgical documents",
-      "If of Korean heritage: Basic Certificate showing nationality loss date",
-    ],
-    costs: [
-      { label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" },
-    ],
-    time: "Emergency processing: 5–7 business days (when humanitarian urgency is recognized)",
-    notices: [
-      "🚨 For funeral attendance or critical illness: call the Visa Dept. immediately: 416-920-3809 ext. 221 to request an urgent appointment slot.",
-      "⚠️ IMPORTANT: If you previously held Korean citizenship (e.g. naturalized Canadian), you MUST submit the Nationality Loss Report (국적상실신고) documentation without exception — even for emergency visits.",
-      "C-series visas cannot be converted to another visa type inside Korea.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_c3_other_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Other"],
-    title: "C-3-1 Short-Term Visa — Other Purpose (Wedding, Adoption, etc.)",
-    docs: [
-      "Visa Application Form (printed from visa.go.kr)",
-      "Valid passport — original + photocopy",
-      "1 passport-type photo",
-      "Supporting documents for purpose of visit",
-      "If of Korean heritage: Basic Certificate showing nationality loss date",
-    ],
-    costs: [
-      { label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" },
-    ],
-    time: "Approx. 12–15 business days",
-    notices: [
-      "⚠️ Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need a visa.",
-      "C-series visas cannot be converted to F-4, F-6 or other visa types inside Korea.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
+  visa_c3_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)"], question: "What is the purpose of your visit?", sub: "Canadian citizens can visit Korea visa-free for up to 6 months. Only apply if you require a visa for your nationality.", options: [{ id: "visa_c3_family_en", icon: "👨‍👩‍👧", title: "Visiting a Korean national family member", desc: "Spouse or child is a Korean national" },{ id: "visa_c3_emergency_en", icon: "🚨", title: "Emergency / Humanitarian visit", desc: "Funeral, critical illness, emergency surgery" },{ id: "visa_c3_other_en", icon: "📋", title: "Other short-term visit (wedding, adoption, etc.)", desc: "Your own wedding, court appearance for adoption, etc." }] },
+  visa_c3_family_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Family of Korean National"], title: "C-3-1 Short-Term Visa — Family of a Korean National", docs: ["Visa Application Form (printed from visa.go.kr — include SIN number, fill in all details)","Valid passport — original + photocopy","1 passport-type photo","Proof of family relationship with Korean national","If of Korean heritage: Basic Certificate showing nationality loss date — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 12–15 business days", notices: ["⚠️ If you are of Korean heritage, you must complete Korean nationality renunciation BEFORE applying.","C-series visas CANNOT be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book" },
+  visa_c3_emergency_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Emergency / Humanitarian"], title: "C-3-1 Short-Term Visa — Emergency / Humanitarian Visit", docs: ["Visa Application Form (printed from visa.go.kr)","Valid passport — original + photocopy","1 passport-type photo","Family relationship proof","Urgency evidence: Funeral → death certificate; Critical illness → doctor's letter; Emergency surgery → surgical documents","If of Korean heritage: Basic Certificate showing nationality loss date"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Emergency processing: 5–7 business days (when humanitarian urgency is recognized)", notices: ["🚨 For funeral attendance or critical illness: call the Visa Dept. immediately: 416-920-3809 ext. 221 to request an urgent appointment slot.","⚠️ IMPORTANT: If you previously held Korean citizenship (e.g. naturalized Canadian), you MUST submit the Nationality Loss Report (국적상실신고) documentation without exception — even for emergency visits.","C-series visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book" },
+  visa_c3_other_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Other"], title: "C-3-1 Short-Term Visa — Other Purpose (Wedding, Adoption, etc.)", docs: ["Visa Application Form (printed from visa.go.kr)","Valid passport — original + photocopy","1 passport-type photo","Supporting documents for purpose of visit","If of Korean heritage: Basic Certificate showing nationality loss date"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 12–15 business days", notices: ["⚠️ Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need a visa.","C-series visas cannot be converted to F-4, F-6 or other visa types inside Korea."], booking: "https://www.torbooking.com/book" },
 
   visa_no_heritage_en: {
     type: "question",
@@ -5323,18 +3287,8 @@ const TREE = {
     question: "What brings you to Korea?",
     sub: "Canadian passport holders can visit Korea visa-free for up to 6 months. Select your purpose below.",
     options: [
-      {
-        id: "visa_visit_en",
-        icon: "🌏",
-        title: "Visiting / Tourism / Short-Term Stay",
-        desc: "Canadian citizens: visa-free up to 6 months · Other nationalities: short-term visitor visa required",
-      },
-      {
-        id: "visa_transit_en",
-        icon: "🔄",
-        title: "Transiting Through Korea (TWOV)",
-        desc: "Passing through Korea on the way to another country — up to 30 days visa-free",
-      },
+      { id: "visa_visit_en", icon: "🌏", title: "Visiting / Tourism / Short-Term Stay", desc: "Canadian citizens: visa-free up to 6 months · Other nationalities: short-term visitor visa required" },
+      { id: "visa_transit_en", icon: "🔄", title: "Transiting Through Korea (TWOV)", desc: "Passing through Korea on the way to another country — up to 30 days visa-free" },
     ],
   },
 
@@ -5359,14 +3313,8 @@ const TREE = {
     ],
     costs: [
       { label: "Canadian citizens", value: "No visa needed" },
-      {
-        label: "Single-entry (other nationalities)",
-        value: "CAD $26 (Cash, Debit, or Credit Card)",
-      },
-      {
-        label: "Multiple-entry (other nationalities)",
-        value: "CAD $52 (Cash, Debit, or Credit Card)",
-      },
+      { label: "Single-entry (other nationalities)", value: "CAD $26 (Cash, Debit, or Credit Card)" },
+      { label: "Multiple-entry (other nationalities)", value: "CAD $52 (Cash, Debit, or Credit Card)" },
     ],
     time: "Approx. 5–7 business days (visa applicants only)",
     notices: [
@@ -5396,12 +3344,7 @@ const TREE = {
       "✅ Condition 4: No prior immigration violations in Korea",
       "✅ Condition 5: Your layover in any intermediate country does NOT exceed 3 days before entering Korea",
     ],
-    costs: [
-      {
-        label: "Transit entry fee",
-        value: "No visa required (if conditions met)",
-      },
-    ],
+    costs: [{ label: "Transit entry fee", value: "No visa required (if conditions met)" }],
     time: "Entry at port of arrival — no advance application needed",
     notices: [
       "⚠️ TWOV is only available to nationals of eligible countries — see below.",
@@ -5450,718 +3393,35 @@ const TREE = {
     onlineLink: "https://www.k-eta.go.kr",
   },
 
-  visa_f1d_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study", "F-1-D Digital Nomad"],
-    title: "F-1-D — Digital Nomad (Workation) Visa",
-    docs: [
-      "Visa Application Form (from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo (3.5×4.5cm, white background, within 6 months)",
-      "Employment letter proving current employment and at least 1 year of employment history — issued within 2 weeks",
-      "Proof of income: documents showing annual income above the threshold (approx. CAD $110,000/year after tax)",
-      "  ▸ Recent tax returns, pay stubs, or employment contract showing salary",
-      "Medical / travel insurance certificate covering at least CAD $130,000 for medical treatment and repatriation flight",
-      "  ▸ Insurance must be valid for the entire intended stay in Korea",
-      "  ▸ If accompanying family: separate insurance for each family member",
-      "  ▸ Family members: passport + proof of relationship (marriage certificate / birth certificate)",
-    ],
-    costs: [
-      {
-        label: "Visa Fee (Canadians)",
-        value: "CAD $117 (Cash, Debit, or Credit Card)",
-      },
-    ],
-    time: "Approx. 7–14 business days",
-    notices: [
-      "Who can apply: remote workers employed by a foreign company (or self-employed) for 1+ year, able to work remotely from Korea.",
-      "Income requirement: must earn more than 2× Korean GNI per capita after tax (approx. CAD $110,000/year — check visa.go.kr for the current figure as it updates annually).",
-      "⚠️ You may NOT work for a Korean company or conduct profit-making activities in Korea while on this visa.",
-      "Stay: up to 1 year from date of issue, extendable by 1 additional year (max 2 years total).",
-      "For stays over 90 days in Korea: register with the local immigration office within 90 days of entry.",
-      "If you previously held Korean nationality: complete the 국적상실신고 (nationality loss report) before applying.",
-      "This is a permanent program as of 2025 — the pilot period has ended.",
-      "Dependents (spouse and minor children) may accompany you on the same visa category.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_d4_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study", "D-4 Language Study"],
-    title: "D-4 — Language Study / Training Visa",
-    docs: [
-      "Visa Application Form (from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo",
-      "Certificate of Admission or enrollment from a Korean language institute, vocational school, or training institution",
-      "Proof of financial ability (bank statement within 30 days — sufficient funds for tuition and living expenses)",
-      "Most recent graduation certificate or transcript",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "D-4 is for Korean language institutes (어학원), vocational training, or preparatory programs — NOT for regular university degree programs (use D-2 for those).",
-      "Canadian citizens can enter Korea visa-free for up to 6 months. If your program is under 6 months, you may not need a D-4 visa — confirm with your institution first.",
-      "Part-time work is NOT permitted on a D-4 visa (unlike D-2).",
-      "For programs over 90 days in Korea: register with the local immigration office within 90 days of entry.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_other_start_en: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study / Other"],
-    question: "What is the purpose of your visit to Korea?",
-    sub: "Select the visa type that matches your purpose.",
-    options: [
-      {
-        id: "visa_e2_en",
-        icon: "📚",
-        title: "E-2 — Native English Teacher",
-        desc: "Teaching English at Korean schools or academies",
-      },
-      {
-        id: "visa_e7_en",
-        icon: "💼",
-        title: "E-7 — Specific Activities (Work Permit)",
-        desc: "Employer-sponsored work visa",
-      },
-      {
-        id: "visa_f1d_en",
-        icon: "💻",
-        title: "F-1-D — Digital Nomad (Workation)",
-        desc: "Remote worker employed by a foreign company — stay up to 1 year",
-      },
-      {
-        id: "visa_d2_en",
-        icon: "🎓",
-        title: "D-2 — Student (University)",
-        desc: "Enrolled at a Korean university",
-      },
-      {
-        id: "visa_d4_en",
-        icon: "🏫",
-        title: "D-4 — Language Study / Training",
-        desc: "Korean language institute, vocational training, etc.",
-      },
-      {
-        id: "visa_c34_en",
-        icon: "🤝",
-        title: "C-3-4 — Business Visitor",
-        desc: "Short-term business trip",
-      },
-      {
-        id: "visa_other_portal_en",
-        icon: "🌐",
-        title: "Other visa types",
-        desc: "F-6 marriage, working holiday, etc.",
-      },
-    ],
-  },
-  visa_e2_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study", "E-2 English Teacher"],
-    title: "E-2 — Native English Teacher Visa",
-    docs: [
-      "Visa Application Form (from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo",
-      "Employment contract — signed by Korean employer",
-      "Degree certificate (Bachelor's or higher) + apostilled copy",
-      "RCMP Criminal Record Check — fingerprint-based, issued within 6 months + Apostille",
-      "Medical certificate",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "Degree certificate AND RCMP Criminal Record Check must both have an Apostille.",
-      "Obtain Apostille for Canadian federal documents from Global Affairs Canada.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_e7_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study", "E-7 Work Permit"],
-    title: "E-7 — Specific Activities Visa (Employer-Sponsored)",
-    docs: [
-      "Visa Application Form (from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo",
-      "Invitation letter and employment contract from Korean employer",
-      "Degree certificate or career certificate",
-      "Korean employer's Business Registration Certificate",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "E-7 visa requirements vary greatly by occupation — check visa.go.kr for your specific job category.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_d2_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study", "D-2 Student"],
-    title: "D-2 — Student Visa (University)",
-    docs: [
-      "Visa Application Form (from visa.go.kr, with photo attached)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo",
-      "Letter of Acceptance from a Korean university",
-      "Proof of financial ability (bank statement within 30 days)",
-      "Most recent graduation certificate",
-    ],
-    costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }],
-    time: "Approx. 7–10 business days",
-    notices: [
-      "Canadian citizens can enter Korea visa-free and apply for a student visa change of status inside Korea.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_c34_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Work / Study", "C-3-4 Business Visitor"],
-    title: "C-3-4 — Business Visitor Visa",
-    docs: [
-      "Visa Application Form (from visa.go.kr)",
-      "Valid Canadian passport — original + photocopy",
-      "1 passport-type photo",
-      "Employment letter from your Canadian company",
-      "Invitation letter from the Korean organization",
-      "Business Registration Certificate of the Korean organization",
-      "Flight itinerary (plan at least 15 business days after submission)",
-    ],
-    costs: [
-      { label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" },
-    ],
-    time: "Approx. 12–15 business days",
-    notices: [
-      "You must be paid by your Canadian employer — NOT by the Korean organization.",
-      "Canadian citizens can enter Korea visa-free for up to 90 days for business purposes.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_other_portal_en: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["Home", "Visa", "Other Visa Types"],
-    title: "Other Visa Types — Check Korea Visa Portal",
-    docs: [
-      "Visa Application Form (from visa.go.kr for your specific visa type)",
-      "Valid passport — original + photocopy",
-      "1 passport-type photo",
-      "Additional documents vary by visa type — check Korea Visa Portal",
-    ],
-    costs: [{ label: "Fee", value: "CAD $52–$117 depending on visa type" }],
-    time: "Short-term: approx. 12–15 business days / Long-term: approx. 7–10 business days",
-    notices: [
-      "The Consulate has NO call centre — check the website before calling.",
-      "All required documents must be submitted — missing even one document means your application will not be accepted.",
-      "Book your appointment at torbooking.com — walk-ins are not accepted.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
+  visa_f1d_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study", "F-1-D Digital Nomad"], title: "F-1-D — Digital Nomad (Workation) Visa", docs: ["Visa Application Form (from visa.go.kr, with photo attached)", "Valid Canadian passport — original + photocopy", "1 passport-type photo (3.5×4.5cm, white background, within 6 months)", "Employment letter proving current employment and at least 1 year of employment history — issued within 2 weeks", "Proof of income: documents showing annual income above the threshold (approx. CAD $110,000/year after tax)", "  ▸ Recent tax returns, pay stubs, or employment contract showing salary", "Medical / travel insurance certificate covering at least CAD $130,000 for medical treatment and repatriation flight", "  ▸ Insurance must be valid for the entire intended stay in Korea", "  ▸ If accompanying family: separate insurance for each family member", "  ▸ Family members: passport + proof of relationship (marriage certificate / birth certificate)"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $117 (Cash, Debit, or Credit Card)" }], time: "Approx. 7–14 business days", notices: ["Who can apply: remote workers employed by a foreign company (or self-employed) for 1+ year, able to work remotely from Korea.", "Income requirement: must earn more than 2× Korean GNI per capita after tax (approx. CAD $110,000/year — check visa.go.kr for the current figure as it updates annually).", "⚠️ You may NOT work for a Korean company or conduct profit-making activities in Korea while on this visa.", "Stay: up to 1 year from date of issue, extendable by 1 additional year (max 2 years total).", "For stays over 90 days in Korea: register with the local immigration office within 90 days of entry.", "If you previously held Korean nationality: complete the 국적상실신고 (nationality loss report) before applying.", "This is a permanent program as of 2025 — the pilot period has ended.", "Dependents (spouse and minor children) may accompany you on the same visa category."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d4_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study", "D-4 Language Study"], title: "D-4 — Language Study / Training Visa", docs: ["Visa Application Form (from visa.go.kr, with photo attached)", "Valid Canadian passport — original + photocopy", "1 passport-type photo", "Certificate of Admission or enrollment from a Korean language institute, vocational school, or training institution", "Proof of financial ability (bank statement within 30 days — sufficient funds for tuition and living expenses)", "Most recent graduation certificate or transcript"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["D-4 is for Korean language institutes (어학원), vocational training, or preparatory programs — NOT for regular university degree programs (use D-2 for those).", "Canadian citizens can enter Korea visa-free for up to 6 months. If your program is under 6 months, you may not need a D-4 visa — confirm with your institution first.", "Part-time work is NOT permitted on a D-4 visa (unlike D-2).", "For programs over 90 days in Korea: register with the local immigration office within 90 days of entry."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_other_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study / Other"], question: "What is the purpose of your visit to Korea?", sub: "Select the visa type that matches your purpose.", options: [{ id: "visa_e2_en", icon: "📚", title: "E-2 — Native English Teacher", desc: "Teaching English at Korean schools or academies" },{ id: "visa_e7_en", icon: "💼", title: "E-7 — Specific Activities (Work Permit)", desc: "Employer-sponsored work visa" },{ id: "visa_f1d_en", icon: "💻", title: "F-1-D — Digital Nomad (Workation)", desc: "Remote worker employed by a foreign company — stay up to 1 year" },{ id: "visa_d2_en", icon: "🎓", title: "D-2 — Student (University)", desc: "Enrolled at a Korean university" },{ id: "visa_d4_en", icon: "🏫", title: "D-4 — Language Study / Training", desc: "Korean language institute, vocational training, etc." },{ id: "visa_c34_en", icon: "🤝", title: "C-3-4 — Business Visitor", desc: "Short-term business trip" },{ id: "visa_other_portal_en", icon: "🌐", title: "Other visa types", desc: "F-6 marriage, working holiday, etc." }] },
+  visa_e2_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study", "E-2 English Teacher"], title: "E-2 — Native English Teacher Visa", docs: ["Visa Application Form (from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","1 passport-type photo","Employment contract — signed by Korean employer","Degree certificate (Bachelor's or higher) + apostilled copy","RCMP Criminal Record Check — fingerprint-based, issued within 6 months + Apostille","Medical certificate"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["Degree certificate AND RCMP Criminal Record Check must both have an Apostille.","Obtain Apostille for Canadian federal documents from Global Affairs Canada."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_e7_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study", "E-7 Work Permit"], title: "E-7 — Specific Activities Visa (Employer-Sponsored)", docs: ["Visa Application Form (from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","1 passport-type photo","Invitation letter and employment contract from Korean employer","Degree certificate or career certificate","Korean employer's Business Registration Certificate"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["E-7 visa requirements vary greatly by occupation — check visa.go.kr for your specific job category."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d2_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study", "D-2 Student"], title: "D-2 — Student Visa (University)", docs: ["Visa Application Form (from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","1 passport-type photo","Letter of Acceptance from a Korean university","Proof of financial ability (bank statement within 30 days)","Most recent graduation certificate"], costs: [{ label: "Visa Fee", value: "CAD $117 (Cash or Debit Card)" }], time: "Approx. 7–10 business days", notices: ["Canadian citizens can enter Korea visa-free and apply for a student visa change of status inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Work / Study", "C-3-4 Business Visitor"], title: "C-3-4 — Business Visitor Visa", docs: ["Visa Application Form (from visa.go.kr)","Valid Canadian passport — original + photocopy","1 passport-type photo","Employment letter from your Canadian company","Invitation letter from the Korean organization","Business Registration Certificate of the Korean organization","Flight itinerary (plan at least 15 business days after submission)"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 12–15 business days", notices: ["You must be paid by your Canadian employer — NOT by the Korean organization.","Canadian citizens can enter Korea visa-free for up to 90 days for business purposes."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_other_portal_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Other Visa Types"], title: "Other Visa Types — Check Korea Visa Portal", docs: ["Visa Application Form (from visa.go.kr for your specific visa type)","Valid passport — original + photocopy","1 passport-type photo","Additional documents vary by visa type — check Korea Visa Portal"], costs: [{ label: "Fee", value: "CAD $52–$117 depending on visa type" }], time: "Short-term: approx. 12–15 business days / Long-term: approx. 7–10 business days", notices: ["The Consulate has NO call centre — check the website before calling.","All required documents must be submitted — missing even one document means your application will not be accepted.","Book your appointment at torbooking.com — walk-ins are not accepted."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
-  visa_f4_former_sex: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)", "전 한국 국적자"],
-    question: "신청자의 성별과 나이는?",
-    sub: "만 41세 미만 남성은 병역 관련 추가 서류가 필요합니다.",
-    options: [
-      {
-        id: "visa_f4_former_female",
-        icon: "👩",
-        title: "여성 또는 만 41세 이상 남성",
-        desc: "병역 관련 추가 서류 불필요",
-      },
-      {
-        id: "visa_f4_former_male41",
-        icon: "👨",
-        title: "만 41세 미만 남성",
-        desc: "병역 관련 추가 서류 필요 (RCMP 범죄경력증명서 등)",
-      },
-    ],
-  },
-  visa_f4_former_female: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "홈",
-      "비자",
-      "재외동포(F-4)",
-      "전 한국 국적자",
-      "여성/41세 이상",
-    ],
-    title: "재외동포 비자 (F-4) — 전 한국 국적자",
-    docs: [
-      "사증발급신청서 1부 (비자포털 양식 출력, 사진 부착)",
-      "캐나다 여권 원본 + 사본 (유효기간 6개월 이상)",
-      "캐나다 시민권증서 원본 + 사본 — 앞뒷면 모두 복사",
-      "본인 명의 기본증명서 (상세, 주민번호 전부공개) — 3개월 이내 발급",
-      "본인 명의 가족관계증명서 (상세) — 3개월 이내 발급",
-      "여권용 사진 1매 (6개월 이내 촬영, 3.5×4.5cm, 흰 배경)",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "국적상실 신고가 기본증명서에 표기되어 있어야 합니다.",
-      "비자 유효기간: 발급일로부터 최대 5년, 1회 입국 시 최대 2년 체류 가능.",
-      "우편 접수 가능 (캐나다 달러 공인 수표 동봉 — 개인 수표 불가).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_former_male41: {
-    type: "result",
-    service: "visa",
-    breadcrumb: [
-      "홈",
-      "비자",
-      "재외동포(F-4)",
-      "전 한국 국적자",
-      "41세 미만 남성",
-    ],
-    title: "재외동포 비자 (F-4) — 전 한국 국적자 (만 41세 미만 남성)",
-    docs: [
-      "사증발급신청서 1부 (비자포털 양식 출력, 사진 부착)",
-      "캐나다 여권 원본 + 사본",
-      "캐나다 시민권증서 원본 + 사본",
-      "본인 명의 기본증명서 (상세) — 3개월 이내",
-      "본인 명의 가족관계증명서 (상세) — 3개월 이내",
-      "여권용 사진 1매",
-      "부모 명의 기본증명서 + 가족관계증명서 (상세) 각 1부 — 3개월 이내",
-      "RCMP 캐나다 연방경찰 범죄경력증명서 원본 — 6개월 이내 (지문 기반)",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "RCMP 범죄경력증명서는 반드시 지문(fingerprint) 기반으로 발급받아야 합니다.",
-      "부모 중 돌아가신 분이 있는 경우 사망증명서로 대체 가능.",
-      "비자 유효기간: 발급일로부터 최대 5년.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_child: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)", "한국계 2세"],
-    question: "신청자의 성별과 나이는?",
-    sub: "만 18~59세 남성은 RCMP 범죄경력증명서가 추가로 필요합니다.",
-    options: [
-      {
-        id: "visa_f4_child_general",
-        icon: "👩",
-        title: "여성 / 만 18세 미만 / 만 60세 이상",
-        desc: "RCMP 범죄경력증명서 불필요",
-      },
-      {
-        id: "visa_f4_child_male",
-        icon: "👨",
-        title: "만 18~59세 남성",
-        desc: "RCMP 범죄경력증명서 필요",
-      },
-    ],
-  },
-  visa_f4_child_general: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)", "한국계 2세", "일반"],
-    title: "재외동포 비자 (F-4) — 한국계 2세",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "캐나다 시민권증서 원본 + 사본",
-      "한국 혈통 부 또는 모의 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "본인 출생증명서 (Certified copy of birth registration) 원본 + 사본",
-      "여권용 사진 1매",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "한국어 능력 입증서류 미제출 시 최대 체류 1년, 제출 시 최대 2년.",
-      "비자 유효기간: 발급일로부터 최대 5년.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_child_male: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "재외동포(F-4)", "한국계 2세", "18~59세 남성"],
-    title: "재외동포 비자 (F-4) — 한국계 2세 (만 18~59세 남성)",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "캐나다 시민권증서 원본 + 사본",
-      "한국 혈통 부 또는 모의 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "본인 출생증명서 (Certified copy of birth registration) 원본 + 사본",
-      "여권용 사진 1매",
-      "RCMP 캐나다 연방경찰 범죄경력증명서 원본 — 6개월 이내 (지문 기반)",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "RCMP 범죄경력증명서는 반드시 지문(fingerprint) 기반.",
-      "비자 유효기간: 발급일로부터 최대 5년.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_f4_family: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "동반(F-3)"],
-    question: "가족 중 누가 F-4 재외동포 비자를 소지하고 있나요?",
-    sub: "F-4 소지자의 배우자 또는 만 18세 이하 미성년 자녀가 F-3 동반비자를 신청할 수 있습니다.",
-    options: [
-      {
-        id: "visa_f3_spouse",
-        icon: "💑",
-        title: "배우자 (F-4 소지자의 배우자)",
-        desc: "최대 1년 체류 가능",
-      },
-      {
-        id: "visa_f3_child",
-        icon: "👶",
-        title: "미성년 자녀 (만 18세 이하)",
-        desc: "최대 1년 체류 가능",
-      },
-    ],
-  },
-  visa_f3_spouse: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "동반(F-3)", "배우자"],
-    title: "동반 비자 (F-3) — F-4 소지자의 배우자",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "체류자격 증빙서류 (캐나다 국적자가 아닌 경우)",
-      "여권용 사진 1매",
-      "유효한 F-4 비자 소지자의 비자 사본 또는 국내거소신고증 앞뒷면 사본",
-      "혼인관계증명서 (상세) — 3개월 이내",
-      "F-4 소지자 및 배우자의 가족관계증명서 (상세) — 3개월 이내",
-    ],
-    costs: [{ label: "수수료", value: "CAD $78 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: ["체류기간: 최대 1년 (F-4 소지자의 비자 유효기간 이내)."],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_f3_child: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "동반(F-3)", "미성년 자녀"],
-    title: "동반 비자 (F-3) — F-4 소지자의 미성년 자녀 (만 18세 이하)",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "체류자격 증빙서류 (캐나다 국적자가 아닌 경우)",
-      "여권용 사진 1매",
-      "유효한 F-4 비자 소지자(부모)의 비자 사본",
-      "자녀 출생증명서 (Certified copy of birth registration) 원본 + 사본",
-      "부모의 가족관계증명서 또는 혼인관계증명서 (상세) — 3개월 이내",
-    ],
-    costs: [{ label: "수수료", value: "CAD $78 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "미성년 자녀는 만 18세 이하 (0~18세)로 규정됩니다.",
-      "체류기간: 최대 1년.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_c3_start: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "단기방문(C-3-1)"],
-    question: "방문 목적은 무엇인가요?",
-    sub: "캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 비자가 필요한 경우만 신청하세요.",
-    options: [
-      {
-        id: "visa_c3_family",
-        icon: "👨‍👩‍👧",
-        title: "한국 국민의 가족 방문",
-        desc: "배우자·자녀가 한국 국민인 경우",
-      },
-      {
-        id: "visa_c3_emergency",
-        icon: "🚨",
-        title: "긴급 인도적 사유",
-        desc: "장례식·임종·긴급 수술 참석 등",
-      },
-      {
-        id: "visa_c3_other",
-        icon: "📋",
-        title: "기타 단기 방문",
-        desc: "결혼식 참석, 입양 등 기타 사유",
-      },
-    ],
-  },
-  visa_c3_family: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "가족 방문"],
-    title: "단기방문 비자 (C-3-1) — 한국 국민 가족",
-    docs: [
-      "사증발급신청서 1부 (비자포털 양식, SIN 번호 기재)",
-      "캐나다 여권 원본 + 사본",
-      "체류자격 증빙서류 (캐나다 국적자가 아닌 경우)",
-      "여권용 사진 1매",
-      "한국 국민 가족관계 증명서류",
-      "재외동포인 경우: 국적상실·이탈 명시된 기본증명서(상세) — 3개월 이내",
-    ],
-    costs: [
-      { label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" },
-    ],
-    time: "약 12~15 영업일",
-    notices: [
-      "국적상실 신고가 완료되지 않은 경우 비자 신청 불가.",
-      "C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_c3_emergency: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "긴급 인도적 사유"],
-    title: "단기방문 비자 (C-3-1) — 긴급 인도적 사유",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "체류자격 증빙서류 (캐나다 국적자가 아닌 경우)",
-      "여권용 사진 1매",
-      "가족관계 증명서류",
-      "긴급성 소명자료 — 장례: 사망진단서, 임종: 의사 소견서, 수술: 수술 예정 증빙서류",
-      "재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내",
-    ],
-    costs: [
-      { label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" },
-    ],
-    time: "긴급: 5~7 영업일 이내",
-    notices: [
-      "장례식 목적 긴급 입국: 비자과 전화(416-920-3809 ext. 221) 문의.",
-      "C 계열 비자로 입국 후 다른 비자로 전환 불가.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_c3_other: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "기타"],
-    title: "단기방문 비자 (C-3-1) — 기타 사유",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "체류자격 증빙서류 (캐나다 국적자가 아닌 경우)",
-      "여권용 사진 1매",
-      "방문 목적 증빙서류",
-      "재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내",
-    ],
-    costs: [
-      { label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" },
-    ],
-    time: "약 12~15 영업일",
-    notices: [
-      "캐나다 국적자는 한국 무비자 입국 가능(최대 6개월) — 비자 필요 여부 먼저 확인하세요.",
-      "C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가.",
-    ],
-    booking: "https://www.torbooking.com/book",
-  },
-  visa_other_start: {
-    type: "question",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "취업·유학·기타"],
-    question: "방문 목적은 무엇인가요?",
-    sub: "해당 비자 종류를 선택하세요.",
-    options: [
-      {
-        id: "visa_e2",
-        icon: "📚",
-        title: "E-2 — 원어민 영어 교사",
-        desc: "한국 학교·학원 영어 강사",
-      },
-      {
-        id: "visa_e7",
-        icon: "💼",
-        title: "E-7 — 특정 활동 (취업)",
-        desc: "회사 초청 취업 비자",
-      },
-      {
-        id: "visa_f1d",
-        icon: "💻",
-        title: "F-1-D — 디지털 노마드 (워케이션)",
-        desc: "외국 회사 재직 중 한국에서 원격근무 — 최대 1년",
-      },
-      {
-        id: "visa_d2",
-        icon: "🎓",
-        title: "D-2 — 유학 (대학)",
-        desc: "한국 대학교 유학",
-      },
-      {
-        id: "visa_d4",
-        icon: "🏫",
-        title: "D-4 — 어학연수",
-        desc: "한국어 어학원·직업훈련 등",
-      },
-      {
-        id: "visa_other_portal",
-        icon: "🌐",
-        title: "그 외 모든 비자",
-        desc: "C-3-4 출장, F-6 결혼이민 등",
-      },
-    ],
-  },
-  visa_f1d: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "취업·유학·기타", "F-1-D 디지털노마드"],
-    title: "F-1-D — 디지털 노마드 비자 (워케이션)",
-    docs: [
-      "비자신청서 (visa.go.kr 출력, 사진 부착)",
-      "유효한 여권 원본 + 사본",
-      "여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)",
-      "재직증명서 또는 고용계약서 (1년 이상 재직 확인)",
-      "소득 증빙서류 (세후 연 약 CAD $110,000 이상 — 최신 세금신고서·급여명세서 등)",
-      "의료·여행보험 증명서 (의료비 최소 CAD $130,000 + 본국 송환 항공권 포함, 체류 전 기간 유효)",
-      "  ▸ 동반 가족: 가족 각각 별도 보험 가입 필요",
-      "  ▸ 동반 가족 서류: 여권 + 가족관계 증명서류 (혼인증명서/출생증명서)",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금·직불카드·신용카드)" }],
-    time: "약 7~14 영업일",
-    notices: [
-      "대상: 외국 회사에 1년 이상 재직 중인 원격근무자 (자영업자 포함).",
-      "⚠️ 한국 기업 취업 또는 한국 내 영리활동 불가.",
-      "체류: 비자 발급일로부터 최대 1년, 1회 연장 가능 (최대 2년).",
-      "90일 이상 체류 시 입국일로부터 90일 이내 출입국사무소 외국인 등록 필요.",
-      "이전에 한국 국적을 보유했던 분: 신청 전 국적상실신고 완료 필수.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_d4: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "취업·유학·기타", "D-4 어학연수"],
-    title: "D-4 — 어학연수 비자",
-    docs: [
-      "비자신청서 (visa.go.kr 출력, 사진 부착)",
-      "유효한 여권 원본 + 사본",
-      "여권용 사진 1매",
-      "입학허가서 또는 수강등록증 (한국 어학원·직업훈련기관 발급)",
-      "재정능력 증빙 (최근 30일 이내 은행 잔고증명서)",
-      "최종 학력 증명서",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금·직불카드·신용카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "D-4는 어학원·어학연수·직업훈련 목적 비자입니다. 정규 대학 학위 과정은 D-2 비자를 이용하세요.",
-      "캐나다 시민권자는 6개월 이내 무비자 입국 가능 — 6개월 미만 과정이라면 비자 불필요 (기관에 사전 확인 권장).",
-      "D-4 비자로는 아르바이트 등 취업 불가.",
-      "90일 이상 체류 시 외국인 등록 필요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_e2: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "기타 비자", "E-2 원어민교사"],
-    title: "E-2 원어민 영어 교사 비자",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "여권용 사진 1매",
-      "고용계약서 원본 (한국 고용주 서명)",
-      "학사 이상 학위증명서 + 아포스티유 공증",
-      "범죄경력증명서 (RCMP 지문 기반) — 6개월 이내 + 아포스티유 필요",
-      "건강진단서",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "학위증명서는 반드시 아포스티유(공증) 처리 후 제출.",
-      "범죄경력증명서도 아포스티유 필요 (RCMP 지문 기반).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_e7: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "기타 비자", "E-7 취업"],
-    title: "E-7 특정 활동 비자",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "여권용 사진 1매",
-      "한국 고용주 초청장 및 고용계약서",
-      "학위증명서 또는 경력증명서",
-      "한국 고용주의 사업자등록증 사본",
-      "기타 직종별 추가 서류 (비자포털 확인 필수)",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "E-7 비자는 직종에 따라 요건이 크게 다릅니다 — 비자포털(visa.go.kr)에서 직종별 서류 목록 반드시 확인.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_d2: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "기타 비자", "D-2 유학"],
-    title: "D-2 유학 비자",
-    docs: [
-      "사증발급신청서 1부",
-      "캐나다 여권 원본 + 사본",
-      "여권용 사진 1매",
-      "한국 대학교 입학허가서",
-      "재정능력 증명서류 (잔액증명서 등)",
-      "최종 학력 졸업증명서",
-    ],
-    costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }],
-    time: "약 7~10 영업일",
-    notices: [
-      "캐나다 국적자는 한국 무비자로 입국 후 한국에서 비자 신청도 가능.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
-  visa_other_portal: {
-    type: "result",
-    service: "visa",
-    breadcrumb: ["홈", "비자", "기타 비자", "그 외"],
-    title: "기타 비자 — 비자포털 확인 필요",
-    docs: [
-      "사증발급신청서 (비자포털 양식 출력)",
-      "캐나다 여권 원본 + 사본",
-      "여권용 사진 1매",
-      "비자 종류별 추가 서류 (비자포털에서 확인 필수)",
-    ],
-    costs: [{ label: "수수료", value: "비자 종류별 상이 (CAD $52~$117)" }],
-    time: "단기비자 약 12~15 영업일 / 장기비자 약 7~10 영업일",
-    notices: [
-      "총영사관 비자과는 콜센터가 없습니다 — 전화 상담 불가, 홈페이지 및 비자포털 확인 필수.",
-      "비자 진행 상황 조회: 대한민국 비자포털 (visa.go.kr).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.visa.go.kr",
-  },
+  visa_f4_former_sex: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "전 한국 국적자"], question: "신청자의 성별과 나이는?", sub: "만 41세 미만 남성은 병역 관련 추가 서류가 필요합니다.", options: [{ id: "visa_f4_former_female", icon: "👩", title: "여성 또는 만 41세 이상 남성", desc: "병역 관련 추가 서류 불필요" },{ id: "visa_f4_former_male41", icon: "👨", title: "만 41세 미만 남성", desc: "병역 관련 추가 서류 필요 (RCMP 범죄경력증명서 등)" }] },
+  visa_f4_former_female: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "전 한국 국적자", "여성/41세 이상"], title: "재외동포 비자 (F-4) — 전 한국 국적자", docs: ["사증발급신청서 1부 (비자포털 양식 출력, 사진 부착)","캐나다 여권 원본 + 사본 (유효기간 6개월 이상)","캐나다 시민권증서 원본 + 사본 — 앞뒷면 모두 복사","본인 명의 기본증명서 (상세, 주민번호 전부공개) — 3개월 이내 발급","본인 명의 가족관계증명서 (상세) — 3개월 이내 발급","여권용 사진 1매 (6개월 이내 촬영, 3.5×4.5cm, 흰 배경)"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["국적상실 신고가 기본증명서에 표기되어 있어야 합니다.","비자 유효기간: 발급일로부터 최대 5년, 1회 입국 시 최대 2년 체류 가능.","우편 접수 가능 (캐나다 달러 공인 수표 동봉 — 개인 수표 불가)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_former_male41: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "전 한국 국적자", "41세 미만 남성"], title: "재외동포 비자 (F-4) — 전 한국 국적자 (만 41세 미만 남성)", docs: ["사증발급신청서 1부 (비자포털 양식 출력, 사진 부착)","캐나다 여권 원본 + 사본","캐나다 시민권증서 원본 + 사본","본인 명의 기본증명서 (상세) — 3개월 이내","본인 명의 가족관계증명서 (상세) — 3개월 이내","여권용 사진 1매","부모 명의 기본증명서 + 가족관계증명서 (상세) 각 1부 — 3개월 이내","RCMP 캐나다 연방경찰 범죄경력증명서 원본 — 6개월 이내 (지문 기반)"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["RCMP 범죄경력증명서는 반드시 지문(fingerprint) 기반으로 발급받아야 합니다.","부모 중 돌아가신 분이 있는 경우 사망증명서로 대체 가능.","비자 유효기간: 발급일로부터 최대 5년."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_child: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "한국계 2세"], question: "신청자의 성별과 나이는?", sub: "만 18~59세 남성은 RCMP 범죄경력증명서가 추가로 필요합니다.", options: [{ id: "visa_f4_child_general", icon: "👩", title: "여성 / 만 18세 미만 / 만 60세 이상", desc: "RCMP 범죄경력증명서 불필요" },{ id: "visa_f4_child_male", icon: "👨", title: "만 18~59세 남성", desc: "RCMP 범죄경력증명서 필요" }] },
+  visa_f4_child_general: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "한국계 2세", "일반"], title: "재외동포 비자 (F-4) — 한국계 2세", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","캐나다 시민권증서 원본 + 사본","한국 혈통 부 또는 모의 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","본인 출생증명서 (Certified copy of birth registration) 원본 + 사본","여권용 사진 1매"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["한국어 능력 입증서류 미제출 시 최대 체류 1년, 제출 시 최대 2년.","비자 유효기간: 발급일로부터 최대 5년."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_child_male: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "한국계 2세", "18~59세 남성"], title: "재외동포 비자 (F-4) — 한국계 2세 (만 18~59세 남성)", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","캐나다 시민권증서 원본 + 사본","한국 혈통 부 또는 모의 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","본인 출생증명서 (Certified copy of birth registration) 원본 + 사본","여권용 사진 1매","RCMP 캐나다 연방경찰 범죄경력증명서 원본 — 6개월 이내 (지문 기반)"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["RCMP 범죄경력증명서는 반드시 지문(fingerprint) 기반.","비자 유효기간: 발급일로부터 최대 5년."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f4_family: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "동반(F-3)"], question: "가족 중 누가 F-4 재외동포 비자를 소지하고 있나요?", sub: "F-4 소지자의 배우자 또는 만 18세 이하 미성년 자녀가 F-3 동반비자를 신청할 수 있습니다.", options: [{ id: "visa_f3_spouse", icon: "💑", title: "배우자 (F-4 소지자의 배우자)", desc: "최대 1년 체류 가능" },{ id: "visa_f3_child", icon: "👶", title: "미성년 자녀 (만 18세 이하)", desc: "최대 1년 체류 가능" }] },
+  visa_f3_spouse: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "동반(F-3)", "배우자"], title: "동반 비자 (F-3) — F-4 소지자의 배우자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","유효한 F-4 비자 소지자의 비자 사본 또는 국내거소신고증 앞뒷면 사본","혼인관계증명서 (상세) — 3개월 이내","F-4 소지자 및 배우자의 가족관계증명서 (상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $78 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["체류기간: 최대 1년 (F-4 소지자의 비자 유효기간 이내)."], booking: "https://www.torbooking.com/book" },
+  visa_f3_child: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "동반(F-3)", "미성년 자녀"], title: "동반 비자 (F-3) — F-4 소지자의 미성년 자녀 (만 18세 이하)", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","유효한 F-4 비자 소지자(부모)의 비자 사본","자녀 출생증명서 (Certified copy of birth registration) 원본 + 사본","부모의 가족관계증명서 또는 혼인관계증명서 (상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $78 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["미성년 자녀는 만 18세 이하 (0~18세)로 규정됩니다.","체류기간: 최대 1년."], booking: "https://www.torbooking.com/book" },
+  visa_c3_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)"], question: "방문 목적은 무엇인가요?", sub: "캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 비자가 필요한 경우만 신청하세요.", options: [{ id: "visa_c3_family", icon: "👨‍👩‍👧", title: "한국 국민의 가족 방문", desc: "배우자·자녀가 한국 국민인 경우" },{ id: "visa_c3_emergency", icon: "🚨", title: "긴급 인도적 사유", desc: "장례식·임종·긴급 수술 참석 등" },{ id: "visa_c3_other", icon: "📋", title: "기타 단기 방문", desc: "결혼식 참석, 입양 등 기타 사유" }] },
+  visa_c3_family: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "가족 방문"], title: "단기방문 비자 (C-3-1) — 한국 국민 가족", docs: ["사증발급신청서 1부 (비자포털 양식, SIN 번호 기재)","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","한국 국민 가족관계 증명서류","재외동포인 경우: 국적상실·이탈 명시된 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" }], time: "약 12~15 영업일", notices: ["국적상실 신고가 완료되지 않은 경우 비자 신청 불가.","C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가."], booking: "https://www.torbooking.com/book" },
+  visa_c3_emergency: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "긴급 인도적 사유"], title: "단기방문 비자 (C-3-1) — 긴급 인도적 사유", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","가족관계 증명서류","긴급성 소명자료 — 장례: 사망진단서, 임종: 의사 소견서, 수술: 수술 예정 증빙서류","재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" }], time: "긴급: 5~7 영업일 이내", notices: ["장례식 목적 긴급 입국: 비자과 전화(416-920-3809 ext. 221) 문의.","C 계열 비자로 입국 후 다른 비자로 전환 불가."], booking: "https://www.torbooking.com/book" },
+  visa_c3_other: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "기타"], title: "단기방문 비자 (C-3-1) — 기타 사유", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","방문 목적 증빙서류","재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" }], time: "약 12~15 영업일", notices: ["캐나다 국적자는 한국 무비자 입국 가능(최대 6개월) — 비자 필요 여부 먼저 확인하세요.","C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가."], booking: "https://www.torbooking.com/book" },
+  visa_other_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타"], question: "방문 목적은 무엇인가요?", sub: "해당 비자 종류를 선택하세요.", options: [{ id: "visa_e2", icon: "📚", title: "E-2 — 원어민 영어 교사", desc: "한국 학교·학원 영어 강사" },{ id: "visa_e7", icon: "💼", title: "E-7 — 특정 활동 (취업)", desc: "회사 초청 취업 비자" },{ id: "visa_f1d", icon: "💻", title: "F-1-D — 디지털 노마드 (워케이션)", desc: "외국 회사 재직 중 한국에서 원격근무 — 최대 1년" },{ id: "visa_d2", icon: "🎓", title: "D-2 — 유학 (대학)", desc: "한국 대학교 유학" },{ id: "visa_d4", icon: "🏫", title: "D-4 — 어학연수", desc: "한국어 어학원·직업훈련 등" },{ id: "visa_other_portal", icon: "🌐", title: "그 외 모든 비자", desc: "C-3-4 출장, F-6 결혼이민 등" }] },
+  visa_f1d: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타", "F-1-D 디지털노마드"], title: "F-1-D — 디지털 노마드 비자 (워케이션)", docs: ["비자신청서 (visa.go.kr 출력, 사진 부착)","유효한 여권 원본 + 사본","여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)","재직증명서 또는 고용계약서 (1년 이상 재직 확인)","소득 증빙서류 (세후 연 약 CAD $110,000 이상 — 최신 세금신고서·급여명세서 등)","의료·여행보험 증명서 (의료비 최소 CAD $130,000 + 본국 송환 항공권 포함, 체류 전 기간 유효)","  ▸ 동반 가족: 가족 각각 별도 보험 가입 필요","  ▸ 동반 가족 서류: 여권 + 가족관계 증명서류 (혼인증명서/출생증명서)"], costs: [{ label: "수수료", value: "CAD $117 (현금·직불카드·신용카드)" }], time: "약 7~14 영업일", notices: ["대상: 외국 회사에 1년 이상 재직 중인 원격근무자 (자영업자 포함).","⚠️ 한국 기업 취업 또는 한국 내 영리활동 불가.","체류: 비자 발급일로부터 최대 1년, 1회 연장 가능 (최대 2년).","90일 이상 체류 시 입국일로부터 90일 이내 출입국사무소 외국인 등록 필요.","이전에 한국 국적을 보유했던 분: 신청 전 국적상실신고 완료 필수."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d4: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타", "D-4 어학연수"], title: "D-4 — 어학연수 비자", docs: ["비자신청서 (visa.go.kr 출력, 사진 부착)","유효한 여권 원본 + 사본","여권용 사진 1매","입학허가서 또는 수강등록증 (한국 어학원·직업훈련기관 발급)","재정능력 증빙 (최근 30일 이내 은행 잔고증명서)","최종 학력 증명서"], costs: [{ label: "수수료", value: "CAD $117 (현금·직불카드·신용카드)" }], time: "약 7~10 영업일", notices: ["D-4는 어학원·어학연수·직업훈련 목적 비자입니다. 정규 대학 학위 과정은 D-2 비자를 이용하세요.","캐나다 시민권자는 6개월 이내 무비자 입국 가능 — 6개월 미만 과정이라면 비자 불필요 (기관에 사전 확인 권장).","D-4 비자로는 아르바이트 등 취업 불가.","90일 이상 체류 시 외국인 등록 필요."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_e2: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "E-2 원어민교사"], title: "E-2 원어민 영어 교사 비자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","여권용 사진 1매","고용계약서 원본 (한국 고용주 서명)","학사 이상 학위증명서 + 아포스티유 공증","범죄경력증명서 (RCMP 지문 기반) — 6개월 이내 + 아포스티유 필요","건강진단서"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["학위증명서는 반드시 아포스티유(공증) 처리 후 제출.","범죄경력증명서도 아포스티유 필요 (RCMP 지문 기반)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_e7: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "E-7 취업"], title: "E-7 특정 활동 비자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","여권용 사진 1매","한국 고용주 초청장 및 고용계약서","학위증명서 또는 경력증명서","한국 고용주의 사업자등록증 사본","기타 직종별 추가 서류 (비자포털 확인 필수)"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["E-7 비자는 직종에 따라 요건이 크게 다릅니다 — 비자포털(visa.go.kr)에서 직종별 서류 목록 반드시 확인."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d2: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "D-2 유학"], title: "D-2 유학 비자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","여권용 사진 1매","한국 대학교 입학허가서","재정능력 증명서류 (잔액증명서 등)","최종 학력 졸업증명서"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["캐나다 국적자는 한국 무비자로 입국 후 한국에서 비자 신청도 가능."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_other_portal: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "그 외"], title: "기타 비자 — 비자포털 확인 필요", docs: ["사증발급신청서 (비자포털 양식 출력)","캐나다 여권 원본 + 사본","여권용 사진 1매","비자 종류별 추가 서류 (비자포털에서 확인 필수)"], costs: [{ label: "수수료", value: "비자 종류별 상이 (CAD $52~$117)" }], time: "단기비자 약 12~15 영업일 / 장기비자 약 7~10 영업일", notices: ["총영사관 비자과는 콜센터가 없습니다 — 전화 상담 불가, 홈페이지 및 비자포털 확인 필수.","비자 진행 상황 조회: 대한민국 비자포털 (visa.go.kr)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
   // ══ NOTARIZATION (공증) ══
   // ══ NOTARIZATION (공증) — 재설계된 트리 ══
@@ -6172,36 +3432,11 @@ const TREE = {
     question: "어떤 공증 업무가 필요하신가요?",
     sub: "⚠️ 모든 서명은 반드시 영사 앞에서 직접 해야 합니다. 사전 서명 서류는 접수 불가합니다. 대리인 신청도 불가합니다.",
     options: [
-      {
-        id: "notarization_apostille_guide",
-        icon: "❓",
-        title: "아포스티유 vs 영사관 공증 — 구분 안내",
-        desc: "어떤 방식을 선택해야 하는지 먼저 확인하세요",
-      },
-      {
-        id: "notarization_saseo",
-        icon: "📜",
-        title: "사서증서 인증 (서명 인증)",
-        desc: "위임장·진술서·상속포기서·계약서 등 서명·날인 인증",
-      },
-      {
-        id: "notarization_ingam",
-        icon: "🔏",
-        title: "인감 관련 공증",
-        desc: "인감증명서 발급 위임장·인감신고서·인감변경신고서",
-      },
-      {
-        id: "notarization_translation",
-        icon: "🌐",
-        title: "번역 공증",
-        desc: "가족관계증명서 등 한국 서류 영문 번역 인증·운전면허증 번역",
-      },
-      {
-        id: "notarization_copy",
-        icon: "📋",
-        title: "원본대조필 확인",
-        desc: "캐나다 발급 서류의 영사 확인",
-      },
+      { id: "notarization_apostille_guide", icon: "❓", title: "아포스티유 vs 영사관 공증 — 구분 안내", desc: "어떤 방식을 선택해야 하는지 먼저 확인하세요" },
+      { id: "notarization_saseo", icon: "📜", title: "사서증서 인증 (서명 인증)", desc: "위임장·진술서·상속포기서·계약서 등 서명·날인 인증" },
+      { id: "notarization_ingam", icon: "🔏", title: "인감 관련 공증", desc: "인감증명서 발급 위임장·인감신고서·인감변경신고서" },
+      { id: "notarization_translation", icon: "🌐", title: "번역 공증", desc: "가족관계증명서 등 한국 서류 영문 번역 인증·운전면허증 번역" },
+      { id: "notarization_copy", icon: "📋", title: "원본대조필 확인", desc: "캐나다 발급 서류의 영사 확인" },
     ],
   },
 
@@ -6234,8 +3469,7 @@ const TREE = {
       "영사관 공증이 필요한 것으로 확인되면 뒤로 돌아가서 해당 메뉴를 선택하세요.",
     ],
     booking: "https://www.torbooking.com/book",
-    onlineLink:
-      "https://www.international.gc.ca/country-pays/apostille.aspx?lang=eng",
+    onlineLink: "https://www.international.gc.ca/country-pays/apostille.aspx?lang=eng",
   },
 
   // ── 사서증서 인증 분기 ──
@@ -6246,24 +3480,9 @@ const TREE = {
     question: "어떤 종류의 서류인가요?",
     sub: "사서증서 인증은 영사가 서명·날인이 본인 의사에 의한 것임을 확인해 주는 업무입니다. 서류 내용의 진위를 확인하는 것이 아닙니다.",
     options: [
-      {
-        id: "notarization_pow",
-        icon: "📜",
-        title: "위임장",
-        desc: "부동산 매매·등기·은행·상속·증명서 발급 등 한국 업무 대리 위임",
-      },
-      {
-        id: "notarization_legal_act",
-        icon: "⚖️",
-        title: "법률행위 증서",
-        desc: "상속재산분할협의서·매매계약서·은행대출약정서·상속포기서 등",
-      },
-      {
-        id: "notarization_sign",
-        icon: "✍️",
-        title: "사실행위 증서",
-        desc: "서명진술서·동일인진술서·거주사실진술서·재직증명서 등",
-      },
+      { id: "notarization_pow", icon: "📜", title: "위임장", desc: "부동산 매매·등기·은행·상속·증명서 발급 등 한국 업무 대리 위임" },
+      { id: "notarization_legal_act", icon: "⚖️", title: "법률행위 증서", desc: "상속재산분할협의서·매매계약서·은행대출약정서·상속포기서 등" },
+      { id: "notarization_sign", icon: "✍️", title: "사실행위 증서", desc: "서명진술서·동일인진술서·거주사실진술서·재직증명서 등" },
     ],
   },
 
@@ -6318,10 +3537,7 @@ const TREE = {
     ],
     costs: [
       { label: "목적가액 없는 서류 1부당", value: "CAD $5.20 (현금)" },
-      {
-        label: "목적가액 있는 서류 (계약서 등)",
-        value: "CAD $1,000당 약 CAD $3.00 별도 산정",
-      },
+      { label: "목적가액 있는 서류 (계약서 등)", value: "CAD $1,000당 약 CAD $3.00 별도 산정" },
       { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
     ],
     time: "방문 당일 즉시 발급 (목적가액 있는 서류는 검토 시간 추가 소요)",
@@ -6375,24 +3591,9 @@ const TREE = {
     question: "어떤 인감 업무가 필요하신가요?",
     sub: "인감 관련 서류는 한국 부동산·금융 거래 시 재산권과 직결되므로 반드시 본인이 영사 앞에서 직접 작성해야 합니다. 대리인 신청 절대 불가.",
     options: [
-      {
-        id: "notarization_ingam_pow",
-        icon: "🔏",
-        title: "인감증명서 발급 위임장",
-        desc: "한국에서 대리인이 인감증명서를 발급받도록 위임",
-      },
-      {
-        id: "notarization_ingam_change",
-        icon: "✏️",
-        title: "인감(변경)신고서",
-        desc: "인감 신규 등록 또는 기존 인감 변경",
-      },
-      {
-        id: "notarization_ingam_protect",
-        icon: "🛡️",
-        title: "인감보호(해제)신청서",
-        desc: "인감 도용 방지 보호 신청 또는 해제",
-      },
+      { id: "notarization_ingam_pow", icon: "🔏", title: "인감증명서 발급 위임장", desc: "한국에서 대리인이 인감증명서를 발급받도록 위임" },
+      { id: "notarization_ingam_change", icon: "✏️", title: "인감(변경)신고서", desc: "인감 신규 등록 또는 기존 인감 변경" },
+      { id: "notarization_ingam_protect", icon: "🛡️", title: "인감보호(해제)신청서", desc: "인감 도용 방지 보호 신청 또는 해제" },
     ],
   },
 
@@ -6471,7 +3672,9 @@ const TREE = {
       "  ▸ 2020년 12월 20일 이후 발급 여권(주민번호 삭제) → 여권정보증명서 추가",
       "캐나다 체류자격 증빙서류 원본",
     ],
-    costs: [{ label: "1부당", value: "CAD $5.20 (현금)" }],
+    costs: [
+      { label: "1부당", value: "CAD $5.20 (현금)" },
+    ],
     time: "방문 당일 즉시 발급",
     notices: [
       "인감보호 신청 시 한국 내에서 인감증명서 발급이 차단됩니다 — 도용 방지 목적.",
@@ -6490,18 +3693,8 @@ const TREE = {
     question: "어떤 서류의 번역 공증이 필요하신가요?",
     sub: "번역은 본인이 직접 작성해 와야 합니다. 영사관은 번역 내용의 정확성을 검토하지 않으며, 번역인이 직접 방문해야 합니다.",
     options: [
-      {
-        id: "notarization_translation_family",
-        icon: "👨‍👩‍👧",
-        title: "가족관계증명서·기본증명서·혼인관계증명서 등",
-        desc: "한국 서류의 한→영 번역 후 영사 확인",
-      },
-      {
-        id: "notarization_translation_license",
-        icon: "🚗",
-        title: "운전면허증 번역 인증",
-        desc: "캐나다 면허증 취득(교환) 시 필요",
-      },
+      { id: "notarization_translation_family", icon: "👨‍👩‍👧", title: "가족관계증명서·기본증명서·혼인관계증명서 등", desc: "한국 서류의 한→영 번역 후 영사 확인" },
+      { id: "notarization_translation_license", icon: "🚗", title: "운전면허증 번역 인증", desc: "캐나다 면허증 취득(교환) 시 필요" },
     ],
   },
 
@@ -6521,7 +3714,9 @@ const TREE = {
       "  ▸ 2020년 12월 20일 이후 발급 여권(주민번호 삭제) → 여권정보증명서 추가",
       "캐나다 체류자격 증빙서류 원본",
     ],
-    costs: [{ label: "서류 1통당", value: "CAD $5.20 (현금)" }],
+    costs: [
+      { label: "서류 1통당", value: "CAD $5.20 (현금)" },
+    ],
     time: "방문 당일 즉시 발급 (10부 이상 시 익일 수령)",
     notices: [
       "번역인이 반드시 직접 방문해야 합니다 — 대리인 제출 불가.",
@@ -6545,7 +3740,9 @@ const TREE = {
       "한국 운전면허증 원본",
       "  ▸ 면허증이 없는 경우: 영문 운전경력증명서 발급 후 번역 진행 가능 (공동인증서 있으면 정부24 온라인 발급)",
     ],
-    costs: [{ label: "번역 인증 수수료", value: "CAD $5.20 (현금)" }],
+    costs: [
+      { label: "번역 인증 수수료", value: "CAD $5.20 (현금)" },
+    ],
     time: "방문 당일 즉시 발급",
     notices: [
       "운전면허 교환 절차·수수료 등은 ServiceOntario에 문의.",
@@ -6553,8 +3750,7 @@ const TREE = {
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (공증 → 운전면허 번역) →",
-    onlineLink:
-      "https://www.ontario.ca/page/exchange-out-province-drivers-licence",
+    onlineLink: "https://www.ontario.ca/page/exchange-out-province-drivers-licence",
   },
 
   // ── 원본대조필 확인 ──
@@ -6570,7 +3766,9 @@ const TREE = {
       "본인 유효한 한국 여권 원본 + 사본 1부",
       "캐나다 체류자격 증빙서류 원본",
     ],
-    costs: [{ label: "서류 1통당", value: "CAD $5.20 (현금)" }],
+    costs: [
+      { label: "서류 1통당", value: "CAD $5.20 (현금)" },
+    ],
     time: "방문 당일 즉시 발급 (약 30분~1시간)",
     notices: [
       "⚠️ 캐나다는 아포스티유 협약 가입국입니다 — 캐나다 공문서(출생증명서·혼인증명서 등)는 영사관 확인보다 아포스티유가 더 적합한 경우가 많습니다.",
@@ -6591,30 +3789,10 @@ const TREE = {
     question: "어떤 병무 업무가 필요하신가요?",
     sub: "병역의무는 대한민국 국적 남성에게 해당됩니다. 정확한 안내를 위해 본인 상황을 선택해 주세요.",
     options: [
-      {
-        id: "military_cert_start",
-        icon: "📄",
-        title: "병적증명서 발급",
-        desc: "비자·취업·국적이탈 등에 필요한 병역사항 증명서",
-      },
-      {
-        id: "military_need_check",
-        icon: "❓",
-        title: "허가 대상 여부 확인",
-        desc: "내가 허가 대상인지 먼저 확인하고 싶어요",
-      },
-      {
-        id: "military_permit_who",
-        icon: "✈️",
-        title: "국외여행허가 신청·연장",
-        desc: "이미 허가 대상인 걸 알고 있어요",
-      },
-      {
-        id: "military_cancel_return",
-        icon: "🏠",
-        title: "귀국·허가 취소",
-        desc: "조기 귀국·허가취소·병역면제 확인·의무 종료",
-      },
+      { id: "military_cert_start", icon: "📄", title: "병적증명서 발급", desc: "비자·취업·국적이탈 등에 필요한 병역사항 증명서" },
+      { id: "military_need_check", icon: "❓", title: "허가 대상 여부 확인", desc: "내가 허가 대상인지 먼저 확인하고 싶어요" },
+      { id: "military_permit_who", icon: "✈️", title: "국외여행허가 신청·연장", desc: "이미 허가 대상인 걸 알고 있어요" },
+      { id: "military_cancel_return", icon: "🏠", title: "귀국·허가 취소", desc: "조기 귀국·허가취소·병역면제 확인·의무 종료" },
     ],
   },
 
@@ -6626,18 +3804,8 @@ const TREE = {
     question: "신청자는 누구인가요?",
     sub: "병적증명서는 본인 외 가족(배우자·직계존비속·형제자매)도 대리 신청할 수 있습니다.",
     options: [
-      {
-        id: "military_cert_self",
-        icon: "👤",
-        title: "본인 직접 신청",
-        desc: "본인 방문 또는 공동인증서로 온라인 발급",
-      },
-      {
-        id: "military_cert_proxy",
-        icon: "👨‍👩‍👧",
-        title: "가족 대리 신청",
-        desc: "배우자·직계존비속·형제자매 대리 가능",
-      },
+      { id: "military_cert_self", icon: "👤", title: "본인 직접 신청", desc: "본인 방문 또는 공동인증서로 온라인 발급" },
+      { id: "military_cert_proxy", icon: "👨‍👩‍👧", title: "가족 대리 신청", desc: "배우자·직계존비속·형제자매 대리 가능" },
     ],
   },
 
@@ -6695,30 +3863,10 @@ const TREE = {
     question: "현재 나이와 병역 상황은?",
     sub: "허가 필요 여부는 나이와 현재 병역 신분에 따라 결정됩니다.",
     options: [
-      {
-        id: "military_age_under24",
-        icon: "🟢",
-        title: "만 24세 이하",
-        desc: "원칙적으로 허가 불필요 — 단, 보충역 복무 중이면 예외",
-      },
-      {
-        id: "military_age_over25_general",
-        icon: "🟡",
-        title: "만 25세 이상 — 병역 미필",
-        desc: "일반 병역준비역 (병역판정검사 대상 또는 현역 입영 대기)",
-      },
-      {
-        id: "military_age_supplemental",
-        icon: "🟠",
-        title: "보충역 복무 중 (나이 무관)",
-        desc: "사회복무요원·전문연구요원·산업기능요원 등",
-      },
-      {
-        id: "military_age_done",
-        icon: "✅",
-        title: "병역 완료·면제",
-        desc: "현역 전역·면제·제2국민역 편입 등",
-      },
+      { id: "military_age_under24", icon: "🟢", title: "만 24세 이하", desc: "원칙적으로 허가 불필요 — 단, 보충역 복무 중이면 예외" },
+      { id: "military_age_over25_general", icon: "🟡", title: "만 25세 이상 — 병역 미필", desc: "일반 병역준비역 (병역판정검사 대상 또는 현역 입영 대기)" },
+      { id: "military_age_supplemental", icon: "🟠", title: "보충역 복무 중 (나이 무관)", desc: "사회복무요원·전문연구요원·산업기능요원 등" },
+      { id: "military_age_done", icon: "✅", title: "병역 완료·면제", desc: "현역 전역·면제·제2국민역 편입 등" },
     ],
   },
 
@@ -6805,30 +3953,10 @@ const TREE = {
     question: "본인의 병역 신분은?",
     sub: "신분에 따라 신청 유형·서류·허가 기간이 완전히 다릅니다. 정확한 신분을 선택하세요.",
     options: [
-      {
-        id: "military_travel_permit",
-        icon: "🎓",
-        title: "일반 병역준비역 — 유학·취업·일반 체재",
-        desc: "병역판정검사 대상 또는 현역 입영 대기 중 (캐나다 체재 연장)",
-      },
-      {
-        id: "military_supplemental_abroad",
-        icon: "🏢",
-        title: "보충역 복무 중 (사회복무요원·전문연구요원 등)",
-        desc: "복무 중 국외 출장·파견·취업·유학 등",
-      },
-      {
-        id: "military_immigrant",
-        icon: "🟢",
-        title: "영주권·시민권 취득자 (국외이주 사유)",
-        desc: "영주권 또는 시민권 취득 후 만 37세까지 연기",
-      },
-      {
-        id: "military_dual",
-        icon: "🧬",
-        title: "선천적 복수국적자 (재외국민2세)",
-        desc: "캐나다 출생 또는 부모 중 한 명이 한국인 — 만 37세까지 연기",
-      },
+      { id: "military_travel_permit", icon: "🎓", title: "일반 병역준비역 — 유학·취업·일반 체재", desc: "병역판정검사 대상 또는 현역 입영 대기 중 (캐나다 체재 연장)" },
+      { id: "military_supplemental_abroad", icon: "🏢", title: "보충역 복무 중 (사회복무요원·전문연구요원 등)", desc: "복무 중 국외 출장·파견·취업·유학 등" },
+      { id: "military_immigrant", icon: "🟢", title: "영주권·시민권 취득자 (국외이주 사유)", desc: "영주권 또는 시민권 취득 후 만 37세까지 연기" },
+      { id: "military_dual", icon: "🧬", title: "선천적 복수국적자 (재외국민2세)", desc: "캐나다 출생 또는 부모 중 한 명이 한국인 — 만 37세까지 연기" },
     ],
   },
 
@@ -6840,24 +3968,9 @@ const TREE = {
     question: "캐나다 체재 목적은?",
     sub: "목적에 따라 제출해야 하는 증빙서류가 달라집니다.",
     options: [
-      {
-        id: "military_permit_study",
-        icon: "📚",
-        title: "유학 (학교 재학 중)",
-        desc: "학교별 제한 연령까지 허가 가능",
-      },
-      {
-        id: "military_permit_work",
-        icon: "💼",
-        title: "취업 (직장 재직 중)",
-        desc: "고용계약서 또는 재직증명서 필요",
-      },
-      {
-        id: "military_permit_general",
-        icon: "🏠",
-        title: "일반 체재 (부모와 함께 거주 등)",
-        desc: "부모의 체류자격 증빙 필요",
-      },
+      { id: "military_permit_study", icon: "📚", title: "유학 (학교 재학 중)", desc: "학교별 제한 연령까지 허가 가능" },
+      { id: "military_permit_work", icon: "💼", title: "취업 (직장 재직 중)", desc: "고용계약서 또는 재직증명서 필요" },
+      { id: "military_permit_general", icon: "🏠", title: "일반 체재 (부모와 함께 거주 등)", desc: "부모의 체류자격 증빙 필요" },
     ],
   },
 
@@ -6951,24 +4064,9 @@ const TREE = {
     question: "국외 활동 목적은?",
     sub: "보충역 복무 중 국외 활동은 목적에 따라 허가 신청 경로가 다릅니다.",
     options: [
-      {
-        id: "military_supp_business",
-        icon: "✈️",
-        title: "소속 기관의 국외출장·파견",
-        desc: "소속기관장의 출장증명서 또는 파견명령서 필요",
-      },
-      {
-        id: "military_supp_work",
-        icon: "💼",
-        title: "국외 취업",
-        desc: "사회복무요원은 반드시 재외공관 통해 신청",
-      },
-      {
-        id: "military_supp_study",
-        icon: "📚",
-        title: "국외 유학",
-        desc: "전문연구요원·산업기능요원 등 유학 허가",
-      },
+      { id: "military_supp_business", icon: "✈️", title: "소속 기관의 국외출장·파견", desc: "소속기관장의 출장증명서 또는 파견명령서 필요" },
+      { id: "military_supp_work", icon: "💼", title: "국외 취업", desc: "사회복무요원은 반드시 재외공관 통해 신청" },
+      { id: "military_supp_study", icon: "📚", title: "국외 유학", desc: "전문연구요원·산업기능요원 등 유학 허가" },
     ],
   },
 
@@ -7117,24 +4215,9 @@ const TREE = {
     question: "어떤 상황인가요?",
     sub: "상황에 따라 필요한 조치가 다릅니다.",
     options: [
-      {
-        id: "military_permit_cancel",
-        icon: "✈️",
-        title: "조기 귀국 — 허가 취소",
-        desc: "국외여행허가 취소 신청",
-      },
-      {
-        id: "military_return_permanent",
-        icon: "🏠",
-        title: "영구 귀국·국내 장기 체류",
-        desc: "허가 취소 후 병역 의무 재개 여부 확인",
-      },
-      {
-        id: "military_return_exempt",
-        icon: "✅",
-        title: "만 37세 이상·면제 처분 — 의무 종료",
-        desc: "병역의무 종료 확인",
-      },
+      { id: "military_permit_cancel", icon: "✈️", title: "조기 귀국 — 허가 취소", desc: "국외여행허가 취소 신청" },
+      { id: "military_return_permanent", icon: "🏠", title: "영구 귀국·국내 장기 체류", desc: "허가 취소 후 병역 의무 재개 여부 확인" },
+      { id: "military_return_exempt", icon: "✅", title: "만 37세 이상·면제 처분 — 의무 종료", desc: "병역의무 종료 확인" },
     ],
   },
 
@@ -7212,36 +4295,11 @@ const TREE = {
     question: "What type of notarization do you need?",
     sub: "⚠️ All signatures must be made in front of the consular officer in person. Pre-signed documents will NOT be accepted. Proxy applications are not allowed.",
     options: [
-      {
-        id: "notarization_apostille_guide_en",
-        icon: "❓",
-        title: "Apostille vs Consular Notarization — Not sure which I need",
-        desc: "Find out which process applies to your situation first",
-      },
-      {
-        id: "notarization_saseo_en",
-        icon: "📜",
-        title: "Signature Notarization (사서증서 인증)",
-        desc: "POA, legal documents, declarations, inheritance renunciation, etc.",
-      },
-      {
-        id: "notarization_ingam_en",
-        icon: "🔏",
-        title: "Seal (인감) Related Documents",
-        desc: "Seal certificate issuance POA, seal registration / change",
-      },
-      {
-        id: "notarization_translation_en",
-        icon: "🌐",
-        title: "Translation Notarization",
-        desc: "English translation of Korean documents, driver's licence translation",
-      },
-      {
-        id: "notarization_copy_en",
-        icon: "📋",
-        title: "Certified True Copy Confirmation",
-        desc: "Consular confirmation of Canadian-issued documents",
-      },
+      { id: "notarization_apostille_guide_en", icon: "❓", title: "Apostille vs Consular Notarization — Not sure which I need", desc: "Find out which process applies to your situation first" },
+      { id: "notarization_saseo_en", icon: "📜", title: "Signature Notarization (사서증서 인증)", desc: "POA, legal documents, declarations, inheritance renunciation, etc." },
+      { id: "notarization_ingam_en", icon: "🔏", title: "Seal (인감) Related Documents", desc: "Seal certificate issuance POA, seal registration / change" },
+      { id: "notarization_translation_en", icon: "🌐", title: "Translation Notarization", desc: "English translation of Korean documents, driver's licence translation" },
+      { id: "notarization_copy_en", icon: "📋", title: "Certified True Copy Confirmation", desc: "Consular confirmation of Canadian-issued documents" },
     ],
   },
 
@@ -7273,8 +4331,7 @@ const TREE = {
       "If consular notarization is confirmed to be needed, go back and select the appropriate menu.",
     ],
     booking: "https://www.torbooking.com/book",
-    onlineLink:
-      "https://www.international.gc.ca/country-pays/apostille.aspx?lang=eng",
+    onlineLink: "https://www.international.gc.ca/country-pays/apostille.aspx?lang=eng",
   },
 
   notarization_saseo_en: {
@@ -7284,36 +4341,16 @@ const TREE = {
     question: "What type of document needs to be notarized?",
     sub: "Consular signature notarization confirms that the signature on a personal document was made of the person's own free will. The Consulate does NOT verify the content of the document.",
     options: [
-      {
-        id: "notarization_pow_en",
-        icon: "📜",
-        title: "Power of Attorney (POA)",
-        desc: "Delegating Korean real estate, banking, inheritance, certificate issuance, etc.",
-      },
-      {
-        id: "notarization_legal_act_en",
-        icon: "⚖️",
-        title: "Legal Act Documents",
-        desc: "Inheritance division agreement, purchase/lease contracts, bank loan agreements, renunciation of inheritance",
-      },
-      {
-        id: "notarization_sign_en",
-        icon: "✍️",
-        title: "Factual Statement Documents",
-        desc: "Signature statement, identity statement (동일인진술서), residency statement, employment letter",
-      },
+      { id: "notarization_pow_en", icon: "📜", title: "Power of Attorney (POA)", desc: "Delegating Korean real estate, banking, inheritance, certificate issuance, etc." },
+      { id: "notarization_legal_act_en", icon: "⚖️", title: "Legal Act Documents", desc: "Inheritance division agreement, purchase/lease contracts, bank loan agreements, renunciation of inheritance" },
+      { id: "notarization_sign_en", icon: "✍️", title: "Factual Statement Documents", desc: "Signature statement, identity statement (동일인진술서), residency statement, employment letter" },
     ],
   },
 
   notarization_pow_en: {
     type: "result",
     service: "notarization",
-    breadcrumb: [
-      "Home",
-      "Notarization",
-      "Signature Notarization",
-      "Power of Attorney",
-    ],
+    breadcrumb: ["Home", "Notarization", "Signature Notarization", "Power of Attorney"],
     title: "Power of Attorney (POA) — Consular Notarization",
     docs: [
       "POA document — prepared in advance, signature field left BLANK (sign in front of consular officer)",
@@ -7327,10 +4364,7 @@ const TREE = {
     ],
     costs: [
       { label: "Fee per document", value: "CAD $2.60 (cash)" },
-      {
-        label: "Passport Info Certificate (if needed)",
-        value: "CAD $1.00 extra",
-      },
+      { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
     notices: [
@@ -7347,14 +4381,8 @@ const TREE = {
   notarization_legal_act_en: {
     type: "result",
     service: "notarization",
-    breadcrumb: [
-      "Home",
-      "Notarization",
-      "Signature Notarization",
-      "Legal Act Documents",
-    ],
-    title:
-      "Legal Act Document Notarization — Inheritance, Contracts, Bank Agreements",
+    breadcrumb: ["Home", "Notarization", "Signature Notarization", "Legal Act Documents"],
+    title: "Legal Act Document Notarization — Inheritance, Contracts, Bank Agreements",
     docs: [
       "Document to be notarized — signature field BLANK (sign in front of consular officer)",
       "  ▸ Inheritance division agreement (상속재산분할협의서)",
@@ -7369,14 +4397,8 @@ const TREE = {
     ],
     costs: [
       { label: "Documents without stated value", value: "CAD $5.20 (cash)" },
-      {
-        label: "Contracts with stated monetary value",
-        value: "Approx. CAD $3.00 per CAD $1,000 of value",
-      },
-      {
-        label: "Passport Info Certificate (if needed)",
-        value: "CAD $1.00 extra",
-      },
+      { label: "Contracts with stated monetary value", value: "Approx. CAD $3.00 per CAD $1,000 of value" },
+      { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (documents with monetary value may take longer to review)",
     notices: [
@@ -7392,14 +4414,8 @@ const TREE = {
   notarization_sign_en: {
     type: "result",
     service: "notarization",
-    breadcrumb: [
-      "Home",
-      "Notarization",
-      "Signature Notarization",
-      "Factual Statement",
-    ],
-    title:
-      "Factual Statement Notarization — Declarations, Identity Statements, etc.",
+    breadcrumb: ["Home", "Notarization", "Signature Notarization", "Factual Statement"],
+    title: "Factual Statement Notarization — Declarations, Identity Statements, etc.",
     docs: [
       "Document to be notarized — signature field BLANK (sign in front of consular officer)",
       "  ▸ Signature statement (서명진술서)",
@@ -7414,10 +4430,7 @@ const TREE = {
     ],
     costs: [
       { label: "Fee per document", value: "CAD $5.20 (cash)" },
-      {
-        label: "Passport Info Certificate (if needed)",
-        value: "CAD $1.00 extra",
-      },
+      { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
     notices: [
@@ -7436,36 +4449,16 @@ const TREE = {
     question: "Which seal (인감) document do you need?",
     sub: "Seal-related documents are directly tied to property rights in Korea. You MUST appear in person and handwrite the form in front of the consular officer. No proxy applications under any circumstances.",
     options: [
-      {
-        id: "notarization_ingam_pow_en",
-        icon: "🔏",
-        title: "Seal Certificate Issuance POA (인감증명서 발급 위임장)",
-        desc: "Authorizing someone in Korea to obtain your seal certificate on your behalf",
-      },
-      {
-        id: "notarization_ingam_change_en",
-        icon: "✏️",
-        title: "Seal Registration / Change Form (인감신고서)",
-        desc: "Registering a new seal or changing an existing one",
-      },
-      {
-        id: "notarization_ingam_protect_en",
-        icon: "🛡️",
-        title: "Seal Protection / Release (인감보호신청서)",
-        desc: "Freezing or unfreezing seal certificate issuance to prevent fraud",
-      },
+      { id: "notarization_ingam_pow_en", icon: "🔏", title: "Seal Certificate Issuance POA (인감증명서 발급 위임장)", desc: "Authorizing someone in Korea to obtain your seal certificate on your behalf" },
+      { id: "notarization_ingam_change_en", icon: "✏️", title: "Seal Registration / Change Form (인감신고서)", desc: "Registering a new seal or changing an existing one" },
+      { id: "notarization_ingam_protect_en", icon: "🛡️", title: "Seal Protection / Release (인감보호신청서)", desc: "Freezing or unfreezing seal certificate issuance to prevent fraud" },
     ],
   },
 
   notarization_ingam_pow_en: {
     type: "result",
     service: "notarization",
-    breadcrumb: [
-      "Home",
-      "Notarization",
-      "Seal Documents",
-      "Seal Certificate Issuance POA",
-    ],
+    breadcrumb: ["Home", "Notarization", "Seal Documents", "Seal Certificate Issuance POA"],
     title: "Seal Certificate Issuance POA (인감증명서 발급 위임장)",
     docs: [
       "Seal Certificate Issuance POA form — available at the Consulate or download from website",
@@ -7478,10 +4471,7 @@ const TREE = {
     ],
     costs: [
       { label: "Fee per document", value: "CAD $5.20 (cash)" },
-      {
-        label: "Passport Info Certificate (if needed)",
-        value: "CAD $1.00 extra",
-      },
+      { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
     notices: [
@@ -7496,12 +4486,7 @@ const TREE = {
   notarization_ingam_change_en: {
     type: "result",
     service: "notarization",
-    breadcrumb: [
-      "Home",
-      "Notarization",
-      "Seal Documents",
-      "Seal Registration / Change",
-    ],
+    breadcrumb: ["Home", "Notarization", "Seal Documents", "Seal Registration / Change"],
     title: "Seal Registration / Change Form (인감신고서)",
     docs: [
       "Seal Registration / Change Form — available at the Consulate or download from website",
@@ -7512,7 +4497,9 @@ const TREE = {
       "  ▸ Passport issued after Dec 20, 2020: also bring Passport Information Certificate",
       "Valid Canadian immigration status document — original",
     ],
-    costs: [{ label: "Fee per document", value: "CAD $5.20 (cash)" }],
+    costs: [
+      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+    ],
     time: "Same-day processing",
     notices: [
       "⚠️ You MUST appear in person — no proxy applications.",
@@ -7528,12 +4515,7 @@ const TREE = {
   notarization_ingam_protect_en: {
     type: "result",
     service: "notarization",
-    breadcrumb: [
-      "Home",
-      "Notarization",
-      "Seal Documents",
-      "Seal Protection / Release",
-    ],
+    breadcrumb: ["Home", "Notarization", "Seal Documents", "Seal Protection / Release"],
     title: "Seal Protection / Release (인감보호신청서)",
     docs: [
       "Seal Protection / Release Form — available at the Consulate or download from website",
@@ -7543,7 +4525,9 @@ const TREE = {
       "  ▸ Passport issued after Dec 20, 2020: also bring Passport Information Certificate",
       "Valid Canadian immigration status document — original",
     ],
-    costs: [{ label: "Fee per document", value: "CAD $5.20 (cash)" }],
+    costs: [
+      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+    ],
     time: "Same-day processing",
     notices: [
       "Seal protection: blocks all seal certificate issuance in Korea — used to prevent unauthorized use of your seal.",
@@ -7569,7 +4553,9 @@ const TREE = {
       "  ▸ Passport issued after Dec 20, 2020: also bring Passport Information Certificate",
       "Valid Canadian immigration status document — original",
     ],
-    costs: [{ label: "Fee per document", value: "CAD $5.20 (cash)" }],
+    costs: [
+      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+    ],
     time: "Same-day processing (30 min – 1 hour). 10+ documents: next-day pickup.",
     notices: [
       "The translator must visit in person — no proxy submission.",
@@ -7594,7 +4580,9 @@ const TREE = {
       "Your valid Korean passport — original + photocopy",
       "Valid Canadian immigration status document — original",
     ],
-    costs: [{ label: "Fee per document", value: "CAD $5.20 (cash)" }],
+    costs: [
+      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+    ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
     notices: [
       "⚠️ Canada is a member of the Apostille Convention — Canadian public documents (birth certificate, marriage certificate, etc.) are often better handled with an Apostille rather than consular notarization.",
@@ -7615,30 +4603,10 @@ const TREE = {
     question: "What do you need help with?",
     sub: "Korean military service obligations apply to male Korean nationals. Select what applies to you.",
     options: [
-      {
-        id: "military_cert_start_en",
-        icon: "📄",
-        title: "Military Record Certificate (병적증명서)",
-        desc: "Needed for visa applications, employment, nationality renunciation, etc.",
-      },
-      {
-        id: "military_need_check_en",
-        icon: "❓",
-        title: "I'm not sure if I need an Overseas Travel Permit",
-        desc: "Check whether a permit applies to your situation first",
-      },
-      {
-        id: "military_permit_who_en",
-        icon: "✈️",
-        title: "I need to apply for / extend an Overseas Travel Permit",
-        desc: "I already know I need a permit",
-      },
-      {
-        id: "military_cancel_return_en",
-        icon: "🏠",
-        title: "I'm returning to Korea or need to cancel my permit",
-        desc: "Early return, permit cancellation, end of obligation",
-      },
+      { id: "military_cert_start_en", icon: "📄", title: "Military Record Certificate (병적증명서)", desc: "Needed for visa applications, employment, nationality renunciation, etc." },
+      { id: "military_need_check_en", icon: "❓", title: "I'm not sure if I need an Overseas Travel Permit", desc: "Check whether a permit applies to your situation first" },
+      { id: "military_permit_who_en", icon: "✈️", title: "I need to apply for / extend an Overseas Travel Permit", desc: "I already know I need a permit" },
+      { id: "military_cancel_return_en", icon: "🏠", title: "I'm returning to Korea or need to cancel my permit", desc: "Early return, permit cancellation, end of obligation" },
     ],
   },
 
@@ -7649,30 +4617,15 @@ const TREE = {
     question: "Who is making the request?",
     sub: "The certificate can be requested by the person themselves, or by an immediate family member acting as proxy.",
     options: [
-      {
-        id: "military_cert_self_en",
-        icon: "👤",
-        title: "I am applying for myself",
-        desc: "In person at the Consulate, or online with a Gong-dong Certificate",
-      },
-      {
-        id: "military_cert_proxy_en",
-        icon: "👨‍👩‍👧",
-        title: "A family member is applying on my behalf",
-        desc: "Spouse, parent, child, sibling — proxy application",
-      },
+      { id: "military_cert_self_en", icon: "👤", title: "I am applying for myself", desc: "In person at the Consulate, or online with a Gong-dong Certificate" },
+      { id: "military_cert_proxy_en", icon: "👨‍👩‍👧", title: "A family member is applying on my behalf", desc: "Spouse, parent, child, sibling — proxy application" },
     ],
   },
 
   military_cert_self_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Military Record Certificate",
-      "Self",
-    ],
+    breadcrumb: ["Home", "Military Service", "Military Record Certificate", "Self"],
     title: "Military Record Certificate (병적증명서) — Self Application",
     docs: [
       "Your valid Korean passport — original",
@@ -7694,14 +4647,8 @@ const TREE = {
   military_cert_proxy_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Military Record Certificate",
-      "Proxy",
-    ],
-    title:
-      "Military Record Certificate (병적증명서) — Family Proxy Application",
+    breadcrumb: ["Home", "Military Service", "Military Record Certificate", "Proxy"],
+    title: "Military Record Certificate (병적증명서) — Family Proxy Application",
     docs: [
       "Proxy (family member)'s ID — original",
       "Family Relationship Certificate proving relationship to the service member",
@@ -7727,42 +4674,17 @@ const TREE = {
     question: "What is your current age and military status?",
     sub: "Whether you need a permit depends on your age and current military status.",
     options: [
-      {
-        id: "military_age_under24_en",
-        icon: "🟢",
-        title: "Age 24 or under",
-        desc: "Generally no permit needed — exceptions apply for supplemental service",
-      },
-      {
-        id: "military_age_over25_general_en",
-        icon: "🟡",
-        title: "Age 25 or over — not yet completed military service",
-        desc: "General service-pending status (waiting for physical exam or induction)",
-      },
-      {
-        id: "military_age_supplemental_en",
-        icon: "🟠",
-        title: "Currently in supplemental service (any age)",
-        desc: "Social service worker, research personnel, industrial technical personnel, etc.",
-      },
-      {
-        id: "military_age_done_en",
-        icon: "✅",
-        title: "Already completed or exempt from military service",
-        desc: "Discharged, exempted, or transferred to second-class service",
-      },
+      { id: "military_age_under24_en", icon: "🟢", title: "Age 24 or under", desc: "Generally no permit needed — exceptions apply for supplemental service" },
+      { id: "military_age_over25_general_en", icon: "🟡", title: "Age 25 or over — not yet completed military service", desc: "General service-pending status (waiting for physical exam or induction)" },
+      { id: "military_age_supplemental_en", icon: "🟠", title: "Currently in supplemental service (any age)", desc: "Social service worker, research personnel, industrial technical personnel, etc." },
+      { id: "military_age_done_en", icon: "✅", title: "Already completed or exempt from military service", desc: "Discharged, exempted, or transferred to second-class service" },
     ],
   },
 
   military_age_under24_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Do I Need a Permit?",
-      "Age 24 or Under",
-    ],
+    breadcrumb: ["Home", "Military Service", "Do I Need a Permit?", "Age 24 or Under"],
     title: "Age 24 or Under — Generally No Permit Required",
     docs: [],
     costs: [{ label: "Fee", value: "N/A" }],
@@ -7780,12 +4702,7 @@ const TREE = {
   military_age_over25_general_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Do I Need a Permit?",
-      "Age 25+ General",
-    ],
+    breadcrumb: ["Home", "Military Service", "Do I Need a Permit?", "Age 25+ General"],
     title: "Age 25 or Over, Service Pending — Permit Required",
     docs: [],
     costs: [{ label: "Fee", value: "Free" }],
@@ -7802,12 +4719,7 @@ const TREE = {
   military_age_supplemental_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Do I Need a Permit?",
-      "Supplemental Service",
-    ],
+    breadcrumb: ["Home", "Military Service", "Do I Need a Permit?", "Supplemental Service"],
     title: "Currently in Supplemental Service — Permit Required (Any Age)",
     docs: [],
     costs: [{ label: "Fee", value: "Free" }],
@@ -7825,12 +4737,7 @@ const TREE = {
   military_age_done_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Do I Need a Permit?",
-      "Completed / Exempt",
-    ],
+    breadcrumb: ["Home", "Military Service", "Do I Need a Permit?", "Completed / Exempt"],
     title: "Service Completed or Exempted — No Permit Required",
     docs: [],
     costs: [{ label: "Fee", value: "N/A" }],
@@ -7852,65 +4759,23 @@ const TREE = {
     question: "What is your current military / residency status?",
     sub: "The type of permit, required documents, and permit duration differ significantly depending on your status. Select the one that applies to you.",
     options: [
-      {
-        id: "military_travel_permit_en",
-        icon: "🎓",
-        title:
-          "General service-pending — studying, working, or living in Canada",
-        desc: "Waiting for physical exam or induction (not PR/citizenship holder, not dual national)",
-      },
-      {
-        id: "military_supplemental_abroad_en",
-        icon: "🏢",
-        title: "Currently in supplemental service (any age)",
-        desc: "Social service worker, research personnel, industrial technical personnel, etc.",
-      },
-      {
-        id: "military_immigrant_en",
-        icon: "🟢",
-        title: "Canadian PR card or citizenship holder",
-        desc: "Overseas immigration reason — permit valid until age 37",
-      },
-      {
-        id: "military_dual_en",
-        icon: "🧬",
-        title:
-          "Congenital dual national (born with Korean + Canadian citizenship)",
-        desc: "Born in Canada or parent is Korean — 'Overseas Korean 2nd Generation' permit until age 37",
-      },
+      { id: "military_travel_permit_en", icon: "🎓", title: "General service-pending — studying, working, or living in Canada", desc: "Waiting for physical exam or induction (not PR/citizenship holder, not dual national)" },
+      { id: "military_supplemental_abroad_en", icon: "🏢", title: "Currently in supplemental service (any age)", desc: "Social service worker, research personnel, industrial technical personnel, etc." },
+      { id: "military_immigrant_en", icon: "🟢", title: "Canadian PR card or citizenship holder", desc: "Overseas immigration reason — permit valid until age 37" },
+      { id: "military_dual_en", icon: "🧬", title: "Congenital dual national (born with Korean + Canadian citizenship)", desc: "Born in Canada or parent is Korean — 'Overseas Korean 2nd Generation' permit until age 37" },
     ],
   },
 
   military_travel_permit_en: {
     type: "question",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Permit",
-      "General Service-Pending",
-    ],
+    breadcrumb: ["Home", "Military Service", "Permit", "General Service-Pending"],
     question: "What is your primary reason for staying in Canada?",
     sub: "The supporting documents required differ by purpose of stay.",
     options: [
-      {
-        id: "military_permit_study_en",
-        icon: "📚",
-        title: "Study (currently enrolled in school)",
-        desc: "Enrollment certificate or Letter of Acceptance required",
-      },
-      {
-        id: "military_permit_work_en",
-        icon: "💼",
-        title: "Work (currently employed)",
-        desc: "Employment contract or employer letter required",
-      },
-      {
-        id: "military_permit_general_en",
-        icon: "🏠",
-        title: "General residence (living with parents, etc.)",
-        desc: "Parents' immigration status documents required",
-      },
+      { id: "military_permit_study_en", icon: "📚", title: "Study (currently enrolled in school)", desc: "Enrollment certificate or Letter of Acceptance required" },
+      { id: "military_permit_work_en", icon: "💼", title: "Work (currently employed)", desc: "Employment contract or employer letter required" },
+      { id: "military_permit_general_en", icon: "🏠", title: "General residence (living with parents, etc.)", desc: "Parents' immigration status documents required" },
     ],
   },
 
@@ -7973,13 +4838,7 @@ const TREE = {
   military_permit_general_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Permit",
-      "General",
-      "General Residence",
-    ],
+    breadcrumb: ["Home", "Military Service", "Permit", "General", "General Residence"],
     title: "Overseas Travel Permit (Extension) — General Residence",
     docs: [
       "Application for Permission for Overseas Travel (Extension) — MMAS Form (pen/ink only)",
@@ -8009,37 +4868,16 @@ const TREE = {
     question: "What is the purpose of your overseas activity?",
     sub: "The application route differs depending on the purpose.",
     options: [
-      {
-        id: "military_supp_business_en",
-        icon: "✈️",
-        title: "Overseas business trip / dispatch by employer",
-        desc: "Official dispatch order or business trip certificate from employer",
-      },
-      {
-        id: "military_supp_work_en",
-        icon: "💼",
-        title: "Overseas employment",
-        desc: "Social service workers MUST apply through the Consulate",
-      },
-      {
-        id: "military_supp_study_en",
-        icon: "📚",
-        title: "Overseas study",
-        desc: "Enrollment certificate required",
-      },
+      { id: "military_supp_business_en", icon: "✈️", title: "Overseas business trip / dispatch by employer", desc: "Official dispatch order or business trip certificate from employer" },
+      { id: "military_supp_work_en", icon: "💼", title: "Overseas employment", desc: "Social service workers MUST apply through the Consulate" },
+      { id: "military_supp_study_en", icon: "📚", title: "Overseas study", desc: "Enrollment certificate required" },
     ],
   },
 
   military_supp_business_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Permit",
-      "Supplemental",
-      "Business Trip",
-    ],
+    breadcrumb: ["Home", "Military Service", "Permit", "Supplemental", "Business Trip"],
     title: "Supplemental Service — Overseas Business Trip / Dispatch",
     docs: [
       "Application for Permission for Overseas Travel (Extension) — MMAS Form (pen/ink only)",
@@ -8113,14 +4951,8 @@ const TREE = {
   military_immigrant_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Permit",
-      "PR / Citizenship Holder",
-    ],
-    title:
-      "Overseas Immigration Permit — PR / Citizenship Holder (until age 37)",
+    breadcrumb: ["Home", "Military Service", "Permit", "PR / Citizenship Holder"],
+    title: "Overseas Immigration Permit — PR / Citizenship Holder (until age 37)",
     docs: [
       "Application for Permission for Overseas Travel (Extension) — MMAS Form (pen/ink only)",
       "Family Residency Confirmation Form (소정 양식 — must include both parents' and applicant's details)",
@@ -8150,14 +4982,8 @@ const TREE = {
   military_dual_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Permit",
-      "Congenital Dual National",
-    ],
-    title:
-      "Congenital Dual National Permit — Overseas Korean 2nd Generation (until age 37)",
+    breadcrumb: ["Home", "Military Service", "Permit", "Congenital Dual National"],
+    title: "Congenital Dual National Permit — Overseas Korean 2nd Generation (until age 37)",
     docs: [
       "Application for Permission for Overseas Travel (Extension) — MMAS Form (pen/ink only)",
       "Family Residency Confirmation Form (소정 양식 — parents' and applicant's details)",
@@ -8189,24 +5015,9 @@ const TREE = {
     question: "What is your situation?",
     sub: "The action required depends on your circumstances.",
     options: [
-      {
-        id: "military_permit_cancel_en",
-        icon: "✈️",
-        title: "Returning early — within my current permit period",
-        desc: "Cancel the existing Overseas Travel Permit",
-      },
-      {
-        id: "military_return_permanent_en",
-        icon: "🏠",
-        title: "Returning to Korea permanently or for a long stay",
-        desc: "Military duty may be reactivated — consult before returning",
-      },
-      {
-        id: "military_return_exempt_en",
-        icon: "✅",
-        title: "I've turned 37 or received an exemption",
-        desc: "Verify end of military obligation",
-      },
+      { id: "military_permit_cancel_en", icon: "✈️", title: "Returning early — within my current permit period", desc: "Cancel the existing Overseas Travel Permit" },
+      { id: "military_return_permanent_en", icon: "🏠", title: "Returning to Korea permanently or for a long stay", desc: "Military duty may be reactivated — consult before returning" },
+      { id: "military_return_exempt_en", icon: "✅", title: "I've turned 37 or received an exemption", desc: "Verify end of military obligation" },
     ],
   },
 
@@ -8237,12 +5048,7 @@ const TREE = {
   military_return_permanent_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Return / Cancel",
-      "Permanent Return",
-    ],
+    breadcrumb: ["Home", "Military Service", "Return / Cancel", "Permanent Return"],
     title: "Permanent Return to Korea — Military Duty May Be Reactivated",
     docs: [
       "Overseas Travel Permit cancellation form (if applicable)",
@@ -8265,12 +5071,7 @@ const TREE = {
   military_return_exempt_en: {
     type: "result",
     service: "military",
-    breadcrumb: [
-      "Home",
-      "Military Service",
-      "Return / Cancel",
-      "Obligation Ended",
-    ],
+    breadcrumb: ["Home", "Military Service", "Return / Cancel", "Obligation Ended"],
     title: "Military Obligation Ended — Age 37 or Exempted",
     docs: [],
     costs: [{ label: "Fee", value: "N/A" }],
@@ -8293,24 +5094,9 @@ const TREE = {
     question: "어떤 재외국민 등록 업무가 필요하신가요?",
     sub: "재외국민 등록은 외국에 90일 이상 거주·체류하는 대한민국 국민의 법적 의무입니다 (재외국민등록법 제2조). 시민권자(한국 국적 상실자)는 해당 없습니다.",
     options: [
-      {
-        id: "registration_new",
-        icon: "📋",
-        title: "신규 등록",
-        desc: "캐나다 입국 후 90일 이내 최초 등록",
-      },
-      {
-        id: "registration_change",
-        icon: "✏️",
-        title: "변경·이동 신고",
-        desc: "주소·연락처·체류신분 변경 또는 귀국·이사 시",
-      },
-      {
-        id: "registration_copy",
-        icon: "📄",
-        title: "재외국민등록부 등본 발급",
-        desc: "부동산·금융·상속 등 해외거주 증명 시",
-      },
+      { id: "registration_new", icon: "📋", title: "신규 등록", desc: "캐나다 입국 후 90일 이내 최초 등록" },
+      { id: "registration_change", icon: "✏️", title: "변경·이동 신고", desc: "주소·연락처·체류신분 변경 또는 귀국·이사 시" },
+      { id: "registration_copy", icon: "📄", title: "재외국민등록부 등본 발급", desc: "부동산·금융·상속 등 해외거주 증명 시" },
     ],
   },
 
@@ -8373,7 +5159,10 @@ const TREE = {
     service: "registration",
     breadcrumb: ["홈", "재외국민 등록", "등록부 등본 발급"],
     title: "재외국민등록부 등본 발급",
-    docs: ["유효한 한국 여권 원본", "수수료 현금"],
+    docs: [
+      "유효한 한국 여권 원본",
+      "수수료 현금",
+    ],
     costs: [{ label: "등본 1부당 수수료", value: "CAD $1.00 (현금)" }],
     time: "방문 당일 즉시 발급",
     notices: [
@@ -8392,18 +5181,8 @@ const TREE = {
     question: "어떤 해외이주 신고 업무가 필요하신가요?",
     sub: "해외이주 신고는 영주권 취득 등으로 한국 주민등록을 재외국민으로 정리하는 절차입니다. 신고 완료 시 건강보험이 정지되고 주민등록이 재외국민으로 변경됩니다.",
     options: [
-      {
-        id: "emigration_new",
-        icon: "🛫",
-        title: "해외이주 신고 (신규)",
-        desc: "영주권 취득 후 한국 주민등록 정리",
-      },
-      {
-        id: "emigration_cert",
-        icon: "📄",
-        title: "해외이주신고확인서 발급",
-        desc: "국민연금 반환일시금 신청 등에 사용",
-      },
+      { id: "emigration_new", icon: "🛫", title: "해외이주 신고 (신규)", desc: "영주권 취득 후 한국 주민등록 정리" },
+      { id: "emigration_cert", icon: "📄", title: "해외이주신고확인서 발급", desc: "국민연금 반환일시금 신청 등에 사용" },
     ],
   },
 
@@ -8450,7 +5229,9 @@ const TREE = {
     service: "emigration",
     breadcrumb: ["홈", "해외이주 신고", "확인서 발급"],
     title: "해외이주신고확인서 발급",
-    docs: ["유효한 한국 여권 원본"],
+    docs: [
+      "유효한 한국 여권 원본",
+    ],
     costs: [
       { label: "원본 1부 (기관제출용)", value: "CAD $0.65 (현금)" },
       { label: "2부 (기관제출용 + 금융기관제출용)", value: "CAD $1.30 (현금)" },
@@ -8473,24 +5254,9 @@ const TREE = {
     question: "What do you need for Overseas Korean Registration?",
     sub: "Registration is a legal obligation for Korean nationals residing abroad for more than 90 days (Overseas Koreans Act, Article 2). Does not apply to those who have lost Korean citizenship.",
     options: [
-      {
-        id: "registration_new_en",
-        icon: "📋",
-        title: "New Registration",
-        desc: "Must register within 90 days of arriving in Canada",
-      },
-      {
-        id: "registration_change_en",
-        icon: "✏️",
-        title: "Update / Change / Move Notification",
-        desc: "Address, immigration status, or relocation change",
-      },
-      {
-        id: "registration_copy_en",
-        icon: "📄",
-        title: "Registration Certificate (등록부 등본)",
-        desc: "For real estate, financial, or inheritance matters",
-      },
+      { id: "registration_new_en", icon: "📋", title: "New Registration", desc: "Must register within 90 days of arriving in Canada" },
+      { id: "registration_change_en", icon: "✏️", title: "Update / Change / Move Notification", desc: "Address, immigration status, or relocation change" },
+      { id: "registration_copy_en", icon: "📄", title: "Registration Certificate (등록부 등본)", desc: "For real estate, financial, or inheritance matters" },
     ],
   },
 
@@ -8525,11 +5291,7 @@ const TREE = {
   registration_change_en: {
     type: "result",
     service: "registration",
-    breadcrumb: [
-      "Home",
-      "Overseas Korean Registration",
-      "Update / Change / Move",
-    ],
+    breadcrumb: ["Home", "Overseas Korean Registration", "Update / Change / Move"],
     title: "Overseas Korean Registration — Update / Change / Move Notification",
     docs: [
       "Overseas Korean Registration Change Form (소정 양식)",
@@ -8554,13 +5316,12 @@ const TREE = {
   registration_copy_en: {
     type: "result",
     service: "registration",
-    breadcrumb: [
-      "Home",
-      "Overseas Korean Registration",
-      "Registration Certificate",
-    ],
+    breadcrumb: ["Home", "Overseas Korean Registration", "Registration Certificate"],
     title: "Overseas Korean Registration Certificate (등록부 등본)",
-    docs: ["Valid Korean passport — original", "Fee (cash)"],
+    docs: [
+      "Valid Korean passport — original",
+      "Fee (cash)",
+    ],
     costs: [{ label: "Fee per copy", value: "CAD $1.00 (cash)" }],
     time: "Same-day issuance",
     notices: [
@@ -8578,18 +5339,8 @@ const TREE = {
     question: "What do you need for the Overseas Emigration Report?",
     sub: "The Overseas Emigration Report (해외이주신고) formally updates your Korean resident registration from 'domestic resident' to 'overseas Korean.' Required after obtaining Canadian PR.",
     options: [
-      {
-        id: "emigration_new_en",
-        icon: "🛫",
-        title: "File Overseas Emigration Report (New)",
-        desc: "After obtaining Canadian PR — deregister from Korean domestic residency",
-      },
-      {
-        id: "emigration_cert_en",
-        icon: "📄",
-        title: "Overseas Emigration Confirmation Certificate",
-        desc: "For National Pension refund claim and other official uses",
-      },
+      { id: "emigration_new_en", icon: "🛫", title: "File Overseas Emigration Report (New)", desc: "After obtaining Canadian PR — deregister from Korean domestic residency" },
+      { id: "emigration_cert_en", icon: "📄", title: "Overseas Emigration Confirmation Certificate", desc: "For National Pension refund claim and other official uses" },
     ],
   },
 
@@ -8634,19 +5385,14 @@ const TREE = {
   emigration_cert_en: {
     type: "result",
     service: "emigration",
-    breadcrumb: [
-      "Home",
-      "Overseas Emigration Report",
-      "Confirmation Certificate",
-    ],
+    breadcrumb: ["Home", "Overseas Emigration Report", "Confirmation Certificate"],
     title: "Overseas Emigration Confirmation Certificate (해외이주신고확인서)",
-    docs: ["Valid Korean passport — original"],
+    docs: [
+      "Valid Korean passport — original",
+    ],
     costs: [
       { label: "1 copy (institutional submission)", value: "CAD $0.65 (cash)" },
-      {
-        label: "2 copies (institutional + financial institution)",
-        value: "CAD $1.30 (cash)",
-      },
+      { label: "2 copies (institutional + financial institution)", value: "CAD $1.30 (cash)" },
     ],
     time: "Same-day issuance",
     notices: [
@@ -8733,162 +5479,48 @@ const TREE = {
 // result 노드 전체를 미리 인덱싱 (title + breadcrumb + docs + notices)
 const SEARCH_INDEX = Object.entries(TREE)
   .filter(([, node]) => node.type === "result")
-  .map(([id, node]) => {
-    // ⚡ node를 any 타입으로 강제 변환하여 타입스크립트의 모든 감시를 패스합니다.
-    const safeNode = node as any;
-
+  .map(([\1, \2]: [any, any]) => {
     const text = [
-      safeNode.title ?? "",
-      ...(Array.isArray(safeNode.breadcrumb) ? safeNode.breadcrumb : []),
-      ...(Array.isArray(safeNode.docs) ? safeNode.docs : []),
-      ...(Array.isArray(safeNode.notices) ? safeNode.notices : []),
-    ]
-      .join(" ")
-      .toLowerCase();
+      node.title ?? "",
+      ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : []),
+      ...(Array.isArray(node.docs)    ? node.docs    : []),
+      ...(Array.isArray(node.notices) ? node.notices : []),
+    ].join(" ").toLowerCase();
     return { id, node, text };
   });
 
-
-
 const SERVICE_COLORS = {
-  passport: "#003478",
-  family: "#1a6b3c",
-  nationality: "#7b2d2d",
-  cert: "#1a4d7a",
-  various_cert: "#2d5a8a",
-  visa: "#4a2d7a",
-  notarization: "#5a3d8a",
-  military: "#7a5500",
-  registration: "#0f5c6b",
-  emigration: "#3d5a2d",
+  passport: "#003478", family: "#1a6b3c", nationality: "#7b2d2d",
+  cert: "#1a4d7a", various_cert: "#2d5a8a", visa: "#4a2d7a",
+  notarization: "#5a3d8a", military: "#7a5500", registration: "#0f5c6b", emigration: "#3d5a2d",
 };
 
 // ─── SERVICE CARD DATA — Separated by language ───────────────────────────
 
 const KO_SERVICES = [
-  {
-    id: "passport_start",
-    icon: "🛂",
-    title: "여권",
-    desc: "발급 · 재발급 · 분실 · 긴급",
-  },
-  {
-    id: "visa_start",
-    icon: "✈️",
-    title: "비자 (사증)",
-    desc: "재외동포(F-4) · 방문 · 취업 · 유학",
-  },
-  {
-    id: "notarization_start",
-    icon: "📝",
-    title: "공증",
-    desc: "서류 · 서명 · 번역 공증",
-  },
-  {
-    id: "military_start",
-    icon: "🪖",
-    title: "병무",
-    desc: "국외여행허가 · 귀국 신고",
-  },
-  {
-    id: "family_start",
-    icon: "👨‍👩‍👧",
-    title: "가족관계등록",
-    desc: "증명서 · 출생 · 혼인 · 이혼 · 사망",
-  },
-  {
-    id: "nationality_start",
-    icon: "🇰🇷",
-    title: "국적",
-    desc: "상실 · 이탈 · 선택 · 보유 신고",
-  },
-  {
-    id: "cert_start",
-    icon: "🔐",
-    title: "공동/금융 인증서",
-    desc: "공동인증서 · 금융인증서",
-  },
-  {
-    id: "various_cert_start",
-    icon: "📄",
-    title: "각종 증명서 발급",
-    desc: "출입국 · 운전경력 · 병적증명서",
-  },
-  {
-    id: "registration_start",
-    icon: "🏠",
-    title: "재외국민 등록",
-    desc: "등록 · 주소 변경",
-  },
-  {
-    id: "emigration_start",
-    icon: "🛫",
-    title: "해외이주 신고",
-    desc: "해외이주 · 귀국 신고",
-  },
+  { id: "passport_start", icon: "🛂", title: "여권", desc: "발급 · 재발급 · 분실 · 긴급" },
+  { id: "visa_start", icon: "✈️", title: "비자 (사증)", desc: "재외동포(F-4) · 방문 · 취업 · 유학" },
+  { id: "notarization_start", icon: "📝", title: "공증", desc: "서류 · 서명 · 번역 공증" },
+  { id: "military_start", icon: "🪖", title: "병무", desc: "국외여행허가 · 귀국 신고" },
+  { id: "family_start", icon: "👨‍👩‍👧", title: "가족관계등록", desc: "증명서 · 출생 · 혼인 · 이혼 · 사망" },
+  { id: "nationality_start", icon: "🇰🇷", title: "국적", desc: "상실 · 이탈 · 선택 · 보유 신고" },
+  { id: "cert_start", icon: "🔐", title: "공동/금융 인증서", desc: "공동인증서 · 금융인증서" },
+  { id: "various_cert_start", icon: "📄", title: "각종 증명서 발급", desc: "출입국 · 운전경력 · 병적증명서" },
+  { id: "registration_start", icon: "🏠", title: "재외국민 등록", desc: "등록 · 주소 변경" },
+  { id: "emigration_start", icon: "🛫", title: "해외이주 신고", desc: "해외이주 · 귀국 신고" },
 ];
 
 const EN_SERVICES = [
-  {
-    id: "passport_start",
-    icon: "🛂",
-    title: "Passport",
-    desc: "Issue · Renewal · Lost · Urgent",
-  },
-  {
-    id: "visa_start",
-    icon: "✈️",
-    title: "Visa",
-    desc: "Overseas Korean (F-4) · Visitor · Work · Study",
-  },
-  {
-    id: "notarization_start",
-    icon: "📝",
-    title: "Notarization",
-    desc: "Document · Signature · Translation",
-  },
-  {
-    id: "military_start",
-    icon: "🪖",
-    title: "Military Service",
-    desc: "Overseas Travel Permit · Return Report",
-  },
-  {
-    id: "family_start",
-    icon: "👨‍👩‍👧",
-    title: "Family Register",
-    desc: "Certificates · Birth · Marriage · Divorce · Death",
-  },
-  {
-    id: "nationality_start",
-    icon: "🇰🇷",
-    title: "Nationality",
-    desc: "Loss · Renunciation · Choice · Retention",
-  },
-  {
-    id: "cert_start",
-    icon: "🔐",
-    title: "Digital Certificate",
-    desc: "Certificate · Financial Certificate",
-  },
-  {
-    id: "various_cert_start",
-    icon: "📄",
-    title: "Various Certificates",
-    desc: "Entry/Exit · Driving History · Military Record",
-  },
-  {
-    id: "registration_start",
-    icon: "🏠",
-    title: "Overseas Korean Reg.",
-    desc: "Registration · Address Change",
-  },
-  {
-    id: "emigration_start",
-    icon: "🛫",
-    title: "Emigration Report",
-    desc: "Emigration · Return Report",
-  },
+  { id: "passport_start", icon: "🛂", title: "Passport", desc: "Issue · Renewal · Lost · Urgent" },
+  { id: "visa_start", icon: "✈️", title: "Visa", desc: "Overseas Korean (F-4) · Visitor · Work · Study" },
+  { id: "notarization_start", icon: "📝", title: "Notarization", desc: "Document · Signature · Translation" },
+  { id: "military_start", icon: "🪖", title: "Military Service", desc: "Overseas Travel Permit · Return Report" },
+  { id: "family_start", icon: "👨‍👩‍👧", title: "Family Register", desc: "Certificates · Birth · Marriage · Divorce · Death" },
+  { id: "nationality_start", icon: "🇰🇷", title: "Nationality", desc: "Loss · Renunciation · Choice · Retention" },
+  { id: "cert_start", icon: "🔐", title: "Digital Certificate", desc: "Certificate · Financial Certificate" },
+  { id: "various_cert_start", icon: "📄", title: "Various Certificates", desc: "Entry/Exit · Driving History · Military Record" },
+  { id: "registration_start", icon: "🏠", title: "Overseas Korean Reg.", desc: "Registration · Address Change" },
+  { id: "emigration_start", icon: "🛫", title: "Emigration Report", desc: "Emigration · Return Report" },
 ];
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────
@@ -8905,25 +5537,23 @@ function AppInner() {
   const [pageId, setPageId] = useState("home");
   const [history, setHistory] = useState(["home"]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [openFaq, setOpenFaq] = useState(null);
+  const [openFaq, setOpenFaq] = useState<any>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
+
   const [lang, setLang] = useState(() => {
-    // 💡 (navigator as any)를 사용하여 유실된 구형 속성 검사를 안전하게 우회합니다.
-    const nav = navigator.language || (navigator as any).userLanguage || "";
-    const langs =
-      Array.isArray(navigator.languages) && navigator.languages.length > 0
-        ? navigator.languages
-        : [nav];
-    const isKorean = langs.some((l) => l && l.toLowerCase().startsWith("ko"));
+    const nav = navigator.language || navigator.userLanguage || "";
+    const langs = Array.isArray(navigator.languages) && navigator.languages.length > 0
+      ? navigator.languages
+      : [nav];
+    const isKorean = langs.some((l: any) => l.toLowerCase().startsWith("ko"));
     return isKorean ? "ko" : "en";
   });
 
-
-  const page = (TREE as any)[pageId] ?? { type: "home" };
+  const page = TREE[pageId] ?? { type: "home" };
 
   // 타입 안전 헬퍼 — 배열 필드 보장
-  const pageDocs = Array.isArray(page.docs) ? page.docs : [];
-  const pageCosts = Array.isArray(page.costs) ? page.costs : [];
+  const pageDocs    = Array.isArray(page.docs)    ? page.docs    : [];
+  const pageCosts   = Array.isArray(page.costs)   ? page.costs   : [];
   const pageNotices = Array.isArray(page.notices) ? page.notices : [];
   const pageOptions = Array.isArray(page.options) ? page.options : [];
 
@@ -8984,26 +5614,20 @@ function AppInner() {
     emigration_cert: "emigration_cert_en",
   };
 
-    const goTo = (id: any) => {
+  const goTo = (id: any) => {
     if (!id || typeof id !== "string") return;
-    
-    // 💡 EN_ROUTE_MAP 뒤에 (as any)를 붙여서 타입스크립트 차단 에러를 완벽하게 우회합니다.
     const resolved = lang === "en" && (EN_ROUTE_MAP as any)[id] ? (EN_ROUTE_MAP as any)[id] : id;
-    
-    // 존재하지 않는 노드 방어
     if (!(TREE as any)[resolved] && resolved !== "home") {
       console.warn(`[goTo] 노드 없음: ${resolved}`);
       return;
     }
     setShowBookingModal(false);
-    setHistory((h) => [...h, resolved]);
-    setPageId(resolved); // 🌟 원래 사용하시던 진짜 함수 이름이 그대로 유지됩니다!
+    setHistory((h: any) => [...h, resolved]);
+    setPageId(resolved);
     window.scrollTo(0, 0);
   };
 
-
-
-  const goBack = () => {
+  const goBack = (): void => {
     if (history.length <= 1) return;
     const newH = history.slice(0, -1);
     setHistory(newH);
@@ -9011,15 +5635,15 @@ function AppInner() {
     window.scrollTo(0, 0);
   };
 
-  const goHome = () => {
+  const goHome = (): void => {
     setHistory(["home"]);
     setPageId("home");
     setSearchQuery("");
     window.scrollTo(0, 0);
   };
 
-  const toggleLang = () => {
-    setLang((l) => (l === "ko" ? "en" : "ko"));
+  const toggleLang = (): void => {
+    setLang((l: any) => (l === "ko" ? "en" : "ko"));
     setHistory(["home"]);
     setPageId("home");
     setSearchQuery("");
@@ -9027,13 +5651,8 @@ function AppInner() {
   };
 
   const breadcrumb = Array.isArray(page.breadcrumb) ? page.breadcrumb : [];
-  const progressPct =
-    pageId === "home" ? 0 : Math.min(100, (breadcrumb.length / 5) * 100);
-    const serviceColor =
-    page.service && (SERVICE_COLORS as any)[page.service]
-      ? (SERVICE_COLORS as any)[page.service]
-      : "#003478";
-
+  const progressPct = pageId === "home" ? 0 : Math.min(100, (breadcrumb.length / 5) * 100);
+  const serviceColor = (page.service && (SERVICE_COLORS as any)[page.service]) ? (SERVICE_COLORS as any)[page.service] : "#003478";
 
   // 언어에 따라 서비스 카드 배열 선택
   const services = lang === "ko" ? KO_SERVICES : EN_SERVICES;
@@ -9044,32 +5663,18 @@ function AppInner() {
       <div className="app">
         {/* HEADER */}
         <header className="header">
-          <button
-            onClick={goHome}
-            className="header-logo"
-            style={{ background: "none", border: "none", cursor: "pointer" }}
-          >
+          <button onClick={goHome} className="header-logo" style={{ background: "none", border: "none", cursor: "pointer" }}>
             <span className="header-flag">🇰🇷</span>
             <div className="header-title">
-              {lang === "ko"
-                ? "주토론토 대한민국 총영사관"
-                : "Consulate General of the Republic of Korea in Toronto"}
-              <span>
-                {lang === "ko" ? "민원 안내 서비스" : "Consular Services Guide"}
-              </span>
+              {lang === "ko" ? "주토론토 대한민국 총영사관" : "Consulate General of the Republic of Korea in Toronto"}
+              <span>{lang === "ko" ? "민원 안내 서비스" : "Consular Services Guide"}</span>
             </div>
           </button>
           <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
             <button className="lang-btn" onClick={toggleLang}>
               {lang === "ko" ? "EN" : "한국어"}
             </button>
-            <a
-              href="tel:+14169203809"
-              className="header-tel"
-              style={{ textDecoration: "none" }}
-            >
-              📞 416-920-3809
-            </a>
+            <a href="tel:+14169203809" className="header-tel" style={{textDecoration:"none"}}>📞 416-920-3809</a>
           </div>
         </header>
 
@@ -9077,39 +5682,23 @@ function AppInner() {
         {pageId !== "home" && (
           <div className="progress-wrap">
             <div className="progress-steps">
-              {breadcrumb.map((label:any, i:any) => {
+              {breadcrumb.map((label: any, i: number) => {
                 const isActive = i === breadcrumb.length - 1;
                 const historyTarget = history[i] ?? "home";
                 return (
                   <div key={i} className="p-step">
-                    {i > 0 && (
-                      <div
-                        className={`p-line ${
-                          i <= breadcrumb.length - 1 ? "done" : ""
-                        }`}
-                      />
-                    )}
+                    {i > 0 && <div className={`p-line ${i <= breadcrumb.length - 1 ? "done" : ""}`} />}
                     <div className={`p-dot ${isActive ? "active" : "done"}`}>
                       {isActive ? i + 1 : "✓"}
                     </div>
                     <span
                       className={`p-label ${isActive ? "active" : "clickable"}`}
-                      onClick={
-                        !isActive
-                          ? () => {
-                              setHistory(history.slice(0, i + 1));
-                              setPageId(historyTarget);
-                              window.scrollTo(0, 0);
-                            }
-                          : undefined
-                      }
-                      title={
-                        !isActive
-                          ? lang === "ko"
-                            ? "이 단계로 돌아가기"
-                            : "Go back to this step"
-                          : undefined
-                      }
+                      onClick={!isActive ? () => {
+                        setHistory(history.slice(0, i + 1));
+                        setPageId(historyTarget);
+                        window.scrollTo(0, 0);
+                      } : undefined}
+                      title={!isActive ? (lang === "ko" ? "이 단계로 돌아가기" : "Go back to this step") : undefined}
                     >
                       {label}
                     </span>
@@ -9118,10 +5707,7 @@ function AppInner() {
               })}
             </div>
             <div className="progress-bar-track">
-              <div
-                className="progress-bar-fill"
-                style={{ width: `${progressPct}%` }}
-              />
+              <div className="progress-bar-fill" style={{ width: `${progressPct}%` }} />
             </div>
           </div>
         )}
@@ -9131,341 +5717,216 @@ function AppInner() {
           {/* NAV BUTTONS */}
           {pageId !== "home" && (
             <div className="nav-row">
-              <button className="nav-btn" onClick={goBack}>
-                {lang === "ko" ? "← 이전" : "← Back"}
-              </button>
-              <button className="nav-btn home" onClick={goHome}>
-                {lang === "ko" ? "🏠 홈으로" : "🏠 Home"}
-              </button>
+              <button className="nav-btn" onClick={goBack}>{lang === "ko" ? "← 이전" : "← Back"}</button>
+              <button className="nav-btn home" onClick={goHome}>{lang === "ko" ? "🏠 홈으로" : "🏠 Home"}</button>
             </div>
           )}
 
           {/* HOME */}
-          {page.type === "home" &&
-            (() => {
-              // 검색 로직
-              const q = searchQuery.trim().toLowerCase();
-              const searchResults =
-                q.length >= 1
-                  ? SEARCH_INDEX.filter(({ text }) => {
-                      // 방법 1: 띄어쓰기로 분리 후 AND 검색 ("여권 분실" → 둘 다 포함)
-                      const words = q.split(/\s+/).filter(Boolean);
-                      const andMatch = words.every((w) => text.includes(w));
-                      // 방법 2: 공백 제거 후 통째로 검색 ("여권분실" → 공백 제거한 텍스트에서 검색)
-                      const qNoSpace = q.replace(/\s+/g, "");
-                      const textNoSpace = text.replace(/\s+/g, "");
-                      const noSpaceMatch =
-                        qNoSpace.length >= 2 && textNoSpace.includes(qNoSpace);
-                      return andMatch || noSpaceMatch;
-                    }).slice(0, 12)
-                  : [];
+          {page.type === "home" && (() => {
+            // 검색 로직
+            const q = searchQuery.trim().toLowerCase();
+            const searchResults = q.length >= 1
+              ? SEARCH_INDEX.filter(({ text }: any) => {
+                  // 방법 1: 띄어쓰기로 분리 후 AND 검색 ("여권 분실" → 둘 다 포함)
+                  const words = q.split(/\s+/).filter(Boolean);
+                  const andMatch = words.every((w: any) => text.includes(w));
+                  // 방법 2: 공백 제거 후 통째로 검색 ("여권분실" → 공백 제거한 텍스트에서 검색)
+                  const qNoSpace = q.replace(/\s+/g, "");
+                  const textNoSpace = text.replace(/\s+/g, "");
+                  const noSpaceMatch = qNoSpace.length >= 2 && textNoSpace.includes(qNoSpace);
+                  return andMatch || noSpaceMatch;
+                }).slice(0, 12)
+              : [];
 
-              // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 40자)
-              const getSnippet = (node:any) => {
-                const candidates = [
-                  ...(Array.isArray(node.docs)
-                    ? node.docs.filter((d:any) => !d.trim().startsWith("▸"))
-                    : []),
-                  ...(Array.isArray(node.notices)
-                    ? node.notices.slice(0, 2)
-                    : []),
-                ];
-                const matched = candidates.find((t:any) =>
-                  t.toLowerCase().includes(q)
-                );
-                if (!matched) return null;
-                const idx = matched.toLowerCase().indexOf(q);
-                const start = Math.max(0, idx - 30);
-                const end = Math.min(matched.length, idx + q.length + 30);
-                const snippet =
-                  (start > 0 ? "…" : "") +
-                  matched.slice(start, end) +
-                  (end < matched.length ? "…" : "");
-                // highlight
-                const re = new RegExp(
-                  `(${q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-                  "gi"
-                );
-                return snippet.replace(re, "<mark>$1</mark>");
-              };
+            // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 40자)
+            const getSnippet = (node) => {
+              const candidates = [
+                ...(Array.isArray(node.docs) ? node.docs.filter(d => !d.trim().startsWith("▸")) : []),
+                ...(Array.isArray(node.notices) ? node.notices.slice(0, 2) : []),
+              ];
+              const matched = candidates.find((t: any) => t.toLowerCase().includes(q));
+              if (!matched) return null;
+              const idx = matched.toLowerCase().indexOf(q);
+              const start = Math.max(0, idx - 30);
+              const end = Math.min(matched.length, idx + q.length + 30);
+              const snippet = (start > 0 ? "…" : "") + matched.slice(start, end) + (end < matched.length ? "…" : "");
+              // highlight
+              const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
+              return snippet.replace(re, "<mark>$1</mark>");
+            };
 
-              return (
-                <>
-                  <div
-                    className="page-title"
-                    style={{
-                      display: "flex",
-                      alignItems: "flex-start",
-                      justifyContent: "space-between",
-                      gap: "8px",
-                    }}
+            return (
+              <>
+                <div className="page-title" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
+                  <div>
+                    <h1>{lang === "ko" ? "어떤 서비스가 필요하신가요?" : "What service do you need?"}</h1>
+                    <p>{lang === "ko" ? "업무를 선택하거나 검색해 보세요." : "Select a service or search below."}</p>
+                  </div>
+                  <button
+                    className="faq-btn"
+                    onClick={() => { setOpenFaq(null); goTo("faq_start"); }}
+                    title={lang === "ko" ? "자주 묻는 질문" : "FAQ"}
+                    aria-label={lang === "ko" ? "자주 묻는 질문" : "FAQ"}
                   >
-                    <div>
-                      <h1>
-                        {lang === "ko"
-                          ? "어떤 서비스가 필요하신가요?"
-                          : "What service do you need?"}
-                      </h1>
-                      <p>
-                        {lang === "ko"
-                          ? "업무를 선택하거나 검색해 보세요."
-                          : "Select a service or search below."}
-                      </p>
-                    </div>
-                    <button
-                      className="faq-btn"
-                      onClick={() => {
-                        setOpenFaq(null);
-                        goTo("faq_start");
-                      }}
-                      title={lang === "ko" ? "자주 묻는 질문" : "FAQ"}
-                      aria-label={lang === "ko" ? "자주 묻는 질문" : "FAQ"}
-                    >
-                      ❓
-                    </button>
-                  </div>
+                    ❓
+                  </button>
+                </div>
 
-                  {/* 검색창 */}
-                  <div className="search-wrap">
-                    <span className="search-icon">🔍</span>
-                    <input
-                      className="search-input"
-                      type="text"
-                      placeholder={
-                        lang === "ko"
-                          ? "위임장, 여권, 공증, 병적증명서…"
-                          : "POA, passport, notarization…"
-                      }
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      autoComplete="off"
-                    />
-                    {searchQuery && (
-                      <button
-                        className="search-clear"
-                        onClick={() => setSearchQuery("")}
-                      >
-                        ✕
-                      </button>
-                    )}
-                  </div>
+                {/* 검색창 */}
+                <div className="search-wrap">
+                  <span className="search-icon">🔍</span>
+                  <input
+                    className="search-input"
+                    type="text"
+                    placeholder={lang === "ko" ? "위임장, 여권, 공증, 병적증명서…" : "POA, passport, notarization…"}
+                    value={searchQuery}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+                    autoComplete="off"
+                  />
+                  {searchQuery && (
+                    <button className="search-clear" onClick={() => setSearchQuery("")}>✕</button>
+                  )}
+                </div>
 
-                  {/* 검색 결과 */}
-                  {q.length >= 1 ? (
-                    <div>
-                      {searchResults.length > 0 ? (
-                        <>
-                          <div className="search-count">
-                            {lang === "ko"
-                              ? `"${searchQuery}" 검색 결과 ${searchResults.length}건`
-                              : `${searchResults.length} result${
-                                  searchResults.length > 1 ? "s" : ""
-                                } for "${searchQuery}"`}
-                          </div>
-                          <div className="search-results">
-                            {searchResults.map(({ id, node }) => {
-                              const snippet = getSnippet(node);
-                              const path = (
-                                Array.isArray((node as any).breadcrumb)
-                                  ? (node as any).breadcrumb
-                                  : []
-                              ).join(" › ");
-                              return (
-                                <button
-                                  key={id}
-                                  className="search-result-card"
-                                  onClick={() => {
-                                    setSearchQuery("");
-                                    goTo(id);
-                                  }}
-                                >
-                                  <div className="search-result-title">
-                                    {(node as any).title ?? ""}
-                                  </div>
-                                  <div className="search-result-path">
-                                    {path}
-                                  </div>
-                                  {snippet && (
-                                    <div
-                                      className="search-result-snippet"
-                                      dangerouslySetInnerHTML={{
-                                        __html: snippet,
-                                      }}
-                                    />
-                                  )}
-                                </button>
-                              );
-                            })}
-                          </div>
-                        </>
-                      ) : (
-                        <div className="search-empty">
-                          <div
-                            style={{ fontSize: "32px", marginBottom: "8px" }}
-                          >
-                            🔍
-                          </div>
-                          <div>
-                            {lang === "ko"
-                              ? `"${searchQuery}"에 대한 결과가 없어요.`
-                              : `No results for "${searchQuery}".`}
-                          </div>
-                          <div
-                            style={{
-                              fontSize: "12px",
-                              marginTop: "6px",
-                              color: "#aab",
-                            }}
-                          >
-                            {lang === "ko"
-                              ? "다른 키워드로 검색하거나 아래 메뉴를 이용하세요."
-                              : "Try a different keyword or browse the menu below."}
-                          </div>
-                        </div>
-                      )}
-                      {/* 결과 없거나 있어도 아래 카드 그리드 유지 */}
-                      <div
-                        style={{
-                          marginTop: "1.25rem",
-                          borderTop: "1px solid #e4eaf6",
-                          paddingTop: "1rem",
-                        }}
-                      >
-                        <div
-                          style={{
-                            fontSize: "12px",
-                            color: "#99a",
-                            marginBottom: "10px",
-                          }}
-                        >
+                {/* 검색 결과 */}
+                {q.length >= 1 ? (
+                  <div>
+                    {searchResults.length > 0 ? (
+                      <>
+                        <div className="search-count">
                           {lang === "ko"
-                            ? "또는 메뉴에서 선택하세요"
-                            : "Or browse by category"}
+                            ? `"${searchQuery}" 검색 결과 ${searchResults.length}건`
+                            : `${searchResults.length} result${searchResults.length > 1 ? "s" : ""} for "${searchQuery}"`}
                         </div>
-                        <div className="service-grid">
-                          {services.map((s:any) => (
-                            <button
+                        <div className="search-results">
+                          {searchResults.map(({ id, node }: any) => {
+                            const snippet = getSnippet(node);
+                            const path = (Array.isArray(node.breadcrumb) ? node.breadcrumb : []).join(" › ");
+                            return (
+                              <button
+                                key={id}
+                                className="search-result-card"
+                                onClick={() => { setSearchQuery(""); goTo(id); }}
+                              >
+                                <div className="search-result-title">{node.title ?? ""}</div>
+                                <div className="search-result-path">{path}</div>
+                                {snippet && (
+                                  <div
+                                    className="search-result-snippet"
+                                    dangerouslySetInnerHTML={{ __html: snippet }}
+                                  />
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </>
+                    ) : (
+                      <div className="search-empty">
+                        <div style={{ fontSize: "32px", marginBottom: "8px" }}>🔍</div>
+                        <div>
+                          {lang === "ko"
+                            ? `"${searchQuery}"에 대한 결과가 없어요.`
+                            : `No results for "${searchQuery}".`}
+                        </div>
+                        <div style={{ fontSize: "12px", marginTop: "6px", color: "#aab" }}>
+                          {lang === "ko" ? "다른 키워드로 검색하거나 아래 메뉴를 이용하세요." : "Try a different keyword or browse the menu below."}
+                        </div>
+                      </div>
+                    )}
+                    {/* 결과 없거나 있어도 아래 카드 그리드 유지 */}
+                    <div style={{ marginTop: "1.25rem", borderTop: "1px solid #e4eaf6", paddingTop: "1rem" }}>
+                      <div style={{ fontSize: "12px", color: "#99a", marginBottom: "10px" }}>
+                        {lang === "ko" ? "또는 메뉴에서 선택하세요" : "Or browse by category"}
+                      </div>
+                      <div className="service-grid">
+                        {services.map((s: any) => (
+                          <button
                               key={s.id}
                               className="service-card"
                               style={{
-                                "--sc-accent":
-                                  (SERVICE_COLORS as any)[
-                                    s.id
-                                      .replace("_start", "")
-                                      .replace("_en", "")
-                                  ] ?? "#003478",
-                              } as React.CSSProperties }
+                                "--sc-accent": (SERVICE_COLORS as any)[
+                                  s.id.replace("_start", "").replace("_en", "")
+                                ] ?? "#003478",
+                              } as React.CSSProperties}
                               onClick={() => {
                                 setSearchQuery("");
                                 goTo(s.id);
-                              }}
-                            >
-                              <div className="sc-header">
-                                <div className="sc-icon-box">{s.icon}</div>
-                                <div className="sc-title">{s.title}</div>
-                              </div>
-                              <div className="sc-desc">{s.desc}</div>
-                              <div className="sc-arrow">›</div>
-                            </button>
-                          ))}
-                        </div>
+                              }}>
+                            <div className="sc-header">
+                              <div className="sc-icon-box">{s.icon}</div>
+                              <div className="sc-title">{s.title}</div>
+                            </div>
+                            <div className="sc-desc">{s.desc}</div>
+                            <div className="sc-arrow">›</div>
+                          </button>
+                        ))}
                       </div>
                     </div>
-                  ) : (
-                    /* 검색어 없을 때 기본 카드 그리드 */
-                    <div className="service-grid">
-                      {services.map((s:any) => (
-                        <button
-                          key={s.id}
-                          className="service-card"
-                          style={{
-                            "--sc-accent":
-                              (SERVICE_COLORS as any)[
-                                s.id.replace("_start", "").replace("_en", "")
-                              ] ?? "#003478",
-                          }as React.CSSProperties}
-                          onClick={() => goTo(s.id)}
-                        >
-                          <div className="sc-header">
-                            <div className="sc-icon-box">{s.icon}</div>
-                            <div className="sc-title">{s.title}</div>
-                          </div>
-                          <div className="sc-desc">{s.desc}</div>
-                          <div className="sc-arrow">›</div>
-                        </button>
-                      ))}
-                    </div>
-                  )}
-
-                  <div className="info-banner">
-                    <strong>
-                      {lang === "ko"
-                        ? "📍 주토론토 대한민국 총영사관"
-                        : "📍 Consulate General of the Republic of Korea in Toronto"}
-                    </strong>
-                    <br />
-                    555 Avenue Road, Toronto, ON M4V 2J7
-                    <br />
-                    {lang === "ko"
-                      ? "민원실: 09:00–12:00 / 13:00–16:30 (월–금)"
-                      : "Consular Hours: 9:00–12:00 / 13:00–16:30 (Mon–Fri)"}
-                    <div className="updated-note">
-                      {lang === "ko"
-                        ? `※ 정보 기준: ${LAST_UPDATED}`
-                        : `※ Information as of ${LAST_UPDATED}`}
-                    </div>
                   </div>
-                </>
-              );
-            })()}
+                ) : (
+                  /* 검색어 없을 때 기본 카드 그리드 */
+                  <div className="service-grid">
+                    {services.map((s: any) => (
+                      <button
+                        key={s.id}
+                        className="service-card"
+                        style={{
+                          "--sc-accent": (SERVICE_COLORS as any)[
+                            s.id.replace("_start", "").replace("_en", "")
+                          ] ?? "#003478",
+                        } as React.CSSProperties}
+                        onClick={() => goTo(s.id)}>
+                        <div className="sc-header">
+                          <div className="sc-icon-box">{s.icon}</div>
+                          <div className="sc-title">{s.title}</div>
+                        </div>
+                        <div className="sc-desc">{s.desc}</div>
+                        <div className="sc-arrow">›</div>
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="info-banner">
+                  <strong>
+                    {lang === "ko" ? "📍 주토론토 대한민국 총영사관" : "📍 Consulate General of the Republic of Korea in Toronto"}
+                  </strong>
+                  <br />
+                  555 Avenue Road, Toronto, ON M4V 2J7
+                  <br />
+                  {lang === "ko" ? "민원실: 09:00–12:00 / 13:00–16:30 (월–금)" : "Consular Hours: 9:00–12:00 / 13:00–16:30 (Mon–Fri)"}
+                  <div className="updated-note">
+                    {lang === "ko" ? `※ 정보 기준: ${LAST_UPDATED}` : `※ Information as of ${LAST_UPDATED}`}
+                  </div>
+                </div>
+              </>
+            );
+          })()}
 
           {/* FAQ */}
           {page.type === "faq" && (
             <div>
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  marginBottom: "1.2rem",
-                }}
-              >
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1.2rem" }}>
                 <div style={{ fontSize: "28px" }}>❓</div>
                 <div>
-                  <div
-                    style={{
-                      fontSize: "20px",
-                      fontWeight: 700,
-                      color: "#1a1a2e",
-                    }}
-                  >
+                  <div style={{ fontSize: "20px", fontWeight: 700, color: "#1a1a2e" }}>
                     {lang === "ko" ? page.title : page.title_en}
                   </div>
-                  <div
-                    style={{
-                      fontSize: "12.5px",
-                      color: "#889",
-                      marginTop: "2px",
-                    }}
-                  >
-                    {lang === "ko"
-                      ? "클릭하면 답변이 펼쳐집니다."
-                      : "Click a question to see the answer."}
+                  <div style={{ fontSize: "12.5px", color: "#889", marginTop: "2px" }}>
+                    {lang === "ko" ? "클릭하면 답변이 펼쳐집니다." : "Click a question to see the answer."}
                   </div>
                 </div>
               </div>
-              {(page.items ?? []).map((item:any, i:any) => (
+              {(page.items ?? []).map((item: any, i: number) => (
                 <div key={i} className="faq-item">
                   <button
                     className={`faq-question ${openFaq === i ? "open" : ""}`}
                     onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   >
                     <span>{lang === "ko" ? item.q : item.q_en}</span>
-                    <span
-                      className={`faq-chevron ${openFaq === i ? "open" : ""}`}
-                    >
-                      ▼
-                    </span>
+                    <span className={`faq-chevron ${openFaq === i ? "open" : ""}`}>▼</span>
                   </button>
                   {openFaq === i && (
                     <div className="faq-answer">
@@ -9474,14 +5935,7 @@ function AppInner() {
                   )}
                 </div>
               ))}
-              <div
-                style={{
-                  marginTop: "1rem",
-                  fontSize: "12px",
-                  color: "#99a",
-                  textAlign: "center",
-                }}
-              >
+              <div style={{ marginTop: "1rem", fontSize: "12px", color: "#99a", textAlign: "center" }}>
                 {lang === "ko"
                   ? "더 궁금한 사항은 영사관(416-920-3809)으로 문의하세요."
                   : "For further inquiries, contact the Consulate at 416-920-3809."}
@@ -9493,30 +5947,17 @@ function AppInner() {
           {page.type === "question" && (
             <div className="question-section">
               {page.service && (
-                <div
-                  className="service-chip"
-                  style={{ "--chip-color": serviceColor } as React.CSSProperties}
-                >
-                  {services.find((s:any) => s.id === page.service + "_start")
-                    ?.icon ??
-                    services.find((s:any) => s.id.startsWith(page.service))?.icon ??
-                    "🔹"}{" "}
-                  {services.find((s:any) => s.id === page.service + "_start")
-                    ?.title ??
-                    services.find((s:any) => s.id.startsWith(page.service))
-                      ?.title ??
-                    page.service}
+                <div className="service-chip" style={{ "--chip-color": serviceColor } as React.CSSProperties}>
+                  {services.find(s => s.id === page.service + "_start")?.icon ?? services.find(s => s.id.startsWith(page.service))?.icon ?? "🔹"}
+                  {" "}
+                  {services.find(s => s.id === page.service + "_start")?.title ?? services.find(s => s.id.startsWith(page.service))?.title ?? page.service}
                 </div>
               )}
               <div className="q-title">{page.question ?? ""}</div>
               {page.sub && <div className="q-sub">{page.sub}</div>}
               <div className="option-list">
-                {pageOptions.map((opt:any) => (
-                  <button
-                    key={opt.id}
-                    className="option-card"
-                    onClick={() => goTo(opt.id)}
-                  >
+                {pageOptions.map((opt: any) => (
+                  <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)}>
                     <div className="oc-icon-box">{opt.icon ?? ""}</div>
                     <div className="oc-content">
                       <div className="oc-title">{opt.title ?? ""}</div>
@@ -9530,480 +5971,245 @@ function AppInner() {
           )}
 
           {/* RESULT */}
-          {page.type === "result" &&
-            (() => {
-              const svcIcon =
-                services.find(
-                  (s:any) =>
-                    s.id === page.service + "_start" ||
-                    s.id.startsWith(page.service ?? "")
-                )?.icon ?? "";
-              const mainDocs = pageDocs.filter(
-                (d:any) => typeof d === "string" && !d.trim().startsWith("▸")
-              );
-              const extraDocs = pageDocs.filter(
-                (d:any) => typeof d === "string" && d.trim().startsWith("▸")
-              );
-              return (
-                <div>
-                  <div
-                    className="result-badge"
-                    style={{ background: serviceColor, marginBottom: "10px" }}
-                  >
-                    {lang === "ko" ? "✓ 안내 결과" : "✓ Result"}
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "10px",
-                      marginBottom: "4px",
-                    }}
-                  >
-                    {svcIcon && (
-                      <span
-                        style={{
-                          fontSize: "28px",
-                          lineHeight: 1,
-                          flexShrink: 0,
-                        }}
-                      >
-                        {svcIcon}
-                      </span>
-                    )}
-                    <div
-                      className="result-title"
-                      style={{ fontSize: "21px", marginBottom: 0 }}
-                    >
-                      {page.title ?? ""}
-                    </div>
-                  </div>
-                  <div className="result-sub">
-                    {lang === "ko"
-                      ? "방문 전 아래 서류를 준비해 주세요."
-                      : "Prepare the following documents before your visit."}
-                  </div>
+          {page.type === "result" && (() => {
+            const svcIcon = services.find(s => s.id === (page.service + "_start") || s.id.startsWith(page.service ?? ""))?.icon ?? "";
+            const mainDocs = pageDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("▸"));
+            const extraDocs = pageDocs.filter((d: any) => typeof d === "string" && d.trim().startsWith("▸"));
+            return (
+            <div>
+              <div className="result-badge" style={{ background: serviceColor, marginBottom: "10px" }}>
+                {lang === "ko" ? "✓ 안내 결과" : "✓ Result"}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
+                {svcIcon && <span style={{ fontSize: "28px", lineHeight: 1, flexShrink: 0 }}>{svcIcon}</span>}
+                <div className="result-title" style={{ fontSize: "21px", marginBottom: 0 }}>{page.title ?? ""}</div>
+              </div>
+              <div className="result-sub">
+                {lang === "ko" ? "방문 전 아래 서류를 준비해 주세요." : "Prepare the following documents before your visit."}
+              </div>
 
-                  <div className="info-card">
-                    <div className="info-card-header">
-                      <span className="info-card-icon">📂</span>
-                      <span className="info-card-title">
-                        {lang === "ko" ? "필요 서류" : "Required Documents"}
-                      </span>
-                      {mainDocs.length > 0 && (
-                        <span className="info-card-count">
-                          {mainDocs.length}
-                          {lang === "ko" ? "개" : ""}
-                        </span>
-                      )}
+              <div className="info-card">
+                <div className="info-card-header">
+                  <span className="info-card-icon">📂</span>
+                  <span className="info-card-title">{lang === "ko" ? "필요 서류" : "Required Documents"}</span>
+                  {mainDocs.length > 0 && <span className="info-card-count">{mainDocs.length}{lang === "ko" ? "개" : ""}</span>}
+                </div>
+                <div className="info-card-body">
+                  {mainDocs.map((doc: any, i: number) => (
+                    <div key={i} className="doc-item">
+                      <div className="doc-num">{i + 1}</div>
+                      <span style={{ fontWeight: 500 }}>{doc}</span>
                     </div>
-                    <div className="info-card-body">
-                      {mainDocs.map((doc:any, i:any) => (
-                        <div key={i} className="doc-item">
-                          <div className="doc-num">{i + 1}</div>
-                          <span style={{ fontWeight: 500 }}>{doc}</span>
+                  ))}
+                  {extraDocs.length > 0 && (
+                    <>
+                      <div style={{ fontSize: "11px", fontWeight: 700, color: "#889", textTransform: "uppercase", letterSpacing: "0.05em", margin: "10px 0 4px", paddingTop: "8px", borderTop: "1px solid #f0f2f7" }}>
+                        {lang === "ko" ? "해당자 추가 서류" : "Additional (if applicable)"}
+                      </div>
+                      {extraDocs.map((doc: any, i: number) => (
+                        <div key={i} className="doc-item" style={{ opacity: 0.75 }}>
+                          <span className="doc-bullet" style={{ color: "#aab" }}>▸</span>
+                          <span style={{ fontSize: "12px" }}>{doc.replace(/^▸\s*/, "")}</span>
                         </div>
                       ))}
-                      {extraDocs.length > 0 && (
-                        <>
-                          <div
-                            style={{
-                              fontSize: "11px",
-                              fontWeight: 700,
-                              color: "#889",
-                              textTransform: "uppercase",
-                              letterSpacing: "0.05em",
-                              margin: "10px 0 4px",
-                              paddingTop: "8px",
-                              borderTop: "1px solid #f0f2f7",
-                            }}
-                          >
-                            {lang === "ko"
-                              ? "해당자 추가 서류"
-                              : "Additional (if applicable)"}
-                          </div>
-                          {extraDocs.map((doc:any, i:any) => (
-                            <div
-                              key={i}
-                              className="doc-item"
-                              style={{ opacity: 0.75 }}
-                            >
-                              <span
-                                className="doc-bullet"
-                                style={{ color: "#aab" }}
-                              >
-                                ▸
-                              </span>
-                              <span style={{ fontSize: "12px" }}>
-                                {doc.replace(/^▸\s*/, "")}
-                              </span>
-                            </div>
-                          ))}
-                        </>
-                      )}
-                    </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
+                <div className="info-card" style={{ marginBottom: 0 }}>
+                  <div className="info-card-header">
+                    <span className="info-card-icon">💰</span>
+                    <span className="info-card-title">{lang === "ko" ? "수수료" : "Fee"}</span>
                   </div>
-
-                  <div
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1fr 1fr",
-                      gap: "10px",
-                      marginBottom: "12px",
-                    }}
-                  >
-                    <div className="info-card" style={{ marginBottom: 0 }}>
-                      <div className="info-card-header">
-                        <span className="info-card-icon">💰</span>
-                        <span className="info-card-title">
-                          {lang === "ko" ? "수수료" : "Fee"}
-                        </span>
+                  <div className="info-card-body">
+                    {pageCosts.map((c: any, i: number) => (
+                      <div key={i} className="cost-row">
+                        <span className="cost-label" style={{ fontSize: "12px" }}>{c.label ?? ""}</span>
+                        <span className="cost-value">{c.value ?? ""}</span>
                       </div>
-                      <div className="info-card-body">
-                        {pageCosts.map((c:any, i:any) => (
-                          <div key={i} className="cost-row">
-                            <span
-                              className="cost-label"
-                              style={{ fontSize: "12px" }}
-                            >
-                              {c.label ?? ""}
-                            </span>
-                            <span className="cost-value">{c.value ?? ""}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="info-card" style={{ marginBottom: 0 }}>
-                      <div className="info-card-header">
-                        <span className="info-card-icon">⏱️</span>
-                        <span className="info-card-title">
-                          {lang === "ko" ? "소요 시간" : "Processing Time"}
-                        </span>
-                      </div>
-                      <div className="info-card-body">
-                        <div
-                          style={{
-                            fontSize: "13px",
-                            color: "#003478",
-                            fontWeight: 600,
-                            lineHeight: "1.5",
-                          }}
-                        >
-                          {page.time ?? ""}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {pageNotices.length > 0 && (
-                    <div className="info-card">
-                      <div className="info-card-header">
-                        <span className="info-card-icon">⚠️</span>
-                        <span className="info-card-title">
-                          {lang === "ko" ? "주의사항" : "Important Notes"}
-                        </span>
-                      </div>
-                      <div className="info-card-body">
-                        {pageNotices.map((n:any, i:any) => {
-                          const text = typeof n === "string" ? n : "";
-                          const isWarn = text.startsWith("⚠️");
-                          return (
-                            <div
-                              key={i}
-                              className={`notice-item${isWarn ? " warn" : ""}`}
-                            >
-                              <span className="notice-icon">
-                                {isWarn ? "" : "•"}
-                              </span>
-                              <span>{text}</span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {page.postalInfo && (
-                    <div className="info-box">
-                      <span>📮</span>
-                      <div>
-                        <strong>
-                          {lang === "ko" ? "우편 신청 주소" : "Postal Address"}
-                        </strong>
-                        <br />
-                        {(page.postalInfo ?? "").split("\n").map((l:any, i:any) => (
-                          <span key={i}>
-                            {l}
-                            <br />
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {page.emailContact && (
-                    <div className="info-box">
-                      <span>📧</span>
-                      <div>
-                        {lang === "ko" ? "이메일 신청:" : "Email Application:"}{" "}
-                        <a
-                          href={`mailto:${page.emailContact}`}
-                          style={{ color: "#003478", fontWeight: 600 }}
-                        >
-                          {page.emailContact}
-                        </a>
-                      </div>
-                    </div>
-                  )}
-
-                  {page.onlineRenewal && (
-                    <div className="highlight-box">
-                      <span>💡</span>
-                      <div>
-                        <strong>
-                          {lang === "ko"
-                            ? "온라인 재발급도 가능합니다"
-                            : "Online Renewal Available"}
-                        </strong>
-                        <br />
-                        {lang === "ko"
-                          ? "기존 전자여권 소지자는 공동인증서로 온라인 신청 가능."
-                          : "Existing e-passport holders can apply online with a Gong-dong Certificate."}{" "}
-                        <a
-                          href={page.onlineRenewal}
-                          target="_blank"
-                          rel="noreferrer"
-                          style={{ color: "#7a5000" }}
-                        >
-                          {lang === "ko" ? "자세히 보기 →" : "Learn more →"}
-                        </a>
-                      </div>
-                    </div>
-                  )}
-
-                  {page.onlineLink && (
-                    <div className="highlight-box">
-                      <span>💡</span>
-                      <div>
-                        <strong>
-                          {lang === "ko"
-                            ? "온라인 신청 / 바로가기"
-                            : "Online Application / Link"}
-                        </strong>
-                        <br />
-                        <a
-                          href={page.onlineLink}
-                          target="_blank"
-                          rel="noreferrer"
-                          style={{ color: "#7a5000" }}
-                        >
-                          {lang === "ko" ? "바로가기 →" : "Go →"}
-                        </a>
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="booking-sticky">
-                    {page.booking ? (
-                      <>
-                        <button
-                          className="booking-btn"
-                          onClick={() => setShowBookingModal(true)}
-                        >
-                          📅{" "}
-                          {page.bookingLabel ??
-                            (lang === "ko"
-                              ? "사전 예약하기 (torbooking.com) →"
-                              : "Book Appointment (torbooking.com) →")}
-                        </button>
-                        <a
-                          href="https://overseas.mofa.go.kr/ca-toronto-ko/index.do"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="booking-secondary"
-                        >
-                          {lang === "ko"
-                            ? "총영사관 홈페이지 →"
-                            : "Official Consulate Website →"}
-                        </a>
-                      </>
-                    ) : (
-                      <div
-                        style={{
-                          background: "#e8eef7",
-                          border: "1px solid #b8caea",
-                          borderRadius: "10px",
-                          padding: "12px 14px",
-                          fontSize: "13px",
-                          color: "#223",
-                          marginTop: "4px",
-                        }}
-                      >
-                        {lang === "ko"
-                          ? "📧 이메일 신청 가능: 방문 예약 불필요"
-                          : "📧 Email application available — no appointment needed"}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* 예약 모달 */}
-                  {showBookingModal &&
-                    page.booking &&
-                    (() => {
-                      const checkDocs = pageDocs.filter(
-                        (d:any) =>
-                          typeof d === "string" && !d.trim().startsWith("▸")
-                      );
-                      return (
-                        <div
-                          className="modal-overlay"
-                          onClick={(e) => {
-                            if (e.target === e.currentTarget)
-                              setShowBookingModal(false);
-                          }}
-                        >
-                          <div className="modal-sheet">
-                            <div className="modal-handle" />
-                            <div className="modal-header">
-                              <div className="modal-title">
-                                {lang === "ko"
-                                  ? "✅ 예약 전 서류 확인"
-                                  : "✅ Check Before Booking"}
-                              </div>
-                              <div className="modal-sub">
-                                {lang === "ko"
-                                  ? "아래 서류를 모두 준비하셨나요? 확인 후 예약 페이지로 이동합니다."
-                                  : "Please confirm you have all the required documents before proceeding."}
-                              </div>
-                            </div>
-                            <div className="modal-body">
-                              {checkDocs.length > 0 && (
-                                <div className="modal-checklist">
-                                  {checkDocs.slice(0, 6).map((doc:any, i:any) => (
-                                    <div key={i} className="modal-check-item">
-                                      <div className="modal-check-num">
-                                        {i + 1}
-                                      </div>
-                                      <span>{doc}</span>
-                                    </div>
-                                  ))}
-                                  {checkDocs.length > 6 && (
-                                    <div
-                                      style={{
-                                        fontSize: "12px",
-                                        color: "#889",
-                                        textAlign: "center",
-                                        padding: "4px",
-                                      }}
-                                    >
-                                      {lang === "ko"
-                                        ? `외 ${
-                                            checkDocs.length - 6
-                                          }개 서류 — 위 결과 페이지에서 전체 확인`
-                                        : `+ ${
-                                            checkDocs.length - 6
-                                          } more — see full list above`}
-                                    </div>
-                                  )}
-                                </div>
-                              )}
-                              <div className="modal-notice">
-                                ⚠️{" "}
-                                {lang === "ko"
-                                  ? "예약 1건 = 업무 1건 기준입니다. 예) 엄마 + 자녀 2명 여권 신청 → 3자리 예약 필요. 예약 시간 15분 전 도착 권장."
-                                  : "1 booking slot = 1 service. E.g. mother + 2 children's passports = 3 slots. Arrive 15 min before your appointment."}
-                              </div>
-                            </div>
-                            <div className="modal-footer">
-                              <a
-                                href={page.booking}
-                                target="_blank"
-                                rel="noreferrer"
-                                className="modal-confirm-btn"
-                                onClick={() => setShowBookingModal(false)}
-                              >
-                                {lang === "ko"
-                                  ? "준비 완료 — 예약 페이지로 이동 →"
-                                  : "Ready — Go to Booking Page →"}
-                              </a>
-                              <button
-                                className="modal-cancel-btn"
-                                onClick={() => setShowBookingModal(false)}
-                              >
-                                {lang === "ko"
-                                  ? "닫기 (서류 다시 확인)"
-                                  : "Close (check documents again)"}
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })()}
-
-                  <div
-                    style={{
-                      marginTop: "16px",
-                      fontSize: "12px",
-                      color: "#889",
-                      textAlign: "center",
-                      lineHeight: "1.6",
-                    }}
-                  >
-                    {lang === "ko"
-                      ? "※ 안내 내용은 참고용입니다. 중요한 사항은 반드시 총영사관(416-920-3809)에 확인하세요."
-                      : "※ This is for reference only. Please confirm important matters with the Consulate (416-920-3809)."}
-                  </div>
-
-                  {/* 양식 다운로드 + 인쇄 버튼 */}
-                  <div
-                    style={{ display: "flex", gap: "8px", marginTop: "12px" }}
-                  >
-                    <a
-                      href="https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5396/list.do"
-                      target="_blank"
-                      rel="noreferrer"
-                      style={{
-                        flex: 1,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "6px",
-                        background: "#fff",
-                        border: "1px solid #dde3ef",
-                        borderRadius: "10px",
-                        padding: "10px",
-                        fontSize: "13px",
-                        color: "#445",
-                        textDecoration: "none",
-                        fontWeight: 500,
-                      }}
-                    >
-                      📥 {lang === "ko" ? "양식 다운로드" : "Download Forms"}
-                    </a>
-                    <button
-                      onClick={() => window.print()}
-                      style={{
-                        flex: 1,
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "6px",
-                        background: "#fff",
-                        border: "1px solid #dde3ef",
-                        borderRadius: "10px",
-                        padding: "10px",
-                        fontSize: "13px",
-                        color: "#445",
-                        cursor: "pointer",
-                        fontWeight: 500,
-                      }}
-                    >
-                      🖨️ {lang === "ko" ? "인쇄하기" : "Print"}
-                    </button>
+                    ))}
                   </div>
                 </div>
-              );
-            })()}
+                <div className="info-card" style={{ marginBottom: 0 }}>
+                  <div className="info-card-header">
+                    <span className="info-card-icon">⏱️</span>
+                    <span className="info-card-title">{lang === "ko" ? "소요 시간" : "Processing Time"}</span>
+                  </div>
+                  <div className="info-card-body">
+                    <div style={{ fontSize: "13px", color: "#003478", fontWeight: 600, lineHeight: "1.5" }}>{page.time ?? ""}</div>
+                  </div>
+                </div>
+              </div>
+
+              {pageNotices.length > 0 && (
+                <div className="info-card">
+                  <div className="info-card-header">
+                    <span className="info-card-icon">⚠️</span>
+                    <span className="info-card-title">{lang === "ko" ? "주의사항" : "Important Notes"}</span>
+                  </div>
+                  <div className="info-card-body">
+                    {pageNotices.map((n: any, i: number) => {
+                      const text = typeof n === "string" ? n : "";
+                      const isWarn = text.startsWith("⚠️");
+                      return (
+                        <div key={i} className={`notice-item${isWarn ? " warn" : ""}`}>
+                          <span className="notice-icon">{isWarn ? "" : "•"}</span>
+                          <span>{text}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {page.postalInfo && (
+                <div className="info-box">
+                  <span>📮</span>
+                  <div>
+                    <strong>{lang === "ko" ? "우편 신청 주소" : "Postal Address"}</strong><br />
+                    {(page.postalInfo ?? "").split("\n").map((l: any, i: number) => <span key={i}>{l}<br /></span>)}
+                  </div>
+                </div>
+              )}
+
+              {page.emailContact && (
+                <div className="info-box">
+                  <span>📧</span>
+                  <div>
+                    {lang === "ko" ? "이메일 신청:" : "Email Application:"}{" "}
+                    <a href={`mailto:${page.emailContact}`} style={{ color: "#003478", fontWeight: 600 }}>{page.emailContact}</a>
+                  </div>
+                </div>
+              )}
+
+              {page.onlineRenewal && (
+                <div className="highlight-box">
+                  <span>💡</span>
+                  <div>
+                    <strong>{lang === "ko" ? "온라인 재발급도 가능합니다" : "Online Renewal Available"}</strong><br />
+                    {lang === "ko" ? "기존 전자여권 소지자는 공동인증서로 온라인 신청 가능." : "Existing e-passport holders can apply online with a Gong-dong Certificate."}{" "}
+                    <a href={page.onlineRenewal} target="_blank" rel="noreferrer" style={{ color: "#7a5000" }}>
+                      {lang === "ko" ? "자세히 보기 →" : "Learn more →"}
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              {page.onlineLink && (
+                <div className="highlight-box">
+                  <span>💡</span>
+                  <div>
+                    <strong>{lang === "ko" ? "온라인 신청 / 바로가기" : "Online Application / Link"}</strong><br />
+                    <a href={page.onlineLink} target="_blank" rel="noreferrer" style={{ color: "#7a5000" }}>
+                      {lang === "ko" ? "바로가기 →" : "Go →"}
+                    </a>
+                  </div>
+                </div>
+              )}
+
+              <div className="booking-sticky">
+              {page.booking ? (
+                <>
+                  <button className="booking-btn" onClick={() => setShowBookingModal(true)}>
+                    📅 {page.bookingLabel ?? (lang === "ko" ? "사전 예약하기 (torbooking.com) →" : "Book Appointment (torbooking.com) →")}
+                  </button>
+                  <a href="https://overseas.mofa.go.kr/ca-toronto-ko/index.do" target="_blank" rel="noreferrer" className="booking-secondary">
+                    {lang === "ko" ? "총영사관 홈페이지 →" : "Official Consulate Website →"}
+                  </a>
+                </>
+              ) : (
+                <div style={{ background: "#e8eef7", border: "1px solid #b8caea", borderRadius: "10px", padding: "12px 14px", fontSize: "13px", color: "#223", marginTop: "4px" }}>
+                  {lang === "ko" ? "📧 이메일 신청 가능: 방문 예약 불필요" : "📧 Email application available — no appointment needed"}
+                </div>
+              )}
+              </div>
+
+              {/* 예약 모달 */}
+              {showBookingModal && page.booking && (() => {
+                const checkDocs = pageDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("▸"));
+                return (
+                  <div className="modal-overlay" onClick={e => { if (e.target === e.currentTarget) setShowBookingModal(false); }}>
+                    <div className="modal-sheet">
+                      <div className="modal-handle" />
+                      <div className="modal-header">
+                        <div className="modal-title">
+                          {lang === "ko" ? "✅ 예약 전 서류 확인" : "✅ Check Before Booking"}
+                        </div>
+                        <div className="modal-sub">
+                          {lang === "ko"
+                            ? "아래 서류를 모두 준비하셨나요? 확인 후 예약 페이지로 이동합니다."
+                            : "Please confirm you have all the required documents before proceeding."}
+                        </div>
+                      </div>
+                      <div className="modal-body">
+                        {checkDocs.length > 0 && (
+                          <div className="modal-checklist">
+                            {checkDocs.slice(0, 6).map((doc: any, i: number) => (
+                              <div key={i} className="modal-check-item">
+                                <div className="modal-check-num">{i + 1}</div>
+                                <span>{doc}</span>
+                              </div>
+                            ))}
+                            {checkDocs.length > 6 && (
+                              <div style={{ fontSize: "12px", color: "#889", textAlign: "center", padding: "4px" }}>
+                                {lang === "ko" ? `외 ${checkDocs.length - 6}개 서류 — 위 결과 페이지에서 전체 확인` : `+ ${checkDocs.length - 6} more — see full list above`}
+                              </div>
+                            )}
+                          </div>
+                        )}
+                        <div className="modal-notice">
+                          ⚠️ {lang === "ko"
+                            ? "예약 1건 = 업무 1건 기준입니다. 예) 엄마 + 자녀 2명 여권 신청 → 3자리 예약 필요. 예약 시간 15분 전 도착 권장."
+                            : "1 booking slot = 1 service. E.g. mother + 2 children's passports = 3 slots. Arrive 15 min before your appointment."}
+                        </div>
+                      </div>
+                      <div className="modal-footer">
+                        <a
+                          href={page.booking}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="modal-confirm-btn"
+                          onClick={() => setShowBookingModal(false)}
+                        >
+                          {lang === "ko" ? "준비 완료 — 예약 페이지로 이동 →" : "Ready — Go to Booking Page →"}
+                        </a>
+                        <button className="modal-cancel-btn" onClick={() => setShowBookingModal(false)}>
+                          {lang === "ko" ? "닫기 (서류 다시 확인)" : "Close (check documents again)"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })()}
+
+              <div style={{ marginTop: "16px", fontSize: "12px", color: "#889", textAlign: "center", lineHeight: "1.6" }}>
+                {lang === "ko"
+                  ? "※ 안내 내용은 참고용입니다. 중요한 사항은 반드시 총영사관(416-920-3809)에 확인하세요."
+                  : "※ This is for reference only. Please confirm important matters with the Consulate (416-920-3809)."}
+              </div>
+
+              {/* 양식 다운로드 + 인쇄 버튼 */}
+              <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>
+                <a
+                  href="https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5396/list.do"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", background: "#fff", border: "1px solid #dde3ef", borderRadius: "10px", padding: "10px", fontSize: "13px", color: "#445", textDecoration: "none", fontWeight: 500 }}
+                >
+                  📥 {lang === "ko" ? "양식 다운로드" : "Download Forms"}
+                </a>
+                <button
+                  onClick={() => window.print()}
+                  style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", background: "#fff", border: "1px solid #dde3ef", borderRadius: "10px", padding: "10px", fontSize: "13px", color: "#445", cursor: "pointer", fontWeight: 500 }}
+                >
+                  🖨️ {lang === "ko" ? "인쇄하기" : "Print"}
+                </button>
+              </div>
+            </div>
+            );
+          })()}
         </main>
 
         {/* FOOTER */}
@@ -10012,17 +6218,11 @@ function AppInner() {
             ? "주토론토 대한민국 총영사관 · 555 Avenue Road, Toronto, ON M4V 2J7"
             : "Consulate General of the Republic of Korea in Toronto · 555 Avenue Road, Toronto, ON M4V 2J7"}
           <br />
-          Tel: 416-920-3809 ·{" "}
-          {lang === "ko" ? "긴급: 416-994-4490" : "Emergency: 416-994-4490"}
+          Tel: 416-920-3809 · {lang === "ko" ? "긴급: 416-994-4490" : "Emergency: 416-994-4490"}
           <br />
-          <a
-            href="https://overseas.mofa.go.kr/ca-toronto-ko/index.do"
-            target="_blank"
-            rel="noreferrer"
-          >
+          <a href="https://overseas.mofa.go.kr/ca-toronto-ko/index.do" target="_blank" rel="noreferrer">
             {lang === "ko" ? "공식 홈페이지" : "Official Website"}
-          </a>{" "}
-          ·{" "}
+          </a>{" "}·{" "}
           <a href="https://www.torbooking.com" target="_blank" rel="noreferrer">
             {lang === "ko" ? "사전 예약" : "Book Appointment"}
           </a>

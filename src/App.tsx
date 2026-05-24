@@ -5534,20 +5534,22 @@ export default function App() {
 }
 
 function AppInner() {
-  const [pageId, setPageId] = useState("home");
+   const [pageId, setPageId] = useState("home");
   const [history, setHistory] = useState(["home"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [openFaq, setOpenFaq] = useState<any>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   const [lang, setLang] = useState(() => {
-    const nav = navigator.language || navigator.userLanguage || "";
+    // ⭕ navigator를 'as any'로 형변환하여 TypeScript 에러를 방지합니다.
+    const nav = navigator.language || (navigator as any).userLanguage || "";
     const langs = Array.isArray(navigator.languages) && navigator.languages.length > 0
       ? navigator.languages
       : [nav];
     const isKorean = langs.some((l: any) => l.toLowerCase().startsWith("ko"));
     return isKorean ? "ko" : "en";
   });
+
 
   const page = TREE[pageId] ?? { type: "home" };
 

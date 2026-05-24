@@ -5479,7 +5479,7 @@ const TREE = {
 // result 노드 전체를 미리 인덱싱 (title + breadcrumb + docs + notices)
 const SEARCH_INDEX = Object.entries(TREE)
   .filter(([, node]) => node.type === "result")
-  .map(([\1, \2]: [any, any]) => {
+  .map(([id, node]: [any, any])  => {
     const text = [
       node.title ?? "",
       ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : []),

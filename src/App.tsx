@@ -3040,7 +3040,7 @@ const TREE = {
     service: "cert",
     breadcrumb: ["홈", "인증서"],
     question: "어떤 인증서가 필요하신가요?",
-    sub: "테스트",
+    sub: "__CERT_COMPARISON__",
     comparisonCard: [
       {
         icon: "📱",
@@ -6256,11 +6256,14 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 </div>
               )}
               <div className="q-title">{page.question ?? ""}</div>
-              {page.sub && <div className="q-sub">{page.sub}</div>}
-              {(() => { const cc = (page as any).comparisonCard; return cc && cc.length > 0 ? (
+              {page.sub === "__CERT_COMPARISON__" ? (
                 <div style={{ marginBottom: "1rem" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "10px", marginBottom: "10px" }}>
-                    {cc.map((item: any) => (
+                    {[
+                      { icon: "📱", title: "간편인증서", visit: false, visitLabel: "영사관 방문 불필요", features: [{ ok: true, text: "앱에서 비대면 발급" }, { ok: true, text: "공공서비스 190개" }, { ok: false, text: "인터넷뱅킹 불가" }, { ok: null, text: "앱별 유효기간" }, { ok: null, text: "앱 내 저장" }] },
+                      { icon: "🔐", title: "공동인증서", visit: true, visitLabel: "영사관 방문 1회", features: [{ ok: true, text: "행정+금융+전자상거래" }, { ok: true, text: "사용처 가장 넓음" }, { ok: true, text: "인터넷뱅킹 가능" }, { ok: null, text: "1년마다 직접 갱신" }, { ok: null, text: "PC/USB 저장" }] },
+                      { icon: "🏦", title: "금융인증서", visit: true, visitLabel: "영사관 방문 1회", features: [{ ok: true, text: "금융+공공서비스" }, { ok: true, text: "인터넷뱅킹 가능" }, { ok: true, text: "3년 자동갱신" }, { ok: null, text: "클라우드 저장" }, { ok: null, text: "기기 이동 자유" }] },
+                    ].map((item) => (
                       <div key={item.title} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "0.875rem" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
                           <span style={{ fontSize: "18px" }}>{item.icon}</span>
@@ -6268,7 +6271,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         </div>
                         <div style={{ display: "inline-block", background: item.visit ? "var(--color-background-warning)" : "var(--color-background-success)", color: item.visit ? "var(--color-text-warning)" : "var(--color-text-success)", fontSize: "11px", padding: "2px 8px", borderRadius: "var(--border-radius-md)", marginBottom: "10px" }}>{item.visitLabel}</div>
                         <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "12px", color: "var(--color-text-secondary)", display: "flex", flexDirection: "column", gap: "5px" }}>
-                          {item.features.map((f: any, i: number) => (
+                          {item.features.map((f, i) => (
                             <li key={i} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
                               <span style={{ color: f.ok === true ? "var(--color-text-success)" : f.ok === false ? "var(--color-text-danger)" : "var(--color-text-secondary)", fontSize: "12px" }}>{f.ok === true ? "✓" : f.ok === false ? "✕" : "·"}</span>
                               <span>{f.text}</span>
@@ -6286,7 +6289,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     <span>⚠️ 세 가지 모두 주민등록번호 필수</span>
                   </div>
                 </div>
-              ) : null; })()}
+              ) : page.sub ? (
+                <div className="q-sub">{page.sub}</div>
+              ) : null}
               <div className="option-list">
                 {pageOptions.map((opt: any) => (
                   <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)}>

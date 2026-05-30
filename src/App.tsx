@@ -3455,7 +3455,6 @@ const TREE = {
       { id: "notarization_saseo", icon: "📜", title: "사서증서 인증 (서명 인증)", desc: "위임장·진술서·상속포기서·계약서 등 서명·날인 인증" },
       { id: "notarization_ingam", icon: "🔏", title: "인감 관련 공증", desc: "인감증명서 발급 위임장·인감신고서·인감변경신고서" },
       { id: "notarization_translation", icon: "🌐", title: "번역 공증", desc: "가족관계증명서 등 한국 서류 영문 번역 인증·운전면허증 번역" },
-      { id: "notarization_copy", icon: "📋", title: "원본대조필 확인", desc: "캐나다 발급 서류의 영사 확인" },
       { id: "notarization_school", icon: "🏫", title: "초·중·고 학적서류 공증", desc: "졸업증명서·재학증명서·성적증명서 — 방문·우편 모두 가능" },
     ],
   },
@@ -4155,33 +4154,6 @@ const TREE = {
   },
 
   // ── 원본대조필 확인 ──
-  notarization_copy: {
-    type: "result",
-    service: "notarization",
-    breadcrumb: ["홈", "공증", "원본대조필 확인"],
-    title: "원본대조필 확인 (영사확인)",
-    docs: [
-      "원본 서류 — 원본 + 사본 1부",
-      "  ▸ 캐나다 발급 공문서 또는 공증인(Notary Public)이 인증한 사문서",
-      "공증촉탁서 (소정 양식 — 자필 작성 필수)",
-      "본인 유효한 한국 여권 원본 + 사본 1부",
-      "캐나다 체류자격 증빙서류 원본",
-    ],
-    costs: [
-      { label: "서류 1통당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
-    ],
-    time: "방문 당일 즉시 발급 (약 30분~1시간)",
-    notices: [
-      "⚠️ 캐나다는 아포스티유 협약 가입국입니다 — 캐나다 공문서(출생증명서·혼인증명서 등)는 영사관 확인보다 아포스티유가 더 적합한 경우가 많습니다.",
-      "연방 서류: Global Affairs Canada에서 아포스티유 발급.",
-      "온타리오주 서류: ServiceOntario에서 아포스티유 발급.",
-      "아포스티유와 영사관 확인을 동일 서류에 동시 적용 불가.",
-      "어떤 방식이 맞는지 불확실하다면 방문 전 영사관(416-920-3809) 또는 한국 제출 기관에 먼저 확인하세요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "예약하기 (공증 → 원본대조필) →",
-  },
-
   notarization_school: {
     type: "question",
     service: "notarization",
@@ -4768,7 +4740,6 @@ const TREE = {
       { id: "notarization_saseo_en", icon: "📜", title: "Signature Notarization (사서증서 인증)", desc: "POA, legal documents, declarations, inheritance renunciation, etc." },
       { id: "notarization_ingam_en", icon: "🔏", title: "Seal (인감) Related Documents", desc: "Seal certificate issuance POA, seal registration / change" },
       { id: "notarization_translation_en", icon: "🌐", title: "Translation Notarization", desc: "English translation of Korean documents, driver's licence translation" },
-      { id: "notarization_copy_en", icon: "📋", title: "Certified True Copy Confirmation", desc: "Consular confirmation of Canadian-issued documents" },
     ],
   },
 
@@ -5037,32 +5008,6 @@ const TREE = {
     bookingLabel: "Book Appointment (Notarization → Translation) →",
   },
 
-  notarization_copy_en: {
-    type: "result",
-    service: "notarization",
-    breadcrumb: ["Home", "Notarization", "Certified True Copy"],
-    title: "Certified True Copy Confirmation (영사확인)",
-    docs: [
-      "Original Canadian-issued document + 1 photocopy",
-      "  ▸ Canadian public document or document notarized by a Canadian Notary Public",
-      "Consular notarization request form (소정 양식) — handwritten only",
-      "Your valid Korean passport — original + photocopy",
-      "Valid Canadian immigration status document — original",
-    ],
-    costs: [
-      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
-    ],
-    time: "Same-day processing (approx. 30 min – 1 hour)",
-    notices: [
-      "⚠️ Canada is a member of the Apostille Convention — Canadian public documents (birth certificate, marriage certificate, etc.) are often better handled with an Apostille rather than consular notarization.",
-      "Federal documents → Apostille from Global Affairs Canada.",
-      "Ontario provincial documents → Apostille from ServiceOntario.",
-      "Apostille and consular notarization CANNOT be applied to the same document — you would need a separate copy.",
-      "Unsure which applies? Call the Consulate (416-920-3809) or the Korean institution you are submitting to.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "Book Appointment (Notarization → True Copy) →",
-  },
 
   // ══ ENGLISH NODES: Military Service ══
   military_start_en: {

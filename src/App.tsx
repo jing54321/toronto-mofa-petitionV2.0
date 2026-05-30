@@ -5540,7 +5540,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     military_supp_business: "military_supp_business_en",
     military_supp_work: "military_supp_work_en",
     military_supp_study: "military_supp_study_en",
-    military_permit_2ndgen: "military_permit_2ndgen_en",
     military_cancel_return: "military_cancel_return_en",
     military_permit_cancel: "military_permit_cancel_en",
     military_return_permanent: "military_return_permanent_en",

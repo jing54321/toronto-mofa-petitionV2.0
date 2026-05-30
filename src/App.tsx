@@ -3456,6 +3456,7 @@ const TREE = {
       { id: "notarization_ingam", icon: "🔏", title: "인감 관련 공증", desc: "인감증명서 발급 위임장·인감신고서·인감변경신고서" },
       { id: "notarization_translation", icon: "🌐", title: "번역 공증", desc: "가족관계증명서 등 한국 서류 영문 번역 인증·운전면허증 번역" },
       { id: "notarization_copy", icon: "📋", title: "원본대조필 확인", desc: "캐나다 발급 서류의 영사 확인" },
+      { id: "notarization_school", icon: "🏫", title: "초·중·고 학적서류 공증", desc: "졸업증명서·재학증명서·성적증명서 — 방문·우편 모두 가능" },
     ],
   },
 
@@ -3522,7 +3523,7 @@ const TREE = {
       "캐나다 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
     ],
     costs: [
-      { label: "위임장 1부당", value: "CAD $2.60 (현금)" },
+      { label: "위임장 1부당", value: "CAD $2.70 (현금, Debit, 신용카드)" },
       { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
     ],
     time: "방문 당일 즉시 발급 (약 30분~1시간)",
@@ -3532,6 +3533,8 @@ const TREE = {
       "인감증명서 발급 위임장은 별도 메뉴(인감 관련 공증)를 이용하세요.",
       "한국 부동산 등기 목적: 캐나다 공증인(Notary Public) + 아포스티유로 대체 가능한 경우도 있으니 제출 기관에 먼저 확인하세요.",
       "시민권자: 한국 여권이 없는 경우 방문 전 전화 문의 필수 (416-920-3809).",
+      "법인 신청 시: 법인 대표자가 직접 방문 — 법인등기부등본 + 사업자등록증 지참 필수.",
+      "해외 거주사실 증명이 필요한 경우: 재외국민등록 후 재외국민등록부등본으로 대체 가능 (별도 메뉴 참조).",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (공증 → 위임장) →",
@@ -3555,7 +3558,7 @@ const TREE = {
       "캐나다 체류자격 증빙서류 원본",
     ],
     costs: [
-      { label: "목적가액 없는 서류 1부당", value: "CAD $5.20 (현금)" },
+      { label: "목적가액 없는 서류 1부당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
       { label: "목적가액 있는 서류 (계약서 등)", value: "CAD $1,000당 약 CAD $3.00 별도 산정" },
       { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
     ],
@@ -3589,7 +3592,7 @@ const TREE = {
       "캐나다 체류자격 증빙서류 원본",
     ],
     costs: [
-      { label: "서류 1부당", value: "CAD $5.20 (현금)" },
+      { label: "서류 1부당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
       { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
     ],
     time: "방문 당일 즉시 발급 (약 30분~1시간)",
@@ -3608,40 +3611,156 @@ const TREE = {
     service: "notarization",
     breadcrumb: ["홈", "공증", "인감 관련"],
     question: "어떤 인감 업무가 필요하신가요?",
-    sub: "인감 관련 서류는 한국 부동산·금융 거래 시 재산권과 직결되므로 반드시 본인이 영사 앞에서 직접 작성해야 합니다. 대리인 신청 절대 불가.",
+    sub: "인감 관련 서류는 반드시 본인이 영사 앞에서 직접 작성해야 합니다. 대리인 신청 절대 불가.",
     options: [
+      { id: "notarization_ingam_eligible", icon: "✅", title: "신청 가능 여부 먼저 확인", desc: "시민권자·거소증 없는 경우 신청 불가 — 먼저 확인하세요" },
       { id: "notarization_ingam_pow", icon: "🔏", title: "인감증명서 발급 위임장", desc: "한국에서 대리인이 인감증명서를 발급받도록 위임" },
       { id: "notarization_ingam_change", icon: "✏️", title: "인감(변경)신고서", desc: "인감 신규 등록 또는 기존 인감 변경" },
       { id: "notarization_ingam_protect", icon: "🛡️", title: "인감보호(해제)신청서", desc: "인감 도용 방지 보호 신청 또는 해제" },
     ],
   },
 
-  notarization_ingam_pow: {
+  notarization_ingam_eligible: {
+    type: "question",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "인감 관련", "신청 가능 여부 확인"],
+    question: "본인의 상황은?",
+    sub: "인감 관련 업무는 대한민국 국적 보유자 또는 유효한 거소증을 가진 시민권자만 신청 가능합니다.",
+    options: [
+      { id: "notarization_ingam_ok_passport", icon: "🛂", title: "한국 여권 보유 (국적 보유자)", desc: "유효한 대한민국 여권이 있는 경우 → 신청 가능" },
+      { id: "notarization_ingam_ok_sojourn", icon: "🪪", title: "캐나다 시민권자 + 유효한 거소증 보유", desc: "외국국적동포 국내거소신고증이 있는 경우 → 신청 가능" },
+      { id: "notarization_ingam_no", icon: "❌", title: "캐나다 시민권자 + 거소증 없음", desc: "국적회복 없이 시민권만 있는 경우 → 신청 불가" },
+    ],
+  },
+
+  notarization_ingam_ok_passport: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "인감 관련", "인감증명서 발급 위임장"],
-    title: "인감증명서 발급 위임장",
+    breadcrumb: ["홈", "공증", "인감 관련", "신청 가능 확인"],
+    title: "✅ 인감 업무 신청 가능 — 메뉴로 이동하세요",
     docs: [
-      "인감증명서 발급 위임장 — 영사관 비치 또는 홈페이지 다운로드",
-      "  ▸ 서명란 공백으로 — 영사 앞에서 자필 작성 및 서명 필수 (타이핑 입력 후 출력 불가)",
-      "  ▸ 대리인 성명·주민등록번호·주소·연락처 기재",
-      "  ▸ 인감 용도 기재 (예: 부동산 매매용, 은행업무용, 일반용 등)",
-      "공증촉탁서 (소정 양식 — 자필 작성 필수)",
-      "본인 유효한 한국 여권 원본 + 사본 1부",
-      "  ▸ 2020년 12월 20일 이후 발급 여권(주민번호 삭제) → 여권정보증명서 추가",
-      "캐나다 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
+      "신청 가능 대상입니다 — 아래 해당 업무를 선택하여 진행하세요:",
+      "  ▸ 인감증명서 발급 위임장 → 한국 대리인이 인감증명서를 대신 발급받도록 위임",
+      "  ▸ 인감(변경)신고서 → 인감 신규 등록 또는 기존 인감 변경",
+      "  ▸ 인감보호(해제)신청서 → 인감 도용 방지 보호 신청·해제",
     ],
-    costs: [
-      { label: "인감증명서 발급 위임장 1부당", value: "CAD $5.20 (현금)" },
-      { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
-    ],
-    time: "방문 당일 즉시 발급 (약 30분~1시간)",
+    costs: [{ label: "참고", value: "각 업무별 수수료 상이 — 해당 메뉴 참조" }],
+    time: "방문 당일 즉시 발급",
     notices: [
-      "⚠️ 반드시 본인이 영사 앞에서 자필 작성 — 대리인 신청 절대 불가.",
-      "⚠️ 다운로드 양식에 문자를 타이핑하여 출력한 위임장은 접수 불가 — 손으로 직접 작성.",
-      "복사한 위임장도 접수 불가 — 반드시 원본만 제출.",
-      "한국 내 대리인이 인감증명서를 발급받을 때 이 위임장과 인감 도장을 함께 지참해야 합니다.",
-      "인감이 아직 한국에 등록되어 있지 않다면 인감신고서를 먼저 처리해야 합니다.",
+      "⚠️ 반드시 본인이 영사 앞에서 직접 작성 — 대리인 신청 절대 불가.",
+      "우편 신청 불가 — 직접 방문 필수.",
+    ],
+    booking: "https://www.torbooking.com/book",
+  },
+
+  notarization_ingam_ok_sojourn: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "인감 관련", "신청 가능 확인 (거소증)"],
+    title: "✅ 인감 업무 신청 가능 — 거소증 소지 시민권자",
+    docs: [
+      "유효한 외국국적동포 국내거소신고증 보유 시 신청 가능합니다.",
+      "  ▸ 거소증 원본 지참 필수",
+      "신청 가능 업무:",
+      "  ▸ 인감증명서 발급 위임장",
+      "  ▸ 인감(변경)신고서",
+      "  ▸ 인감보호(해제)신청서",
+    ],
+    costs: [{ label: "참고", value: "각 업무별 수수료 상이 — 해당 메뉴 참조" }],
+    time: "방문 당일 즉시 발급",
+    notices: [
+      "⚠️ 거소증이 만료된 경우 신청 불가 — 반드시 유효한 거소증 지참.",
+      "⚠️ 반드시 본인 직접 방문 — 대리인 신청 절대 불가.",
+    ],
+    booking: "https://www.torbooking.com/book",
+  },
+
+  notarization_ingam_no: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "인감 관련", "신청 불가 안내"],
+    title: "❌ 인감 업무 신청 불가",
+    docs: [
+      "캐나다 시민권 취득과 동시에 한국 국적은 법적으로 상실됩니다.",
+      "  ▸ 국적상실신고를 하지 않았더라도 시민권 선서 시점에 자동으로 한국 국적 상실",
+      "  ▸ 따라서 유효한 거소증이 없는 시민권자는 인감 업무 신청 불가",
+      "신청 가능하려면 아래 중 하나가 필요합니다:",
+      "  ▸ 한국 국적 회복 → 국적회복 허가 후 거소신고 또는 여권 발급",
+      "  ▸ 재외국민 거소신고 → 외국국적동포 국내거소신고증 발급",
+    ],
+    costs: [{ label: "해당없음", value: "신청 불가" }],
+    time: "신청 불가",
+    notices: [
+      "국적 회복 또는 거소신고 관련 문의: 영사관 전화 상담 (416-920-3809).",
+      "국적 회복 절차는 국적 메뉴를 참조하세요.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "상담 예약하기 →",
+  },
+
+  notarization_ingam_pow: {
+    type: "question",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "인감 관련", "인감증명서 발급 위임장"],
+    question: "위임자(신청인)의 연령은?",
+    sub: "만 19세 미만 미성년자는 본인과 법정대리인이 함께 방문해야 합니다.",
+    options: [
+      { id: "notarization_ingam_pow_adult", icon: "👤", title: "만 19세 이상 (성인)", desc: "본인 직접 방문" },
+      { id: "notarization_ingam_pow_minor", icon: "👶", title: "만 19세 미만 (미성년자)", desc: "본인 + 법정대리인 함께 방문 필수" },
+    ],
+  },
+
+  notarization_ingam_pow_adult: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "인감 관련", "인감증명서 발급 위임장", "성인"],
+    title: "인감증명서 발급 위임장 — 성인",
+    docs: [
+      "인감증명서 발급 위임장 양식 — 다운로드 후 작성 (서명란은 공백, 영사 앞에서 자필 서명)",
+      "  ▸ 한국 내 대리인 성명·주민등록번호·주소·전화번호 반드시 기재",
+      "  ▸ 인감 용도 기재 (예: 부동산 매매용·은행업무용·일반용 등)",
+      "유효한 대한민국 여권 원본",
+      "체류자격 증명서류 원본:",
+      "  ▸ 단기방문자: ETA 허가서",
+      "  ▸ 장기체류자: 캐나다 체류비자 원본 (Work/Study Permit 등)",
+      "  ▸ 영주권자: PR Card 원본 (유효기간 내)",
+      "  ▸ 복수국적자: 국적회복이 표시된 기본증명서 또는 국적회복증서",
+      "  ▸ 거소증 소지 시민권자: 유효한 외국국적동포 국내거소신고증 원본",
+    ],
+    costs: [{ label: "1부당", value: "CAD $5.40 (현금, Debit, 신용카드)" }],
+    time: "방문 당일 즉시 발급",
+    notices: [
+      "⚠️ 반드시 본인이 영사 앞에서 자필 서명 — 대리인 신청 절대 불가, 우편 신청 불가.",
+      "⚠️ 타이핑 입력 후 출력한 위임장·복사한 위임장 접수 불가 — 반드시 손으로 직접 작성.",
+      "한국 내 대리인이 인감증명서 발급 시 이 위임장과 인감도장을 함께 지참해야 합니다.",
+      "인감이 아직 한국에 등록되어 있지 않다면 인감(변경)신고서를 먼저 처리하세요.",
+      "유효한 체류자격 증명이 없는 경우 발급 불가.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (공증 → 인감증명 위임장) →",
+  },
+
+  notarization_ingam_pow_minor: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "인감 관련", "인감증명서 발급 위임장", "미성년자"],
+    title: "인감증명서 발급 위임장 — 만 19세 미만 미성년자",
+    docs: [
+      "인감증명서 발급 위임장 양식 — 미성년자 본인과 법정대리인이 함께 방문, 자필 작성",
+      "  ▸ 한국 내 대리인 성명·주민등록번호·주소·전화번호 반드시 기재",
+      "미성년자 본인의 유효한 대한민국 여권 원본",
+      "미성년자 본인의 캐나다 체류비자 원본 또는 유효한 PR Card 원본",
+      "  ▸ 이중국적자인 경우: 기본증명서 + 캐나다 여권 원본 추가",
+      "법정대리인(부 또는 모)의 유효한 여권 원본",
+      "미성년자의 기본증명서 + 가족관계증명서 — 3개월 이내 발급",
+      "  ▸ 상세증명서, 주민등록번호 전부공개 버전",
+    ],
+    costs: [{ label: "1부당", value: "CAD $5.40 (현금, Debit, 신용카드)" }],
+    time: "방문 당일 즉시 발급",
+    notices: [
+      "⚠️ 미성년자 본인과 법정대리인이 반드시 함께 직접 방문 — 둘 중 한 명만 방문 불가.",
+      "⚠️ 우편 신청 불가.",
+      "유효한 체류자격 증명이 없는 경우 발급 불가.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (공증 → 인감증명 위임장) →",
@@ -3663,7 +3782,7 @@ const TREE = {
       "  ▸ 인감도장을 한국에서 제작하고 싶다면: 서명으로 대리 가능 (대리인이 한국에서 도장 지참)",
     ],
     costs: [
-      { label: "인감(변경)신고서 1부당", value: "CAD $5.20 (현금)" },
+      { label: "인감(변경)신고서 1부당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
       { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
     ],
     time: "방문 당일 즉시 발급",
@@ -3692,7 +3811,7 @@ const TREE = {
       "캐나다 체류자격 증빙서류 원본",
     ],
     costs: [
-      { label: "1부당", value: "CAD $5.20 (현금)" },
+      { label: "1부당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
     ],
     time: "방문 당일 즉시 발급",
     notices: [
@@ -3734,7 +3853,7 @@ const TREE = {
       "캐나다 체류자격 증빙서류 원본",
     ],
     costs: [
-      { label: "서류 1통당", value: "CAD $5.20 (현금)" },
+      { label: "서류 1통당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
     ],
     time: "방문 당일 즉시 발급 (10부 이상 시 익일 수령)",
     notices: [
@@ -3760,7 +3879,7 @@ const TREE = {
       "  ▸ 면허증이 없는 경우: 영문 운전경력증명서 발급 후 번역 진행 가능 (공동인증서 있으면 정부24 온라인 발급)",
     ],
     costs: [
-      { label: "번역 인증 수수료", value: "CAD $5.20 (현금)" },
+      { label: "번역 인증 수수료", value: "CAD $5.40 (현금, Debit, 신용카드)" },
     ],
     time: "방문 당일 즉시 발급",
     notices: [
@@ -3786,7 +3905,7 @@ const TREE = {
       "캐나다 체류자격 증빙서류 원본",
     ],
     costs: [
-      { label: "서류 1통당", value: "CAD $5.20 (현금)" },
+      { label: "서류 1통당", value: "CAD $5.40 (현금, Debit, 신용카드)" },
     ],
     time: "방문 당일 즉시 발급 (약 30분~1시간)",
     notices: [
@@ -3798,6 +3917,74 @@ const TREE = {
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (공증 → 원본대조필) →",
+  },
+
+  notarization_school: {
+    type: "question",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "학적서류 공증"],
+    question: "어떻게 신청하시겠어요?",
+    sub: "⚠️ 온타리오주·마니토바주 정규 교육기관 발행 서류만 공증 가능합니다. 공증 가능 서류 여부를 먼저 확인하세요.",
+    options: [
+      { id: "notarization_school_visit", icon: "🏛️", title: "직접 방문", desc: "대리인 접수도 가능" },
+      { id: "notarization_school_mail", icon: "📮", title: "우편 접수", desc: "원거리 거주자에 한함 — Money Order 필수" },
+    ],
+  },
+
+  notarization_school_visit: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "학적서류 공증", "방문 접수"],
+    title: "초·중·고 학적서류 공증 — 방문 접수",
+    docs: [
+      "학적 서류 원본:",
+      "  ▸ 졸업증명서 / 재학증명서 / 성적증명서",
+      "  ▸ 사본 공증 시: 학교 확인 도장·압인 또는 학교장 서명 있는 경우만 가능",
+      "  ▸ 인터넷 발급 서류: 학교 서명 또는 도장 받은 경우에만 원본으로 인정",
+      "해당 학생의 여권 사본 + 비자 사본 각 1부",
+      "대리인 접수 시: 대리인 신분증 원본",
+    ],
+    costs: [{ label: "1건당", value: "CAD $5.40 (현금, Debit, 신용카드)" }],
+    time: "방문 당일 즉시 발급",
+    notices: [
+      "⚠️ 온타리오주·마니토바주 교육청에 정규 교육기관으로 등록된 학교 발행 서류만 가능.",
+      "공증 가능 서류인지 방문 전 반드시 확인하세요 — 불가 서류 지참 시 처리 불가.",
+      "대리인 접수 가능 — 학생 본인이 방문하지 않아도 됩니다.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (공증 → 학적서류) →",
+  },
+
+  notarization_school_mail: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "학적서류 공증", "우편 접수"],
+    title: "초·중·고 학적서류 공증 — 우편 접수",
+    docs: [
+      "공증촉탁서 — 신청자당 1부, 자필 작성·서명",
+      "  ▸ 대리인 신청 시: 대리인이 촉탁서 작성·서명 후 대리인 신분증 사본 동봉",
+      "학적 서류 원본 + 복사본",
+      "  ▸ 원본·복사본 동봉 시 희망 공증 건수 및 내용 메모 필수",
+      "해당 학생의 여권 사본 + 비자 사본 각 1부",
+      "대리인 신청 시: 대리인 신분증 사본 1부",
+      "수수료 — Money Order (payable to 'Korean Consulate')",
+      "  ▸ 개인수표 불가 / 한국에서 신청 시 KEB 하나은행 송금 수표만 가능",
+      "반송용 봉투 (필수):",
+      "  ▸ 캐나다 내: Canada Post Xpresspost 봉투 (수취인 정보 기재)",
+      "  ▸ 한국으로: Prepaid DHL 반송봉투 + 국제우편 배송 송장 동봉",
+      "발송 주소: 공증과 (Notarization Dept.) Consulate General of the Republic of Korea in Toronto, 555 Avenue Road, Toronto, ON M4V 2J7",
+    ],
+    costs: [{ label: "1건당", value: "CAD $5.40 — Money Order만 가능" }],
+    time: "우편 배송 기간 제외 최소 3일 이상 (서류 미비 시 연장)",
+    notices: [
+      "⚠️ 온타리오주·마니토바주 정규 교육기관 발행 서류만 공증 가능.",
+      "⚠️ 우편 접수는 원거리 거주자에 한합니다.",
+      "⚠️ 우편 분실·사고에 대해 영사관은 책임지지 않습니다.",
+      "수수료는 Money Order 원칙 — 현금 동봉 시 반드시 Xpresspost 이용, 개인수표 불가.",
+      "반송봉투 미동봉 시 처리된 서류를 받을 수 없습니다 — 반드시 동봉.",
+      "Xpresspost Tracking Number를 따로 보관하고 canadapost.ca에서 배송 상태 확인 가능.",
+    ],
+    booking: null,
   },
 
   // ══ MILITARY SERVICE (병무) — 재설계된 트리 ══
@@ -4382,7 +4569,7 @@ const TREE = {
       "Valid Canadian immigration status document — original (PR Card / visa / citizenship certificate)",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $2.60 (cash)" },
+      { label: "Fee per document", value: "CAD $2.70 (cash, Debit, credit card)" },
       { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
@@ -4415,7 +4602,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Documents without stated value", value: "CAD $5.20 (cash)" },
+      { label: "Documents without stated value", value: "CAD $5.40 (cash, Debit, credit card)" },
       { label: "Contracts with stated monetary value", value: "Approx. CAD $3.00 per CAD $1,000 of value" },
       { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
@@ -4448,7 +4635,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
       { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
@@ -4489,7 +4676,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
       { label: "Passport Info Certificate (if needed)", value: "CAD $1.00 extra" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
@@ -4517,7 +4704,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
     ],
     time: "Same-day processing",
     notices: [
@@ -4545,7 +4732,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
     ],
     time: "Same-day processing",
     notices: [
@@ -4573,7 +4760,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
     ],
     time: "Same-day processing (30 min – 1 hour). 10+ documents: next-day pickup.",
     notices: [
@@ -4600,7 +4787,7 @@ const TREE = {
       "Valid Canadian immigration status document — original",
     ],
     costs: [
-      { label: "Fee per document", value: "CAD $5.20 (cash)" },
+      { label: "Fee per document", value: "CAD $5.40 (cash, Debit, credit card)" },
     ],
     time: "Same-day processing (approx. 30 min – 1 hour)",
     notices: [
@@ -5620,7 +5807,13 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     notarization_start: "notarization_start_en",
     notarization_saseo: "notarization_saseo_en",
     notarization_ingam: "notarization_ingam_en",
+    notarization_ingam_eligible: "notarization_ingam_eligible",
+    notarization_ingam_ok_passport: "notarization_ingam_ok_passport",
+    notarization_ingam_ok_sojourn: "notarization_ingam_ok_sojourn",
+    notarization_ingam_no: "notarization_ingam_no",
     notarization_ingam_pow: "notarization_ingam_pow_en",
+    notarization_ingam_pow_adult: "notarization_ingam_pow_adult",
+    notarization_ingam_pow_minor: "notarization_ingam_pow_minor",
     notarization_ingam_change: "notarization_ingam_change_en",
     notarization_ingam_protect: "notarization_ingam_protect_en",
     notarization_apostille_guide: "notarization_apostille_guide_en",

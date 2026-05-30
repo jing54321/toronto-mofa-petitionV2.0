@@ -4137,8 +4137,37 @@ const TREE = {
     options: [
       { id: "visa_transit_ok_en", icon: "✅", title: "Departing from another country → Korea → home country or 3rd country", desc: "e.g. China → Korea → Canada  /  Canada → Korea → China" },
       { id: "visa_transit_roundtrip_en", icon: "❌", title: "Canada → Korea → back to Canada only (round trip)", desc: "No other final destination — visiting Korea only" },
-      { id: "visa_transit_ok_en", icon: "✅", title: "Complex route with stopover (max 3 days) before Korea", desc: "e.g. Country A → stopover (≤3 days) → Korea → home country" },
+      { id: "visa_transit_complex_en", icon: "✅", title: "Complex route with stopover (max 3 days) before Korea", desc: "e.g. Country A → stopover (≤3 days) → Korea → home country" },
     ],
+  },
+
+  visa_transit_complex_en: {
+    type: "result",
+    service: "visa",
+    breadcrumb: ["Home", "Visa", "Transit (TWOV)", "Complex Route"],
+    title: "✅ You Are Likely Eligible for TWOV — Complex Route",
+    docs: [
+      "No visa application required — conditions to meet upon arrival:",
+      "  ▸ Valid Canadian PR Card or physical Canadian visa sticker",
+      "  ▸ Confirmed onward flight departing Korea within 30 days",
+      "  ▸ No prior entry refusal to Korea within the last 3 years",
+      "  ▸ No illegal stay or criminal violations in Korea",
+      "  ▸ ⚠️ Any intermediate stopover BEFORE entering Korea must be 3 days or less",
+    ],
+    costs: [{ label: "Entry fee", value: "None (if all conditions met)" }],
+    time: "No advance application — assessed at port of entry",
+    notices: [
+      "Stay: up to 30 days (B-2 Transit status).",
+      "Examples of allowed complex routes:",
+      "  ▸ Canada → Korea → 3rd country → home country ✅",
+      "  ▸ Home country → stopover (≤3 days) → Korea → Canada ✅",
+      "  ▸ Canada → stopover (≤3 days) → Korea → home country ✅",
+      "⚠️ If your stopover BEFORE Korea exceeds 3 days — TWOV is NOT available.",
+      "⚠️ TWOV conditions can change — verify with your airline and Korean Immigration before travel.",
+      "Korean Immigration Information Centre: +82-2-2100-1345",
+    ],
+    booking: null,
+    onlineLink: "https://www.immigration.go.kr",
   },
 
   visa_transit_ok_en: {

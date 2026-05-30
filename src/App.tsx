@@ -3040,7 +3040,7 @@ const TREE = {
     service: "cert",
     breadcrumb: ["홈", "인증서"],
     question: "어떤 인증서가 필요하신가요?",
-    sub: "",
+    sub: "테스트",
     comparisonCard: [
       {
         icon: "📱",

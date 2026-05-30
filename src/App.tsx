@@ -2588,94 +2588,67 @@ const TREE = {
     type: "question",
     service: "nationality",
     breadcrumb: ["홈", "국적"],
-    question: "본인의 상황은?",
-    sub: "국적 업무는 상황에 따라 완전히 달라집니다. 먼저 본인 상황을 선택하세요.",
+    question: "해당하는 상황을 선택하세요",
+    sub: "국적 업무는 상황에 따라 완전히 달라집니다.",
     options: [
-      { id: "nationality_loss_or_renounce", icon: "❓", title: "상실 vs 이탈 — 뭐가 다른지 모르겠어요", desc: "내 상황이 국적상실인지 국적이탈인지 먼저 확인" },
-      { id: "nationality_loss", icon: "🍁", title: "국적상실신고 — 한국에서 태어나 시민권 취득", desc: "후천적으로 캐나다 시민권을 취득한 경우 · 무료" },
-      { id: "nationality_renounce_start", icon: "🌏", title: "국적이탈신고 — 태어날 때부터 복수국적", desc: "선천적 복수국적자가 한국 국적 포기 · CAD $24.30" },
-      { id: "nationality_renounce_exception", icon: "⚖️", title: "예외적 국적이탈 허가 — 병역미필로 기간 도과", desc: "만 18세 3월31일 이후 기간을 놓친 남성 · CAD $121.50" },
-      { id: "nationality_retain", icon: "🔏", title: "국적보유신고 — 부모와 함께 시민권 수반취득", desc: "미성년 때 부모와 함께 시민권 취득 · 6개월 이내 신청 필수" },
-      { id: "nationality_choice", icon: "✍️", title: "국적선택신고 — 한국 국적 선택·유지 (외국국적불행사 서약)", desc: "복수국적 유지하며 한국 국적 선택 · 무료" },
-      { id: "nationality_recover", icon: "🇰🇷", title: "국적회복 — 한국 국적 되찾기 (65세 이상)", desc: "한국 출입국사무소에서만 신청 가능" },
-      { id: "nationality_acquire", icon: "👶", title: "인지에 의한 국적취득 — 한국인 부의 혼외자", desc: "한국인 부 + 외국인 모 사이 혼외자 국적취득 · CAD $24.30" },
+      { id: "nationality_citizen_start", icon: "🍁", title: "나(또는 가족)가 캐나다 시민권을 취득했어요", desc: "국적상실·이탈·보유·선택신고 — 내 상황에 맞게 안내" },
+      { id: "nationality_renounce_exception", icon: "⚠️", title: "이탈 신고 기간을 놓쳤어요 (병역미필 남성)", desc: "만 18세 3월 31일 이후 기간 도과 — 예외적 국적이탈 허가 · CAD $121.50" },
+      { id: "nationality_acquire", icon: "👶", title: "자녀의 한국 국적을 만들어 주고 싶어요", desc: "한국인 부와 외국인 모 사이 혼외자 국적취득 · CAD $24.30" },
+      { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적을 되찾고 싶어요 (65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
     ],
   },
 
-  // ── 상실 vs 이탈 구분 안내 ──
-  nationality_loss_or_renounce: {
+  // ── 시민권 취득 → 출생지 확인 ──
+  nationality_citizen_start: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "상실 vs 이탈 확인"],
-    question: "본인은 어떤 경우인가요?",
-    sub: "국적상실과 국적이탈은 대상자가 다릅니다. 아래에서 본인 상황을 선택하세요.",
+    breadcrumb: ["홈", "국적", "시민권 취득"],
+    question: "본인은 어디서 태어났나요?",
+    sub: "출생지에 따라 국적 업무 종류가 달라집니다.",
     options: [
-      { id: "nationality_loss_confirm", icon: "🍁", title: "한국에서 태어났고, 이후 캐나다 시민권을 취득했어요", desc: "→ 국적상실신고 대상" },
-      { id: "nationality_renounce_confirm", icon: "🌏", title: "캐나다(또는 해외)에서 태어났고, 태어날 때부터 두 국적이었어요", desc: "→ 국적이탈신고 대상" },
-      { id: "nationality_retain_confirm", icon: "🔏", title: "미성년 때 부모와 함께 시민권을 취득했어요 (수반취득)", desc: "→ 국적보유신고 또는 국적이탈신고 대상" },
+      { id: "nationality_loss", icon: "🇰🇷", title: "한국에서 태어났어요", desc: "후천적 시민권 취득 → 국적상실신고 · 무료" },
+      { id: "nationality_born_abroad", icon: "🌏", title: "해외에서 태어났어요 (선천적 복수국적)", desc: "태어날 때부터 두 국적 → 포기 또는 유지 선택" },
     ],
   },
 
-  nationality_loss_confirm: {
-    type: "result",
-    service: "nationality",
-    breadcrumb: ["홈", "국적", "상실 vs 이탈", "국적상실신고 대상"],
-    title: "✅ 국적상실신고 대상입니다",
-    docs: [
-      "후천적으로 외국국적을 취득한 경우 → 국적상실신고",
-      "예) 한국에서 출생 → 캐나다 이주 → 캐나다 시민권 취득",
-    ],
-    costs: [{ label: "수수료", value: "무료" }],
-    time: "약 6개월",
-    notices: [
-      "국적상실신고 메뉴로 이동하여 진행하세요.",
-    ],
-    booking: null,
-  },
-
-  nationality_renounce_confirm: {
-    type: "result",
-    service: "nationality",
-    breadcrumb: ["홈", "국적", "상실 vs 이탈", "국적이탈신고 대상"],
-    title: "✅ 국적이탈신고 대상입니다",
-    docs: [
-      "선천적 복수국적자 → 국적이탈신고",
-      "예1) 캐나다 출생 + 부모 중 1인이 한국인 → 한국/캐나다 복수국적",
-      "예2) 한국/캐나다 외 지역 출생 + 부모 중 1인이 캐나다 국적 → 복수국적",
-    ],
-    costs: [{ label: "수수료", value: "CAD $24.30" }],
-    time: "약 18~24개월",
-    notices: [
-      "⚠️ 남성은 만 18세가 되는 해 3월 31일까지 신고해야 합니다 — 기간 도과 시 병역의무 해소 후에만 가능.",
-      "국적이탈신고 메뉴로 이동하여 진행하세요.",
-    ],
-    booking: null,
-  },
-
-  nationality_retain_confirm: {
+  // ── 해외 출생 → 포기 or 유지 ──
+  nationality_born_abroad: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "상실 vs 이탈", "수반취득"],
+    breadcrumb: ["홈", "국적", "시민권 취득", "해외 출생"],
+    question: "한국 국적을 어떻게 하고 싶으세요?",
+    sub: "선천적 복수국적자는 한국 국적을 포기하거나 유지할 수 있습니다.",
+    options: [
+      { id: "nationality_renounce_start", icon: "🚫", title: "한국 국적을 포기할게요", desc: "국적이탈신고 · CAD $24.30 · 남성 만 18세 3월 31일까지" },
+      { id: "nationality_keep_start", icon: "✅", title: "한국 국적을 유지하고 싶어요", desc: "국적보유신고 또는 국적선택신고" },
+    ],
+  },
+
+  // ── 유지 → 보유신고 or 선택신고 ──
+  nationality_keep_start: {
+    type: "question",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "시민권 취득", "해외 출생", "한국 국적 유지"],
     question: "시민권 취득일로부터 6개월이 지났나요?",
-    sub: "수반취득한 경우 6개월 이내라면 국적보유신고가 가능합니다.",
+    sub: "6개월 이내라면 국적보유신고, 이후라면 국적선택신고(외국국적불행사 서약)를 진행합니다.",
     options: [
-      { id: "nationality_retain", icon: "✅", title: "6개월 이내", desc: "→ 국적보유신고 가능" },
-      { id: "nationality_retain_expired", icon: "⏰", title: "6개월 초과", desc: "→ 국적상실신고 후 국적이탈 또는 국적선택 절차" },
+      { id: "nationality_retain", icon: "✅", title: "6개월 이내예요 — 국적보유신고", desc: "수반취득자 · CAD $24.30 · 6개월 이내 신청 필수" },
+      { id: "nationality_choice", icon: "✍️", title: "6개월 초과예요 — 국적선택신고", desc: "외국국적불행사 서약 · 무료 · 여자 만 22세 전" },
     ],
   },
 
   nationality_retain_expired: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "수반취득 6개월 초과"],
+    breadcrumb: ["홈", "국적", "국적보유신고 기한 초과"],
     title: "⚠️ 국적보유신고 기한 초과",
     docs: [],
     costs: [{ label: "수수료", value: "무료" }],
     time: "해당없음",
     notices: [
-      "외국국적 취득일로부터 6개월이 초과된 경우 국적보유신고가 불가하며, 소급하여 대한민국 국적을 상실하게 됩니다.",
-      "이 경우 국적상실신고 후 상황에 따라 국적이탈신고 또는 국적선택신고 절차를 진행해야 합니다.",
-      "정확한 안내를 위해 영사관 국적과 전화 상담을 먼저 권장합니다 (416-920-3809).",
+      "외국국적 취득일로부터 6개월 초과 시 국적보유신고 불가 — 소급하여 대한민국 국적 상실.",
+      "이 경우 국적상실신고 후 상황에 따라 국적이탈 또는 국적선택 절차 진행.",
+      "정확한 안내를 위해 방문 전 전화 상담 권장 (416-920-3809).",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "상담 예약하기 →",

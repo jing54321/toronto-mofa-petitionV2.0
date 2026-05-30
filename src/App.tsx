@@ -6257,10 +6257,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               )}
               <div className="q-title">{page.question ?? ""}</div>
               {page.sub && <div className="q-sub">{page.sub}</div>}
-              {page.comparisonCard && (
+              {(page as any).comparisonCard && (
                 <div style={{ marginBottom: "1rem" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "10px", marginBottom: "10px" }}>
-                    {page.comparisonCard.map((item: any) => (
+                    {(page as any).comparisonCard.map((item: any) => (
                       <div key={item.title} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "0.875rem" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
                           <span style={{ fontSize: "18px" }}>{item.icon}</span>

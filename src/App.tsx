@@ -3040,7 +3040,48 @@ const TREE = {
     service: "cert",
     breadcrumb: ["홈", "인증서"],
     question: "어떤 인증서가 필요하신가요?",
-    sub: "📋 인증서 비교\n\n• 재외국민 간편인증서: 영사관 방문 불필요 · 앱에서 비대면 발급 · 정부24·국민연금 등 공공서비스 190개 · 인터넷뱅킹 불가\n• 공동인증서: 영사관 방문 1회 · 행정+금융+전자상거래 폭넓게 사용 · PC/USB 저장 · 유효기간 1년 (직접 갱신)\n• 금융인증서: 영사관 방문 1회 · 금융+공공서비스 · 클라우드 저장 · 유효기간 3년 자동갱신\n\n⚠️ 세 가지 모두 캐나다 시민권자(한국 국적 상실자)는 발급 불가\n⚠️ 세 가지 모두 주민등록번호 필수",
+    sub: "",
+    comparisonCard: [
+      {
+        icon: "📱",
+        title: "간편인증서",
+        visit: false,
+        visitLabel: "영사관 방문 불필요",
+        features: [
+          { ok: true, text: "앱에서 비대면 발급" },
+          { ok: true, text: "공공서비스 190개" },
+          { ok: false, text: "인터넷뱅킹 불가" },
+          { ok: null, text: "앱별 유효기간" },
+          { ok: null, text: "앱 내 저장" },
+        ],
+      },
+      {
+        icon: "🔐",
+        title: "공동인증서",
+        visit: true,
+        visitLabel: "영사관 방문 1회",
+        features: [
+          { ok: true, text: "행정+금융+전자상거래" },
+          { ok: true, text: "사용처 가장 넓음" },
+          { ok: true, text: "인터넷뱅킹 가능" },
+          { ok: null, text: "1년마다 직접 갱신" },
+          { ok: null, text: "PC/USB 저장" },
+        ],
+      },
+      {
+        icon: "🏦",
+        title: "금융인증서",
+        visit: true,
+        visitLabel: "영사관 방문 1회",
+        features: [
+          { ok: true, text: "금융+공공서비스" },
+          { ok: true, text: "인터넷뱅킹 가능" },
+          { ok: true, text: "3년 자동갱신" },
+          { ok: null, text: "클라우드 저장" },
+          { ok: null, text: "기기 이동 자유" },
+        ],
+      },
+    ],
     options: [
       { id: "cert_nonface", icon: "📱", title: "재외국민 간편인증서 (영사관 방문 불필요)", desc: "앱에서 비대면 발급 · 공공서비스 190개 · 인터넷뱅킹 불가" },
       { id: "cert_joint_who", icon: "🔐", title: "공동인증서 (영사관 방문)", desc: "행정·금융·전자상거래 폭넓게 사용 · PC/USB 저장 · 1년 갱신" },
@@ -6216,6 +6257,36 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               )}
               <div className="q-title">{page.question ?? ""}</div>
               {page.sub && <div className="q-sub">{page.sub}</div>}
+              {page.comparisonCard && (
+                <div style={{ marginBottom: "1rem" }}>
+                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "10px", marginBottom: "10px" }}>
+                    {page.comparisonCard.map((item: any) => (
+                      <div key={item.title} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "0.875rem" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+                          <span style={{ fontSize: "18px" }}>{item.icon}</span>
+                          <span style={{ fontWeight: 500, fontSize: "13px", color: "var(--color-text-primary)" }}>{item.title}</span>
+                        </div>
+                        <div style={{ display: "inline-block", background: item.visit ? "var(--color-background-warning)" : "var(--color-background-success)", color: item.visit ? "var(--color-text-warning)" : "var(--color-text-success)", fontSize: "11px", padding: "2px 8px", borderRadius: "var(--border-radius-md)", marginBottom: "10px" }}>{item.visitLabel}</div>
+                        <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "12px", color: "var(--color-text-secondary)", display: "flex", flexDirection: "column", gap: "5px" }}>
+                          {item.features.map((f: any, i: number) => (
+                            <li key={i} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                              <span style={{ color: f.ok === true ? "var(--color-text-success)" : f.ok === false ? "var(--color-text-danger)" : "var(--color-text-secondary)", fontSize: "12px" }}>{f.ok === true ? "✓" : f.ok === false ? "✕" : "·"}</span>
+                              <span>{f.text}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", padding: "7px 12px", fontSize: "12px", color: "var(--color-text-secondary)", marginBottom: "6px" }}>
+                    📵 세 가지 모두 한국 전화번호 불필요
+                  </div>
+                  <div style={{ background: "var(--color-background-danger)", borderRadius: "var(--border-radius-md)", padding: "8px 12px", fontSize: "12px", color: "var(--color-text-danger)", display: "flex", flexDirection: "column", gap: "3px" }}>
+                    <span>⚠️ 세 가지 모두 캐나다 시민권자(한국 국적 상실자)는 발급 불가</span>
+                    <span>⚠️ 세 가지 모두 주민등록번호 필수</span>
+                  </div>
+                </div>
+              )}
               <div className="option-list">
                 {pageOptions.map((opt: any) => (
                   <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)}>

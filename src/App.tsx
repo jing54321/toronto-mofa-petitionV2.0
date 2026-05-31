@@ -3953,6 +3953,13 @@ const TREE = {
     service: "visa",
     breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Case 3 — Naturalized Canadian"],
     title: "F-4 Overseas Korean Visa — Case 3: Naturalized Canadian (F-4-11)",
+    summary: {
+      stay: "Up to 2 years",
+      validity: "5 years",
+      entries: "Multiple",
+      fee: "CAD $121.50",
+      processing: "5–10 business days",
+    },
     docs: [
       "Visa Application Form — downloaded from visa.go.kr, all fields completed",
       "  ▸ Section 8.4 (Planned address in Korea): must enter full road-name address",
@@ -7196,6 +7203,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
             const svcIcon = services.find(s => s.id === (page.service + "_start") || s.id.startsWith(page.service ?? ""))?.icon ?? "";
             const mainDocs = pageDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("▸"));
             const extraDocs = pageDocs.filter((d: any) => typeof d === "string" && d.trim().startsWith("▸"));
+            const summary = (page as any).summary;
             return (
             <div>
               <div className="result-badge" style={{ background: serviceColor, marginBottom: "10px" }}>
@@ -7205,9 +7213,53 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 {svcIcon && <span style={{ fontSize: "28px", lineHeight: 1, flexShrink: 0 }}>{svcIcon}</span>}
                 <div className="result-title" style={{ fontSize: "21px", marginBottom: 0 }}>{page.title ?? ""}</div>
               </div>
-              <div className="result-sub">
-                {lang === "ko" ? "방문 전 아래 서류를 준비해 주세요." : "Prepare the following documents before your visit."}
-              </div>
+
+              {summary && (
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "8px", margin: "14px 0 16px" }}>
+                  {summary.stay && (
+                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "체류기간" : "Stay"}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.stay}</div>
+                    </div>
+                  )}
+                  {summary.validity && (
+                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "유효기간" : "Validity"}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.validity}</div>
+                    </div>
+                  )}
+                  {summary.entries && (
+                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "입국횟수" : "Entries"}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.entries}</div>
+                    </div>
+                  )}
+                  {summary.fee && (
+                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "수수료" : "Fee"}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.fee}</div>
+                    </div>
+                  )}
+                  {summary.processing && (
+                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "처리기간" : "Processing"}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.processing}</div>
+                    </div>
+                  )}
+                  {summary.time && (
+                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
+                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "처리기간" : "Processing"}</div>
+                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.time}</div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {!summary && (
+                <div className="result-sub">
+                  {lang === "ko" ? "방문 전 아래 서류를 준비해 주세요." : "Prepare the following documents before your visit."}
+                </div>
+              )}
 
               <div className="info-card">
                 <div className="info-card-header">

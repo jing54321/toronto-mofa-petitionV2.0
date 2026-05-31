@@ -3747,7 +3747,7 @@ const TREE = {
     question: "What brings you to Korea?",
     sub: "Since you have no Korean heritage, select your purpose of visit. Canadian citizens can enter Korea visa-free for up to 6 months.",
     options: [
-      { id: "visa_no_heritage_en", icon: "🌏", title: "Visiting / Tourism / Transit", desc: "Canadian citizens: visa-free · Tourist / Short-Stay / Transit (TWOV) / K-ETA" },
+      { id: "visa_visit_transit_en", icon: "🌏", title: "Visiting / Tourism / Transit", desc: "Canadian citizens: visa-free · Tourist / Short-Stay / Transit (TWOV) / K-ETA" },
       { id: "visa_short_term_en", icon: "🤝", title: "Short-Term Visit", desc: "Business (C-3-4), General (C-3-1), Culture/Arts/Sports (C-3-9)" },
       { id: "visa_work_en", icon: "💼", title: "Work", desc: "E-2-1 English teacher, E-2-2 EPIK/TALK, E-1~E-7, H-1 Working Holiday, F-1-D Digital Nomad" },
       { id: "visa_study_en", icon: "🎓", title: "Study", desc: "D-2-6 Exchange, D-2-8 Short-term, D-4-1 Korean Language, D-4-3 Elementary/Secondary" },

@@ -3953,48 +3953,33 @@ const TREE = {
     service: "visa",
     breadcrumb: ["Home", "Visa", "F-4 Overseas Korean", "Case 3 — Naturalized Canadian"],
     title: "F-4 Overseas Korean Visa — Case 3: Naturalized Canadian (F-4-11)",
-    summary: {
-      stay: "Up to 2 years",
-      validity: "5 years",
-      entries: "Multiple",
-      fee: "CAD $121.50",
-      processing: "5–10 business days",
-    },
     docs: [
-      "Visa Application Form — downloaded from visa.go.kr, all fields completed",
-      "  ▸ Section 8.4 (Planned address in Korea): must enter full road-name address",
-      "1 passport photo (3.5×4.5cm, white background, taken within 6 months, date-stamped)",
-      "  ▸ ⚠️ Consulate photo equipment cannot be used — bring photo from photo studio",
+      "Visa Application Form — downloaded from visa.go.kr, all fields completed in full",
+      "1 passport photo — 3.5×4.5cm, white background, within 6 months, date-stamped on back",
       "Canadian passport — original + photocopy",
       "Canadian Citizenship Certificate — original + photocopy",
-      "  ▸ Card-type or Search of Citizenship Record NOT accepted",
-      "  ▸ Must show citizenship date (oath date) with year/month/day",
-      "  ▸ e-Certificate: print and submit",
-      "Applicant's Basic Certificate / 기본증명서 (Detailed, full ID number, within 3 months)",
-      "  ▸ Must show nationality loss/renunciation date",
-      "  ▸ If not yet shown: submit Nationality Loss Registration Receipt additionally",
-      "  ▸ If nationality loss was before Jan 1, 2008: submit 제적등본 instead",
-      "Applicant's Family Relationship Certificate / 가족관계증명서 (Detailed, within 3 months)",
-      "RCMP Criminal Record Check — fingerprint-based, issued within 6 months (ages 18–59)",
+      "Applicant's Basic Certificate / 기본증명서 — Detailed, full ID number, within 3 months",
+      "Applicant's Family Relationship Certificate / 가족관계증명서 — Detailed, within 3 months",
+      "RCMP Criminal Record Check — fingerprint-based, issued within 6 months",
       "  ▸ Ages 17 and under, 60 and over: exempt",
-      "  ▸ ⚠️ Fingerprint-based ONLY — name-based or local police NOT accepted",
-      "  ▸ Inquiries: CCRTIS-SCICTR@rcmp-grc.gc.ca",
-      "Third-country Criminal Record Check (if stayed 1+ year outside Korea/Canada in last 5 years)",
-      "  ▸ Apostille required (Apostille Convention countries) or consular authentication",
+      "  ▸ Third-country check also required if stayed 1+ year outside Korea/Canada in last 5 years",
     ],
     costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, or Credit Card) / Mail: Certified Cheque" }],
     time: "5–10 business days",
     notices: [
-      "⚠️ You MUST complete Korean nationality loss (국적상실 신고) BEFORE applying.",
-      "  ▸ Book Nationality section appointment first — processing takes approx. 6 months",
-      "  ▸ 기본증명서 / 가족관계증명서 from consulate takes 2 weeks — apply early",
-      "This is the most common F-4 case: born in Korea → immigrated to Canada → naturalized as Canadian citizen.",
-      "Visa validity: 5 years from issue date; stay up to 2 years per entry.",
-      "⚠️ Visa valid for 3 months from issue date — must enter Korea within this period or visa is void.",
-      "Visa status check: visa.go.kr → select '재외공관' → enter passport number.",
-      "Mail applications accepted (Xpresspost return envelope + Certified Cheque required).",
-      "거소증 (Overseas Korean Resident Card): if staying 90+ days or multiple visits in 5 years, apply at Korean Immigration Office within 90 days of arrival.",
-      "Note: consulate has no call centre — for inquiries email torvisa@mofa.go.kr",
+      "⚠️ Complete nationality loss (국적상실 신고) BEFORE applying — processing takes ~6 months. Book Nationality section first.",
+      "⚠️ 기본증명서 / 가족관계증명서 from consulate takes 2 weeks — apply early.",
+      "⚠️ Consulate photo equipment cannot be used — bring photo from a photo studio.",
+      "⚠️ Citizenship Certificate: card-type or Search of Citizenship Record NOT accepted. Must show oath date (year/month/day). e-Certificate: print and submit.",
+      "⚠️ RCMP check: fingerprint-based ONLY — name-based or local police NOT accepted. Inquiries: CCRTIS-SCICTR@rcmp-grc.gc.ca",
+      "⚠️ If 기본증명서 does not yet show nationality loss: also submit Nationality Loss Registration Receipt.",
+      "⚠️ If nationality loss was before Jan 1, 2008: submit 제적등본 instead of 기본증명서/가족관계증명서.",
+      "Visa: 5-year validity · up to 2 years stay per entry · multiple entry.",
+      "⚠️ Visa valid for 3 months from issue — must enter Korea within this period or visa is void.",
+      "Visa status: visa.go.kr → select '재외공관' → enter passport number.",
+      "Mail: include Xpresspost return envelope + Certified Cheque (residents 2+ hours from consulate only).",
+      "거소증: if staying 90+ days, apply at Korean Immigration Office within 90 days of arrival.",
+      "No call centre — inquiries: torvisa@mofa.go.kr",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "Book Appointment (Visa Section) →",
@@ -7203,7 +7188,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
             const svcIcon = services.find(s => s.id === (page.service + "_start") || s.id.startsWith(page.service ?? ""))?.icon ?? "";
             const mainDocs = pageDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("▸"));
             const extraDocs = pageDocs.filter((d: any) => typeof d === "string" && d.trim().startsWith("▸"));
-            const summary = (page as any).summary;
             return (
             <div>
               <div className="result-badge" style={{ background: serviceColor, marginBottom: "10px" }}>
@@ -7214,52 +7198,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 <div className="result-title" style={{ fontSize: "21px", marginBottom: 0 }}>{page.title ?? ""}</div>
               </div>
 
-              {summary && (
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "8px", margin: "14px 0 16px" }}>
-                  {summary.stay && (
-                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "체류기간" : "Stay"}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.stay}</div>
-                    </div>
-                  )}
-                  {summary.validity && (
-                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "유효기간" : "Validity"}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.validity}</div>
-                    </div>
-                  )}
-                  {summary.entries && (
-                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "입국횟수" : "Entries"}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.entries}</div>
-                    </div>
-                  )}
-                  {summary.fee && (
-                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "수수료" : "Fee"}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.fee}</div>
-                    </div>
-                  )}
-                  {summary.processing && (
-                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "처리기간" : "Processing"}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.processing}</div>
-                    </div>
-                  )}
-                  {summary.time && (
-                    <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-lg)", padding: "10px 12px", textAlign: "center" }}>
-                      <div style={{ fontSize: "11px", color: "var(--color-text-tertiary)", marginBottom: "4px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" }}>{lang === "ko" ? "처리기간" : "Processing"}</div>
-                      <div style={{ fontSize: "15px", fontWeight: 700, color: "var(--color-text-primary)" }}>{summary.time}</div>
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {!summary && (
-                <div className="result-sub">
-                  {lang === "ko" ? "방문 전 아래 서류를 준비해 주세요." : "Prepare the following documents before your visit."}
-                </div>
-              )}
+              <div className="result-sub">
+                {lang === "ko" ? "방문 전 아래 서류를 준비해 주세요." : "Prepare the following documents before your visit."}
+              </div>
 
               <div className="info-card">
                 <div className="info-card-header">

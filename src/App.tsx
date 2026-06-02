@@ -312,6 +312,19 @@ const STYLES = `
   .cost-label { color: #556; }
   .cost-value { font-weight: 700; color: #003478; }
 
+  /* ── 수령방법 박스 (여권 등) ── */
+  .pickup-card { border: 1.5px solid #003478; border-radius: 12px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 1px 4px rgba(0,52,120,0.06); }
+  .pickup-head { background: #eef3fb; padding: 9px 14px; display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: #003478; }
+  .pickup-body { padding: 2px 14px 10px; }
+  .pickup-opt { padding: 9px 0 8px; border-bottom: 1px solid #f2f4f9; }
+  .pickup-opt:last-child { border-bottom: none; }
+  .pickup-opt-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .pickup-opt-name { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+  .pickup-badge { font-size: 11px; color: #556; background: #f0f2f7; padding: 2px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0; }
+  .pickup-badge.fast { color: #185fa5; background: #e6f1fb; }
+  .pickup-opt-desc { font-size: 12px; color: #667; margin-top: 4px; line-height: 1.45; }
+  .pickup-warn { font-size: 12px; color: #a35a00; margin-top: 3px; line-height: 1.4; }
+
   /* ── 주의사항 — ⚠️ 강조 배경 ── */
   .notice-item {
     display: flex; align-items: flex-start; gap: 8px;
@@ -631,1297 +644,917 @@ const TREE = {
   passport_start: {
     type: "question",
     service: "passport",
-    stepLabel: "여권",
     breadcrumb: ["홈", "여권"],
     question: "여권이 언제까지 필요하신가요?",
-    sub: "긴급 여부에 따라 발급 방법과 절차가 완전히 달라집니다.",
+    sub: "긴급 여부에 따라 발급되는 여권 종류와 절차가 완전히 달라집니다.",
     options: [
-      { id: "passport_urgent_age", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "단수여권(사진부착식) 당일 발급 — 긴급 귀국·출국 사유 필요" },
-      { id: "passport_normal_age", icon: "📅", title: "여유 있음 (1주일 이상)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
+      { id: "pp_urgent_age", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "비전자 단수여권(유효기간 1년) 당일 발급 — 긴급 출국 사유 필요" },
+      { id: "pp_normal_age", icon: "📘", title: "일반 — 1주일 이상 여유", desc: "전자여권 — 방문/우편 수령 또는 DHL 특급(약 1~2주)" },
     ],
   },
 
-  passport_urgent_age: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "긴급"],
-    question: "신청자의 연령은?",
-    sub: "만 18세 기준으로 필요 서류가 달라집니다.",
-    options: [
-      { id: "passport_urgent_status", icon: "👤", title: "만 18세 이상 (성인)", desc: "본인 직접 신청" },
-      { id: "passport_minor_urgent_who", icon: "👶", title: "만 18세 미만 (미성년자)", desc: "법정대리인 동반 또는 서류 필요" },
-    ],
-  },
-
-  passport_urgent_status: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인"],
-    question: "현재 여권 상태는?",
-    sub: "여권 유무에 따라 준비 서류가 다릅니다.",
-    options: [
-      { id: "passport_urgent_who", icon: "✅", title: "여권 있음 (재발급)", desc: "만료 임박·만료·훼손 등" },
-      { id: "passport_urgent_lost_who", icon: "❌", title: "여권 분실", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
-      { id: "passport_urgent_who_new", icon: "🆕", title: "여권 없음 (신규)", desc: "한국 여권이 한 번도 없었던 경우" },
-    ],
-  },
-
-  passport_normal_age: {
+  pp_normal_age: {
     type: "question",
     service: "passport",
     breadcrumb: ["홈", "여권", "일반"],
     question: "신청자의 연령은?",
-    sub: "만 18세 기준으로 필요 서류가 달라집니다.",
+    sub: "만 18세 기준으로 필요 서류와 수수료가 달라집니다.",
     options: [
-      { id: "passport_adult", icon: "👤", title: "만 18세 이상 (성인)", desc: "본인 직접 신청" },
-      { id: "passport_minor", icon: "👶", title: "만 18세 미만 (미성년자)", desc: "법정대리인 동반 또는 서류 필요" },
+      { id: "pp_n_adult_state", icon: "🧑", title: "만 18세 이상 (성인)", desc: "본인 직접 신청" },
+      { id: "pp_n_minor_state", icon: "🧒", title: "만 18세 미만 (미성년자)", desc: "법정대리인 동의 필요" },
     ],
   },
 
-  passport_adult: {
+  pp_urgent_age: {
     type: "question",
     service: "passport",
-    breadcrumb: ["홈", "여권", "성인"],
+    breadcrumb: ["홈", "여권", "긴급"],
+    question: "신청자의 연령은?",
+    sub: "비전자 단수여권(유효기간 1년)을 당일 발급합니다.",
+    options: [
+      { id: "pp_u_adult_state", icon: "🧑", title: "만 18세 이상 (성인)", desc: "본인 직접 신청" },
+      { id: "pp_u_minor_state", icon: "🧒", title: "만 18세 미만 (미성년자)", desc: "법정대리인 동의 필요" },
+    ],
+  },
+
+  pp_n_adult_state: {
+    type: "question",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "일반", "성인"],
     question: "현재 여권 상태는?",
-    sub: "여권 유무에 따라 준비 서류가 다릅니다.",
+    sub: "상태에 따라 추가 서류(분실신고서 등)가 달라집니다.",
     options: [
-      { id: "passport_adult_have", icon: "✅", title: "재발급 (여권 있음)", desc: "만료 임박 또는 만료된 여권" },
-      { id: "passport_adult_lost", icon: "❌", title: "분실 재발급", desc: "경찰 신고 후 재발급" },
-      { id: "passport_adult_new", icon: "🆕", title: "신규 발급 (여권 없음)", desc: "최초 여권 발급 — 반드시 방문 신청" },
+      { id: "pp_n_adult_renew_status", icon: "🔄", title: "재발급 (여권 있음)", desc: "만료·만료 임박·훼손·정보 변경" },
+      { id: "pp_n_adult_lost_status", icon: "❌", title: "분실 재발급", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
+      { id: "pp_n_adult_new_status", icon: "🆕", title: "신규 발급 (여권 없음)", desc: "한국 여권을 처음 발급" },
     ],
   },
 
-  passport_adult_have: {
+  pp_n_minor_state: {
     type: "question",
     service: "passport",
+    breadcrumb: ["홈", "여권", "일반", "미성년자"],
+    question: "자녀의 현재 여권 상태는?",
+    sub: "상태에 따라 추가 서류가 달라집니다.",
+    options: [
+      { id: "pp_n_minor_renew_custody", icon: "🔄", title: "재발급 (여권 있음)", desc: "만료·만료 임박·훼손" },
+      { id: "pp_n_minor_lost_custody", icon: "❌", title: "분실 재발급", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
+      { id: "pp_n_minor_new_custody", icon: "🆕", title: "신규 발급 (여권 없음)", desc: "한국 여권을 처음 발급" },
+    ],
+  },
+
+  pp_u_adult_state: {
+    type: "question",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "성인"],
+    question: "현재 여권 상태는?",
+    sub: "긴급 비전자 단수여권 — 상태에 따라 분실신고서 등이 달라집니다.",
+    options: [
+      { id: "pp_u_adult_have", icon: "🔄", title: "여권 있음 (재발급)", desc: "만료·훼손 등" },
+      { id: "pp_u_adult_lost", icon: "❌", title: "여권 분실", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
+      { id: "pp_u_adult_new", icon: "🆕", title: "여권 없음 (신규)", desc: "한국 여권을 처음 발급" },
+    ],
+  },
+
+  pp_u_minor_state: {
+    type: "question",
+    service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자"],
+    question: "자녀의 현재 여권 상태는?",
+    sub: "긴급 비전자 단수여권 — 친권 상황은 결과 페이지에서 안내합니다.",
+    options: [
+      { id: "pp_u_minor_have", icon: "🔄", title: "여권 있음 (재발급)", desc: "만료·훼손 등" },
+      { id: "pp_u_minor_lost", icon: "❌", title: "여권 분실", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
+      { id: "pp_u_minor_new", icon: "🆕", title: "여권 없음 (신규)", desc: "한국 여권을 처음 발급" },
+    ],
+  },
+
+  // ───────── ④ 일반·성인: 상태별 체류신분 선택 (3개 → 같은 결과 5개) ─────────
+  pp_n_adult_renew_status: {
+    type: "question", service: "passport",
     breadcrumb: ["홈", "여권", "일반", "성인", "재발급"],
-    question: "재발급 사유가 무엇인가요?",
-    sub: "사유에 따라 수수료와 준비 서류가 달라집니다.",
+    question: "체류 신분을 선택하세요",
+    sub: "신분에 따라 제출하는 증명서류가 달라집니다.",
     options: [
-      { id: "passport_adult_have_normal", icon: "📅", title: "만료 또는 만료 임박", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
-      { id: "passport_residual", icon: "⏳", title: "훼손 · 성명변경 · 정보정정", desc: "유효기간이 남아있는 여권 재발급 — 잔여기간 수수료 적용" },
+      { id: "pp_n_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
+      { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
+      { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
+      { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
+      { id: "pp_n_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
     ],
   },
-
-  passport_adult_new: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "일반", "성인", "신규"],
-    question: "신규 발급 유형은?",
-    sub: "신규 발급은 기존 여권이 없으므로 온라인 신청 불가, 반드시 방문 신청입니다.",
-    options: [
-      { id: "passport_new_normal", icon: "🆕", title: "일반 신규 발급", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
-    ],
-  },
-
-  passport_adult_lost: {
-    type: "question",
-    service: "passport",
+  pp_n_adult_lost_status: {
+    type: "question", service: "passport",
     breadcrumb: ["홈", "여권", "일반", "성인", "분실"],
-    question: "분실 후 재발급",
-    sub: "⚠️ 방문 전 반드시 경찰 분실 신고(Police Report)를 먼저 완료하세요.",
+    question: "체류 신분을 선택하세요",
+    sub: "분실 재발급 — 신분에 따라 증명서류가 달라집니다. (경찰 분실 신고 먼저)",
     options: [
-      { id: "passport_lost_normal", icon: "📅", title: "일반 발급 (여유 있음)", desc: "일반 전자여권 3~4주 / DHL 특급 약 2주" },
+      { id: "pp_n_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
+      { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
+      { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
+      { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
+      { id: "pp_n_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
     ],
   },
-
-  // ── 성인 긴급 — 체류신분 분기 (재발급/분실용 — eTA 포함) ──
-  passport_urgent_who: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "긴급", "체류신분"],
-    question: "캐나다 체류 신분은?",
-    sub: "체류신분에 따라 지참해야 하는 서류가 달라집니다.",
+  pp_n_adult_new_status: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "일반", "성인", "신규"],
+    question: "체류 신분을 선택하세요",
+    sub: "신규 발급 — 신분에 따라 증명서류가 달라집니다.",
     options: [
-      { id: "passport_urgent_pr", icon: "🟢", title: "영주권자 (PR Card)", desc: "Permanent Resident" },
-      { id: "passport_urgent_citizen", icon: "🍁", title: "시민권자", desc: "Canadian Citizen — 국적상실신고 관련 주의사항 있음" },
-      { id: "passport_urgent_visa", icon: "📋", title: "비자 소지자", desc: "학생·취업·방문 비자 등" },
-      { id: "passport_urgent_eta", icon: "✈️", title: "단기 방문자 (eTA)", desc: "한국에서 캐나다로 관광·방문 중인 경우" },
+      { id: "pp_n_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
+      { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
+      { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
+      { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
+      { id: "pp_n_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
     ],
   },
 
-  // ── 성인 긴급 — 신규 전용 (eTA 제외) ──
-  passport_urgent_who_new: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "긴급", "신청 사유"],
-    question: "어떤 이유로 처음 여권을 발급받으시나요?",
-    sub: "긴급 단수여권도 신규 사유에 따라 지참 서류가 다릅니다.",
+  // ───────── ④ 일반·미성년: 상태별 친권 선택 (3개 → 같은 결과 5개) ─────────
+  pp_n_minor_renew_custody: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "재발급"],
+    question: "친권 상황을 선택하세요",
+    sub: "상황에 따라 동의서·인감 등 추가 서류가 달라집니다.",
     options: [
-      { id: "passport_urgent_new_dual", icon: "🧬", title: "선천적 복수국적자 — 한국 여권 미발급", desc: "캐나다 출생, 성인 전 한국 여권 발급 없이 성인이 된 경우" },
-      { id: "passport_urgent_new_recovery", icon: "🇰🇷", title: "국적 회복 후 첫 여권 신청", desc: "국적회복 허가를 받은 후 처음 여권 신청" },
+      { id: "pp_n_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
+      { id: "pp_n_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
+      { id: "pp_n_minor_joint", icon: "👥", title: "이혼 — 공동친권", desc: "이혼했으나 공동친권 유지" },
+      { id: "pp_n_minor_single", icon: "💗", title: "한부모 (사별·미혼)", desc: "사별 또는 미혼 단독 양육" },
+      { id: "pp_n_minor_study", icon: "🎒", title: "유학생 (부모 한국 거주)", desc: "부모 모두 한국 거주 — 본인 또는 대리인 신청" },
     ],
   },
-
-  passport_urgent_new_dual: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "긴급", "선천적 복수국적자"],
-    title: "⚡ 긴급 단수여권 — 신규 · 선천적 복수국적자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "기본증명서 (상세) — 한국 발급, 3개월 이내 (부/모 한국인 표기 확인)",
-      "가족관계증명서 (상세) — 한국 발급, 3개월 이내",
-      "캐나다 출생증명서 (Birth Certificate) 원본 + 사본",
-      "캐나다 여권 또는 시민권증서 원본 + 사본",
-      "부 또는 모의 한국 여권 또는 신분증 사본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
-      "  ▸ 만 18~37세 남성: 병역 관련 서류 — 방문 전 반드시 전화 상담 (416-920-3809)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 한국 출생신고(가족관계등록부 등재)가 완료되어 있어야 합니다. 미등록 시 당일 발급 불가 — 사전 전화 필수 (416-920-3809).",
-      "⚠️ 만 18~37세 남성 복수국적자: 병역 서류 미비 시 발급 거부될 수 있음 — 방문 전 반드시 전화 상담.",
-      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
-      "단수여권은 1회용 — 귀국 후 반드시 정식 전자여권 별도 신청.",
-      "수령: 방문 당일 직접 수령만 가능 (우편·DHL 불가).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_new_recovery: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "긴급", "국적 회복"],
-    title: "⚡ 긴급 단수여권 — 신규 · 국적 회복 후",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "국적회복 허가서 원본 + 사본 (법무부 발급)",
-      "기본증명서 (상세) — 3개월 이내",
-      "가족관계증명서 (상세) — 3개월 이내",
-      "캐나다 여권 또는 PR Card 원본 + 사본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 국적회복 허가서 없이는 발급 불가 — 사전 준비 필수.",
-      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
-      "단수여권은 1회용 — 귀국 후 반드시 정식 전자여권 별도 신청.",
-      "수령: 방문 당일 직접 수령만 가능 (우편·DHL 불가).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_lost_who: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "긴급", "체류신분"],
-    question: "캐나다 체류 신분은?",
-    sub: "⚠️ 분실 시 경찰 신고(Police Report)를 먼저 완료하세요. 체류신분에 따라 서류가 달라집니다.",
+  pp_n_minor_lost_custody: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "분실"],
+    question: "친권 상황을 선택하세요",
+    sub: "분실 재발급 — 경찰 분실 신고 먼저. 상황에 따라 추가 서류가 달라집니다.",
     options: [
-      { id: "passport_urgent_lost_pr", icon: "🟢", title: "영주권자 (PR Card)", desc: "PR카드 분실 여부에 따라 서류 다름" },
-      { id: "passport_urgent_lost_citizen", icon: "🍁", title: "시민권자", desc: "시민권증서 지참 필요" },
-      { id: "passport_urgent_lost_visa", icon: "📋", title: "비자 소지자", desc: "비자 사본·기본증명서 등으로 신분 확인" },
-      { id: "passport_urgent_lost_eta", icon: "✈️", title: "단기 방문자 (eTA)", desc: "항공권 + eTA 승인서류 필수" },
+      { id: "pp_n_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
+      { id: "pp_n_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
+      { id: "pp_n_minor_joint", icon: "👥", title: "이혼 — 공동친권", desc: "이혼했으나 공동친권 유지" },
+      { id: "pp_n_minor_single", icon: "💗", title: "한부모 (사별·미혼)", desc: "사별 또는 미혼 단독 양육" },
+      { id: "pp_n_minor_study", icon: "🎒", title: "유학생 (부모 한국 거주)", desc: "부모 모두 한국 거주 — 본인 또는 대리인 신청" },
     ],
   },
-
-  // ── 성인 긴급 — 체류신분별 결과 ──
-  passport_urgent_pr: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "긴급", "영주권자"],
-    title: "⚡ 긴급 단수여권 — 영주권자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "PR Card 원본 + 흑백 사본 (앞뒷면)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류:",
-      "  ▸ 친족 사망·위독: 사망증명서 / 진단서",
-      "  ▸ 사업상 긴급: 계약서 / 초청장 / 회사 공문",
-      "  ▸ 긴급 귀국: 항공권 사본 + 귀국 사유 설명서",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 단수여권은 1회용 — 귀국 후 반드시 정식 전자여권 재발급 신청.",
-      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
-      "캐나다 재입국 시: 단수여권만으로는 불가 — PR카드 반드시 함께 지참.",
-      "긴급사유 수수료 감면: 증빙서류를 방문 당일 제출하지 못해도 6개월 이내 사후 제출로 차액 환급 신청 가능 (신청한 공관에서만 가능).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_citizen: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "긴급", "시민권자"],
-    title: "⚡ 긴급 단수여권 — 시민권자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "캐나다 여권 원본 + 흑백 사본 1부",
-      "캐나다 시민권증서 원본 + 흑백 사본 1부",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 / 계약서 등)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 시민권 취득 시 한국 국적이 자동 상실됩니다 — 국적상실신고가 기본증명서에 아직 반영되지 않은 경우 별도 처리가 필요할 수 있습니다. 방문 전 전화 문의 권장 (416-920-3809).",
-      "⚠️ 단수여권은 1회용 — 귀국 후 정식 전자여권 재발급 및 국적상실신고 처리 필요.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "캐나다 재입국 시: 캐나다 여권 + 시민권증서 지참.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_visa: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "긴급", "비자 소지자"],
-    title: "⚡ 긴급 단수여권 — 비자 소지자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "캐나다 비자 원본 + 흑백 사본 (학생·취업·방문 비자 등)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 / 계약서 등)",
-      "  ▸ 만 25~37세 남성 병역의무자: 병역 증빙서류 (해당 시)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 단수여권은 1회용 — 귀국 후 반드시 정식 전자여권 재발급 신청.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "캐나다 재입국 시: 단수여권만으로는 불가 — 기존 캐나다 비자 + 새 여권 지참.",
-      "새 여권 발급 후 비자 이전(IRCC 온라인 신청) 또는 새 비자 신청이 필요할 수 있습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_eta: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "긴급", "단기방문(eTA)"],
-    title: "⚡ 긴급 단수여권 — 단기 방문자 (eTA)",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "현재 여권 원본 + 흑백 사본 1부",
-      "왕복 항공권 (e-ticket) 출력본 — 귀국 일정 확인 필수",
-      "eTA 승인서류 출력본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권으로 대체 가능한 경우도 있음)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 단기 방문 중 여권 만료가 임박한 경우, 귀국 일정이 촉박할 수 있으니 항공권을 반드시 지참하세요.",
-      "⚠️ 단수여권은 1회용 — 귀국 후 한국에서 정식 전자여권 발급 필요.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "캐나다 재입국 시: 단수여권만으로는 불가 — 기존 여권의 유효한 eTA로 재입국 가능 여부 IRCC에 확인.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  // ── 분실 긴급 — 체류신분별 결과 ──
-  passport_urgent_lost_pr: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "긴급", "영주권자"],
-    title: "⚡ 긴급 단수여권 — 여권 분실 · 영주권자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 현지 경찰서 발급 필수",
-      "PR Card 원본 + 흑백 사본 (앞뒷면)",
-      "  ▸ PR카드도 분실 시: 방문 전 반드시 전화 상담 필수 (416-920-3809)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
-      "  ▸ 신분 확인용: 기본증명서 (상세) — 여권·신분증 모두 없는 경우",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ Police Report 없이는 접수 불가 — 반드시 방문 전 경찰 신고 완료.",
-      "⚠️ PR카드도 분실한 경우: 신분 확인이 어려워 발급이 제한될 수 있음 — 사전 전화 상담 필수.",
-      "단수여권 1회용 — 귀국 후 정식 전자여권 재발급 필요.",
-      "PR카드 분실은 IRCC에 별도 신고 및 재발급 신청 필요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_lost_citizen: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "긴급", "시민권자"],
-    title: "⚡ 긴급 단수여권 — 여권 분실 · 시민권자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 현지 경찰서 발급 필수",
-      "캐나다 여권 원본 + 흑백 사본",
-      "캐나다 시민권증서 원본 + 흑백 사본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
-      "  ▸ 기본증명서 (상세) — 신분 추가 확인 필요 시",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 시민권 취득시 한국 국적 자동 상실 — 국적상실신고 미완료 시 긴급여권 발급이 제한될 수 있습니다. 방문 전 반드시 전화 상담 필수 (416-920-3809).",
-      "단수여권 1회용 — 귀국 후 정식 전자여권 재발급 및 국적상실신고 처리 필요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_lost_visa: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "긴급", "비자 소지자"],
-    title: "⚡ 긴급 단수여권 — 여권 분실 · 비자 소지자",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 현지 경찰서 발급 필수",
-      "캐나다 비자 사본 (분실하지 않은 경우) 또는 IRCC 체류자격 확인서류",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
-      "  ▸ 기본증명서 (상세) — 여권 없어 신분 확인 불가 시 필수",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 비자도 함께 분실한 경우: 신분 확인이 어려울 수 있음 — 사전 전화 상담 권장 (416-920-3809).",
-      "단수여권 1회용 — 귀국 후 정식 전자여권 재발급 필요.",
-      "여행증명서가 필요한 경우: 영사관에 사전 전화 문의 (416-920-3809).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_lost_eta: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "긴급", "단기방문(eTA)"],
-    title: "⚡ 긴급 단수여권 — 여권 분실 · 단기 방문자 (eTA)",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 현지 경찰서 발급 필수",
-      "왕복 항공권 (e-ticket) 출력본",
-      "eTA 승인서류 출력본 (이메일 조회 가능)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "  ▸ 기본증명서 (상세) — 신분 확인 추가 필요 시",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 단기 방문 중 여권 분실은 귀국이 최우선 — 항공권을 반드시 지참하세요.",
-      "단수여권 1회용 — 귀국 후 한국에서 정식 전자여권 발급 필요.",
-      "eTA는 여권번호에 연동되므로 단수여권으로 캐나다 재입국 불가 — 귀국 전용 서류입니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  // ── 미성년자 긴급 — 친권 분기 ──
-  passport_minor_urgent_who: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "친권 상황"],
-    question: "부모 친권 상황은?",
-    sub: "긴급 상황이라도 친권 상황에 따라 지참 서류가 달라집니다. 방문 전 미리 확인하세요.",
+  pp_n_minor_new_custody: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "신규"],
+    question: "친권 상황을 선택하세요",
+    sub: "신규 발급 — 상황에 따라 추가 서류가 달라집니다.",
     options: [
-      { id: "passport_urgent_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "부·모 여권 사본 모두 필요" },
-      { id: "passport_urgent_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "단독친권자만 방문·서명" },
-      { id: "passport_urgent_minor_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },
-      { id: "passport_urgent_minor_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 방문" },
-      { id: "passport_urgent_minor_korea", icon: "🇰🇷", title: "법정대리인이 한국에 거주", desc: "인감도장 + 인감증명서 필요 — 긴급 시 사전 전화 필수" },
+      { id: "pp_n_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
+      { id: "pp_n_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
+      { id: "pp_n_minor_joint", icon: "👥", title: "이혼 — 공동친권", desc: "이혼했으나 공동친권 유지" },
+      { id: "pp_n_minor_single", icon: "💗", title: "한부모 (사별·미혼)", desc: "사별 또는 미혼 단독 양육" },
+      { id: "pp_n_minor_study", icon: "🎒", title: "유학생 (부모 한국 거주)", desc: "부모 모두 한국 거주 — 본인 또는 대리인 신청" },
     ],
   },
 
-  passport_urgent_minor_married: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "공동친권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 부모 혼인 중 (공동친권)",
-    docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "자녀 여권 원본 + 흑백 사본 (있는 경우) / 없으면 기본증명서 또는 가족관계증명서",
-      "법정대리인 동의서 — 부모 2인 인적사항 기재, 방문하는 1인이 서명",
-      "방문하는 법정대리인(부 또는 모) 여권 원본",
-      "비방문 법정대리인(부 또는 모) 여권 사본 1부",
-      "자녀 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료 (만 8세 이상)", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급여권 수수료 (만 8세 미만)", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 법정대리인 반드시 동반 방문 — 자녀 단독 방문 불가.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "단수여권 1회용 — 여행 목적 달성 후 정식 전자여권 별도 신청.",
-      "캐나다 재입국 시: 단수여권만으로는 불가 — 자녀 PR카드·비자·캐나다 여권 지참.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_minor_sole: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "단독친권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 이혼 후 단독친권",
-    docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "자녀 여권 원본 + 흑백 사본 (있는 경우)",
-      "법정대리인 동의서 — 단독친권자만 인적사항 기재 및 서명",
-      "단독친권자 여권 원본",
-      "단독친권 확인 서류: 자녀 기본증명서 (상세, 친권자 1인 명시) — 3개월 이내",
-      "자녀 체류자격 증빙서류 원본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 단독친권자만 방문·서명 — 비친권자 동의 불필요.",
-      "기본증명서(상세)에 단독친권자가 명확히 표기되어야 합니다.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_minor_joint: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "이혼·공동친권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 이혼 후 공동친권",
-    docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드 — 여행국가명 또는 출발예정일 기재)",
-      "자녀 여권 원본 + 흑백 사본 (있는 경우) / 없으면 기본증명서 또는 가족관계증명서",
-      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기재, 방문하는 친권자가 서명",
-      "방문하는 공동친권자 여권 원본",
-      "비방문 공동친권자 여권 사본 1부",
-      "공동친권 확인: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)",
-      "자녀 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 공동친권: 양쪽 친권자 모두의 동의가 필요합니다 — 한 쪽이 반대하면 발급 제한.",
-      "⚠️ 비방문 친권자 여권 사본 반드시 지참.",
-      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
-      "단수여권 1회용 — 여행 목적 달성 후 정식 전자여권 별도 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_minor_single: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "한부모"],
-    title: "⚡ 미성년자 긴급 단수여권 — 한부모 (사별 / 미혼)",
-    docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "자녀 여권 원본 + 흑백 사본 (있는 경우) / 없으면 기본증명서 또는 가족관계증명서",
-      "법정대리인 동의서 — 생존 친권자만 인적사항 기재 및 서명",
-      "생존 친권자 여권 원본",
-      "자녀 체류자격 증빙서류 원본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류",
-      "  ▸ 사별의 경우: 사망한 배우자의 사망증명서",
-      "  ▸ 기본증명서 (상세) — 단독친권 또는 사망 사실 표기된 것",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 생존 친권자만 방문·서명 가능.",
-      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
-      "기본증명서(상세)에 단독친권 또는 사망 사실이 표기되어야 합니다.",
-      "단수여권 1회용 — 여행 목적 달성 후 정식 전자여권 별도 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-    passport_urgent_minor_korea: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "법정대리인 한국 거주"],
-    title: "⚡ 미성년자 긴급 단수여권 — 법정대리인이 한국에 거주",
-    docs: [
-      "여권발급신청서 (자녀 명의, 캐나다 측 성인이 대리 작성)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "자녀 여권 원본 + 흑백 사본 (있는 경우)",
-      "법정대리인 동의서 — 한국 거주 부 또는 모가 서명, 서명란에 반드시 인감도장 날인",
-      "법정대리인 인감증명서 — 6개월 이내 발급본",
-      "법정대리인 신분증 사본 (여권 / 주민등록증)",
-      "자녀 체류자격 증빙서류 원본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
-    ],
-    costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 — 영사 심사 후 결정",
-    notices: [
-      "⚠️ 긴급 상황에서 인감도장·인감증명서를 준비하기 어려울 수 있습니다 — 반드시 방문 전 전화 상담 필수 (416-920-3809).",
-      "법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.",
-      "인감증명서는 6개월 이내 발급본만 인정.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_minor: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "긴급", "단수여권"],
-    title: "⚡ 긴급 단수여권 (비전자식) — 당일 발급",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드 — 여행국가명 또는 출발예정일 반드시 기재)",
-      "현재 여권 원본 + 흑백 사본 1부 (여권이 있는 경우)",
-      "  ▸ 여권 없는 경우: 한국 공공기관 발급 신분증 원본 + 사본 (사진·생년월일 기재)",
-      "캐나다 체류자격 증빙서류 원본 + 흑백 사본 (PR카드 / 비자 / 시민권증서)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 지참 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (아래 중 해당하는 것):",
-      "  ▸ 친족 사망·위독: 사망증명서 / 진단서 / 병원 확인서",
-      "  ▸ 사업상 긴급 출국: 계약서 / 초청장 / 회사 공문",
-      "  ▸ 인도적 사유: 해당 사유 증빙서류",
-      "  ▸ 긴급 귀국: 항공권 사본 + 귀국 사유 설명서",
-    ],
-    costs: [
-      { label: "일반 긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-      { label: "감면 조건", value: "사전 또는 방문 후 6개월 이내 증빙서류 제출 시 적용" },
-    ],
-    time: "당일 발급 (방문 즉시) — 영사 심사 후 발급 결정",
-    notices: [
-      "⚠️ 단수여권은 1회용입니다 — 여행 목적 달성 시 효력 소멸. 귀국 후 반드시 정식 전자여권을 별도 신청하세요.",
-      "⚠️ 사진은 반드시 사진관에서 대한민국 여권 규격으로 촬영 — 영사관 무료촬영 불가.",
-      "긴급 발급 여부는 영사 심사 후 결정됩니다 — 사유가 충분하지 않으면 발급이 거부될 수 있습니다.",
-      "수령: 방문 당일 직접 수령만 가능 (우편·DHL 불가).",
-      "캐나다 재입국 시: 단수여권만으로는 재입국 불가 — PR카드·비자·시민권증서를 반드시 함께 지참.",
-      "긴급사유 수수료 감면: 증빙서류를 방문 당일 제출하지 못해도 6개월 이내 사후 제출로 차액 환급 신청 가능 (신청한 공관에서만 가능).",
-      "신분 확인이 불가능한 경우(여권 분실 + 신분증 없음): 반드시 방문 전 전화 상담 필수 (416-920-3809).",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_lost: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "긴급", "단수여권"],
-    title: "⚡ 긴급 단수여권 — 여권 분실 후 긴급 출국",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 필수)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드 — 여행국가명 또는 출발예정일 기재)",
-      "여권 분실 신고서 (Police Report) — 방문 전 현지 경찰서에서 반드시 발급",
-      "캐나다 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
-      "  ▸ PR카드도 분실 시: 여권과 사전 전화 상담 필수 (416-920-3809)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 지참 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류:",
-      "  ▸ 친족 사망·위독: 사망증명서 / 진단서",
-      "  ▸ 기타 긴급 사유: 항공권 / 초청장 / 계약서 등",
-      "  ▸ 신분 확인용 추가서류: 기본증명서 (상세) — 여권 없어 가족관계 확인 불가 시",
-    ],
-    costs: [
-      { label: "일반 긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-      { label: "감면 조건", value: "사전 또는 방문 후 6개월 이내 증빙서류 제출 시 적용" },
-    ],
-    time: "당일 발급 (영사 심사 후 결정)",
-    notices: [
-      "⚠️ 반드시 경찰 분실 신고(Police Report) 완료 후 방문하세요.",
-      "⚠️ 사진은 반드시 사진관 촬영본 — 영사관 무료촬영 불가.",
-      "⚠️ PR카드·비자 등 체류자격 증빙이 전혀 없는 경우: 단수여권 발급이 어려울 수 있습니다 — 반드시 사전 전화 문의 (416-920-3809).",
-      "단수여권은 1회용 — 귀국 후 한국에서 정식 전자여권 재발급 신청 필요.",
-      "신분 확인 불가 시: 방문 전 반드시 전화 상담 필수 (416-920-3809).",
-      "캐나다 재입국 시: 단수여권만으로는 재입국 불가 — PR카드·비자 필요.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-  passport_urgent_minor_2: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "긴급", "단수여권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 당일 발급",
-    docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 신청인은 자녀 기준으로 작성)",
-      "  ▸ 하단 서명: 신청인(자녀) + 법정대리인(부 또는 모) 각각 이름 기재, 서명은 법정대리인",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드 — 여행국가명 또는 출발예정일 기재)",
-      "자녀의 기존 여권 원본 + 흑백 사본 1부 (여권이 있는 경우)",
-      "  ▸ 여권 없는 경우: 자녀 기본증명서 또는 가족관계증명서",
-      "법정대리인(부 또는 모) 여권 원본 + 흑백 사본 1부",
-      "법정대리인 동의서 (영사관 홈페이지 다운로드 — 동반하지 않는 부 또는 모 서명 필수)",
-      "캐나다 체류자격 증빙서류 원본 (자녀 + 신청 법정대리인)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 지참 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 / 초청장 등)",
-    ],
-    costs: [
-      { label: "만 8~17세 긴급여권", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "만 8세 미만 긴급여권", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
-    ],
-    time: "당일 발급 (영사 심사 후 결정)",
-    notices: [
-      "⚠️ 법정대리인(부 또는 모) 반드시 동반 방문 — 자녀 단독 방문 불가.",
-      "⚠️ 사진은 반드시 사진관 촬영본 — 영사관 무료촬영 불가.",
-      "동반하지 않는 부 또는 모의 법정대리인 동의서가 반드시 필요합니다.",
-      "단수여권은 1회용 — 여행 목적 달성 후 정식 전자여권을 별도 신청하세요.",
-      "캐나다 재입국 시: 단수여권만으로는 재입국 불가 — 캐나다 여권 또는 PR카드 등 필요.",
-      "긴급 발급 여부는 영사 심사 후 결정 — 사유가 충분하지 않으면 거부될 수 있습니다.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
-  },
-
-
-  passport_residual: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "성인", "재발급", "훼손·성명변경·정보정정"], title: "여권 재발급 — 훼손 · 성명변경 · 정보정정 (잔여기간)", docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 여권 원본 + 흑백 사본 1부","체류자격 증빙서류 원본 + 사본 (PR카드 / 비자 / 시민권증서)","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","  ▸ 흰색 또는 연한 색 상의 착용 금지","성명변경의 경우: 법원 개명 허가서 또는 공증된 성명변경 증빙서류","정보정정의 경우: 기본증명서 (상세) 등 정정 사유 증빙서류"], costs: [{ label: "잔여기간 재발급", value: "CAD $36.45 (현금, Debit, 신용카드)" }], time: "약 3~4주 (DHL 특급 선택 시 약 2주)", notices: ["유효기간이 남아있는 여권을 훼손·분실·성명변경 등으로 재발급하는 경우 잔여기간 수수료 $36.45가 적용됩니다.","재발급된 여권의 유효기간은 기존 여권과 동일하게 유지됩니다.","여권 사진: 흰색 또는 연한 색 상의 착용 금지.","카카오톡 알림: 신청서에 카카오톡 연결 전화번호 기재 시 발급 진행상황 알림 수신 가능.","방문 전 사유에 맞는 증빙서류를 반드시 준비하세요 — 미비 시 접수 불가."], booking: "https://www.torbooking.com/book" },
-
-  passport_adult_have_normal: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "재발급", "일반"],
-    question: "캐나다 체류 신분은?",
-    sub: "체류 신분에 따라 준비할 증빙서류가 달라집니다.",
+  // ───────── ④ 긴급·성인: 상태별 체류신분 선택 (3개 → 같은 결과 5개) ─────────
+  pp_u_adult_have: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "재발급"],
+    question: "체류 신분을 선택하세요",
+    sub: "긴급 비전자 단수여권 — 신분에 따라 증명서류가 달라집니다.",
     options: [
-      { id: "passport_have_pr", icon: "🟢", title: "영주권자 (PR Card 소지)", desc: "Permanent Resident" },
-      { id: "passport_have_citizen", icon: "🍁", title: "시민권자", desc: "Canadian Citizen" },
-      { id: "passport_have_visa", icon: "📋", title: "비자 소지자", desc: "학생/취업/방문 비자 등" },
-      { id: "passport_have_visitor", icon: "✈️", title: "단기 방문자 (eTA)", desc: "관광·단기 방문으로 입국한 여행자" },
+      { id: "pp_u_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
+      { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
+      { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
+      { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
+      { id: "pp_u_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
     ],
   },
-
-  passport_new_normal: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "일반"],
-    question: "어떤 이유로 처음 여권을 발급받으시나요?",
-    sub: "성인이 캐나다에서 한국 여권을 처음 발급받는 경우는 상황이 한정되어 있습니다. 해당하는 경우를 선택하세요.",
+  pp_u_adult_lost: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "분실"],
+    question: "체류 신분을 선택하세요",
+    sub: "긴급 비전자 단수여권 (분실) — 경찰 분실 신고 먼저. 신분에 따라 증명서류가 달라집니다.",
     options: [
-      { id: "passport_new_dual", icon: "🧬", title: "선천적 복수국적자 — 한국 여권 미발급", desc: "캐나다 출생 또는 성인 전 한국 여권 발급 없이 성인이 된 경우" },
-      { id: "passport_new_recovery", icon: "🇰🇷", title: "국적 회복 후 첫 여권 신청", desc: "국적회복 허가를 받은 후 처음 여권 신청" },
+      { id: "pp_u_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
+      { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
+      { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
+      { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
+      { id: "pp_u_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
     ],
   },
-
-  // ── 신규 — 선천적 복수국적자 ──
-  passport_new_dual: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "선천적 복수국적자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "신규 발급은 반드시 방문 신청입니다. 수령 방법을 선택하세요.",
+  pp_u_adult_new: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "신규"],
+    question: "체류 신분을 선택하세요",
+    sub: "긴급 비전자 단수여권 (신규) — 신분에 따라 증명서류가 달라집니다.",
     options: [
-      { id: "passport_new_dual_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_new_dual_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
+      { id: "pp_u_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
+      { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
+      { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
+      { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
+      { id: "pp_u_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
     ],
   },
 
-  passport_new_dual_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "복수국적자", "방문수령"],
-    title: "여권 신규 발급 — 선천적 복수국적자 · 방문 수령",
+  // ───────── ④ 긴급·미성년: 상태별 친권 선택 (3개 → 같은 결과 5개) ─────────
+  pp_u_minor_have: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "재발급"],
+    question: "친권 상황을 선택하세요",
+    sub: "긴급 비전자 단수여권 — 상황에 따라 추가 서류가 달라집니다.",
+    options: [
+      { id: "pp_u_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
+      { id: "pp_u_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
+      { id: "pp_u_minor_joint", icon: "👥", title: "이혼 — 공동친권", desc: "이혼했으나 공동친권 유지" },
+      { id: "pp_u_minor_single", icon: "💗", title: "한부모 (사별·미혼)", desc: "사별 또는 미혼 단독 양육" },
+      { id: "pp_u_minor_study", icon: "🎒", title: "유학생 (부모 한국 거주)", desc: "부모 모두 한국 거주 — 본인 또는 대리인 신청" },
+    ],
+  },
+  pp_u_minor_lost: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "분실"],
+    question: "친권 상황을 선택하세요",
+    sub: "긴급 비전자 단수여권 (분실) — 경찰 분실 신고 먼저. 상황에 따라 추가 서류가 달라집니다.",
+    options: [
+      { id: "pp_u_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
+      { id: "pp_u_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
+      { id: "pp_u_minor_joint", icon: "👥", title: "이혼 — 공동친권", desc: "이혼했으나 공동친권 유지" },
+      { id: "pp_u_minor_single", icon: "💗", title: "한부모 (사별·미혼)", desc: "사별 또는 미혼 단독 양육" },
+      { id: "pp_u_minor_study", icon: "🎒", title: "유학생 (부모 한국 거주)", desc: "부모 모두 한국 거주 — 본인 또는 대리인 신청" },
+    ],
+  },
+  pp_u_minor_new: {
+    type: "question", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "신규"],
+    question: "친권 상황을 선택하세요",
+    sub: "긴급 비전자 단수여권 (신규) — 상황에 따라 추가 서류가 달라집니다.",
+    options: [
+      { id: "pp_u_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
+      { id: "pp_u_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
+      { id: "pp_u_minor_joint", icon: "👥", title: "이혼 — 공동친권", desc: "이혼했으나 공동친권 유지" },
+      { id: "pp_u_minor_single", icon: "💗", title: "한부모 (사별·미혼)", desc: "사별 또는 미혼 단독 양육" },
+      { id: "pp_u_minor_study", icon: "🎒", title: "유학생 (부모 한국 거주)", desc: "부모 모두 한국 거주 — 본인 또는 대리인 신청" },
+    ],
+  },
+
+  // ═══════════ 결과: 일반 전자여권 · 성인 (5) — pickup + stateDocs ═══════════
+  pp_n_adult_pr: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "성인", "영주권자"],
+    title: "일반 전자여권 — 영주권자",
+    sub: "전자여권 · 발급 약 3~4주 (DHL 이용 시 약 1~2주)",
     docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력)",
-      "기본증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
-      "  ▸ 기본증명서에 부 또는 모가 한국인임이 표기되어야 합니다",
-      "가족관계증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
-      "캐나다 출생증명서 (Birth Certificate) 원본 + 사본",
-      "캐나다 여권 또는 시민권증서 원본 + 사본",
-      "부 또는 모의 한국 여권 또는 신분증 사본 (한국 국적 확인용)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 가능)",
-      "  ▸ 한국 출생신고가 안 된 경우: 출생신고 먼저 완료 후 신청 (가족관계등록 메뉴 참조)",
-      "  ▸ 만 18~37세 남성: 병역 관련 서류 추가 필요 — 방문 전 전화 상담 권장 (416-920-3809)",
+      "여권발급신청서 (영사관 비치 양식 권장 / 미리 작성 시 컬러·A4 원본크기 출력, Letter 불가)",
+      "여권용 사진 1매 (6개월 이내, 흰색·연한색 상의 불가, 영사관 무료 촬영 가능)",
+      "PR Card 원본 + 사본 (앞뒷면 모두 복사)",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)", "현재 여권이 없으므로 분실 신고서로 대체"],
+      new: ["기존 한국 여권이 없는 경우 — 기본증명서·가족관계증명서로 신원 확인 (담당자 확인)"],
+    },
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },
-      { label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },
+      { label: "10년 (58면)", value: "CAD $70.20" },
+      { label: "10년 (26면)", value: "CAD $66.15" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
     ],
-    time: "약 3~4주 후 방문 수령",
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
     notices: [
-      "⚠️ 한국 출생신고(가족관계등록부 등재)가 완료되어 있어야 여권 신청 가능합니다. 미등록 시 가족관계등록 메뉴에서 출생신고를 먼저 진행하세요.",
-      "⚠️ 만 18~37세 남성 복수국적자: 재외국민2세 국외여행허가 또는 병역 관련 서류가 필요할 수 있습니다. 방문 전 전화 상담 필수 (416-920-3809).",
-      "기본증명서·가족관계증명서는 정부24(gov.kr) 온라인 발급 또는 한국 주민센터에서 발급하세요.",
-      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
-      "영문 이름은 신청서에 반드시 대문자로 정확히 기재.",
+      "PR Card가 만료·분실된 경우: 연장(재발급) 신청 영수증 제출 시 1년 유효 단수여권 발급 가능 — 담당자 상담 필요.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+      "신청서에 카카오톡 연결 번호 기재 시 발급 진행상황을 알림으로 받을 수 있습니다.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "예약하기 (여권 → 신규 발급) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_new_dual_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "복수국적자", "우편수령"],
-    title: "여권 신규 발급 — 선천적 복수국적자 · 우편 수령",
+  pp_n_adult_longterm: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "성인", "장기체류자"],
+    title: "일반 전자여권 — 장기체류자",
+    sub: "전자여권 · 발급 약 3~4주 (DHL 이용 시 약 1~2주)",
     docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력)",
-      "기본증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
-      "  ▸ 기본증명서에 부 또는 모가 한국인임이 표기되어야 합니다",
-      "가족관계증명서 (상세, 주민번호 전부 공개) — 한국 발급, 3개월 이내",
-      "캐나다 출생증명서 (Birth Certificate) 원본 + 사본",
-      "캐나다 여권 또는 시민권증서 원본 + 사본",
-      "부 또는 모의 한국 여권 또는 신분증 사본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 가능)",
-      "Canada Post Xpresspost 등기 봉투 (별도 구매, 수취인 주소·Tracking 기재)",
-      "우편수령 신청서",
-      "  ▸ 만 18~37세 남성: 병역 관련 서류 — 방문 전 전화 상담 필수 (416-920-3809)",
+      "여권발급신청서 (영사관 비치 양식 권장 / 미리 작성 시 컬러·A4 원본크기 출력, Letter 불가)",
+      "여권용 사진 1매 (6개월 이내, 흰색·연한색 상의 불가, 영사관 무료 촬영 가능)",
+      "캐나다 체류비자 원본 + 사본 (Study Permit, Work Permit 등)",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)", "현재 여권이 없으므로 분실 신고서로 대체"],
+      new: ["기존 한국 여권이 없는 경우 — 기본증명서·가족관계증명서로 신원 확인 (담당자 확인)"],
+    },
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },
-      { label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },
+      { label: "10년 (58면)", value: "CAD $70.20" },
+      { label: "10년 (26면)", value: "CAD $66.15" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
     ],
-    time: "약 3~4주 + 우편 배송 기간",
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
     notices: [
-      "⚠️ 한국 출생신고가 완료되어 있어야 여권 신청 가능합니다.",
-      "⚠️ 만 18~37세 남성 복수국적자: 병역 관련 서류 필요 — 방문 전 전화 상담 필수 (416-920-3809).",
-      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다 — Xpresspost 등기 봉투 사용 권장.",
+      "체류비자(Permit)의 유효기간이 충분히 남아 있어야 합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+      "신청서에 카카오톡 연결 번호 기재 시 발급 진행상황을 알림으로 받을 수 있습니다.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "예약하기 (여권 → 신규 발급) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  // ── 신규 — 국적 회복 ──
-  passport_new_recovery: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "신규", "국적 회복"],
-    title: "여권 신규 발급 — 국적 회복 후 첫 여권 신청",
+  pp_n_adult_eta: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "성인", "단기방문(eTA)"],
+    title: "일반 전자여권 — 단기방문자 (eTA)",
+    sub: "전자여권 · 발급 약 3~4주 (DHL 이용 시 약 1~2주)",
     docs: [
-      "여권발급신청서 (영사관 비치, 자필 작성 — 반드시 컬러 출력)",
-      "국적회복 허가서 원본 + 사본 (법무부 발급)",
-      "기본증명서 (상세, 주민번호 전부 공개) — 3개월 이내",
-      "가족관계증명서 (상세) — 3개월 이내",
-      "캐나다 여권 또는 PR Card 원본 + 사본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 가능)",
-      "  ▸ 우편 수령 희망 시: Canada Post Xpresspost 등기 봉투 + 우편수령 신청서",
+      "여권발급신청서 (영사관 비치 양식 권장 / 미리 작성 시 컬러·A4 원본크기 출력, Letter 불가)",
+      "여권용 사진 1매 (6개월 이내, 흰색·연한색 상의 불가, 영사관 무료 촬영 가능)",
+      "eTA 허가서 출력본",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)", "현재 여권이 없으므로 분실 신고서로 대체"],
+      new: ["기존 한국 여권이 없는 경우 — 기본증명서·가족관계증명서로 신원 확인 (담당자 확인)"],
+    },
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },
-      { label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },
+      { label: "10년 (58면)", value: "CAD $70.20" },
+      { label: "10년 (26면)", value: "CAD $66.15" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
     ],
-    time: "약 3~4주",
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
     notices: [
-      "⚠️ 국적회복 허가서는 법무부에서 발급 — 영사관에서 발급 불가.",
-      "국적 회복 절차는 홈 → 국적 → 한국 국적 회복 메뉴를 참조하세요.",
-      "신규 발급은 반드시 방문 신청 — 온라인 신청 불가.",
+      "⚠️ eTA(무비자 입국)는 캐나다 입국 후 6개월 이내만 인정됩니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+      "신청서에 카카오톡 연결 번호 기재 시 발급 진행상황을 알림으로 받을 수 있습니다.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "예약하기 (여권 → 신규 발급) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_lost_normal: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "일반"],
-    question: "캐나다 체류 신분은?",
-    sub: "분실 신고(Police Report)를 먼저 완료한 후 방문하세요. 체류신분에 따라 지참 서류가 달라집니다.",
-    options: [
-      { id: "passport_lost_pr", icon: "🟢", title: "영주권자 (PR Card)", desc: "Permanent Resident" },
-      { id: "passport_lost_citizen", icon: "🍁", title: "시민권자", desc: "Canadian Citizen" },
-      { id: "passport_lost_visa", icon: "📋", title: "비자 소지자", desc: "학생·취업·방문 비자 등" },
-      { id: "passport_lost_eta", icon: "✈️", title: "단기 방문자 (eTA)", desc: "한국에서 캐나다로 관광·방문 중인 경우" },
+  pp_n_adult_dual: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "성인", "선천적 복수국적자"],
+    title: "일반 전자여권 — 선천적 복수국적자",
+    sub: "태어날 때부터 한국·캐나다 국적 보유 · 출생지에 따라 증빙서류가 다릅니다",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 미리 작성 시 컬러·A4 원본크기 출력, Letter 불가)",
+      "여권용 사진 1매 (6개월 이내, 흰색·연한색 상의 불가, 영사관 무료 촬영 가능)",
+      "▸ 한국 출생(부 또는 모가 캐나다 국적): 캐나다 여권 원본+사본 또는 시민권증서 원본+사본",
+      "▸ 외국·캐나다 출생: 외국여권 원본+사본 또는 출생증명서(Birth Certificate) 원본+사본",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)", "현재 여권이 없으므로 분실 신고서로 대체"],
+      new: ["▸ 캐나다 여권이 없는 복수국적자의 최초 한국여권 신청 시: 캐나다 출생증명서 원본"],
+    },
+    costs: [
+      { label: "10년 (58면)", value: "CAD $70.20" },
+      { label: "10년 (26면)", value: "CAD $66.15" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "선천적 복수국적자는 한국 국적을 그대로 보유하므로 한국 여권 발급에 문제가 없습니다.",
+      "혹시 과거에 국적이탈·국적선택 신고를 한 적이 있다면 국적 상태가 다를 수 있으니, 불확실하면 신청 전 확인하세요. (영사관 416-920-3809)",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_have_pr: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "재발급", "영주권자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
-    options: [
-      { id: "passport_have_pr_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_have_pr_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_have_pr_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
+  pp_n_adult_acq: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "성인", "후천적 시민권자"],
+    title: "일반 전자여권 — 후천적 시민권자",
+    sub: "원래 한국 국적 → 이후 캐나다 시민권 취득 · 국적 확인이 먼저입니다",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 미리 작성 시 컬러·A4 원본크기 출력, Letter 불가)",
+      "여권용 사진 1매 (6개월 이내, 흰색·연한색 상의 불가, 영사관 무료 촬영 가능)",
+      "캐나다 여권 원본 + 사본",
+      "국적회복증서 (국적회복 사실이 기본증명서에 기재되어 있으면 제출 불요)",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)", "현재 여권이 없으므로 분실 신고서로 대체"],
+      new: ["기본증명서로 국적(국적회복) 상태 확인 필요"],
+    },
+    costs: [
+      { label: "10년 (58면)", value: "CAD $70.20" },
+      { label: "10년 (26면)", value: "CAD $66.15" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "⚠️ 캐나다 시민권을 취득한 경우 한국 국적이 자동 상실되었을 수 있습니다. 국적이 상실된 상태에서 한국 여권을 신청·사용하면 출입국관리법 위반이 될 수 있으니, 신청 전 본인의 국적 상태(기본증명서 등)를 반드시 확인하세요.",
+      "⚠️ 불확실하면 여권 신청 전 국적 담당과 먼저 상담하시기 바랍니다. (영사관 416-920-3809)",
+      "국적회복이 완료되어 기본증명서에 기재된 경우 한국 여권 신청이 가능합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_have_citizen: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "재발급", "시민권자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
-    options: [
-      { id: "passport_have_citizen_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_have_citizen_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_have_citizen_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
+  // ═══════════ 결과: 일반 전자여권 · 미성년 (5) — 친권별 + 신분 섹션 + pickup ═══════════
+  pp_n_minor_married: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "부모 혼인 중"],
+    title: "일반 전자여권 — 미성년자 (부모 혼인 중)",
+    sub: "공동친권 · 대표 친권자 1명이 방문하여 신청",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 대표 친권자가 서명",
+      "방문하는 대표 친권자(부 또는 모)의 여권 원본 + 사본 1부",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
+      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "8세 이상 (5년, 58면)", value: "CAD $59.40" },
+      { label: "8세 미만 (5년, 58면)", value: "CAD $47.25" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "부모가 혼인 관계이면 대표 친권자 한 명이 방문해 신청할 수 있습니다.",
+      "자녀가 후천적으로 외국국적을 취득한 경우 국적 확인이 필요할 수 있습니다 — 불확실하면 상담하세요. (416-920-3809)",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_have_visa: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "재발급", "비자소지자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "수령 방법에 따라 추가 준비물이 다릅니다.",
-    options: [
-      { id: "passport_have_visa_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_have_visa_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_have_visa_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
+  pp_n_minor_sole: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "단독친권"],
+    title: "일반 전자여권 — 미성년자 (이혼·단독친권)",
+    sub: "단독친권자가 방문하여 신청",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 단독친권자가 서명",
+      "방문하는 친권자(부 또는 모)의 여권 원본 + 사본 1부",
+      "단독친권 증빙 — 자녀의 기본증명서·가족관계증명서 (친권 확인)",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
+      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "8세 이상 (5년, 58면)", value: "CAD $59.40" },
+      { label: "8세 미만 (5년, 58면)", value: "CAD $47.25" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "이혼 후 단독친권자는 혼자 방문해 신청할 수 있습니다. 친권이 기본증명서에 확인되어야 합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_have_visitor: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "재발급", "단기방문자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "단기 방문자는 귀국 일정이 촉박할 수 있습니다. 확인 후 선택하세요.",
-    options: [
-      { id: "passport_have_visitor_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_have_visitor_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_have_visitor_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
+  pp_n_minor_joint: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "공동친권"],
+    title: "일반 전자여권 — 미성년자 (이혼·공동친권)",
+    sub: "거주 상황에 따라 서류가 달라집니다",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "자녀의 기본증명서·가족관계증명서 각 1부",
+      "【경우 A — 부모 일방이 한국 거주】",
+      "  ▸ 법정대리인 동의서 — 한국 거주 친권자 인감 날인 + 방문 친권자 서명",
+      "  ▸ 한국 거주 친권자의 인감증명서",
+      "  ▸ 한국 거주 친권자의 여권 사본",
+      "  ▸ 방문 친권자의 여권 원본 + 사본",
+      "【경우 B — 부모 모두 캐나다 거주(인감 발급 불가)】",
+      "  ▸ 부모 모두 영사관 방문",
+      "  ▸ 법정대리인 동의서 — 부모 모두 서명",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
+      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "8세 이상 (5년, 58면)", value: "CAD $59.40" },
+      { label: "8세 미만 (5년, 58면)", value: "CAD $47.25" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "공동친권은 거주 상황(경우 A/B)에 따라 서류가 다릅니다. 본인 상황에 맞는 쪽을 준비하세요.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-
-
-
-  passport_lost_pr: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "영주권자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "분실 재발급 후 수령 방법을 선택하세요.",
-    options: [
-      { id: "passport_lost_pr_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_lost_pr_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_lost_pr_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
+  pp_n_minor_single: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "한부모"],
+    title: "일반 전자여권 — 미성년자 (한부모·사별·미혼)",
+    sub: "단독 양육 친권자가 방문하여 신청",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 친권자가 서명",
+      "방문하는 친권자의 여권 원본 + 사본 1부",
+      "단독 양육·친권 증빙 — 자녀의 기본증명서·가족관계증명서 (사별 시 사망 사실 확인 가능)",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
+      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "8세 이상 (5년, 58면)", value: "CAD $59.40" },
+      { label: "8세 미만 (5년, 58면)", value: "CAD $47.25" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "사별·미혼으로 단독 양육 중인 경우 친권 사실이 기본증명서·가족관계증명서로 확인되어야 합니다.",
+      "구체적인 증빙이 불확실하면 방문 전 영사관에 문의하세요. (416-920-3809)",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_lost_citizen: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "시민권자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "분실 재발급 후 수령 방법을 선택하세요.",
-    options: [
-      { id: "passport_lost_citizen_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_lost_citizen_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_lost_citizen_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
+  pp_n_minor_study: {
+    type: "result", service: "passport", pickup: true,
+    breadcrumb: ["홈", "여권", "일반", "미성년자", "유학생"],
+    title: "일반 전자여권 — 미성년 유학생 (부모 한국 거주)",
+    sub: "본인 신청 또는 대리인 신청",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 대표 친권자의 인감 날인",
+      "대표 친권자의 인감증명서",
+      "부모 여권 사본",
+      "자녀(미성년자)의 기본증명서·가족관계증명서 각 1부",
+      "【대리인이 신청하는 경우 추가】",
+      "  ▸ 위임장 (대리인에게 위임한다는 내용)",
+      "  ▸ 대리인의 여권 원본 + 사본 (대리인 범위: 18세 이상 (외)조부모·형제·자매)",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
+      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
+    stateDocs: {
+      renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "8세 이상 (5년, 58면)", value: "CAD $59.40" },
+      { label: "8세 미만 (5년, 58면)", value: "CAD $47.25" },
+      { label: "잔여기간 재발급", value: "CAD $36.45" },
+    ],
+    time: "약 3~4주 (DHL 특급 이용 시 약 1~2주)",
+    notices: [
+      "부모가 모두 한국에 거주하는 유학생 본인 또는 대리인이 신청하는 경우입니다.",
+      "대리인은 18세 이상의 (외)조부모·형제·자매만 가능합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_lost_visa: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "비자소지자"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "분실 재발급 후 수령 방법을 선택하세요.",
-    options: [
-      { id: "passport_lost_visa_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_lost_visa_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-      { id: "passport_lost_visa_dhl", icon: "🚀", title: "DHL 특급 (약 2주, 비용 별도)", desc: "사전 DHL 결제 후 영수증 지참" },
-    ],
-  },
-
-  passport_have_pr_visit: {
+  // ═══════════ 결과: 긴급 비전자 단수여권 · 성인 (5) — pickup 없음 ═══════════
+  pp_u_adult_pr: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "영주권자", "방문수령"],
-    title: "여권 재발급 — 영주권자 · 방문 수령",
-    docs: ["여권발급신청서 (영사관 비치, 자필 작성 — 컬러 출력 후 작성 가능)","현재 여권 원본 + 흑백 사본 1부 (어둡거나 컬러 복사 불가)","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능, 진한색 상의)"],
-    costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" }],
-    time: "약 3~4주 후 방문 수령",
-    notices: ["여권 수령 시 별도 예약 없이 접수증 지참 후 픽업 가능 (오후 픽업 시간 확인 권장).","PR Card 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","여권 사진: 흰색 또는 연한 색 상의 착용 금지 — 배경과 구분이 안 되는 경우 재촬영 필요.","카카오톡 알림: 신청서에 카카오톡 연결 전화번호 기재 시 발급 진행상황을 카카오톡으로 받을 수 있어요.","온라인 재발급도 가능합니다 (기존 전자여권 소지자 + 공동인증서 보유 시)."],
-    booking: "https://www.torbooking.com/book",
-    onlineRenewal: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/view.do?seq=1344521",
-  },
-
-  passport_have_pr_xpress: {
-    type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "영주권자", "Xpresspost"],
-    title: "여권 재발급 — 영주권자 · Xpresspost 우편 수령",
-    docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 여권 원본 + 흑백 사본 1부","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","우편수령신청서 (영사관 홈페이지 다운로드, 자필 작성)","Canada Post Xpresspost 봉투 — Canada Post에서 구매 후 수취인 주소·이름 기재하여 지참 (1인: 소형, 2인 이상: 대형)"],
-    costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "Xpresspost 봉투 (Canada Post)", value: "별도 구매" }],
-    time: "약 3~4주 발급 + 우편 배송 기간 (3~5일)",
-    notices: ["Xpresspost 봉투는 Canada Post(우체국)에서 미리 구매하여 수취인 정보를 기재해 오세요.","우편 분실·파손에 대해 영사관은 책임지지 않습니다.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","여권 사진: 흰색 또는 연한 색 상의 착용 금지 — 배경과 구분이 안 되는 경우 재촬영 필요.","카카오톡 알림: 신청서에 카카오톡 연결 전화번호 기재 시 발급 진행상황을 카카오톡으로 받을 수 있어요.","PR Card 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수."],
-    booking: "https://www.torbooking.com/book",
-  },
-
-  passport_have_pr_dhl: {
-    type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "재발급", "영주권자", "DHL특급"],
-    title: "여권 재발급 — 영주권자 · DHL 특급 (약 2주)",
-    docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 여권 원본 + 흑백 사본 1부","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","DHL 긴급여권 서비스 결제 영수증 출력본 — 방문 전 온라인 결제 필수"],
-    costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }],
-    time: "약 2주 (DHL 특급 배송 기준)",
-    notices: ["방문 전 반드시 DHL 긴급여권 서비스를 온라인으로 결제하고 영수증을 출력해 오세요.","DHL 서비스는 한국→영사관 배송 단축 서비스이며, 자택 직접 배송이 아닙니다.","여권 완성 후 영사관에서 방문 수령하거나 Xpresspost로 별도 우편 수령 가능.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가."],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.dhl.com/kr-ko/home/our-divisions/ecommerce/sending-parcels.html",
-  },
-
-  passport_have_citizen_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "시민권자", "방문수령"], title: "여권 재발급 — 시민권자 · 방문 수령", docs: ["여권발급신청서 (영사관 비치, 자필 작성)","현재 한국 여권 원본 + 흑백 사본 1부","캐나다 여권 원본 + 흑백 사본 1부","캐나다 시민권증서 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" }], time: "약 3~4주 후 방문 수령", notices: ["시민권 취득 시 한국 국적이 법적으로 상실됩니다 — 국적상실신고를 별도로 진행하세요.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","여권 사진: 흰색 또는 연한 색 상의 착용 금지 — 배경과 구분이 안 되는 경우 재촬영 필요.","카카오톡 알림: 신청서에 카카오톡 연결 전화번호 기재 시 발급 진행상황을 카카오톡으로 받을 수 있어요.","온라인 재발급도 가능합니다 (기존 전자여권 소지자 + 공동인증서 보유 시)."], booking: "https://www.torbooking.com/book", onlineRenewal: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/view.do?seq=1344521" },
-  passport_have_citizen_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "시민권자", "Xpresspost"], title: "여권 재발급 — 시민권자 · Xpresspost 우편 수령", docs: ["여권발급신청서","현재 한국 여권 원본 + 흑백 사본 1부","캐나다 여권 원본 + 흑백 사본 1부","캐나다 시민권증서 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","우편수령신청서 (홈페이지 다운로드, 자필 작성)","Canada Post Xpresspost 봉투 — 수취인 주소·이름 기재 후 지참"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 발급 + 우편 배송 기간", notices: ["시민권 취득 시 한국 국적 상실 — 국적상실신고 별도 진행 필요.","우편 분실·파손에 대해 영사관은 책임지지 않습니다.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가."], booking: "https://www.torbooking.com/book" },
-  passport_have_citizen_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "시민권자", "DHL특급"], title: "여권 재발급 — 시민권자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","현재 한국 여권 원본 + 흑백 사본 1부","캐나다 여권 원본 + 흑백 사본 1부","캐나다 시민권증서 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }], time: "약 2주", notices: ["시민권 취득 시 한국 국적 상실 — 국적상실신고 별도 진행 필요.","방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.","DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님)."], booking: "https://www.torbooking.com/book" },
-
-  passport_have_visa_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "비자소지자", "방문수령"], title: "여권 재발급 — 비자 소지자 · 방문 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","캐나다 비자 원본 + 흑백 사본 1부 (비자 분실 시 재학·재직증명서 등 대체)","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","병역 증빙서류 (만 25~37세 병역의무자, 전산 확인 불가 시만 해당)"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },{ label: "병역미필자 알뜰 (24면)", value: "CAD $41.00 (현금)" }], time: "약 3~4주 후 방문 수령", notices: ["사본은 흑백으로 밝게 복사 — 어둡거나 컬러 복사본 접수 불가.","여권 사진: 흰색 또는 연한 색 상의 착용 금지 — 배경과 구분이 안 되는 경우 재촬영 필요.","카카오톡 알림: 신청서에 카카오톡 연결 전화번호 기재 시 발급 진행상황을 카카오톡으로 받을 수 있어요.","비자 분실 시 여권과(416-920-3809)에 사전 전화 상담 권장.","만 25~37세 남성 병역의무자는 병역 증빙서류 필요할 수 있습니다."], booking: "https://www.torbooking.com/book" },
-  passport_have_visa_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "비자소지자", "Xpresspost"], title: "여권 재발급 — 비자 소지자 · Xpresspost 우편 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","캐나다 비자 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (만 25~37세, 해당자만)","우편수령신청서 (홈페이지 다운로드)","Canada Post Xpresspost 봉투 — 수취인 정보 기재 후 지참"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 발급 + 우편 배송 기간", notices: ["우편 분실·파손에 대해 영사관은 책임지지 않습니다.","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
-  passport_have_visa_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "비자소지자", "DHL특급"], title: "여권 재발급 — 비자 소지자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","캐나다 비자 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (만 25~37세, 해당자만)","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }], time: "약 2주", notices: ["방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.","DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님).","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
-
-  passport_have_visitor_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "단기방문자", "방문수령"], title: "여권 재발급 — 단기 방문자 (eTA) · 방문 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","왕복 항공권 (e-ticket) 출력본","eTA 승인서류 출력본","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" }], time: "약 3~4주 (귀국 일정과 비교 후 DHL 특급 고려 권장)", notices: ["귀국 일정이 촉박한 경우 DHL 특급(약 2주) 또는 단수여권(당일)을 고려하세요.","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
-  passport_have_visitor_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "단기방문자", "Xpresspost"], title: "여권 재발급 — 단기 방문자 (eTA) · Xpresspost 우편 수령", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","왕복 항공권 (e-ticket) 출력본","eTA 승인서류 출력본","최근 6개월 이내 여권용 사진 2매","우편수령신청서 (홈페이지 다운로드)","Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간 (귀국 일정 확인 필수)", notices: ["귀국 일정과 발급 소요시간을 꼭 비교해 DHL 또는 단수여권 대안을 검토하세요.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
-  passport_have_visitor_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "재발급", "단기방문자", "DHL특급"], title: "여권 재발급 — 단기 방문자 (eTA) · DHL 특급 (약 2주)", docs: ["여권발급신청서","현재 여권 원본 + 흑백 사본 1부","왕복 항공권 (e-ticket) 출력본","eTA 승인서류 출력본","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "DHL 특급 배송비", value: "별도 (온라인 결제)" }], time: "약 2주 (단기 방문자에게 권장 옵션)", notices: ["방문 전 DHL 긴급여권 서비스 온라인 결제 후 영수증 출력 필수.","DHL은 한국→영사관 배송 단축 서비스 (자택 배송 아님)."], booking: "https://www.torbooking.com/book" },
-
-
-
-
-  passport_lost_pr_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "영주권자", "방문수령"], title: "여권 분실 재발급 — 영주권자 · 방문 수령", docs: ["여권발급신청서","여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","기본증명서 (상세) — 분실 여권으로 가족관계 확인 불가 시 추가"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" }], time: "약 3~4주 후 방문 수령", notices: ["여권 분실 재발급은 온라인(정부24) 신청 불가 — 반드시 영사관 방문 신청만 가능합니다.","반드시 현지 경찰서에서 분실 신고(Police Report)를 먼저 완료 후 방문하세요.","PR Card도 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수.","사본은 흑백으로 밝게 복사."], booking: "https://www.torbooking.com/book" },
-  passport_lost_pr_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "영주권자", "Xpresspost"], title: "여권 분실 재발급 — 영주권자 · Xpresspost 우편 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","기본증명서 (상세) — 해당 시","우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간", notices: ["경찰 분실 신고 먼저 완료 후 방문.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
-  passport_lost_pr_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "영주권자", "DHL특급"], title: "여권 분실 재발급 — 영주권자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","유효한 PR Card 원본 + 흑백 사본 1부","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "DHL 특급 배송비", value: "별도" }], time: "약 2주", notices: ["경찰 분실 신고 먼저 완료 후 방문.","방문 전 DHL 온라인 결제 후 영수증 출력 필수."], booking: "https://www.torbooking.com/book" },
-
-  passport_lost_citizen_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "시민권자", "방문수령"], title: "여권 분실 재발급 — 시민권자 · 방문 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 여권 원본 또는 시민권증서 원본","최근 6개월 이내 여권용 사진 2매"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["시민권 취득시 한국 국적이 자동 상실됩니다 — 국적상실신고가 기본증명서에 반영되지 않은 경우 여권 재발급이 제한될 수 있습니다. 방문 전 반드시 전화 상담 (416-920-3809).","합법적 복수국적자(외국국적불행사서약 완료, 만 65세 이상 국적회복자)는 정상 재발급 가능합니다.","경찰 분실 신고 먼저 완료 후 방문.","긴급 귀국 필요시 영사관에 사전 전화 문의 (416-920-3809)."], booking: "https://www.torbooking.com/book" },
-  passport_lost_citizen_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "시민권자", "Xpresspost"], title: "여권 분실 재발급 — 시민권자 · Xpresspost 우편 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 여권 원본 또는 시민권증서 원본","최근 6개월 이내 여권용 사진 2매","우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간", notices: ["시민권 취득시 한국 국적이 자동 상실됩니다 — 국적상실신고가 기본증명서에 반영되지 않은 경우 여권 재발급이 제한될 수 있습니다. 방문 전 반드시 전화 상담 (416-920-3809).","합법적 복수국적자(외국국적불행사서약 완료, 만 65세 이상 국적회복자)는 정상 재발급 가능합니다.","경찰 분실 신고 먼저 완료 후 방문.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
-  passport_lost_citizen_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "시민권자", "DHL특급"], title: "여권 분실 재발급 — 시민권자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 여권 원본 또는 시민권증서 원본","최근 6개월 이내 여권용 사진 2매","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "DHL 특급 배송비", value: "별도" }], time: "약 2주", notices: ["시민권 취득시 한국 국적이 자동 상실됩니다 — 국적상실신고가 기본증명서에 반영되지 않은 경우 여권 재발급이 제한될 수 있습니다. 방문 전 반드시 전화 상담 (416-920-3809).","합법적 복수국적자(외국국적불행사서약 완료, 만 65세 이상 국적회복자)는 정상 재발급 가능합니다.","경찰 분실 신고 먼저 완료 후 방문.","방문 전 DHL 온라인 결제 후 영수증 출력 필수."], booking: "https://www.torbooking.com/book" },
-
-  passport_lost_visa_visit: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "비자소지자", "방문수령"], title: "여권 분실 재발급 — 비자 소지자 · 방문 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 비자 원본 (비자도 분실 시 재학·재직증명서 등 대체)","최근 6개월 이내 여권용 사진 2매 (영사관 무료촬영 가능)","병역 증빙서류 (만 25~37세, 해당자만)"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },{ label: "병역미필자 일반 (58면)", value: "CAD $44.00 (현금)" }], time: "약 3~4주 후 방문 수령", notices: ["경찰 분실 신고 먼저 완료 후 방문.","비자도 함께 분실 시 여권과(416-920-3809)에 사전 전화 상담 필수."], booking: "https://www.torbooking.com/book" },
-  passport_lost_visa_xpress: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "비자소지자", "Xpresspost"], title: "여권 분실 재발급 — 비자 소지자 · Xpresspost 우편 수령", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 비자 원본 (분실 시 대체 서류)","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (해당자만)","우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "Xpresspost 봉투", value: "별도 구매" }], time: "약 3~4주 + 우편 배송 기간", notices: ["경찰 분실 신고 먼저 완료 후 방문.","우편 분실에 대해 영사관은 책임지지 않습니다."], booking: "https://www.torbooking.com/book" },
-  passport_lost_visa_dhl: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "분실", "비자소지자", "DHL특급"], title: "여권 분실 재발급 — 비자 소지자 · DHL 특급 (약 2주)", docs: ["여권발급신청서","여권 분실 신고서 (Police Report) — 방문 전 필수","캐나다 비자 원본 (분실 시 대체 서류)","최근 6개월 이내 여권용 사진 2매","병역 증빙서류 (해당자만)","DHL 긴급여권 서비스 결제 영수증 출력본"], costs: [{ label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },{ label: "DHL 특급 배송비", value: "별도" }], time: "약 2주", notices: ["경찰 분실 신고 먼저 완료 후 방문.","방문 전 DHL 온라인 결제 후 영수증 출력 필수."], booking: "https://www.torbooking.com/book" },
-
-  // ── 분실 일반 — eTA 단기방문자 수령방법 분기 ──
-  passport_lost_eta: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "일반", "단기방문(eTA)"],
-    question: "발급된 여권을 어떻게 받으시겠어요?",
-    sub: "단기 방문 중 여권을 분실한 경우, 수령 방법을 선택하세요.",
-    options: [
-      { id: "passport_lost_eta_visit", icon: "🏛️", title: "영사관 직접 방문 수령", desc: "접수증 지참 후 예약 없이 픽업 가능" },
-      { id: "passport_lost_eta_xpress", icon: "📮", title: "우편 수령 (Canada Post Xpresspost)", desc: "등기 봉투 별도 구매 후 지참" },
-    ],
-  },
-
-  passport_lost_eta_visit: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "일반", "단기방문(eTA)", "방문수령"],
-    title: "여권 분실 재발급 — 단기방문(eTA) · 영사관 방문 수령",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "영주권자"],
+    title: "긴급 단수여권 — 영주권자",
+    sub: "비전자 단수여권 (유효기간 1년) · 1주일 이내 필요 시",
     docs: [
-      "여권발급신청서 (컬러 출력, 자필 작성)",
-      "여권 분실 신고서 (Police Report) — 방문 전 경찰서 발급 필수",
-      "왕복 항공권 (e-ticket) 출력본 — 귀국 일정 확인용",
-      "eTA 승인서류 출력본 (이메일 조회 가능)",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "  ▸ 기본증명서 (상세) — 신분 추가 확인 필요 시",
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내, 영사관 무료 촬영 가능)",
+      "PR Card 원본 + 사본 (앞뒷면). 만료 시: 연장 신청 영수증 + 만료된 PR카드 지참 (담당자 상담)",
+      "항공권 사본 — 본인 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["기존 한국 여권이 없는 경우 — 기본증명서 등으로 신원 확인 (담당자 확인)"],
+    },
     costs: [
-      { label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },
-      { label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
     ],
-    time: "접수 후 약 3~4주 — 단기 방문 중이라면 귀국 일정 감안 필요",
+    time: "긴급 발급 (일반적으로 1주일 이내)",
     notices: [
-      "⚠️ 단기 방문 중 여권 분실 시 귀국 일정이 촉박할 수 있습니다 — 항공권을 반드시 지참하세요.",
-      "⚠️ 처리 기간(3~4주)이 귀국 일정보다 긴 경우 긴급 단수여권 발급을 검토하세요 (뒤로 가서 '긴급' 선택).",
-      "⚠️ 경찰 분실 신고(Police Report) 없이는 접수 불가 — 방문 전 반드시 완료.",
-      "eTA는 여권번호에 연동되므로 새 여권 발급 후 캐나다 재입국 시 eTA 재신청 필요.",
-      "여권 수령 후 접수증 지참하여 예약 없이 영사관 방문해 수령.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유로 한국에 가야 하면 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "수수료는 긴급사유 인정 시 C$22.95, 일반사유 C$67.50. 긴급 여행목적 증빙(사망증명서·상해진단서·입원증명 등) 제출 시 긴급사유로 인정됩니다.",
+      "긴급사유 환급은 신청 후 6개월 이내 증빙 제출 시, 신청한 공관에서만 가능합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "예약하기 (여권 분실 재발급) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_lost_eta_xpress: {
-    type: "result",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "성인", "분실", "일반", "단기방문(eTA)", "우편수령"],
-    title: "여권 분실 재발급 — 단기방문(eTA) · 우편 수령",
-    docs: [
-      "여권발급신청서 (컬러 출력, 자필 작성)",
-      "여권 분실 신고서 (Police Report) — 방문 전 경찰서 발급 필수",
-      "왕복 항공권 (e-ticket) 출력본",
-      "eTA 승인서류 출력본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "Canada Post Xpresspost 등기 봉투 (별도 구매, 수취인 주소·Tracking 기재)",
-      "  ▸ 기본증명서 (상세) — 신분 추가 확인 필요 시",
-    ],
-    costs: [
-      { label: "일반여권 (58면)", value: "CAD $70.20 (현금, Debit, 신용카드)" },
-      { label: "알뜰여권 (26면)", value: "CAD $66.15 (현금, Debit, 신용카드)" },
-    ],
-    time: "접수 후 약 3~4주 + 우편 배송 기간",
-    notices: [
-      "⚠️ 단기 방문 중 귀국 일정이 촉박하다면 우편보다 방문 수령 또는 긴급 단수여권을 선택하세요.",
-      "⚠️ 경찰 분실 신고(Police Report) 없이는 접수 불가.",
-      "eTA는 여권번호 연동 — 새 여권 발급 후 캐나다 재입국 시 eTA 재신청 필요.",
-      "우편 분실에 대해 영사관은 책임지지 않습니다 — Xpresspost 등기 봉투 사용 권장.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "예약하기 (여권 분실 재발급) →",
-  },
-
-  passport_minor: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "일반", "미성년자"], question: "자녀의 현재 여권 상태는?", sub: "여권 유무와 분실 여부에 따라 준비 서류가 달라집니다.", options: [{ id: "passport_minor_have", icon: "✅", title: "재발급 (여권 있음)", desc: "만료 임박 또는 만료된 여권" },{ id: "passport_minor_lost", icon: "❌", title: "분실 재발급", desc: "경찰 분실 신고 후 재발급" },{ id: "passport_minor_new", icon: "🆕", title: "신규 발급 (여권 없음)", desc: "최초 여권 발급" }] },
-  passport_minor_have: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "일반", "미성년자", "재발급"], question: "부모님의 혼인·친권 상황은?", sub: "친권자가 누구인지에 따라 필요한 서류와 절차가 달라집니다.", options: [{ id: "passport_minor_married", icon: "👫", title: "부모님이 혼인 중 (공동친권)", desc: "부모 중 1인이 방문 신청 가능" },{ id: "passport_minor_divorced_sole", icon: "👤", title: "이혼 — 단독친권자 있음", desc: "단독친권자만 신청 가능" },{ id: "passport_minor_divorced_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },{ id: "passport_minor_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 신청" },{ id: "passport_minor_korea_parent", icon: "🇰🇷", title: "법정대리인이 한국에 계심", desc: "인감도장·증명서 필요" }] },
-  passport_minor_new: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "일반", "미성년자", "신규"], question: "부모님의 혼인·친권 상황은?", sub: "신규 발급 시에도 친권자 확인이 필요합니다. 한국 출생신고가 완료된 경우에만 신청 가능합니다.", options: [{ id: "passport_minor_new_married", icon: "👫", title: "부모님이 혼인 중 (공동친권)", desc: "부모 중 1인이 방문 신청 가능" },{ id: "passport_minor_new_divorced_sole", icon: "👤", title: "이혼 — 단독친권자 있음", desc: "단독친권자만 신청 가능" },{ id: "passport_minor_new_divorced_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },{ id: "passport_minor_new_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 신청" },{ id: "passport_minor_new_korea_parent", icon: "🇰🇷", title: "법정대리인이 한국에 계심", desc: "인감도장·증명서 필요" }] },
-  passport_minor_lost: { type: "question", service: "passport", breadcrumb: ["홈", "여권", "일반", "미성년자", "분실"], question: "부모님의 혼인·친권 상황은?", sub: "⚠️ 방문 전 반드시 경찰 분실 신고(Police Report)를 먼저 완료하세요.", options: [{ id: "passport_minor_lost_married", icon: "👫", title: "부모님이 혼인 중 (공동친권)", desc: "부모 중 1인이 방문 신청 가능" },{ id: "passport_minor_lost_divorced_sole", icon: "👤", title: "이혼 — 단독친권자 있음", desc: "단독친권자만 신청 가능" },{ id: "passport_minor_lost_divorced_joint", icon: "⚖️", title: "이혼 — 공동친권", desc: "양쪽 동의 필요" },{ id: "passport_minor_lost_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 신청" },{ id: "passport_minor_lost_korea_parent", icon: "🇰🇷", title: "법정대리인이 한국에 계심", desc: "인감도장·증명서 필요" }] },
-
-  passport_minor_urgent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "긴급", "단수여권"], title: "⚡ 미성년자 긴급 단수여권 — 당일 발급", docs: ["여권발급신청서 (영사관 비치, 법정대리인 서명)","자녀 여권 원본 + 흑백 사본 (기존 여권 있는 경우)","자녀 체류자격 증빙서류 (PR카드 / 비자 / 시민권증서)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (전산 확인 불가 시)","법정대리인 동의서 (방문하는 부 또는 모 서명)","방문하는 법정대리인(부 또는 모) 여권 원본","여권용 사진 2매 — 반드시 사진관 촬영본 지참 (만 5세 이하 포함, 영사관 촬영 불가)","긴급 출국 사유 증빙서류 (항공권, 진단서, 사망증명서 등)"], costs: [{ label: "단수여권 수수료", value: "CAD $67.50" },{ label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (긴급사유 인정 시)" }], time: "당일 발급 (방문 즉시)", notices: ["⚠️ 미국은 비전자여권(긴급여권)으로 입국·경유 불가 — 미국 경유로 한국 입국 시 DHL 전자여권(약 1주일) 또는 직항편 이용.","⚠️ 5년 이내 3회 이상 여권 분실자는 긴급여권 발급 불가.","단수여권은 1회용 — 사용 목적 달성 시 효력 소멸, 이후 정식 전자여권을 별도 신청하세요.","사진은 반드시 사진관에서 촬영해 오세요 — 영사관 무료촬영 불가.","긴급 출국 사유 증빙서류 반드시 지참.","이혼·단독친권의 경우에도 동일하게 적용 — 친권자 확인 서류 지참."], booking: "https://www.torbooking.com/book", bookingLabel: "사전 예약하기 (당일 방문) →" },
-  passport_minor_urgent_lost_who: {
-    type: "question",
-    service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "친권 상황"],
-    question: "부모 친권 상황은?",
-    sub: "⚠️ 경찰 분실 신고(Police Report)를 먼저 완료하세요. 친권 상황에 따라 지참 서류가 달라집니다.",
-    options: [
-      { id: "passport_minor_urgent_lost_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "부·모 여권 사본 모두 필요" },
-      { id: "passport_minor_urgent_lost_sole", icon: "👤", title: "이혼 — 단독친권", desc: "단독친권자만 방문·서명" },
-      { id: "passport_minor_urgent_lost_joint", icon: "⚖️", title: "이혼 — 공동친권 (두 분 모두 친권)", desc: "양쪽 동의 필요" },
-      { id: "passport_minor_urgent_lost_single", icon: "🙋", title: "한부모 (사별 / 미혼)", desc: "생존 친권자 단독 방문" },
-      { id: "passport_minor_urgent_lost_korea", icon: "🇰🇷", title: "법정대리인이 한국에 거주", desc: "인감도장 + 인감증명서 — 긴급 시 사전 전화 필수" },
-    ],
-  },
-
-  passport_minor_urgent_lost_married: {
+  pp_u_adult_longterm: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "공동친권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 부모 혼인 중",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "장기체류자"],
+    title: "긴급 단수여권 — 장기체류자",
+    sub: "비전자 단수여권 (유효기간 1년) · 1주일 이내 필요 시",
     docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 경찰서 발급 필수",
-      "법정대리인 동의서 — 부모 2인 인적사항 기재, 방문하는 1인 서명",
-      "방문하는 부 또는 모의 여권 원본",
-      "비방문 부 또는 모의 여권 사본 1부",
-      "자녀 체류자격 증빙서류 원본 (PR카드 / 비자 / 시민권증서)",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "여권용 사진 1매 — 반드시 사진관 촬영본 (영사관 무료촬영 불가)",
-      "긴급 출국 사유 증빙서류 (항공권 / 사망증명서 / 진단서 등)",
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내, 영사관 무료 촬영 가능)",
+      "캐나다 체류비자 원본 + 사본 (Study Permit, Work Permit 등)",
+      "항공권 사본 — 본인 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["기존 한국 여권이 없는 경우 — 기본증명서 등으로 신원 확인 (담당자 확인)"],
+    },
     costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
     ],
-    time: "당일 발급 — 영사 심사 후 결정",
+    time: "긴급 발급 (일반적으로 1주일 이내)",
     notices: [
-      "⚠️ Police Report 없이는 접수 불가 — 반드시 방문 전 경찰 신고 완료.",
-      "⚠️ 사진은 사진관 촬영본 필수 — 영사관 무료촬영 불가.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "수수료는 긴급사유 인정 시 C$22.95, 일반사유 C$67.50. 긴급 여행목적 증빙 제출 시 긴급사유로 인정됩니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_minor_urgent_lost_sole: {
+  pp_u_adult_eta: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "단독친권"],
-    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 이혼 단독친권",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "단기방문(eTA)"],
+    title: "긴급 단수여권 — 단기방문자 (eTA)",
+    sub: "비전자 단수여권 (유효기간 1년) · 1주일 이내 필요 시",
     docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "법정대리인 동의서 — 단독친권자만 인적사항 기재 및 서명",
-      "단독친권자 여권 원본",
-      "단독친권 확인: 자녀 기본증명서 (상세) — 친권자 1인 명시, 3개월 이내",
-      "자녀 체류자격 증빙서류 원본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내, 영사관 무료 촬영 가능)",
+      "eTA 허가서 출력본 (캐나다 입국 후 6개월 이내만 인정)",
+      "항공권 사본 — 본인 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["기존 한국 여권이 없는 경우 — 기본증명서 등으로 신원 확인 (담당자 확인)"],
+    },
     costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
     ],
-    time: "당일 발급 — 영사 심사 후 결정",
+    time: "긴급 발급 (일반적으로 1주일 이내)",
     notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "기본증명서(상세)에 단독친권자가 명시되어야 합니다.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ eTA(무비자 입국)는 캐나다 입국 후 6개월 이내만 인정됩니다.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_minor_urgent_lost_joint: {
+  pp_u_adult_dual: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "공동친권(이혼)"],
-    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 이혼 공동친권",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "선천적 복수국적자"],
+    title: "긴급 단수여권 — 선천적 복수국적자",
+    sub: "비전자 단수여권 (유효기간 1년) · 출생지에 따라 증빙서류가 다릅니다",
     docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기재, 방문 친권자 서명",
-      "방문하는 공동친권자 여권 원본",
-      "비방문 공동친권자 여권 사본 1부",
-      "공동친권 확인: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)",
-      "자녀 체류자격 증빙서류 원본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내, 영사관 무료 촬영 가능)",
+      "▸ 한국 출생(부 또는 모가 캐나다 국적): 캐나다 여권 또는 시민권증서 원본+사본",
+      "▸ 외국·캐나다 출생: 외국여권 또는 출생증명서 원본+사본",
+      "▸ 캐나다 여권이 없는 복수국적 신생아 최초 신청: 캐나다 출생증명서 원본",
+      "항공권 사본 — 본인 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 위 출생지별 증빙으로 신원 확인"],
+    },
     costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
     ],
-    time: "당일 발급 — 영사 심사 후 결정",
+    time: "긴급 발급 (일반적으로 1주일 이내)",
     notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 공동친권: 양쪽 모두 동의 필요 — 한 쪽이 반대하면 발급 제한.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "선천적 복수국적자는 한국 국적을 보유하므로 발급에 문제가 없습니다. 과거 국적이탈·국적선택을 한 적이 있으면 확인이 필요합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_minor_urgent_lost_single: {
+  pp_u_adult_acq: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "한부모"],
-    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 한부모",
+    breadcrumb: ["홈", "여권", "긴급", "성인", "후천적 시민권자"],
+    title: "긴급 단수여권 — 후천적 시민권자",
+    sub: "비전자 단수여권 (유효기간 1년) · 국적 확인이 먼저입니다",
     docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "법정대리인 동의서 — 생존 친권자만 인적사항 기재 및 서명",
-      "생존 친권자 여권 원본",
-      "자녀 기본증명서 (상세) — 단독친권 또는 사망 사실 표기, 3개월 이내",
-      "자녀 체류자격 증빙서류 원본",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
-      "  ▸ 사별의 경우: 사망한 배우자의 사망증명서",
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내, 영사관 무료 촬영 가능)",
+      "캐나다 여권 원본 + 사본",
+      "국적회복증서 (국적회복 사실이 기본증명서에 기재되어 있으면 제출 불요)",
+      "항공권 사본 — 본인 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["기본증명서로 국적(국적회복) 상태 확인 필요"],
+    },
     costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
     ],
-    time: "당일 발급 — 영사 심사 후 결정",
+    time: "긴급 발급 (일반적으로 1주일 이내)",
     notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "기본증명서(상세)에 단독친권 또는 사망 사실이 표기되어야 합니다.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
+      "⚠️ 캐나다 시민권을 취득한 경우 한국 국적이 자동 상실되었을 수 있습니다. 국적이 상실된 상태에서 한국 여권을 신청·사용하면 출입국관리법 위반이 될 수 있으니, 신청 전 본인의 국적 상태(기본증명서 등)를 반드시 확인하세요.",
+      "⚠️ 불확실하면 여권 신청 전 국적 담당과 먼저 상담하시기 바랍니다. (영사관 416-920-3809)",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "국적회복이 완료되어 기본증명서에 기재된 경우 한국 여권 신청이 가능합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  passport_minor_urgent_lost_korea: {
+  // ═══════════ 결과: 긴급 비전자 단수여권 · 미성년 (5) — pickup 없음 ═══════════
+  pp_u_minor_married: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "법정대리인 한국"],
-    title: "⚡ 미성년자 긴급 단수여권 — 분실 · 법정대리인 한국 거주",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "부모 혼인 중"],
+    title: "긴급 단수여권 — 미성년자 (부모 혼인 중)",
+    sub: "비전자 단수여권 (유효기간 1년) · 공동친권, 대표 친권자 1명 방문",
     docs: [
-      "여권발급신청서 (자녀 명의, 자필 작성 — 컬러 출력)",
-      "긴급여권 발급신청 사유서 (영사관 홈페이지 다운로드)",
-      "여권 분실 신고서 (Police Report) — 방문 전 필수",
-      "법정대리인 동의서 — 한국 거주 부 또는 모가 서명, 서명란에 반드시 인감도장 날인",
-      "법정대리인 인감증명서 — 6개월 이내 발급본",
-      "법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)",
-      "자녀 체류자격 증빙서류 원본",
-      "자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내",
-      "여권용 사진 1매 — 반드시 사진관 촬영본",
-      "긴급 출국 사유 증빙서류",
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 대표 친권자가 서명",
+      "방문하는 대표 친권자(부 또는 모)의 여권 원본 + 사본 1부",
+      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
     costs: [
-      { label: "긴급여권 수수료", value: "CAD $67.50 (현금, Debit, 신용카드)" },
-      { label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (현금, Debit, 신용카드)" },
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
     ],
-    time: "당일 발급 — 영사 심사 후 결정",
+    time: "긴급 발급 (일반적으로 1주일 이내)",
     notices: [
-      "⚠️ Police Report 없이는 접수 불가.",
-      "⚠️ 긴급 상황에서 인감도장·인감증명서 준비가 어려울 수 있습니다 — 반드시 사전 전화 필수 (416-920-3809).",
-      "⚠️ 사진은 사진관 촬영본 필수.",
-      "법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.",
-      "단수여권 1회용 — 여행 후 정식 전자여권 별도 신청.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
     ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "사전 예약하기 (당일 방문) →",
+    bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-    passport_minor_urgent_lost: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "긴급", "단수여권"], title: "⚡ 미성년자 긴급 단수여권 — 분실 시", docs: ["여권발급신청서 (영사관 비치, 법정대리인 서명)","여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","법정대리인 동의서 + 방문하는 법정대리인 여권 원본","여권용 사진 2매 — 반드시 사진관 촬영본 지참 (영사관 촬영 불가)","긴급 출국 사유 증빙서류 (항공권, 진단서 등)"], costs: [{ label: "단수여권 수수료", value: "CAD $67.50" },{ label: "긴급사유 인정 시 (감면)", value: "CAD $22.95 (긴급사유 인정 시)" }], time: "당일 발급 (방문 즉시)", notices: ["⚠️ 미국은 비전자여권(긴급여권)으로 입국·경유 불가 — 미국 경유로 한국 입국 시 DHL 전자여권(약 1주일) 또는 직항편 이용.","⚠️ 5년 이내 3회 이상 여권 분실자는 긴급여권 발급 불가.","반드시 경찰서 분실 신고(Police Report) 먼저 완료 후 방문하세요.","단수여권은 1회용 — 귀국 후 정식 전자여권 별도 신청 필요.","사진은 반드시 사진관에서 촬영해 오세요."], booking: "https://www.torbooking.com/book", bookingLabel: "사전 예약하기 (당일 방문) →" },
+  pp_u_minor_sole: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "단독친권"],
+    title: "긴급 단수여권 — 미성년자 (이혼·단독친권)",
+    sub: "비전자 단수여권 (유효기간 1년) · 단독친권자 방문",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 단독친권자가 서명",
+      "방문하는 친권자(부 또는 모)의 여권 원본 + 사본 1부",
+      "단독친권 증빙 — 자녀의 기본증명서·가족관계증명서",
+      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
+    ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
+    ],
+    time: "긴급 발급 (일반적으로 1주일 이내)",
+    notices: [
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
+  },
 
+  pp_u_minor_joint: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "공동친권"],
+    title: "긴급 단수여권 — 미성년자 (이혼·공동친권)",
+    sub: "비전자 단수여권 (유효기간 1년) · 거주 상황에 따라 서류가 다릅니다",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "자녀의 기본증명서·가족관계증명서 각 1부",
+      "【경우 A — 부모 일방이 한국 거주】 법정대리인 동의서(한국 거주 친권자 인감 날인 + 방문 친권자 서명) + 한국 거주 친권자 인감증명서 + 한국 거주 친권자 여권 사본 + 방문 친권자 여권 원본+사본",
+      "【경우 B — 부모 모두 캐나다 거주(인감 발급 불가)】 부모 모두 방문 + 법정대리인 동의서 부모 모두 서명",
+      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
+    ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
+    ],
+    time: "긴급 발급 (일반적으로 1주일 이내)",
+    notices: [
+      "공동친권은 거주 상황(경우 A/B)에 따라 서류가 다릅니다. 본인 상황에 맞는 쪽을 준비하세요.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
+  },
 
-  passport_minor_married: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "혼인중·공동친권"], title: "미성년자 여권 재발급 — 부모 혼인 중 (공동친권)", docs: ["여권발급신청서 (자녀 명의, 영사관 비치, 법정대리인 자필 작성)","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본 (PR카드 / 비자 / 시민권증서)","법정대리인 동의서 — 부모 2인 모두 인적사항 기입, 부모 중 1인 서명","방문하는 부 또는 모의 여권 원본","부·모 여권 사본 각 1부 (방문하지 않는 부 또는 모 포함)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (전산 확인 불가 시)","만 5세 미만: 여권용 사진 2매 — 사진관 촬영본 지참 필수 (영사관 무료촬영 불가)","만 5세 이상: 영사관 무료촬영 가능 (사진 미지참 시 자녀 동반 필요)","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" },{ label: "DHL 특급 (선택)", value: "별도 DHL 요금" }], time: "약 3~4주 (DHL 특급 선택 시 약 2주)", notices: ["공동친권: 동의서에 부모 2인 모두 인적사항 기재 — 방문은 1인만 해도 됩니다.","1인 1예약 = 업무건수 기준 — 자녀 2명 신청 시 예약 2자리 필요.","캐나다 출생 자녀는 반드시 한국 출생신고 완료 후에만 여권 신청 가능.","사본은 흑백으로 밝게 복사 — 어둡거나 컬러 사본 접수 불가."], booking: "https://www.torbooking.com/book" },
-  passport_minor_divorced_sole: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "이혼·단독친권"], title: "미성년자 여권 재발급 — 이혼 후 단독친권", docs: ["여권발급신청서 (자녀 명의, 영사관 비치, 단독친권자 자필 작성)","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 단독친권자만 인적사항 기입 및 서명","단독친권자 여권 원본","단독친권 확인 서류: 자녀 기본증명서(상세) — 친권자가 1인으로 명시된 것 (3개월 이내)","자녀 가족관계증명서 (상세) — 3개월 이내","이혼판결문 또는 협의이혼 확인서 사본 (친권자 지정 내용 포함, 영문 판결문은 번역 필요)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" },{ label: "DHL 특급 (선택)", value: "별도 DHL 요금" }], time: "약 3~4주 (DHL 특급 시 약 2주)", notices: ["단독친권자만 방문 신청 가능 — 비친권자(다른 부모)의 동의 불필요.","기본증명서(상세)에 단독친권자가 명확히 표기되어야 합니다.","이혼 판결문이 영문인 경우 자필 번역 가능 (번역자 성명·서명·날짜 기재).","캐나다 법원 공동양육 협정이 있더라도 한국 법상 단독친권자 기준으로 처리됩니다 — 불명확 시 사전 전화 상담 권장 (416-920-3809)."], booking: "https://www.torbooking.com/book" },
-  passport_minor_divorced_joint: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "이혼·공동친권"], title: "미성년자 여권 재발급 — 이혼 후 공동친권", docs: ["여권발급신청서","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자가 서명","방문하는 공동친권자 여권 원본","비방문 공동친권자 여권 사본 1부","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","공동친권 확인 서류: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["공동친권: 양쪽 친권자 모두의 동의가 필요합니다 — 동의서에 2인 모두 기재.","한 쪽 친권자가 여권 발급에 반대(부동의 의사 표시)한 경우 발급이 제한될 수 있습니다.","비방문 친권자가 한국에 있는 경우 인감도장이 날인된 동의서 + 인감증명서 필요 — 사전 전화 상담 권장.","이혼 판결문 영문본은 자필 번역 가능 (번역자 성명·날짜 기재)."], booking: "https://www.torbooking.com/book" },
-  passport_minor_single: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "한부모(사별·미혼)"], title: "미성년자 여권 재발급 — 한부모 (사별 또는 미혼)", docs: ["여권발급신청서","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 생존 친권자만 인적사항 기입 및 서명","생존 친권자 여권 원본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","사별의 경우: 사망한 부 또는 모의 사망증명서 (번역 필요 시 자필 번역)","미혼의 경우: 자녀 기본증명서에 친권자가 1인으로 표기된 것으로 확인 가능","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["사망증명서가 영문인 경우 자필 번역 가능 (번역자 성명·서명·날짜 기재).","기본증명서(상세)에 사망 또는 단독친권이 표기되어야 합니다.","불명확한 경우 방문 전 전화 상담 권장 (416-920-3809)."], booking: "https://www.torbooking.com/book" },
-  passport_minor_korea_parent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "재발급", "법정대리인 한국"], title: "미성년자 여권 재발급 — 법정대리인이 한국에 거주", docs: ["여권발급신청서 (자녀 명의, 영사관 비치, 캐나다 측 성인이 대리 작성)","자녀 여권 원본 + 흑백 사본 1부","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 한국의 부 또는 모가 서명, 서명란에 반드시 인감도장 날인 (서명만 불가)","법정대리인 인감증명서 — 발급일로부터 6개월 이내","법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)","부·모 여권 사본 각 1부 (공동친권의 경우 두 분 모두)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.","인감증명서는 발급일로부터 6개월 이내 서류만 인정.","공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요.","한국 서류는 방문 전 미리 준비해 오세요."], booking: "https://www.torbooking.com/book" },
+  pp_u_minor_single: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "한부모"],
+    title: "긴급 단수여권 — 미성년자 (한부모·사별·미혼)",
+    sub: "비전자 단수여권 (유효기간 1년) · 단독 양육 친권자 방문",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 친권자가 서명",
+      "방문하는 친권자의 여권 원본 + 사본 1부",
+      "단독 양육·친권 증빙 — 자녀의 기본증명서·가족관계증명서",
+      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
+    ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
+    ],
+    time: "긴급 발급 (일반적으로 1주일 이내)",
+    notices: [
+      "사별·미혼으로 단독 양육 중인 경우 친권 사실이 기본증명서·가족관계증명서로 확인되어야 합니다.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
+  },
 
-  passport_minor_lost_korea_parent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "법정대리인 한국"], title: "미성년자 여권 분실 재발급 — 법정대리인이 한국에 거주", docs: ["여권발급신청서 (자녀 명의, 자필 작성)","여권 분실 신고서 (Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 한국의 부 또는 모가 서명, 서명란에 반드시 인감도장 날인","법정대리인 인감증명서 — 발급일로부터 6개월 이내","법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["⚠️ 경찰 분실 신고(Police Report) 먼저 완료 후 방문.","⚠️ 법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만으로는 접수 불가.","인감증명서는 발급일로부터 6개월 이내 서류만 인정.","공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요."], booking: "https://www.torbooking.com/book" },
-  passport_minor_new_married: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "혼인중·공동친권"], title: "미성년자 여권 신규 발급 — 부모 혼인 중 (공동친권)", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본 (신규 발급 필수)","자녀 체류자격 증빙서류 원본 + 사본 (PR카드 / 비자 / 시민권증서 / 캐나다 출생증명서)","법정대리인 동의서 — 부모 2인 모두 인적사항 기입, 부모 중 1인 서명","방문하는 부 또는 모의 여권 원본","부·모 여권 사본 각 1부 (방문하지 않는 부 또는 모 포함)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 반드시 한국 출생신고 완료 후에만 여권 신청 가능.","기본증명서·가족관계증명서는 한국에서 발급해 오세요 (정부24 온라인 또는 주민센터).","신규 발급은 온라인 신청 불가 — 반드시 방문 신청.","공동친권: 동의서에 부모 2인 모두 기재, 방문은 1인으로 가능."], booking: "https://www.torbooking.com/book" },
-  passport_minor_new_divorced_sole: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "이혼·단독친권"], title: "미성년자 여권 신규 발급 — 이혼 후 단독친권", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 (친권자 1인 명시)","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 단독친권자만 기입 및 서명","단독친권자 여권 원본","이혼판결문 또는 협의이혼 확인서 (단독친권 명시, 영문본은 자필 번역)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","기본증명서에 단독친권자가 명시되어야 합니다.","신규 발급은 반드시 방문 신청."], booking: "https://www.torbooking.com/book" },
-  passport_minor_new_divorced_joint: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "이혼·공동친권"], title: "미성년자 여권 신규 발급 — 이혼 후 공동친권", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자 서명","방문하는 공동친권자 여권 원본 + 비방문 공동친권자 여권 사본","공동친권 확인: 이혼 판결문 또는 협의이혼 확인서 (공동친권 명시)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능","우편 수령 희망 시: 우편수령신청서 + Canada Post Xpresspost 봉투"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["공동친권: 양쪽 모두 동의 필요 — 한 쪽이 반대하면 발급 제한.","캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","신규 발급은 반드시 방문 신청."], booking: "https://www.torbooking.com/book" },
-  passport_minor_new_single: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "한부모"], title: "미성년자 여권 신규 발급 — 한부모 (사별 또는 미혼)", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 생존 친권자 기입 및 서명","생존 친권자 여권 원본","사별의 경우: 사망한 배우자의 사망증명서 (영문본은 자필 번역)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","기본증명서에 단독친권 또는 사망 사실이 표기되어야 합니다.","신규 발급은 반드시 방문 신청."], booking: "https://www.torbooking.com/book" },
-  passport_minor_new_korea_parent: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "신규", "법정대리인 한국"], title: "미성년자 여권 신규 발급 — 법정대리인이 한국에 거주", docs: ["여권발급신청서","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내 한국 발급본","자녀 체류자격 증빙서류 원본 + 사본","법정대리인 동의서 — 서명란에 반드시 인감도장 날인 (서명만 불가)","법정대리인 인감증명서 — 발급일로부터 6개월 이내","법정대리인 신분증 사본 (한국 여권 / 운전면허증 / 주민등록증)","부·모 여권 사본 각 1부 (공동친권의 경우 두 분 모두)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["캐나다 출생 자녀는 한국 출생신고 완료 후 신청 가능.","법정대리인 동의서 서명란에 반드시 인감도장 날인 — 서명만 접수 불가.","인감증명서는 발급일로부터 6개월 이내.","공동친권의 경우 두 분 모두의 인감도장·인감증명서 필요."], booking: "https://www.torbooking.com/book" },
-
-  passport_minor_lost_married: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "혼인중·공동친권"], title: "미성년자 여권 분실 재발급 — 부모 혼인 중", docs: ["여권발급신청서","여권 분실 신고서 (현지 경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 부모 2인 인적사항 기입, 1인 서명","방문하는 부 또는 모의 여권 원본 + 부·모 여권 사본 각 1부","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["반드시 경찰서 분실 신고(Police Report) 완료 후 방문하세요.","공동친권: 동의서에 부모 2인 모두 기재, 방문은 1인으로 가능."], booking: "https://www.torbooking.com/book" },
-  passport_minor_lost_divorced_sole: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "이혼·단독친권"], title: "미성년자 여권 분실 재발급 — 이혼 후 단독친권", docs: ["여권발급신청서","여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 단독친권자만 기입 및 서명","단독친권자 여권 원본","자녀 기본증명서 (상세) — 단독친권자 표기 확인 (3개월 이내)","자녀 가족관계증명서 (상세) — 3개월 이내","이혼판결문 또는 협의이혼 확인서 (단독친권 명시)","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["경찰 분실 신고(Police Report) 먼저 완료 후 방문.","단독친권자만 방문 신청 가능.","이혼 판결문 영문본은 자필 번역 가능."], booking: "https://www.torbooking.com/book" },
-  passport_minor_lost_divorced_joint: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "이혼·공동친권"], title: "미성년자 여권 분실 재발급 — 이혼 후 공동친권", docs: ["여권발급신청서","여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 공동친권자 2인 모두 인적사항 기입, 방문 친권자 서명","방문 친권자 여권 원본 + 비방문 친권자 여권 사본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","공동친권 확인: 이혼 판결문 또는 협의이혼 확인서","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["경찰 분실 신고(Police Report) 먼저 완료 후 방문.","공동친권: 양쪽 모두 동의 필요.","한 쪽이 여권 발급 반대 의사 표시를 한 경우 발급 제한 — 법원 명령이 있어야 가능."], booking: "https://www.torbooking.com/book" },
-  passport_minor_lost_single: { type: "result", service: "passport", breadcrumb: ["홈", "여권", "미성년자", "분실", "한부모"], title: "미성년자 여권 분실 재발급 — 한부모 (사별 또는 미혼)", docs: ["여권발급신청서","여권 분실 신고서 (경찰서 발급 Police Report) — 방문 전 필수","자녀 체류자격 증빙서류 원본 + 흑백 사본","법정대리인 동의서 — 생존 친권자 기입 및 서명","생존 친권자 여권 원본","자녀 기본증명서 (상세) + 가족관계증명서 (상세) — 3개월 이내","사별의 경우: 사망한 배우자의 사망증명서","만 5세 미만: 여권용 사진 2매 (사진관 촬영본), 만 5세 이상: 영사관 무료촬영 가능"], costs: [{ label: "만 8세 이상 (58면 · 5년)", value: "CAD $59.40 (현금, Debit, 신용카드)" },{ label: "만 8세 이상 (26면 · 5년)", value: "CAD $55.35 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (58면 · 5년)", value: "CAD $47.25 (현금, Debit, 신용카드)" },{ label: "만 8세 미만 (26면 · 5년)", value: "CAD $43.20 (현금, Debit, 신용카드)" }], time: "약 3~4주", notices: ["경찰 분실 신고(Police Report) 먼저 완료 후 방문.","기본증명서에 단독친권 또는 사망 사실이 표기되어야 합니다."], booking: "https://www.torbooking.com/book" },
+  pp_u_minor_study: {
+    type: "result", service: "passport",
+    breadcrumb: ["홈", "여권", "긴급", "미성년자", "유학생"],
+    title: "긴급 단수여권 — 미성년 유학생 (부모 한국 거주)",
+    sub: "비전자 단수여권 (유효기간 1년) · 본인 또는 대리인 신청",
+    docs: [
+      "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
+      "긴급여권 발급신청 사유서 (양식 작성·제출)",
+      "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
+      "법정대리인 동의서 — 대표 친권자의 인감 날인",
+      "대표 친권자의 인감증명서",
+      "부모 여권 사본",
+      "자녀(미성년자)의 기본증명서·가족관계증명서 각 1부",
+      "【대리인 신청 시 추가】 위임장 + 대리인 여권 원본+사본 (대리인 범위: 18세 이상 (외)조부모·형제·자매)",
+      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
+    ],
+    stateDocs: {
+      renew: ["여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
+      lost: ["⚠️ 여권 분실 신고서 (양식 작성·제출)"],
+      new: ["최초 신청 시 — 자녀의 기본증명서·가족관계증명서로 신원 확인"],
+    },
+    costs: [
+      { label: "긴급사유 인정", value: "CAD $22.95" },
+      { label: "일반사유", value: "CAD $67.50" },
+    ],
+    time: "긴급 발급 (일반적으로 1주일 이내)",
+    notices: [
+      "부모가 모두 한국에 거주하는 유학생 본인 또는 대리인이 신청하는 경우입니다. 대리인은 18세 이상 (외)조부모·형제·자매만 가능합니다.",
+      "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
+      "결제: 현금(CAD)·Debit·신용카드.",
+    ],
+    bookingLabel: "사전 예약하기 (여권과) →",
+  },
 
   // ══ FAMILY REGISTER (가족관계등록) ══
 
@@ -7847,6 +7480,850 @@ const KO_TRANSLATIONS = {
   },
 };
 
+const EN_TRANSLATIONS: any = {
+  // 여권(passport) 영어 번역 — 한국어 원본 노드 id로 키 (한국어 TREE 원본 미수정)
+  // ───────── 질문 노드 (19) ─────────
+  passport_start: {
+    breadcrumb: ["Home", "Passport"],
+    question: "When do you need your passport?",
+    sub: "Whether it is urgent completely changes the passport type and the process.",
+    options: {
+      pp_urgent_age: { title: "Urgent — needed within 1 week", desc: "Non-electronic single-use passport (valid 1 year), same-day — urgent travel reason required" },
+      pp_normal_age: { title: "Standard — 1 week or more", desc: "E-passport — in-person/mail pickup, or DHL express (about 1–2 weeks)" },
+    },
+  },
+  pp_normal_age: {
+    breadcrumb: ["Home", "Passport", "Standard"],
+    question: "Applicant's age?",
+    sub: "Required documents and fees differ based on age 18.",
+    options: {
+      pp_n_adult_state: { title: "Age 18 or older (adult)", desc: "Applies in person" },
+      pp_n_minor_state: { title: "Under 18 (minor)", desc: "Legal guardian consent required" },
+    },
+  },
+  pp_urgent_age: {
+    breadcrumb: ["Home", "Passport", "Urgent"],
+    question: "Applicant's age?",
+    sub: "A non-electronic single-use passport (valid 1 year) is issued same-day.",
+    options: {
+      pp_u_adult_state: { title: "Age 18 or older (adult)", desc: "Applies in person" },
+      pp_u_minor_state: { title: "Under 18 (minor)", desc: "Legal guardian consent required" },
+    },
+  },
+  pp_n_adult_state: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult"],
+    question: "Current passport status?",
+    sub: "Status determines additional documents (e.g., loss report).",
+    options: {
+      pp_n_adult_renew_status: { title: "Renewal (have passport)", desc: "Expired · expiring · damaged · info change" },
+      pp_n_adult_lost_status: { title: "Lost — reissue", desc: "Police report (Police Report) required first" },
+      pp_n_adult_new_status: { title: "New issue (no passport)", desc: "First Korean passport" },
+    },
+  },
+  pp_n_minor_state: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor"],
+    question: "Child's current passport status?",
+    sub: "Status determines additional documents.",
+    options: {
+      pp_n_minor_renew_custody: { title: "Renewal (have passport)", desc: "Expired · expiring · damaged" },
+      pp_n_minor_lost_custody: { title: "Lost — reissue", desc: "Police report (Police Report) required first" },
+      pp_n_minor_new_custody: { title: "New issue (no passport)", desc: "First Korean passport" },
+    },
+  },
+  pp_u_adult_state: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult"],
+    question: "Current passport status?",
+    sub: "Urgent non-electronic single-use passport — loss report etc. differ by status.",
+    options: {
+      pp_u_adult_have: { title: "Have passport (renewal)", desc: "Expired · damaged, etc." },
+      pp_u_adult_lost: { title: "Passport lost", desc: "Police report (Police Report) required first" },
+      pp_u_adult_new: { title: "No passport (new)", desc: "First Korean passport" },
+    },
+  },
+  pp_u_minor_state: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor"],
+    question: "Child's current passport status?",
+    sub: "Urgent non-electronic single-use passport — custody is explained on the result page.",
+    options: {
+      pp_u_minor_have: { title: "Have passport (renewal)", desc: "Expired · damaged, etc." },
+      pp_u_minor_lost: { title: "Passport lost", desc: "Police report (Police Report) required first" },
+      pp_u_minor_new: { title: "No passport (new)", desc: "First Korean passport" },
+    },
+  },
+
+  pp_n_adult_renew_status: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Renewal"],
+    question: "Select your residency status",
+    sub: "Required proof documents differ by status.",
+    options: {
+      pp_n_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
+      pp_n_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
+      pp_n_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
+      pp_n_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
+      pp_n_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+    },
+  },
+  pp_n_adult_lost_status: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Lost"],
+    question: "Select your residency status",
+    sub: "Lost reissue — proof documents differ by status. (Police report first)",
+    options: {
+      pp_n_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
+      pp_n_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
+      pp_n_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
+      pp_n_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
+      pp_n_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+    },
+  },
+  pp_n_adult_new_status: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "New"],
+    question: "Select your residency status",
+    sub: "New issue — proof documents differ by status.",
+    options: {
+      pp_n_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
+      pp_n_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
+      pp_n_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
+      pp_n_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
+      pp_n_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+    },
+  },
+  pp_n_minor_renew_custody: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Renewal"],
+    question: "Select the custody situation",
+    sub: "Additional documents (consent form, seal certificate, etc.) differ by situation.",
+    options: {
+      pp_n_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
+      pp_n_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
+      pp_n_minor_joint: { title: "Divorced — joint custody", desc: "Divorced but joint custody retained" },
+      pp_n_minor_single: { title: "Single parent (bereaved · unwed)", desc: "Bereaved or unwed sole guardian" },
+      pp_n_minor_study: { title: "Student (parents in Korea)", desc: "Both parents in Korea — self or proxy applies" },
+    },
+  },
+  pp_n_minor_lost_custody: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Lost"],
+    question: "Select the custody situation",
+    sub: "Lost reissue — police report first. Additional documents differ by situation.",
+    options: {
+      pp_n_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
+      pp_n_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
+      pp_n_minor_joint: { title: "Divorced — joint custody", desc: "Divorced but joint custody retained" },
+      pp_n_minor_single: { title: "Single parent (bereaved · unwed)", desc: "Bereaved or unwed sole guardian" },
+      pp_n_minor_study: { title: "Student (parents in Korea)", desc: "Both parents in Korea — self or proxy applies" },
+    },
+  },
+  pp_n_minor_new_custody: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "New"],
+    question: "Select the custody situation",
+    sub: "New issue — additional documents differ by situation.",
+    options: {
+      pp_n_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
+      pp_n_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
+      pp_n_minor_joint: { title: "Divorced — joint custody", desc: "Divorced but joint custody retained" },
+      pp_n_minor_single: { title: "Single parent (bereaved · unwed)", desc: "Bereaved or unwed sole guardian" },
+      pp_n_minor_study: { title: "Student (parents in Korea)", desc: "Both parents in Korea — self or proxy applies" },
+    },
+  },
+  pp_u_adult_have: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Renewal"],
+    question: "Select your residency status",
+    sub: "Urgent non-electronic single-use passport — proof documents differ by status.",
+    options: {
+      pp_u_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
+      pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
+      pp_u_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
+      pp_u_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
+      pp_u_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+    },
+  },
+  pp_u_adult_lost: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Lost"],
+    question: "Select your residency status",
+    sub: "Urgent non-electronic single-use passport (lost) — police report first. Proof documents differ by status.",
+    options: {
+      pp_u_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
+      pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
+      pp_u_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
+      pp_u_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
+      pp_u_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+    },
+  },
+  pp_u_adult_new: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "New"],
+    question: "Select your residency status",
+    sub: "Urgent non-electronic single-use passport (new) — proof documents differ by status.",
+    options: {
+      pp_u_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
+      pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
+      pp_u_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
+      pp_u_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
+      pp_u_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+    },
+  },
+  pp_u_minor_have: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Renewal"],
+    question: "Select the custody situation",
+    sub: "Urgent non-electronic single-use passport — additional documents differ by situation.",
+    options: {
+      pp_u_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
+      pp_u_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
+      pp_u_minor_joint: { title: "Divorced — joint custody", desc: "Divorced but joint custody retained" },
+      pp_u_minor_single: { title: "Single parent (bereaved · unwed)", desc: "Bereaved or unwed sole guardian" },
+      pp_u_minor_study: { title: "Student (parents in Korea)", desc: "Both parents in Korea — self or proxy applies" },
+    },
+  },
+  pp_u_minor_lost: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Lost"],
+    question: "Select the custody situation",
+    sub: "Urgent non-electronic single-use passport (lost) — police report first. Additional documents differ by situation.",
+    options: {
+      pp_u_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
+      pp_u_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
+      pp_u_minor_joint: { title: "Divorced — joint custody", desc: "Divorced but joint custody retained" },
+      pp_u_minor_single: { title: "Single parent (bereaved · unwed)", desc: "Bereaved or unwed sole guardian" },
+      pp_u_minor_study: { title: "Student (parents in Korea)", desc: "Both parents in Korea — self or proxy applies" },
+    },
+  },
+  pp_u_minor_new: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "New"],
+    question: "Select the custody situation",
+    sub: "Urgent non-electronic single-use passport (new) — additional documents differ by situation.",
+    options: {
+      pp_u_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
+      pp_u_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
+      pp_u_minor_joint: { title: "Divorced — joint custody", desc: "Divorced but joint custody retained" },
+      pp_u_minor_single: { title: "Single parent (bereaved · unwed)", desc: "Bereaved or unwed sole guardian" },
+      pp_u_minor_study: { title: "Student (parents in Korea)", desc: "Both parents in Korea — self or proxy applies" },
+    },
+  },
+
+  // ───────── 결과: 일반 전자여권 · 성인 (5) ─────────
+  pp_n_adult_pr: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Permanent Resident"],
+    title: "Standard E-passport — Permanent Resident",
+    sub: "E-passport · issued in about 3–4 weeks (about 1–2 weeks with DHL)",
+    docs: [
+      "Passport application form (consulate form recommended / if prepared in advance, print in color on A4 at original size; Letter size not accepted)",
+      "1 passport photo (within 6 months, no white/light-colored top, free photo at consulate available)",
+      "PR Card original + copy (both front and back)",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)", "Since there is no current passport, the loss report replaces it"],
+      new: ["If you have no prior Korean passport — identity verified via basic/family relation certificate (staff confirmation)"],
+    },
+    costs: [
+      { label: "10-year (58 pages)", value: "CAD $70.20" },
+      { label: "10-year (26 pages)", value: "CAD $66.15" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "If your PR Card is expired/lost: with proof of a renewal (reissue) application, a 1-year single-use passport may be issued — consult staff.",
+      "Payment: cash (CAD) · debit · credit card.",
+      "If you enter a KakaoTalk-linked phone number on the form, you can receive processing-status notifications.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_adult_longterm: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Long-term resident"],
+    title: "Standard E-passport — Long-term resident",
+    sub: "E-passport · issued in about 3–4 weeks (about 1–2 weeks with DHL)",
+    docs: [
+      "Passport application form (consulate form recommended / if prepared in advance, print in color on A4 at original size; Letter size not accepted)",
+      "1 passport photo (within 6 months, no white/light-colored top, free photo at consulate available)",
+      "Canadian residence visa original + copy (Study Permit, Work Permit, etc.)",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)", "Since there is no current passport, the loss report replaces it"],
+      new: ["If you have no prior Korean passport — identity verified via basic/family relation certificate (staff confirmation)"],
+    },
+    costs: [
+      { label: "10-year (58 pages)", value: "CAD $70.20" },
+      { label: "10-year (26 pages)", value: "CAD $66.15" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "Your Permit must have sufficient validity remaining.",
+      "Payment: cash (CAD) · debit · credit card.",
+      "If you enter a KakaoTalk-linked phone number on the form, you can receive processing-status notifications.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_adult_eta: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Short-term (eTA)"],
+    title: "Standard E-passport — Short-term visitor (eTA)",
+    sub: "E-passport · issued in about 3–4 weeks (about 1–2 weeks with DHL)",
+    docs: [
+      "Passport application form (consulate form recommended / if prepared in advance, print in color on A4 at original size; Letter size not accepted)",
+      "1 passport photo (within 6 months, no white/light-colored top, free photo at consulate available)",
+      "eTA approval printout",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)", "Since there is no current passport, the loss report replaces it"],
+      new: ["If you have no prior Korean passport — identity verified via basic/family relation certificate (staff confirmation)"],
+    },
+    costs: [
+      { label: "10-year (58 pages)", value: "CAD $70.20" },
+      { label: "10-year (26 pages)", value: "CAD $66.15" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "⚠️ eTA (visa-free entry) is recognized only within 6 months of entering Canada.",
+      "Payment: cash (CAD) · debit · credit card.",
+      "If you enter a KakaoTalk-linked phone number on the form, you can receive processing-status notifications.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_adult_dual: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Congenital dual citizen"],
+    title: "Standard E-passport — Congenital dual citizen",
+    sub: "Korean & Canadian nationality from birth · proof documents differ by birthplace",
+    docs: [
+      "Passport application form (consulate form recommended / if prepared in advance, print in color on A4 at original size; Letter size not accepted)",
+      "1 passport photo (within 6 months, no white/light-colored top, free photo at consulate available)",
+      "▸ Born in Korea (a parent held Canadian nationality): Canadian passport original+copy, or citizenship certificate original+copy",
+      "▸ Born abroad/in Canada: foreign passport original+copy, or birth certificate original+copy",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)", "Since there is no current passport, the loss report replaces it"],
+      new: ["▸ First Korean passport for a dual citizen with no Canadian passport: original Canadian birth certificate"],
+    },
+    costs: [
+      { label: "10-year (58 pages)", value: "CAD $70.20" },
+      { label: "10-year (26 pages)", value: "CAD $66.15" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "Congenital dual citizens retain Korean nationality, so there is no issue with passport issuance.",
+      "If you have ever filed a nationality renunciation/choice, your status may differ — verify before applying if unsure. (Consulate 416-920-3809)",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_adult_acq: {
+    breadcrumb: ["Home", "Passport", "Standard", "Adult", "Acquired citizen"],
+    title: "Standard E-passport — Acquired citizen",
+    sub: "Was Korean → later acquired Canadian citizenship · a nationality check comes first",
+    docs: [
+      "Passport application form (consulate form recommended / if prepared in advance, print in color on A4 at original size; Letter size not accepted)",
+      "1 passport photo (within 6 months, no white/light-colored top, free photo at consulate available)",
+      "Canadian passport original + copy",
+      "Certificate of nationality restoration (not required if restoration is recorded on your basic certificate)",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)", "Since there is no current passport, the loss report replaces it"],
+      new: ["Basic certificate needed to confirm nationality (restoration) status"],
+    },
+    costs: [
+      { label: "10-year (58 pages)", value: "CAD $70.20" },
+      { label: "10-year (26 pages)", value: "CAD $66.15" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "⚠️ If you acquired Canadian citizenship, your Korean nationality may have been automatically lost. Applying for or using a Korean passport while your nationality is lost may violate the Immigration Act, so verify your nationality status (basic certificate, etc.) before applying.",
+      "⚠️ If unsure, consult the nationality desk before applying for a passport. (Consulate 416-920-3809)",
+      "If nationality restoration is complete and recorded on your basic certificate, a Korean passport application is possible.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+
+  // ───────── 결과: 일반 전자여권 · 미성년 (5) ─────────
+  pp_n_minor_married: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Parents married"],
+    title: "Standard E-passport — Minor (parents married)",
+    sub: "Joint custody · one representative guardian visits to apply",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — signed by the representative guardian",
+      "Visiting representative guardian's (father or mother) passport original + 1 copy",
+      "Residency-status proof (one applicable to the child):",
+      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Age 8+ (5-year, 58 pages)", value: "CAD $59.40" },
+      { label: "Under 8 (5-year, 58 pages)", value: "CAD $47.25" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "If the parents are married, one representative guardian may visit to apply.",
+      "If the child acquired a foreign nationality, a nationality check may be needed — consult if unsure. (416-920-3809)",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_minor_sole: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Sole custody"],
+    title: "Standard E-passport — Minor (divorced · sole custody)",
+    sub: "The sole-custody guardian visits to apply",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — signed by the sole-custody guardian",
+      "Visiting guardian's (father or mother) passport original + 1 copy",
+      "Sole-custody proof — child's basic/family relation certificate (to confirm custody)",
+      "Residency-status proof (one applicable to the child):",
+      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Age 8+ (5-year, 58 pages)", value: "CAD $59.40" },
+      { label: "Under 8 (5-year, 58 pages)", value: "CAD $47.25" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "After divorce, the sole-custody guardian may apply alone. Custody must be confirmed on the basic certificate.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_minor_joint: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Joint custody"],
+    title: "Standard E-passport — Minor (divorced · joint custody)",
+    sub: "Documents differ depending on the residence situation",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Child's basic & family relation certificate, 1 each",
+      "【Case A — one parent resides in Korea】",
+      "  ▸ Legal guardian consent form — seal (ingam) of the Korea-resident guardian + signature of the visiting guardian",
+      "  ▸ Korea-resident guardian's seal certificate (ingam jeungmyeong)",
+      "  ▸ Korea-resident guardian's passport copy",
+      "  ▸ Visiting guardian's passport original + copy",
+      "【Case B — both parents reside in Canada (cannot obtain a seal certificate)】",
+      "  ▸ Both parents visit the consulate",
+      "  ▸ Legal guardian consent form — signed by both parents",
+      "Residency-status proof (one applicable to the child):",
+      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Age 8+ (5-year, 58 pages)", value: "CAD $59.40" },
+      { label: "Under 8 (5-year, 58 pages)", value: "CAD $47.25" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "For joint custody, documents differ by residence situation (Case A/B). Prepare the set that matches your situation.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_minor_single: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Single parent"],
+    title: "Standard E-passport — Minor (single parent · bereaved/unwed)",
+    sub: "The sole-custody guardian visits to apply",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — signed by the guardian",
+      "Visiting guardian's passport original + 1 copy",
+      "Sole-custody proof — child's basic/family relation certificate (bereavement confirmable if applicable)",
+      "Residency-status proof (one applicable to the child):",
+      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Age 8+ (5-year, 58 pages)", value: "CAD $59.40" },
+      { label: "Under 8 (5-year, 58 pages)", value: "CAD $47.25" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "For a bereaved or unwed sole guardian, custody must be confirmed via the basic/family relation certificate.",
+      "If the required proof is unclear, contact the consulate before visiting. (416-920-3809)",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_n_minor_study: {
+    breadcrumb: ["Home", "Passport", "Standard", "Minor", "Student"],
+    title: "Standard E-passport — Minor student (parents in Korea)",
+    sub: "Self-application or proxy application",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — seal (ingam) of the representative guardian",
+      "Representative guardian's seal certificate (ingam jeungmyeong)",
+      "Parents' passport copies",
+      "Child's (minor's) basic & family relation certificate, 1 each",
+      "【If a proxy applies, add】",
+      "  ▸ Power of attorney (stating delegation to the proxy)",
+      "  ▸ Proxy's passport original + copy (proxy must be an adult 18+: grandparent, sibling)",
+      "Residency-status proof (one applicable to the child):",
+      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Age 8+ (5-year, 58 pages)", value: "CAD $59.40" },
+      { label: "Under 8 (5-year, 58 pages)", value: "CAD $47.25" },
+      { label: "Remaining-validity reissue", value: "CAD $36.45" },
+    ],
+    time: "About 3–4 weeks (about 1–2 weeks with DHL express)",
+    notices: [
+      "This applies when both parents reside in Korea and the student applies in person or via a proxy.",
+      "A proxy must be an adult (18+) grandparent or sibling only.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+
+  // ───────── 결과: 긴급 비전자 단수여권 · 성인 (5) ─────────
+  pp_u_adult_pr: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Permanent Resident"],
+    title: "Urgent single-use passport — Permanent Resident",
+    sub: "Non-electronic single-use passport (valid 1 year) · when needed within 1 week",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months, free photo at consulate available)",
+      "PR Card original + copy (both sides). If expired: renewal application receipt + the expired PR Card (consult staff)",
+      "Flight ticket copy — itinerary printout showing your name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["If you have no prior Korean passport — identity verified via basic certificate, etc. (staff confirmation)"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. If you must transit the USA to reach Korea, use a DHL e-passport (about 1 week) or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "If you have 1 week or more, we recommend the DHL e-passport delivery service instead of an urgent passport.",
+      "Fee is CAD $22.95 if the urgent reason is accepted, CAD $67.50 for a general reason. Submitting urgent-travel proof (death certificate, injury diagnosis, hospitalization proof, etc.) qualifies as an urgent reason.",
+      "Refunds for the urgent reason are possible within 6 months of application, with proof, only at the mission where you applied.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_adult_longterm: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Long-term resident"],
+    title: "Urgent single-use passport — Long-term resident",
+    sub: "Non-electronic single-use passport (valid 1 year) · when needed within 1 week",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months, free photo at consulate available)",
+      "Canadian residence visa original + copy (Study Permit, Work Permit, etc.)",
+      "Flight ticket copy — itinerary printout showing your name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["If you have no prior Korean passport — identity verified via basic certificate, etc. (staff confirmation)"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport (about 1 week) or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "If you have 1 week or more, we recommend the DHL e-passport delivery service instead.",
+      "Fee is CAD $22.95 if the urgent reason is accepted, CAD $67.50 for a general reason. Urgent-travel proof qualifies as an urgent reason.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_adult_eta: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Short-term (eTA)"],
+    title: "Urgent single-use passport — Short-term visitor (eTA)",
+    sub: "Non-electronic single-use passport (valid 1 year) · when needed within 1 week",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months, free photo at consulate available)",
+      "eTA approval printout (recognized only within 6 months of entering Canada)",
+      "Flight ticket copy — itinerary printout showing your name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["If you have no prior Korean passport — identity verified via basic certificate, etc. (staff confirmation)"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport (about 1 week) or a direct Canada–Korea flight.",
+      "⚠️ eTA (visa-free entry) is recognized only within 6 months of entering Canada.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "If you have 1 week or more, we recommend the DHL e-passport delivery service instead.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_adult_dual: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Congenital dual citizen"],
+    title: "Urgent single-use passport — Congenital dual citizen",
+    sub: "Non-electronic single-use passport (valid 1 year) · proof differs by birthplace",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months, free photo at consulate available)",
+      "▸ Born in Korea (a parent held Canadian nationality): Canadian passport or citizenship certificate original+copy",
+      "▸ Born abroad/in Canada: foreign passport or birth certificate original+copy",
+      "▸ First application for a dual citizen with no Canadian passport: original Canadian birth certificate",
+      "Flight ticket copy — itinerary printout showing your name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the birthplace-based proof above"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport (about 1 week) or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "Congenital dual citizens retain Korean nationality, so issuance is not an issue. If you have ever filed a nationality renunciation/choice, verification is needed.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_adult_acq: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Acquired citizen"],
+    title: "Urgent single-use passport — Acquired citizen",
+    sub: "Non-electronic single-use passport (valid 1 year) · a nationality check comes first",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months, free photo at consulate available)",
+      "Canadian passport original + copy",
+      "Certificate of nationality restoration (not required if restoration is recorded on your basic certificate)",
+      "Flight ticket copy — itinerary printout showing your name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["Basic certificate needed to confirm nationality (restoration) status"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ If you acquired Canadian citizenship, your Korean nationality may have been automatically lost. Applying for or using a Korean passport while your nationality is lost may violate the Immigration Act, so verify your nationality status (basic certificate, etc.) before applying.",
+      "⚠️ If unsure, consult the nationality desk before applying for a passport. (Consulate 416-920-3809)",
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "If nationality restoration is complete and recorded on your basic certificate, a Korean passport application is possible.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+
+  // ───────── 결과: 긴급 비전자 단수여권 · 미성년 (5) ─────────
+  pp_u_minor_married: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Parents married"],
+    title: "Urgent single-use passport — Minor (parents married)",
+    sub: "Non-electronic single-use passport (valid 1 year) · joint custody, one representative guardian visits",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — signed by the representative guardian",
+      "Visiting representative guardian's (father or mother) passport original + 1 copy",
+      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "If you have 1 week or more, we recommend the DHL e-passport delivery service instead.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_minor_sole: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Sole custody"],
+    title: "Urgent single-use passport — Minor (divorced · sole custody)",
+    sub: "Non-electronic single-use passport (valid 1 year) · sole-custody guardian visits",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — signed by the sole-custody guardian",
+      "Visiting guardian's (father or mother) passport original + 1 copy",
+      "Sole-custody proof — child's basic/family relation certificate",
+      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "If you have 1 week or more, we recommend the DHL e-passport delivery service instead.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_minor_joint: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Joint custody"],
+    title: "Urgent single-use passport — Minor (divorced · joint custody)",
+    sub: "Non-electronic single-use passport (valid 1 year) · documents differ by residence situation",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Child's basic & family relation certificate, 1 each",
+      "【Case A — one parent resides in Korea】 Legal guardian consent form (seal of the Korea-resident guardian + signature of the visiting guardian) + Korea-resident guardian's seal certificate + Korea-resident guardian's passport copy + visiting guardian's passport original+copy",
+      "【Case B — both parents reside in Canada (cannot obtain a seal certificate)】 Both parents visit + legal guardian consent form signed by both parents",
+      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "For joint custody, documents differ by residence situation (Case A/B). Prepare the set that matches your situation.",
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_minor_single: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Single parent"],
+    title: "Urgent single-use passport — Minor (single parent · bereaved/unwed)",
+    sub: "Non-electronic single-use passport (valid 1 year) · sole-custody guardian visits",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — signed by the guardian",
+      "Visiting guardian's passport original + 1 copy",
+      "Sole-custody proof — child's basic/family relation certificate",
+      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "For a bereaved or unwed sole guardian, custody must be confirmed via the basic/family relation certificate.",
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+  pp_u_minor_study: {
+    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Student"],
+    title: "Urgent single-use passport — Minor student (parents in Korea)",
+    sub: "Non-electronic single-use passport (valid 1 year) · self or proxy application",
+    docs: [
+      "Passport application form (consulate form recommended / print in color on A4 at original size)",
+      "Urgent passport issuance reason statement (complete and submit the form)",
+      "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
+      "Legal guardian consent form — seal of the representative guardian",
+      "Representative guardian's seal certificate",
+      "Parents' passport copies",
+      "Child's (minor's) basic & family relation certificate, 1 each",
+      "【If a proxy applies, add】 Power of attorney + proxy's passport original+copy (proxy must be an adult 18+: grandparent, sibling)",
+      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
+    ],
+    stateDocs: {
+      renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
+      lost: ["⚠️ Passport loss report (complete and submit the form)"],
+      new: ["For a first application — identity verified via the child's basic/family relation certificate"],
+    },
+    costs: [
+      { label: "Urgent reason accepted", value: "CAD $22.95" },
+      { label: "General reason", value: "CAD $67.50" },
+    ],
+    time: "Urgent issuance (generally within 1 week)",
+    notices: [
+      "This applies when both parents reside in Korea and the student applies in person or via a proxy. A proxy must be an adult (18+) grandparent or sibling only.",
+      "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "⚠️ Not issued to: persons whose identity cannot be verified / those who lost a passport 3+ times in the last 5 years.",
+      "Payment: cash (CAD) · debit · credit card.",
+    ],
+    bookingLabel: "Book Appointment (Passport) →",
+  },
+};
+
 const SERVICE_COLORS = {
   passport: "#003478", family: "#1a6b3c", nationality: "#7b2d2d",
   cert: "#1a4d7a", various_cert: "#2d5a8a", visa: "#4a2d7a",
@@ -7915,14 +8392,30 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
 
   // 한국어 번역 레이어 — 영문 _en 노드를 한국어로 렌더 (영문 TREE 원본 미수정)
   const T_KO = (KO_TRANSLATIONS as any)[pageId];
+  // 영어 번역 레이어 — 한국어 원본 노드(여권 등)를 영어로 렌더 (한국어 TREE 원본 미수정)
+  const T_EN = (EN_TRANSLATIONS as any)[pageId];
   const L = (field: string, fb: any) =>
-    (lang === "ko" && T_KO && T_KO[field] !== undefined) ? T_KO[field] : fb;
+    (lang === "ko" && T_KO && T_KO[field] !== undefined) ? T_KO[field]
+    : (lang === "en" && T_EN && T_EN[field] !== undefined) ? T_EN[field]
+    : fb;
 
   // 타입 안전 헬퍼 — 배열 필드 보장 (+ 한국어 번역 적용)
-  const pageDocs    = L("docs",    Array.isArray(page.docs)    ? page.docs    : []);
   const pageCosts   = L("costs",   Array.isArray(page.costs)   ? page.costs   : []);
   const pageNotices = L("notices", Array.isArray(page.notices) ? page.notices : []);
   const pageOptions = Array.isArray(page.options) ? page.options : [];
+
+  // ── 여권 상태 자동 토글 ──
+  // 방문 경로(history)에서 재발급/분실/신규를 감지해, 노드의 stateDocs[상태] 줄을 서류에 끼움
+  const ppState =
+    history.some((h: string) => /_lost(_|$)/.test(h)) ? "lost" :
+    history.some((h: string) => /_new(_|$)/.test(h))  ? "new"  :
+    history.some((h: string) => /_renew(_|$)|_have(_|$)/.test(h)) ? "renew" : null;
+  const baseDocs = L("docs", Array.isArray(page.docs) ? page.docs : []);
+  const stateSrc = (lang === "en" && T_EN && T_EN.stateDocs) ? T_EN.stateDocs : page.stateDocs;
+  const stateExtra = (stateSrc && ppState && Array.isArray(stateSrc[ppState]))
+    ? stateSrc[ppState] : [];
+  // 상태별 서류는 공통 서류 바로 뒤에 이어붙임
+  const pageDocs = stateExtra.length ? [...baseDocs, ...stateExtra] : baseDocs;
 
   // 영어 모드에서 특정 서비스는 영문 전용 노드로 라우팅
   const EN_ROUTE_MAP = {
@@ -8410,8 +8903,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               <div className="option-list">
                 {pageOptions.map((opt: any) => {
                   const ko = (lang === "ko" && T_KO && T_KO.options) ? T_KO.options[opt.id] : null;
-                  const oTitle = (ko && ko.title) ?? opt.title ?? "";
-                  const oDesc  = (ko && ko.desc) ?? opt.desc;
+                  const en = (lang === "en" && T_EN && T_EN.options) ? T_EN.options[opt.id] : null;
+                  const oTitle = (ko && ko.title) ?? (en && en.title) ?? opt.title ?? "";
+                  const oDesc  = (ko && ko.desc) ?? (en && en.desc) ?? opt.desc;
                   return (
                   <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)}>
                     <div className="oc-icon-box">{opt.icon ?? ""}</div>
@@ -8474,6 +8968,36 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   )}
                 </div>
               </div>
+
+              {page.pickup && (
+                <div className="pickup-card">
+                  <div className="pickup-head">📦 {lang === "ko" ? "여권 어떻게 받으시겠어요?" : "How would you like to receive it?"}</div>
+                  <div className="pickup-body">
+                    <div className="pickup-opt">
+                      <div className="pickup-opt-top">
+                        <span className="pickup-opt-name">🏛️ {lang === "ko" ? "영사관 방문 수령" : "In-person pickup"}</span>
+                        <span className="pickup-badge">{lang === "ko" ? "약 3~4주" : "~3–4 wks"}</span>
+                      </div>
+                      <div className="pickup-opt-desc">{lang === "ko" ? "추가 서류 없음 · 접수증 지참 후 픽업 · 무료" : "No extra docs · bring receipt · free"}</div>
+                    </div>
+                    <div className="pickup-opt">
+                      <div className="pickup-opt-top">
+                        <span className="pickup-opt-name">✉️ {lang === "ko" ? "우편 수령 (Xpresspost)" : "Mail (Xpresspost)"}</span>
+                        <span className="pickup-badge">{lang === "ko" ? "3~4주 + 배송" : "3–4 wks + post"}</span>
+                      </div>
+                      <div className="pickup-opt-desc">{lang === "ko" ? "추가: 등기봉투(1인당 1매) + 우편수령신청서 · 봉투값 별도" : "Add: Xpresspost envelope (1 per person) + mail-receipt form"}</div>
+                    </div>
+                    <div className="pickup-opt">
+                      <div className="pickup-opt-top">
+                        <span className="pickup-opt-name">✈️ {lang === "ko" ? "DHL 특급" : "DHL express"} <span style={{ fontSize: "11px", color: "#185fa5", fontWeight: 700 }}>{lang === "ko" ? "가장 빠름" : "fastest"}</span></span>
+                        <span className="pickup-badge fast">{lang === "ko" ? "약 1~2주" : "~1–2 wks"}</span>
+                      </div>
+                      <div className="pickup-opt-desc">{lang === "ko" ? "추가: DHL 결제 영수증 출력본 · 배송비 별도 · 가족 1회 결제" : "Add: DHL payment receipt · shipping extra · one payment per family"}</div>
+                      <div className="pickup-warn">⚠️ {lang === "ko" ? "자택 배송 아님 — 영사관 또는 우편으로 최종 수령" : "Not home delivery — final pickup at consulate or by mail"}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", marginBottom: "12px" }}>
                 <div className="info-card" style={{ marginBottom: 0 }}>

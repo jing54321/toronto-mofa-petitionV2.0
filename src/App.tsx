@@ -4082,24 +4082,22 @@ const TREE = {
     breadcrumb: ["Home", "Visa", "Mail Application & Status Check"],
     title: "Visa — Mail Application & Status Check",
     docs: [
-      "All required documents for your visa type",
+      "All documents required for the visa you are applying for (see each visa's guide)",
       "Original passport — must be included",
-      "Prepaid Xpresspost return envelope (Canada Post) — for passport return",
-      "  ▸ Write YOUR name/address as both sender and recipient on this envelope",
-      "  ▸ Size does not matter",
-      "Certified Cheque (Money Order) for the visa fee",
-      "  ▸ Payable to: KOREAN CONSULATE TORONTO",
-      "  ▸ Personal cheques NOT accepted",
+      "Outer envelope (you send your documents in this) — write From: your address, To: the consulate",
+      "Return envelope enclosed inside, for passport return — Prepaid Xpresspost (Canada Post), with From & To both your own name/address (size does not matter)",
+      "Certified Cheque or Money Order for the visa fee, payable to KOREAN CONSULATE TORONTO (personal cheques not accepted)",
       "Photocopy of your driver's licence (front, showing your address)",
     ],
     costs: [{ label: "Mail Fee", value: "Same as in-person fee — Certified Cheque only" }],
     time: "Same as in-person processing time + mail delivery",
     notices: [
+      "⚠️ Mail applications only available for residents living 2+ hours by car from the consulate (e.g. London, Windsor, Kingston, Ontario).",
+      "⚠️ F-6-1 Marriage Immigration Visa — mail applications NOT accepted.",
       "Mail address: Korean Consulate in Toronto (비자), 555 Avenue Road, Toronto, ON M4V 2J7",
       "Phone: 416-920-3809",
       "Email: torvisa@mofa.go.kr",
-      "⚠️ Mail applications only available for residents living 2+ hours by car from the consulate (e.g. London, Windsor, Kingston, Ontario).",
-      "⚠️ F-6-1 Marriage Immigration Visa — mail applications NOT accepted.",
+      "Consulate jurisdiction: Ontario (except Ottawa) and Manitoba.",
       "An in-person interview may still be required after mail submission (rare).",
       "Visa status check: visa.go.kr → select '재외공관' → enter passport number and name (Last First, no comma, no hyphen)",
       "  ▸ Example: HONG GILDONG (correct) / HONG, GILDONG (incorrect)",
@@ -5583,164 +5581,6 @@ const TREE = {
     onlineLink: "https://www.g4k.go.kr",
   },
 
-  // ══ ENGLISH NODES: Registration & Emigration ══
-  registration_start_en: {
-    type: "question",
-    service: "registration",
-    breadcrumb: ["Home", "Overseas Korean Registration"],
-    question: "What do you need for Overseas Korean Registration?",
-    sub: "Registration is a legal obligation for Korean nationals residing abroad for more than 90 days (Overseas Koreans Act, Article 2). Does not apply to those who have lost Korean citizenship.",
-    options: [
-      { id: "registration_new_en", icon: "📋", title: "New Registration", desc: "Must register within 90 days of arriving in Canada" },
-      { id: "registration_change_en", icon: "✏️", title: "Update / Change / Move Notification", desc: "Address, immigration status, or relocation change" },
-      { id: "registration_copy_en", icon: "📄", title: "Registration Certificate (등록부 등본)", desc: "For real estate, financial, or inheritance matters" },
-    ],
-  },
-
-  registration_new_en: {
-    type: "result",
-    service: "registration",
-    breadcrumb: ["Home", "Overseas Korean Registration", "New Registration"],
-    title: "Overseas Korean Registration — New",
-    docs: [
-      "Overseas Korean Registration Form (소정 양식)",
-      "  ▸ Registration base (등록기준지): enter from top of your Basic Certificate",
-      "  ▸ Military service status (males): select completed / pending / exempt; females: N/A",
-      "  ▸ Canadian address: full address including city and postal code",
-      "  ▸ Sign at the bottom if consenting to administrative data sharing",
-      "Valid Korean passport — original",
-      "Canadian immigration status document — original + photocopy (PR Card front & back / visa / study permit)",
-      "  ▸ If consenting to administrative data sharing: immigration status document NOT required",
-      "  ▸ If no valid visa or PR Card: submit proof of long-term stay (rental agreement, utility bill, etc.)",
-    ],
-    costs: [{ label: "Fee", value: "Free" }],
-    time: "Same-day processing",
-    notices: [
-      "⚠️ You must register within 90 days of arriving in Canada — failure to do so may result in a fine.",
-      "Online registration available: Overseas Koreans 365 Portal (g4k.go.kr) — requires a Gong-dong Certificate.",
-      "Korean nationals only — those who have lost Korean citizenship are NOT eligible.",
-      "After completing an Overseas Emigration Report, you must also register here for Korean administrative services.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.g4k.go.kr",
-  },
-
-  registration_change_en: {
-    type: "result",
-    service: "registration",
-    breadcrumb: ["Home", "Overseas Korean Registration", "Update / Change / Move"],
-    title: "Overseas Korean Registration — Update / Change / Move Notification",
-    docs: [
-      "Overseas Korean Registration Change Form (소정 양식)",
-      "Valid Korean passport — original",
-      "Supporting documents for the change:",
-      "  ▸ Address change: rental agreement, utility bill, or other address proof",
-      "  ▸ Immigration status change: new PR Card / visa — original + photocopy",
-      "  ▸ Relocation (move within Canada or return to Korea): relevant travel/departure documents",
-    ],
-    costs: [{ label: "Fee", value: "Free" }],
-    time: "Same-day processing",
-    notices: [
-      "Online update available at the Overseas Koreans 365 Portal (g4k.go.kr) with a Gong-dong Certificate.",
-      "Please report changes promptly when your address or immigration status changes.",
-      "Moving within Canada also requires a change notification.",
-      "Returning to Korea or moving to another country requires a relocation (이동) notification.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.g4k.go.kr",
-  },
-
-  registration_copy_en: {
-    type: "result",
-    service: "registration",
-    breadcrumb: ["Home", "Overseas Korean Registration", "Registration Certificate"],
-    title: "Overseas Korean Registration Certificate (등록부 등본)",
-    docs: [
-      "Valid Korean passport — original",
-      "Fee (cash)",
-    ],
-    costs: [{ label: "Fee per copy", value: "CAD $1.00 (cash)" }],
-    time: "Same-day issuance",
-    notices: [
-      "Free online issuance available at Overseas Koreans 365 Portal (g4k.go.kr) if you have a Gong-dong Certificate.",
-      "Used as proof of overseas residency for real estate transactions, inheritance, and financial matters in Korea.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.g4k.go.kr",
-  },
-
-  emigration_start_en: {
-    type: "question",
-    service: "emigration",
-    breadcrumb: ["Home", "Overseas Emigration Report"],
-    question: "What do you need for the Overseas Emigration Report?",
-    sub: "The Overseas Emigration Report (해외이주신고) formally updates your Korean resident registration from 'domestic resident' to 'overseas Korean.' Required after obtaining Canadian PR.",
-    options: [
-      { id: "emigration_new_en", icon: "🛫", title: "File Overseas Emigration Report (New)", desc: "After obtaining Canadian PR — deregister from Korean domestic residency" },
-      { id: "emigration_cert_en", icon: "📄", title: "Overseas Emigration Confirmation Certificate", desc: "For National Pension refund claim and other official uses" },
-    ],
-  },
-
-  emigration_new_en: {
-    type: "result",
-    service: "emigration",
-    breadcrumb: ["Home", "Overseas Emigration Report", "New Report"],
-    title: "Overseas Emigration Report — New Filing",
-    docs: [
-      "Overseas Emigration Report Application Form (소정 양식, 1 copy)",
-      "Administrative Information Sharing Pre-Consent Form (소정 양식, 1 copy)",
-      "  ▸ ✅ If you consent: Resident Registration Certificate, all 3 tax certificates, and military record are NOT required — the Consulate retrieves them directly",
-      "  ▸ ❌ If you do NOT consent: submit all documents below yourself",
-      "Valid Korean passport — original + photocopy",
-      "Canadian Permanent Resident Card — original + photocopy (front and back)",
-      "Basic Certificate / 기본증명서 (Detailed, all numbers visible) — within 3 months",
-      "Family Relationship Certificate / 가족관계증명서 (Detailed) — within 3 months",
-      "  ▸ If NOT consenting, also submit:",
-      "  ▸ Resident Registration Certificate (주민등록등본, all numbers visible) — from gov.kr",
-      "  ▸ Males aged 18–37: military service record (초본 with military info, or 병적증명서; pending → 병적증명서 required)",
-      "  ▸ National Tax Certificate (해외이주용, all numbers visible) — from Hometax (hometax.go.kr)",
-      "  ▸ Local Tax Certificate (해외이주용) — from gov.kr",
-      "  ▸ Customs Tax Certificate (해외이주용) — from unipass.customs.go.kr",
-      "  ▸ Adult family members filing together: each must bring their own full set of documents and appear in person",
-      "  ▸ Minor children filing together: child's passport + PR card + Basic & Family Certificates + all 3 tax certificates (child's)",
-    ],
-    costs: [{ label: "Fee", value: "Free" }],
-    time: "Same-day processing",
-    notices: [
-      "⚠️ Personal visit required — no proxy applications. All adults aged 18+ must appear in person.",
-      "⚠️ Korean National Health Insurance (건강보험) is immediately suspended upon completion.",
-      "💡 Consenting to administrative data sharing eliminates the need to bring most documents — bring the consent form pre-filled.",
-      "All tax certificates have an expiry date — obtain them just before your visit if not using the consent option.",
-      "After filing, complete Overseas Korean Registration (재외국민 등록) to retain access to Korean administrative services.",
-      "International marriage: additionally submit marriage certificates from both countries + translation (with Apostille or consular confirmation) + spouse's passport copy.",
-      "Existing holders of the old-style residence passport (거주여권) do not need to file this report.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    bookingLabel: "Book Appointment (Overseas Emigration Report) →",
-  },
-
-  emigration_cert_en: {
-    type: "result",
-    service: "emigration",
-    breadcrumb: ["Home", "Overseas Emigration Report", "Confirmation Certificate"],
-    title: "Overseas Emigration Confirmation Certificate (해외이주신고확인서)",
-    docs: [
-      "Valid Korean passport — original",
-    ],
-    costs: [
-      { label: "1 copy (institutional submission)", value: "CAD $0.65 (cash)" },
-      { label: "2 copies (institutional + financial institution)", value: "CAD $1.30 (cash)" },
-    ],
-    time: "Same-day issuance",
-    notices: [
-      "Used for National Pension (국민연금) lump-sum refund claims and financial institution submissions.",
-      "If you have a Gong-dong Certificate, you can reissue this online at the Overseas Koreans 365 Portal (g4k.go.kr) — only if the original report has already been filed.",
-      "If you have not yet filed the Overseas Emigration Report, you must complete that first.",
-    ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.g4k.go.kr",
-  },
-
   // ══ FAQ ══
   faq_start: {
     type: "faq",
@@ -5833,7 +5673,7 @@ const KO_TRANSLATIONS = {
   visa_start_en: {
     breadcrumb: ["홈", "비자 (사증)"],
     question: "한국 혈통이 있으신가요?",
-    sub: "한국법상 부모 중 한 분이라도 과거에 한국 국적이었던 적이 있으면 — 이후 캐나다인이 되셨더라도 — 본인이 자동으로 한국 국적을 보유할 수 있습니다. 이는 비자가 필요한지 여부 자체를 좌우합니다.",
+    sub: "한국법상 부모 중 한 분이라도 과거에 한국 국적이었던 적이 있으면 — 이후 캐나다인이 되셨더라도 — 본인이 자동으로 한국 국적을 보유할 수 있습니다. 이에 따라 비자가 아예 필요 없을 수도 있습니다.",
     options: {
       visa_heritage_yes_en:    { title: "네 — 부모 또는 조부모가 한국인이었어요", desc: "이후 한국 국적을 포기한 경우도 포함됩니다" },
       visa_heritage_unsure_en: { title: "잘 모르겠어요 — 부모님 중 한 분이 한국인이었을 수 있어요", desc: "비자 신청 전 확인하는 것이 좋습니다" },
@@ -7009,24 +6849,22 @@ const KO_TRANSLATIONS = {
     breadcrumb: ["홈", "비자 (사증)", "우편 신청 & 진행 조회"],
     title: "비자 — 우편 신청 & 진행 조회",
     docs: [
-      "본인 비자 종류의 모든 필요 서류",
+      "신청하려는 비자의 구비서류 일체 (각 비자 안내 참조)",
       "여권 원본 — 반드시 포함",
-      "Prepaid Xpresspost 반송봉투 (Canada Post) — 여권 반송용",
-      "  ▸ 이 봉투의 보내는 사람·받는 사람 모두 본인 이름·주소로 기재",
-      "  ▸ 크기는 무관",
-      "비자 수수료용 Certified Cheque (Money Order)",
-      "  ▸ 수취인: KOREAN CONSULATE TORONTO",
-      "  ▸ 개인 수표 불가",
+      "바깥 봉투 (서류를 담아 보내는 봉투) — 보내는 사람(From): 본인 주소, 받는 사람(To): 영사관 주소로 기재",
+      "안에 동봉하는 여권 반송용 봉투 — Prepaid Xpresspost (Canada Post), 보내는 사람·받는 사람(From·To) 모두 본인 이름·주소 (크기 무관)",
+      "비자 수수료용 Certified Cheque 또는 Money Order — 수취인 KOREAN CONSULATE TORONTO (개인 수표 불가)",
       "운전면허증 사본 (앞면, 주소 표시)",
     ],
     costs: [{ label: "우편 수수료", value: "방문 신청과 동일 — Certified Cheque만 가능" }],
     time: "방문 신청 처리기간 + 우편 배송 기간",
     notices: [
+      "⚠️ 우편 신청은 영사관에서 차로 2시간 이상 거리에 거주하는 분만 가능 (예: 런던, 윈저, 킹스턴, 온타리오).",
+      "⚠️ F-6-1 결혼이민 비자 — 우편 신청 불가.",
       "우편 주소: Korean Consulate in Toronto (비자), 555 Avenue Road, Toronto, ON M4V 2J7",
       "전화: 416-920-3809",
       "이메일: torvisa@mofa.go.kr",
-      "⚠️ 우편 신청은 영사관에서 차로 2시간 이상 거리에 거주하는 분만 가능 (예: 런던, 윈저, 킹스턴, 온타리오).",
-      "⚠️ F-6-1 결혼이민 비자 — 우편 신청 불가.",
+      "공관 관할지역: 온타리오 (오타와 제외), 마니토바.",
       "우편 제출 후에도 대면 인터뷰가 요구될 수 있음 (드물게).",
       "비자 진행 조회: visa.go.kr → '재외공관' 선택 → 여권번호·성명 입력 (Last First, 쉼표·하이픈 없이)",
       "  ▸ 예: HONG GILDONG (올바름) / HONG, GILDONG (틀림)",
@@ -9792,6 +9630,813 @@ const EN_TRANSLATIONS: any = {
     booking: "https://www.torbooking.com/book",
     bookingLabel: "Book Appointment (Nationality → Acquisition report) →",
   },
+  registration_start: {
+    breadcrumb: ["Home", "Overseas Korean Registration"],
+    question: "What registration matter do you need?",
+    sub: "Overseas Korean registration is a legal duty for Korean nationals residing/staying abroad 90+ days (Overseas Koreans Registration Act Art. 2). Citizens (those who lost Korean nationality) are not subject to it.",
+    options: {
+      registration_new: { title: "New registration", desc: "First-time registration within 90 days of entering Canada" },
+      registration_change: { title: "Change / move report", desc: "When address, contact, or residency status changes, or on return/relocation" },
+      registration_copy: { title: "Issue a registration record copy", desc: "For proving overseas residence — real estate, finance, inheritance, etc." },
+    },
+  },
+  registration_new: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "New registration / change"],
+    question: "How would you like to apply?",
+    sub: "With a joint certificate you can apply online. If you sign the 'consent to request and share personal information' at the bottom of the form, the basic certificate is not required.",
+    options: {
+      registration_new_online: { title: "Online application", desc: "Overseas Koreans G4K portal (g4k.go.kr) — joint certificate required" },
+      registration_new_visit: { title: "Apply in person at the consulate", desc: "By appointment — processed same day" },
+      registration_new_mail: { title: "Apply by mail", desc: "Send copies notarized by a lawyer" },
+    },
+  },
+  registration_new_online: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "New registration", "Online"],
+    title: "Overseas Korean Registration — online application",
+    docs: [
+      "Go to the Overseas Koreans G4K portal (g4k.go.kr) → log in with a joint certificate → apply for overseas Korean registration",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Immediate",
+    notices: [
+      "If you have no joint certificate, issue one first via the certificate menu.",
+      "⚠️ Registration within 90 days of entering Canada is recommended.",
+      "Citizens (those who lost Korean nationality) cannot register.",
+    ],
+    onlineLink: "https://www.g4k.go.kr",
+  },
+  registration_new_visit: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "New registration", "In person"],
+    title: "Overseas Korean Registration — in person",
+    docs: [
+      "New registration form (Form 1) or move/change form (Form 5)",
+      "  ▸ 'First entry date into country of residence':",
+      "  ▸   PR holders: the 'PR since...' landing date on the back of the PR Card",
+      "  ▸   Visa holders: the date of first entry on that visa",
+      "  ▸ 'Registering mission': write Consulate General in Toronto (Ontario·Manitoba residents)",
+      "  ▸ 'Registration base address': copy exactly as shown at the top of the basic certificate",
+      "Passport original + copy",
+      "Residency-status proof original + copy",
+      "  ▸ PR holders: PR Card both sides / long-term residents: valid residence visa",
+      "Basic certificate (detailed, full resident number, within 3 months)",
+      "  ▸ If you sign the information-sharing consent at the bottom of the form, the basic certificate is not required (extra processing time)",
+      "Proof of first entry date (Canada entry stamp, entry-exit record, flight ticket, etc.)",
+      "If an immediate family member applies on your behalf, add:",
+      "  ▸ All of the above (for the subject) + family relation certificate (detailed, within 3 months) + proxy's passport",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Processed same day on visit",
+    notices: [
+      "⚠️ Registration within 90 days of entering Canada is recommended — a fine may apply if not registered.",
+      "Citizens (those who lost Korean nationality) cannot register.",
+      "No retroactive registration — only possible while currently residing in Canada.",
+      "Grounds for removal: return report, non-residence over 183 days, 183+ days residing in Korea, nationality loss, death.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Overseas Korean Registration) →",
+  },
+  registration_new_mail: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "New registration", "Mail"],
+    title: "Overseas Korean Registration — by mail",
+    docs: [
+      "New registration form (Form 1) or move/change form (Form 5)",
+      "Passport copy — notarized by a lawyer before sending (originals not accepted)",
+      "Residency-status proof copy — notarized by a lawyer before sending (originals not accepted)",
+      "Basic certificate (detailed, full resident number, within 3 months)",
+      "Copy of proof of first entry date",
+      "Mailing address: Korean Consulate in Toronto (재외국민등록), 555 Avenue Road, Toronto, Ontario M4V 2J7",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 1–2 weeks including mail delivery",
+    notices: [
+      "Do not mail originals (passport, PR card, visa) — submit lawyer-notarized copies.",
+      "No retroactive registration — only possible while currently residing in Canada.",
+    ],
+  },
+  registration_change: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "Change / move report"],
+    title: "Overseas Korean Registration — change / move report",
+    docs: [
+      "Move/change form (Form 5)",
+      "Valid Korean passport original",
+      "Proof of the changed item:",
+      "  ▸ Address change: proof of the new address",
+      "  ▸ Residency-status change: new PR Card or visa original + copy",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Processed same day on visit",
+    notices: [
+      "Can also be changed online: Overseas Koreans G4K portal (g4k.go.kr).",
+      "Report promptly when your address or residency status changes.",
+      "A move report is also needed when returning to Korea or moving to another country.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    onlineLink: "https://www.g4k.go.kr",
+  },
+  registration_copy: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "Registration record copy"],
+    question: "How would you like to obtain it?",
+    sub: "With a joint certificate you can issue it instantly online at Consular Services 24.",
+    options: {
+      registration_copy_online: { title: "Online issuance (Consular Services 24)", desc: "Joint certificate required — issued instantly" },
+      registration_copy_visit: { title: "Issue in person at the consulate", desc: "Same day — CAD $0.65/copy" },
+      registration_copy_mail: { title: "Apply by mail", desc: "Lawyer-notarized copies required" },
+    },
+  },
+  registration_copy_online: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "Record copy", "Online"],
+    title: "Overseas Korean Registration record copy — online",
+    docs: [
+      "Go to Consular Services 24 → apply for an overseas Korean registration record copy",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Immediate",
+    notices: [
+      "Issuable only if your overseas Korean registration is complete.",
+      "The registration record copy cannot be used as direct proof of your period of overseas stay.",
+    ],
+    onlineLink: "https://consul.mofa.go.kr",
+  },
+  registration_copy_visit: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "Record copy", "In person"],
+    title: "Overseas Korean Registration record copy — in person",
+    docs: [
+      "Application for a registration record copy (form)",
+      "Valid Korean passport original + copy",
+      "Residency-status proof original + copy",
+      "  ▸ PR holders: PR Card both sides / long-term residents: residence visa",
+      "  ▸ Dual nationals: basic certificate showing nationality restoration/dual nationality (detailed, within 3 months) + Canadian passport",
+      "If a proxy (family) applies, add:",
+      "  ▸ All of the above (for the subject) + family relation certificate (detailed, within 3 months) + proxy's passport",
+      "  ▸ Eligible proxies: spouse, spouse's lineal relatives, lineal relatives, lineal relatives' spouses",
+    ],
+    costs: [{ label: "Fee per copy", value: "CAD $0.65 (Cash, Debit, Credit)" }],
+    time: "Issued same day on visit",
+    notices: [
+      "Issuable only if your overseas Korean registration is complete.",
+      "The registration record copy cannot be used as direct proof of your period of overseas stay.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Registration record copy) →",
+  },
+  registration_copy_mail: {
+    breadcrumb: ["Home", "Overseas Korean Registration", "Record copy", "Mail"],
+    title: "Overseas Korean Registration record copy — by mail",
+    docs: [
+      "Application for a registration record copy (form)",
+      "Passport copy — notarized by a lawyer before sending",
+      "Residency-status proof copy — notarized by a lawyer before sending",
+      "Fee: Money Order or Certified Cheque (cash risks loss)",
+      "Mailing address: Korean Consulate in Toronto (재외국민등록), 555 Avenue Road, Toronto, Ontario M4V 2J7",
+    ],
+    costs: [{ label: "Fee per copy", value: "CAD $0.65 (Money Order recommended)" }],
+    time: "About 1–2 weeks including mail delivery",
+    notices: [
+      "Do not mail originals (passport, PR card, visa) — submit lawyer-notarized copies.",
+      "Cash risks loss in mail — use a Money Order or Certified Cheque.",
+    ],
+  },
+  emigration_start: {
+    breadcrumb: ["Home", "Overseas Emigration Report"],
+    question: "What emigration matter do you need?",
+    sub: "⚠️ Emigration report ≠ Overseas Korean registration.\nEmigration report: reclassifies your resident registration as overseas Korean (allows health-insurance suspension / national pension refund) — PR holders only.\nOverseas Korean registration: proves overseas residence (real estate, inheritance, finance) — use the separate menu.",
+    options: {
+      emigration_who: { title: "Emigration report (new)", desc: "Settle Korean resident registration after obtaining PR — PR holders only" },
+      emigration_cert: { title: "Issue an emigration report certificate", desc: "For those who already reported — used for national pension refund, etc." },
+    },
+  },
+  emigration_who: {
+    breadcrumb: ["Home", "Overseas Emigration Report", "New report"],
+    question: "Applicant's age?",
+    sub: "Age 18+ must visit in person. Minors under 18 may have a parent apply on their behalf.",
+    options: {
+      emigration_adult: { title: "Age 18 or older (adult)", desc: "Must visit in person — proxy application strictly not allowed" },
+      emigration_minor: { title: "Under age 18 (minor)", desc: "A parent may apply — the child need not come along" },
+    },
+  },
+  emigration_adult: {
+    breadcrumb: ["Home", "Overseas Emigration Report", "New report", "Adult"],
+    question: "Choose how to prepare the documents",
+    sub: "With a joint certificate, you can prepare the documents yourself and have it issued the same day.",
+    options: {
+      emigration_new_direct: { title: "Prepare documents yourself (joint certificate needed) — same-day issuance", desc: "Issue the resident registration copy and 3 tax certificates yourself and bring them" },
+      emigration_new_consent: { title: "Consent to administrative information sharing — about 10 days", desc: "Minimal documents; the consulate looks them up and issues the certificate" },
+    },
+  },
+  emigration_new_direct: {
+    breadcrumb: ["Home", "Overseas Emigration Report", "New report", "Adult", "Prepare documents yourself"],
+    title: "Overseas Emigration Report — prepare documents yourself (same-day issuance)",
+    docs: [
+      "Emigration report form — write 'local emigration (현지이주)' under 'type of emigration'",
+      "Passport original + 1 copy",
+      "PR Card original + copy (both sides)",
+      "  ▸ If the PR Card hasn't arrived: use the CoPR (Confirmation of Permanent Residence) instead",
+      "Resident registration copy (등본) — issued within 1 month (Gov24)",
+      "National tax payment certificate — emigration purpose, full resident number + Korean address shown (Hometax)",
+      "Local tax payment certificate — emigration purpose (Gov24)",
+      "Customs tax payment certificate — emigration purpose (Korea Customs UNI-PASS)",
+      "  ▸ Issue the tax certificates right before your visit — valid for 1 month",
+      "Additional documents for males aged 18–37:",
+      "  ▸ Military completed: resident registration abstract showing military status, or military service certificate",
+      "  ▸ Not yet served: military service certificate required",
+    ],
+    costs: [{ label: "Emigration report certificate, 1 copy", value: "CAD $0.65 (Cash)" }],
+    time: "Issued same day on visit",
+    notices: [
+      "⚠️ Must visit in person — proxy application strictly not allowed.",
+      "⚠️ On completion, national health insurance is suspended immediately and resident registration is changed to overseas Korean.",
+      "⚠️ PR holders only.",
+      "All 3 tax certificates must be issued for emigration purpose — general-purpose ones not accepted.",
+      "If you have no joint certificate, issue one first via the certificate menu.",
+      "Accompanying family must each prepare their own documents and visit together.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Overseas Emigration Report) →",
+  },
+  emigration_new_consent: {
+    breadcrumb: ["Home", "Overseas Emigration Report", "New report", "Adult", "Information-sharing consent"],
+    title: "Overseas Emigration Report — administrative information-sharing consent (about 10 days)",
+    docs: [
+      "Emigration report form",
+      "  ▸ Must sign both the 'consent to request and share personal information' and the 'administrative information-sharing consent' at the bottom",
+      "  ▸ Write 'local emigration (현지이주)' under 'type of emigration'",
+      "Passport original + 1 copy",
+      "PR Card original + copy (both sides)",
+      "  ▸ If the PR Card hasn't arrived: use the CoPR instead",
+      "Pickup method (choose at the visit):",
+      "  ▸ In-person pickup: visit the consulate after processing",
+      "  ▸ Mail pickup: bring a Canada Post Xpresspost registered envelope",
+      "Additional documents for males aged 18–37:",
+      "  ▸ Military completed: resident registration abstract showing military status, or military service certificate",
+      "  ▸ Not yet served: military service certificate required",
+    ],
+    costs: [{ label: "Emigration report certificate, 1 copy", value: "CAD $0.65 (Cash)" }],
+    time: "About 10 days (national tax lookup takes about 10 days)",
+    notices: [
+      "⚠️ Must visit in person — proxy application strictly not allowed.",
+      "⚠️ On completion, national health insurance is suspended immediately.",
+      "⚠️ PR holders only.",
+      "With consent, you don't need to issue the resident registration copy and 3 tax certificates yourself.",
+      "Accompanying family must each prepare all documents (except the form) individually.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Overseas Emigration Report) →",
+  },
+  emigration_minor: {
+    breadcrumb: ["Home", "Overseas Emigration Report", "New report", "Minor"],
+    title: "Overseas Emigration Report — minor under age 18",
+    docs: [
+      "Emigration report form — can be written on one sheet when reported together with a parent",
+      "Minor's passport original + copy",
+      "Minor's PR Card original + copy",
+      "Minor's basic certificate + family relation certificate — detailed, full resident number, within 3 months",
+      "Minor's 3 tax certificates (national, local, customs) — a minor must also have each issued individually",
+      "Parents' passport original + copy",
+      "  ▸ If only one parent visits: submit only a passport copy of the non-attending parent",
+      "If only one parent visits, additional documents:",
+      "  ▸ The custodial parent's seal certificate (인감증명서, issued within 3 months)",
+      "  ▸ The custodial parent's emigration consent form (form)",
+    ],
+    costs: [{ label: "Emigration report certificate, 1 copy", value: "CAD $0.65 (Cash)" }],
+    time: "Same day if documents prepared yourself / about 10 days with information-sharing consent",
+    notices: [
+      "The minor need not visit — a parent may apply on their behalf.",
+      "⚠️ A minor must also have all 3 tax certificates issued individually.",
+      "If both parents visit together, the seal certificate and consent form are not needed.",
+      "⚠️ On completion, the minor's national health insurance is also suspended.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Overseas Emigration Report) →",
+  },
+  emigration_cert: {
+    breadcrumb: ["Home", "Overseas Emigration Report", "Certificate issuance"],
+    title: "Emigration report certificate issuance",
+    docs: [
+      "Valid Korean passport original",
+    ],
+    costs: [
+      { label: "1 copy (for institutions)", value: "CAD $0.65 (Cash)" },
+      { label: "2 copies (institution + financial institution)", value: "CAD $1.30 (Cash)" },
+    ],
+    time: "Issued same day on visit",
+    notices: [
+      "The emigration report certificate is used for national pension refund applications, submission to financial institutions, etc.",
+      "With a joint certificate, it can be reissued online at the Overseas Koreans G4K portal (g4k.go.kr) (only for those who already reported).",
+      "If you have not yet filed an emigration report, you must complete the new report first.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    onlineLink: "https://www.g4k.go.kr",
+  },
+  cert_start: {
+    breadcrumb: ["Home", "Certificates"],
+    question: "Which certificate do you need?",
+    options: {
+      cert_nonface: { title: "Overseas Korean Simple Certificate (no consulate visit)", desc: "Issued remotely via app · 190 public services · no internet banking" },
+      cert_joint_who: { title: "Joint Certificate (consulate visit)", desc: "Wide use across admin/finance/e-commerce · PC/USB storage · yearly renewal" },
+      cert_financial_who: { title: "Financial Certificate (consulate visit)", desc: "Finance + public services · cloud storage · auto-renew every 3 years" },
+    },
+  },
+  cert_joint_who: {
+    breadcrumb: ["Home", "Certificates", "Joint Certificate"],
+    question: "Applicant's age?",
+    sub: "A minor under 19 must visit together with a legal guardian (a Korean national).",
+    options: {
+      cert_joint_adult: { title: "Age 19 or older (adult)", desc: "Visit in person" },
+      cert_joint_minor: { title: "Under age 19 (minor)", desc: "Minor + legal guardian must visit together" },
+    },
+  },
+  cert_joint_adult: {
+    breadcrumb: ["Home", "Certificates", "Joint Certificate", "Adult"],
+    title: "Joint Certificate issuance — adult",
+    docs: [
+      "Joint certificate application (form) — sign the same as your passport signature",
+      "Joint certificate service terms (form)",
+      "Passport original + 1 copy",
+      "Canadian residency-status proof original + copy",
+      "  ▸ Short-term visitor: eTA confirmation",
+      "  ▸ Long-term resident: Canadian residence visa",
+      "  ▸ PR holder: PR Card",
+      "  ▸ Dual national: basic certificate showing nationality restoration or dual nationality (detailed, full resident number, within 3 months)",
+      "  ▸ Citizen: not eligible",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Apply at the consulate → receive guidance by email → download at home/office within 7 days",
+    notices: [
+      "⚠️ Must visit in person — proxy application not allowed.",
+      "⚠️ Without a valid Korean passport original + residency-status proof original, it cannot be issued.",
+      "⚠️ Cannot be issued without a Korean resident registration number.",
+      "⚠️ Canadian citizens (those who lost Korean nationality) cannot be issued one.",
+      "You must download it on a computer within 7 days of issuance — otherwise you must revisit the consulate.",
+      "The joint certificate is valid for 1 year — renew it yourself on the issuing authority's website before expiry.",
+      "Enter your email address exactly (case-sensitive).",
+      "Some services such as internet banking require separate customer registration with that institution.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Certificates → Joint Certificate) →",
+  },
+  cert_joint_minor: {
+    breadcrumb: ["Home", "Certificates", "Joint Certificate", "Minor"],
+    title: "Joint Certificate issuance — minor under 19",
+    docs: [
+      "Joint certificate application (form) — the minor signs in person",
+      "Joint certificate service terms (form)",
+      "Minor's passport original + copy",
+      "Minor's Canadian residency-status proof (eTA, visa, PR, etc.)",
+      "  ▸ Citizen: not eligible",
+      "Family relation certificate (detailed, full resident number, within 3 months) — issued in the minor's name, not the viewing-only type",
+      "Basic certificate (detailed, full resident number, within 3 months) — issued in the minor's name, not the viewing-only type",
+      "  ▸ For 2+ minors applying, submit a separate original per applicant",
+      "  ▸ Issuance at the consulate takes 2 weeks — obtain in advance and submit",
+      "Legal guardian's consent form (form)",
+      "Legal guardian's Korean passport original + copy",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Apply at the consulate → receive guidance by email → download at home/office within 7 days",
+    notices: [
+      "⚠️ The minor and the legal guardian (a Korean national) must visit together.",
+      "⚠️ The minor must sign the application in person — a guardian may not sign on their behalf.",
+      "⚠️ Cannot be issued without a Korean resident registration number.",
+      "⚠️ Canadian citizens cannot be issued one.",
+      "Must download within 7 days of issuance.",
+      "Enter your email address exactly (case-sensitive).",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Certificates → Joint Certificate) →",
+  },
+  cert_financial_who: {
+    breadcrumb: ["Home", "Certificates", "Financial Certificate"],
+    question: "Applicant's age?",
+    sub: "A minor under 19 must visit together with a legal guardian (a Korean national).",
+    options: {
+      cert_financial_adult: { title: "Age 19 or older (adult)", desc: "Visit in person" },
+      cert_financial_minor: { title: "Under age 19 (minor)", desc: "Minor + legal guardian must visit together" },
+    },
+  },
+  cert_financial_adult: {
+    breadcrumb: ["Home", "Certificates", "Financial Certificate", "Adult"],
+    title: "Financial Certificate issuance — adult",
+    docs: [
+      "Financial certificate application + service terms (form) — sign the same as your passport signature",
+      "Passport original + 1 copy",
+      "Canadian residency-status proof original + copy",
+      "  ▸ Short-term visitor: eTA confirmation",
+      "  ▸ Long-term resident: Canadian residence visa",
+      "  ▸ PR holder: PR Card",
+      "  ▸ Dual national: basic certificate showing nationality restoration or dual nationality (detailed, full resident number, within 3 months)",
+      "  ▸ Citizen: not eligible",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Apply at the consulate → receive guidance by email → download at home/office within 14 days",
+    notices: [
+      "⚠️ Must visit in person — proxy application not allowed.",
+      "⚠️ Without a valid Korean passport original + residency-status proof original, it cannot be issued.",
+      "⚠️ Cannot be issued without a Korean resident registration number.",
+      "⚠️ Canadian citizens (those who lost Korean nationality) cannot be issued one.",
+      "The financial certificate is stored in the Korea Financial Telecommunications cloud — no USB/PC storage needed, accessible anywhere.",
+      "Valid for 3 years, auto-renewed.",
+      "Must download in the app/web within 14 days of issuance.",
+      "Enter your email address exactly (case-sensitive).",
+      "Some services such as internet banking require separate customer registration with that institution.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Certificates → Financial Certificate) →",
+  },
+  cert_financial_minor: {
+    breadcrumb: ["Home", "Certificates", "Financial Certificate", "Minor"],
+    title: "Financial Certificate issuance — minor under 19",
+    docs: [
+      "Financial certificate application + service terms (form) — the minor signs in person",
+      "Minor's passport original + copy",
+      "Minor's Canadian residency-status proof (eTA, visa, PR, etc.)",
+      "  ▸ Citizen: not eligible",
+      "Family relation certificate (detailed, full resident number, within 3 months) — not the viewing-only type",
+      "Basic certificate (detailed, full resident number, within 3 months) — not the viewing-only type",
+      "  ▸ For 2+ minors applying, submit a separate original per applicant",
+      "Legal guardian's consent form (form)",
+      "Legal guardian's Korean passport original + copy",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Apply at the consulate → receive guidance by email → download at home/office within 14 days",
+    notices: [
+      "⚠️ The minor and the legal guardian must visit together.",
+      "⚠️ The minor must sign the application in person — a guardian may not sign on their behalf.",
+      "⚠️ Cannot be issued without a Korean resident registration number.",
+      "⚠️ Canadian citizens cannot be issued one.",
+      "Must download within 14 days of issuance.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Certificates → Financial Certificate) →",
+  },
+  cert_nonface: {
+    breadcrumb: ["Home", "Certificates", "Overseas Korean Simple Certificate"],
+    title: "Overseas Korean Simple Certificate — issued remotely via app",
+    docs: [
+      "Smartphone (iOS or Android)",
+      "A valid e-passport issued on or after Aug 25, 2008",
+      "  ▸ Only passports with the IC-chip mark (⊕) at the bottom of the front cover work",
+      "  ▸ Older passports (no IC-chip mark) → not usable, apply at the consulate instead",
+      "Korean resident registration number",
+      "Completed overseas Korean registration",
+      "Install one of the following apps and apply:",
+      "  ▸ KB Star Banking / Shinhan SOL Bank / Woori WON Banking / Hana 1Q / Toss",
+      "  ▸ Install the app → select 'Overseas Korean certificate application' → enter personal info → scan e-passport + face",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Immediate (no consulate visit needed)",
+    notices: [
+      "From late April 2026, usable for about 190 public services such as Gov24, National Pension, e-People, and Internet Post Office.",
+      "⚠️ Not available for internet banking — if you need internet banking, use a Joint Certificate or Financial Certificate.",
+      "⚠️ Cannot be issued without a Korean resident registration number.",
+      "⚠️ Cannot be issued if you are not registered as an overseas Korean — see the Overseas Korean Registration menu.",
+      "⚠️ Citizens (those who lost Korean nationality) cannot be issued one.",
+      "App application inquiries: each issuer or the Overseas Koreans Service Support Center.",
+    ],
+    onlineLink: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_27012/view.do?seq=3",
+  },
+  various_cert_start: {
+    breadcrumb: ["Home", "Various Certificates"],
+    question: "Which certificate do you need?",
+    sub: "With a joint certificate, you can issue most documents instantly and free online at Gov24 (gov.kr).",
+    options: {
+      vcert_immigration: { title: "Entry-exit record certificate", desc: "Confirms Korea entry/exit records — in person or online" },
+      vcert_criminal: { title: "Background check (criminal record) certificate", desc: "For visa/citizenship applications, identity verification — 7 days at the police agency" },
+      vcert_driving: { title: "English driving record certificate", desc: "Needed when exchanging for a Canadian license — in person or online" },
+      vcert_driving_license: { title: "Korean driver's license renewal/reissue", desc: "Applied at the mission — Class 2 renewal & lost-card reissue · CAD $13.50" },
+      vcert_military_c: { title: "Military service certificate", desc: "Confirms military service status" },
+      vcert_overseas_reg: { title: "Overseas Korean registration record copy", desc: "Proof of overseas residence — real estate, inheritance, finance, etc." },
+      vcert_resident: { title: "Resident registration copy/abstract", desc: "Confirms resident registration status — in person or online" },
+      vcert_tax: { title: "Tax / income certificates", desc: "Tax payment (national/local/customs) & income certificates — needed for emigration report, etc." },
+      vcert_passport_info: { title: "Passport information certificate", desc: "For holders of passports issued after Dec 20, 2020 — substitute for the resident number" },
+    },
+  },
+  vcert_immigration: {
+    breadcrumb: ["Home", "Various Certificates", "Entry-exit record certificate"],
+    question: "Choose how to apply",
+    sub: "With a joint certificate, it can be issued instantly and free at Gov24 — no consulate visit needed.",
+    options: {
+      vcert_immigration_online: { title: "Online issuance (joint certificate)", desc: "Free instant issuance at Gov24" },
+      vcert_immigration_self: { title: "Apply in person at the consulate", desc: "Issued immediately — CAD $2.70" },
+      vcert_immigration_minor: { title: "Minor — legal guardian applies", desc: "An immediate family member applies on their behalf — CAD $2.70" },
+      vcert_immigration_mail: { title: "Apply by mail", desc: "Lawyer-notarized copies — CAD $2.70" },
+    },
+  },
+  vcert_immigration_online: {
+    breadcrumb: ["Home", "Various Certificates", "Entry-exit record", "Online"],
+    title: "Entry-exit record certificate — online issuance",
+    docs: ["Go to Gov24 (www.gov.kr) → log in with a joint certificate → apply for the entry-exit record certificate"],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Immediate",
+    notices: [
+      "Issuable only by Korean nationals.",
+      "Even if there are no entry-exit records, it can be issued as 'no record'.",
+    ],
+    onlineLink: "https://www.gov.kr",
+  },
+  vcert_immigration_self: {
+    breadcrumb: ["Home", "Various Certificates", "Entry-exit record", "In person"],
+    title: "Entry-exit record certificate — in person at the consulate",
+    docs: [
+      "Application for the entry-exit record certificate (designated form)",
+      "Valid Korean passport original",
+      "Residency-status proof original (PR Card, visa, eTA, etc.)",
+      "  ▸ Dual nationals: basic certificate showing nationality restoration, or nationality restoration certificate",
+    ],
+    costs: [{ label: "Fee", value: "CAD $2.70 (Cash, Debit, Credit)" }],
+    time: "Immediate",
+    notices: [
+      "Issuable only by Korean nationals — foreign nationals cannot be issued one.",
+      "  ▸ Foreign nationals: after notarizing a power of attorney, a proxy in Korea obtains it from the relevant authority.",
+      "Even with no entry-exit records, it can be issued as 'no record'.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Various Certificates → Entry-exit record) →",
+  },
+  vcert_immigration_minor: {
+    breadcrumb: ["Home", "Various Certificates", "Entry-exit record", "Minor (proxy)"],
+    title: "Entry-exit record certificate — minor, legal guardian applies",
+    docs: [
+      "Application for the entry-exit record certificate (designated form)",
+      "The subject minor's passport original",
+      "The proxy (immediate family)'s passport original",
+      "The subject's residency-status proof original (PR Card, visa, etc.)",
+      "The subject's basic certificate + family relation certificate (detailed, full resident number, within 3 months)",
+    ],
+    costs: [{ label: "Fee", value: "CAD $2.70 (Cash, Debit, Credit)" }],
+    time: "Immediate",
+    notices: ["A legal guardian (immediate family) may apply on the minor's behalf."],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Various Certificates → Entry-exit record) →",
+  },
+  vcert_immigration_mail: {
+    breadcrumb: ["Home", "Various Certificates", "Entry-exit record", "Mail"],
+    title: "Entry-exit record certificate — by mail",
+    docs: [
+      "Application for the entry-exit record certificate (designated form)",
+      "Lawyer (notary)-notarized passport copy",
+      "Lawyer (notary)-notarized residency-status proof copy (PR Card, visa)",
+      "Fee: CAD $2.70 (cash or Money Order)",
+      "Return envelope: Canada Post Xpresspost registered envelope (your own address as both sender and recipient)",
+    ],
+    costs: [{ label: "Fee", value: "CAD $2.70 (Cash or Money Order)" }],
+    time: "About 1–2 weeks including mail delivery",
+    notices: ["Submit lawyer-notarized copies instead of originals."],
+  },
+  vcert_criminal: {
+    breadcrumb: ["Home", "Various Certificates", "Background check (criminal record)"],
+    question: "What do you need it for?",
+    sub: "Since April 2015 it has been renamed the 'background check (criminal record) certificate.' The application form differs by purpose (Forms 1-1, 1-2, 1-3).",
+    options: {
+      vcert_criminal_visa: { title: "For a foreign visa/PR application", desc: "Confirms Korean criminal record for Canadian immigration/visa — Form 1-1" },
+      vcert_criminal_citizenship: { title: "For a Canadian citizenship application", desc: "Submitted for citizenship applications — Form 1-2" },
+      vcert_criminal_identity: { title: "For identity verification", desc: "Identity verification for PR/citizenship holders — Form 1-3" },
+    },
+  },
+  vcert_criminal_visa: {
+    breadcrumb: ["Home", "Various Certificates", "Background check", "For visa/PR"],
+    title: "Background check (criminal record) certificate — for a foreign visa/PR application (Form 1-1)",
+    docs: [
+      "Application Form 1-1 (download from the consulate website)",
+      "1 color photo taken within the last 6 months — 3cm×4cm, white background (must be taken at a photo studio)",
+      "  ▸ ⚠️ Consulate photo equipment not allowed / note this differs from the passport-photo size (3.5×4.5cm)",
+      "Valid Korean passport original",
+      "Canadian residency-status proof original (PR Card, visa, etc.)",
+      "If a Korean national's passport doesn't show the resident number: resident registration card, driver's license, or basic certificate",
+      "Foreign nationals: foreigner registration card showing the foreigner registration number, or proof of foreigner registration",
+      "Age 14–18: a parent applies on their behalf",
+      "  ▸ Basic certificate + family relation certificate within 3 months (detailed, full resident number)",
+      "If you want to receive it by mail: enclose a Canada Post Xpresspost envelope",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 2 weeks (a phone call when ready — be sure to write a voicemail-capable number on the application)",
+    notices: [
+      "⚠️ No mail submission — you must visit the consulate in person.",
+      "⚠️ Photo size is 3cm×4cm — different from passport photos (3.5×4.5cm). Wrong size means rejection.",
+      "⚠️ Consulate photo equipment not allowed — must be taken at a photo studio.",
+      "Available to Korean nationals and foreign nationals with a Korean residence record.",
+      "Korean National Police Agency, Foreign Affairs Background section: +82-2-3150-2676",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Various Certificates → Background check) →",
+  },
+  vcert_criminal_citizenship: {
+    breadcrumb: ["Home", "Various Certificates", "Background check", "For citizenship"],
+    title: "Background check (criminal record) certificate — for a Canadian citizenship application (Form 1-2)",
+    docs: [
+      "Application Form 1-2 (download from the consulate website)",
+      "1 color photo taken within the last 6 months — 3cm×4cm, white background (must be taken at a photo studio)",
+      "  ▸ ⚠️ Consulate photo equipment not allowed / note this differs from the passport-photo size",
+      "Valid Korean passport original",
+      "Canadian PR Card original (both sides)",
+      "If you want to receive it by mail: enclose a Canada Post Xpresspost envelope",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 2 weeks (a phone call when ready — write a voicemail-capable number on the application)",
+    notices: [
+      "⚠️ No mail submission — you must visit the consulate in person.",
+      "⚠️ Photo size is 3cm×4cm — different from passport photos.",
+      "This differs from the RCMP criminal record check (fingerprint-based) — apply for the RCMP one separately.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Various Certificates → Background check) →",
+  },
+  vcert_criminal_identity: {
+    breadcrumb: ["Home", "Various Certificates", "Background check", "Identity verification"],
+    title: "Background check (criminal record) certificate — for identity verification (Form 1-3)",
+    docs: [
+      "Application Form 1-3 (download from the consulate website)",
+      "1 color photo taken within the last 6 months — 3cm×4cm, white background (must be taken at a photo studio)",
+      "  ▸ ⚠️ Consulate photo equipment not allowed / note this differs from the passport-photo size",
+      "Valid Korean passport original",
+      "Canadian PR Card or citizenship certificate original",
+      "If you want to receive it by mail: enclose a Canada Post Xpresspost envelope",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 2 weeks (a phone call when ready — write a voicemail-capable number on the application)",
+    notices: [
+      "⚠️ No mail submission — you must visit the consulate in person.",
+      "⚠️ Photo size is 3cm×4cm — different from passport photos.",
+      "Used for identity verification of PR holders and citizens.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Various Certificates → Background check) →",
+  },
+  vcert_driving: {
+    breadcrumb: ["Home", "Various Certificates", "English driving record certificate"],
+    question: "Choose how to apply",
+    sub: "With a joint certificate, it can be issued instantly and free online — no consulate visit needed.",
+    options: {
+      vcert_driving_online: { title: "Online issuance (joint certificate)", desc: "Gov24 or Police Traffic Minwon 24 — instant, free" },
+      vcert_driving_self: { title: "Apply in person at the consulate", desc: "Issued immediately — free" },
+      vcert_driving_proxy: { title: "A proxy applies", desc: "Power of attorney required — free" },
+    },
+  },
+  vcert_driving_online: {
+    breadcrumb: ["Home", "Various Certificates", "English driving record", "Online"],
+    title: "English driving record certificate — online issuance",
+    docs: [
+      "Go to Gov24 (www.gov.kr) or the Police Traffic Minwon 24 (efine.go.kr)",
+      "Log in with a joint certificate → apply for the English driving record certificate",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Immediate",
+    notices: [
+      "⚠️ In some cases the online-issued version is not accepted as an original by local receiving offices — check before submitting.",
+    ],
+    onlineLink: "https://www.gov.kr",
+  },
+  vcert_driving_self: {
+    breadcrumb: ["Home", "Various Certificates", "English driving record", "In person"],
+    title: "English driving record certificate — in person at the consulate",
+    docs: [
+      "Application for the English driving record certificate (designated form)",
+      "Valid Korean passport original",
+      "Canadian residency-status proof original",
+      "  ▸ Short-term visitor: eTA confirmation / long-term resident: residence visa / PR holder: PR Card",
+      "  ▸ Dual nationals: basic certificate showing nationality restoration, or nationality restoration certificate",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Same day on visit",
+    notices: [
+      "⚠️ Appointment required: torbooking.com (Notarization → driver's-license translation notarization & English driving record issuance)",
+      "⚠️ If the online version isn't accepted as an original, use in-person consulate issuance.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Notarization → driver's license) →",
+  },
+  vcert_driving_proxy: {
+    breadcrumb: ["Home", "Various Certificates", "English driving record", "Proxy"],
+    title: "English driving record certificate — proxy application",
+    docs: [
+      "Application for the English driving record certificate (designated form)",
+      "Power of attorney signed by the delegator (subject) — free format allowed",
+      "The delegator's valid Korean passport original + copy",
+      "The delegator's valid Canadian residency-status proof original (PR Card, visa, etc.)",
+      "The proxy (visitor)'s valid Korean passport",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Same day on visit",
+    notices: [
+      "⚠️ Appointment required: torbooking.com (Notarization → driver's-license translation notarization & English driving record issuance)",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Notarization → driver's license) →",
+  },
+  vcert_driving_license: {
+    breadcrumb: ["Home", "Various Certificates", "Korean driver's license renewal/reissue"],
+    title: "Korean driver's license renewal / reissue",
+    docs: [
+      "License renewal/reissue application + personal information consent form (form)",
+      "1 color photo — within the last 6 months, photo studio, date on the back",
+      "  ▸ ⚠️ Consulate photo equipment not allowed",
+      "  ▸ ⚠️ Must meet the driver's-license photo specs (wrong specs are often rejected)",
+      "Valid passport original + copy",
+      "Canadian residence visa or valid PR Card original + copy",
+      "  ▸ Dual nationals: basic certificate showing the foreign-nationality non-exercise pledge date",
+      "Korean driver's license original (renewal applicants only — surrendered at application)",
+    ],
+    costs: [{ label: "Fee", value: "CAD $13.50 (Cash only)" }],
+    time: "About 4–5 weeks",
+    notices: [
+      "⚠️ Only Korean nationals may apply.",
+      "⚠️ No mail submission — you must visit the consulate in person.",
+      "⚠️ Cash only — Debit/credit not accepted.",
+      "Eligibility:",
+      "  ▸ Class 1 license: reissue only (under 70, within the aptitude-test period)",
+      "  ▸ Class 2 license: both renewal and reissue (69 or under / ages 70–74 reissue only)",
+      "  ▸ Age 75+ with the renewal period started: reissue not possible — an aptitude test in Korea is required",
+      "  ▸ Suspended/revoked licenses: cannot apply",
+      "Class 1 aptitude-test extension: apply online after identity verification at the Korea Road Traffic Authority (safedriving.or.kr).",
+      "International driving permit issuance and aptitude-test postponement cannot be applied for here.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Various Certificates → license renewal/reissue) →",
+    onlineLink: "https://www.safedriving.or.kr",
+  },
+  vcert_military_c: {
+    breadcrumb: ["Home", "Various Certificates", "Military service certificate"],
+    question: "Who is the applicant?",
+    sub: "With a joint certificate, you can issue it instantly online at Gov24 — no consulate visit needed.",
+    options: {
+      military_cert_online: { title: "Online issuance (joint certificate)", desc: "Issued instantly at Gov24 — no consulate visit needed" },
+      military_cert_self: { title: "Apply in person at the consulate", desc: "About 10 days" },
+      military_cert_family: { title: "Family applies on behalf", desc: "Lineal ascendant/descendant, sibling, spouse — about 10 days" },
+      military_cert_proxy: { title: "A proxy applies", desc: "Power of attorney required — about 10 days" },
+    },
+  },
+  vcert_resident: {
+    breadcrumb: ["Home", "Various Certificates", "Resident registration copy/abstract"],
+    title: "Resident registration copy / abstract",
+    docs: [
+      "Resident registration copy/abstract application (designated form)",
+      "Your valid Korean passport original",
+      "Canadian residency-status proof original",
+      "  ▸ With a joint certificate: free instant online issuance at Gov24 (gov.kr) — no consulate visit needed",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Same day on visit / instant online",
+    notices: [
+      "With a joint certificate, free instant issuance at Gov24.",
+      "⚠️ If resident registration is cancelled (an overseas Korean with no domestic address): the copy/abstract cannot be issued — the overseas Korean registration record copy can substitute.",
+      "The resident registration copy needed for an emigration report must be issued in the full-resident-number version.",
+      "Mail submission accepted.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    onlineLink: "https://www.gov.kr",
+  },
+  vcert_tax: {
+    breadcrumb: ["Home", "Various Certificates", "Tax / income certificates"],
+    title: "Tax payment / income certificates",
+    docs: [
+      "Tax/income certificate application (designated form)",
+      "Your valid Korean passport original",
+      "Canadian residency-status proof original",
+      "State the purpose of issuance (e.g., for emigration, for a financial institution, etc.)",
+      "  ▸ For online issuance: instant issuance at Hometax (hometax.go.kr) with a joint certificate",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "Same day on visit / instant online",
+    notices: [
+      "📌 All 3 tax certificates are needed for an emigration report:",
+      "  ① National tax payment certificate — issued at Hometax (hometax.go.kr) (purpose: emigration, full resident number shown)",
+      "  ② Local tax payment certificate — issued at Gov24 (gov.kr) (purpose: emigration)",
+      "  ③ Customs tax payment certificate — issued at the Korea Customs UNI-PASS (unipass.customs.go.kr)",
+      "⚠️ Tax certificates have a validity period — issue them right before your visit.",
+      "With a joint certificate, all can be issued online — no consulate visit needed.",
+      "Income certificate: Hometax → civil certificates → income amount certificate.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    onlineLink: "https://www.hometax.go.kr",
+  },
+  vcert_passport_info: {
+    breadcrumb: ["Home", "Various Certificates", "Passport information certificate"],
+    title: "Passport information certificate",
+    docs: [
+      "Passport information certificate application (designated form)",
+      "Your valid Korean passport original (issued after Dec 20, 2020)",
+      "Canadian residency-status proof original",
+      "  ▸ With a joint certificate: instant online issuance at Gov24 (gov.kr)",
+    ],
+    costs: [{ label: "Fee", value: "CAD $1.00 (Cash)" }],
+    time: "Same day on visit / instant online",
+    notices: [
+      "Passports issued after Dec 20, 2020 have the resident registration number removed.",
+      "The passport information certificate proves the passport details together with the resident number, used to verify the resident number for various civil/notarization purposes.",
+      "With a joint certificate, free online issuance at Gov24 (CAD $1.00 in person).",
+      "Mail submission accepted.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    onlineLink: "https://www.gov.kr",
+  },
+  vcert_overseas_reg: {
+    breadcrumb: ["Home", "Various Certificates", "Overseas Korean registration record copy"],
+    question: "How would you like to obtain it?",
+    sub: "With a joint certificate, it can be issued instantly online at Consular Services 24.",
+    options: {
+      registration_copy_online: { title: "Online issuance (Consular Services 24)", desc: "Joint certificate required — issued instantly" },
+      registration_copy_visit: { title: "Issue in person at the consulate", desc: "Same day — CAD $0.65/copy" },
+      registration_copy_mail: { title: "Apply by mail", desc: "Lawyer-notarized copies required" },
+    },
+  },
 };
 
 const SERVICE_COLORS = {
@@ -9924,13 +10569,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     visa_d4_1_en: "visa_d4_1_en",
     visa_d4_3_en: "visa_d4_3_en",
     visa_short_term_en: "visa_short_term_en",
-    registration_start: "registration_start_en",
-    registration_new: "registration_new_en",
-    registration_change: "registration_change_en",
-    registration_copy: "registration_copy_en",
-    emigration_start: "emigration_start_en",
-    emigration_new: "emigration_new_en",
-    emigration_cert: "emigration_cert_en",
   };
 
   const goTo = (id: any) => {
@@ -10277,11 +10915,15 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               {page.sub === "__CERT_COMPARISON__" ? (
                 <div style={{ marginBottom: "1rem" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "10px", marginBottom: "10px" }}>
-                    {[
+                    {(lang === "en" ? [
+                      { icon: "📱", title: "Simple Certificate", visit: false, visitLabel: "No consulate visit", features: [{ ok: true, text: "Issued remotely via app" }, { ok: true, text: "190 public services" }, { ok: false, text: "No internet banking" }, { ok: null, text: "Validity varies by app" }, { ok: null, text: "Stored in the app" }] },
+                      { icon: "🔐", title: "Joint Certificate", visit: true, visitLabel: "One consulate visit", features: [{ ok: true, text: "Admin + finance + e-commerce" }, { ok: true, text: "Widest range of use" }, { ok: true, text: "Internet banking OK" }, { ok: null, text: "Renew yourself yearly" }, { ok: null, text: "PC/USB storage" }] },
+                      { icon: "🏦", title: "Financial Certificate", visit: true, visitLabel: "One consulate visit", features: [{ ok: true, text: "Finance + public services" }, { ok: true, text: "Internet banking OK" }, { ok: true, text: "Auto-renew every 3 years" }, { ok: null, text: "Cloud storage" }, { ok: null, text: "Move between devices freely" }] },
+                    ] : [
                       { icon: "📱", title: "간편인증서", visit: false, visitLabel: "영사관 방문 불필요", features: [{ ok: true, text: "앱에서 비대면 발급" }, { ok: true, text: "공공서비스 190개" }, { ok: false, text: "인터넷뱅킹 불가" }, { ok: null, text: "앱별 유효기간" }, { ok: null, text: "앱 내 저장" }] },
                       { icon: "🔐", title: "공동인증서", visit: true, visitLabel: "영사관 방문 1회", features: [{ ok: true, text: "행정+금융+전자상거래" }, { ok: true, text: "사용처 가장 넓음" }, { ok: true, text: "인터넷뱅킹 가능" }, { ok: null, text: "1년마다 직접 갱신" }, { ok: null, text: "PC/USB 저장" }] },
                       { icon: "🏦", title: "금융인증서", visit: true, visitLabel: "영사관 방문 1회", features: [{ ok: true, text: "금융+공공서비스" }, { ok: true, text: "인터넷뱅킹 가능" }, { ok: true, text: "3년 자동갱신" }, { ok: null, text: "클라우드 저장" }, { ok: null, text: "기기 이동 자유" }] },
-                    ].map((item) => (
+                    ]).map((item) => (
                       <div key={item.title} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "0.875rem" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
                           <span style={{ fontSize: "18px" }}>{item.icon}</span>
@@ -10300,11 +10942,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     ))}
                   </div>
                   <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", padding: "7px 12px", fontSize: "12px", color: "var(--color-text-secondary)", marginBottom: "6px" }}>
-                    📵 세 가지 모두 한국 전화번호 불필요
+                    📵 {lang === "en" ? "None of the three require a Korean phone number" : "세 가지 모두 한국 전화번호 불필요"}
                   </div>
                   <div style={{ background: "var(--color-background-danger)", borderRadius: "var(--border-radius-md)", padding: "8px 12px", fontSize: "12px", color: "var(--color-text-danger)", display: "flex", flexDirection: "column", gap: "3px" }}>
-                    <span>⚠️ 세 가지 모두 캐나다 시민권자(한국 국적 상실자)는 발급 불가</span>
-                    <span>⚠️ 세 가지 모두 주민등록번호 필수</span>
+                    <span>⚠️ {lang === "en" ? "None of the three are available to Canadian citizens (those who lost Korean nationality)" : "세 가지 모두 캐나다 시민권자(한국 국적 상실자)는 발급 불가"}</span>
+                    <span>⚠️ {lang === "en" ? "All three require a Korean resident registration number" : "세 가지 모두 주민등록번호 필수"}</span>
                   </div>
                 </div>
               ) : L("sub", page.sub) ? (
@@ -10328,6 +10970,75 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   );
                 })}
               </div>
+              {pageId === "military_start" && (() => {
+                const Y = new Date().getFullYear();
+                const thisYearBirth = Y - 24;
+                const rows = [thisYearBirth - 1, thisYearBirth, thisYearBirth + 1].map((b) => ({ birth: b, start: b + 24, deadline: (b + 25) + ".1.15" }));
+                return (
+                  <div style={{ background: "#f7f9fd", border: "1px solid #dde3ef", borderRadius: "12px", padding: "0.875rem 1rem", marginTop: "1rem", display: "flex", flexDirection: "column", gap: "10px" }}>
+                    <div>
+                      <div style={{ fontSize: "14px", fontWeight: 600, color: "#003478" }}>
+                        {lang === "en" ? "✈️ When should I apply for an overseas travel (extension) permit?" : "✈️ 국외여행(기간연장)허가, 언제 신청하나요?"}
+                      </div>
+                      <div style={{ fontSize: "12.5px", color: "#4a5a78", marginTop: "3px", lineHeight: 1.5 }}>
+                        {lang === "en"
+                          ? "Male conscripts aged 25+ who haven't completed service need the MMA's permit before traveling or staying abroad. Apply from the year you turn 24."
+                          : "만 25세 이상 병역의무자(군복무 미필)는 국외여행(국외체재) 전 병무청장의 허가가 필요합니다. 만 24세가 되는 해부터 신청하세요."}
+                      </div>
+                    </div>
+                    <div style={{ background: "#fff", borderRadius: "8px", overflow: "hidden", border: "0.5px solid #e3e6ee" }}>
+                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px", tableLayout: "fixed" }}>
+                        <thead>
+                          <tr style={{ background: "#eef3fb" }}>
+                            <th style={{ textAlign: "left", padding: "7px 12px", fontWeight: 600, color: "#185fa5", width: "82px" }}>{lang === "en" ? "Birth year" : "출생연도"}</th>
+                            <th style={{ textAlign: "left", padding: "7px 12px", fontWeight: 600, color: "#185fa5" }}>{lang === "en" ? "Apply from" : "신청 시작"}</th>
+                            <th style={{ textAlign: "left", padding: "7px 12px", fontWeight: 600, color: "#185fa5" }}>{lang === "en" ? "Deadline" : "신청 마감"}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {rows.map((r) => {
+                            const hl = r.birth === thisYearBirth;
+                            return (
+                              <tr key={r.birth} style={{ borderTop: "0.5px solid #eef1f8", background: hl ? "#eef3fb" : "transparent" }}>
+                                <td style={{ padding: "7px 12px", color: "#333", fontWeight: hl ? 600 : 400 }}>{r.birth}{lang === "en" ? "" : "년생"}</td>
+                                <td style={{ padding: "7px 12px", color: "#333" }}>{lang === "en" ? "from " + r.start : r.start + "년부터"}</td>
+                                <td style={{ padding: "7px 12px", color: "#333" }}>{lang === "en" ? "by " + r.deadline : r.deadline + "까지"}</td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div style={{ fontSize: "11.5px", color: "#8899bb" }}>
+                      {lang === "en"
+                        ? "Auto-shown for the current year (" + Y + ") · those born in " + thisYearBirth + " turn 24 this year."
+                        : "올해(" + Y + "년) 기준 자동 표시 · " + thisYearBirth + "년생이 올해 만 24세입니다."}
+                    </div>
+                  </div>
+                );
+              })()}
+              {(pageId === "visa_start" || pageId === "visa_start_en") && (
+                <div style={{ marginTop: "1.25rem" }}>
+                  <div style={{ fontSize: "13.5px", fontWeight: 600, color: "#003478", marginBottom: "8px" }}>
+                    {lang === "en" ? "✋ Wait! Live far from the consulate?" : "✋ 여기서 잠깐! 멀리 거주하시나요?"}
+                  </div>
+                  <button
+                    onClick={() => goTo("visa_mail_en")}
+                    style={{ width: "100%", textAlign: "left", background: "#f7f9fd", border: "1px solid #dde3ef", borderRadius: "12px", padding: "0.875rem 1rem", display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}
+                  >
+                    <span style={{ fontSize: "20px", flexShrink: 0 }}>📮</span>
+                    <span style={{ flex: 1 }}>
+                      <span style={{ display: "block", fontSize: "13.5px", fontWeight: 600, color: "#003478" }}>
+                        {lang === "en" ? "Mail application guide" : "우편 신청 안내"}
+                      </span>
+                      <span style={{ display: "block", fontSize: "12px", color: "#4a5a78", marginTop: "2px" }}>
+                        {lang === "en" ? "How to apply by mail & check your visa status" : "우편 신청 방법 및 비자 진행 조회 안내"}
+                      </span>
+                    </span>
+                    <span style={{ fontSize: "18px", color: "#8899bb", flexShrink: 0 }}>›</span>
+                  </button>
+                </div>
+              )}
             </div>
           )}
 

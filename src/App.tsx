@@ -61,7 +61,7 @@ const STYLES = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Noto Sans KR', 'Inter', sans-serif; background: #F5F6F8; color: #1a1a2e; -webkit-font-smoothing: antialiased; }
 
-  .app { min-height: 100vh; display: flex; flex-direction: column; }
+  .app { min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 
   /* ── Header ─────────────────────────────────────────── */
   .header {
@@ -74,11 +74,17 @@ const STYLES = `
     position: sticky; top: 0; z-index: 100;
     box-shadow: 0 2px 12px rgba(0,0,0,0.22);
   }
-  .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .header-flag { font-size: 22px; }
-  .header-title { color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.25; }
+  .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; flex: 1; }
+  .header-flag { font-size: 22px; flex-shrink: 0; }
+  .header-title { color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.25; min-width: 0; }
   .header-title span { display: block; font-size: 11px; font-weight: 400; opacity: 0.75; margin-top: 1px; }
-  .header-tel { color: rgba(255,255,255,0.8); font-size: 12px; display: flex; align-items: center; gap: 4px; }
+  .header-tel { color: rgba(255,255,255,0.8); font-size: 12px; display: flex; align-items: center; gap: 4px; flex-shrink: 0; white-space: nowrap; }
+  .header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+  @media (max-width: 480px) {
+    .header-title { font-size: 12px; }
+    .header-title span { display: none; }
+    .header-tel { display: none; }
+  }
 
   /* ── Progress / Breadcrumb ───────────────────────────── */
   .progress-wrap {
@@ -296,7 +302,9 @@ const STYLES = `
     padding: 6px 0;
     border-bottom: 1px solid #f2f4f9;
     font-size: 13px; line-height: 1.55; color: #334;
+    overflow-wrap: anywhere; word-break: break-word;
   }
+  .doc-item > span { min-width: 0; }
   .doc-item:last-child { border-bottom: none; }
   .doc-num {
     width: 20px; height: 20px; border-radius: 50%;
@@ -330,7 +338,9 @@ const STYLES = `
     display: flex; align-items: flex-start; gap: 8px;
     padding: 5px 0;
     font-size: 12.5px; line-height: 1.55; color: #445;
+    overflow-wrap: anywhere; word-break: break-word;
   }
+  .notice-item > span { min-width: 0; }
   .notice-item.warn {
     background: #fffbee;
     border-radius: 7px;
@@ -415,7 +425,7 @@ const STYLES = `
     color: #fff;
     border: 1px solid rgba(255,255,255,0.35);
     border-radius: 6px;
-    padding: 4px 10px;
+    padding: 7px 12px;
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
@@ -491,13 +501,15 @@ const STYLES = `
     font-size: 16px; pointer-events: none;
   }
   .search-clear {
-    position: absolute; right: 10px; top: 50%;
+    position: absolute; right: 6px; top: 50%;
     transform: translateY(-50%);
     background: #e8eef7; border: none; border-radius: 50%;
     width: 22px; height: 22px; font-size: 12px;
     cursor: pointer; color: #667;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.12s;
+    box-sizing: content-box; padding: 9px;
+    background-clip: content-box;
   }
   .search-clear:hover { background: #c8d3e8; }
 
@@ -523,7 +535,9 @@ const STYLES = `
   /* ── FAQ ────────────────────────────────────────────── */
   .faq-btn {
     background: none; border: none; cursor: pointer;
-    font-size: 20px; padding: 2px 4px; line-height: 1;
+    font-size: 20px; padding: 8px; line-height: 1;
+    min-width: 40px; min-height: 40px;
+    display: flex; align-items: center; justify-content: center;
     opacity: 0.55; transition: opacity 0.15s, transform 0.15s;
     flex-shrink: 0;
   }
@@ -633,6 +647,62 @@ const STYLES = `
     outline: 2px solid #CD2E3A;
     outline-offset: 2px;
     border-radius: 4px;
+  }
+
+  /* ── 채팅 도우미 (FAB + 패널) ───────────────────────── */
+  .chat-fab {
+    position: fixed; right: 18px; bottom: 18px; z-index: 200;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #003478; color: #fff; border: none; cursor: pointer;
+    font-size: 24px; box-shadow: 0 4px 16px rgba(0,52,120,0.32);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .chat-fab:hover { transform: scale(1.06); background: #004ba0; }
+  .chat-panel {
+    position: fixed; right: 18px; bottom: 84px; z-index: 200;
+    width: 360px; max-width: calc(100vw - 36px);
+    height: 520px; max-height: calc(100vh - 120px);
+    background: #fff; border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+    display: flex; flex-direction: column; overflow: hidden;
+    border: 1px solid #e4eaf6;
+  }
+  .chat-head {
+    background: linear-gradient(135deg, #003478 0%, #004ba0 100%);
+    color: #fff; padding: 13px 16px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .chat-head-title { font-size: 14px; font-weight: 700; }
+  .chat-head-sub { font-size: 11px; opacity: 0.8; margin-top: 1px; }
+  .chat-close { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; opacity: 0.85; padding: 4px 6px; }
+  .chat-close:hover { opacity: 1; }
+  .chat-body { flex: 1; overflow-y: auto; padding: 14px; background: #f7f9fd; display: flex; flex-direction: column; gap: 12px; }
+  .chat-row { display: flex; gap: 7px; align-items: flex-start; }
+  .chat-row.user { justify-content: flex-end; }
+  .chat-avatar { width: 28px; height: 28px; border-radius: 50%; background: #e6f1fb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+  .chat-bubble-bot { background: #fff; border: 0.5px solid #e4eaf6; padding: 10px 12px; border-radius: 4px 13px 13px 13px; font-size: 13px; line-height: 1.55; color: #1a1a2e; max-width: 85%; }
+  .chat-bubble-user { background: #003478; color: #fff; padding: 9px 12px; border-radius: 13px 13px 4px 13px; font-size: 13px; line-height: 1.5; max-width: 85%; }
+  .chat-result-card { width: 100%; text-align: left; background: #fff; border: 0.5px solid #dde3ef; border-radius: 12px; padding: 11px 13px; cursor: pointer; margin-top: 7px; transition: border-color 0.12s; }
+  .chat-result-card:hover { border-color: #003478; }
+  .chat-result-path { font-size: 11px; color: #99a; margin-bottom: 3px; }
+  .chat-result-title { font-size: 13.5px; font-weight: 600; color: #003478; line-height: 1.4; }
+  .chat-result-go { font-size: 11.5px; color: #185fa5; margin-top: 6px; font-weight: 600; }
+  .chat-option-btn { width: 100%; text-align: left; background: #fff; border: 0.5px solid #dde3ef; border-radius: 9px; padding: 10px 12px; cursor: pointer; font-size: 13px; color: #1a1a2e; margin-top: 6px; transition: border-color 0.12s, background 0.12s; }
+  .chat-option-btn:hover { border-color: #003478; background: #f7f9fd; }
+  .chat-disclaim { font-size: 11px; color: #99a; line-height: 1.45; margin-top: 4px; }
+  .chat-foot { flex-shrink: 0; border-top: 1px solid #e4eaf6; padding: 10px; display: flex; gap: 8px; background: #fff; }
+  .chat-text-input { flex: 1; border: 1px solid #c8d3e8; border-radius: 10px; padding: 9px 12px; font-size: 13px; outline: none; min-width: 0; }
+  .chat-text-input:focus { border-color: #003478; }
+  .chat-send { background: #003478; color: #fff; border: none; border-radius: 10px; padding: 0 14px; font-size: 14px; cursor: pointer; flex-shrink: 0; }
+  .chat-send:hover { background: #004ba0; }
+  .chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .chat-chip { background: #eef3fb; color: #185fa5; border: 0.5px solid #dde3ef; border-radius: 14px; padding: 5px 11px; font-size: 12px; cursor: pointer; }
+  .chat-chip:hover { background: #e0eaf8; }
+  @media (max-width: 480px) {
+    .chat-panel { right: 10px; left: 10px; width: auto; max-width: none; bottom: 78px; height: calc(100vh - 150px); }
+    .chat-fab { right: 14px; bottom: 14px; }
   }
 `;
 
@@ -1645,7 +1715,7 @@ const TREE = {
     breadcrumb: ["홈", "가족관계등록", "증명서 발급", "위임장 공증 후 대리인"],
     title: "위임장 공증 후 대리인 발급",
     docs: [
-      "영사관 방문하여 위임장 공증 (공증 메뉴 → 사서증서 인증 → 일반 위임장)",
+      "영사관 방문하여 위임장 공증 (공증 메뉴 → 사문서 인증 → 위임장)",
       "공증된 위임장을 한국 대리인에게 송부",
       "대리인이 신분증 + 위임장 지참 후 전국 구청·주민센터 방문 신청",
       "  ▸ 위임인의 등록기준지와 성명을 알아야 합니다",
@@ -2222,13 +2292,12 @@ const TREE = {
     service: "nationality",
     breadcrumb: ["홈", "국적"],
     question: "해당하는 상황을 선택하세요",
-    sub: "국적 업무는 상황에 따라 완전히 달라집니다. 용어가 헷갈리면 맨 아래 '용어 비교'를 먼저 보세요.",
+    sub: "국적 업무는 상황에 따라 완전히 달라집니다. 본인 상황에 맞는 항목을 선택하세요.",
     options: [
       { id: "nationality_citizen_start", icon: "🍁", title: "나 또는 가족이 외국 국적(시민권)을 취득했어요", desc: "국적이탈·상실·보유·선택 — 내 상황에 맞게 안내" },
       { id: "nationality_acquire", icon: "👶", title: "한국인 아버지와 외국인 어머니 사이의 혼외자예요", desc: "인지에 의한 국적취득 (미성년) · CAD $24.30" },
       { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적을 되찾고 싶어요 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
       { id: "nationality_renounce_exception", icon: "⚠️", title: "이탈 신고 기간을 놓친 병역미필 남성이에요", desc: "예외적 국적이탈 허가 (국적법 제14조의2) · CAD $121.50" },
-      { id: "nationality_terms", icon: "❓", title: "이탈·상실·보유·선택이 헷갈려요", desc: "네 가지 용어를 표로 비교해 드려요" },
     ],
   },
 
@@ -3397,7 +3466,7 @@ const TREE = {
   visa_ko_heritage_yes: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통"], question: "어떤 상황이신가요?", sub: "한국 혈통이 있으시면 비자 신청 전 국적 상태를 먼저 확인해야 합니다.", options: [{ id: "visa_dual_check_en", icon: "⚠️", title: "국적 상태를 아직 확인하지 않았어요", desc: "선천적 한국 국적 보유 여부 — 먼저 확인 필수" }, { id: "visa_f4_family_en", icon: "👨‍👩‍👧", title: "배우자 또는 자녀가 F-4 재외동포 비자 소지자예요", desc: "동반 비자 (F-3) 신청" }, { id: "visa_f4_en", icon: "🇰🇷", title: "국적상실 확인 완료 — F-4 비자 신청하러 왔어요", desc: "해당 케이스 선택" }] },
   visa_ko_heritage_unsure: { type: "result", service: "visa", breadcrumb: ["홈", "비자 (사증)", "혈통 불확실"], title: "⚠️ 비자 신청 전 부모님께 먼저 확인하세요", docs: ["부모님 중 한 분이라도 한국 국적이었던 적이 있는지 확인하세요", "  ▸ 현재 캐나다 시민권자이더라도, 본인 출생 당시 한국인이었다면 해당됩니다", "  ▸ 출생신고를 한 적 없어도, 출생 당시 부모 중 한 명이 한국인이었으면 본인도 한국 국적입니다", "확인 결과에 따라:", "  ▸ 한국 혈통 있음 → 뒤로 가서 '네' 선택", "  ▸ 한국 혈통 없음 → 뒤로 가서 '전혀 없어요' 선택"], costs: [{ label: "수수료", value: "해당 없음 — 상담 안내" }], time: "부모님께 확인 후 다시 방문", notices: ["⚠️ 한국 국적을 보유한 상태에서 비자를 신청하면 접수가 거부됩니다.", "⚠️ 만 18~37세 남성이고 한국 국적이라면 병역 의무가 있을 수 있습니다.", "여전히 불확실하다면 영사관(416-920-3809) 또는 국적과 상담 예약을 이용하세요."], booking: "https://www.torbooking.com/book", bookingLabel: "국적 상담 예약하기 →" },
 
-  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🇨🇦 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월).", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·단기 체류·경유", desc: "캐나다 시민권자 무비자 · C-3-9 관광비자 · TWOV · K-ETA" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-4 출장, C-3-1 행사참석, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
+  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🇨🇦 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월).", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·경유 (캐나다 국적자)", desc: "무비자 · K-ETA · 경유(TWOV)" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-9 관광, C-3-4 출장, C-3-1 일반, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
   visa_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa"], question: "Do you have Korean heritage?", sub: "Under Korean law, if either of your parents is/was EVER a Korean national — even if they later became Canadian — you may hold Korean citizenship automatically. This affects whether you need a visa at all.", options: [
     { id: "visa_heritage_yes_en", icon: "🧬", title: "Yes — a parent or grandparent was Korean", desc: "Includes cases where they later gave up Korean citizenship" },
     { id: "visa_heritage_unsure_en", icon: "🤔", title: "Not sure — one of my parents may have been Korean", desc: "Best to confirm before applying for any visa" },
@@ -3450,8 +3519,8 @@ const TREE = {
     question: "What brings you to Korea?",
     sub: "Since you have no Korean heritage, select your purpose of visit. Canadian citizens can enter Korea visa-free for up to 6 months.",
     options: [
-      { id: "visa_visit_transit_en", icon: "🌏", title: "Visiting / Tourism / Transit", desc: "Canadian citizens: visa-free · Tourist / Short-Stay / Transit (TWOV) / K-ETA" },
-      { id: "visa_short_term_en", icon: "🤝", title: "Short-Term Visit", desc: "Business (C-3-4), General (C-3-1), Culture/Arts/Sports (C-3-9)" },
+      { id: "visa_visit_transit_en", icon: "🌏", title: "Visa-Free / Transit (Canadian citizens)", desc: "Visa-free · K-ETA · Transit (TWOV)" },
+      { id: "visa_short_term_en", icon: "🤝", title: "Short-Term Visit", desc: "Tourism (C-3-9), Business (C-3-4), General (C-3-1), Medical (C-3-3)" },
       { id: "visa_work_en", icon: "💼", title: "Work", desc: "E-2-1 English teacher, E-2-2 EPIK/TALK, E-1~E-7, H-1 Working Holiday, F-1-D Digital Nomad" },
       { id: "visa_study_en", icon: "🎓", title: "Study", desc: "D-2-6 Exchange, D-2-8 Short-term, D-4-1 Korean Language, D-4-3 Elementary/Secondary" },
       { id: "visa_marriage_en", icon: "💍", title: "Marriage Immigration (F-6-1)", desc: "Spouse of a Korean national — 90-day single entry, extendable inside Korea" },
@@ -3534,7 +3603,7 @@ const TREE = {
       "Third-country Criminal Record Check (if stayed 1+ year in a country other than Korea/Canada within last 5 years)",
       "  ▸ Apostille required if from Apostille Convention country; consular authentication if not",
     ],
-    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, or Credit Card) / Mail: Certified Cheque" }],
+    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, Credit) / Mail: Certified Cheque" }],
     time: "5–10 business days",
     notices: [
       "⚠️ You MUST complete Korean nationality loss/renunciation (국적상실 신고) BEFORE applying for the visa.",
@@ -3599,7 +3668,7 @@ const TREE = {
       "  ▸   King Sejong Institute certificate (Elementary 1B+), or equivalent",
       "  ▸ Exemptions: age 60+, completed Korean elementary school+, age 13 or under, previous F-4 with 3+ years in Korea",
     ],
-    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, or Credit Card) / Mail: Certified Cheque" }],
+    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, Credit) / Mail: Certified Cheque" }],
     time: "5–10 business days",
     notices: [
       "Eligibility: born with dual Korean-Canadian nationality where at least one parent was already Canadian at time of birth, AND nationality renunciation completed.",
@@ -3637,7 +3706,7 @@ const TREE = {
       "Third-country Criminal Record Check (if stayed 1+ year outside Korea/Canada in last 5 years)",
       "[Optional] Korean language proficiency document (for 2-year stay)",
     ],
-    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, or Credit Card) / Mail: Certified Cheque" }],
+    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, Credit) / Mail: Certified Cheque" }],
     time: "5–10 business days",
     notices: [
       "⚠️ RCMP check must be fingerprint-based — name-based NOT accepted.",
@@ -3667,7 +3736,7 @@ const TREE = {
       "  ▸ Ages 17 and under, 60 and over: exempt",
       "  ▸ Third-country check also required if stayed 1+ year outside Korea/Canada in last 5 years",
     ],
-    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, or Credit Card) / Mail: Certified Cheque" }],
+    costs: [{ label: "Visa Fee", value: "CAD $121.50 (Cash, Debit, Credit) / Mail: Certified Cheque" }],
     time: "5–10 business days",
     notices: [
       "⚠️ Complete nationality loss (국적상실 신고) BEFORE applying — processing takes ~6 months. Book Nationality section first.",
@@ -3690,13 +3759,13 @@ const TREE = {
   },
 
   visa_f4_family_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa"], question: "What is your relationship to the F-4 visa holder?", sub: "Spouse or minor children (under 18) of an F-4 Overseas Korean visa holder may apply for an F-3 Dependent Visa.", options: [{ id: "visa_f3_spouse_en", icon: "💑", title: "Spouse of an F-4 visa holder", desc: "Up to 1 year stay" },{ id: "visa_f3_child_en", icon: "👶", title: "Minor child (under 18) of an F-4 visa holder", desc: "Up to 1 year stay" }] },
-  visa_f3_spouse_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Spouse"], title: "F-3 Dependent Visa — Spouse of F-4 Holder", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","1 passport-type photo","Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back","Marriage certificate — Korean marriage registration (혼인관계증명서, Detailed, within 3 months), OR Canadian marriage registration","Family Relationship Certificate of both spouses (Detailed) — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $81 (Cash, Debit, Credit Card) / Mail: Certified Cheque $81" }], time: "Approx. 1–2 weeks", notices: ["Stay period: up to 1 year (within the F-4 holder's visa validity).","⚠️ Visa valid for 3 months from issue date — must enter Korea within this period or visa is void.","Marriage certificate: If married in Canada, must submit Certified Copy of Marriage Registration or Certified Copy of Marriage License (Legal size) — Certificate of Marriage short form NOT accepted.","Mail applications accepted — include Prepaid Xpresspost return envelope for passport.","⚠️ If you are of Korean heritage yourself, you may be eligible to apply for F-4 directly."], booking: "https://www.torbooking.com/book" },
-  visa_f3_child_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Minor Child"], title: "F-3 Dependent Visa — Minor Child (Under 18) of F-4 Holder", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy","1 passport-type photo","Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back","Child's birth certificate — Certified Copy of Birth Registration","Parent's Family Relationship Certificate or Marriage Certificate (Detailed) — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $81 (Cash, Debit, Credit Card) / Mail: Certified Cheque $81" }], time: "Approx. 1–2 weeks", notices: ["Minor children: ages 0–18.","Stay period: up to 1 year (within F-4 holder's visa validity).","⚠️ Visa valid for 3 months from issue date — must enter Korea within this period or visa is void.","Mail applications accepted — include Prepaid Xpresspost return envelope for passport."], booking: "https://www.torbooking.com/book" },
+  visa_f3_spouse_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Spouse"], title: "F-3 Dependent Visa — Spouse of F-4 Holder", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid Canadian passport — original + photocopy","1 passport-type photo","Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back","Marriage certificate — Korean marriage registration (혼인관계증명서, Detailed, within 3 months), OR Canadian marriage registration","Family Relationship Certificate of both spouses (Detailed) — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $81 (Cash, Debit, Credit) / Mail: Certified Cheque $81" }], time: "Approx. 1–2 weeks", notices: ["Stay period: up to 1 year (within the F-4 holder's visa validity).","⚠️ Visa valid for 3 months from issue date — must enter Korea within this period or visa is void.","Marriage certificate: If married in Canada, must submit Certified Copy of Marriage Registration or Certified Copy of Marriage License (Legal size) — Certificate of Marriage short form NOT accepted.","Mail applications accepted — include Prepaid Xpresspost return envelope for passport.","⚠️ If you are of Korean heritage yourself, you may be eligible to apply for F-4 directly."], booking: "https://www.torbooking.com/book" },
+  visa_f3_child_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "F-3 Dependent Visa", "Minor Child"], title: "F-3 Dependent Visa — Minor Child (Under 18) of F-4 Holder", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy","1 passport-type photo","Copy of the F-4 visa holder's visa or Overseas Korean Resident Card (거소증) — front & back","Child's birth certificate — Certified Copy of Birth Registration","Parent's Family Relationship Certificate or Marriage Certificate (Detailed) — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $81 (Cash, Debit, Credit) / Mail: Certified Cheque $81" }], time: "Approx. 1–2 weeks", notices: ["Minor children: ages 0–18.","Stay period: up to 1 year (within F-4 holder's visa validity).","⚠️ Visa valid for 3 months from issue date — must enter Korea within this period or visa is void.","Mail applications accepted — include Prepaid Xpresspost return envelope for passport."], booking: "https://www.torbooking.com/book" },
 
   visa_c3_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)"], question: "What is the purpose of your visit?", sub: "Canadian citizens can visit Korea visa-free for up to 6 months. Only apply if you require a visa for your nationality.", options: [{ id: "visa_c3_family_en", icon: "👨‍👩‍👧", title: "Visiting a Korean national family member", desc: "Spouse or child is a Korean national" },{ id: "visa_c3_emergency_en", icon: "🚨", title: "Emergency / Humanitarian visit", desc: "Funeral, critical illness, emergency surgery" },{ id: "visa_c3_other_en", icon: "📋", title: "Other short-term visit (wedding, adoption, etc.)", desc: "Your own wedding, court appearance for adoption, etc." }] },
-  visa_c3_family_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Family of Korean National"], title: "C-3-1 Short-Term Visa — Family of a Korean National", docs: ["Visa Application Form (printed from visa.go.kr — include SIN number, fill in all details)","Valid passport — original + photocopy","1 passport-type photo","Proof of family relationship with Korean national","If of Korean heritage: Basic Certificate showing nationality loss date — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 12–15 business days", notices: ["⚠️ If you are of Korean heritage, you must complete Korean nationality renunciation BEFORE applying.","C-series visas CANNOT be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book" },
-  visa_c3_emergency_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Emergency / Humanitarian"], title: "C-3-1 Short-Term Visa — Emergency / Humanitarian Visit", docs: ["Visa Application Form (printed from visa.go.kr)","Valid passport — original + photocopy","1 passport-type photo","Family relationship proof","Urgency evidence: Funeral → death certificate; Critical illness → doctor's letter; Emergency surgery → surgical documents","If of Korean heritage: Basic Certificate showing nationality loss date"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Emergency processing: 5–7 business days (when humanitarian urgency is recognized)", notices: ["🚨 For funeral attendance or critical illness: call the Visa Dept. immediately: 416-920-3809 ext. 221 to request an urgent appointment slot.","⚠️ IMPORTANT: If you previously held Korean citizenship (e.g. naturalized Canadian), you MUST submit the Nationality Loss Report (국적상실신고) documentation without exception — even for emergency visits.","C-series visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book" },
-  visa_c3_other_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Other"], title: "C-3-1 Short-Term Visa — Other Purpose (Wedding, Adoption, etc.)", docs: ["Visa Application Form (printed from visa.go.kr)","Valid passport — original + photocopy","1 passport-type photo","Supporting documents for purpose of visit","If of Korean heritage: Basic Certificate showing nationality loss date"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 12–15 business days", notices: ["⚠️ Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need a visa.","C-series visas cannot be converted to F-4, F-6 or other visa types inside Korea."], booking: "https://www.torbooking.com/book" },
+  visa_c3_family_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Family of Korean National"], title: "C-3-1 Short-Term Visa — Family of a Korean National", docs: ["Visa Application Form (printed from visa.go.kr — include SIN number, fill in all details)","Valid passport — original + photocopy","1 passport-type photo","Proof of family relationship with Korean national","If of Korean heritage: Basic Certificate showing nationality loss date — within 3 months"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Approx. 12–15 business days", notices: ["⚠️ If you are of Korean heritage, you must complete Korean nationality renunciation BEFORE applying.","C-series visas CANNOT be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book" },
+  visa_c3_emergency_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Emergency / Humanitarian"], title: "C-3-1 Short-Term Visa — Emergency / Humanitarian Visit", docs: ["Visa Application Form (printed from visa.go.kr)","Valid passport — original + photocopy","1 passport-type photo","Family relationship proof","Urgency evidence: Funeral → death certificate; Critical illness → doctor's letter; Emergency surgery → surgical documents","If of Korean heritage: Basic Certificate showing nationality loss date"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Emergency processing: 5–7 business days (when humanitarian urgency is recognized)", notices: ["🚨 For funeral attendance or critical illness: call the Visa Dept. immediately: 416-920-3809 ext. 221 to request an urgent appointment slot.","⚠️ IMPORTANT: If you previously held Korean citizenship (e.g. naturalized Canadian), you MUST submit the Nationality Loss Report (국적상실신고) documentation without exception — even for emergency visits.","C-series visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book" },
+  visa_c3_other_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "Short-Term Visit (C-3-1)", "Other"], title: "C-3-1 Short-Term Visa — Other Purpose (Wedding, Adoption, etc.)", docs: ["Visa Application Form (printed from visa.go.kr)","Valid passport — original + photocopy","1 passport-type photo","Supporting documents for purpose of visit","If of Korean heritage: Basic Certificate showing nationality loss date"], costs: [{ label: "Visa Fee", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Approx. 12–15 business days", notices: ["⚠️ Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need a visa.","C-series visas cannot be converted to F-4, F-6 or other visa types inside Korea."], booking: "https://www.torbooking.com/book" },
 
   visa_no_heritage_en: {
     type: "question",
@@ -3731,8 +3800,8 @@ const TREE = {
     ],
     costs: [
       { label: "Canadian citizens", value: "No visa needed" },
-      { label: "Single-entry (other nationalities)", value: "CAD $26 (Cash, Debit, or Credit Card)" },
-      { label: "Multiple-entry (other nationalities)", value: "CAD $52 (Cash, Debit, or Credit Card)" },
+      { label: "Single-entry (other nationalities)", value: "CAD $26 (Cash, Debit, Credit)" },
+      { label: "Multiple-entry (other nationalities)", value: "CAD $52 (Cash, Debit, Credit)" },
     ],
     time: "Approx. 5–7 business days (visa applicants only)",
     notices: [
@@ -3946,7 +4015,6 @@ const TREE = {
     sub: "🇨🇦 Canadian passport holders are visa-free for up to 6 months — no visa needed. K-ETA exempted until December 31, 2026.",
     options: [
       { id: "visa_visit_en", icon: "🇨🇦", title: "Tourism / Short-Term Stay — Canadian citizen", desc: "Visa-free up to 6 months — no Consulate visit needed" },
-      { id: "visa_c39_tourist_en", icon: "🌏", title: "Tourism / Short-Term Stay — Non-Canadian national (with Canadian PR or visa)", desc: "C-3-9 Tourist Visa required — fee varies by nationality" },
       { id: "visa_transit_en", icon: "🔄", title: "Transiting Through Korea (TWOV)", desc: "Passing through Korea on the way to another country — up to 30 days" },
       { id: "visa_keta_en", icon: "📱", title: "K-ETA — Do I need one?", desc: "Canadians currently exempted until Dec 31, 2026" },
     ],
@@ -3955,7 +4023,7 @@ const TREE = {
   visa_c39_tourist_en: {
     type: "result",
     service: "visa",
-    breadcrumb: ["Home", "Visa", "No Korean Heritage", "Tourism Visa (C-3-9)"],
+    breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Tourism (C-3-9)"],
     title: "C-3-9 Tourist Visa — Non-Canadian Nationals",
     docs: [
       "Visa Application Form — printed from visa.go.kr, all fields completed",
@@ -3987,11 +4055,10 @@ const TREE = {
     bookingLabel: "Book Appointment (Visa Section) →",
     onlineLink: "https://www.visa.go.kr",
   },
-  visa_short_term_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit"], question: "What is the purpose of your short-term visit?", sub: "🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — you may NOT need a visa. A short-term visa (C-3) is mainly required for non-Canadian nationals residing in Canada, or for specific activities.", options: [{ id: "visa_c34_en", icon: "🤝", title: "Business Trip (C-3-4)", desc: "Market research, contract signing, consulting, meetings with Korean companies" },{ id: "visa_c31_en", icon: "📋", title: "General Short-Term Visit (C-3-1)", desc: "Conference, academic research, medical treatment, training, religious activities" },{ id: "visa_c33_en", icon: "🏥", title: "Medical Treatment (C-3-3)", desc: "Non-Canadians visiting Korea for medical treatment — up to 90 days" },{ id: "visa_c39_en", icon: "🎭", title: "Culture / Arts / Sports (C-3-9)", desc: "Performing arts, sports competitions, cultural exchanges" }] },
-  visa_c33_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Medical Treatment (C-3-3)"], title: "Medical Treatment Visa — C-3-3", docs: ["Visa Application Form — print, fill out, and sign","Valid original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo — must be taken at a professional photo shop","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Proof of Residency in Canada — original + photocopy","  ▸ Permanent Resident: valid PR Card","  ▸ Long-term visitor: valid Work Permit or Study Permit","Medical Purpose Documentation (의료목적 입증서류) — issued within 3 months","  ▸ Invitation letter or doctor's appointment confirmation issued by a Korean hospital","Business Registration Certificate of the Korean hospital or medical facility (사업자등록증)","Certificate of Medical Travel Facilitator Registration (의료관광 유치기관 등록증)","  ▸ Available from the Korean hospital or medical facility","Proof of Funding (one of the following):","  ▸ Employment letter issued within 3 months + 2 months' recent pay stubs","  ▸ OR recent 2 months' Canadian bank statement"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit or Credit Card)" },{ label: "Other nationalities", value: "Fee may vary by nationality" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days from date of entry.", notices: ["⚠️ This visa is primarily for NON-Canadian nationals residing in Canada — Canadian passport holders can enter Korea visa-free for medical treatment.", "⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","All medical documents must be issued within 3 months of your application date.","Transit passengers: check the TWOV conditions at the Consulate website before applying.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Business (C-3-4)"], title: "Short-Term Business Visa — C-3-4", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Invitation letter from the Korean company — on company letterhead, signed","Business Registration Certificate of the Korean inviting company (사업자등록증명원)","Employment letter from your Canadian employer (confirming your role and that the company is paying you)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, or Credit Card)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can enter Korea visa-free for up to 90 days for business purposes — confirm whether you actually need this visa.","You must be paid by your Canadian employer — NOT by the Korean company.","Stay: up to 90 days. C-3 visas cannot be converted to another visa type inside Korea.","Plan at least 2 weeks ahead as processing may take longer during peak periods."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c31_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "General (C-3-1)"], title: "General Short-Term Visitor Visa — C-3-1", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Supporting documents for your purpose of visit (one of the following):","  ▸ Conference / event: invitation letter or event registration confirmation","  ▸ Medical treatment: letter from Korean hospital or clinic confirming your appointment","  ▸ Academic research: letter from Korean university or institution","  ▸ Training: training program acceptance letter","  ▸ Religious activities: invitation from Korean religious organization","Proof of financial means (recent bank statement)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, or Credit Card)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","Stay: up to 90 days per entry. C-3 visas cannot be converted to another visa type inside Korea.","All documents must be submitted together — missing even one document means your application will not be accepted."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c39_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Culture / Arts / Sports (C-3-9)"], title: "Culture / Arts / Sports Short-Term Visa — C-3-9", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Invitation letter or participation confirmation from the Korean organizer","Program schedule or event details","Proof of financial means (recent bank statement)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, or Credit Card)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, or Credit Card)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","Stay: up to 90 days. C-3 visas cannot be extended or converted inside Korea.","If engaging in paid performances or activities in Korea, you may require a different visa type — contact the Consulate."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_short_term_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit"], question: "What is the purpose of your short-term visit?", sub: "🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — you may NOT need a visa. A short-term visa (C-3) is mainly required for non-Canadian nationals residing in Canada, or for specific activities.", options: [{ id: "visa_c34_en", icon: "🤝", title: "Business Trip (C-3-4)", desc: "Market research, contract signing, consulting, meetings with Korean companies" },{ id: "visa_c31_en", icon: "📋", title: "General Short-Term Visit (C-3-1)", desc: "Conference, academic research, medical treatment, training, religious activities" },{ id: "visa_c33_en", icon: "🏥", title: "Medical Treatment (C-3-3)", desc: "Non-Canadians visiting Korea for medical treatment — up to 90 days" },{ id: "visa_c39_tourist_en", icon: "🌏", title: "Tourism / Short-Term Stay (C-3-9)", desc: "Sightseeing, visiting relatives, short-term leisure — for non-Canadian nationals" }] },
+  visa_c33_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Medical Treatment (C-3-3)"], title: "Medical Treatment Visa — C-3-3", docs: ["Visa Application Form — print, fill out, and sign","Valid original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo — must be taken at a professional photo shop","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Proof of Residency in Canada — original + photocopy","  ▸ Permanent Resident: valid PR Card","  ▸ Long-term visitor: valid Work Permit or Study Permit","Medical Purpose Documentation (의료목적 입증서류) — issued within 3 months","  ▸ Invitation letter or doctor's appointment confirmation issued by a Korean hospital","Business Registration Certificate of the Korean hospital or medical facility (사업자등록증)","Certificate of Medical Travel Facilitator Registration (의료관광 유치기관 등록증)","  ▸ Available from the Korean hospital or medical facility","Proof of Funding (one of the following):","  ▸ Employment letter issued within 3 months + 2 months' recent pay stubs","  ▸ OR recent 2 months' Canadian bank statement"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" },{ label: "Other nationalities", value: "Fee may vary by nationality" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days from date of entry.", notices: ["⚠️ This visa is primarily for NON-Canadian nationals residing in Canada — Canadian passport holders can enter Korea visa-free for medical treatment.", "⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","All medical documents must be issued within 3 months of your application date.","Transit passengers: check the TWOV conditions at the Consulate website before applying.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Business (C-3-4)"], title: "Short-Term Business Visa — C-3-4", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Invitation letter from the Korean company — on company letterhead, signed","Business Registration Certificate of the Korean inviting company (사업자등록증명원)","Employment letter from your Canadian employer (confirming your role and that the company is paying you)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, Credit)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can enter Korea visa-free for up to 90 days for business purposes — confirm whether you actually need this visa.","You must be paid by your Canadian employer — NOT by the Korean company.","Stay: up to 90 days. C-3 visas cannot be converted to another visa type inside Korea.","Plan at least 2 weeks ahead as processing may take longer during peak periods."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c31_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "General (C-3-1)"], title: "General Short-Term Visitor Visa — C-3-1", docs: ["Visa Application Form (printed from visa.go.kr, with photo attached)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Supporting documents for your purpose of visit (one of the following):","  ▸ Conference / event: invitation letter or event registration confirmation","  ▸ Medical treatment: letter from Korean hospital or clinic confirming your appointment","  ▸ Academic research: letter from Korean university or institution","  ▸ Training: training program acceptance letter","  ▸ Religious activities: invitation from Korean religious organization","Proof of financial means (recent bank statement)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, Credit)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","Stay: up to 90 days per entry. C-3 visas cannot be converted to another visa type inside Korea.","All documents must be submitted together — missing even one document means your application will not be accepted."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
   // ── C-3-1 Event / Conference Visa ──
   visa_c31_event_en: {
@@ -4011,7 +4078,7 @@ const TREE = {
       "Organizer's Business Registration Certificate (사업자등록증)",
       "Proof of employment or enrollment (재직증명서 or 재학증명서) from Canadian employer/school",
     ],
-    costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, or Credit Card)" }],
+    costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" }],
     time: "Approx. 2 weeks (12–15 business days)",
     notices: [
       "🇨🇦 Canadian citizens can enter Korea visa-free — confirm if you actually need this visa.",
@@ -4116,15 +4183,15 @@ const TREE = {
   visa_c45_model_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "C-4-5", "Model / Performer"], title: "C-4-5 — Model / Performer / Entertainer", docs: ["Visa Application Form — print and fill out","Original passport + photocopy","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Business Registration Certificate of the Korean inviting organization (사업자등록증) OR certified copy of Corporate Register (등기부등본)","Performance Outline","Employment Contract and Performance Outline (fashion model contract, advertisement contract, etc.)","  ▸ Must indicate wages/incentives for participating events","Recommendation / employment certificate from the relevant minister:","  ▸ Entertainment activities: recommendation letter from the Korea Media Rating Board + entertainment activities outline","  ▸ Advertisement / fashion model: recommendation letter from the Minister of Culture, Sport, and Tourism","Certificate from Korea Creative Content Agency / KOCCA (대중문화예술기획업 등록증)","VAT Tax Standard Certificate (부가가치세 과세표준증명/매출과세표준)","Tax Payment Certificate (납세증명서)","Personal Reference Letter","Resume / Portfolio"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash or Debit)" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days.", notices: ["⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","If you previously held Korean nationality: submit 가족관계증명서 (상세) + 기본증명서 (상세) issued within 3 months (or 제적등본 if renunciation was before 2008).","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_c45_dispatch_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "C-4-5", "Corporate Dispatch"], title: "C-4-5 — Corporate Dispatch to Korea", docs: ["Visa Application Form — print and fill out","Original passport + photocopy","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Business Registration Certificate of the Korean inviting organization (사업자등록증) OR certified copy of Corporate Register (등기부등본)","Employment Letter from your Canadian company","  ▸ Must include: applicant info, nature of business activities in Korea, intended period, contact person in Canada (full address + phone), confirmation that the Canadian company is paying your expenses (NOT the Korean company)","Employment / Service Contract between the two companies","Supporting documents showing business relationship (e.g. trade records, export/import licences, contracts between the two companies)","Flight itinerary and details of your stay","  ▸ Recommend a rebookable/reschedulable ticket or submit a flight itinerary only"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash or Debit)" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days.", notices: ["⚠️ You must be employed and paid by your Canadian company — NOT by the Korean company.","⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","If you previously held Korean nationality: submit 가족관계증명서 (상세) + 기본증명서 (상세) issued within 3 months (or 제적등본 if renunciation was before 2008).","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_e2_1_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "E-2-1 Foreign Language Instructor"], title: "E-2-1 — Foreign Language Instructor (CVI Holders)", docs: ["Visa Application Form — print and fill out the attached form","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Signed employment contract — signed by both the applicant and the academic institution"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 2 weeks. Single-entry visa valid for 90 days from date of issue. Stay up to 2 years (generally 13 months).", notices: ["⚠️ Your Korean employer must apply through visa.go.kr first to obtain the Confirmation of Visa Issuance (CVI) number — you cannot start this process alone.","⚠️ E-2-1 is a SINGLE-ENTRY visa valid for 90 days from issue — enter Korea within that period.","⚠️ Eligible nationalities: Canada, USA, UK, Australia, New Zealand, Ireland, South Africa only.","Additional documents may be requested upon review.","Korean-descent applicants may be required to provide nationality documents (기본증명서, 가족관계증명서, 제적등본) to verify citizenship status.","⚠️ Dual citizens (holding both Korean and foreign citizenship) are NOT eligible to apply for a visa — a Korean passport must be issued instead.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ If renunciation was reported after 2008: submit 가족관계증명서 (상세) + 기본증명서 (상세), issued within 3 months.","  ▸ If reported before 2008: submit 제적등본 instead."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_e2_2_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "E-2-2 EPIK / TALK"], title: "E-2-2 — EPIK / TALK Teaching Assistant Visa", docs: ["Visa Application Form — print and fill out the attached form","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Notice of Appointment — issued by EPIK or TALK program","Signed employment contract — signed by both the applicant and the academic institution"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit or Credit)" }], time: "Approx. 1–2 weeks. Single-entry visa valid for 90 days from date of issue. Stay up to 2 years (generally contract duration + 1 month).", notices: ["⚠️ E-2-2 is specifically for government-sponsored EPIK (English Program in Korea) and TALK (Teach and Learn in Korea) participants.","⚠️ Unlike E-2-1, this visa does NOT require a CVI from visa.go.kr — the Notice of Appointment replaces it.","Additional documents may be requested upon review.","⚠️ Dual citizens (holding both Korean and foreign citizenship) are NOT eligible to apply for a visa.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ If renunciation was reported after 2008: submit 가족관계증명서 (상세) + 기본증명서 (상세), issued within 3 months.","  ▸ If reported before 2008: submit 제적등본 instead."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_e1_e7_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "E-1 to E-7 (CVI)"], title: "E-1 to E-7 — Work Visas (CVI Holders)", docs: ["Visa Application Form for those with Visa Eligibility Certificate — print, fill out, and sign at the bottom","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: also submit photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Signed employment contract — signed by both the applicant and the inviting party"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit or Credit)" }], time: "Approx. 1–2 weeks. Single-entry visa valid for 90 days from issue (stay duration as indicated on Visa Issuance Certificate).", notices: ["📌 Visa types covered:","  ▸ E-1 — Professor: Teaching at universities or educational facilities under the Higher Education Act","  ▸ E-3 — Research: Research at Korean public or private institutions in natural science, high technology, social science, humanities, arts or sports","  ▸ E-4 — Technological Guidance: Special technology or expertise in natural sciences / high-technology not available in Korea","  ▸ E-5 — Profession: Professionals certified abroad in law, accounting, medicine, or other areas approved by Korean law","  ▸ E-6 — Culture and Arts: Music, art, literature, sports, entertainment, advertising, or fashion modelling for profit","  ▸ E-7 — Specially Designated Activities: Roles specially designated by the Minister of Justice","⚠️ Your Korean employer or sponsor must apply at visa.go.kr first to obtain the CVI (Confirmation of Visa Issuance) — you cannot initiate the process alone.","Additional documents may be requested upon review depending on visa type and occupation.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_h1_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "H-1 Working Holiday"], title: "H-1 — Working Holiday Visa", docs: ["Visa Application Form — print and fill out","Original passport + photocopy","  ▸ Must have remaining validity of at least 6 months","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Working Holiday Plan — specify travel schedule and activity plan with date and signature at the bottom","Resume (CV) — explaining work experience","Certificate from the most recent school attended — proof of highest academic qualifications or graduation","  ▸ Must be notarized by a lawyer or notary public if NOT within the Consulate's jurisdiction (Ontario, Manitoba)","RCMP Fingerprint Criminal Record Check — issued within 6 months","  ▸ Dual citizens: must also submit the other country's criminal record check with Apostille","  ▸ Lived in another country 1+ year within the past 5 years: must also submit that country's criminal record check with Apostille","Physical examination by a physician — issued within 3 months","  ▸ Must include: chest X-ray, urinalysis, blood test, and HIV test","Health / Medical Insurance — must remain valid throughout entire stay in Korea","  ▸ Minimum coverage: KRW 40,000,000","  ▸ Must cover return to home country AND medical treatment during stay","Bank statement with certified bank stamp — proving ability to cover travel expenses for at least the first 3 months","Round-trip flight schedule","Travel itinerary","  ▸ Do NOT purchase tickets until visa is approved"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $121.5 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Multiple-entry visa, valid up to 2 years.", notices: ["Eligibility: Canadian citizens aged 18–35 at the time of visa issuance, currently residing in Canada.","⚠️ You must NOT have previously participated in the Korea Working Holiday Program — only one participation allowed per lifetime.","⚠️ Dependent family members CANNOT accompany H-1 visa holders.","This program is primarily intended as a travel vacation — employment is only meant to supplement travel expenses.","Additional documents may be requested upon review.","⚠️ Dual citizens (holding both Korean and foreign citizenship) are NOT eligible — a Korean passport must be issued instead.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ If renunciation was reported after 2008: submit 가족관계증명서 (상세) + 기본증명서 (상세), issued within 3 months.","  ▸ If reported before 2008: submit 제적등본 instead."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_f1d_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "F-1-D Digital Nomad"], title: "F-1-D — Digital Nomad (Workation) Visa", docs: ["Visa Application Form — print and fill out","Original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Employment letter — proves current employment and at least 1 year of employment history","  ▸ Must be issued within 2 weeks of application date","Salary / income proof (all 3 required):","  ▸ 3 months' pay stubs","  ▸ 3 months' bank balance statement","  ▸ 2 years' tax report (Notice of Assessment / NOA)","Apostilled RCMP Certificate — fingerprint-based, issued within 3 months","Medical insurance proof (including coverage details):","  ▸ Must cover approx. CAD $130,000 for medical treatment AND return flight to home country during stay","Family Relationship Certificate — only required if applying for accompanying family members","  ▸ Each family member requires their own original passport and application form","  ▸ Documents not in Korean or English must include a notarized English translation"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $121.5 (Cash, Debit or Credit)" }], time: "Approx. 1–2 weeks. Multiple-entry visa, valid up to 1 year from date of issue.", notices: ["Eligibility: employed by a foreign (non-Korean) company for 1+ year, or owner of a foreign-registered company — must be able to work remotely in Korea.","Income requirement (2024 GNI standard): must earn approx. KRW 99,900,000/year or KRW 8,325,000/month BEFORE tax deduction.","  ▸ Based on 2× Korea's GNI per capita — this figure updates annually. Verify the current standard before applying.","⚠️ Must have NO criminal record.","⚠️ You may NOT be employed by or receive income from a Korean company or entity while on this visa.","Stay: up to 1 year from date of issue, extendable by 1 additional year (max 2 years total).","For stays over 90 days: register with the local Korean immigration office (hikorea.go.kr) within 90 days of arrival.","Dependents (spouse and minor children) may accompany you — each requires a separate application.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ Submit 가족관계증명서 (상세) + 기본증명서 (상세) issued within 3 months (or 제적등본 if renunciation was before 2008)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_e2_2_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "E-2-2 EPIK / TALK"], title: "E-2-2 — EPIK / TALK Teaching Assistant Visa", docs: ["Visa Application Form — print and fill out the attached form","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Notice of Appointment — issued by EPIK or TALK program","Signed employment contract — signed by both the applicant and the academic institution"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit)" }], time: "Approx. 1–2 weeks. Single-entry visa valid for 90 days from date of issue. Stay up to 2 years (generally contract duration + 1 month).", notices: ["⚠️ E-2-2 is specifically for government-sponsored EPIK (English Program in Korea) and TALK (Teach and Learn in Korea) participants.","⚠️ Unlike E-2-1, this visa does NOT require a CVI from visa.go.kr — the Notice of Appointment replaces it.","Additional documents may be requested upon review.","⚠️ Dual citizens (holding both Korean and foreign citizenship) are NOT eligible to apply for a visa.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ If renunciation was reported after 2008: submit 가족관계증명서 (상세) + 기본증명서 (상세), issued within 3 months.","  ▸ If reported before 2008: submit 제적등본 instead."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_e1_e7_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "E-1 to E-7 (CVI)"], title: "E-1 to E-7 — Work Visas (CVI Holders)", docs: ["Visa Application Form for those with Visa Eligibility Certificate — print, fill out, and sign at the bottom","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: also submit photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Signed employment contract — signed by both the applicant and the inviting party"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit)" }], time: "Approx. 1–2 weeks. Single-entry visa valid for 90 days from issue (stay duration as indicated on Visa Issuance Certificate).", notices: ["📌 Visa types covered:","  ▸ E-1 — Professor: Teaching at universities or educational facilities under the Higher Education Act","  ▸ E-3 — Research: Research at Korean public or private institutions in natural science, high technology, social science, humanities, arts or sports","  ▸ E-4 — Technological Guidance: Special technology or expertise in natural sciences / high-technology not available in Korea","  ▸ E-5 — Profession: Professionals certified abroad in law, accounting, medicine, or other areas approved by Korean law","  ▸ E-6 — Culture and Arts: Music, art, literature, sports, entertainment, advertising, or fashion modelling for profit","  ▸ E-7 — Specially Designated Activities: Roles specially designated by the Minister of Justice","⚠️ Your Korean employer or sponsor must apply at visa.go.kr first to obtain the CVI (Confirmation of Visa Issuance) — you cannot initiate the process alone.","Additional documents may be requested upon review depending on visa type and occupation.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_h1_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "H-1 Working Holiday"], title: "H-1 — Working Holiday Visa", docs: ["Visa Application Form — print and fill out","Original passport + photocopy","  ▸ Must have remaining validity of at least 6 months","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Working Holiday Plan — specify travel schedule and activity plan with date and signature at the bottom","Resume (CV) — explaining work experience","Certificate from the most recent school attended — proof of highest academic qualifications or graduation","  ▸ Must be notarized by a lawyer or notary public if NOT within the Consulate's jurisdiction (Ontario, Manitoba)","RCMP Fingerprint Criminal Record Check — issued within 6 months","  ▸ Dual citizens: must also submit the other country's criminal record check with Apostille","  ▸ Lived in another country 1+ year within the past 5 years: must also submit that country's criminal record check with Apostille","Physical examination by a physician — issued within 3 months","  ▸ Must include: chest X-ray, urinalysis, blood test, and HIV test","Health / Medical Insurance — must remain valid throughout entire stay in Korea","  ▸ Minimum coverage: KRW 40,000,000","  ▸ Must cover return to home country AND medical treatment during stay","Bank statement with certified bank stamp — proving ability to cover travel expenses for at least the first 3 months","Round-trip flight schedule","Travel itinerary","  ▸ Do NOT purchase tickets until visa is approved"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $121.50 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Multiple-entry visa, valid up to 2 years.", notices: ["Eligibility: Canadian citizens aged 18–35 at the time of visa issuance, currently residing in Canada.","⚠️ You must NOT have previously participated in the Korea Working Holiday Program — only one participation allowed per lifetime.","⚠️ Dependent family members CANNOT accompany H-1 visa holders.","This program is primarily intended as a travel vacation — employment is only meant to supplement travel expenses.","Additional documents may be requested upon review.","⚠️ Dual citizens (holding both Korean and foreign citizenship) are NOT eligible — a Korean passport must be issued instead.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ If renunciation was reported after 2008: submit 가족관계증명서 (상세) + 기본증명서 (상세), issued within 3 months.","  ▸ If reported before 2008: submit 제적등본 instead."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f1d_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "F-1-D Digital Nomad"], title: "F-1-D — Digital Nomad (Workation) Visa", docs: ["Visa Application Form — print and fill out","Original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Employment letter — proves current employment and at least 1 year of employment history","  ▸ Must be issued within 2 weeks of application date","Salary / income proof (all 3 required):","  ▸ 3 months' pay stubs","  ▸ 3 months' bank balance statement","  ▸ 2 years' tax report (Notice of Assessment / NOA)","Apostilled RCMP Certificate — fingerprint-based, issued within 3 months","Medical insurance proof (including coverage details):","  ▸ Must cover approx. CAD $130,000 for medical treatment AND return flight to home country during stay","Family Relationship Certificate — only required if applying for accompanying family members","  ▸ Each family member requires their own original passport and application form","  ▸ Documents not in Korean or English must include a notarized English translation"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $121.50 (Cash, Debit, Credit)" }], time: "Approx. 1–2 weeks. Multiple-entry visa, valid up to 1 year from date of issue.", notices: ["Eligibility: employed by a foreign (non-Korean) company for 1+ year, or owner of a foreign-registered company — must be able to work remotely in Korea.","Income requirement (2024 GNI standard): must earn approx. KRW 99,900,000/year or KRW 8,325,000/month BEFORE tax deduction.","  ▸ Based on 2× Korea's GNI per capita — this figure updates annually. Verify the current standard before applying.","⚠️ Must have NO criminal record.","⚠️ You may NOT be employed by or receive income from a Korean company or entity while on this visa.","Stay: up to 1 year from date of issue, extendable by 1 additional year (max 2 years total).","For stays over 90 days: register with the local Korean immigration office (hikorea.go.kr) within 90 days of arrival.","Dependents (spouse and minor children) may accompany you — each requires a separate application.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ Submit 가족관계증명서 (상세) + 기본증명서 (상세) issued within 3 months (or 제적등본 if renunciation was before 2008)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_study_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study"], question: "What type of study program are you enrolling in?", sub: "All study visas below are single-entry, valid for 3 months from the date of issuance. Select the one that matches your program.", options: [{ id: "visa_d2_6_en", icon: "🔄", title: "D-2-6 — Exchange Student", desc: "University exchange program — at least 1 semester completed at current Canadian school required" },{ id: "visa_d2_8_en", icon: "🎓", title: "D-2-8 — Short-Term University Study", desc: "Less than 1 year including summer/winter school — NOT for Korean language programs" },{ id: "visa_d4_1_en", icon: "🇰🇷", title: "D-4-1 — Korean Language Study", desc: "Study Korean at a university-affiliated language institute — high school diploma minimum" },{ id: "visa_d4_3_en", icon: "🏫", title: "D-4-3 — Elementary / Secondary School", desc: "Study at a Korean elementary, middle, or high school" }] },
   visa_d2_6_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-2-6 Exchange Student"], title: "D-2-6 — Exchange Student Visa", docs: ["Visa Application Form — print and fill out","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission (표준입학허가서) — issued by the dean or president of the Korean university","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the Korean institution (사업자등록증)","Documents proving exchange student status:","  ▸ Official documents from the host university","  ▸ Exchange student agreement between universities","Proof of at least one semester completed at current Canadian school:","  ▸ Official proof of enrollment letter (NOT a tuition receipt or screenshot)","Proof of financial ability (1 year tuition + living expenses):","  ▸ Certified bank statement with official bank stamp","  ▸ If using a parent's account: signed written permission from parent + Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ Applicants from certain countries currently in Canada (temporary workers, international students, etc.) must have resided continuously in Canada for at least 2 years (730 days) before applying.","Korean-descent or former Korean nationals must also submit:","  ▸ Korean-descent (parents received Canadian citizenship before your birth): photocopy of both parents' passport + Canadian Citizenship Certificate (not a card)","  ▸ Renunciation after 2008: 기본증명서 (상세, 전부공개) + 가족관계증명서 (상세, 전부공개) — within 3 months. Submit both pages if document has 2 pages.","  ▸ Renunciation before 2008: 제적등본 — within 3 months","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_d2_8_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-2-8 Short-Term University Study"], title: "D-2-8 — Short-Term University Study Visa (under 1 year)", docs: ["Visa Application Form — print and fill out","  ▸ Address in Korea (section 8.4): use the NEW ADDRESS SYSTEM","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission (표준입학허가서) — issued by the dean or president of the Korean university","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the Korean institution (사업자등록증)","Proof of enrollment from current Canadian university or college:","  ▸ Must be an official letter — NOT a tuition payment confirmation or course page screenshot","Proof of financial ability (tuition + living expenses for the stay):","  ▸ Certified bank statement with official bank stamp","  ▸ If using a parent's account: signed written permission from parent + original and copy of Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Program under 90 days", value: "CAD $54 (Cash, Debit or Credit Card)" },{ label: "Program 90 days or more", value: "CAD $81 (Cash, Debit or Credit Card)" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ If your program is to study the Korean language, apply for D-4-1 instead — NOT this visa.","⚠️ D-2-8 holders are NOT permitted to engage in any paid activities (part-time work, etc.) — violations are penalised under Articles 94 or 95 of the Immigration Law.","⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d2_8_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-2-8 Short-Term University Study"], title: "D-2-8 — Short-Term University Study Visa (under 1 year)", docs: ["Visa Application Form — print and fill out","  ▸ Address in Korea (section 8.4): use the NEW ADDRESS SYSTEM","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission (표준입학허가서) — issued by the dean or president of the Korean university","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the Korean institution (사업자등록증)","Proof of enrollment from current Canadian university or college:","  ▸ Must be an official letter — NOT a tuition payment confirmation or course page screenshot","Proof of financial ability (tuition + living expenses for the stay):","  ▸ Certified bank statement with official bank stamp","  ▸ If using a parent's account: signed written permission from parent + original and copy of Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Program under 90 days", value: "CAD $54 (Cash, Debit, Credit)" },{ label: "Program 90 days or more", value: "CAD $81 (Cash, Debit, Credit)" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ If your program is to study the Korean language, apply for D-4-1 instead — NOT this visa.","⚠️ D-2-8 holders are NOT permitted to engage in any paid activities (part-time work, etc.) — violations are penalised under Articles 94 or 95 of the Immigration Law.","⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_d4_1_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-4-1 Korean Language"], title: "D-4-1 — Korean Language Study Visa", docs: ["Visa Application Form — print and fill out","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission — issued by the dean or president of the language institute","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the institution (사업자등록증)","Training Plan — lecture schedule, lecturer profiles, training facility details, etc.","Certificate of enrollment or proof of highest level of education:","  ▸ Non-OECD country applicants: must submit documents notarized by Apostille, or confirmed by a Korean consul or the country's consul in Korea","Proof of financial ability (1 year tuition + living expenses):","  ▸ If using a parent's account: signed written permission from parent + Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["Eligibility: must hold at least a high school diploma or equivalent.","Program must be at a language institution affiliated with a foreign educational institution in Korea, or at a higher education institution under the Higher Education Act.","⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","Korean-descent or former Korean nationals must also submit:","  ▸ Korean-descent (parents received Canadian citizenship before your birth): photocopy of both parents' passport + Canadian Citizenship Certificate (not a card)","  ▸ Renunciation after 2008: 기본증명서 (상세, 전부공개) + 가족관계증명서 (상세, 전부공개) — within 3 months. Submit both pages if document has 2 pages.","  ▸ Renunciation before 2008: 제적등본 — within 3 months","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_d4_3_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-4-3 Elementary / Secondary School"], title: "D-4-3 — Elementary / Secondary School Visa", docs: ["Visa Application Form + Guardianship Form — print and fill out both","Valid Canadian passport — original + photocopy","  ▸ Must have remaining validity of at least 6 months","  ▸ Dual citizens: present both passports if available","Proof of residency in Canada — original + photocopy","  ▸ Valid PR Card, Work Permit, or Study Permit","1 passport-type colour photo — must be taken at a professional passport photo studio","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Acceptance Letter (학교장 발행 입학허가서) — issued by the principal of the Korean school","  ▸ Official form with the principal's stamp as provided by the school","Business Registration Certificate of the institution (사업자등록증)","Proof of highest educational attainment — graduation certificate or proof of current enrollment","Receipt for tuition payment (학비 납부 영수증):","  ▸ All related expenses: tuition, dormitory, entrance fee","  ▸ Full scholarship recipients: submit scholarship documentation instead","Family relationship documents — government-issued birth certificate","  ▸ If not in English: must be translated to English and notarized by a lawyer","Bank statement — most recent 3 months (applicant's name must be clearly visible)"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit or Credit Card)" },{ label: "Other nationalities", value: "Fee varies by nationality" }], time: "Approx. 1–2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ This visa is generally NOT available for students planning to study at mandatory (tuition-free) schools under Articles 10-2 and 12 of the Elementary and Secondary Education Act.","Eligible schools: elementary, middle, or high school under the Elementary and Secondary Education Act; or foreign educational institutions under the Special Act on Establishment and Management of Foreign Educational Institutions in Free Economic Zones and Jeju International City.","Korean-ancestry applicants: verification documents for dual citizenship are required — specific documents vary by individual situation.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d4_3_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-4-3 Elementary / Secondary School"], title: "D-4-3 — Elementary / Secondary School Visa", docs: ["Visa Application Form + Guardianship Form — print and fill out both","Valid Canadian passport — original + photocopy","  ▸ Must have remaining validity of at least 6 months","  ▸ Dual citizens: present both passports if available","Proof of residency in Canada — original + photocopy","  ▸ Valid PR Card, Work Permit, or Study Permit","1 passport-type colour photo — must be taken at a professional passport photo studio","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Acceptance Letter (학교장 발행 입학허가서) — issued by the principal of the Korean school","  ▸ Official form with the principal's stamp as provided by the school","Business Registration Certificate of the institution (사업자등록증)","Proof of highest educational attainment — graduation certificate or proof of current enrollment","Receipt for tuition payment (학비 납부 영수증):","  ▸ All related expenses: tuition, dormitory, entrance fee","  ▸ Full scholarship recipients: submit scholarship documentation instead","Family relationship documents — government-issued birth certificate","  ▸ If not in English: must be translated to English and notarized by a lawyer","Bank statement — most recent 3 months (applicant's name must be clearly visible)"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit)" },{ label: "Other nationalities", value: "Fee varies by nationality" }], time: "Approx. 1–2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ This visa is generally NOT available for students planning to study at mandatory (tuition-free) schools under Articles 10-2 and 12 of the Elementary and Secondary Education Act.","Eligible schools: elementary, middle, or high school under the Elementary and Secondary Education Act; or foreign educational institutions under the Special Act on Establishment and Management of Foreign Educational Institutions in Free Economic Zones and Jeju International City.","Korean-ancestry applicants: verification documents for dual citizenship are required — specific documents vary by individual situation.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_others_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Others"], title: "A-2-4 — Official / Diplomatic Duty Visa", docs: ["Visa Application Form — print and fill out","Original + photocopy of Diplomatic, Official, or Special passport","1 colour photo (3.5×4.5cm, within 6 months)","Document demonstrating current employment status","Documents proving state of dispatch or employment, OR a public letter by the Foreign Minister or Minister of the applicant's country","  ▸ The public letter must be able to prove one's status of official duty"], costs: [{ label: "Visa Fee", value: "Contact the Consulate — fee varies" }], time: "Additional documents may be requested if deemed necessary for visa evaluation.", notices: ["Eligibility: those executing official duties of a foreign government or international organization.","  ▸ e.g. CBSA officer with official or diplomatic passport accompanying a Korean national to Korea","  ▸ e.g. Government official with official or diplomatic passport attending a conference or event in Korea","Single-entry visa valid for 3 months from issuance — must enter Korea within 3 months.","Period of stay: up to 90 days."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
   visa_f4_former_sex: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "재외동포(F-4)", "전 한국 국적자"], question: "신청자의 성별과 나이는?", sub: "만 41세 미만 남성은 병역 관련 추가 서류가 필요합니다.", options: [{ id: "visa_f4_former_female", icon: "👩", title: "여성 또는 만 41세 이상 남성", desc: "병역 관련 추가 서류 불필요" },{ id: "visa_f4_former_male41", icon: "👨", title: "만 41세 미만 남성", desc: "병역 관련 추가 서류 필요 (RCMP 범죄경력증명서 등)" }] },
@@ -4137,12 +4204,12 @@ const TREE = {
   visa_f3_spouse: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "동반(F-3)", "배우자"], title: "동반 비자 (F-3) — F-4 소지자의 배우자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","유효한 F-4 비자 소지자의 비자 사본 또는 국내거소신고증 앞뒷면 사본","혼인관계증명서 (상세) — 3개월 이내","F-4 소지자 및 배우자의 가족관계증명서 (상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $81 (현금, Debit, 신용카드) / 우편: Certified Cheque $81" }], time: "약 1~2주", notices: ["체류기간: 최대 1년 (F-4 소지자의 비자 유효기간 이내).","혼인증명서: 캐나다에서만 혼인신고한 경우 Certified Copy of Marriage Registration 또는 Certified Copy of Marriage License (Legal 사이즈) 필수 — Certificate of Marriage 약식 불가.","⚠️ 비자 유효기간: 발급일로부터 3개월 이내 입국 필수 — 미입국 시 비자 무효.","우편 신청 가능 — Prepaid Xpresspost 반송봉투 동봉 필수."], booking: "https://www.torbooking.com/book" },
   visa_f3_child: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "동반(F-3)", "미성년 자녀"], title: "동반 비자 (F-3) — F-4 소지자의 미성년 자녀 (만 18세 이하)", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","유효한 F-4 비자 소지자(부모)의 비자 사본","자녀 출생증명서 (Certified copy of birth registration) 원본 + 사본","부모의 가족관계증명서 또는 혼인관계증명서 (상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $81 (현금, Debit, 신용카드) / 우편: Certified Cheque $81" }], time: "약 1~2주", notices: ["미성년 자녀는 만 18세 이하 (0~18세)로 규정됩니다.","체류기간: 최대 1년.","⚠️ 비자 유효기간: 발급일로부터 3개월 이내 입국 필수.","우편 신청 가능 — Prepaid Xpresspost 반송봉투 동봉 필수."], booking: "https://www.torbooking.com/book" },
   visa_c3_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)"], question: "방문 목적은 무엇인가요?", sub: "캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 비자가 필요한 경우만 신청하세요.", options: [{ id: "visa_c3_family", icon: "👨‍👩‍👧", title: "한국 국민의 가족 방문", desc: "배우자·자녀가 한국 국민인 경우" },{ id: "visa_c3_emergency", icon: "🚨", title: "긴급 인도적 사유", desc: "장례식·임종·긴급 수술 참석 등" },{ id: "visa_c3_other", icon: "📋", title: "기타 단기 방문", desc: "결혼식 참석, 입양 등 기타 사유" }] },
-  visa_c3_family: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "가족 방문"], title: "단기방문 비자 (C-3-1) — 한국 국민 가족", docs: ["사증발급신청서 1부 (비자포털 양식, SIN 번호 기재)","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","한국 국민 가족관계 증명서류","재외동포인 경우: 국적상실·이탈 명시된 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" }], time: "약 12~15 영업일", notices: ["국적상실 신고가 완료되지 않은 경우 비자 신청 불가.","C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가."], booking: "https://www.torbooking.com/book" },
-  visa_c3_emergency: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "긴급 인도적 사유"], title: "단기방문 비자 (C-3-1) — 긴급 인도적 사유", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","가족관계 증명서류","긴급성 소명자료 — 장례: 사망진단서, 임종: 의사 소견서, 수술: 수술 예정 증빙서류","재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" }], time: "긴급: 5~7 영업일 이내", notices: ["장례식 목적 긴급 입국: 비자과 전화(416-920-3809 ext. 221) 문의.","C 계열 비자로 입국 후 다른 비자로 전환 불가."], booking: "https://www.torbooking.com/book" },
-  visa_c3_other: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "기타"], title: "단기방문 비자 (C-3-1) — 기타 사유", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","방문 목적 증빙서류","재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금·직불카드·신용카드 가능)" }], time: "약 12~15 영업일", notices: ["캐나다 국적자는 한국 무비자 입국 가능(최대 6개월) — 비자 필요 여부 먼저 확인하세요.","C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가."], booking: "https://www.torbooking.com/book" },
+  visa_c3_family: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "가족 방문"], title: "단기방문 비자 (C-3-1) — 한국 국민 가족", docs: ["사증발급신청서 1부 (비자포털 양식, SIN 번호 기재)","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","한국 국민 가족관계 증명서류","재외동포인 경우: 국적상실·이탈 명시된 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금, Debit, 신용카드)" }], time: "약 12~15 영업일", notices: ["국적상실 신고가 완료되지 않은 경우 비자 신청 불가.","C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가."], booking: "https://www.torbooking.com/book" },
+  visa_c3_emergency: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "긴급 인도적 사유"], title: "단기방문 비자 (C-3-1) — 긴급 인도적 사유", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","가족관계 증명서류","긴급성 소명자료 — 장례: 사망진단서, 임종: 의사 소견서, 수술: 수술 예정 증빙서류","재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금, Debit, 신용카드)" }], time: "긴급: 5~7 영업일 이내", notices: ["장례식 목적 긴급 입국: 비자과 전화(416-920-3809 ext. 221) 문의.","C 계열 비자로 입국 후 다른 비자로 전환 불가."], booking: "https://www.torbooking.com/book" },
+  visa_c3_other: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "단기방문(C-3-1)", "기타"], title: "단기방문 비자 (C-3-1) — 기타 사유", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","체류자격 증빙서류 (캐나다 국적자가 아닌 경우)","여권용 사진 1매","방문 목적 증빙서류","재외동포인 경우: 국적상실 명시 기본증명서(상세) — 3개월 이내"], costs: [{ label: "수수료", value: "CAD $52 (현금, Debit, 신용카드)" }], time: "약 12~15 영업일", notices: ["캐나다 국적자는 한국 무비자 입국 가능(최대 6개월) — 비자 필요 여부 먼저 확인하세요.","C 계열 비자로 입국 후 다른 비자(F-4, F-6 등)로 전환 불가."], booking: "https://www.torbooking.com/book" },
   visa_other_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타"], question: "방문 목적은 무엇인가요?", sub: "해당 비자 종류를 선택하세요.", options: [{ id: "visa_e2", icon: "📚", title: "E-2 — 원어민 영어 교사", desc: "한국 학교·학원 영어 강사" },{ id: "visa_e7", icon: "💼", title: "E-7 — 특정 활동 (취업)", desc: "회사 초청 취업 비자" },{ id: "visa_f1d", icon: "💻", title: "F-1-D — 디지털 노마드 (워케이션)", desc: "외국 회사 재직 중 한국에서 원격근무 — 최대 1년" },{ id: "visa_d2", icon: "🎓", title: "D-2 — 유학 (대학)", desc: "한국 대학교 유학" },{ id: "visa_d4", icon: "🏫", title: "D-4 — 어학연수", desc: "한국어 어학원·직업훈련 등" },{ id: "visa_other_portal", icon: "🌐", title: "그 외 모든 비자", desc: "C-3-4 출장, F-6 결혼이민 등" }] },
-  visa_f1d: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타", "F-1-D 디지털노마드"], title: "F-1-D — 디지털 노마드 비자 (워케이션)", docs: ["비자신청서 (visa.go.kr 출력, 사진 부착)","유효한 여권 원본 + 사본","여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)","재직증명서 또는 고용계약서 (1년 이상 재직 확인)","소득 증빙서류 (세후 연 약 CAD $110,000 이상 — 최신 세금신고서·급여명세서 등)","의료·여행보험 증명서 (의료비 최소 CAD $130,000 + 본국 송환 항공권 포함, 체류 전 기간 유효)","  ▸ 동반 가족: 가족 각각 별도 보험 가입 필요","  ▸ 동반 가족 서류: 여권 + 가족관계 증명서류 (혼인증명서/출생증명서)"], costs: [{ label: "수수료", value: "CAD $117 (현금·직불카드·신용카드)" }], time: "약 7~14 영업일", notices: ["대상: 외국 회사에 1년 이상 재직 중인 원격근무자 (자영업자 포함).","⚠️ 한국 기업 취업 또는 한국 내 영리활동 불가.","체류: 비자 발급일로부터 최대 1년, 1회 연장 가능 (최대 2년).","90일 이상 체류 시 입국일로부터 90일 이내 출입국사무소 외국인 등록 필요.","이전에 한국 국적을 보유했던 분: 신청 전 국적상실신고 완료 필수."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_d4: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타", "D-4 어학연수"], title: "D-4 — 어학연수 비자", docs: ["비자신청서 (visa.go.kr 출력, 사진 부착)","유효한 여권 원본 + 사본","여권용 사진 1매","입학허가서 또는 수강등록증 (한국 어학원·직업훈련기관 발급)","재정능력 증빙 (최근 30일 이내 은행 잔고증명서)","최종 학력 증명서"], costs: [{ label: "수수료", value: "CAD $117 (현금·직불카드·신용카드)" }], time: "약 7~10 영업일", notices: ["D-4는 어학원·어학연수·직업훈련 목적 비자입니다. 정규 대학 학위 과정은 D-2 비자를 이용하세요.","캐나다 시민권자는 6개월 이내 무비자 입국 가능 — 6개월 미만 과정이라면 비자 불필요 (기관에 사전 확인 권장).","D-4 비자로는 아르바이트 등 취업 불가.","90일 이상 체류 시 외국인 등록 필요."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_f1d: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타", "F-1-D 디지털노마드"], title: "F-1-D — 디지털 노마드 비자 (워케이션)", docs: ["비자신청서 (visa.go.kr 출력, 사진 부착)","유효한 여권 원본 + 사본","여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)","재직증명서 또는 고용계약서 (1년 이상 재직 확인)","소득 증빙서류 (세후 연 약 CAD $110,000 이상 — 최신 세금신고서·급여명세서 등)","의료·여행보험 증명서 (의료비 최소 CAD $130,000 + 본국 송환 항공권 포함, 체류 전 기간 유효)","  ▸ 동반 가족: 가족 각각 별도 보험 가입 필요","  ▸ 동반 가족 서류: 여권 + 가족관계 증명서류 (혼인증명서/출생증명서)"], costs: [{ label: "수수료", value: "CAD $117 (현금, Debit, 신용카드)" }], time: "약 7~14 영업일", notices: ["대상: 외국 회사에 1년 이상 재직 중인 원격근무자 (자영업자 포함).","⚠️ 한국 기업 취업 또는 한국 내 영리활동 불가.","체류: 비자 발급일로부터 최대 1년, 1회 연장 가능 (최대 2년).","90일 이상 체류 시 입국일로부터 90일 이내 출입국사무소 외국인 등록 필요.","이전에 한국 국적을 보유했던 분: 신청 전 국적상실신고 완료 필수."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_d4: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "취업·유학·기타", "D-4 어학연수"], title: "D-4 — 어학연수 비자", docs: ["비자신청서 (visa.go.kr 출력, 사진 부착)","유효한 여권 원본 + 사본","여권용 사진 1매","입학허가서 또는 수강등록증 (한국 어학원·직업훈련기관 발급)","재정능력 증빙 (최근 30일 이내 은행 잔고증명서)","최종 학력 증명서"], costs: [{ label: "수수료", value: "CAD $117 (현금, Debit, 신용카드)" }], time: "약 7~10 영업일", notices: ["D-4는 어학원·어학연수·직업훈련 목적 비자입니다. 정규 대학 학위 과정은 D-2 비자를 이용하세요.","캐나다 시민권자는 6개월 이내 무비자 입국 가능 — 6개월 미만 과정이라면 비자 불필요 (기관에 사전 확인 권장).","D-4 비자로는 아르바이트 등 취업 불가.","90일 이상 체류 시 외국인 등록 필요."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_e2: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "E-2 원어민교사"], title: "E-2 원어민 영어 교사 비자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","여권용 사진 1매","고용계약서 원본 (한국 고용주 서명)","학사 이상 학위증명서 + 아포스티유 공증","범죄경력증명서 (RCMP 지문 기반) — 6개월 이내 + 아포스티유 필요","건강진단서"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["학위증명서는 반드시 아포스티유(공증) 처리 후 제출.","범죄경력증명서도 아포스티유 필요 (RCMP 지문 기반)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_e7: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "E-7 취업"], title: "E-7 특정 활동 비자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","여권용 사진 1매","한국 고용주 초청장 및 고용계약서","학위증명서 또는 경력증명서","한국 고용주의 사업자등록증 사본","기타 직종별 추가 서류 (비자포털 확인 필수)"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["E-7 비자는 직종에 따라 요건이 크게 다릅니다 — 비자포털(visa.go.kr)에서 직종별 서류 목록 반드시 확인."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_d2: { type: "result", service: "visa", breadcrumb: ["홈", "비자", "기타 비자", "D-2 유학"], title: "D-2 유학 비자", docs: ["사증발급신청서 1부","캐나다 여권 원본 + 사본","여권용 사진 1매","한국 대학교 입학허가서","재정능력 증명서류 (잔액증명서 등)","최종 학력 졸업증명서"], costs: [{ label: "수수료", value: "CAD $117 (현금 또는 직불카드)" }], time: "약 7~10 영업일", notices: ["캐나다 국적자는 한국 무비자로 입국 후 한국에서 비자 신청도 가능."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
@@ -4154,56 +4221,58 @@ const TREE = {
     type: "question",
     service: "notarization",
     breadcrumb: ["홈", "공증"],
-    question: "어떤 공증 업무가 필요하신가요?",
-    sub: "⚠️ 모든 서명은 반드시 영사 앞에서 직접 해야 합니다. 사전 서명 서류는 접수 불가합니다. 대리인 신청도 불가합니다.",
+    question: "어떤 서류의 공증·인증이 필요하신가요?",
+    sub: "찾으시는 서류 이름으로 골라보세요. ⚠️ 영사관 공증은 모든 서명을 반드시 영사 앞에서 직접 해야 하며, 사전 서명·대리 신청은 불가합니다.",
     options: [
-      { id: "notarization_apostille_guide", icon: "❓", title: "아포스티유 vs 영사관 공증 — 구분 안내", desc: "어떤 방식을 선택해야 하는지 먼저 확인하세요" },
-      { id: "notarization_saseo", icon: "📜", title: "사서증서 인증 (서명 인증)", desc: "위임장·진술서·상속포기서·계약서 등 서명·날인 인증" },
-      { id: "notarization_ingam", icon: "🔏", title: "인감 관련 공증", desc: "인감증명서 발급 위임장·인감신고서·인감변경신고서" },
-      { id: "notarization_translation", icon: "🌐", title: "번역 공증", desc: "가족관계증명서 등 한국 서류 영문 번역 인증·운전면허증 번역" },
-      { id: "notarization_school", icon: "🏫", title: "초·중·고 학적서류 공증", desc: "졸업증명서·재학증명서·성적증명서 — 방문·우편 모두 가능" },
+      { id: "notarization_canada_doc", icon: "🍁", title: "캐나다에서 발행된 문서를 한국에 제출", desc: "출생·혼인·사망·RCMP 범죄경력·대학/College·고용계약서 등 → 아포스티유 안내" },
+      { id: "notarization_translation", icon: "🌐", title: "한국 증명서를 영문으로 번역", desc: "가족관계·기본·혼인·출생·졸업증명서 등 영문 번역 인증" },
+      { id: "notarization_saseo", icon: "✍️", title: "직접 작성한 서류의 서명 인증", desc: "위임장·상속포기서·거주확인서·재직·진술서 등" },
+      { id: "notarization_ingam", icon: "🔏", title: "인감 관련", desc: "인감증명서 발급 위임장·인감신고·변경신고" },
+      { id: "notarization_school", icon: "🏫", title: "초·중·고 학적서류", desc: "졸업·재학·성적증명서 (대학·College는 맨 위 항목으로)" },
     ],
   },
 
-  // ── 아포스티유 vs 영사관 공증 안내 ──
-  notarization_apostille_guide: {
+  // ── 캐나다 발행 문서 → 아포스티유 안내 ──
+  notarization_canada_doc: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "아포스티유 vs 영사관 공증"],
-    title: "아포스티유 vs 영사관 공증 — 어떤 것이 필요한가요?",
+    breadcrumb: ["홈", "공증", "캐나다 발행 문서"],
+    title: "캐나다에서 발행된 문서를 한국에 제출 — 아포스티유로 진행하세요",
+    sub: "2024년 1월 11일 캐나다가 아포스티유 협약에 가입함에 따라, 캐나다 발행 문서는 더 이상 영사확인 대상이 아닙니다.",
     docs: [
-      "📌 핵심 질문: 한국 제출 기관에서 '아포스티유'를 요구하는지, '영사관 공증'을 요구하는지 먼저 확인하세요",
+      "📌 영사관 방문이 필요 없습니다 — 아래 발급처에서 아포스티유 확인을 받아 한국에 제출하세요.",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "🔵 아포스티유 (Apostille) — 캐나다 공문서를 한국에 제출할 때",
-      "  ▸ 캐나다는 헤이그 협약(아포스티유) 가입국 — 영사관 방문 없이 처리 가능",
-      "  ▸ 연방 서류 (시민권증서·여권·FBI에 해당하는 RCMP 범죄경력증명서 등): Global Affairs Canada에서 아포스티유 발급",
-      "  ▸ 주(Province) 서류 (출생증명서·혼인증명서·이혼판결문 등): 온타리오주의 경우 ServiceOntario에서 아포스티유 발급",
-      "  ▸ 영사관 공증과 아포스티유를 동일 서류에 동시 적용 불가",
+      "【1단계 — 문서 종류 확인】",
+      "정부(주·연방) 발행 문서 → 바로 아포스티유",
+      "  ▸ 출생·혼인·이혼·사망증명서, RCMP 범죄경력증명서 등",
+      "개인이 작성한 사문서·학교/기업 서류 → 먼저 캐나다 공증인(변호사) 공증 후 아포스티유",
+      "  ▸ 위임장·계약서·대학/College 성적·재학·졸업증명서, 고용계약서 등",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "🔴 영사관 공증 — 개인이 작성한 사문서의 서명을 인증할 때",
-      "  ▸ 위임장·진술서·상속포기서 등 본인이 작성한 서류의 서명 인증",
-      "  ▸ 인감증명서 발급 위임장·인감신고서 등 인감 관련 서류",
-      "  ▸ 한국 서류(가족관계증명서 등)의 영문 번역 인증",
-      "  ▸ 캐나다 공문서는 아포스티유 권장 — 영사관에서는 캐나다 공문서 자체의 진위 확인 불가",
+      "【2단계 — 발급처에서 아포스티유 받기】",
+      "연방정부 발행 / 마니토바 발행·공증 문서 → Global Affairs Canada (오타와)",
+      "  ▸ 125 Sussex Drive, Ottawa, ON K1A 0G2 · 1-833-928-1551 · docs@international.gc.ca",
+      "온타리오 발행·공증 문서 → ServiceOntario (Official Documents Services)",
+      "  ▸ 777 Bay Street, Lower Level, Toronto, ON M7A 2J8 · 416-325-8416",
+      "  ▸ 오타와·윈저·Sault Ste. Marie·Thunder Bay ServiceOntario 지점에서도 접수 가능",
     ],
-    costs: [{ label: "상담", value: "무료" }],
-    time: "확인 후 해당 서비스로 진행",
+    costs: [{ label: "영사관 수수료", value: "해당 없음 (영사관 업무 아님)" }],
+    time: "발급처 안내에 따름",
     notices: [
-      "확인이 어렵다면 한국 내 제출 기관(법무사·등기소·은행·관공서)에 먼저 문의하세요.",
-      "아포스티유 신청: Global Affairs Canada (연방서류) / ServiceOntario (주 서류)",
-      "영사관 공증이 필요한 것으로 확인되면 뒤로 돌아가서 해당 메뉴를 선택하세요.",
+      "⚠️ 캐나다 시민권자의 서명인증서·거주증명서·동일인증명서 등도 캐나다 공증인 공증 후 아포스티유로 진행 (영사확인 불가).",
+      "단, 위임장·상속재산분할협의서·상속포기서는 본인이 직접 영사관 방문 시 공증인 공증 없이 영사 인증도 가능합니다 (직접 작성 서류 메뉴 참조).",
+      "한국 내 제출 기관(법원·등기소 등)이 캐나다 공증인 공증을 별도로 요구하는 경우가 있으니 제출처에 먼저 확인하세요.",
+      "한국에서 발행된 문서를 캐나다 등에 제출하려는 경우는 apostille.go.kr에서 온라인 발급(공동인증서 필요).",
     ],
-    booking: "https://www.torbooking.com/book",
-    onlineLink: "https://www.international.gc.ca/country-pays/apostille.aspx?lang=eng",
+    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
   },
 
-  // ── 사서증서 인증 분기 ──
+  // ── 사문서 인증(사서증서) 분기 ──
   notarization_saseo: {
     type: "question",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "사서증서 인증"],
+    breadcrumb: ["홈", "공증", "사문서 인증"],
     question: "어떤 종류의 서류인가요?",
-    sub: "사서증서 인증은 영사가 서명·날인이 본인 의사에 의한 것임을 확인해 주는 업무입니다. 서류 내용의 진위를 확인하는 것이 아닙니다.",
+    sub: "사문서 인증(사서증서 인증)은 개인이 작성한 서류의 서명·날인이 본인 의사에 의한 것임을 영사가 확인해 주는 업무입니다. 서류 내용의 진위를 확인하는 것은 아닙니다.",
     options: [
       { id: "notarization_pow", icon: "📜", title: "위임장", desc: "부동산 매매·등기·은행·상속·증명서 발급 등 한국 업무 대리 위임" },
       { id: "notarization_legal_act", icon: "⚖️", title: "법률행위 증서", desc: "상속재산분할협의서·매매계약서·은행대출약정서·상속포기서 등" },
@@ -4215,8 +4284,8 @@ const TREE = {
   notarization_pow: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "사서증서 인증", "위임장"],
-    title: "위임장 공증 (사서증서 인증)",
+    breadcrumb: ["홈", "공증", "사문서 인증", "위임장"],
+    title: "위임장 공증 (사문서 인증)",
     docs: [
       "위임장 — 사전에 작성, 단 서명란은 반드시 공백으로 (영사 앞에서 서명)",
       "  ▸ 피위임자 성명·주민등록번호·주소·연락처·위임 목적(용도)·발급 통수 기재 필수",
@@ -4249,7 +4318,7 @@ const TREE = {
   notarization_legal_act: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "사서증서 인증", "법률행위 증서"],
+    breadcrumb: ["홈", "공증", "사문서 인증", "법률행위 증서"],
     title: "법률행위 증서 공증 — 상속포기서·매매계약서·은행약정서 등",
     docs: [
       "공증받을 서류 — 서명란 공백으로 준비 (영사 앞에서 서명)",
@@ -4280,10 +4349,22 @@ const TREE = {
 
   // ── 사실행위 증서 ──
   notarization_sign: {
+    type: "question",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "사문서 인증", "사실행위 증서"],
+    question: "신청인의 신분은?",
+    sub: "서명진술서·거주사실진술서·동일인진술서 등은 신청인 신분에 따라 처리 방법이 다릅니다. (2024.1.11 캐나다 아포스티유 시행)",
+    options: [
+      { id: "notarization_sign_passport", icon: "🇰🇷", title: "한국 여권 소지자 (한국 국적자)", desc: "영사관에서 서명 인증 가능" },
+      { id: "notarization_sign_citizen", icon: "🍁", title: "캐나다 시민권자", desc: "영사확인 불가 → 캐나다 공증인 + 아포스티유" },
+    ],
+  },
+
+  notarization_sign_passport: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "사서증서 인증", "사실행위 증서"],
-    title: "사실행위 증서 공증 — 진술서·동일인진술서·거주사실진술서 등",
+    breadcrumb: ["홈", "공증", "사문서 인증", "사실행위 증서", "한국 여권 소지자"],
+    title: "사실행위 증서 공증 — 진술서·동일인진술서·거주사실진술서 등 (한국 여권 소지자)",
     docs: [
       "공증받을 서류 — 서명란 공백으로 준비 (영사 앞에서 서명)",
       "  ▸ 서명진술서 (Signature Statement)",
@@ -4304,10 +4385,35 @@ const TREE = {
     notices: [
       "⚠️ 모든 서명은 반드시 영사 앞에서 직접 — 대리인 신청 불가.",
       "서류 내용의 진위를 영사가 확인하는 것이 아닙니다 — 서명이 본인 의사임을 인증하는 것입니다.",
-      "시민권자: 한국 여권이 없는 경우 방문 전 전화 문의 필수 (416-920-3809).",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (공증 → 사실행위 증서) →",
+  },
+
+  notarization_sign_citizen: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "사문서 인증", "사실행위 증서", "캐나다 시민권자"],
+    title: "사실행위 증서 — 캐나다 시민권자는 아포스티유로 진행",
+    sub: "2024.1.11 캐나다 아포스티유 시행 이후, 시민권자의 서명·거주·동일인 증명서 등은 영사확인이 불가합니다.",
+    docs: [
+      "📌 캐나다 시민권자는 서명인증서·거주증명서·동일인증명서 등을 영사관에서 인증받을 수 없습니다.",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "【진행 방법】",
+      "① 캐나다 공증인(Notary Public / 변호사)에게 해당 서류의 공증을 받습니다.",
+      "② 공증받은 서류에 아포스티유 인증을 받습니다.",
+      "  ▸ 온타리오 공증 문서 → ServiceOntario (777 Bay Street, Lower Level, Toronto)",
+      "  ▸ 마니토바 공증 문서 → Global Affairs Canada (오타와)",
+      "③ 아포스티유 받은 서류를 한국 제출처에 제출합니다.",
+    ],
+    costs: [{ label: "영사관 수수료", value: "해당 없음 (영사관 업무 아님)" }],
+    time: "발급처 안내에 따름",
+    notices: [
+      "위임장·상속재산분할협의서·상속포기서는 시민권자라도 본인이 직접 영사관 방문 시 공증인 공증 없이 영사 인증이 가능합니다 (해당 메뉴 참조).",
+      "자세한 아포스티유 발급처·절차는 첫 화면의 '캐나다 발행 문서' 안내를 참고하세요.",
+      "한국 제출처가 요구하는 형식을 먼저 확인하세요.",
+    ],
+    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
   },
 
   // ── 인감 관련 공증 ──
@@ -4478,8 +4584,10 @@ const TREE = {
     title: "인감(변경)신고서 — 인감 신규 등록 또는 변경",
     docs: [
       "인감(변경)신고서 — 영사관 비치 또는 홈페이지 다운로드",
-      "  ▸ 영사 앞에서 자필 작성 및 서명 필수",
-      "  ▸ 보증인 성명·주민등록번호·한국 주소·인감 날인 필수 (보증인 ≠ 대리인)",
+      "  ▸ 영사 앞에서 자필 작성 및 서명 필수 (타이핑·복사본 불가, 반드시 법정 양식 사용)",
+      "  ▸ 대리인 정보 기재: 성명·주민등록번호·한국 주소",
+      "  ▸ 보증인 정보 기재: 성명·주민등록번호·한국 주소 + 보증인 인감 날인",
+      "  ▸ ⚠️ 보증인과 대리인은 반드시 다른 사람이어야 합니다",
       "공증촉탁서 (소정 양식 — 자필 작성 필수)",
       "본인 유효한 한국 여권 원본 + 사본 1부",
       "  ▸ 2020년 12월 20일 이후 발급 여권(주민번호 삭제) → 여권정보증명서 추가",
@@ -4492,10 +4600,11 @@ const TREE = {
     ],
     time: "방문 당일 즉시 발급",
     notices: [
-      "⚠️ 신고인(본인)은 반드시 직접 방문 — 대리인 신청 불가.",
-      "보증인의 인감은 서류 제출 기관에 제출하기 전에 반드시 날인되어 있어야 합니다.",
+      "📌 보증인 = 신고인의 진정한 의사를 보증하는 제3자. 반드시 국내에 인감이 신고되어 있는 성년자여야 하며, 인감증명처에 서류를 제출하기 전에 보증인의 인감이 날인되어 있어야 합니다.",
+      "📌 대리인 = 한국에서 증명청·인감증명 발급기관을 직접 방문해 업무를 처리하는 사람.",
+      "⚠️ 보증인과 대리인은 반드시 다른 사람이어야 합니다.",
+      "⚠️ 신고인(본인)은 반드시 직접 방문 — 대리인 신청 불가. 미성년자는 법정대리인과 함께 방문.",
       "신고인의 주민등록번호가 있어야 합니다 (주민등록번호 말소자 불가).",
-      "보증인과 대리인은 반드시 다른 사람이어야 합니다.",
       "인감도장을 한국에서 새로 만들고 싶은 경우: 서명으로 대체 가능 — 대리인이 한국에서 도장을 만들어 업무 처리 시 도장 지참.",
     ],
     booking: "https://www.torbooking.com/book",
@@ -4864,6 +4973,12 @@ const TREE = {
     breadcrumb: ["홈", "공증", "학적서류 공증"],
     question: "어떻게 신청하시겠어요?",
     sub: "⚠️ 온타리오주·마니토바주 정규 교육기관 발행 서류만 공증 가능합니다. 공증 가능 서류 여부를 먼저 확인하세요.",
+    intro: [
+      "💡 공증이 불필요할 수 있습니다 — 먼저 확인하세요:",
+      "  ▸ 국내 초·중·고 편입학용: 교육부가 인정한 외국소재 학력인정학교 서류는 아포스티유·영사확인 없이 학교장 발급 원본으로 갈음됩니다 (2014.9.16~). 교육부 학력인정학교 리스트를 확인하세요.",
+      "  ▸ 대학 입학·편입용 초·중·고 학적서류는 아포스티유 또는 영사확인이 필요할 수 있으니 대학 측에 먼저 문의하세요.",
+      "  ▸ 대학·College 자체 발행 서류는 캐나다 발행 문서이므로 첫 화면의 '캐나다 발행 문서'(아포스티유)로 진행하세요.",
+    ],
     options: [
       { id: "notarization_school_visit", icon: "🏛️", title: "직접 방문", desc: "대리인 접수도 가능" },
       { id: "notarization_school_mail", icon: "📮", title: "우편 접수", desc: "원거리 거주자에 한함 — Money Order 필수" },
@@ -5639,8 +5754,8 @@ const TREE = {
       {
         q: "영사관 전화번호는 무엇인가요?",
         q_en: "What is the Consulate's phone number?",
-        a: "대표: 416-920-3809\n비자과 내선: ext. 221\n여권/국적과 내선: ext. 225\n긴급 (업무시간 외): 647-999-2113 (영사콜센터 1+82-2-3210-0404)",
-        a_en: "Main: 416-920-3809\nVisa: ext. 221\nPassport/Nationality: ext. 225\nAfter-hours emergency: 647-999-2113 (or overseas: +82-2-3210-0404)",
+        a: "대표: 416-920-3809\n비자과 내선: ext. 221\n여권/국적과 내선: ext. 225\n긴급 (업무시간 외): 416-994-4490 (영사콜센터 1+82-2-3210-0404)",
+        a_en: "Main: 416-920-3809\nVisa: ext. 221\nPassport/Nationality: ext. 225\nAfter-hours emergency: 416-994-4490 (or overseas: +82-2-3210-0404)",
       },
       {
         q: "영사관 주소는 어디인가요?",
@@ -5654,17 +5769,33 @@ const TREE = {
 
 // ─── SEARCH INDEX ─────────────────────────────────────────────────────────────
 // result 노드 전체를 미리 인덱싱 (title + breadcrumb + docs + notices)
-const SEARCH_INDEX = Object.entries(TREE)
-  .filter(([, node]) => node.type === "result")
-  .map(([id, node]: [any, any])  => {
-    const text = [
-      node.title ?? "",
-      ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : []),
-      ...(Array.isArray(node.docs)    ? node.docs    : []),
-      ...(Array.isArray(node.notices) ? node.notices : []),
-    ].join(" ").toLowerCase();
-    return { id, node, text };
-  });
+// 비자 코드 등 언어 무관 식별자 추출 (예: B-2, C-3-9, E-2-1, F-6-1, H-1, D-2, K-ETA)
+const extractCodes = (s: string) => {
+  const m = s.match(/\b[A-Z]-?\d(?:-\d)*\b|\bK-ETA\b|\bTWOV\b/g);
+  return m ? m.join(" ") : "";
+};
+
+// 언어별 검색 인덱스 빌더.
+//  - 결과로 표시할 텍스트(title/breadcrumb)는 해당 언어 번역을 사용
+//  - 검색 대상 text 에는 (해당 언어 번역) + (언어 무관 코드) 를 함께 포함
+const buildSearchIndex = (lng: "ko" | "en") =>
+  Object.entries(TREE as any)
+    .filter(([, node]: any) => node.type === "result")
+    .map(([id, node]: [any, any]) => {
+      const tk: any = (KO_TRANSLATIONS as any)[id];
+      const te: any = (EN_TRANSLATIONS as any)[id];
+      const tr: any = lng === "ko" ? tk : te;
+      // 표시용: 번역 우선, 없으면 원문
+      const title = (tr && tr.title) ?? node.title ?? "";
+      const breadcrumb = (tr && tr.breadcrumb) ?? node.breadcrumb ?? [];
+      const docs = (tr && tr.docs) ?? node.docs ?? [];
+      const notices = (tr && tr.notices) ?? node.notices ?? [];
+      // 검색 대상 텍스트: 해당 언어 번역 + 코드(원문에서 추출, 언어 무관)
+      const codeBag = extractCodes([node.title ?? "", ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : [])].join(" "));
+      const text = [title, ...(Array.isArray(breadcrumb) ? breadcrumb : []), ...(Array.isArray(docs) ? docs : []), ...(Array.isArray(notices) ? notices : []), codeBag]
+        .join(" ").toLowerCase();
+      return { id, node, title, breadcrumb, docs, notices, text };
+    });
 
 // ─── 비자 한국어 번역 테이블 ──────────────────────────────────────────────
 // 영문 _en 노드 그래프를 한국어로 렌더하기 위한 번역 (영문 TREE 원본은 미수정).
@@ -5720,8 +5851,8 @@ const KO_TRANSLATIONS = {
     question: "한국 방문 목적은 무엇인가요?",
     sub: "한국 혈통이 없으시므로 방문 목적을 선택하세요. 캐나다 국적자는 최대 6개월간 무비자로 한국에 입국할 수 있습니다.",
     options: {
-      visa_visit_transit_en: { title: "방문 / 관광 / 경유", desc: "캐나다 국적자: 무비자 · 관광 / 단기체류 / 경유(TWOV) / K-ETA" },
-      visa_short_term_en:    { title: "단기 방문", desc: "출장(C-3-4), 일반(C-3-1), 문화·예술·체육(C-3-9)" },
+      visa_visit_transit_en: { title: "무비자 / 경유 (캐나다 국적자)", desc: "무비자 · K-ETA · 경유(TWOV)" },
+      visa_short_term_en:    { title: "단기 방문", desc: "관광(C-3-9), 출장(C-3-4), 일반(C-3-1), 의료(C-3-3)" },
       visa_work_en:          { title: "취업", desc: "E-2-1 원어민 교사, E-2-2 EPIK/TALK, E-1~E-7, H-1 워킹홀리데이, F-1-D 디지털노마드" },
       visa_study_en:         { title: "유학", desc: "D-2-6 교환, D-2-8 단기, D-4-1 한국어연수, D-4-3 초·중·고" },
       visa_marriage_en:      { title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자 — 단수 90일, 한국 내 연장 가능" },
@@ -5978,7 +6109,7 @@ const KO_TRANSLATIONS = {
       visa_c34_en: { title: "출장 (C-3-4)", desc: "시장조사, 계약 체결, 컨설팅, 한국 기업과의 미팅" },
       visa_c31_en: { title: "일반 단기방문 (C-3-1)", desc: "회의, 학술연구, 치료, 연수, 종교활동" },
       visa_c33_en: { title: "치료 (C-3-3)", desc: "비캐나다 국적자의 한국 내 치료 목적 — 최대 90일" },
-      visa_c39_en: { title: "문화·예술·체육 (C-3-9)", desc: "공연예술, 체육 대회, 문화 교류" },
+      visa_c39_tourist_en: { title: "관광 / 단기체류 (C-3-9)", desc: "관광, 친지 방문, 단기 여가 — 비(非)캐나다 국적자" },
     },
   },
 
@@ -6069,31 +6200,6 @@ const KO_TRANSLATIONS = {
       "모든 의료 서류는 신청일 기준 3개월 이내 발급분이어야 함.",
       "경유 승객: 신청 전 영사관 홈페이지에서 TWOV 조건 확인.",
       "심사 과정에서 추가 서류가 요청될 수 있음.",
-    ],
-  },
-
-  visa_c39_en: {
-    breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "단기 방문", "문화·예술·체육 (C-3-9)"],
-    title: "문화·예술·체육 단기비자 — C-3-9",
-    docs: [
-      "비자신청서 (visa.go.kr에서 출력, 사진 부착)",
-      "유효한 여권 — 원본 + 사본 (잔여 유효기간 6개월 이상)",
-      "여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)",
-      "한국 주최측의 초청장 또는 참가 확인서",
-      "프로그램 일정 또는 행사 세부사항",
-      "재정능력 증빙 (최근 은행 거래내역서)",
-      "왕복 항공 일정",
-      "  ▸ 캐나다 PR카드 또는 장기 비자 — 원본 + 사본 (해당 시)",
-    ],
-    costs: [
-      { label: "단수", value: "CAD $26 (현금, Debit, 신용카드)" },
-      { label: "복수", value: "CAD $52 (현금, Debit, 신용카드)" },
-    ],
-    time: "약 5~7 영업일",
-    notices: [
-      "🇨🇦 캐나다 국적자는 최대 6개월 무비자 방문 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
-      "체류: 최대 90일. C-3 비자는 한국 내에서 연장·전환 불가.",
-      "한국에서 보수를 받는 공연·활동을 하는 경우 다른 비자가 필요할 수 있음 — 영사관에 문의.",
     ],
   },
 
@@ -6248,7 +6354,7 @@ const KO_TRANSLATIONS = {
       "임용예정확인서 — EPIK 또는 TALK 프로그램 발급",
       "서명된 고용계약서 — 신청자와 교육기관 양측 서명",
     ],
-    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $81 (현금, Debit 또는 신용카드)" }],
+    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $81 (현금, Debit, 신용카드)" }],
     time: "약 1~2주. 단수, 발급일로부터 90일 유효. 최대 2년 체류 (통상 계약기간 + 1개월).",
     notices: [
       "⚠️ E-2-2는 정부 지원 EPIK(English Program in Korea) 및 TALK(Teach and Learn in Korea) 참가자 전용.",
@@ -6272,7 +6378,7 @@ const KO_TRANSLATIONS = {
       "컬러사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내, 뒷면 날짜 기재)",
       "서명된 고용계약서 — 신청자와 초청자 양측 서명",
     ],
-    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $81 (현금, Debit 또는 신용카드)" }],
+    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $81 (현금, Debit, 신용카드)" }],
     time: "약 1~2주. 단수, 발급일로부터 90일 유효 (체류기간은 사증발급인정서 기재대로).",
     notices: [
       "📌 대상 비자 유형:",
@@ -6313,7 +6419,7 @@ const KO_TRANSLATIONS = {
       "여행 일정표",
       "  ▸ 비자 승인 전 항공권 구매 금지",
     ],
-    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $121.5 (현금, Debit, 신용카드 또는 Money Order)" }],
+    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $121.50 (현금, Debit, 신용카드 또는 Money Order)" }],
     time: "약 1~2주. 복수비자, 최대 2년 유효.",
     notices: [
       "신청 자격: 비자 발급 시점에 만 18~35세인 캐나다 국적자로 현재 캐나다 거주.",
@@ -6349,7 +6455,7 @@ const KO_TRANSLATIONS = {
       "  ▸ 가족 구성원 각자 본인 여권 원본 및 신청서 필요",
       "  ▸ 한국어·영어가 아닌 서류는 공증된 영문 번역 첨부",
     ],
-    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $121.5 (현금, Debit 또는 신용카드)" }],
+    costs: [{ label: "비자 수수료 (캐나다인)", value: "CAD $121.50 (현금, Debit, 신용카드)" }],
     time: "약 1~2주. 복수비자, 발급일로부터 최대 1년 유효.",
     notices: [
       "신청 자격: 외국(비한국) 회사에 1년 이상 재직 중이거나 외국 등록 회사의 소유주 — 한국에서 원격근무가 가능해야 함.",
@@ -6518,7 +6624,6 @@ const KO_TRANSLATIONS = {
     sub: "🇨🇦 캐나다 여권 소지자는 최대 6개월 무비자 — 비자가 필요 없습니다. K-ETA는 2026년 12월 31일까지 면제.",
     options: {
       visa_visit_en:        { title: "관광 / 단기체류 — 캐나다 국적자", desc: "최대 6개월 무비자 — 영사관 방문 불필요" },
-      visa_c39_tourist_en:  { title: "관광 / 단기체류 — 비(非)캐나다 국적자 (캐나다 PR·비자 보유)", desc: "C-3-9 관광비자 필요 — 국적별 수수료 상이" },
       visa_transit_en:      { title: "한국 경유 (TWOV)", desc: "다른 나라로 가는 길에 한국 경유 — 최대 30일" },
       visa_keta_en:         { title: "K-ETA — 필요한가요?", desc: "캐나다인은 2026년 12월 31일까지 면제" },
     },
@@ -6558,7 +6663,7 @@ const KO_TRANSLATIONS = {
   },
 
   visa_c39_tourist_en: {
-    breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "관광비자 (C-3-9)"],
+    breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "단기 방문", "관광 (C-3-9)"],
     title: "C-3-9 관광비자 — 비(非)캐나다 국적자",
     docs: [
       "비자신청서 — visa.go.kr에서 출력, 모든 항목 작성",
@@ -7744,42 +7849,45 @@ const EN_TRANSLATIONS: any = {
   // ════════════ 공증(notarization) 영어 번역 ════════════
   notarization_start: {
     breadcrumb: ["Home", "Notarization"],
-    question: "What notarization service do you need?",
-    sub: "⚠️ All signatures must be made in person before the consul. Pre-signed documents are not accepted, and proxy applications are not allowed.",
+    question: "Which document do you need notarized/certified?",
+    sub: "Pick by the document you're looking for. ⚠️ For consular notarization, all signatures must be made in person before the consul — pre-signed or proxy applications are not accepted.",
     options: {
-      notarization_apostille_guide: { title: "Apostille vs. consular notarization — guide", desc: "Check which method you need first" },
-      notarization_saseo: { title: "Private document certification (signature)", desc: "Certifies signature/seal on a power of attorney, statement, inheritance waiver, contract, etc." },
-      notarization_ingam: { title: "Seal (ingam) notarization", desc: "Seal certificate power of attorney · seal registration · seal change form" },
-      notarization_translation: { title: "Translation certification", desc: "English translation of Korean documents (family relation certificate, etc.) · driver's license" },
-      notarization_school: { title: "Elementary/middle/high school record notarization", desc: "Diploma · enrollment · transcript — in person or by mail" },
+      notarization_canada_doc: { title: "Canadian-issued document for use in Korea", desc: "Birth·marriage·death·RCMP·university/College·employment, etc. → Apostille guide" },
+      notarization_translation: { title: "Translate a Korean certificate into English", desc: "Family relation·basic·marriage·birth·graduation certificates, etc." },
+      notarization_saseo: { title: "Certify the signature on a document you wrote", desc: "Power of attorney·inheritance waiver·residence statement·employment·declarations" },
+      notarization_ingam: { title: "Seal (ingam) matters", desc: "Seal certificate power of attorney·seal registration·change report" },
+      notarization_school: { title: "Elementary/middle/high school records", desc: "Diploma·enrollment·transcript (university/College → top item)" },
     },
   },
-  notarization_apostille_guide: {
-    breadcrumb: ["Home", "Notarization", "Apostille vs. consular notarization"],
-    title: "Apostille vs. consular notarization — which do you need?",
+  notarization_canada_doc: {
+    breadcrumb: ["Home", "Notarization", "Canadian-issued document"],
+    title: "Canadian-issued document for use in Korea — use an Apostille",
+    sub: "Since Canada joined the Apostille Convention on Jan 11, 2024, Canadian-issued documents are no longer subject to consular authentication.",
     docs: [
-      "📌 Key question: first confirm whether the receiving institution in Korea requires an 'Apostille' or 'consular notarization'.",
+      "📌 No consulate visit needed — obtain an Apostille from the issuer below and submit it in Korea.",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "🔵 Apostille — for submitting Canadian public documents to Korea",
-      "  ▸ Canada is a party to the Hague (Apostille) Convention — can be processed without visiting the consulate",
-      "  ▸ Federal documents (citizenship certificate, passport, RCMP criminal record check, etc.): Apostille issued by Global Affairs Canada",
-      "  ▸ Provincial documents (birth certificate, marriage certificate, divorce judgment, etc.): in Ontario, Apostille issued by ServiceOntario",
-      "  ▸ Consular notarization and Apostille cannot be applied to the same document at the same time",
+      "【Step 1 — identify the document type】",
+      "Government (provincial/federal) documents → Apostille directly",
+      "  ▸ Birth·marriage·divorce·death certificates, RCMP criminal record check, etc.",
+      "Private documents / school·company documents → first notarized by a Canadian notary (lawyer), then Apostille",
+      "  ▸ Power of attorney·contracts·university/College transcript·enrollment·diploma, employment letter, etc.",
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "🔴 Consular notarization — to certify the signature on a private document you wrote",
-      "  ▸ Signature certification on documents you drafted: power of attorney, statement, inheritance waiver, etc.",
-      "  ▸ Seal-related documents such as a seal certificate power of attorney and seal registration form",
-      "  ▸ English translation certification of Korean documents (family relation certificate, etc.)",
-      "  ▸ Apostille is recommended for Canadian public documents — the consulate cannot verify the authenticity of Canadian public documents themselves",
+      "【Step 2 — get the Apostille from the issuer】",
+      "Federal documents / Manitoba-issued·notarized → Global Affairs Canada (Ottawa)",
+      "  ▸ 125 Sussex Drive, Ottawa, ON K1A 0G2 · 1-833-928-1551 · docs@international.gc.ca",
+      "Ontario-issued·notarized → ServiceOntario (Official Documents Services)",
+      "  ▸ 777 Bay Street, Lower Level, Toronto, ON M7A 2J8 · 416-325-8416",
+      "  ▸ Also accepted at Ottawa·Windsor·Sault Ste. Marie·Thunder Bay ServiceOntario locations",
     ],
-    costs: [{ label: "Consultation", value: "Free" }],
-    time: "Proceed to the relevant service after confirming",
+    costs: [{ label: "Consulate fee", value: "N/A (not a consular service)" }],
+    time: "Per the issuer's guidance",
     notices: [
-      "If unsure, first ask the receiving institution in Korea (judicial scrivener, registry office, bank, government office).",
-      "Apostille applications: Global Affairs Canada (federal documents) / ServiceOntario (provincial documents).",
-      "If consular notarization is confirmed to be what you need, go back and select the relevant menu.",
+      "⚠️ A Canadian citizen's signature certificate, residence certificate, identity certificate, etc. also go through a Canadian notary + Apostille (consular authentication not available).",
+      "However, a power of attorney, inheritance division agreement, and inheritance waiver can still be certified by the consul if you visit in person (see the 'document you wrote' menu).",
+      "Some receiving institutions in Korea (courts, registry offices) may separately require a Canadian notary's notarization — check with the receiver first.",
+      "To submit a Korean-issued document abroad, use the online Apostille at apostille.go.kr (joint certificate required).",
     ],
-    bookingLabel: "Book Appointment (Notarization) →",
+    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
   },
   notarization_saseo: {
     breadcrumb: ["Home", "Notarization", "Private document certification"],
@@ -7850,7 +7958,16 @@ const EN_TRANSLATIONS: any = {
   },
   notarization_sign: {
     breadcrumb: ["Home", "Notarization", "Private document certification", "Factual-act document"],
-    title: "Factual-act document certification — statement, identity statement, residence statement, etc.",
+    question: "What is the applicant's status?",
+    sub: "Signature, residence, and identity statements are handled differently by applicant status. (Canada Apostille effective Jan 11, 2024)",
+    options: {
+      notarization_sign_passport: { title: "Korean passport holder (Korean national)", desc: "Signature can be certified at the consulate" },
+      notarization_sign_citizen: { title: "Canadian citizen", desc: "Consular authentication not available → Canadian notary + Apostille" },
+    },
+  },
+  notarization_sign_passport: {
+    breadcrumb: ["Home", "Notarization", "Private document certification", "Factual-act document", "Korean passport holder"],
+    title: "Factual-act document certification — statement, identity statement, residence statement, etc. (Korean passport holder)",
     docs: [
       "Document to be notarized — prepare with the signature field blank (sign before the consul)",
       "  ▸ Signature statement",
@@ -7871,9 +7988,31 @@ const EN_TRANSLATIONS: any = {
     notices: [
       "⚠️ All signatures must be made in person before the consul — proxy applications not allowed.",
       "The consul does not verify the truthfulness of the contents — only certifies that the signature is by your own will.",
-      "Citizens: if you have no Korean passport, you must call before visiting (416-920-3809).",
     ],
     bookingLabel: "Book Appointment (Notarization → Factual-act document) →",
+  },
+  notarization_sign_citizen: {
+    breadcrumb: ["Home", "Notarization", "Private document certification", "Factual-act document", "Canadian citizen"],
+    title: "Factual-act documents — Canadian citizens use an Apostille",
+    sub: "Since the Canada Apostille took effect on Jan 11, 2024, a citizen's signature/residence/identity statements cannot be authenticated by the consulate.",
+    docs: [
+      "📌 Canadian citizens cannot have a signature/residence/identity certificate authenticated at the consulate.",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "【How to proceed】",
+      "① Have the document notarized by a Canadian notary (notary public / lawyer).",
+      "② Get an Apostille on the notarized document.",
+      "  ▸ Ontario-notarized → ServiceOntario (777 Bay Street, Lower Level, Toronto)",
+      "  ▸ Manitoba-notarized → Global Affairs Canada (Ottawa)",
+      "③ Submit the Apostilled document to the receiving institution in Korea.",
+    ],
+    costs: [{ label: "Consulate fee", value: "N/A (not a consular service)" }],
+    time: "Per the issuer's guidance",
+    notices: [
+      "A power of attorney, inheritance division agreement, and inheritance waiver can still be certified by the consul even for citizens if you visit in person (see that menu).",
+      "For detailed Apostille issuers and procedure, see the 'Canadian-issued document' guide on the first screen.",
+      "Check the format required by the receiving institution in Korea first.",
+    ],
+    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
   },
   notarization_ingam: {
     breadcrumb: ["Home", "Notarization", "Seal (ingam)"],
@@ -8013,8 +8152,10 @@ const EN_TRANSLATIONS: any = {
     title: "Seal (change) registration form — new seal registration or change",
     docs: [
       "Seal (change) registration form — available at the consulate or download from the website",
-      "  ▸ Must be handwritten and signed before the consul",
-      "  ▸ Must include the guarantor's name, resident registration number, Korean address, and seal impression (guarantor ≠ agent)",
+      "  ▸ Must be handwritten and signed before the consul (no typing/copies; must use the statutory form)",
+      "  ▸ Enter the agent's details: name, resident registration number, Korean address",
+      "  ▸ Enter the guarantor's details: name, resident registration number, Korean address + guarantor's seal impression",
+      "  ▸ ⚠️ The guarantor and the agent must be different people",
       "Notarization request form (designated form — must be handwritten)",
       "Your valid Korean passport original + 1 copy",
       "  ▸ Passport issued after Dec 20, 2020 (resident number removed) → add a passport information certificate",
@@ -8027,10 +8168,11 @@ const EN_TRANSLATIONS: any = {
     ],
     time: "Issued same day on visit",
     notices: [
-      "⚠️ The registrant (you) must visit in person — proxy applications not allowed.",
-      "The guarantor's seal must be stamped before submitting the document to the receiving institution.",
+      "📌 Guarantor = a third party who vouches for the registrant's genuine intent. Must be an adult whose seal is registered in Korea, and the guarantor's seal must be stamped before submitting the document to the seal-certificate office.",
+      "📌 Agent = the person who visits the certificate/seal-issuing office in Korea in person to process the matter.",
+      "⚠️ The guarantor and the agent must be different people.",
+      "⚠️ The registrant (you) must visit in person — proxy applications not allowed. A minor visits with a legal guardian.",
       "The registrant must have a resident registration number (those whose number is cancelled cannot apply).",
-      "The guarantor and the agent must be different people.",
       "If you want a new seal stamp made in Korea: this can be done by signature — the agent makes the stamp in Korea and brings it when processing.",
     ],
     bookingLabel: "Book Appointment (Notarization → Seal registration) →",
@@ -8324,6 +8466,12 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Notarization", "School record notarization"],
     question: "How would you like to apply?",
     sub: "⚠️ Only documents issued by accredited Ontario/Manitoba educational institutions can be notarized. Check eligibility first.",
+    intro: [
+      "💡 Notarization may not be needed — check first:",
+      "  ▸ For transfer into a Korean elementary/middle/high school: documents from foreign schools recognized by Korea's Ministry of Education are accepted as the principal-issued original, without Apostille or consular authentication (since Sep 16, 2014). Check the Ministry's accredited-school list.",
+      "  ▸ For university admission/transfer, elementary/middle/high school records may still need an Apostille or consular authentication — ask the university first.",
+      "  ▸ University/College documents are Canadian-issued — use the 'Canadian-issued document' (Apostille) item on the first screen.",
+    ],
     options: {
       notarization_school_visit: { title: "In person", desc: "Proxy submission also allowed" },
       notarization_school_mail: { title: "By mail", desc: "Distant residents only — Money Order required" },
@@ -9173,13 +9321,12 @@ const EN_TRANSLATIONS: any = {
   nationality_start: {
     breadcrumb: ["Home", "Nationality"],
     question: "Select the situation that applies",
-    sub: "Nationality services differ completely by situation. If the terms confuse you, see 'Compare terms' at the bottom first.",
+    sub: "Nationality services differ completely by situation. Select the item that matches your case.",
     options: {
       nationality_citizen_start: { title: "I or my family acquired a foreign nationality (citizenship)", desc: "Exit / loss / retention / choice — guided to your situation" },
       nationality_acquire: { title: "Child of a Korean father & foreign mother born out of wedlock", desc: "Nationality acquisition by acknowledgment (minor) · CAD $24.30" },
       nationality_recover: { title: "I want to restore Korean nationality (age 65+)", desc: "Dual-nationality restoration — only at a Korean immigration office" },
       nationality_renounce_exception: { title: "Male (military unfulfilled) who missed the exit deadline", desc: "Exceptional nationality-exit permit (Nationality Act Art. 14-2) · CAD $121.50" },
-      nationality_terms: { title: "Exit, loss, retention, choice — I'm confused", desc: "A table comparing the four terms" },
     },
   },
   nationality_terms: {
@@ -10439,6 +10586,9 @@ const EN_TRANSLATIONS: any = {
   },
 };
 
+const SEARCH_INDEX_KO = buildSearchIndex("ko");
+const SEARCH_INDEX_EN = buildSearchIndex("en");
+
 const SERVICE_COLORS = {
   passport: "#003478", family: "#1a6b3c", nationality: "#7b2d2d",
   cert: "#1a4d7a", various_cert: "#2d5a8a", visa: "#4a2d7a",
@@ -10484,11 +10634,14 @@ export default function App() {
 }
 
 function AppInner() {
-   const [pageId, setPageId] = useState("home");
+  const [pageId, setPageId] = useState("home");
   const [history, setHistory] = useState(["home"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [openFaq, setOpenFaq] = useState<any>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMsgs, setChatMsgs] = useState<any[]>([]);
 
   const [lang, setLang] = useState(() => {
     // ⭕ navigator를 'as any'로 형변환하여 TypeScript 에러를 방지합니다.
@@ -10549,7 +10702,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     visa_c33_en: "visa_c33_en",
     visa_c34_en: "visa_c34_en",
     visa_c31_en: "visa_c31_en",
-    visa_c39_en: "visa_c39_en",
     visa_no_heritage_en: "visa_no_heritage_en",
     visa_visit_en: "visa_visit_en",
     visa_transit_en: "visa_transit_en",
@@ -10582,6 +10734,192 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     setHistory((h: any) => [...h, resolved]);
     setPageId(resolved);
     window.scrollTo(0, 0);
+  };
+
+  // ── 채팅 도우미: 질문을 받아 현재 언어 인덱스에서 매칭 (1단계: 검색 기반) ──
+  const chatGoTo = (id: any) => { setChatOpen(false); goTo(id); };
+
+  // ── 시나리오 정의 (서비스별 핵심 질문 → 되묻기/즉답) ──
+  // 확장: 각 시나리오는 keywords(any 1개 매칭) + must(서비스 키워드, 1개 필수) + 응답 빌더.
+  const CHAT_SCENARIOS: any[] = [
+    // ===== 여권 =====
+    {
+      svc: "passport",
+      must: ["여권", "passport"],
+      items: [
+        {
+          id: "pp_q_time",
+          kw: ["얼마나", "며칠", "기간", "걸리", "소요", "how long", "how many days", "processing", "time"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "신청 후 처리 기간은 여권 종류에 따라 다릅니다:\n• 일반 전자여권 — 약 3~4주 (DHL 특급 이용 시 약 1~2주)\n• 긴급 단수여권 — 1주일 이내 (긴급 출국 사유 증빙 필요)"
+              : "Processing time depends on the passport type:\n• Regular e-passport — about 3–4 weeks (1–2 weeks with DHL express)\n• Emergency single-use passport — within 1 week (proof of urgent departure required)",
+            goId: "passport_start",
+            goLabel: lang === "ko" ? "여권 안내 자세히 보기" : "View passport guide",
+          }),
+        },
+        {
+          id: "pp_q_lost",
+          kw: ["잃", "분실", "도난", "lost", "stolen", "missing"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "여권을 분실하셨군요. 먼저 여권이 언제까지 필요한지에 따라 절차가 달라집니다. 아래에서 시작해 주세요 — 다음 화면에서 분실 상태를 선택하시면 됩니다."
+              : "Lost your passport. The process depends on how soon you need it. Start below — you'll select 'lost' on the next screens.",
+            goId: "passport_start",
+            goLabel: lang === "ko" ? "여권 재발급 시작하기" : "Start passport reissue",
+          }),
+        },
+        {
+          id: "pp_q_minor",
+          kw: ["아이", "자녀", "미성년", "애기", "child", "minor", "kid", "parent"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "미성년 자녀의 여권은 친권 상황(혼인 중·이혼·한부모 등)에 따라 부모 방문·동의 요건이 달라집니다. 아래에서 시작하면 연령·친권 상황을 차례로 여쭤 정확히 안내해 드려요."
+              : "For a minor's passport, the parental-visit/consent requirements depend on custody (married, divorced, single parent, etc.). Start below and we'll ask step by step.",
+            goId: "passport_start",
+            goLabel: lang === "ko" ? "미성년 여권 시작하기" : "Start minor's passport",
+          }),
+        },
+        {
+          id: "pp_q_renew_docs",
+          kw: ["서류", "구비", "준비물", "필요", "document", "papers", "what do i need", "requirement"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "갱신·재발급에 필요한 서류는 여권 종류(일반/긴급), 연령, 체류 신분에 따라 달라집니다. 아래에서 시작하면 차례로 여쭤 정확한 구비서류를 안내해 드려요."
+              : "Required documents depend on the passport type (regular/emergency), age, and your residency status. Start below and we'll ask step by step.",
+            goId: "passport_start",
+            goLabel: lang === "ko" ? "필요 서류 확인하기" : "Check required documents",
+          }),
+        },
+        {
+          id: "pp_q_renew",
+          kw: ["만료", "갱신", "연장", "expire", "expir", "renew", "renewal"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "여권 만료가 가까우면 미리 갱신(재발급) 신청이 가능합니다. 여권이 언제까지 필요한지에 따라 절차가 달라지니, 아래에서 시작해 주세요."
+              : "If your passport is expiring soon, you can renew (reissue) in advance. The process depends on how soon you need it — start below.",
+            goId: "passport_start",
+            goLabel: lang === "ko" ? "여권 갱신 시작하기" : "Start passport renewal",
+          }),
+        },
+      ],
+    },
+    // ===== 비자 =====
+    {
+      svc: "visa",
+      must: ["비자", "사증", "visa", "f-4", "f4", "f-6", "무비자", "visa-free", "visa free"],
+      items: [
+        {
+          id: "visa_q_f4",
+          kw: ["f-4", "f4", "재외동포", "예전에 한국", "과거 한국", "한국 국적이었", "former korean", "used to be korean", "overseas korean", "lost.*nationality", "국적상실"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "과거 한국 국적이셨다면 F-4 재외동포 비자 대상일 수 있습니다. 다만 먼저 국적 상태(선천적 이중국적 여부, 국적상실 신고 완료 여부) 확인이 필요해요. 아래에서 시작하면 차례로 여쭤봅니다."
+              : "If you were formerly a Korean national, you may be eligible for the F-4 Overseas Korean visa. First we need to confirm your nationality status. Start below and we'll ask step by step.",
+            goId: "visa_f4_start",
+            goLabel: lang === "ko" ? "F-4 자격 확인 시작하기" : "Check F-4 eligibility",
+          }),
+        },
+        {
+          id: "visa_q_work",
+          kw: ["취업", "일하", "직장", "회사", "근무", "work", "job", "employ", "hire", "teaching", "teach"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "취업 비자는 하시는 일(영어교사 E-2, 전문직 E-1~E-7, 워킹홀리데이 H-1 등)에 따라 종류가 달라집니다. 대부분 한국 고용주가 먼저 사증발급인정서(CVI)를 받아야 해요. 아래에서 직무를 선택해 주세요."
+              : "Work visas depend on the type of work (E-2 language instructor, E-1–E-7 professional, H-1 working holiday, etc.). Most require your Korean employer to obtain a Confirmation of Visa Issuance (CVI) first. Pick your work type below.",
+            goId: "visa_work_en",
+            goLabel: lang === "ko" ? "취업 비자 선택하기" : "Choose a work visa",
+          }),
+        },
+        {
+          id: "visa_q_novisa6m",
+          kw: ["무비자", "6개월", "더 머물", "오래 머물", "visa-free", "visa free", "without a visa", "6 months", "stay longer", "longer than"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "캐나다 시민권자는 무비자로 한국에 최대 6개월까지 체류할 수 있습니다. 그 이상 머무시려면 체류 목적(취업·학업·재외동포 등)에 맞는 비자를 받아야 합니다. 무비자 체류는 한국 내에서 다른 비자로 변경이 원칙적으로 불가하니, 장기 체류 예정이면 입국 전 해당 비자를 받는 것이 좋습니다."
+              : "Canadian citizens can stay in Korea visa-free for up to 6 months. To stay longer, you need a visa matching your purpose (work, study, overseas Korean, etc.). Visa-free status generally cannot be converted to another visa inside Korea, so obtain the right visa before entry if you plan a long stay.",
+            goId: "visa_heritage_no_en",
+            goLabel: lang === "ko" ? "체류 목적별 비자 보기" : "See visas by purpose",
+          }),
+        },
+        {
+          id: "visa_q_longstay",
+          kw: ["몇 년", "장기", "오래", "수년", "거주", "살고 싶", "살려고", "live in korea", "several years", "long-term", "long term", "reside"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "한국에서 장기간 거주하시려면 체류 목적에 맞는 비자가 필요합니다 — 단일 '장기 거주' 비자가 따로 있는 것은 아니에요. 취업이면 E계열, 학업이면 D계열, 재외동포(과거 한국 국적)면 F-4가 해당됩니다. 아래에서 목적을 선택해 주세요. (과거 한국 국적이셨다면 'F-4 재외동포'도 확인해 보세요.)"
+              : "For a long-term stay in Korea, you need a visa matching your purpose — there isn't a single 'long-term residence' visa. Work → E-series, study → D-series, overseas Korean (former Korean national) → F-4. Pick your purpose below. (If you were formerly a Korean national, also check F-4.)",
+            goId: "visa_heritage_no_en",
+            goLabel: lang === "ko" ? "체류 목적별 비자 보기" : "See visas by purpose",
+          }),
+        },
+        {
+          id: "visa_q_parentcare",
+          kw: ["부모", "돌보", "돌봄", "간병", "모시", "방문동거", "care for", "parent", "look after", "elderly"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "한국에 계신 부모님을 돌보기 위한 장기 체류(방문동거 등)는 개인 상황에 따라 자격·서류가 크게 달라져, 이 앱에는 상세 안내가 준비되어 있지 않습니다. 정확한 안내는 비자과로 직접 문의해 주세요: torvisa@mofa.go.kr (대표 416-920-3809)."
+              : "Long-term stay to care for parents in Korea (e.g. visiting/cohabitation) varies greatly by personal circumstances, so detailed guidance isn't available in this app. Please contact the Visa Section directly: torvisa@mofa.go.kr (main 416-920-3809).",
+            goId: "visa_start",
+            goLabel: lang === "ko" ? "비자 안내 처음으로" : "Visa guide home",
+          }),
+        },
+      ],
+    },
+  ];
+
+  const matchScenario = (q: string) => {
+    for (const sc of CHAT_SCENARIOS) {
+      if (!sc.must.some((m: string) => q.includes(m.toLowerCase()))) continue;
+      for (const it of sc.items) {
+        if (it.kw.some((k: string) => q.includes(k.toLowerCase()))) return it.build();
+      }
+    }
+    return null;
+  };
+
+  const handleChatSend = (raw?: string) => {
+    const text = (raw ?? chatInput).trim();
+    if (!text) return;
+    const q = text.toLowerCase();
+    setChatInput("");
+    // 1) 시나리오 우선
+    const sc = matchScenario(q);
+    if (sc) {
+      setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...sc }]);
+      return;
+    }
+    // 2) 검색 폴백
+    const idx = lang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
+    const words = q.split(/\s+/).filter(Boolean);
+    const qNoSpace = q.replace(/\s+/g, "");
+    const scored = idx
+      .map((e: any) => {
+        const t = e.text;
+        const tNoSpace = t.replace(/\s+/g, "");
+        let score = 0;
+        for (const w of words) { if (t.includes(w)) score += w.length >= 2 ? 2 : 1; }
+        if (qNoSpace.length >= 2 && tNoSpace.includes(qNoSpace)) score += 3;
+        return { e, score };
+      })
+      .filter((x: any) => x.score > 0)
+      .sort((a: any, b: any) => b.score - a.score)
+      .slice(0, 3)
+      .map((x: any) => x.e);
+    const reply = scored.length > 0
+      ? { role: "bot", kind: "results", results: scored }
+      : { role: "bot", kind: "noresult" };
+    setChatMsgs((m: any) => [...m, { role: "user", text }, reply]);
   };
 
   const goBack = (): void => {
@@ -10628,7 +10966,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               <span>{lang === "ko" ? "민원 안내 서비스" : "Consular Services Guide"}</span>
             </div>
           </button>
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div className="header-right">
             <button className="lang-btn" onClick={toggleLang}>
               {lang === "ko" ? "EN" : "한국어"}
             </button>
@@ -10684,8 +11022,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           {page.type === "home" && (() => {
             // 검색 로직
             const q = searchQuery.trim().toLowerCase();
+            const activeIndex = lang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
             const searchResults = q.length >= 1
-              ? SEARCH_INDEX.filter(({ text }: any) => {
+              ? activeIndex.filter(({ text }: any) => {
                   // 방법 1: 띄어쓰기로 분리 후 AND 검색 ("여권 분실" → 둘 다 포함)
                   const words = q.split(/\s+/).filter(Boolean);
                   const andMatch = words.every((w: any) => text.includes(w));
@@ -10697,11 +11036,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 }).slice(0, 12)
               : [];
 
-            // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 40자)
-            const getSnippet = (node:any) => {
+            // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 30자) — 현재 언어 docs/notices 사용
+            const getSnippet = (entry:any) => {
               const candidates = [
-                ...(Array.isArray(node.docs) ? node.docs.filter((d:any) => !d.trim().startsWith("▸")) : []),
-                ...(Array.isArray(node.notices) ? node.notices.slice(0, 2) : []),
+                ...(Array.isArray(entry.docs) ? entry.docs.filter((d:any) => !d.trim().startsWith("▸")) : []),
+                ...(Array.isArray(entry.notices) ? entry.notices.slice(0, 2) : []),
               ];
               const matched = candidates.find((t: any) => t.toLowerCase().includes(q));
               if (!matched) return null;
@@ -10758,16 +11097,17 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                             : `${searchResults.length} result${searchResults.length > 1 ? "s" : ""} for "${searchQuery}"`}
                         </div>
                         <div className="search-results">
-                          {searchResults.map(({ id, node }: any) => {
-                            const snippet = getSnippet(node);
-                            const path = (Array.isArray(node.breadcrumb) ? node.breadcrumb : []).join(" › ");
+                          {searchResults.map((entry: any) => {
+                            const { id, title, breadcrumb } = entry;
+                            const snippet = getSnippet(entry);
+                            const path = (Array.isArray(breadcrumb) ? breadcrumb : []).join(" › ");
                             return (
                               <button
                                 key={id}
                                 className="search-result-card"
                                 onClick={() => { setSearchQuery(""); goTo(id); }}
                               >
-                                <div className="search-result-title">{node.title ?? ""}</div>
+                                <div className="search-result-title">{title ?? ""}</div>
                                 <div className="search-result-path">{path}</div>
                                 {snippet && (
                                   <div
@@ -10913,45 +11253,24 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               )}
               <div className="q-title">{L("question", page.question ?? "")}</div>
               {page.sub === "__CERT_COMPARISON__" ? (
-                <div style={{ marginBottom: "1rem" }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(3, minmax(0, 1fr))", gap: "10px", marginBottom: "10px" }}>
-                    {(lang === "en" ? [
-                      { icon: "📱", title: "Simple Certificate", visit: false, visitLabel: "No consulate visit", features: [{ ok: true, text: "Issued remotely via app" }, { ok: true, text: "190 public services" }, { ok: false, text: "No internet banking" }, { ok: null, text: "Validity varies by app" }, { ok: null, text: "Stored in the app" }] },
-                      { icon: "🔐", title: "Joint Certificate", visit: true, visitLabel: "One consulate visit", features: [{ ok: true, text: "Admin + finance + e-commerce" }, { ok: true, text: "Widest range of use" }, { ok: true, text: "Internet banking OK" }, { ok: null, text: "Renew yourself yearly" }, { ok: null, text: "PC/USB storage" }] },
-                      { icon: "🏦", title: "Financial Certificate", visit: true, visitLabel: "One consulate visit", features: [{ ok: true, text: "Finance + public services" }, { ok: true, text: "Internet banking OK" }, { ok: true, text: "Auto-renew every 3 years" }, { ok: null, text: "Cloud storage" }, { ok: null, text: "Move between devices freely" }] },
-                    ] : [
-                      { icon: "📱", title: "간편인증서", visit: false, visitLabel: "영사관 방문 불필요", features: [{ ok: true, text: "앱에서 비대면 발급" }, { ok: true, text: "공공서비스 190개" }, { ok: false, text: "인터넷뱅킹 불가" }, { ok: null, text: "앱별 유효기간" }, { ok: null, text: "앱 내 저장" }] },
-                      { icon: "🔐", title: "공동인증서", visit: true, visitLabel: "영사관 방문 1회", features: [{ ok: true, text: "행정+금융+전자상거래" }, { ok: true, text: "사용처 가장 넓음" }, { ok: true, text: "인터넷뱅킹 가능" }, { ok: null, text: "1년마다 직접 갱신" }, { ok: null, text: "PC/USB 저장" }] },
-                      { icon: "🏦", title: "금융인증서", visit: true, visitLabel: "영사관 방문 1회", features: [{ ok: true, text: "금융+공공서비스" }, { ok: true, text: "인터넷뱅킹 가능" }, { ok: true, text: "3년 자동갱신" }, { ok: null, text: "클라우드 저장" }, { ok: null, text: "기기 이동 자유" }] },
-                    ]).map((item) => (
-                      <div key={item.title} style={{ background: "var(--color-background-primary)", border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-lg)", padding: "0.875rem" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
-                          <span style={{ fontSize: "18px" }}>{item.icon}</span>
-                          <span style={{ fontWeight: 500, fontSize: "13px", color: "var(--color-text-primary)" }}>{item.title}</span>
-                        </div>
-                        <div style={{ display: "inline-block", background: item.visit ? "var(--color-background-warning)" : "var(--color-background-success)", color: item.visit ? "var(--color-text-warning)" : "var(--color-text-success)", fontSize: "11px", padding: "2px 8px", borderRadius: "var(--border-radius-md)", marginBottom: "10px" }}>{item.visitLabel}</div>
-                        <ul style={{ listStyle: "none", padding: 0, margin: 0, fontSize: "12px", color: "var(--color-text-secondary)", display: "flex", flexDirection: "column", gap: "5px" }}>
-                          {item.features.map((f, i) => (
-                            <li key={i} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-                              <span style={{ color: f.ok === true ? "var(--color-text-success)" : f.ok === false ? "var(--color-text-danger)" : "var(--color-text-secondary)", fontSize: "12px" }}>{f.ok === true ? "✓" : f.ok === false ? "✕" : "·"}</span>
-                              <span>{f.text}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-                  <div style={{ background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", padding: "7px 12px", fontSize: "12px", color: "var(--color-text-secondary)", marginBottom: "6px" }}>
-                    📵 {lang === "en" ? "None of the three require a Korean phone number" : "세 가지 모두 한국 전화번호 불필요"}
-                  </div>
-                  <div style={{ background: "var(--color-background-danger)", borderRadius: "var(--border-radius-md)", padding: "8px 12px", fontSize: "12px", color: "var(--color-text-danger)", display: "flex", flexDirection: "column", gap: "3px" }}>
-                    <span>⚠️ {lang === "en" ? "None of the three are available to Canadian citizens (those who lost Korean nationality)" : "세 가지 모두 캐나다 시민권자(한국 국적 상실자)는 발급 불가"}</span>
-                    <span>⚠️ {lang === "en" ? "All three require a Korean resident registration number" : "세 가지 모두 주민등록번호 필수"}</span>
-                  </div>
-                </div>
+                <div className="q-sub">{lang === "en" ? "Pick the certificate you need — see the comparison table below the options." : "필요한 인증서를 선택하세요 — 차이는 아래 비교표를 참고하세요."}</div>
               ) : L("sub", page.sub) ? (
                 <div className="q-sub">{L("sub", page.sub)}</div>
               ) : null}
+              {(() => {
+                const introArr = L("intro", Array.isArray(page.intro) ? page.intro : []);
+                if (!introArr || introArr.length === 0) return null;
+                return (
+                  <div style={{ background: "#fffdf5", border: "1px solid #efe6cc", borderRadius: "10px", padding: "10px 12px", marginBottom: "1.1rem" }}>
+                    {introArr.map((line: string, i: number) => {
+                      const sub = line.trim().startsWith("▸");
+                      return (
+                        <div key={i} style={{ fontSize: sub ? "12px" : "13px", color: sub ? "#6b6450" : "#7a5b00", fontWeight: sub ? 400 : 600, lineHeight: 1.55, paddingLeft: sub ? "10px" : 0, marginTop: i === 0 ? 0 : "4px" }}>{line}</div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
               <div className="option-list">
                 {pageOptions.map((opt: any) => {
                   const ko = (lang === "ko" && T_KO && T_KO.options) ? T_KO.options[opt.id] : null;
@@ -11039,6 +11358,103 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </button>
                 </div>
               )}
+              {pageId === "nationality_start" && (
+                <div style={{ marginTop: "1.25rem" }}>
+                  <div style={{ fontSize: "13.5px", fontWeight: 600, color: "#003478", marginBottom: "8px" }}>
+                    {lang === "en" ? "✋ Wait! Confused by exit / loss / retention / choice?" : "✋ 여기서 잠깐! 이탈·상실·보유·선택이 헷갈리나요?"}
+                  </div>
+                  <button
+                    onClick={() => goTo("nationality_terms")}
+                    style={{ width: "100%", textAlign: "left", background: "#f7f9fd", border: "1px solid #dde3ef", borderRadius: "12px", padding: "0.875rem 1rem", display: "flex", alignItems: "center", gap: "12px", cursor: "pointer" }}
+                  >
+                    <span style={{ fontSize: "20px", flexShrink: 0 }}>❓</span>
+                    <span style={{ flex: 1 }}>
+                      <span style={{ display: "block", fontSize: "13.5px", fontWeight: 600, color: "#003478" }}>
+                        {lang === "en" ? "Compare the four terms" : "네 가지 용어 비교 보기"}
+                      </span>
+                      <span style={{ display: "block", fontSize: "12px", color: "#4a5a78", marginTop: "2px" }}>
+                        {lang === "en" ? "Exit vs. loss, retention vs. choice — in a table" : "이탈vs상실, 보유vs선택을 표로 정리"}
+                      </span>
+                    </span>
+                    <span style={{ fontSize: "18px", color: "#8899bb", flexShrink: 0 }}>›</span>
+                  </button>
+                </div>
+              )}
+              {pageId === "passport_start" && (
+                <div style={{ marginTop: "1.25rem" }}>
+                  <div style={{ fontSize: "13.5px", fontWeight: 600, color: "#003478", marginBottom: "8px" }}>
+                    {lang === "en" ? "✋ Wait! In a hurry? Read this first" : "✋ 여기서 잠깐! 급하신가요? 먼저 확인하세요"}
+                  </div>
+                  <div style={{ background: "#f7f9fd", border: "1px solid #dde3ef", borderRadius: "12px", padding: "0.875rem 1rem", display: "flex", flexDirection: "column", gap: "8px" }}>
+                    <div style={{ fontSize: "12.5px", color: "#3a4a66", lineHeight: 1.6 }}>
+                      {lang === "en"
+                        ? "Being in a hurry does NOT automatically mean you need an emergency passport. Most people simply receive a regular e-passport faster by DHL express."
+                        : "급하다고 무조건 긴급여권이 필요한 것은 아닙니다. 대부분은 일반 전자여권을 DHL 특급배송으로 더 빨리 받으시면 됩니다."}
+                    </div>
+                    <div style={{ borderTop: "0.5px solid #e3e6ee", paddingTop: "8px", display: "flex", flexDirection: "column", gap: "6px" }}>
+                      <div style={{ fontSize: "12.5px", color: "#333", lineHeight: 1.55 }}>
+                        <span style={{ fontWeight: 600, color: "#185fa5" }}>📘 {lang === "en" ? "Regular e-passport + DHL" : "일반 전자여권 + DHL"}</span>
+                        {lang === "en" ? " — for most people. Apply for the standard e-passport and pay for DHL express to receive it in about 1–2 weeks." : " — 대부분 여기에 해당. 일반 전자여권을 신청하고 DHL 특급배송을 결제하면 약 1~2주 안에 받습니다."}
+                      </div>
+                      <div style={{ fontSize: "12.5px", color: "#333", lineHeight: 1.55 }}>
+                        <span style={{ fontWeight: 600, color: "#a32d2d" }}>🚨 {lang === "en" ? "Emergency passport" : "긴급여권"}</span>
+                        {lang === "en" ? " — only when you have proof of an urgent departure. It is a non-electronic single-use passport (1-year validity), issued same day." : " — 긴급 출국 사유 증빙이 있을 때만. 비전자 단수여권(유효기간 1년)으로 당일 발급됩니다."}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {pageId === "cert_start" && (() => {
+                const en = lang === "en";
+                const cols = en ? ["Simple", "Joint", "Financial"] : ["간편", "공동", "금융"];
+                const rows = en ? [
+                  { label: "Consulate visit", vals: ["Not needed", "Once", "Once"], kind: ["good", "warn", "warn"] },
+                  { label: "Internet banking", vals: ["✕", "✓", "✓"], kind: ["bad", "good", "good"] },
+                  { label: "Where to use", vals: ["190 public services", "Admin+finance+commerce", "Finance+public"], kind: ["", "", ""] },
+                  { label: "Renewal", vals: ["Varies by app", "Yearly, by you", "Every 3 yrs, auto"], kind: ["", "", ""] },
+                  { label: "Storage", vals: ["In the app", "PC / USB", "Cloud"], kind: ["", "", ""] },
+                ] : [
+                  { label: "영사관 방문", vals: ["불필요", "1회", "1회"], kind: ["good", "warn", "warn"] },
+                  { label: "인터넷뱅킹", vals: ["✕", "✓", "✓"], kind: ["bad", "good", "good"] },
+                  { label: "사용처", vals: ["공공 190개", "행정+금융+상거래", "금융+공공"], kind: ["", "", ""] },
+                  { label: "갱신", vals: ["앱별 상이", "1년 직접", "3년 자동"], kind: ["", "", ""] },
+                  { label: "저장", vals: ["앱 내", "PC / USB", "클라우드"], kind: ["", "", ""] },
+                ];
+                const cellColor = (k: string) => k === "good" ? "#3b6d11" : k === "bad" ? "#a32d2d" : k === "warn" ? "#854f0b" : "#333";
+                return (
+                  <div style={{ marginTop: "1.25rem" }}>
+                    <div style={{ fontSize: "13.5px", fontWeight: 600, color: "#003478", marginBottom: "8px" }}>
+                      {en ? "Three certificates at a glance" : "세 가지 인증서 한눈에 비교"}
+                    </div>
+                    <div style={{ border: "1px solid #dde3ef", borderRadius: "12px", overflow: "hidden" }}>
+                      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12.5px", tableLayout: "fixed", wordBreak: "keep-all", overflowWrap: "anywhere" }}>
+                        <thead>
+                          <tr style={{ background: "#eef3fb" }}>
+                            <th style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: "#185fa5", width: "74px" }}>{en ? "" : "구분"}</th>
+                            {cols.map((c) => (
+                              <th key={c} style={{ textAlign: "left", padding: "8px 10px", fontWeight: 600, color: "#185fa5" }}>{c}</th>
+                            ))}
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {rows.map((r, ri) => (
+                            <tr key={ri} style={{ borderTop: "0.5px solid #eef1f8", background: ri % 2 ? "#fafbfd" : "#fff" }}>
+                              <td style={{ padding: "8px 10px", color: "#667", fontWeight: 500, verticalAlign: "top" }}>{r.label}</td>
+                              {r.vals.map((v, ci) => (
+                                <td key={ci} style={{ padding: "8px 10px", color: cellColor(r.kind[ci]), fontWeight: r.kind[ci] ? 600 : 400, verticalAlign: "top", lineHeight: 1.4 }}>{v}</td>
+                              ))}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                    <div style={{ fontSize: "12px", color: "#4a5a78", marginTop: "8px", lineHeight: 1.6 }}>
+                      <div>📵 {en ? "None of the three require a Korean phone number" : "세 가지 모두 한국 전화번호 불필요"}</div>
+                      <div style={{ color: "#a32d2d", marginTop: "2px" }}>⚠️ {en ? "Not available to Canadian citizens (those who lost Korean nationality) · resident registration number required" : "캐나다 시민권자(한국 국적 상실자) 발급 불가 · 주민등록번호 필수"}</div>
+                    </div>
+                  </div>
+                );
+              })()}
             </div>
           )}
 
@@ -11381,6 +11797,110 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
             {lang === "ko" ? "사전 예약" : "Book Appointment"}
           </a>
         </footer>
+
+        {/* CHAT HELPER */}
+        {!chatOpen && (
+          <button className="chat-fab" onClick={() => setChatOpen(true)} aria-label={lang === "ko" ? "도우미 열기" : "Open helper"}>💬</button>
+        )}
+        {chatOpen && (
+          <div className="chat-panel">
+            <div className="chat-head">
+              <div>
+                <div className="chat-head-title">{lang === "ko" ? "민원 도우미" : "Consular Helper"}</div>
+                <div className="chat-head-sub">{lang === "ko" ? "찾으시는 업무를 물어보세요" : "Ask what you're looking for"}</div>
+              </div>
+              <button className="chat-close" onClick={() => setChatOpen(false)} aria-label={lang === "ko" ? "닫기" : "Close"}>✕</button>
+            </div>
+            <div className="chat-body">
+              {chatMsgs.length === 0 && (
+                <div className="chat-row">
+                  <div className="chat-avatar">💬</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div className="chat-bubble-bot">
+                      {lang === "ko"
+                        ? "안녕하세요! 필요하신 업무를 입력해 주세요. 예를 들어 이렇게요:"
+                        : "Hello! Tell me what you need. For example:"}
+                    </div>
+                    <div className="chat-suggest">
+                      {(lang === "ko"
+                        ? ["여권 잃어버렸어요", "워킹홀리데이 비자", "위임장 공증", "아이 한국 국적"]
+                        : ["Lost my passport", "Working holiday visa", "Power of attorney", "Child's Korean nationality"]
+                      ).map((s) => (
+                        <button key={s} className="chat-chip" onClick={() => handleChatSend(s)}>{s}</button>
+                      ))}
+                    </div>
+                    <div className="chat-disclaim">
+                      {lang === "ko" ? "ⓘ 앱에 담긴 안내만 보여드립니다. 정확한 내용은 영사관 공식 확인이 필요합니다." : "ⓘ Shows only what's in this app. Please confirm details with the Consulate."}
+                    </div>
+                  </div>
+                </div>
+              )}
+              {chatMsgs.map((m: any, i: number) => (
+                m.role === "user" ? (
+                  <div key={i} className="chat-row user">
+                    <div className="chat-bubble-user">{m.text}</div>
+                  </div>
+                ) : (
+                  <div key={i} className="chat-row">
+                    <div className="chat-avatar">💬</div>
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      {m.kind === "results" ? (
+                        <>
+                          <div className="chat-bubble-bot">
+                            {lang === "ko" ? "이 안내가 관련 있어 보여요:" : "These look relevant:"}
+                          </div>
+                          {m.results.map((r: any) => (
+                            <button key={r.id} className="chat-result-card" onClick={() => chatGoTo(r.id)}>
+                              <div className="chat-result-path">{(Array.isArray(r.breadcrumb) ? r.breadcrumb : []).join(" › ")}</div>
+                              <div className="chat-result-title">{r.title}</div>
+                              <div className="chat-result-go">{lang === "ko" ? "자세히 보기 ›" : "View details ›"}</div>
+                            </button>
+                          ))}
+                        </>
+                      ) : m.kind === "answer" ? (
+                        <>
+                          <div className="chat-bubble-bot" style={{ whiteSpace: "pre-line" }}>{m.text}</div>
+                          {m.goId && (
+                            <button className="chat-option-btn" style={{ color: "#185fa5", fontWeight: 600 }} onClick={() => chatGoTo(m.goId)}>
+                              {m.goLabel} ›
+                            </button>
+                          )}
+                        </>
+                      ) : m.kind === "reask" ? (
+                        <>
+                          <div className="chat-bubble-bot" style={{ whiteSpace: "pre-line" }}>{m.text}</div>
+                          {m.goId && (
+                            <button className="chat-result-card" onClick={() => chatGoTo(m.goId)} style={{ marginTop: "7px" }}>
+                              <div className="chat-result-title" style={{ color: "#003478" }}>{m.goLabel}</div>
+                              <div className="chat-result-go">{lang === "ko" ? "여기서 시작 ›" : "Start here ›"}</div>
+                            </button>
+                          )}
+                        </>
+                      ) : (
+                        <div className="chat-bubble-bot">
+                          {lang === "ko"
+                            ? "관련 안내를 찾지 못했어요. 다른 표현으로 다시 입력해 보시거나, 홈 화면의 메뉴를 이용해 주세요."
+                            : "I couldn't find a match. Try different words, or browse the menu on the home screen."}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )
+              ))}
+            </div>
+            <div className="chat-foot">
+              <input
+                className="chat-text-input"
+                type="text"
+                placeholder={lang === "ko" ? "예: 여권 재발급, 비자, 공증…" : "e.g. passport, visa, notarization…"}
+                value={chatInput}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChatInput(e.target.value)}
+                onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter") handleChatSend(); }}
+              />
+              <button className="chat-send" onClick={() => handleChatSend()} aria-label={lang === "ko" ? "보내기" : "Send"}>➤</button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

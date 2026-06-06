@@ -5718,8 +5718,8 @@ const TREE = {
       {
         q: "수수료는 현금만 되나요?",
         q_en: "Is cash the only payment method?",
-        a: "여권·공증 등 대부분은 현금만 가능합니다. 비자(사증)는 현금·직불카드·신용카드 모두 가능합니다. 수표·이체는 불가합니다.",
-        a_en: "Most services (passport, notarization, etc.) require cash only. Visa fees accept cash, debit, and credit cards. No cheques or bank transfers.",
+        a: "여권·공증 등 대부분의 업무는 현금, Debit(직불카드), 신용카드 모두 가능합니다. 단 비자(사증) 일부는 현금 또는 직불카드만 가능(신용카드 불가)하며, 일부 증명서 업무는 현금 또는 Money Order만 받는 경우가 있으니 해당 업무 화면에서 확인하세요. 수표·계좌이체는 불가합니다.",
+        a_en: "Most services (passport, notarization, etc.) accept cash, Debit, and credit cards. However, some visa fees accept only cash or debit (no credit card), and certain certificate services may accept only cash or Money Order — check the specific service screen. Cheques and bank transfers are not accepted.",
       },
       {
         q: "우편으로 신청할 수 있는 업무는 무엇인가요?",
@@ -5748,8 +5748,8 @@ const TREE = {
       {
         q: "대리인이 방문할 수 있는 업무는 무엇인가요?",
         q_en: "Which services allow a proxy (대리인) to apply on my behalf?",
-        a: "우편 또는 대리인 방문이 가능한 업무: 가족관계 신고(일부), 국적상실신고(우편), 병무 국외여행허가(위임장 필요), 병적증명서 발급(가족 대리), 일부 증명서 발급. 반드시 본인이 방문해야 하는 업무: 공증(서명인증), 여권 신규/재발급, 인감 관련, 해외이주신고.",
-        a_en: "Proxy or mail allowed: family register reports (some), nationality loss (mail), military travel permit (proxy authorization required), military record certificate (immediate family), some certificate issuances. Must appear in person: all notarization (signature certification), passport applications, seal (인감) documents, overseas emigration report.",
+        a: "우편 또는 대리인 신청이 가능한 업무: 가족관계 신고(일부), 국적상실신고(우편), 병무 국외여행허가(위임장 필요), 병적증명서 발급(가족 대리), 일부 증명서 발급, 초·중·고 학적서류 공증(우편 가능). 본인 방문이 원칙인 업무: 공증의 서명·인증(영사 앞 서명 필요), 여권 신규/재발급, 인감 관련, 해외이주신고 — 다만 미성년 자녀 여권 등 일부는 부모·대리인 신청이 가능하니 해당 업무 화면에서 확인하세요.",
+        a_en: "Proxy or mail allowed: family register reports (some), nationality loss (mail), military travel permit (authorization required), military record certificate (immediate family), some certificate issuances, school-record notarization (by mail). In person as a rule: signature/authentication notarization (you must sign before the consul), passport issuance, seal (인감) documents, overseas emigration report — though some cases (e.g. a minor's passport) allow a parent/proxy, so check the specific service screen.",
       },
       {
         q: "영사관 전화번호는 무엇인가요?",
@@ -10742,14 +10742,93 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
   // ── 시나리오 정의 (서비스별 핵심 질문 → 되묻기/즉답) ──
   // 확장: 각 시나리오는 keywords(any 1개 매칭) + must(서비스 키워드, 1개 필수) + 응답 빌더.
   const CHAT_SCENARIOS: any[] = [
+    // ===== 각종 증명서 (범죄경력·출입국·주민등록·납세·여권정보) =====
+    {
+      svc: "various_cert",
+      must: ["범죄경력", "신원조사", "신원조회", "출입국사실", "출입국 사실", "주민등록", "등본", "초본", "납세", "소득금액", "소득 증명", "여권정보", "여권 정보", "criminal record", "background check", "immigration record", "tax certificate", "resident registration"],
+      items: [
+        {
+          id: "vcert_q_criminal",
+          kw: ["범죄경력", "신원조사", "신원조회", "범죄 경력", "범죄경력증명", "신원증명", "criminal record", "background check", "police check"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "신원조사(범죄경력)증명서는 용도(외국 비자·영주권용 / 캐나다 시민권용 / 신원확인용)에 따라 신청 서식이 다릅니다. 발급은 무료이지만 우편 접수가 불가능해 반드시 본인이 영사관을 방문해야 합니다. 아래에서 용도를 선택해 주세요."
+              : "The criminal-record (background-check) certificate has different application forms depending on the purpose (foreign visa/PR, Canadian citizenship, or identity verification). It is free, but cannot be filed by mail — you must appear at the Consulate in person. Choose the purpose below.",
+            goId: "vcert_criminal",
+            goLabel: lang === "ko" ? "용도 선택하기" : "Choose the purpose",
+          }),
+        },
+        {
+          id: "vcert_q_immigration",
+          kw: ["출입국", "출입국사실", "입출국", "immigration record", "entry exit", "travel record"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 출입국사실증명서는 공동인증서가 있으면 정부24에서 무료로 즉시 발급받을 수 있어 영사관 방문이 필요 없습니다. 공동인증서가 없으면 영사관 방문(즉시, CAD $2.70), 직계가족 대리, 또는 우편으로 발급받으실 수 있습니다. 아래에서 방법을 선택해 주세요."
+              : "Yes — with a joint certificate, an immigration (entry/exit) record can be issued instantly and free on Government24, with no Consulate visit. Without it, you can use a Consulate visit (instant, CAD $2.70), an immediate-family proxy, or mail. Choose a method below.",
+            goId: "vcert_immigration",
+            goLabel: lang === "ko" ? "출입국사실증명서 발급" : "Immigration record issuance",
+          }),
+        },
+        {
+          id: "vcert_q_resident",
+          kw: ["주민등록", "등본", "초본", "resident registration", "resident record"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 주민등록 등본·초본은 공동인증서가 있으면 정부24(gov.kr)에서 온라인으로 즉시 무료 발급이 가능해 영사관 방문이 필요 없습니다. 영사관 방문(당일 즉시) 또는 우편 접수도 가능합니다. 자세한 안내는 아래에서 확인하세요."
+              : "Yes — a resident-registration copy (deungbon/chobon) can be issued instantly and free online via Government24 (gov.kr) with a joint certificate, no Consulate visit needed. A same-day Consulate visit or mail is also possible. See details below.",
+            goId: "vcert_resident",
+            goLabel: lang === "ko" ? "주민등록 등본·초본 보기" : "View resident registration",
+          }),
+        },
+        {
+          id: "vcert_q_tax",
+          kw: ["납세", "소득", "소득금액", "세금 증명", "tax certificate", "income certificate"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "납세증명서·소득금액증명서는 공동인증서가 있으면 홈택스(hometax.go.kr)에서 온라인으로 즉시 무료 발급이 가능합니다. 영사관 방문(당일 즉시) 발급도 가능하며 무료입니다. 자세한 안내는 아래에서 확인하세요."
+              : "A tax-payment or income certificate can be issued instantly and free online via Hometax (hometax.go.kr) with a joint certificate. A same-day Consulate visit is also available and free. See details below.",
+            goId: "vcert_tax",
+            goLabel: lang === "ko" ? "납세·소득 증명서 보기" : "View tax/income certificate",
+          }),
+        },
+        {
+          id: "vcert_q_passportinfo",
+          kw: ["여권정보", "여권 정보", "여권정보증명", "passport info", "passport information"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "여권정보증명서는 공동인증서가 있으면 정부24(gov.kr)에서 온라인으로 무료 발급이 가능합니다. 영사관을 방문해 발급받는 경우 수수료는 CAD $1.00(현금)입니다. 자세한 안내는 아래에서 확인하세요."
+              : "A passport-information certificate can be issued free online via Government24 (gov.kr) with a joint certificate. If issued at the Consulate in person, the fee is CAD $1.00 (cash). See details below.",
+            goId: "vcert_passport_info",
+            goLabel: lang === "ko" ? "여권정보증명서 보기" : "View passport-info certificate",
+          }),
+        },
+      ],
+    },
     // ===== 여권 =====
     {
       svc: "passport",
       must: ["여권", "passport"],
       items: [
         {
+          id: "pp_q_urgent",
+          kw: ["당일", "급하게", "급한데", "긴급여권", "긴급 여권", "오늘 받", "바로 받", "same day", "same-day", "urgent", "emergency passport"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "당일 발급이 되는 것은 긴급여권(비전자 단수여권, 유효기간 1년)이며, 긴급한 출국 사유에 대한 증빙이 있을 때만 발급됩니다. 단순히 빨리 받고 싶으신 경우라면 대부분 일반 전자여권을 DHL 특급(약 1~2주)으로 받으시는 편이 적절합니다. 아래에서 상황에 맞게 시작해 주세요."
+              : "Same-day issuance applies to an emergency passport (a non-electronic single-use passport, valid 1 year), and only when you have proof of an urgent reason to travel. If you simply want it quickly, most people are better served by a regular e-passport via DHL express (about 1–2 weeks). Start below based on your situation.",
+            goId: "passport_start",
+            goLabel: lang === "ko" ? "여권 안내 시작하기" : "Start passport guide",
+          }),
+        },
+        {
           id: "pp_q_time",
-          kw: ["얼마나", "며칠", "기간", "걸리", "소요", "how long", "how many days", "processing", "time"],
+          kw: ["얼마나", "며칠", "처리 기간", "발급 기간", "걸리", "소요", "언제 받", "언제 나와", "언제쯤", "how long", "how many days", "processing", "time", "when can i get"],
           build: () => ({
             kind: "answer",
             text: lang === "ko"
@@ -10761,11 +10840,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         },
         {
           id: "pp_q_lost",
-          kw: ["잃", "분실", "도난", "lost", "stolen", "missing"],
+          kw: ["잃", "분실", "도난", "없어졌", "잃어버", "사라졌", "lost", "stolen", "missing", "gone"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "여권을 분실하셨군요. 먼저 여권이 언제까지 필요한지에 따라 절차가 달라집니다. 아래에서 시작해 주세요 — 다음 화면에서 분실 상태를 선택하시면 됩니다."
+              ? "여권을 분실하셨군요. 재발급 절차는 여권이 얼마나 급히 필요하신지에 따라 달라집니다. 아래에서 시작하시면 다음 화면에서 '분실'을 선택해 안내받으실 수 있습니다."
               : "Lost your passport. The process depends on how soon you need it. Start below — you'll select 'lost' on the next screens.",
             goId: "passport_start",
             goLabel: lang === "ko" ? "여권 재발급 시작하기" : "Start passport reissue",
@@ -10773,11 +10852,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         },
         {
           id: "pp_q_minor",
-          kw: ["아이", "자녀", "미성년", "애기", "child", "minor", "kid", "parent"],
+          kw: ["아이", "자녀", "미성년", "애기", "아들", "딸", "애", "child", "minor", "kid", "parent"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "미성년 자녀의 여권은 친권 상황(혼인 중·이혼·한부모 등)에 따라 부모 방문·동의 요건이 달라집니다. 아래에서 시작하면 연령·친권 상황을 차례로 여쭤 정확히 안내해 드려요."
+              ? "미성년 자녀의 여권은 친권 상황(혼인 중·이혼·한부모 등)에 따라 부모 방문·동의 요건이 달라집니다. 아래에서 시작하시면 연령·친권 상황을 차례로 확인해 정확히 안내해 드립니다."
               : "For a minor's passport, the parental-visit/consent requirements depend on custody (married, divorced, single parent, etc.). Start below and we'll ask step by step.",
             goId: "passport_start",
             goLabel: lang === "ko" ? "미성년 여권 시작하기" : "Start minor's passport",
@@ -10789,7 +10868,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "갱신·재발급에 필요한 서류는 여권 종류(일반/긴급), 연령, 체류 신분에 따라 달라집니다. 아래에서 시작하면 차례로 여쭤 정확한 구비서류를 안내해 드려요."
+              ? "갱신·재발급에 필요한 서류는 여권 종류(일반/긴급), 연령, 체류 신분에 따라 달라집니다. 아래에서 시작하시면 차례로 여쭤보고 정확한 구비서류를 안내해 드립니다."
               : "Required documents depend on the passport type (regular/emergency), age, and your residency status. Start below and we'll ask step by step.",
             goId: "passport_start",
             goLabel: lang === "ko" ? "필요 서류 확인하기" : "Check required documents",
@@ -10797,7 +10876,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         },
         {
           id: "pp_q_renew",
-          kw: ["만료", "갱신", "연장", "expire", "expir", "renew", "renewal"],
+          kw: ["만료", "갱신", "연장", "기간 끝", "기간이 끝", "기간 만료", "유효기간", "다 됐", "다 돼", "새로 받", "새로 만들", "새 여권", "재발급", "expire", "expir", "renew", "renewal"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
@@ -10820,7 +10899,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "과거 한국 국적이셨다면 F-4 재외동포 비자 대상일 수 있습니다. 다만 먼저 국적 상태(선천적 이중국적 여부, 국적상실 신고 완료 여부) 확인이 필요해요. 아래에서 시작하면 차례로 여쭤봅니다."
+              ? "과거 한국 국적이셨다면 F-4 재외동포 비자 대상일 수 있습니다. 다만 먼저 국적 상태(선천적 이중국적 여부, 국적상실 신고 완료 여부)를 확인해야 합니다. 아래에서 시작하시면 차례로 여쭤봅니다."
               : "If you were formerly a Korean national, you may be eligible for the F-4 Overseas Korean visa. First we need to confirm your nationality status. Start below and we'll ask step by step.",
             goId: "visa_f4_start",
             goLabel: lang === "ko" ? "F-4 자격 확인 시작하기" : "Check F-4 eligibility",
@@ -10828,11 +10907,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         },
         {
           id: "visa_q_work",
-          kw: ["취업", "일하", "직장", "회사", "근무", "work", "job", "employ", "hire", "teaching", "teach"],
+          kw: ["취업", "일하", "일할", "일자리", "직장", "회사", "근무", "워홀", "워킹홀리데이", "취직", "work", "job", "employ", "hire", "teaching", "teach"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "취업 비자는 하시는 일(영어교사 E-2, 전문직 E-1~E-7, 워킹홀리데이 H-1 등)에 따라 종류가 달라집니다. 대부분 한국 고용주가 먼저 사증발급인정서(CVI)를 받아야 해요. 아래에서 직무를 선택해 주세요."
+              ? "취업 비자는 하시는 일(영어교사 E-2, 전문직 E-1~E-7, 워킹홀리데이 H-1 등)에 따라 종류가 달라집니다. 대부분 한국 고용주가 먼저 사증발급인정서(CVI)를 받아야 합니다. 아래에서 직무를 선택해 주세요."
               : "Work visas depend on the type of work (E-2 language instructor, E-1–E-7 professional, H-1 working holiday, etc.). Most require your Korean employer to obtain a Confirmation of Visa Issuance (CVI) first. Pick your work type below.",
             goId: "visa_work_en",
             goLabel: lang === "ko" ? "취업 비자 선택하기" : "Choose a work visa",
@@ -10844,20 +10923,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "answer",
             text: lang === "ko"
-              ? "캐나다 시민권자는 무비자로 한국에 최대 6개월까지 체류할 수 있습니다. 그 이상 머무시려면 체류 목적(취업·학업·재외동포 등)에 맞는 비자를 받아야 합니다. 무비자 체류는 한국 내에서 다른 비자로 변경이 원칙적으로 불가하니, 장기 체류 예정이면 입국 전 해당 비자를 받는 것이 좋습니다."
-              : "Canadian citizens can stay in Korea visa-free for up to 6 months. To stay longer, you need a visa matching your purpose (work, study, overseas Korean, etc.). Visa-free status generally cannot be converted to another visa inside Korea, so obtain the right visa before entry if you plan a long stay.",
-            goId: "visa_heritage_no_en",
-            goLabel: lang === "ko" ? "체류 목적별 비자 보기" : "See visas by purpose",
-          }),
-        },
-        {
-          id: "visa_q_longstay",
-          kw: ["몇 년", "장기", "오래", "수년", "거주", "살고 싶", "살려고", "live in korea", "several years", "long-term", "long term", "reside"],
-          build: () => ({
-            kind: "reask",
-            text: lang === "ko"
-              ? "한국에서 장기간 거주하시려면 체류 목적에 맞는 비자가 필요합니다 — 단일 '장기 거주' 비자가 따로 있는 것은 아니에요. 취업이면 E계열, 학업이면 D계열, 재외동포(과거 한국 국적)면 F-4가 해당됩니다. 아래에서 목적을 선택해 주세요. (과거 한국 국적이셨다면 'F-4 재외동포'도 확인해 보세요.)"
-              : "For a long-term stay in Korea, you need a visa matching your purpose — there isn't a single 'long-term residence' visa. Work → E-series, study → D-series, overseas Korean (former Korean national) → F-4. Pick your purpose below. (If you were formerly a Korean national, also check F-4.)",
+              ? "네, 캐나다 시민권자는 무비자로 최대 6개월까지 머무실 수 있습니다. 그보다 오래 계실 계획이라면 목적에 맞는 비자(취업·학업·재외동포 등)를 따로 받으셔야 합니다. 다만 무비자로 입국한 뒤에는 한국 안에서 다른 비자로 바꾸기가 원칙적으로 어렵습니다. 장기 체류 예정이라면 입국 전에 미리 비자를 받아두시는 것이 좋습니다."
+              : "Yes — Canadian citizens can stay in Korea visa-free for up to 6 months. To stay longer, you need a visa matching your purpose (work, study, overseas Korean, etc.). Note that visa-free status generally cannot be converted to another visa inside Korea, so it is best to obtain the right visa before entry if you plan a long stay.",
             goId: "visa_heritage_no_en",
             goLabel: lang === "ko" ? "체류 목적별 비자 보기" : "See visas by purpose",
           }),
@@ -10868,10 +10935,558 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "answer",
             text: lang === "ko"
-              ? "한국에 계신 부모님을 돌보기 위한 장기 체류(방문동거 등)는 개인 상황에 따라 자격·서류가 크게 달라져, 이 앱에는 상세 안내가 준비되어 있지 않습니다. 정확한 안내는 비자과로 직접 문의해 주세요: torvisa@mofa.go.kr (대표 416-920-3809)."
+              ? "부모님을 돌보기 위한 장기 체류(방문동거 등)는 개인 상황에 따라 자격과 서류가 크게 달라져, 이 앱에는 상세 안내가 준비되어 있지 않습니다. 정확한 내용은 비자과로 직접 문의해 주세요: torvisa@mofa.go.kr (대표 416-920-3809)."
               : "Long-term stay to care for parents in Korea (e.g. visiting/cohabitation) varies greatly by personal circumstances, so detailed guidance isn't available in this app. Please contact the Visa Section directly: torvisa@mofa.go.kr (main 416-920-3809).",
             goId: "visa_start",
             goLabel: lang === "ko" ? "비자 안내 처음으로" : "Visa guide home",
+          }),
+        },
+        {
+          id: "visa_q_longstay",
+          kw: ["몇 년", "장기", "오래", "수년", "거주", "살고 싶", "살려고", "살려면", "오래 살", "오래 있", "정착", "live in korea", "several years", "long-term", "long term", "reside", "settle"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "한국에서 장기간 거주하시려면 체류 목적에 맞는 비자가 필요합니다. 단일 '장기 거주' 비자가 따로 있는 것은 아닙니다. 취업이면 E계열, 학업이면 D계열, 재외동포(과거 한국 국적)면 F-4가 해당됩니다. 아래에서 목적을 선택해 주세요. (과거 한국 국적이셨다면 'F-4 재외동포'도 확인해 보세요.)"
+              : "For a long-term stay in Korea, you need a visa matching your purpose — there isn't a single 'long-term residence' visa. Work → E-series, study → D-series, overseas Korean (former Korean national) → F-4. Pick your purpose below. (If you were formerly a Korean national, also check F-4.)",
+            goId: "visa_heritage_no_en",
+            goLabel: lang === "ko" ? "체류 목적별 비자 보기" : "See visas by purpose",
+          }),
+        },
+        {
+          id: "visa_q_general",
+          kw: ["어디서", "어디에서", "어떻게 신청", "신청은", "신청 방법", "비자 종류", "무슨 비자", "어떤 비자", "where do i apply", "how to apply", "which visa"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "비자는 신청 목적(취업·학업·결혼·재외동포 등)에 따라 종류와 절차가 완전히 달라집니다. 대부분 온라인 비자포털(visa.go.kr)이나 영사관을 통해 신청하며, 일부는 한국 고용주·기관이 먼저 사증발급인정서를 받아야 합니다. 먼저 어떤 목적인지 아래에서 선택해 주세요."
+              : "Visas differ completely by purpose (work, study, marriage, overseas Korean, etc.). Most are applied for via the visa portal (visa.go.kr) or the Consulate, and some require a Korean employer/institution to obtain a Confirmation of Visa Issuance first. Start by choosing your purpose below.",
+            goId: "visa_start",
+            goLabel: lang === "ko" ? "비자 안내 시작하기" : "Start visa guide",
+          }),
+        },
+      ],
+    },
+    // ===== 증명서 발급 (가족관계증명서 등) =====
+    {
+      svc: "cert_issue",
+      must: ["증명서", "가족관계증명", "기본증명", "혼인관계증명", "영문 증명", "영문증명", "certificate", "family relation cert", "basic cert"],
+      items: [
+        {
+          id: "fam_q_cert_apostille",
+          kw: ["아포스티유", "캐나다 정부 제출", "캐나다에 제출", "외국 제출", "외국에 제출", "apostille", "for canadian government", "submit to canada"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "한국에서 발행한 증명서(가족관계증명서 등)를 캐나다 정부 등 외국 기관에 제출할 때 아포스티유가 필요한 경우, 그 아포스티유는 한국 외교부(또는 정부24)에서 발급받으셔야 하며 토론토 영사관에서는 처리되지 않습니다. 한국 내 가족이나 대리인을 통해 한국에서 진행하시는 것이 일반적입니다. 정확한 절차는 제출받는 캐나다 기관과 한국 외교부에 확인하시기 바랍니다."
+              : "If a certificate issued in Korea (e.g. a family-relation certificate) needs an Apostille to be submitted to a foreign body such as the Canadian government, that Apostille must be obtained from Korea's Ministry of Foreign Affairs (or Government24) — it is not processed at the Toronto Consulate. It is usually handled in Korea through family or a proxy. Please confirm the exact steps with the receiving Canadian body and Korea's MOFA.",
+            goId: "family_cert",
+            goLabel: lang === "ko" ? "증명서 발급 안내 보기" : "View certificate guide",
+          }),
+        },
+        {
+          id: "fam_q_cert_fee",
+          kw: ["수수료", "얼마", "비용", "가격", "무료", "fee", "cost", "how much", "price", "free"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "가족관계증명서 등은 공동인증서가 있으면 온라인(전자가족관계등록시스템)에서 즉시 무료로 발급받을 수 있습니다. 공동인증서가 없어 영사관을 통해 발급받는 경우에는 약 2주가 소요되며 수수료는 통당 약 $1.30입니다. 발급 방법은 아래에서 선택하실 수 있습니다."
+              : "If you have a joint certificate (gongdong-injungseo), family-relation and similar certificates can be issued instantly and free online via the Electronic Family Relation Registration System. Without it, issuance through the Consulate takes about 2 weeks and costs about $1.30 per copy. Choose a method below.",
+            goId: "family_cert",
+            goLabel: lang === "ko" ? "증명서 발급 시작하기" : "Start certificate issuance",
+          }),
+        },
+        {
+          id: "fam_q_cert_online",
+          kw: ["온라인", "인터넷", "집에서", "online", "internet", "from home", "remotely"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 공동인증서(구 공인인증서)가 있으면 전자가족관계등록시스템에서 온라인으로 즉시 무료 발급이 가능하며, 영사관 방문이 필요 없습니다. 공동인증서가 없으면 한국 내 가족, 대리인, 또는 영사관 방문/우편으로 발급받으실 수 있습니다. 아래에서 방법을 선택해 주세요."
+              : "Yes — if you have a joint certificate (gongdong-injungseo), you can issue it online instantly and free via the Electronic Family Relation Registration System, with no Consulate visit needed. Without it, you can use family in Korea, a proxy, or a Consulate visit/mail. Choose a method below.",
+            goId: "family_cert",
+            goLabel: lang === "ko" ? "증명서 발급 시작하기" : "Start certificate issuance",
+          }),
+        },
+        {
+          id: "fam_q_cert_english",
+          kw: ["영문", "영어 증명서", "영문 증명", "english", "in english"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 영문 가족관계증명서 발급이 가능합니다. 영문증명서에는 본인·부모·배우자 정보가 하나의 서류에 담기며(자녀 정보는 포함되지 않습니다), 공동인증서가 있으면 온라인에서 즉시 무료로 발급받을 수 있습니다. 아래에서 영문 증명서 발급을 시작하세요."
+              : "Yes — an English family-relation certificate is available. It contains the holder's, parents', and spouse's information in one document (children's information is not included), and with a joint certificate it can be issued instantly and free online. Start English certificate issuance below.",
+            goId: "family_cert_english",
+            goLabel: lang === "ko" ? "영문 증명서 발급 시작하기" : "Start English certificate",
+          }),
+        },
+        {
+          id: "fam_q_cert_visit",
+          kw: ["직접 방문", "방문해야", "가야 하나", "가야 되나", "본인이 가", "in person", "have to visit", "must i go", "visit"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "꼭 그렇지는 않습니다. 공동인증서가 있으면 온라인으로 즉시 발급할 수 있어 영사관 방문이 필요 없습니다. 공동인증서가 없는 경우에만 한국 내 가족, 대리인, 또는 영사관 방문/우편을 이용하시면 됩니다. 아래에서 방법을 선택해 주세요."
+              : "Not necessarily. With a joint certificate you can issue it online instantly, with no Consulate visit needed. Only without it would you use family in Korea, a proxy, or a Consulate visit/mail. Choose a method below.",
+            goId: "family_cert",
+            goLabel: lang === "ko" ? "증명서 발급 시작하기" : "Start certificate issuance",
+          }),
+        },
+      ],
+    },
+    // ===== 공증 =====
+    {
+      svc: "notarization",
+      must: ["공증", "인증", "위임", "위임장", "아포스티유", "영사관 확인", "영사 확인", "한국에 제출", "서명", "notar", "apostille", "authenticat", "power of attorney", "poa", "submit to korea", "sign before", "sign in advance"],
+      items: [
+        {
+          id: "notar_q_presign",
+          kw: ["미리 서명", "먼저 서명", "사전 서명", "서명 먼저", "서명하고 가", "서명해서 가", "먼저 하고 가", "집에서 서명", "미리 사인", "사인하면", "미리 작성해서 서명", "sign in advance", "pre-sign", "presign", "already signed", "sign beforehand", "sign before"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "아니요. 영사관 공증·인증은 모든 서명을 반드시 영사 앞에서 직접 하셔야 합니다. 서류는 미리 작성하셔도 되지만 서명란은 반드시 공백으로 두고 오셔야 하며, 사전 서명이나 타인의 대리 서명은 인정되지 않습니다."
+              : "No. For Consulate notarization/authentication, all signatures must be made in person before the consul. You may prepare the document in advance, but leave the signature line blank — pre-signing or signing by someone else is not accepted.",
+            goId: "notarization_start",
+            goLabel: lang === "ko" ? "공증 안내 보기" : "View notarization guide",
+          }),
+        },
+        {
+          id: "notar_q_visit",
+          kw: ["직접 방문", "방문해야", "꼭 가야", "가야 하나", "가야 되나", "우편으로", "in person", "have to visit", "must i go", "by mail", "mail it"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "공증·인증은 영사 앞에서 직접 서명해야 하므로 본인 방문이 원칙입니다. 다만 일부 업무(초·중·고 학적서류, 영문 운전경력증명서 등)는 우편 접수나 온라인 발급이 가능합니다. 필요하신 업무를 아래에서 선택하시면 방문/우편 여부를 안내해 드립니다."
+              : "Notarization/authentication generally requires you to appear in person, since signing happens before the consul. However, some services (school records, English driving-record certificates, etc.) can be done by mail or online. Pick your service below to see whether mail is an option.",
+            goId: "notarization_start",
+            goLabel: lang === "ko" ? "공증 업무 선택하기" : "Choose a notarization service",
+          }),
+        },
+        {
+          id: "notar_q_canadadoc",
+          kw: ["캐나다에서 작성", "캐나다에서 발행", "캐나다 서류", "캐나다 문서", "한국에 제출", "영사관 확인", "issued in canada", "canadian document", "submit.*korea", "apostille", "아포스티유"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "캐나다에서 발행된 문서를 한국에 제출하실 때는, 2024년 캐나다의 아포스티유 협약 가입 이후 영사관 확인이 아니라 아포스티유로 진행하는 것이 원칙입니다. 발급처와 절차는 아래에서 확인하실 수 있습니다."
+              : "For documents issued in Canada to be submitted in Korea, since Canada joined the Apostille Convention in 2024 you generally use an Apostille — not Consulate authentication. Check the issuing authority and steps below.",
+            goId: "notarization_canada_doc",
+            goLabel: lang === "ko" ? "아포스티유 안내 보기" : "View Apostille guide",
+          }),
+        },
+        {
+          id: "notar_q_realty",
+          kw: ["아파트", "부동산", "집을 팔", "매도", "매매", "처분", "real estate", "property", "apartment", "sell.*house", "sell.*apartment"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "한국 부동산 처분을 가족에게 맡기시려면 위임장(또는 매매 관련 법률행위 증서) 공증이 필요합니다. 서류 종류에 따라 안내가 달라지니, 아래에서 시작해 정확한 종류를 선택해 주세요. (부동산 매도 위임은 보통 위임장으로 작성합니다.)"
+              : "To authorize a family member to handle Korean real-estate, you'll need a notarized power of attorney (or a legal-act deed for the sale). Guidance differs by document type — start below and choose the exact type. (Real-estate sale delegation is usually written as a power of attorney.)",
+            goId: "notarization_saseo",
+            goLabel: lang === "ko" ? "서류 종류 선택하기" : "Choose document type",
+          }),
+        },
+        {
+          id: "notar_q_poa",
+          kw: ["위임장", "위임", "대신 처리", "대리", "은행 업무", "power of attorney", "poa", "delegate", "on my behalf", "bank"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "한국 내 업무(은행 등)를 대신 처리하도록 위임장을 써주시려면 영사관에서 사문서 인증(위임장 공증)을 받으시면 됩니다. 단, 서명은 반드시 영사 앞에서 하셔야 합니다. 아래에서 시작해 서류 종류를 선택해 주세요."
+              : "To authorize someone to handle matters in Korea (e.g. banking), you can have the Consulate notarize a power of attorney (private-document authentication). You must sign before the consul. Start below and choose the document type.",
+            goId: "notarization_saseo",
+            goLabel: lang === "ko" ? "서류 종류 선택하기" : "Choose document type",
+          }),
+        },
+      ],
+    },
+    // ===== 병역 =====
+    {
+      svc: "military",
+      must: ["병역", "군대", "군 복무", "군복무", "입대", "국외여행허가", "국적이탈", "이탈", "병적", "military", "army", "conscription", "service", "renounce", "renunciation"],
+      items: [
+        {
+          id: "mil_q_exitdeadline",
+          kw: ["언제까지", "기한", "마감", "시한", "deadline", "by when", "until when", "when do i", "when must"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "선천적 복수국적 남성은 만 18세가 되는 해의 3월 31일까지만 일반 국적이탈신고를 할 수 있습니다. 이 기간을 넘기면 원칙적으로 병역의무를 해소한 후에만 이탈이 가능합니다(예외적 허가 제도 별도). 출생 상황에 따라 달라질 수 있으니 아래에서 확인하세요. (여성은 시기 기준이 다릅니다.)"
+              : "A male with congenital dual nationality can file an ordinary nationality-exit report only until March 31 of the year he turns 18. After that, exit is generally possible only after fulfilling military service (a separate exceptional permit exists). It can vary by birth circumstances — check below. (Different timing applies to women.)",
+            goId: "nationality_renounce_start",
+            goLabel: lang === "ko" ? "국적이탈 안내 보기" : "View nationality-exit guide",
+          }),
+        },
+        {
+          id: "mil_q_age18",
+          kw: ["18세", "18살", "만 18", "곧 18", "되는데", "병역 문제", "병역 때문", "지금 해야 할", "지금 뭘 해야", "뭐 해야", "뭘 해야", "해야 할 일", "할 일", "준비할", "turning 18", "turns 18", "age 18", "18 years", "military issue", "what should i do"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "아들이 선천적 복수국적자라면, 만 18세가 되는 해 3월 31일이 국적이탈 신고의 중요한 기한입니다. 이 시점에 따라 선택지가 달라지니, 아래에서 상황을 확인해 필요한 절차를 안내받으실 수 있습니다."
+              : "If your son holds congenital dual nationality, March 31 of the year he turns 18 is the key deadline for filing a nationality-exit report. The options depend on this timing — check the situation below.",
+            goId: "nationality_renounce_start",
+            goLabel: lang === "ko" ? "국적이탈 절차 확인하기" : "Check nationality-exit steps",
+          }),
+        },
+        {
+          id: "mil_q_canadaborn",
+          kw: ["태어난", "출생", "캐나다에서 태어", "born in canada", "born here", "아들인데", "군대 가", "군대 가야", "군대에 가", "군 복무 해야", "go to the army"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "캐나다에서 태어난 아들도 부모 중 한 명이 출생 당시 한국 국적이었다면 선천적 복수국적자일 수 있고, 이 경우 한국 병역의무가 따를 수 있습니다. 병역의무를 피하려면 정해진 기간 내 국적이탈이 필요합니다. 다만 상황마다 달라 단정하기 어려우니, 아래에서 출생 상황을 확인해 정확히 안내받으시기 바랍니다."
+              : "A son born in Canada may still be a congenital dual national if a parent was a Korean national at his birth — in which case Korean military duty may apply. Avoiding it requires a nationality-exit report within the set period. This can't be stated categorically, so check the birth circumstances below.",
+            goId: "nationality_renounce_start",
+            goLabel: lang === "ko" ? "출생 상황별 안내 보기" : "Check by birth circumstances",
+          }),
+        },
+        {
+          id: "mil_q_citizenship",
+          kw: ["시민권을 취득", "시민권 취득", "귀화", "후천", "acquire citizenship", "became a citizen", "naturaliz"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "아니요, 한국 국적자가 나중에 캐나다 시민권을 취득하더라도 그 자체로 한국 병역의무가 자동으로 사라지지는 않습니다. 병역 관계는 국적·연령·국외여행허가 상황에 따라 달라지므로, 구체적인 내용은 병역 또는 국적 업무에서 확인하셔야 합니다. 아래에서 병역 업무를 선택해 주세요."
+              : "No — if a Korean national later acquires Canadian citizenship, that alone does not automatically end Korean military duty. The situation depends on nationality, age, and overseas-travel-permit status, so please check via the military or nationality services. Pick a military service below.",
+            goId: "military_start",
+            goLabel: lang === "ko" ? "병역 업무 보기" : "View military services",
+          }),
+        },
+        {
+          id: "mil_q_dualstay",
+          kw: ["학교", "유학", "오래 체류", "장기 체류", "거주", "복수국적", "체류하면", "study in korea", "long stay", "reside", "dual national"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 복수국적 남성이 한국에 장기 체류하거나 학교를 다니는 경우 국외여행허가 의무나 체류 기간에 따른 병역 관련 영향이 생길 수 있습니다. 상황에 따라 안내가 달라지니, 아래에서 국외여행허가 업무를 확인해 주세요."
+              : "Yes — if a dual-national male stays long-term or attends school in Korea, there may be overseas-travel-permit obligations or military-related effects tied to the length of stay. Guidance varies by situation, so check the overseas-travel-permit service below.",
+            goId: "military_permit_start",
+            goLabel: lang === "ko" ? "국외여행허가 확인하기" : "Check overseas-travel permit",
+          }),
+        },
+      ],
+    },
+    // ===== 국적 =====
+    {
+      svc: "nationality",
+      must: ["국적", "시민권", "복수국적", "이중국적", "국적상실", "국적이탈", "국적선택", "국적회복", "nationality", "citizenship", "dual national"],
+      items: [
+        {
+          id: "nat_q_recover",
+          kw: ["회복", "되찾", "다시", "포기했는데", "다시 가질", "다시 받", "다시 취득", "복원", "restore", "recover", "get it back", "reclaim", "regain", "back again"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 과거에 한국 국적을 포기(상실·이탈)하셨다가 다시 회복하는 '국적회복' 제도가 있습니다. 다만 영사관에서 처리되지 않고 한국 출입국·외국인관서에서 신청해야 하며, 복수국적 회복은 만 65세 이상 등 일정 요건이 있습니다. 자세한 내용은 아래에서 확인하실 수 있습니다."
+              : "Yes — there is a 'nationality restoration' process to regain Korean nationality you previously gave up. It isn't handled at the Consulate (you apply at a Korean immigration office), and restoring dual nationality has conditions such as being age 65 or older. Check the details below.",
+            goId: "nationality_recover",
+            goLabel: lang === "ko" ? "국적회복 안내 보기" : "View restoration guide",
+          }),
+        },
+        {
+          id: "nat_q_dual",
+          kw: ["동시에", "둘 다", "함께 가질", "복수국적이 가능", "이중국적이 가능", "이중국적", "복수국적 되", "복수국적 가능", "복수국적 유지", "복수국적을 유지", "이중국적 되", "유지할 수", "둘 다 가질", "두 나라", "두 개의 국적", "두개", "두 개", "양쪽 다", "both", "at the same time", "hold both", "keep both", "dual citizen", "two nationalities"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "선천적 복수국적자(태어날 때부터 두 국적)는 정해진 기한 내 '국적선택신고(외국국적불행사 서약)'를 하면 한국 국적과 캐나다 국적을 함께 유지할 수 있습니다. 다만 후천적으로 외국 국적을 취득한 경우에는 원칙적으로 한국 국적을 상실합니다. 본인 상황에 맞는 안내는 아래에서 확인하실 수 있습니다."
+              : "A congenital dual national (two nationalities from birth) can keep both Korean and Canadian nationality by filing a 'nationality-choice report (pledge not to exercise foreign nationality)' within the deadline. However, if you acquired a foreign nationality later (by your own act), you generally lose Korean nationality. Check your situation below.",
+            goId: "nationality_start",
+            goLabel: lang === "ko" ? "국적 안내 보기" : "View nationality guide",
+          }),
+        },
+        {
+          id: "nat_q_childborn",
+          kw: ["태어난 아이", "태어난 아기", "출생한 아이", "캐나다에서 태어난", "아이도 한국", "여기서 낳은", "여기서 태어난", "낳은 아이", "낳은 애", "우리 애", "아기도 한국", "애 한국", "애도 한국", "애 국적", "아이 국적", "child born", "baby born", "is my child korean", "born here"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 한국은 부모의 국적을 따르는 속인주의이므로, 출생 당시 부모 중 한 명이 한국 국적이었다면 캐나다에서 태어난 아이도 한국 국적을 함께 가진 선천적 복수국적자가 됩니다(출생지와 무관). 이후 국적 유지·선택·이탈 절차는 상황에 따라 달라지니 아래에서 확인하실 수 있습니다."
+              : "Yes — Korea follows jus sanguinis (nationality by parentage), so if a parent was a Korean national at the child's birth, a child born in Canada is also a congenital dual national holding Korean nationality, regardless of birthplace. The later retention/choice/exit steps vary by situation, so check below.",
+            goId: "nationality_start",
+            goLabel: lang === "ko" ? "국적 안내 보기" : "View nationality guide",
+          }),
+        },
+        {
+          id: "nat_q_loss",
+          kw: ["국적상실", "상실 신고", "상실신고", "시민권을 취득했는데", "시민권 취득했는데", "시민권 따", "시민권을 따", "시민권 받았는데", "시민권 취득 후", "시민권 취득후", "취득 후 뭘", "취득하면 뭘", "국적 어떻게 돼", "국적은 어떻게", "loss report", "report.*loss", "lose korean", "lost korean nationality", "what happens to my korean", "after getting citizenship"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 본인의 의사로 캐나다 시민권 등 외국 국적을 취득하면 그 시점에 한국 국적을 상실하며, 이를 '국적상실신고'로 신고해야 합니다. 본인 신고인지, 사망한 가족에 대한 신고인지에 따라 절차가 달라지니 아래에서 시작해 주세요."
+              : "Yes — if you voluntarily acquire a foreign nationality (e.g. Canadian citizenship), you lose Korean nationality at that point and must file a 'nationality-loss report.' The process differs depending on whether it is for yourself or a deceased family member, so start below.",
+            goId: "nationality_citizen_start",
+            goLabel: lang === "ko" ? "국적상실 신고 시작하기" : "Start nationality-loss report",
+          }),
+        },
+        {
+          id: "nat_q_exit",
+          kw: ["이탈", "포기하려", "포기할", "포기 기한", "포기 언제", "국적 포기", "버리려", "renounce", "give up", "relinquish", "exit"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "선천적 복수국적자가 한국 국적을 포기하는 '국적이탈신고'는 성별·출생 상황·시기에 따라 절차와 가능 여부가 달라집니다. 특히 남성은 만 18세가 되는 해 3월 31일까지가 일반 이탈 기한입니다. 아래에서 상황을 확인해 주세요."
+              : "For a congenital dual national, the 'nationality-exit report' to give up Korean nationality depends on gender, birth circumstances, and timing. In particular, males have until March 31 of the year they turn 18 for an ordinary exit. Check your situation below.",
+            goId: "nationality_renounce_start",
+            goLabel: lang === "ko" ? "국적이탈 절차 확인하기" : "Check nationality-exit steps",
+          }),
+        },
+      ],
+    },
+    // ===== 가족관계등록 =====
+    {
+      svc: "family",
+      must: ["가족관계", "출생신고", "혼인신고", "이혼신고", "사망신고", "기본증명", "혼인관계증명", "출생 등록", "출생", "혼인", "이혼", "사망", "정정", "결혼", "태어난 아이", "태어난 아기", "낳", "돌아가", "가족관계등록부", "잘못된 정보", "기록 정정", "family register", "family relation", "birth", "marriage", "death", "divorce", "register"],
+      items: [
+        {
+          id: "fam_q_fix",
+          kw: ["정정", "잘못된", "수정", "오류", "틀린", "틀린 거", "고치", "고쳐", "바로잡", "correct", "fix", "wrong", "error", "amend"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 가족관계등록부의 잘못된 정보는 정정이 가능합니다. 다만 어떤 항목(외국인 가족의 사망기록 추가, 또는 국적·성별·생년월일·외국인등록번호 등)을 정정하는지에 따라 절차가 달라집니다. 아래에서 정정 종류를 선택해 주세요."
+              : "Yes — incorrect information in the family register can be corrected. The procedure depends on what you are correcting (adding a foreign family member's death record, or nationality, sex, date of birth, registration number, etc.). Choose the correction type below.",
+            goId: "family_fix",
+            goLabel: lang === "ko" ? "기록 정정 시작하기" : "Start record correction",
+          }),
+        },
+        {
+          id: "fam_q_birth",
+          kw: ["태어난 아이", "출생신고", "출생 등록", "아이를 한국", "아기를 한국", "등록해야", "한국에도 등록", "한국 등록", "낳았는데", "낳은", "출생 신고", "born", "birth report", "register.*birth", "register my child", "register my baby"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 캐나다에서 태어난 아이도 부모 중 한 명이 한국 국적이면 한국에 출생신고를 해야 합니다. 부모의 국적 조합(부모 모두 한국인 / 한쪽만 한국인 / 미혼 등)에 따라 서류가 달라지니, 아래에서 상황을 선택해 주세요."
+              : "Yes — a child born in Canada must be reported in Korea if one parent is a Korean national. The required documents depend on the parents' nationality combination (both Korean / one Korean / unmarried, etc.). Choose your situation below.",
+            goId: "family_birth",
+            goLabel: lang === "ko" ? "출생신고 시작하기" : "Start birth report",
+          }),
+        },
+        {
+          id: "fam_q_marriage",
+          kw: ["혼인신고", "결혼했는데", "결혼 신고", "혼인 신고", "결혼했어", "한국에 알려", "한국에도 알려", "결혼 알려", "marriage report", "got married", "register.*marriage", "report.*marriage"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "네, 캐나다에서 한 결혼도 한국 가족관계등록부에 반영하려면 혼인신고를 해야 합니다. 배우자가 한국인인지 외국인인지에 따라 서류가 달라지니, 아래에서 상황을 선택해 주세요."
+              : "Yes — a marriage held in Canada must be reported to reflect it in the Korean family register. Required documents depend on whether your spouse is Korean or a foreigner. Choose your situation below.",
+            goId: "family_marriage",
+            goLabel: lang === "ko" ? "혼인신고 시작하기" : "Start marriage report",
+          }),
+        },
+        {
+          id: "fam_q_death",
+          kw: ["사망", "돌아가", "돌아가셨", "별세", "사망신고", "운명", "death", "passed away", "deceased", "died"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 한국 국적자인 가족이 사망한 경우 한국에 사망신고를 해야 합니다. 아래에서 사망신고 안내(필요 서류·기한 등)를 확인하실 수 있습니다. (외국인 가족의 사망기록을 등록부에 추가하는 경우는 '기록 정정'으로 진행합니다.)"
+              : "Yes — if a family member who is a Korean national passes away, a death report must be filed in Korea. See the death-report guide below (documents, deadlines, etc.). To add a foreign family member's death record to the register, use 'record correction' instead.",
+            goId: "family_death",
+            goLabel: lang === "ko" ? "사망신고 안내 보기" : "View death-report guide",
+          }),
+        },
+        {
+          id: "fam_q_cert",
+          kw: ["증명서", "발급", "떼", "발급받", "가족관계증명", "기본증명", "혼인관계증명", "certificate", "issue", "family relation cert", "basic cert"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "가족관계증명서·기본증명서 등은 국문/영문, 그리고 발급 방법(온라인·한국 가족 통해·대리인·영사관 방문/우편)에 따라 절차가 달라집니다. 아래에서 어떤 증명서가 필요한지부터 선택해 주세요."
+              : "Family-relation, basic, and similar certificates differ by language (Korean/English) and issuance method (online, via family in Korea, proxy, Consulate visit/mail). Start by choosing which certificate you need below.",
+            goId: "family_cert",
+            goLabel: lang === "ko" ? "증명서 발급 시작하기" : "Start certificate issuance",
+          }),
+        },
+      ],
+    },
+    // ===== 해외이주 신고 =====
+    {
+      svc: "emigration",
+      must: ["해외이주", "해외 이주", "이주신고", "이주 신고", "emigration", "emigrate", "moving abroad permanently"],
+      items: [
+        {
+          id: "emig_q_vsreg",
+          kw: ["재외국민등록과", "재외국민 등록과", "등록과 다", "뭐가 다", "차이", "다른가요", "difference", "vs", "versus", "different from"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "두 가지는 다릅니다. 해외이주 신고는 주민등록을 재외국민으로 정리하는 것으로, 국민건강보험 정지와 국민연금 반환이 가능해지며 영주권자만 신고할 수 있습니다. 반면 재외국민 등록은 해외 거주 사실을 증명하기 위한 것으로(부동산·상속·금융 등), 별도 메뉴에서 진행합니다. 목적이 서로 다르니 상황에 맞는 쪽을 선택하세요."
+              : "They are different. An emigration report reorganizes your resident registration as an overseas resident — it allows suspension of National Health Insurance and refund of National Pension, and only permanent residents can file it. Registration as an overseas Korean, on the other hand, is to prove your residence abroad (real estate, inheritance, banking) and is done from a separate menu. Choose the one that fits your purpose.",
+            goId: "emigration_start",
+            goLabel: lang === "ko" ? "해외이주 신고 안내 보기" : "View emigration guide",
+          }),
+        },
+        {
+          id: "emig_q_benefit",
+          kw: ["뭐가 좋", "왜 해", "혜택", "이점", "장점", "하면 좋", "why", "benefit", "advantage", "what for"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "해외이주 신고를 하면 주민등록이 재외국민으로 정리되며, 국민건강보험이 정지되고 국민연금 반환일시금을 신청할 수 있게 됩니다. 한국에 더 이상 거주하지 않는 영주권자가 한국 내 신분 관계를 정리하는 절차입니다. 다만 신고가 완료되면 건강보험이 즉시 정지되니 이 점을 유의하세요."
+              : "Filing an emigration report reorganizes your resident registration as an overseas resident, suspends National Health Insurance, and lets you claim a lump-sum National Pension refund. It is how a permanent resident who no longer lives in Korea settles their status in Korea. Note that once filed, health insurance is suspended immediately.",
+            goId: "emigration_start",
+            goLabel: lang === "ko" ? "해외이주 신고 안내 보기" : "View emigration guide",
+          }),
+        },
+        {
+          id: "emig_q_eligible",
+          kw: ["누가", "자격", "할 수 있", "대상", "영주권", "who can", "eligible", "qualify"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "해외이주 신고는 영주권자만 할 수 있습니다(영주권 취득자가 대상). 만 18세 이상은 본인이 직접 영사관을 방문해야 하며, 만 18세 미만 미성년자는 부모가 대리 신청할 수 있습니다. 자세한 안내는 아래에서 확인하세요."
+              : "Only permanent residents can file an emigration report. Those aged 18+ must appear at the Consulate in person; for minors under 18, a parent may apply on their behalf. See the details below.",
+            goId: "emigration_who",
+            goLabel: lang === "ko" ? "해외이주 신고 시작하기" : "Start emigration report",
+          }),
+        },
+        {
+          id: "emig_q_cert",
+          kw: ["확인서", "신고확인서", "어디에 쓰", "어디에 사용", "용도", "certificate", "confirmation", "what is it used for"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "해외이주신고확인서는 국민연금 반환일시금 신청이나 금융기관 제출 등에 사용됩니다. 발급 안내는 아래에서 확인하실 수 있습니다."
+              : "The emigration report confirmation is used for things like claiming a lump-sum National Pension refund or submitting to financial institutions. See issuance details below.",
+            goId: "emigration_cert",
+            goLabel: lang === "ko" ? "확인서 발급 보기" : "View confirmation issuance",
+          }),
+        },
+        {
+          id: "emig_q_how",
+          kw: ["어떻게 하", "어떻게 신청", "어떻게", "신고하려", "신고하고 싶", "절차", "how to", "how do i", "process"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "해외이주 신고는 신청자의 연령(성인/미성년)과 서류 준비 방법에 따라 절차가 달라집니다. 아래에서 시작하시면 차례로 안내해 드립니다."
+              : "The emigration report procedure depends on the applicant's age (adult/minor) and how documents are prepared. Start below and we'll guide you step by step.",
+            goId: "emigration_who",
+            goLabel: lang === "ko" ? "해외이주 신고 시작하기" : "Start emigration report",
+          }),
+        },
+      ],
+    },
+    // ===== 재외국민 등록 =====
+    {
+      svc: "registration",
+      must: ["재외국민", "재외국민등록", "거주 등록", "해외 거주 등록", "등록부", "overseas korean registration", "resident registration abroad", "register as overseas"],
+      items: [
+        {
+          id: "reg_q_benefit",
+          kw: ["뭐가 좋", "왜 해", "혜택", "이점", "장점", "필요한 이유", "하면 좋", "why register", "benefit", "advantage", "what for"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "재외국민 등록을 하면 해외 거주 사실을 공식적으로 증명할 수 있어, 부동산·상속·금융 등 한국 내 업무를 처리할 때 유용합니다. 또한 외국에 90일 이상 거주·체류하는 대한민국 국민에게는 재외국민 등록이 법적 의무이기도 합니다(재외국민등록법 제2조). 다만 한국 국적을 상실한 시민권자는 해당하지 않습니다."
+              : "Registering as an overseas Korean lets you officially prove your residence abroad, which helps with matters in Korea such as real estate, inheritance, and banking. It is also a legal obligation for Korean nationals residing/staying abroad for 90+ days (Overseas Koreans Registration Act, Art. 2). It does not apply to those who have lost Korean nationality.",
+            goId: "registration_start",
+            goLabel: lang === "ko" ? "재외국민 등록 안내 보기" : "View registration guide",
+          }),
+        },
+        {
+          id: "reg_q_mandatory",
+          kw: ["꼭 해야", "의무", "반드시", "안 하면", "필수", "해야 하나", "must i register", "mandatory", "required", "obligation"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 외국에 90일 이상 거주하거나 체류하는 대한민국 국민에게 재외국민 등록은 법적 의무입니다(재외국민등록법 제2조). 다만 한국 국적을 상실한 시민권자는 등록 대상이 아닙니다. 신청 방법은 아래에서 확인하실 수 있습니다."
+              : "Yes — for Korean nationals residing or staying abroad for 90+ days, registration as an overseas Korean is a legal obligation (Overseas Koreans Registration Act, Art. 2). It does not apply to those who have lost Korean nationality. See how to apply below.",
+            goId: "registration_start",
+            goLabel: lang === "ko" ? "재외국민 등록 안내 보기" : "View registration guide",
+          }),
+        },
+        {
+          id: "reg_q_copy",
+          kw: ["등본", "등록부 등본", "발급받", "증명 발급", "copy", "extract", "certificate of registration"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "재외국민등록부 등본은 온라인(영사민원24), 영사관 방문, 우편 중에서 선택해 발급받으실 수 있습니다. 아래에서 방법을 선택해 주세요."
+              : "A copy of the overseas-Korean registration record can be issued online (Consular Services 24), by Consulate visit, or by mail. Choose a method below.",
+            goId: "registration_copy",
+            goLabel: lang === "ko" ? "등본 발급 시작하기" : "Start copy issuance",
+          }),
+        },
+        {
+          id: "reg_q_change",
+          kw: ["주소가 바뀌", "주소 변경", "이사", "변경 신고", "이동 신고", "바뀌었는데", "address change", "moved", "change report"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "주소 등 등록 정보가 바뀌었다면 재외국민 등록 변경·이동 신고를 하시면 됩니다. 아래에서 안내를 확인해 주세요."
+              : "If your address or other registered information has changed, file an overseas-Korean registration change/move report. See the guide below.",
+            goId: "registration_change",
+            goLabel: lang === "ko" ? "변경·이동 신고 보기" : "View change report",
+          }),
+        },
+        {
+          id: "reg_q_how",
+          kw: ["어떻게 하", "어떻게 신청", "신규 등록", "처음 등록", "등록하려", "등록하고 싶", "how to register", "how do i register", "new registration"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "재외국민 신규 등록은 온라인, 영사관 방문, 우편 중에서 선택해 신청하실 수 있습니다. 아래에서 신청 방법을 선택해 주세요."
+              : "New overseas-Korean registration can be applied for online, by Consulate visit, or by mail. Choose a method below.",
+            goId: "registration_new",
+            goLabel: lang === "ko" ? "신규 등록 시작하기" : "Start new registration",
+          }),
+        },
+      ],
+    },
+    // ===== 공통: 예약·관할·기타 =====
+    {
+      svc: "booking",
+      must: ["예약", "방문", "관할", "관할지역", "관할 지역", "신청서", "미리 작성", "예약 없이", "예약없이", "appointment", "booking", "book a", "reserve", "walk-in", "walk in", "jurisdiction", "fill out", "in advance"],
+      items: [
+        {
+          id: "common_q_jurisdiction",
+          kw: ["관할", "관할지역", "관할 지역", "어느 지역", "담당 지역", "jurisdiction", "which region", "areas covered"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "주토론토 총영사관의 관할 지역은 온타리오주(오타와 제외)와 마니토바주입니다. 오타와 지역은 주캐나다 대사관 영사부 관할입니다."
+              : "The Consulate General in Toronto covers Ontario (except Ottawa) and Manitoba. The Ottawa area falls under the Embassy of Korea's consular section.",
+            goId: "home",
+            goLabel: lang === "ko" ? "홈으로" : "Home",
+          }),
+        },
+        {
+          id: "common_q_nobooking",
+          kw: ["예약 없이", "예약없이", "예약 안 하고", "예약 안하고", "예약 안 해도", "예약 안해도", "예약 없어도", "예약 안 하면", "without a booking", "without an appointment", "no appointment", "without booking"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "영사관 방문 신청은 예약이 필요하지만, 일부 업무는 영사관 방문 없이 처리할 수 있습니다. 공동인증서가 있으면 가족관계·기본증명서, 출입국사실증명서, 주민등록 등본·초본, 납세증명서 등을 온라인(정부24·홈택스 등)에서 직접 발급할 수 있고, 일부 신고·증명서는 우편으로도 접수됩니다. 필요하신 업무를 입력해 주시면 더 안내해 드리겠습니다."
+              : "Visiting the Consulate requires a booking, but some tasks can be done without visiting. With a joint certificate you can issue family-relation/basic certificates, immigration records, resident-registration copies, tax certificates, etc. online (Government24, Hometax), and some reports/certificates are accepted by mail. Tell me the specific task and I can guide you further.",
+            goId: "home",
+            goLabel: lang === "ko" ? "홈으로" : "Home",
+          }),
+        },
+        {
+          id: "common_q_prefill",
+          kw: ["신청서", "미리 작성", "미리 써", "양식 작성", "fill out", "fill in", "form in advance", "prepare the form"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "신청서는 미리 작성해 오셔도 됩니다(영사관 홈페이지에서 양식을 내려받거나 타이핑 후 출력 가능). 다만 공증·인증처럼 서명이 필요한 서류는 서명란을 비워 두고 오셔야 하며, 서명은 반드시 영사 앞에서 하셔야 합니다. 사전 서명이나 대리 서명은 인정되지 않습니다."
+              : "You may fill out application forms in advance (download from the Consulate website or type and print). However, for documents that require a signature (e.g. notarization/authentication), leave the signature line blank — you must sign before the consul. Pre-signing or signing by someone else is not accepted.",
+            goId: "home",
+            goLabel: lang === "ko" ? "홈으로" : "Home",
+          }),
+        },
+        {
+          id: "common_q_booking",
+          kw: ["예약", "방문", "appointment", "booking", "book", "reserve", "walk", "필요한가", "해야 하나", "do i need"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 영사관 방문 전 온라인 예약이 필요합니다. torbooking.com에서 예약 후 방문하셔야 하며, 예약 없이 방문하면 접수가 불가합니다. 참고로 1인 1예약은 방문자 수가 아니라 처리할 업무 건수 기준입니다(예: 본인 + 자녀 2명 여권 신청 = 3건 예약)."
+              : "Yes, you need an online appointment before visiting the Consulate. Book at torbooking.com — walk-ins without a booking cannot be accepted. Note that one booking covers one task, not one person (e.g. you + 2 children's passports = 3 bookings).",
+            goId: "home",
+            goLabel: lang === "ko" ? "홈으로" : "Home",
           }),
         },
       ],
@@ -10888,6 +11503,34 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     return null;
   };
 
+  // FAQ 매칭: 자주 묻는 질문(faq_start.items)에서 키워드가 겹치면 그 답을 즉답으로
+  const FAQ_KW: any = {
+    0: ["예약", "appointment", "booking", "book"],
+    1: ["사진", "규격", "photo", "picture", "size"],
+    2: ["수수료", "현금", "카드", "결제", "지불", "fee", "cash", "card", "payment", "pay"],
+    3: ["우편", "메일로", "by mail", "mail"],
+    4: ["운영", "시간", "영업", "몇 시", "언제 여", "언제 열", "hours", "open", "time"],
+    5: ["주차", "parking", "park"],
+    6: ["처리 결과", "결과 확인", "처리 현황", "민원 현황", "진행 상황", "진행 현황", "어디까지 됐", "현황을 확인", "status", "track my"],
+    7: ["대리", "대신 방문", "대신 신청", "proxy", "on my behalf", "someone else"],
+    8: ["전화번호", "연락처", "전화 번호", "phone number", "contact number"],
+    9: ["영사관 주소", "영사관 위치", "어디에 있", "어디 있", "찾아가", "address", "where is the consulate", "location of"],
+  };
+  const matchFaq = (q: string) => {
+    const items = (TREE as any).faq_start?.items ?? [];
+    for (let i = 0; i < items.length; i++) {
+      const kws = FAQ_KW[i] || [];
+      if (kws.some((k: string) => q.includes(k.toLowerCase()))) {
+        const it = items[i];
+        return {
+          kind: "answer",
+          text: lang === "ko" ? it.a : (it.a_en ?? it.a),
+        };
+      }
+    }
+    return null;
+  };
+
   const handleChatSend = (raw?: string) => {
     const text = (raw ?? chatInput).trim();
     if (!text) return;
@@ -10897,6 +11540,12 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     const sc = matchScenario(q);
     if (sc) {
       setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...sc }]);
+      return;
+    }
+    // 1.5) FAQ 매칭 (일반 질문: 운영시간·주차·전화번호 등)
+    const faq = matchFaq(q);
+    if (faq) {
+      setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...faq }]);
       return;
     }
     // 2) 검색 폴백

@@ -810,7 +810,7 @@ const TREE = {
       { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_n_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
+      { id: "pp_n_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_n_adult_lost_status: {
@@ -823,20 +823,17 @@ const TREE = {
       { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_n_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
+      { id: "pp_n_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_n_adult_new_status: {
     type: "question", service: "passport",
     breadcrumb: ["홈", "여권", "일반", "성인", "신규"],
     question: "체류 신분을 선택하세요",
-    sub: "신규 발급 — 신분에 따라 증명서류가 달라집니다.",
+    sub: "성인이 한국 여권을 생애 최초로 신규 발급받는 경우는, 한국 국적을 보유한 다음 두 경우에 해당합니다.",
     options: [
-      { id: "pp_n_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
-      { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
-      { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
-      { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_n_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
+      { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유 — 국적이탈 신고를 하지 않은 경우" },
+      { id: "pp_n_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
 
@@ -892,7 +889,7 @@ const TREE = {
       { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_u_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
+      { id: "pp_u_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_u_adult_lost: {
@@ -905,20 +902,17 @@ const TREE = {
       { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_u_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
+      { id: "pp_u_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_u_adult_new: {
     type: "question", service: "passport",
     breadcrumb: ["홈", "여권", "긴급", "성인", "신규"],
     question: "체류 신분을 선택하세요",
-    sub: "긴급 비전자 단수여권 (신규) — 신분에 따라 증명서류가 달라집니다.",
+    sub: "성인이 한국 여권을 생애 최초로 신규 발급받는 경우는, 한국 국적을 보유한 다음 두 경우에 해당합니다.",
     options: [
-      { id: "pp_u_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
-      { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
-      { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
-      { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_u_adult_acq", icon: "⚠️", title: "후천적 시민권자", desc: "원래 한국 국적 → 이후 캐나다 시민권 취득" },
+      { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유 — 국적이탈 신고를 하지 않은 경우" },
+      { id: "pp_u_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
 
@@ -1448,6 +1442,7 @@ const TREE = {
       "⚠️ 캐나다 시민권을 취득한 경우 한국 국적이 자동 상실되었을 수 있습니다. 국적이 상실된 상태에서 한국 여권을 신청·사용하면 출입국관리법 위반이 될 수 있으니, 신청 전 본인의 국적 상태(기본증명서 등)를 반드시 확인하세요.",
       "⚠️ 불확실하면 여권 신청 전 국적 담당과 먼저 상담하시기 바랍니다. (영사관 416-920-3809)",
       "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
+      "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
       "국적회복이 완료되어 기본증명서에 기재된 경우 한국 여권 신청이 가능합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
@@ -1865,7 +1860,7 @@ const TREE = {
     service: "family",
     breadcrumb: ["홈", "가족관계등록", "신고", "출생신고"],
     question: "부모의 국적 상황은?",
-    sub: "부모 국적 조합에 따라 필요 서류가 달라집니다.",
+    sub: "출생 후 1개월 이내 신고가 원칙입니다(기한이 지나도 신고는 가능하며, 지연 사유 설명이 필요할 수 있습니다). 부모 국적 조합에 따라 필요 서류가 달라집니다.",
     options: [
       { id: "family_birth_both_korean", icon: "🇰🇷", title: "부모 모두 한국 국적", desc: "혼인신고 완료 후 신청 가능" },
       { id: "family_birth_father_korean", icon: "👨", title: "부(아버지)만 한국인 + 모(어머니)는 외국인", desc: "Long-form 출생증명서 필수 — 혼외자는 인지신고 별도" },
@@ -2297,7 +2292,6 @@ const TREE = {
       { id: "nationality_citizen_start", icon: "🍁", title: "나 또는 가족이 외국 국적(시민권)을 취득했어요", desc: "국적이탈·상실·보유·선택 — 내 상황에 맞게 안내" },
       { id: "nationality_acquire", icon: "👶", title: "한국인 아버지와 외국인 어머니 사이의 혼외자예요", desc: "인지에 의한 국적취득 (미성년) · CAD $24.30" },
       { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적을 되찾고 싶어요 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
-      { id: "nationality_renounce_exception", icon: "⚠️", title: "이탈 신고 기간을 놓친 병역미필 남성이에요", desc: "예외적 국적이탈 허가 (국적법 제14조의2) · CAD $121.50" },
     ],
   },
 
@@ -2316,7 +2310,7 @@ const TREE = {
         rows: [
           { label: "대상자", left: "선천적 복수국적자 (태어날 때부터 두 국적)", right: "후천적 취득자 (나중에 시민권 취득)" },
           { label: "차이점", left: "내가 능동적으로 한국 국적을 포기하는 신고", right: "이미 자동 상실된 것을 사후에 신고" },
-          { label: "신고 기한", left: "남: 출생상황에 따라 다름 (18세 3월 말 또는 병역해소 후) / 여: 20세 전 복수국적→22세 전, 20세 후→2년 내", right: "기한 없음 (취득 후 지체 없이 사후신고)" },
+          { label: "신고 기한", left: "남: 출생상황에 따라 다름 (18세 3월 말 또는 병역해소 후) / 여: 제한 없음 (언제든 신고 가능)", right: "기한 없음 (취득 후 지체 없이 사후신고)" },
           { label: "결과물", left: "한국 국적 없음 (외국 국적만 유지)", right: "한국 국적 없음 (잃은 사실을 기록)" },
         ],
       },
@@ -2360,7 +2354,7 @@ const TREE = {
     sub: "선천적 복수국적자는 한국 국적을 포기하거나, 유지할 수 있습니다.",
     options: [
       { id: "nationality_renounce_start", icon: "🚫", title: "한국 국적을 포기할게요", desc: "국적이탈신고 · CAD $24.30" },
-      { id: "nationality_choice", icon: "✍️", title: "한국 국적을 유지할게요", desc: "국적선택신고 — 외국국적불행사 서약 · 무료" },
+      { id: "nationality_choice_start", icon: "✍️", title: "한국 국적을 유지할게요", desc: "국적선택신고 — 성별·시기에 따라 안내" },
     ],
   },
 
@@ -2396,8 +2390,8 @@ const TREE = {
     sub: "남성은 만 18세가 되는 해 3월 31일까지만 일반 국적이탈신고가 가능합니다.",
     options: [
       { id: "nationality_renounce_male_intime", icon: "✅", title: "만 18세 되는 해 3월 31일 이전 (기간 내)", desc: "정상 국적이탈신고 가능" },
-      { id: "nationality_renounce_exception", icon: "⚠️", title: "기간을 넘겼고 병역 미해소", desc: "예외적 국적이탈 허가 필요 · CAD $121.50" },
       { id: "nationality_renounce_male_done", icon: "🎖️", title: "병역의무 해소 완료 (전역·면제 등)", desc: "병역 해소 후 국적이탈신고 가능" },
+      { id: "nationality_renounce_exception", icon: "⚠️", title: "기간을 넘겼고 병역 미해소", desc: "예외적 국적이탈 허가 필요 · CAD $121.50" },
     ],
   },
 
@@ -2418,10 +2412,22 @@ const TREE = {
     service: "nationality",
     breadcrumb: ["홈", "국적", "부모와 함께 취득"],
     question: "시민권 취득일(선서일)로부터 6개월이 지났나요?",
-    sub: "부모와 함께 시민권을 취득한 미성년 자녀는 6개월 이내에만 국적보유신고가 가능합니다.",
+    sub: "6개월 이내라면 한국 국적을 유지(보유신고)할지, 유지하지 않을지(상실) 선택할 수 있습니다. 6개월이 지나면 소급하여 국적이 상실됩니다.",
     options: [
-      { id: "nationality_retain", icon: "✅", title: "6개월 이내예요", desc: "국적보유신고 — 한국 국적 유지 · CAD $24.30" },
+      { id: "nationality_keep_choice", icon: "✅", title: "6개월 이내예요", desc: "한국 국적 유지 또는 상실 중 선택" },
       { id: "nationality_loss", icon: "⚠️", title: "6개월이 지났어요", desc: "기한 초과 → 소급하여 국적 상실 → 국적상실신고로 안내" },
+    ],
+  },
+
+  nationality_keep_choice: {
+    type: "question",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "부모와 함께 취득", "국적 선택"],
+    question: "한국 국적을 어떻게 하시겠어요?",
+    sub: "6개월 이내에는 한국 국적을 유지(보유신고)할 수도, 유지하지 않을 수도 있습니다.",
+    options: [
+      { id: "nationality_retain", icon: "🇰🇷", title: "한국 국적을 유지하겠습니다", desc: "국적보유신고 — 한국 국적 유지 · CAD $24.30" },
+      { id: "nationality_loss", icon: "📤", title: "한국 국적을 유지하지 않겠습니다", desc: "국적상실신고 — 한국 국적 상실 · 무료" },
     ],
   },
 
@@ -2538,7 +2544,7 @@ const TREE = {
     service: "nationality",
     breadcrumb: ["홈", "국적", "국적이탈신고", "여성"],
     title: "국적이탈신고 — 여성",
-    sub: "선천적 복수국적자 · 복수국적자가 된 시기에 따라 신고 기한이 다릅니다",
+    sub: "선천적 복수국적 여성 · 이탈 시기에 제한이 없습니다",
     docs: [
       "국적이탈신고서 (양식) — 카카오톡 연결 전화번호 기재",
       "  ▸ 15세 이상: 본인 서명 / 15세 미만: 법정대리인 서명",
@@ -2560,7 +2566,7 @@ const TREE = {
     costs: [{ label: "수수료", value: "CAD $24.30 (현금, Debit, 신용카드)" }],
     time: "약 18~24개월",
     notices: [
-      "⚠️ 신고기한 (2026.4.1 기준): 만 20세가 되기 전 복수국적자가 된 경우 → 만 22세가 되기 전. 만 20세가 된 후 복수국적자가 된 경우 → 그때부터 2년 이내.",
+      "⚠️ 신고 시기에 제한이 없습니다. 선천적 복수국적 여성은 남성과 달리 국적이탈 신고 기한이 없어, 언제든지 신고할 수 있습니다.",
       "⚠️ 15세 이상은 반드시 본인 방문 — 우편 접수 불가.",
       "외국에 주소(생활 근거지)가 있어야 신고할 수 있습니다.",
       "부 또는 모가 시민권 취득 후 국적상실신고를 안 한 경우 동시 접수.",
@@ -2638,6 +2644,172 @@ const TREE = {
       "⚠️ '원정출산' 자녀는 서약 불가 — 단, 출생 전후 통산 2년 이상 외국 체류, 영주권·국적 취득, 정규대학 6개월 이상 수학(어학연수 1년+), 파견 근무 등은 예외.",
       "⚠️ 15세 이상은 반드시 본인 방문 — 우편 접수 불가.",
       "부 또는 모가 시민권 취득 후 국적상실신고를 안 한 경우 동시 접수.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (국적 → 국적선택신고) →",
+  },
+
+  nationality_choice_start: {
+    type: "question",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고"],
+    question: "신청자의 성별은?",
+    sub: "선천적 복수국적자의 국적선택신고는 성별과 시기에 따라 기한이 달라집니다.",
+    options: [
+      { id: "nationality_choice_male_birth", icon: "👨", title: "남성", desc: "출생 상황·병역에 따라 기한이 달라집니다" },
+      { id: "nationality_choice_female_birth", icon: "👩", title: "여성", desc: "만 22세가 되는 해 생일 전까지 신고 가능" },
+    ],
+  },
+
+  nationality_choice_male_birth: {
+    type: "question",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "남성"],
+    question: "출생 당시 부모님의 체류 상황은?",
+    sub: "이른바 '원정출산'에 해당하면 외국국적불행사 서약(국적선택)이 제한됩니다.",
+    options: [
+      { id: "nationality_choice_male_a", icon: "🏠", title: "영주 목적으로 체류 중 출생", desc: "부/모가 영주권·시민권을 보유·신청한 상태에서 출생 / 또는 부·모가 외국에 오래 거주한 경우" },
+      { id: "nationality_choice_excluded", icon: "✈️", title: "영주 목적 없이 체류 중 출생 (원정출산 등)", desc: "원칙적으로 외국국적불행사 서약 불가 — 예외 조건 확인 필요" },
+    ],
+  },
+
+  nationality_choice_female_birth: {
+    type: "question",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "여성"],
+    question: "출생 당시 부모님의 체류 상황은?",
+    sub: "이른바 '원정출산'에 해당하면 외국국적불행사 서약(국적선택)이 제한됩니다.",
+    options: [
+      { id: "nationality_choice_female", icon: "🏠", title: "영주 목적으로 체류 중 출생", desc: "부/모가 영주권·시민권을 보유·신청한 상태에서 출생 / 또는 부·모가 외국에 오래 거주한 경우" },
+      { id: "nationality_choice_excluded", icon: "✈️", title: "영주 목적 없이 체류 중 출생 (원정출산 등)", desc: "원칙적으로 외국국적불행사 서약 불가 — 예외 조건 확인 필요" },
+    ],
+  },
+
+  nationality_choice_male_a: {
+    type: "question",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "남성", "영주 목적 출생"],
+    question: "현재 시기·병역 상황은?",
+    sub: "남성은 만 22세가 되는 해 생일 전까지, 또는 병역의무를 마친 경우 그로부터 2년 이내에 국적선택신고가 가능합니다.",
+    options: [
+      { id: "nationality_choice_male_intime", icon: "✅", title: "만 22세 되는 해 생일 전 (기간 내)", desc: "정상 국적선택신고(외국국적불행사 서약) 가능" },
+      { id: "nationality_choice_male_served", icon: "🎖️", title: "병역의무 해소 완료 (전역·면제 등)", desc: "병역 해소일로부터 2년 이내 국적선택신고 가능" },
+      { id: "nationality_renounce_exception", icon: "⚠️", title: "기간을 넘겼고 병역 미해소", desc: "국적선택 불가 → 예외적 국적이탈 허가로 안내" },
+    ],
+  },
+
+  nationality_choice_male_intime: {
+    type: "result",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "남성", "기간 내"],
+    title: "국적선택신고 — 남성 (만 22세 되는 해 생일 전)",
+    sub: "선천적 복수국적자가 한국 국적을 유지하는 신고(외국국적불행사 서약) · 무료",
+    docs: [
+      "국적선택신고서 (양식) — 카카오톡 연결 전화번호 기재",
+      "  ▸ 15세 이상: 본인 서명 / 15세 미만: 법정대리인 서명",
+      "외국국적불행사서약서 (양식)",
+      "증명사진 2매 (사진관 촬영 필수)",
+      "캐나다 출생증명서 원본 + 사본 (해외 출생자) / 한국 출생자는 시민권증서로 대체",
+      "출생증명서 한글 번역문 (공증 불필요)",
+      "당사자 캐나다 여권 원본 + 사본 (유효기간 최소 1년 이상)",
+      "부·모 여권 사본 + 체류자격 증명서류 사본 각 1부",
+      "당사자 기본증명서 + 가족관계증명서 (상세, 3개월 이내)",
+      "부·모 기본증명서 각 1부 / 부의 혼인관계증명서 (해당 시)",
+      "동일인증명서 (이름 변경 시 — 4촌 이내 2명 서명)",
+      "XpressPost 등기봉투 (통지서 수령용)",
+      "통보 및 송달 동의서 (양식)",
+    ],
+    costs: [{ label: "수수료", value: "무료" }],
+    time: "약 6개월",
+    notices: [
+      "외국국적불행사 서약 = 한국 국적을 선택하되 외국 국적은 포기하지 않고, 한국에서는 외국 국적을 행사하지 않겠다는 서약.",
+      "신고 마감일 — 남자: 만 22세가 되는 해 생일 전까지(이후에는 국적이탈신고만 가능).",
+      "⚠️ 15세 이상은 반드시 본인 방문 — 우편 접수 불가.",
+      "부 또는 모가 시민권 취득 후 국적상실신고를 안 한 경우 동시 접수.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (국적 → 국적선택신고) →",
+  },
+
+  nationality_choice_male_served: {
+    type: "result",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "남성", "병역 해소 후"],
+    title: "국적선택신고 — 남성 (병역 해소 후 2년 이내)",
+    sub: "병역의무를 마친 남성이 그로부터 2년 이내에 한국 국적을 유지하는 신고 · 무료",
+    docs: [
+      "국적선택신고서 (양식) — 카카오톡 연결 전화번호 기재",
+      "외국국적불행사서약서 (양식)",
+      "증명사진 2매 (사진관 촬영 필수)",
+      "병역 해소 증빙 (전역증·병적증명서·면제 확인서 등)",
+      "캐나다 출생증명서 원본 + 사본 (해외 출생자) / 한국 출생자는 시민권증서로 대체",
+      "출생증명서 한글 번역문 (공증 불필요)",
+      "당사자 캐나다 여권 원본 + 사본 (유효기간 최소 1년 이상)",
+      "부·모 여권 사본 + 체류자격 증명서류 사본 각 1부",
+      "당사자 기본증명서 + 가족관계증명서 (상세, 3개월 이내)",
+      "동일인증명서 (이름 변경 시 — 4촌 이내 2명 서명)",
+      "XpressPost 등기봉투 (통지서 수령용)",
+      "통보 및 송달 동의서 (양식)",
+    ],
+    costs: [{ label: "수수료", value: "무료" }],
+    time: "약 6개월",
+    notices: [
+      "외국국적불행사 서약 = 한국 국적을 선택하되 외국 국적은 포기하지 않고, 한국에서는 외국 국적을 행사하지 않겠다는 서약.",
+      "신고 마감일 — 병역의무를 마친 남성은 그 해소일로부터 2년 이내.",
+      "⚠️ 15세 이상은 반드시 본인 방문 — 우편 접수 불가.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (국적 → 국적선택신고) →",
+  },
+
+  nationality_choice_female: {
+    type: "result",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "여성"],
+    title: "국적선택신고 — 여성 (만 22세 되는 해 생일 전)",
+    sub: "선천적 복수국적 여성이 한국 국적을 유지하는 신고(외국국적불행사 서약) · 무료",
+    docs: [
+      "국적선택신고서 (양식) — 카카오톡 연결 전화번호 기재",
+      "  ▸ 15세 이상: 본인 서명 / 15세 미만: 법정대리인 서명",
+      "외국국적불행사서약서 (양식)",
+      "증명사진 2매 (사진관 촬영 필수)",
+      "캐나다 출생증명서 원본 + 사본 (해외 출생자) / 한국 출생자는 시민권증서로 대체",
+      "출생증명서 한글 번역문 (공증 불필요)",
+      "당사자 캐나다 여권 원본 + 사본 (유효기간 최소 1년 이상)",
+      "부·모 여권 사본 + 체류자격 증명서류 사본 각 1부",
+      "당사자 기본증명서 + 가족관계증명서 (상세, 3개월 이내)",
+      "부·모 기본증명서 각 1부 / 부의 혼인관계증명서 (해당 시)",
+      "동일인증명서 (이름 변경 시 — 4촌 이내 2명 서명)",
+      "XpressPost 등기봉투 (통지서 수령용)",
+      "통보 및 송달 동의서 (양식)",
+    ],
+    costs: [{ label: "수수료", value: "무료" }],
+    time: "약 6개월",
+    notices: [
+      "외국국적불행사 서약 = 한국 국적을 선택하되 외국 국적은 포기하지 않고, 한국에서는 외국 국적을 행사하지 않겠다는 서약.",
+      "신고 마감일 — 여자: 만 22세가 되는 해 생일 전까지(이후에는 국적이탈신고만 가능).",
+      "⚠️ 15세 이상은 반드시 본인 방문 — 우편 접수 불가.",
+      "부 또는 모가 시민권 취득 후 국적상실신고를 안 한 경우 동시 접수.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (국적 → 국적선택신고) →",
+  },
+
+  nationality_choice_excluded: {
+    type: "result",
+    service: "nationality",
+    breadcrumb: ["홈", "국적", "국적선택신고", "서약 제한"],
+    title: "외국국적불행사 서약 제한 — 영주 목적 없이 체류 중 출생 (원정출산 등)",
+    sub: "원칙적으로 외국국적불행사 서약(국적선택)이 불가하나, 예외 조건에 해당하면 가능합니다.",
+    docs: [],
+    notices: [
+      "⚠️ 출생 당시 부모가 영주 목적 없이 단기 체류 중이었던 경우(이른바 '원정출산'), 원칙적으로 외국국적불행사 서약을 할 수 없습니다 — 한국 국적을 유지하려면 한국 국적을 선택하면서 외국 국적은 포기해야 합니다.",
+      "다만 다음 중 하나에 해당하면 예외적으로 서약이 가능합니다:",
+      "  ▸ 출생 전후를 합산해 외국에서 2년 이상 계속 거주한 경우",
+      "  ▸ 외국 영주권 또는 국적을 취득한 경우",
+      "  ▸ 외국 정규 대학에서 6개월 이상 수학한 경우(어학연수는 1년 이상)",
+      "  ▸ 외국에 파견 근무하는 부모를 따라 체류한 경우 등",
+      "본인이 예외에 해당하는지 정확한 판단이 필요하므로, 영사관 또는 국적 담당으로 문의하시기 바랍니다.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (국적 → 국적선택신고) →",
@@ -3060,7 +3232,7 @@ const TREE = {
       { id: "vcert_overseas_reg", icon: "🌏", title: "재외국민등록부 등본", desc: "해외 거주사실 증명 — 부동산·상속·금융 등" },
       { id: "vcert_resident", icon: "🏠", title: "주민등록 등본·초본", desc: "주민등록 현황 확인 — 방문 또는 온라인" },
       { id: "vcert_tax", icon: "💰", title: "납세·소득 증명서", desc: "납세증명(국세·지방세·관세)·소득금액증명 — 해외이주신고 등에 필요" },
-      { id: "vcert_passport_info", icon: "📋", title: "여권정보증명서", desc: "2020.12.20 이후 발급 여권 소지자 — 주민번호 대체 서류" },
+      { id: "vcert_passport_info", icon: "📋", title: "여권 사실증명서", desc: "여권정보·발급기록·실효확인 등 — 주민번호 없는 여권 보완 서류" },
     ],
   },
 
@@ -3428,21 +3600,25 @@ const TREE = {
   vcert_passport_info: {
     type: "result",
     service: "various_cert",
-    breadcrumb: ["홈", "각종 증명서 발급", "여권정보증명서"],
-    title: "여권정보증명서",
+    breadcrumb: ["홈", "각종 증명서 발급", "여권 사실증명서"],
+    title: "여권 사실증명서",
+    sub: "여권정보·발급기록·실효확인·발급신청서류·사본 등 여권 관련 사실을 증명",
     docs: [
-      "여권정보증명서 발급 신청서 (소정 양식)",
-      "본인 유효한 한국 여권 원본 (2020.12.20 이후 발급된 여권)",
-      "캐나다 체류자격 증빙서류 원본",
+      "여권 사실증명서 발급 신청서 (소정 양식)",
+      "발급대상자의 유효한 여권 원본 (여권 원본을 제출하지 못하면 발급 불가)",
       "  ▸ 공동인증서 보유 시: 정부24(gov.kr)에서 온라인 즉시 발급 가능",
+      "  ▸ 영사관 방문 시: 예약 후 방문하여 발급",
+      "[만 19세 미만 자녀를 부 또는 모가 신청 시] 방문하는 부/모의 여권 원본+사본, 가족관계증명서(상세·주민번호 전부공개) 또는 신청서 내 행정정보공동이용 동의",
+      "[대리인 신청 시] 대리인의 여권 원본+사본, 여권 사실증명 위임장 원본, 위임자의 인감증명서(또는 본인서명사실확인서·전자본인서명확인서 원본)",
     ],
-    costs: [{ label: "수수료", value: "CAD $1.00 (현금)" }],
+    costs: [{ label: "수수료", value: "CAD $1.35 (현금·Debit·신용카드)" }],
     time: "방문 당일 즉시 / 온라인 즉시",
     notices: [
-      "2020년 12월 20일 이후 발급된 여권은 주민등록번호가 삭제되어 있습니다.",
-      "여권정보증명서는 주민등록번호가 표기된 여권 정보를 증명하는 서류로, 각종 민원·공증 시 주민번호 확인 용도로 사용됩니다.",
-      "공동인증서가 있으면 정부24에서 무료 온라인 발급 가능 (방문 시 CAD $1.00).",
-      "우편 접수 가능.",
+      "여권 사실증명은 다음 6종입니다: ▸여권정보증명서 ▸여권발급기록증명서(국문) ▸여권발급기록증명서(영문) ▸여권실효확인서(국문) ▸여권실효확인서(영문) ▸여권발급신청서류 증명서. 이와 별도로 여권사본증명서(여권 사본의 진위 인증)도 발급 가능합니다.",
+      "2020년 12월 21일 이후 발급된 여권은 개인정보 보호를 위해 주민등록번호 뒷자리가 표기되지 않습니다.",
+      "각종 민원업무에 주민등록번호 뒷자리 확인이 필요한 경우, 뒷자리가 없는 여권 소지자는 여권과 함께 여권정보증명서를 제출해야 업무가 가능합니다.",
+      "공동인증서가 있으면 정부24에서 온라인으로 간편 발급 가능하며, 영사관 여권과를 예약 후 방문하셔도 발급됩니다.",
+      "여권사본증명서: 외국 정부기관 등에 여권 사본을 제출할 때 그 사본의 진위를 정부가 인증하는 서류입니다.",
     ],
     booking: "https://www.torbooking.com/book",
     onlineLink: "https://www.gov.kr",
@@ -4502,6 +4678,8 @@ const TREE = {
     costs: [{ label: "해당없음", value: "신청 불가" }],
     time: "신청 불가",
     notices: [
+      "📌 거소증(국내거소신고증)은 영사관에서 발급하지 않습니다. F-4 비자 등으로 한국에 입국한 후, 거주지를 관할하는 출입국·외국인청(구 출입국관리사무소)에 국내거소신고를 하여 발급받습니다(입국 후 90일 이내 신고).",
+      "신청처가 다릅니다 — F-4 비자는 해외 공관(토론토 총영사관)에서 신청하고, 거소증은 한국 내 출입국·외국인청에서 신청합니다. (F-4 = 체류자격 / 거소증 = 한국 내 신분증)",
       "국적 회복 또는 거소신고 관련 문의: 영사관 전화 상담 (416-920-3809).",
       "국적 회복 절차는 국적 메뉴를 참조하세요.",
     ],
@@ -5047,7 +5225,7 @@ const TREE = {
     service: "military",
     breadcrumb: ["홈", "병역"],
     question: "어떤 병역 업무가 필요하신가요?",
-    sub: "병역의무는 대한민국 국적 남성에게 해당됩니다.",
+    sub: "병역의무는 대한민국 국적 남성에게 해당됩니다. 선천적 복수국적 남성의 국적이탈(병역 면탈 목적이 아닌 국적 포기)은 '국적' 메뉴에서 확인하세요 — 만 18세가 되는 해 3월 31일까지만 신청할 수 있는 기한이 있습니다.",
     options: [
       { id: "military_permit_start", icon: "✈️", title: "국외여행허가 신청·연장", desc: "캐나다 체류 중 병역 연기 허가 신청" },
       { id: "military_cert_start", icon: "📄", title: "병적증명서 발급", desc: "비자·취업·국적이탈 등에 필요한 병역사항 증명서" },
@@ -5780,17 +5958,39 @@ const extractCodes = (s: string) => {
 //  - 검색 대상 text 에는 (해당 언어 번역) + (언어 무관 코드) 를 함께 포함
 const buildSearchIndex = (lng: "ko" | "en") =>
   Object.entries(TREE as any)
-    .filter(([, node]: any) => node.type === "result")
+    .filter(([, node]: any) => node.type === "result" || node.type === "question")
     .map(([id, node]: [any, any]) => {
       const tk: any = (KO_TRANSLATIONS as any)[id];
       const te: any = (EN_TRANSLATIONS as any)[id];
       const tr: any = lng === "ko" ? tk : te;
-      // 표시용: 번역 우선, 없으면 원문
+      if (node.type === "question") {
+        // question 노드: question/sub/옵션 제목/breadcrumb를 검색 대상에 포함
+        const qText = (tr && tr.question) ?? node.question ?? "";
+        const subText = (tr && tr.sub) ?? node.sub ?? "";
+        const breadcrumb = (tr && tr.breadcrumb) ?? node.breadcrumb ?? [];
+        // 표시 제목: question 텍스트(없으면 breadcrumb 마지막)
+        const title = qText || (Array.isArray(breadcrumb) && breadcrumb.length ? breadcrumb[breadcrumb.length - 1] : id);
+        // 옵션 제목들 (번역 우선)
+        const trOpts = (tr && tr.options) ?? {};
+        const optTitles: string[] = [];
+        if (Array.isArray(node.options)) {
+          for (const o of node.options) {
+            const ot = (trOpts && trOpts[o.id] && trOpts[o.id].title) ?? o.title ?? "";
+            const od = (trOpts && trOpts[o.id] && trOpts[o.id].desc) ?? o.desc ?? "";
+            if (ot) optTitles.push(ot);
+            if (od) optTitles.push(od);
+          }
+        }
+        const codeBag = extractCodes([node.question ?? "", ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : [])].join(" "));
+        const text = [title, subText, ...(Array.isArray(breadcrumb) ? breadcrumb : []), ...optTitles, codeBag]
+          .join(" ").toLowerCase();
+        return { id, node, title, breadcrumb, docs: [], notices: [], text };
+      }
+      // result 노드 (기존 로직)
       const title = (tr && tr.title) ?? node.title ?? "";
       const breadcrumb = (tr && tr.breadcrumb) ?? node.breadcrumb ?? [];
       const docs = (tr && tr.docs) ?? node.docs ?? [];
       const notices = (tr && tr.notices) ?? node.notices ?? [];
-      // 검색 대상 텍스트: 해당 언어 번역 + 코드(원문에서 추출, 언어 무관)
       const codeBag = extractCodes([node.title ?? "", ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : [])].join(" "));
       const text = [title, ...(Array.isArray(breadcrumb) ? breadcrumb : []), ...(Array.isArray(docs) ? docs : []), ...(Array.isArray(notices) ? notices : []), codeBag]
         .join(" ").toLowerCase();
@@ -7083,7 +7283,7 @@ const EN_TRANSLATIONS: any = {
       pp_n_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
       pp_n_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
       pp_n_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
-      pp_n_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+      pp_n_adult_acq: { title: "Acquired citizenship (restored Korean nationality)", desc: "Originally Korean → acquired Canadian citizenship → later restored Korean nationality" },
     },
   },
   pp_n_adult_lost_status: {
@@ -7095,19 +7295,16 @@ const EN_TRANSLATIONS: any = {
       pp_n_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
       pp_n_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
       pp_n_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
-      pp_n_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+      pp_n_adult_acq: { title: "Acquired citizenship (restored Korean nationality)", desc: "Originally Korean → acquired Canadian citizenship → later restored Korean nationality" },
     },
   },
   pp_n_adult_new_status: {
     breadcrumb: ["Home", "Passport", "Standard", "Adult", "New"],
     question: "Select your residency status",
-    sub: "New issue — proof documents differ by status.",
+    sub: "An adult getting a Korean passport for the very first time falls into one of these two cases, both holding Korean nationality.",
     options: {
-      pp_n_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
-      pp_n_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
-      pp_n_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
-      pp_n_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
-      pp_n_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+      pp_n_adult_dual: { title: "Congenital dual national", desc: "Korean & Canadian nationality from birth — has not filed a nationality-exit report" },
+      pp_n_adult_acq: { title: "Acquired citizenship (restored Korean nationality)", desc: "Originally Korean → acquired Canadian citizenship → later restored Korean nationality" },
     },
   },
   pp_n_minor_renew_custody: {
@@ -7155,7 +7352,7 @@ const EN_TRANSLATIONS: any = {
       pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
       pp_u_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
       pp_u_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
-      pp_u_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+      pp_u_adult_acq: { title: "Acquired citizenship (restored Korean nationality)", desc: "Originally Korean → acquired Canadian citizenship → later restored Korean nationality" },
     },
   },
   pp_u_adult_lost: {
@@ -7167,19 +7364,16 @@ const EN_TRANSLATIONS: any = {
       pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
       pp_u_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
       pp_u_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
-      pp_u_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+      pp_u_adult_acq: { title: "Acquired citizenship (restored Korean nationality)", desc: "Originally Korean → acquired Canadian citizenship → later restored Korean nationality" },
     },
   },
   pp_u_adult_new: {
     breadcrumb: ["Home", "Passport", "Urgent", "Adult", "New"],
     question: "Select your residency status",
-    sub: "Urgent non-electronic single-use passport (new) — proof documents differ by status.",
+    sub: "An adult getting a Korean passport for the very first time falls into one of these two cases, both holding Korean nationality.",
     options: {
-      pp_u_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
-      pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
-      pp_u_adult_eta: { title: "Short-term visitor (eTA)", desc: "Visa-free entry — within 6 months of entry" },
-      pp_u_adult_dual: { title: "Congenital dual citizen", desc: "Korean & Canadian nationality from birth" },
-      pp_u_adult_acq: { title: "Acquired citizen", desc: "Was Korean → later acquired Canadian citizenship" },
+      pp_u_adult_dual: { title: "Congenital dual national", desc: "Korean & Canadian nationality from birth — has not filed a nationality-exit report" },
+      pp_u_adult_acq: { title: "Acquired citizenship (restored Korean nationality)", desc: "Originally Korean → acquired Canadian citizenship → later restored Korean nationality" },
     },
   },
   pp_u_minor_have: {
@@ -7677,6 +7871,7 @@ const EN_TRANSLATIONS: any = {
       "⚠️ If you acquired Canadian citizenship, your Korean nationality may have been automatically lost. Applying for or using a Korean passport while your nationality is lost may violate the Immigration Act, so verify your nationality status (basic certificate, etc.) before applying.",
       "⚠️ If unsure, consult the nationality desk before applying for a passport. (Consulate 416-920-3809)",
       "⚠️ A non-electronic single-use passport cannot be used to enter or transit the USA. For USA transit, use a DHL e-passport or a direct Canada–Korea flight.",
+      "⚠️ Cannot be issued to: a person whose identity cannot be verified / anyone who has lost a passport 3 or more times in the last 5 years.",
       "If nationality restoration is complete and recorded on your basic certificate, a Korean passport application is possible.",
       "Payment: cash (CAD) · debit · credit card.",
     ],
@@ -8085,6 +8280,8 @@ const EN_TRANSLATIONS: any = {
     costs: [{ label: "N/A", value: "Not eligible" }],
     time: "Not eligible",
     notices: [
+      "📌 The residence card (domestic residence report card) is not issued by the Consulate. After entering Korea on an F-4 visa, etc., file a domestic residence report at the immigration office (formerly immigration management office) for your area of residence to obtain it (report within 90 days of entry).",
+      "The application places differ — the F-4 visa is applied for at an overseas mission (Consulate General in Toronto), while the residence card is applied for at a Korea immigration office. (F-4 = status of stay / residence card = ID within Korea)",
       "For nationality restoration or residence report inquiries: consulate phone consultation (416-920-3809).",
       "See the Nationality menu for the nationality restoration procedure.",
     ],
@@ -8530,7 +8727,7 @@ const EN_TRANSLATIONS: any = {
   military_start: {
     breadcrumb: ["Home", "Military Service"],
     question: "What military service matter do you need?",
-    sub: "Military service applies to male Korean nationals.",
+    sub: "Military service applies to male Korean nationals. For a congenital dual-national male, the nationality-exit report (giving up nationality, not for evading service) is in the 'Nationality' menu — note the deadline: it can be filed only until Mar 31 of the year he turns 18.",
     options: {
       military_permit_start: { title: "Overseas travel permit — apply/extend", desc: "Apply to defer military service while residing in Canada" },
       military_cert_start: { title: "Military service certificate issuance", desc: "Certificate of military status for visa, employment, nationality exit, etc." },
@@ -8948,7 +9145,7 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Family Register", "Reports"],
     question: "What report do you need?",
     options: {
-      family_birth: { title: "Birth report", desc: "Register a Canada-born child in the Korean register" },
+      family_birth: { title: "Birth report", desc: "Register a Canada-born child in the Korean register", sub: "A birth report should be filed within 1 month of birth (it can still be filed after the deadline, though an explanation of the delay may be required). Required documents depend on the parents' nationality combination." },
       family_marriage: { title: "Marriage report", desc: "Reflect a Canadian marriage in the Korean register" },
       family_divorce: { title: "Divorce report", desc: "Confirmation of divorce intent, or report after a Canadian court divorce" },
       family_death: { title: "Death report", desc: "A Korean national who died in Canada" },
@@ -9326,7 +9523,6 @@ const EN_TRANSLATIONS: any = {
       nationality_citizen_start: { title: "I or my family acquired a foreign nationality (citizenship)", desc: "Exit / loss / retention / choice — guided to your situation" },
       nationality_acquire: { title: "Child of a Korean father & foreign mother born out of wedlock", desc: "Nationality acquisition by acknowledgment (minor) · CAD $24.30" },
       nationality_recover: { title: "I want to restore Korean nationality (age 65+)", desc: "Dual-nationality restoration — only at a Korean immigration office" },
-      nationality_renounce_exception: { title: "Male (military unfulfilled) who missed the exit deadline", desc: "Exceptional nationality-exit permit (Nationality Act Art. 14-2) · CAD $121.50" },
     },
   },
   nationality_terms: {
@@ -9342,7 +9538,7 @@ const EN_TRANSLATIONS: any = {
         rows: [
           { label: "Who", left: "Congenital dual national (two nationalities from birth)", right: "Acquired later (gained citizenship afterward)" },
           { label: "Difference", left: "You actively report giving up Korean nationality", right: "Report after-the-fact what was already auto-lost" },
-          { label: "Deadline", left: "Male: depends on birth situation (by Mar 31 of the year turning 18, or after military resolved) / Female: dual before 20 → before 22, after 20 → within 2 years", right: "No deadline (report promptly after acquisition)" },
+          { label: "Deadline", left: "Male: depends on birth situation (by Mar 31 of the year turning 18, or after military resolved) / Female: no time limit (may file anytime)", right: "No deadline (report promptly after acquisition)" },
           { label: "Result", left: "No Korean nationality (foreign nationality only)", right: "No Korean nationality (records the loss)" },
         ],
       },
@@ -9380,8 +9576,150 @@ const EN_TRANSLATIONS: any = {
     sub: "A congenital dual national may give up or keep Korean nationality.",
     options: {
       nationality_renounce_start: { title: "I'll give up Korean nationality", desc: "Nationality-exit report · CAD $24.30" },
-      nationality_choice: { title: "I'll keep Korean nationality", desc: "Nationality-choice report — pledge not to exercise foreign nationality · free" },
+      nationality_choice_start: { title: "I'll keep Korean nationality", desc: "Nationality-choice report — guided by sex and timing" },
     },
+  },
+  nationality_choice_start: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report"],
+    question: "Applicant's sex?",
+    sub: "For a congenital dual national, the nationality-choice report deadline depends on sex and timing.",
+    options: {
+      nationality_choice_male_birth: { title: "Male", desc: "Deadline varies by birth circumstances and military status" },
+      nationality_choice_female_birth: { title: "Female", desc: "Can file until the birthday of the year turning 22" },
+    },
+  },
+  nationality_choice_male_birth: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male"],
+    question: "Parents' residence status at the time of birth?",
+    sub: "If it counts as 'birth tourism,' the pledge not to exercise foreign nationality (nationality choice) is restricted.",
+    options: {
+      nationality_choice_male_a: { title: "Born while residing for permanent purposes", desc: "A parent held/applied for PR or citizenship, or parents lived abroad long-term" },
+      nationality_choice_excluded: { title: "Born without permanent-residence purpose (birth tourism, etc.)", desc: "In principle the pledge is not allowed — check the exceptions" },
+    },
+  },
+  nationality_choice_female_birth: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Female"],
+    question: "Parents' residence status at the time of birth?",
+    sub: "If it counts as 'birth tourism,' the pledge not to exercise foreign nationality (nationality choice) is restricted.",
+    options: {
+      nationality_choice_female: { title: "Born while residing for permanent purposes", desc: "A parent held/applied for PR or citizenship, or parents lived abroad long-term" },
+      nationality_choice_excluded: { title: "Born without permanent-residence purpose (birth tourism, etc.)", desc: "In principle the pledge is not allowed — check the exceptions" },
+    },
+  },
+  nationality_choice_male_a: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male", "Permanent-purpose birth"],
+    question: "Current timing / military status?",
+    sub: "Males can file until the birthday of the year they turn 22, or within 2 years of completing their military obligation.",
+    options: {
+      nationality_choice_male_intime: { title: "Before the birthday of the year turning 22 (in time)", desc: "Normal nationality-choice report (pledge) is possible" },
+      nationality_choice_male_served: { title: "Military obligation completed (discharged, exempted, etc.)", desc: "Can file within 2 years of completing the obligation" },
+      nationality_renounce_exception: { title: "Past the deadline and military not resolved", desc: "Nationality choice not possible → guided to exceptional nationality-exit permission" },
+    },
+  },
+  nationality_choice_male_intime: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male", "In time"],
+    title: "Nationality-choice report — Male (before the birthday of the year turning 22)",
+    sub: "A congenital dual national keeps Korean nationality (pledge not to exercise foreign nationality) · free",
+    docs: [
+      "Nationality-choice report form — enter a KakaoTalk-linked phone number",
+      "  ▸ Age 15+: self-signs / under 15: legal guardian signs",
+      "Pledge not to exercise foreign nationality (form)",
+      "2 ID photos (must be taken at a studio)",
+      "Canadian birth certificate original + copy (born overseas) / replaced by citizenship certificate if born in Korea",
+      "Korean translation of the birth certificate (no notarization needed)",
+      "Applicant's Canadian passport original + copy (at least 1 year validity)",
+      "Parents' passport copies + proof of status copies (1 each)",
+      "Applicant's basic + family-relation certificates (detailed, within 3 months)",
+      "Parents' basic certificates (1 each) / father's marriage-relation certificate (if applicable)",
+      "Identity certificate (if the name changed — signed by 2 relatives within the 4th degree)",
+      "XpressPost prepaid envelope (to receive the notice)",
+      "Notification and service consent form (form)",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 6 months",
+    notices: [
+      "The pledge = you choose Korean nationality without giving up the foreign one, pledging not to exercise the foreign nationality within Korea.",
+      "Deadline — males: until the birthday of the year turning 22 (after that, only a nationality-exit report is possible).",
+      "⚠️ Age 15+ must appear in person — no postal submission.",
+      "If a parent acquired citizenship and hasn't filed a loss report, it can be submitted together.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book (Nationality → Nationality-choice report) →",
+  },
+  nationality_choice_male_served: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male", "After military service"],
+    title: "Nationality-choice report — Male (within 2 years of completing military service)",
+    sub: "A male who completed his military obligation keeps Korean nationality within 2 years · free",
+    docs: [
+      "Nationality-choice report form — enter a KakaoTalk-linked phone number",
+      "Pledge not to exercise foreign nationality (form)",
+      "2 ID photos (must be taken at a studio)",
+      "Proof of resolved military obligation (discharge certificate, military record, exemption confirmation, etc.)",
+      "Canadian birth certificate original + copy (born overseas) / replaced by citizenship certificate if born in Korea",
+      "Korean translation of the birth certificate (no notarization needed)",
+      "Applicant's Canadian passport original + copy (at least 1 year validity)",
+      "Parents' passport copies + proof of status copies (1 each)",
+      "Applicant's basic + family-relation certificates (detailed, within 3 months)",
+      "Identity certificate (if the name changed — signed by 2 relatives within the 4th degree)",
+      "XpressPost prepaid envelope (to receive the notice)",
+      "Notification and service consent form (form)",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 6 months",
+    notices: [
+      "The pledge = you choose Korean nationality without giving up the foreign one, pledging not to exercise the foreign nationality within Korea.",
+      "Deadline — a male who completed his military obligation: within 2 years of resolution.",
+      "⚠️ Age 15+ must appear in person — no postal submission.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book (Nationality → Nationality-choice report) →",
+  },
+  nationality_choice_female: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Female"],
+    title: "Nationality-choice report — Female (before the birthday of the year turning 22)",
+    sub: "A congenital dual-national female keeps Korean nationality (pledge not to exercise foreign nationality) · free",
+    docs: [
+      "Nationality-choice report form — enter a KakaoTalk-linked phone number",
+      "  ▸ Age 15+: self-signs / under 15: legal guardian signs",
+      "Pledge not to exercise foreign nationality (form)",
+      "2 ID photos (must be taken at a studio)",
+      "Canadian birth certificate original + copy (born overseas) / replaced by citizenship certificate if born in Korea",
+      "Korean translation of the birth certificate (no notarization needed)",
+      "Applicant's Canadian passport original + copy (at least 1 year validity)",
+      "Parents' passport copies + proof of status copies (1 each)",
+      "Applicant's basic + family-relation certificates (detailed, within 3 months)",
+      "Parents' basic certificates (1 each) / father's marriage-relation certificate (if applicable)",
+      "Identity certificate (if the name changed — signed by 2 relatives within the 4th degree)",
+      "XpressPost prepaid envelope (to receive the notice)",
+      "Notification and service consent form (form)",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 6 months",
+    notices: [
+      "The pledge = you choose Korean nationality without giving up the foreign one, pledging not to exercise the foreign nationality within Korea.",
+      "Deadline — females: until the birthday of the year turning 22 (after that, only a nationality-exit report is possible).",
+      "⚠️ Age 15+ must appear in person — no postal submission.",
+      "If a parent acquired citizenship and hasn't filed a loss report, it can be submitted together.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book (Nationality → Nationality-choice report) →",
+  },
+  nationality_choice_excluded: {
+    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Pledge restricted"],
+    title: "Pledge restricted — born without permanent-residence purpose (birth tourism, etc.)",
+    sub: "In principle the pledge (nationality choice) is not allowed, but it is possible if an exception applies.",
+    docs: [],
+    notices: [
+      "⚠️ If the parents were staying short-term without a permanent-residence purpose at the time of birth (so-called 'birth tourism'), the pledge not to exercise foreign nationality is in principle not allowed — to keep Korean nationality you would have to choose it and give up the foreign nationality.",
+      "However, the pledge is exceptionally allowed if one of the following applies:",
+      "  ▸ Lived abroad continuously for 2+ years, counting before and after birth",
+      "  ▸ Acquired foreign permanent residence or nationality",
+      "  ▸ Studied 6+ months at a foreign regular university (1+ year for language training)",
+      "  ▸ Stayed accompanying a parent on overseas assignment, etc.",
+      "Whether you qualify for an exception needs a precise judgment, so please contact the Consulate or the nationality desk.",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book (Nationality → Nationality-choice report) →",
   },
   nationality_renounce_start: {
     breadcrumb: ["Home", "Nationality", "Nationality-exit report"],
@@ -9389,7 +9727,7 @@ const EN_TRANSLATIONS: any = {
     sub: "Males and females have different nationality-exit report periods.",
     options: {
       nationality_renounce_male_birth: { title: "Male", desc: "The report period depends on your parents' residence situation at your birth" },
-      nationality_renounce_female: { title: "Female", desc: "The deadline depends on when you became a dual national" },
+      nationality_renounce_female: { title: "Female", desc: "No time limit for the exit report" },
     },
   },
   nationality_renounce_male_birth: {
@@ -9407,8 +9745,8 @@ const EN_TRANSLATIONS: any = {
     sub: "A male may file a normal nationality-exit report only until Mar 31 of the year he turns 18.",
     options: {
       nationality_renounce_male_intime: { title: "Before Mar 31 of the year turning 18 (in time)", desc: "Normal nationality-exit report possible" },
-      nationality_renounce_exception: { title: "Past the deadline and military unresolved", desc: "Exceptional nationality-exit permit required · CAD $121.50" },
       nationality_renounce_male_done: { title: "Military duty resolved (discharged/exempt, etc.)", desc: "Nationality-exit report possible after military is resolved" },
+      nationality_renounce_exception: { title: "Past the deadline and military unresolved", desc: "Exceptional nationality-exit permit required · CAD $121.50" },
     },
   },
   nationality_acquired_self: {
@@ -9423,10 +9761,19 @@ const EN_TRANSLATIONS: any = {
   nationality_keep_start: {
     breadcrumb: ["Home", "Nationality", "Acquired with parents"],
     question: "Has it been more than 6 months since the citizenship acquisition (oath) date?",
-    sub: "A minor who acquired citizenship together with a parent can file a nationality-retention report only within 6 months.",
+    sub: "Within 6 months, you can choose to keep Korean nationality (retention report) or not (loss). After 6 months, nationality is lost retroactively.",
     options: {
-      nationality_retain: { title: "Within 6 months", desc: "Nationality-retention report — keeps Korean nationality · CAD $24.30" },
+      nationality_keep_choice: { title: "Within 6 months", desc: "Choose to keep or give up Korean nationality" },
       nationality_loss: { title: "More than 6 months have passed", desc: "Deadline exceeded → nationality lost retroactively → guided to the loss report" },
+    },
+  },
+  nationality_keep_choice: {
+    breadcrumb: ["Home", "Nationality", "Acquired with parents", "Choose"],
+    question: "What would you like to do with the Korean nationality?",
+    sub: "Within 6 months, you may either keep Korean nationality (retention report) or not.",
+    options: {
+      nationality_retain: { title: "I want to keep Korean nationality", desc: "Nationality-retention report — keeps Korean nationality · CAD $24.30" },
+      nationality_loss: { title: "I do not want to keep Korean nationality", desc: "Nationality-loss report — Korean nationality is lost · free" },
     },
   },
   nationality_renounce_male_intime: {
@@ -9531,7 +9878,7 @@ const EN_TRANSLATIONS: any = {
   nationality_renounce_female: {
     breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Female"],
     title: "Nationality-exit report — Female",
-    sub: "Congenital dual national · the deadline depends on when you became a dual national",
+    sub: "Congenital dual-national female · there is no time limit for the exit report",
     docs: [
       "Nationality-exit report form — enter a KakaoTalk-linked phone number",
       "  ▸ Age 15+: self-signs / under 15: legal guardian signs",
@@ -9553,7 +9900,7 @@ const EN_TRANSLATIONS: any = {
     costs: [{ label: "Fee", value: "CAD $24.30 (Cash, Debit, Credit)" }],
     time: "About 18–24 months",
     notices: [
-      "⚠️ Deadline (as of Apr 1, 2026): if you became a dual national before age 20 → before the birthday of the year you turn 22. If you became a dual national after age 20 → within 2 years from then.",
+      "⚠️ There is no time limit for filing. Unlike males, a congenital dual-national female has no nationality-exit deadline and may file at any time.",
       "⚠️ Age 15+ must visit in person — mail submission not allowed.",
       "You must have an address (center of living) abroad to file.",
       "If a parent acquired citizenship but did not file a loss report, file together.",
@@ -10253,7 +10600,7 @@ const EN_TRANSLATIONS: any = {
       vcert_overseas_reg: { title: "Overseas Korean registration record copy", desc: "Proof of overseas residence — real estate, inheritance, finance, etc." },
       vcert_resident: { title: "Resident registration copy/abstract", desc: "Confirms resident registration status — in person or online" },
       vcert_tax: { title: "Tax / income certificates", desc: "Tax payment (national/local/customs) & income certificates — needed for emigration report, etc." },
-      vcert_passport_info: { title: "Passport information certificate", desc: "For holders of passports issued after Dec 20, 2020 — substitute for the resident number" },
+      vcert_passport_info: { title: "Passport fact certificate", desc: "Information · issuance record · invalidation, etc. — supplements a passport without the resident number" },
     },
   },
   vcert_immigration: {
@@ -10555,21 +10902,25 @@ const EN_TRANSLATIONS: any = {
     onlineLink: "https://www.hometax.go.kr",
   },
   vcert_passport_info: {
-    breadcrumb: ["Home", "Various Certificates", "Passport information certificate"],
-    title: "Passport information certificate",
+    breadcrumb: ["Home", "Various Certificates", "Passport fact certificate"],
+    title: "Passport fact certificate",
+    sub: "Proves passport-related facts — information, issuance record, invalidation, application documents, copy, etc.",
     docs: [
-      "Passport information certificate application (designated form)",
-      "Your valid Korean passport original (issued after Dec 20, 2020)",
-      "Canadian residency-status proof original",
+      "Passport fact certificate application (designated form)",
+      "The subject's valid passport original (cannot be issued without the passport original)",
       "  ▸ With a joint certificate: instant online issuance at Gov24 (gov.kr)",
+      "  ▸ In person: book an appointment and visit the Consulate",
+      "[Minor under 19 applied for by a parent] visiting parent's passport original+copy, family relation certificate (detailed, full resident number) or the e-gov info-sharing consent on the form",
+      "[By proxy] proxy's passport original+copy, original passport-fact power of attorney, the principal's seal certificate (or signature-verification certificate original)",
     ],
-    costs: [{ label: "Fee", value: "CAD $1.00 (Cash)" }],
+    costs: [{ label: "Fee", value: "CAD $1.35 (cash · debit · credit card)" }],
     time: "Same day on visit / instant online",
     notices: [
-      "Passports issued after Dec 20, 2020 have the resident registration number removed.",
-      "The passport information certificate proves the passport details together with the resident number, used to verify the resident number for various civil/notarization purposes.",
-      "With a joint certificate, free online issuance at Gov24 (CAD $1.00 in person).",
-      "Mail submission accepted.",
+      "Passport fact certificates include 6 types: ▸passport information certificate ▸passport issuance record (Korean) ▸passport issuance record (English) ▸passport invalidation confirmation (Korean) ▸passport invalidation confirmation (English) ▸passport application documents certificate. Separately, a passport copy certificate (authenticating a passport copy) is also available.",
+      "Passports issued after Dec 21, 2020 do not show the latter part of the resident registration number, to protect personal information.",
+      "If a civil service requires the latter resident number, a holder of such a passport must submit the passport information certificate together with the passport.",
+      "With a joint certificate you can issue it easily online at Gov24, or book and visit the Consulate passport desk.",
+      "Passport copy certificate: a document by which the government authenticates the authenticity of a passport copy when submitting it to a foreign authority.",
     ],
     booking: "https://www.torbooking.com/book",
     onlineLink: "https://www.gov.kr",
@@ -10816,12 +11167,12 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
       items: [
         {
           id: "pp_q_urgent",
-          kw: ["당일", "급하게", "급한데", "긴급여권", "긴급 여권", "오늘 받", "바로 받", "same day", "same-day", "urgent", "emergency passport"],
+          kw: ["당일", "급하게", "급한데", "긴급여권", "긴급 여권", "오늘 받", "바로 받", "내일 출국", "내일 출발", "오늘 출국", "곧 출국", "출국인데", "출국해야", "출국 예정인데", "비행기", "급해요", "급합니다", "오늘 알았", "급하게 필요", "same day", "same-day", "urgent", "emergency passport", "leaving tomorrow", "flight tomorrow", "fly tomorrow"],
           build: () => ({
             kind: "answer",
             text: lang === "ko"
-              ? "당일 발급이 되는 것은 긴급여권(비전자 단수여권, 유효기간 1년)이며, 긴급한 출국 사유에 대한 증빙이 있을 때만 발급됩니다. 단순히 빨리 받고 싶으신 경우라면 대부분 일반 전자여권을 DHL 특급(약 1~2주)으로 받으시는 편이 적절합니다. 아래에서 상황에 맞게 시작해 주세요."
-              : "Same-day issuance applies to an emergency passport (a non-electronic single-use passport, valid 1 year), and only when you have proof of an urgent reason to travel. If you simply want it quickly, most people are better served by a regular e-passport via DHL express (about 1–2 weeks). Start below based on your situation.",
+              ? "출국이 임박한 긴급 상황이라면, 긴급여권(비전자 단수여권, 유효기간 1년)을 당일 발급받을 수 있습니다. 단, 항공권 등 긴급한 출국 사유 증빙이 필요하며, 방문 전 torbooking.com에서 예약을 하셔야 합니다(긴급한 경우 영사관에 전화로 문의: 대표 416-920-3809). 시간 여유가 있다면 일반 전자여권을 DHL 특급(약 1~2주)으로 받으실 수도 있습니다. 아래에서 시작해 자세한 구비서류를 확인하세요."
+              : "If your departure is imminent, you can get a same-day emergency passport (a non-electronic single-use passport, valid 1 year). You'll need proof of the urgent travel (e.g. a flight ticket) and a booking at torbooking.com before visiting (for urgent cases, call the Consulate: main 416-920-3809). If you have more time, a regular e-passport via DHL express (about 1–2 weeks) is also an option. Start below to check the required documents.",
             goId: "passport_start",
             goLabel: lang === "ko" ? "여권 안내 시작하기" : "Start passport guide",
           }),
@@ -10856,8 +11207,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "미성년 자녀의 여권은 친권 상황(혼인 중·이혼·한부모 등)에 따라 부모 방문·동의 요건이 달라집니다. 아래에서 시작하시면 연령·친권 상황을 차례로 확인해 정확히 안내해 드립니다."
-              : "For a minor's passport, the parental-visit/consent requirements depend on custody (married, divorced, single parent, etc.). Start below and we'll ask step by step.",
+              ? "대부분의 경우 친권자 한 명만 방문해 신청할 수 있습니다(방문하지 않는 부모의 법정대리인 동의서·인감 등이 필요할 수 있습니다). 다만 부모가 모두 캐나다에 거주해 인감 발급이 어려운 공동친권 등 일부 경우에는 부모가 함께 방문해야 합니다. 구체적인 요건은 연령·친권 상황(혼인 중·이혼·단독친권 등)에 따라 달라지니, 아래에서 시작해 정확히 확인하세요."
+              : "In most cases, one custodial parent can apply in person (a legal-guardian consent form and seal from the non-attending parent may be required). However, in some cases — such as joint custody where both parents live in Canada and cannot issue a Korean seal — both parents must attend. The exact requirements depend on age and custody situation (married, divorced, sole custody, etc.), so start below to confirm."
+            ,
             goId: "passport_start",
             goLabel: lang === "ko" ? "미성년 여권 시작하기" : "Start minor's passport",
           }),
@@ -10891,8 +11243,20 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // ===== 비자 =====
     {
       svc: "visa",
-      must: ["비자", "사증", "visa", "f-4", "f4", "f-6", "무비자", "visa-free", "visa free"],
+      must: ["비자", "사증", "visa", "f-4", "f4", "f-6", "무비자", "visa-free", "visa free", "체류기간 연장", "체류 연장", "체류기간을 연장", "extension of stay", "거소증", "거소신고", "국내거소", "거소", "residence card"],
       items: [
+        {
+          id: "visa_q_sojourn",
+          kw: ["거소증", "거소신고", "국내거소", "거소", "residence card", "domestic residence"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "거소증(국내거소신고증)은 토론토 총영사관에서 발급하지 않습니다. F-4 비자 등으로 한국에 입국한 후, 거주지를 관할하는 출입국·외국인청(구 출입국관리사무소)에 국내거소신고를 하여 발급받습니다(입국 후 90일 이내 신고). 신청처가 다르니 유의하세요 — F-4 비자는 해외 공관(영사관)에서 신청하고, 거소증은 한국 내 출입국·외국인청에서 신청합니다. F-4는 체류자격(비자)이고, 거소증은 한국 내 신분증으로 은행·통신·부동산 등에 쓰입니다. 정확한 절차·서류는 한국 출입국·외국인청(하이코리아 hikorea.go.kr)으로 문의하시기 바랍니다."
+              : "The residence card (domestic residence report card) is not issued by the Consulate General in Toronto. After entering Korea on an F-4 visa, etc., you file a domestic residence report at the immigration office for your area of residence to obtain it (within 90 days of entry). Note the application places differ — the F-4 visa is applied for at an overseas mission (Consulate), while the residence card is applied for at a Korea immigration office. F-4 is a status of stay (visa); the residence card is an ID within Korea used for banking, telecom, real estate, etc. For exact steps and documents, contact a Korea immigration office (HiKorea, hikorea.go.kr).",
+            goId: "visa_start",
+            goLabel: lang === "ko" ? "비자 안내 처음으로" : "Visa guide home",
+          }),
+        },
         {
           id: "visa_q_f4",
           kw: ["f-4", "f4", "재외동포", "예전에 한국", "과거 한국", "한국 국적이었", "former korean", "used to be korean", "overseas korean", "lost.*nationality", "국적상실"],
@@ -10915,6 +11279,18 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               : "Work visas depend on the type of work (E-2 language instructor, E-1–E-7 professional, H-1 working holiday, etc.). Most require your Korean employer to obtain a Confirmation of Visa Issuance (CVI) first. Pick your work type below.",
             goId: "visa_work_en",
             goLabel: lang === "ko" ? "취업 비자 선택하기" : "Choose a work visa",
+          }),
+        },
+        {
+          id: "visa_q_extend",
+          kw: ["연장", "체류기간 연장", "체류 연장", "기간 연장", "더 연장", "extend", "extension", "extension of stay", "prolong"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "캐나다 여권 소지자는 무비자로 최대 180일 체류가 가능하며, 체류기간은 입국 시 출입국심사관이 부여합니다. '무비자 입국은 연장이 불가능하다'고 오해하시는 경우가 많은데, 한국에는 체류기간 연장(Extension of Stay) 제도가 있어 체류 만료 전 관할 출입국·외국인청에 신청할 수 있습니다. 다만 연장이 자동 승인되는 것은 아니며, 연장 사유와 체류자격에 따라 심사를 받습니다.\n\n체류기간 연장은 한국 입국 후의 사안으로 토론토 총영사관 업무 범위가 아니므로, 정확한 가능 여부와 절차는 한국 관할 출입국·외국인청(하이코리아 hikorea.go.kr)으로 문의하시기 바랍니다."
+              : "Canadian passport holders may stay visa-free for up to 180 days, with the period granted by the immigration officer at entry. Many assume 'visa-free entry cannot be extended,' but Korea has an Extension of Stay system — you can apply at the competent Immigration Office before your stay expires. Approval is not automatic; it is reviewed based on the reason and your status.\n\nExtension of stay is a matter handled inside Korea, not by the Consulate General in Toronto. For exact eligibility and procedures, please contact the competent Korea Immigration Office (HiKorea, hikorea.go.kr).",
+            goId: "visa_start",
+            goLabel: lang === "ko" ? "비자 안내 처음으로" : "Visa guide home",
           }),
         },
         {
@@ -10972,6 +11348,18 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
       svc: "cert_issue",
       must: ["증명서", "가족관계증명", "기본증명", "혼인관계증명", "영문 증명", "영문증명", "certificate", "family relation cert", "basic cert"],
       items: [
+        {
+          id: "cert_q_translation",
+          kw: ["번역", "번역 공증", "번역본", "직접 번역", "translation", "translate"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "증명서를 한국 제출용 등으로 번역해 인증받으시려면 영사관 번역문 인증(번역 공증)을 이용하시면 됩니다. 다만 본인 번역의 인정 여부와 가능한 서류는 제출처·서류 종류에 따라 다르며, 일부(예: 캐나다 이민국 IRCC 제출용)는 영사관 번역 공증이 인정되지 않습니다. 아래에서 번역하려는 서류 종류를 선택해 확인하세요."
+              : "To have a certificate translated and authenticated (e.g. for submission in Korea), use the Consulate's translation authentication. Whether your own translation is accepted and which documents qualify depend on the receiving body and document type — some (e.g. Canada's IRCC) do not accept Consulate translation authentication. Choose the document type below.",
+            goId: "notarization_translation_type",
+            goLabel: lang === "ko" ? "번역 공증 안내 보기" : "View translation authentication",
+          }),
+        },
         {
           id: "fam_q_cert_apostille",
           kw: ["아포스티유", "캐나다 정부 제출", "캐나다에 제출", "외국 제출", "외국에 제출", "apostille", "for canadian government", "submit to canada"],
@@ -11037,8 +11425,32 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // ===== 공증 =====
     {
       svc: "notarization",
-      must: ["공증", "인증", "위임", "위임장", "아포스티유", "영사관 확인", "영사 확인", "한국에 제출", "서명", "notar", "apostille", "authenticat", "power of attorney", "poa", "submit to korea", "sign before", "sign in advance"],
+      must: ["공증", "인증", "위임", "위임장", "아포스티유", "영사관 확인", "영사 확인", "한국에 제출", "서명", "번역", "이름이 다", "이름 불일치", "성명 불일치", "동일인", "notar", "apostille", "authenticat", "power of attorney", "poa", "submit to korea", "sign before", "sign in advance", "translation", "different name"],
       items: [
+        {
+          id: "notar_q_translation",
+          kw: ["번역", "번역 공증", "번역본", "출생증명서 번역", "혼인증명서 번역", "직접 번역", "translation", "translate"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "출생·혼인·사망증명서 등 캐나다 문서를 한국 제출용으로 번역할 때, 영사관에서 번역문 인증(번역 공증)을 받을 수 있습니다. 다만 본인이 한 번역도 인증 대상이 되는지, 어떤 서류에 인증이 가능한지는 제출처와 서류 종류에 따라 다릅니다(예: 캐나다 이민국 IRCC 제출용 등 일부는 영사관 번역 공증이 인정되지 않습니다). 아래에서 번역하려는 서류 종류를 선택해 정확히 확인하세요."
+              : "For Canadian documents (birth, marriage, death certificates, etc.) being submitted in Korea, the Consulate can authenticate the translation. Whether your own translation qualifies, and which documents are eligible, depends on the receiving body and document type (e.g. for some submissions like Canada's IRCC, Consulate translation authentication is not accepted). Choose the document type below to confirm.",
+            goId: "notarization_translation_type",
+            goLabel: lang === "ko" ? "번역 공증 안내 보기" : "View translation authentication",
+          }),
+        },
+        {
+          id: "notar_q_namematch",
+          kw: ["이름이 다", "이름 불일치", "성명 불일치", "이름이 안 맞", "한국 이름", "영문 이름", "동일인", "같은 사람", "different name", "name mismatch", "same person"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "시민권 증서의 영문 이름과 한국 서류의 이름이 달라 같은 사람임을 증명해야 하는 경우, 영사관에서 동일인 진술서(사실행위 증서) 공증을 받을 수 있습니다. 서명은 반드시 영사 앞에서 하셔야 합니다. 아래에서 안내를 확인하세요."
+              : "If the English name on your citizenship certificate differs from the name on your Korean documents and you need to prove they are the same person, the Consulate can notarize a statement of identity (a 'same person' declaration). You must sign before the consul. See the guidance below.",
+            goId: "notarization_sign_passport",
+            goLabel: lang === "ko" ? "동일인 진술서 안내 보기" : "View identity statement",
+          }),
+        },
         {
           id: "notar_q_presign",
           kw: ["미리 서명", "먼저 서명", "사전 서명", "서명 먼저", "서명하고 가", "서명해서 가", "먼저 하고 가", "집에서 서명", "미리 사인", "사인하면", "미리 작성해서 서명", "sign in advance", "pre-sign", "presign", "already signed", "sign beforehand", "sign before"],
@@ -11171,11 +11583,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // ===== 국적 =====
     {
       svc: "nationality",
-      must: ["국적", "시민권", "복수국적", "이중국적", "국적상실", "국적이탈", "국적선택", "국적회복", "nationality", "citizenship", "dual national"],
+      must: ["국적", "시민권", "복수국적", "이중국적", "국적상실", "국적이탈", "국적선택", "국적회복", "이탈 기간", "이탈 신고 기간", "이탈 신고", "예외적 이탈", "국적 포기", "nationality", "citizenship", "dual national"],
       items: [
         {
           id: "nat_q_recover",
-          kw: ["회복", "되찾", "다시", "포기했는데", "다시 가질", "다시 받", "다시 취득", "복원", "restore", "recover", "get it back", "reclaim", "regain", "back again"],
+          kw: ["회복", "되찾", "포기했는데", "다시 가질", "다시 받", "다시 취득", "복원", "65세", "만 65", "restore", "recover", "get it back", "reclaim", "regain", "back again", "age 65"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
@@ -11210,8 +11622,20 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           }),
         },
         {
+          id: "nat_q_loss_late",
+          kw: ["안 했는데", "안했는데", "신고 안", "미신고", "지금도", "지금이라도", "10년", "오래됐", "오래 됐", "한참 됐", "취득한 지", "취득한지", "괜찮", "늦었", "안 하면", "haven't reported", "didn't report", "still report", "long ago", "10 years"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "네, 국적상실 신고는 언제든지 할 수 있습니다. 캐나다 시민권을 취득하면 그 시점에 한국 국적은 법률상 자동으로 상실되지만, 국적상실 '신고' 자체는 시점 제한이 없어 10년이 지났더라도 가능합니다. 다만 F-4 재외동포 비자 신청이나 각종 가족관계등록 업무를 처리하려면 미리 신고해 두시는 것이 좋습니다. 아래에서 신고를 시작하실 수 있습니다."
+              : "Yes, a nationality-loss report can be filed at any time. Korean nationality is automatically lost by law the moment you acquire Canadian citizenship, but the 'report' itself has no time limit — it is possible even after 10 years. That said, it is best to file it in advance if you'll need an F-4 Overseas Korean visa or any family-relation registration service. You can start the report below.",
+            goId: "nationality_citizen_start",
+            goLabel: lang === "ko" ? "국적상실 신고 시작하기" : "Start nationality-loss report",
+          }),
+        },
+        {
           id: "nat_q_loss",
-          kw: ["국적상실", "상실 신고", "상실신고", "시민권을 취득했는데", "시민권 취득했는데", "시민권 따", "시민권을 따", "시민권 받았는데", "시민권 취득 후", "시민권 취득후", "취득 후 뭘", "취득하면 뭘", "국적 어떻게 돼", "국적은 어떻게", "loss report", "report.*loss", "lose korean", "lost korean nationality", "what happens to my korean", "after getting citizenship"],
+          kw: ["국적상실", "상실 신고", "상실신고", "시민권을 취득했는데", "시민권 취득했는데", "시민권 따", "시민권을 따", "시민권 땄", "시민권을 땄", "시민권 받았는데", "시민권 취득 후", "시민권 취득후", "취득 후 뭘", "취득하면 뭘", "국적 어떻게 돼", "국적은 어떻게", "loss report", "report.*loss", "lose korean", "lost korean nationality", "what happens to my korean", "after getting citizenship", "got citizenship"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
@@ -11219,6 +11643,18 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               : "Yes — if you voluntarily acquire a foreign nationality (e.g. Canadian citizenship), you lose Korean nationality at that point and must file a 'nationality-loss report.' The process differs depending on whether it is for yourself or a deceased family member, so start below.",
             goId: "nationality_citizen_start",
             goLabel: lang === "ko" ? "국적상실 신고 시작하기" : "Start nationality-loss report",
+          }),
+        },
+        {
+          id: "nat_q_exit_missed",
+          kw: ["기간을 놓", "기간 놓", "기한을 놓", "기한 놓", "기한 지난", "기한이 지난", "18세 지난", "18세가 지난", "늦게 이탈", "이탈 기간 지", "병역미필인데 이탈", "예외적 이탈", "missed the deadline", "missed deadline", "past the exit"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "국적이탈 신고 기간(만 18세가 되는 해 3월 31일)을 넘긴 병역미필 남성은, 일반 국적이탈이 아니라 '예외적 국적이탈 허가'(국적법 제14조의2) 절차를 거쳐야 합니다. 요건이 까다롭고 비용(CAD $121.50)이 발생하니 아래에서 자세히 확인하세요."
+              : "A male who has not fulfilled military service and missed the nationality-exit deadline (March 31 of the year turning 18) must go through the 'exceptional nationality-exit permit' (Nationality Act Art. 14-2), not an ordinary exit. The requirements are strict and a fee (CAD $121.50) applies — see the details below.",
+            goId: "nationality_renounce_exception",
+            goLabel: lang === "ko" ? "예외적 국적이탈 안내 보기" : "View exceptional exit permit",
           }),
         },
         {
@@ -11233,12 +11669,60 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
             goLabel: lang === "ko" ? "국적이탈 절차 확인하기" : "Check nationality-exit steps",
           }),
         },
+        {
+          id: "nat_q_choice",
+          kw: ["국적선택", "국적 선택", "선택신고", "외국국적불행사", "불행사 서약", "nationality choice", "choice report", "non-exercise"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "선천적 복수국적자가 한국 국적을 유지하기 위해 하는 신고가 '국적선택신고(외국국적불행사 서약)'입니다. 정해진 기한 내에 신고하면 한국 국적과 외국 국적을 함께 유지할 수 있습니다. 아래에서 안내를 확인하세요."
+              : "A 'nationality-choice report (pledge not to exercise foreign nationality)' is filed by a congenital dual national to keep Korean nationality. Filing within the deadline lets you hold both Korean and foreign nationality. See the guidance below.",
+            goId: "nationality_choice_start",
+            goLabel: lang === "ko" ? "국적선택신고 시작하기" : "Start nationality-choice report",
+          }),
+        },
+        {
+          id: "nat_q_retain",
+          kw: ["국적보유", "국적 보유", "보유신고", "부모와 함께 시민권", "함께 취득한 미성년", "같이 시민권", "retain", "retention report"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "부모와 함께 외국 시민권을 취득한 미성년 자녀가 한국 국적을 유지하려면 '국적보유신고'를 합니다. 시민권 취득(선서)일로부터 정해진 기간 내에 신고해야 하니, 아래에서 기한과 절차를 확인하세요."
+              : "A minor child who acquired foreign citizenship together with their parents files a 'nationality-retention report' to keep Korean nationality. It must be filed within a set period from the citizenship (oath) date — check the deadline and steps below.",
+            goId: "nationality_keep_start",
+            goLabel: lang === "ko" ? "국적보유신고 보기" : "View nationality-retention report",
+          }),
+        },
+        {
+          id: "nat_q_terms",
+          kw: ["용어", "헷갈", "차이가 뭐", "뭐가 다른", "구분", "이탈이랑 상실", "이탈 vs", "상실 vs", "difference between", "terms", "confused"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "국적 관련 용어(이탈·상실·보유·선택)가 헷갈리실 수 있습니다. 이탈은 선천적 복수국적자가 한국 국적을 포기하는 것, 상실은 본인 의사로 외국 국적을 취득해 한국 국적을 잃는 것, 보유·선택은 한국 국적을 유지하는 신고입니다. 아래에서 네 용어를 한눈에 비교해 보세요."
+              : "The nationality terms (exit, loss, retention, choice) can be confusing. Exit = a congenital dual national gives up Korean nationality; loss = you lose it by voluntarily acquiring a foreign nationality; retention/choice = reports to keep Korean nationality. Compare all four below.",
+            goId: "nationality_terms",
+            goLabel: lang === "ko" ? "네 용어 비교 보기" : "Compare the four terms",
+          }),
+        },
+        {
+          id: "nat_q_general",
+          kw: ["국적", "시민권", "nationality", "citizenship"],
+          build: () => ({
+            kind: "reask",
+            text: lang === "ko"
+              ? "국적 업무는 상황에 따라 국적이탈·국적상실·국적선택·국적보유·국적회복 등으로 나뉩니다. 아래에서 본인 상황을 선택하시면 정확한 안내로 연결해 드립니다."
+              : "Nationality services are divided by situation — exit, loss, choice, retention, restoration, and more. Choose your situation below and we'll guide you to the right information.",
+            goId: "nationality_start",
+            goLabel: lang === "ko" ? "국적 안내 시작하기" : "Start nationality guide",
+          }),
+        },
       ],
     },
     // ===== 가족관계등록 =====
     {
       svc: "family",
-      must: ["가족관계", "출생신고", "혼인신고", "이혼신고", "사망신고", "기본증명", "혼인관계증명", "출생 등록", "출생", "혼인", "이혼", "사망", "정정", "결혼", "태어난 아이", "태어난 아기", "낳", "돌아가", "가족관계등록부", "잘못된 정보", "기록 정정", "family register", "family relation", "birth", "marriage", "death", "divorce", "register"],
+      must: ["가족관계", "출생신고", "혼인신고", "이혼신고", "사망신고", "기본증명", "혼인관계증명", "출생 등록", "출생", "태어났", "태어난", "출산", "혼인", "이혼", "사망", "정정", "결혼", "태어난 아이", "태어난 아기", "낳", "돌아가", "가족관계등록부", "잘못된 정보", "기록 정정", "family register", "family relation", "birth", "born", "marriage", "death", "divorce", "register"],
       items: [
         {
           id: "fam_q_fix",
@@ -11253,13 +11737,25 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           }),
         },
         {
+          id: "fam_q_birth_late",
+          kw: ["늦게 해도", "늦어도", "늦게", "기한 지났", "기한이 지났", "기한 넘", "지연신고", "늦게 신고", "지금 해도", "안 했는데", "안 했어", "몇 살", "2살", "5살", "10살", "지났는데", "too late", "late registration", "missed the deadline", "overdue"],
+          build: () => ({
+            kind: "answer",
+            text: lang === "ko"
+              ? "출생신고는 법적으로 출생 후 1개월 이내에 해야 합니다. 「가족관계의 등록 등에 관한 법률」에 따라 신고의무자가 정당한 사유 없이 기한을 넘기면 5만 원 이하의 과태료가 부과될 수 있습니다.\n\n다만 기한이 지났다고 해서 출생신고를 못 하는 것은 아닙니다. 아이가 2살, 5살, 심지어 10살이 넘었더라도 출생신고 자체는 가능합니다. 이 경우 지연 사유에 대한 설명이나 추가 확인이 필요할 수 있습니다. 아래에서 출생신고 절차를 시작해 주세요."
+              : "A birth report must legally be filed within 1 month of birth. Under the Act on Registration of Family Relations, if the person obligated to report misses the deadline without justifiable cause, a fine of up to KRW 50,000 may be imposed.\n\nHowever, missing the deadline does not mean you can no longer file. Even if the child is 2, 5, or over 10 years old, the birth report can still be made — though an explanation of the delay or additional verification may be required. Start the birth-report process below.",
+            goId: "family_birth",
+            goLabel: lang === "ko" ? "출생신고 시작하기" : "Start birth report",
+          }),
+        },
+        {
           id: "fam_q_birth",
-          kw: ["태어난 아이", "출생신고", "출생 등록", "아이를 한국", "아기를 한국", "등록해야", "한국에도 등록", "한국 등록", "낳았는데", "낳은", "출생 신고", "born", "birth report", "register.*birth", "register my child", "register my baby"],
+          kw: ["태어난 아이", "출생신고", "출생 등록", "아이를 한국", "아기를 한국", "등록해야", "한국에도 등록", "한국 등록", "낳았는데", "낳은", "태어났는데", "태어났어", "출산했", "아들이 태어", "딸이 태어", "아이가 태어", "뭘 해야", "출생 신고", "born", "birth report", "register.*birth", "register my child", "register my baby", "just had a baby"],
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "네, 캐나다에서 태어난 아이도 부모 중 한 명이 한국 국적이면 한국에 출생신고를 해야 합니다. 부모의 국적 조합(부모 모두 한국인 / 한쪽만 한국인 / 미혼 등)에 따라 서류가 달라지니, 아래에서 상황을 선택해 주세요."
-              : "Yes — a child born in Canada must be reported in Korea if one parent is a Korean national. The required documents depend on the parents' nationality combination (both Korean / one Korean / unmarried, etc.). Choose your situation below.",
+              ? "네, 캐나다에서 태어난 아이도 부모 중 한 명이 출생 당시 한국 국적이면 한국에 출생신고를 해야 합니다. 이 경우 아이는 출생과 동시에 한국 국적도 함께 갖는 선천적 복수국적자가 되며, 출생신고를 하면 가족관계등록부에 등재됩니다. 부모의 국적 조합(부모 모두 한국인 / 한쪽만 한국인 / 혼외자 등)에 따라 필요한 서류가 달라지니, 아래에서 상황을 선택해 주세요."
+              : "Yes — a child born in Canada must be reported in Korea if one parent was a Korean national at the birth. In that case the child is a congenital dual national holding Korean nationality from birth, and the birth report registers them in the family register. Required documents depend on the parents' nationality combination (both Korean / one Korean / child born out of wedlock, etc.). Choose your situation below.",
             goId: "family_birth",
             goLabel: lang === "ko" ? "출생신고 시작하기" : "Start birth report",
           }),
@@ -11506,7 +12002,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
   // FAQ 매칭: 자주 묻는 질문(faq_start.items)에서 키워드가 겹치면 그 답을 즉답으로
   const FAQ_KW: any = {
     0: ["예약", "appointment", "booking", "book"],
-    1: ["사진", "규격", "photo", "picture", "size"],
+    1: ["사진", "규격", "반려", "거부", "사진 때문", "사진이 안", "photo", "picture", "size", "rejected", "reject"],
     2: ["수수료", "현금", "카드", "결제", "지불", "fee", "cash", "card", "payment", "pay"],
     3: ["우편", "메일로", "by mail", "mail"],
     4: ["운영", "시간", "영업", "몇 시", "언제 여", "언제 열", "hours", "open", "time"],
@@ -11531,11 +12027,65 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     return null;
   };
 
+  // 인사·간단한 잡담 처리 (정확 일치 또는 아주 짧은 입력만 — 업무 질문을 가로채지 않도록)
+  const matchSmalltalk = (q: string, rl: string) => {
+    const clean = q.replace(/[!?.~,\s]/g, "");
+    const greet = ["안녕", "안녕하세요", "안녕하십니까", "하이", "헬로", "hi", "hello", "hey", "goodmorning", "goodafternoon", "좋은아침", "여보세요"];
+    const thanks = ["고마워", "고마워요", "고맙습니다", "감사", "감사해요", "감사합니다", "thanks", "thankyou", "thx", "thankyouverymuch"];
+    const bye = ["잘있어", "잘있어요", "안녕히계세요", "안녕히가세요", "bye", "goodbye", "seeya", "수고", "수고하세요", "수고하셨습니다"];
+    const help = ["도와줘", "도와주세요", "뭐할수있어", "뭐할수있나요", "뭘할수있어", "무엇을도와", "기능이뭐야", "기능이뭔가요", "whatcanyoudo", "help", "menu", "도움말"];
+    // 정확히 일치하는 경우에만 잡담으로 처리 (문장에 섞이면 업무 질문으로 넘김)
+    const isExact = (arr: string[]) => arr.some((g) => clean === g);
+    if (isExact(greet)) {
+      return {
+        kind: "answer",
+        text: rl === "ko"
+          ? "안녕하세요! 영사 민원 도우미입니다. 여권, 비자, 공증, 국적, 가족관계 신고, 증명서 발급 등 어떤 업무가 궁금하신지 편하게 말씀해 주세요."
+          : "Hello! I'm the consular services helper. Tell me what you need — passports, visas, notarization, nationality, family reports, certificate issuance, and more.",
+      };
+    }
+    if (isExact(thanks)) {
+      return {
+        kind: "answer",
+        text: rl === "ko"
+          ? "도움이 되었다니 다행입니다. 더 궁금한 업무가 있으면 말씀해 주세요."
+          : "Glad to help. Let me know if there's anything else you'd like to ask about.",
+      };
+    }
+    if (isExact(bye)) {
+      return {
+        kind: "answer",
+        text: rl === "ko"
+          ? "감사합니다. 필요하실 때 언제든 다시 찾아 주세요."
+          : "Thank you. Feel free to come back anytime you need help.",
+      };
+    }
+    if (isExact(help)) {
+      return {
+        kind: "answer",
+        text: rl === "ko"
+          ? "다음과 같은 업무를 안내해 드릴 수 있습니다: 여권(발급·갱신·분실), 비자, 공증·인증, 병역, 국적(상실·이탈·회복·복수국적), 가족관계 신고(출생·혼인·사망·정정), 각종 증명서 발급, 재외국민 등록, 해외이주 신고, 예약·관할 안내. 찾으시는 업무를 입력해 주세요."
+          : "I can help with: passports (issue/renew/lost), visas, notarization, military service, nationality (loss/exit/restoration/dual), family reports (birth/marriage/death/correction), certificate issuance, overseas-Korean registration, emigration report, and booking/jurisdiction info. Just type what you're looking for.",
+      };
+    }
+    return null;
+  };
+
   const handleChatSend = (raw?: string) => {
     const text = (raw ?? chatInput).trim();
     if (!text) return;
     const q = text.toLowerCase();
     setChatInput("");
+    // 입력 언어 감지: 한글이 있으면 ko, 영문 알파벳만 있으면 en, 둘 다/없으면 현재 lang
+    const hasKo = /[가-힣]/.test(text);
+    const hasEn = /[a-zA-Z]/.test(text);
+    const replyLang = hasKo ? "ko" : (hasEn ? "en" : lang);
+    // 0) 인사·간단한 잡담 → 가볍게 받고 서비스 유도
+    const smalltalk = matchSmalltalk(q, replyLang);
+    if (smalltalk) {
+      setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...smalltalk }]);
+      return;
+    }
     // 1) 시나리오 우선
     const sc = matchScenario(q);
     if (sc) {
@@ -11548,8 +12098,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
       setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...faq }]);
       return;
     }
-    // 2) 검색 폴백
-    const idx = lang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
+    // 2) 검색 폴백 (감지된 언어 기준)
+    const idx = replyLang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
     const words = q.split(/\s+/).filter(Boolean);
     const qNoSpace = q.replace(/\s+/g, "");
     const scored = idx
@@ -11567,7 +12117,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
       .map((x: any) => x.e);
     const reply = scored.length > 0
       ? { role: "bot", kind: "results", results: scored }
-      : { role: "bot", kind: "noresult" };
+      : { role: "bot", kind: "noresult", replyLang };
     setChatMsgs((m: any) => [...m, { role: "user", text }, reply]);
   };
 
@@ -11608,7 +12158,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
       <div className="app">
         {/* HEADER */}
         <header className="header">
-          <button onClick={goHome} className="header-logo" style={{ background: "none", border: "none", cursor: "pointer" }}>
+          <button onClick={goHome} className="header-logo" aria-label={lang === "ko" ? "홈으로" : "Home"} style={{ background: "none", border: "none", cursor: "pointer" }}>
             <span className="header-flag">🇰🇷</span>
             <div className="header-title">
               {lang === "ko" ? "주토론토 대한민국 총영사관" : "Consulate General of the Republic of Korea in Toronto"}
@@ -11662,7 +12212,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           {/* NAV BUTTONS */}
           {pageId !== "home" && (
             <div className="nav-row">
-              <button className="nav-btn" onClick={goBack}>{lang === "ko" ? "← 이전" : "← Back"}</button>
+              <button className="nav-btn" onClick={goBack} aria-label={lang === "ko" ? "이전 화면으로" : "Go back"}>{lang === "ko" ? "← 이전" : "← Back"}</button>
               <button className="nav-btn home" onClick={goHome}>{lang === "ko" ? "🏠 홈으로" : "🏠 Home"}</button>
             </div>
           )}
@@ -11724,6 +12274,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   <span className="search-icon">🔍</span>
                   <input
                     className="search-input"
+                    aria-label={lang === "ko" ? "민원 업무 검색" : "Search consular services"}
                     type="text"
                     placeholder={lang === "ko" ? "위임장, 여권, 공증, 병적증명서…" : "POA, passport, notarization…"}
                     value={searchQuery}
@@ -11824,7 +12375,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                             s.id.replace("_start", "").replace("_en", "")
                           ] ?? "#003478",
                         } as React.CSSProperties}
-                        onClick={() => goTo(s.id)}>
+                        onClick={() => goTo(s.id)} aria-label={s.title}>
                         <div className="sc-header">
                           <div className="sc-icon-box">{s.icon}</div>
                           <div className="sc-title">{s.title}</div>
@@ -11927,7 +12478,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   const oTitle = (ko && ko.title) ?? (en && en.title) ?? opt.title ?? "";
                   const oDesc  = (ko && ko.desc) ?? (en && en.desc) ?? opt.desc;
                   return (
-                  <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)}>
+                  <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)} aria-label={oTitle}>
                     <div className="oc-icon-box">{opt.icon ?? ""}</div>
                     <div className="oc-content">
                       <div className="oc-title">{oTitle}</div>
@@ -12527,9 +13078,9 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         </>
                       ) : (
                         <div className="chat-bubble-bot">
-                          {lang === "ko"
-                            ? "관련 안내를 찾지 못했어요. 다른 표현으로 다시 입력해 보시거나, 홈 화면의 메뉴를 이용해 주세요."
-                            : "I couldn't find a match. Try different words, or browse the menu on the home screen."}
+                          {(m.replyLang ?? lang) === "ko"
+                            ? "말씀하신 내용과 꼭 맞는 안내를 찾지 못했습니다. 다른 표현으로 다시 입력해 주시거나, 찾으시는 업무(예: 여권, 비자, 공증, 증명서)를 알려 주세요."
+                            : "I couldn't find an exact match. Please try rephrasing, or tell me the service you need (e.g. passport, visa, notarization, certificate)."}
                         </div>
                       )}
                     </div>

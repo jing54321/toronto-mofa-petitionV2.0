@@ -10940,6 +10940,38 @@ const EN_TRANSLATIONS: any = {
 const SEARCH_INDEX_KO = buildSearchIndex("ko");
 const SEARCH_INDEX_EN = buildSearchIndex("en");
 
+// 검색어 → 서비스 매핑 (서비스 핵심어). 검색 결과 정렬 시 해당 서비스 노드를 우대.
+const SEARCH_SVC_KW: Record<string, string[]> = {
+  nationality: ["국적", "시민권", "복수국적", "이중국적", "이탈", "상실", "귀화", "nationality", "citizenship", "dual"],
+  passport: ["여권", "passport"],
+  visa: ["비자", "사증", "체류", "visa"],
+  family: ["출생", "혼인", "이혼", "사망", "가족관계", "인지", "출생신고", "혼인신고", "birth", "marriage", "divorce", "death"],
+  military: ["병역", "국외여행허가", "병적", "군대", "military"],
+  notarization: ["공증", "인증", "위임", "아포스티유", "인감", "notar", "apostille"],
+  various_cert: ["범죄경력", "출입국사실", "주민등록", "납세", "criminal"],
+};
+const queryToService = (q: string): string | null => {
+  const ql = q.toLowerCase();
+  for (const [svc, kws] of Object.entries(SEARCH_SVC_KW)) {
+    if (kws.some((k) => k === ql || ql.includes(k) || k.includes(ql))) return svc;
+  }
+  return null;
+};
+// 검색 결과 관련도 점수 (높을수록 상위)
+const scoreSearchEntry = (entry: any, q: string, qSvc: string | null): number => {
+  const title = (entry.title ?? "").toLowerCase();
+  const bc = Array.isArray(entry.breadcrumb) ? entry.breadcrumb.map((b: string) => b.toLowerCase()) : [];
+  const text = (entry.text ?? "").toLowerCase();
+  let sc = 0;
+  if (title.includes(q)) sc += 10;
+  if (bc.some((b: string) => b.includes(q))) sc += 5;
+  if (text.includes(q)) sc += 1;
+  const nodeSvc = entry.node && entry.node.service ? entry.node.service : "";
+  if (qSvc && nodeSvc === qSvc) sc += 12;
+  if (typeof entry.id === "string" && entry.id.endsWith("_start")) sc += 2;
+  return sc;
+};
+
 const SERVICE_COLORS = {
   passport: "#003478", family: "#1a6b3c", nationality: "#7b2d2d",
   cert: "#1a4d7a", various_cert: "#2d5a8a", visa: "#4a2d7a",
@@ -12102,6 +12134,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     const idx = replyLang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
     const words = q.split(/\s+/).filter(Boolean);
     const qNoSpace = q.replace(/\s+/g, "");
+    const fbSvc = queryToService(q);
     const scored = idx
       .map((e: any) => {
         const t = e.text;
@@ -12109,6 +12142,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         let score = 0;
         for (const w of words) { if (t.includes(w)) score += w.length >= 2 ? 2 : 1; }
         if (qNoSpace.length >= 2 && tNoSpace.includes(qNoSpace)) score += 3;
+        // 제목·경로·서비스 일치 가중치 (앱 검색과 동일한 관련도 반영)
+        score += scoreSearchEntry(e, q, fbSvc);
         return { e, score };
       })
       .filter((x: any) => x.score > 0)
@@ -12222,17 +12257,24 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
             // 검색 로직
             const q = searchQuery.trim().toLowerCase();
             const activeIndex = lang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
+            const qSvc = q.length >= 1 ? queryToService(q) : null;
             const searchResults = q.length >= 1
-              ? activeIndex.filter(({ text }: any) => {
-                  // 방법 1: 띄어쓰기로 분리 후 AND 검색 ("여권 분실" → 둘 다 포함)
-                  const words = q.split(/\s+/).filter(Boolean);
-                  const andMatch = words.every((w: any) => text.includes(w));
-                  // 방법 2: 공백 제거 후 통째로 검색 ("여권분실" → 공백 제거한 텍스트에서 검색)
-                  const qNoSpace = q.replace(/\s+/g, "");
-                  const textNoSpace = text.replace(/\s+/g, "");
-                  const noSpaceMatch = qNoSpace.length >= 2 && textNoSpace.includes(qNoSpace);
-                  return andMatch || noSpaceMatch;
-                }).slice(0, 12)
+              ? activeIndex
+                  .filter(({ text }: any) => {
+                    // 방법 1: 띄어쓰기로 분리 후 AND 검색 ("여권 분실" → 둘 다 포함)
+                    const words = q.split(/\s+/).filter(Boolean);
+                    const andMatch = words.every((w: any) => text.includes(w));
+                    // 방법 2: 공백 제거 후 통째로 검색 ("여권분실" → 공백 제거한 텍스트에서 검색)
+                    const qNoSpace = q.replace(/\s+/g, "");
+                    const textNoSpace = text.replace(/\s+/g, "");
+                    const noSpaceMatch = qNoSpace.length >= 2 && textNoSpace.includes(qNoSpace);
+                    return andMatch || noSpaceMatch;
+                  })
+                  // 관련도 점수로 정렬 (제목·경로·서비스 일치 우대) 후 상위 12개
+                  .map((e: any) => ({ e, s: scoreSearchEntry(e, q, qSvc) }))
+                  .sort((a: any, b: any) => b.s - a.s)
+                  .slice(0, 12)
+                  .map((x: any) => x.e)
               : [];
 
             // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 30자) — 현재 언어 docs/notices 사용

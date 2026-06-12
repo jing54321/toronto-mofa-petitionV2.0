@@ -715,11 +715,12 @@ const TREE = {
     type: "question",
     service: "passport",
     breadcrumb: ["홈", "여권"],
-    question: "여권이 언제까지 필요하신가요?",
-    sub: "긴급 여부에 따라 발급되는 여권 종류와 절차가 완전히 달라집니다.",
+    question: "어떤 방법으로 발급받으시겠어요?",
+    sub: "신청 상황에 따라 여권 종류와 수령 방법이 달라집니다.",
     options: [
-      { id: "pp_urgent_age", icon: "🚨", title: "긴급 — 1주일 이내 필요", desc: "비전자 단수여권(유효기간 1년) 당일 발급 — 긴급 출국 사유 필요" },
-      { id: "pp_normal_age", icon: "📘", title: "일반 — 1주일 이상 여유", desc: "전자여권 — 방문/우편 수령 또는 DHL 특급(약 1~2주)" },
+      { id: "pp_normal_age", icon: "📘", title: "일반 — 우편 또는 방문 수령", desc: "전자여권 · 약 4주 소요" },
+      { id: "pp_normal_age_dhl", icon: "✈️", title: "일반 — DHL 특급 배송", desc: "전자여권 · 약 1~2주 소요 (가장 빠름)" },
+      { id: "pp_urgent_age", icon: "📄", title: "비전자 단수여권", desc: "당일 발급 · 유효기간 1년 · 왕복 1회만 사용 · 미국 입국/경유 불가 등 제약" },
     ],
   },
 
@@ -7208,11 +7209,12 @@ const EN_TRANSLATIONS: any = {
   // ───────── 질문 노드 (19) ─────────
   passport_start: {
     breadcrumb: ["Home", "Passport"],
-    question: "When do you need your passport?",
-    sub: "Whether it is urgent completely changes the passport type and the process.",
+    question: "How would you like to apply?",
+    sub: "The passport type and pickup method depend on your situation.",
     options: {
-      pp_urgent_age: { title: "Urgent — needed within 1 week", desc: "Non-electronic single-use passport (valid 1 year), same-day — urgent travel reason required" },
-      pp_normal_age: { title: "Standard — 1 week or more", desc: "E-passport — in-person/mail pickup, or DHL express (about 1–2 weeks)" },
+      pp_normal_age: { title: "Standard — mail or in-person pickup", desc: "E-passport · about 4 weeks" },
+      pp_normal_age_dhl: { title: "Standard — DHL express delivery", desc: "E-passport · about 1–2 weeks (fastest)" },
+      pp_urgent_age: { title: "Non-electronic single-use passport", desc: "Same-day · valid 1 year · one round trip only · cannot enter/transit the USA, among other limits" },
     },
   },
   pp_normal_age: {
@@ -11019,6 +11021,8 @@ export default function App() {
 function AppInner() {
   const [pageId, setPageId] = useState("home");
   const [history, setHistory] = useState(["home"]);
+  // 여권 첫 화면에서 고른 수령 방법(우편·방문 / DHL)을 결과 수령 블록에 반영. null이면 전체 표시.
+  const [deliveryChoice, setDeliveryChoice] = useState<null | "mail_visit" | "dhl">(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [openFaq, setOpenFaq] = useState<any>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
@@ -11108,6 +11112,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
 
   const goTo = (id: any) => {
     if (!id || typeof id !== "string") return;
+    // 별칭: DHL 특급 옵션은 일반 전자여권과 동일한 흐름으로 합류
+    if (id === "pp_normal_age_dhl") id = "pp_normal_age";
     const resolved = lang === "en" && (EN_ROUTE_MAP as any)[id] ? (EN_ROUTE_MAP as any)[id] : id;
     if (!(TREE as any)[resolved] && resolved !== "home") {
       console.warn(`[goTo] 노드 없음: ${resolved}`);
@@ -12168,6 +12174,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     setHistory(["home"]);
     setPageId("home");
     setSearchQuery("");
+    setDeliveryChoice(null);
     window.scrollTo(0, 0);
   };
 
@@ -12176,6 +12183,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     setHistory(["home"]);
     setPageId("home");
     setSearchQuery("");
+    setDeliveryChoice(null);
     window.scrollTo(0, 0);
   };
 
@@ -12520,7 +12528,12 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   const oTitle = (ko && ko.title) ?? (en && en.title) ?? opt.title ?? "";
                   const oDesc  = (ko && ko.desc) ?? (en && en.desc) ?? opt.desc;
                   return (
-                  <button key={opt.id} className="option-card" onClick={() => goTo(opt.id)} aria-label={oTitle}>
+                  <button key={opt.id} className="option-card" onClick={() => {
+                    // 여권 첫 화면 수령 방법 선택 기억 (그 외 옵션은 영향 없음)
+                    if (opt.id === "pp_normal_age") setDeliveryChoice("mail_visit");
+                    else if (opt.id === "pp_normal_age_dhl") setDeliveryChoice("dhl");
+                    goTo(opt.id);
+                  }} aria-label={oTitle}>
                     <div className="oc-icon-box">{opt.icon ?? ""}</div>
                     <div className="oc-content">
                       <div className="oc-title">{oTitle}</div>
@@ -12620,30 +12633,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     </span>
                     <span style={{ fontSize: "18px", color: "#8899bb", flexShrink: 0 }}>›</span>
                   </button>
-                </div>
-              )}
-              {pageId === "passport_start" && (
-                <div style={{ marginTop: "1.25rem" }}>
-                  <div style={{ fontSize: "13.5px", fontWeight: 600, color: "#003478", marginBottom: "8px" }}>
-                    {lang === "en" ? "✋ Wait! In a hurry? Read this first" : "✋ 여기서 잠깐! 급하신가요? 먼저 확인하세요"}
-                  </div>
-                  <div style={{ background: "#f7f9fd", border: "1px solid #dde3ef", borderRadius: "12px", padding: "0.875rem 1rem", display: "flex", flexDirection: "column", gap: "8px" }}>
-                    <div style={{ fontSize: "12.5px", color: "#3a4a66", lineHeight: 1.6 }}>
-                      {lang === "en"
-                        ? "Being in a hurry does NOT automatically mean you need an emergency passport. Most people simply receive a regular e-passport faster by DHL express."
-                        : "급하다고 무조건 긴급여권이 필요한 것은 아닙니다. 대부분은 일반 전자여권을 DHL 특급배송으로 더 빨리 받으시면 됩니다."}
-                    </div>
-                    <div style={{ borderTop: "0.5px solid #e3e6ee", paddingTop: "8px", display: "flex", flexDirection: "column", gap: "6px" }}>
-                      <div style={{ fontSize: "12.5px", color: "#333", lineHeight: 1.55 }}>
-                        <span style={{ fontWeight: 600, color: "#185fa5" }}>📘 {lang === "en" ? "Regular e-passport + DHL" : "일반 전자여권 + DHL"}</span>
-                        {lang === "en" ? " — for most people. Apply for the standard e-passport and pay for DHL express to receive it in about 1–2 weeks." : " — 대부분 여기에 해당. 일반 전자여권을 신청하고 DHL 특급배송을 결제하면 약 1~2주 안에 받습니다."}
-                      </div>
-                      <div style={{ fontSize: "12.5px", color: "#333", lineHeight: 1.55 }}>
-                        <span style={{ fontWeight: 600, color: "#a32d2d" }}>🚨 {lang === "en" ? "Emergency passport" : "긴급여권"}</span>
-                        {lang === "en" ? " — only when you have proof of an urgent departure. It is a non-electronic single-use passport (1-year validity), issued same day." : " — 긴급 출국 사유 증빙이 있을 때만. 비전자 단수여권(유효기간 1년)으로 당일 발급됩니다."}
-                      </div>
-                    </div>
-                  </div>
                 </div>
               )}
               {pageId === "cert_start" && (() => {
@@ -12787,6 +12776,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 <div className="pickup-card">
                   <div className="pickup-head">📦 {lang === "ko" ? "여권 어떻게 받으시겠어요?" : "How would you like to receive it?"}</div>
                   <div className="pickup-body">
+                    {deliveryChoice !== "dhl" && (
                     <div className="pickup-opt">
                       <div className="pickup-opt-top">
                         <span className="pickup-opt-name">🏛️ {lang === "ko" ? "영사관 방문 수령" : "In-person pickup"}</span>
@@ -12794,6 +12784,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       </div>
                       <div className="pickup-opt-desc">{lang === "ko" ? "추가 서류 없음 · 접수증 지참 후 픽업 · 무료" : "No extra docs · bring receipt · free"}</div>
                     </div>
+                    )}
+                    {deliveryChoice !== "dhl" && (
                     <div className="pickup-opt">
                       <div className="pickup-opt-top">
                         <span className="pickup-opt-name">✉️ {lang === "ko" ? "우편 수령 (Xpresspost)" : "Mail (Xpresspost)"}</span>
@@ -12801,6 +12793,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       </div>
                       <div className="pickup-opt-desc">{lang === "ko" ? "추가: 등기봉투(1인당 1매) + 우편수령신청서 · 봉투값 별도" : "Add: Xpresspost envelope (1 per person) + mail-receipt form"}</div>
                     </div>
+                    )}
+                    {deliveryChoice !== "mail_visit" && (
                     <div className="pickup-opt">
                       <div className="pickup-opt-top">
                         <span className="pickup-opt-name">✈️ {lang === "ko" ? "DHL 특급" : "DHL express"} <span style={{ fontSize: "11px", color: "#185fa5", fontWeight: 700 }}>{lang === "ko" ? "가장 빠름" : "fastest"}</span></span>
@@ -12809,6 +12803,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       <div className="pickup-opt-desc">{lang === "ko" ? "추가: DHL 결제 영수증 출력본 · 배송비 별도 · 가족 1회 결제" : "Add: DHL payment receipt · shipping extra · one payment per family"}</div>
                       <div className="pickup-warn">⚠️ {lang === "ko" ? "자택 배송 아님 — 영사관 또는 우편으로 최종 수령" : "Not home delivery — final pickup at consulate or by mail"}</div>
                     </div>
+                    )}
                   </div>
                 </div>
               )}

@@ -11024,9 +11024,13 @@ function AppInner() {
   // 여권 첫 화면에서 고른 수령 방법(우편·방문 / DHL)을 결과 수령 블록에 반영. null이면 전체 표시.
   const [deliveryChoice, setDeliveryChoice] = useState<null | "mail_visit" | "dhl">(null);
   const [searchQuery, setSearchQuery] = useState("");
+  // 검색바 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
+  const SEARCH_ENABLED = false;
   const [openFaq, setOpenFaq] = useState<any>(null);
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
+  // 챗봇 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
+  const CHAT_ENABLED = false;
   const [chatInput, setChatInput] = useState("");
   const [chatMsgs, setChatMsgs] = useState<any[]>([]);
 
@@ -12307,7 +12311,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 <div className="page-title" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
                   <div>
                     <h1>{lang === "ko" ? "어떤 서비스가 필요하신가요?" : "What service do you need?"}</h1>
-                    <p>{lang === "ko" ? "업무를 선택하거나 검색해 보세요." : "Select a service or search below."}</p>
+                    <p>{lang === "ko" ? "업무를 선택하여 필요한 문서를 확인하세요." : "Select a service to see the required documents."}</p>
                   </div>
                   <button
                     className="faq-btn"
@@ -12320,6 +12324,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 </div>
 
                 {/* 검색창 */}
+                {SEARCH_ENABLED && (
                 <div className="search-wrap">
                   <span className="search-icon">🔍</span>
                   <input
@@ -12335,9 +12340,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     <button className="search-clear" onClick={() => setSearchQuery("")}>✕</button>
                   )}
                 </div>
+                )}
 
                 {/* 검색 결과 */}
-                {q.length >= 1 ? (
+                {SEARCH_ENABLED && q.length >= 1 ? (
                   <div>
                     {searchResults.length > 0 ? (
                       <>
@@ -13036,10 +13042,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         </footer>
 
         {/* CHAT HELPER */}
-        {!chatOpen && (
+        {CHAT_ENABLED && !chatOpen && (
           <button className="chat-fab" onClick={() => setChatOpen(true)} aria-label={lang === "ko" ? "도우미 열기" : "Open helper"}>💬</button>
         )}
-        {chatOpen && (
+        {CHAT_ENABLED && chatOpen && (
           <div className="chat-panel">
             <div className="chat-head">
               <div>

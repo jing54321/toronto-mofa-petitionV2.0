@@ -7601,8 +7601,8 @@ const EN_TRANSLATIONS: any = {
       "Legal guardian consent form — signed by the representative guardian",
       "Visiting representative guardian's (father or mother) passport original + 1 copy",
       "Residency-status proof (one applicable to the child):",
-      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
-      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
       renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
@@ -7633,8 +7633,8 @@ const EN_TRANSLATIONS: any = {
       "Visiting guardian's (father or mother) passport original + 1 copy",
       "Sole-custody proof — child's basic/family relation certificate (to confirm custody)",
       "Residency-status proof (one applicable to the child):",
-      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
-      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
       renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
@@ -7662,16 +7662,16 @@ const EN_TRANSLATIONS: any = {
       "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
       "Child's basic & family relation certificate, 1 each",
       "【Case A — one parent resides in Korea】",
-      "  ▸ Legal guardian consent form — seal (ingam) of the Korea-resident guardian + signature of the visiting guardian",
-      "  ▸ Korea-resident guardian's seal certificate (ingam jeungmyeong)",
-      "  ▸ Korea-resident guardian's passport copy",
-      "  ▸ Visiting guardian's passport original + copy",
+      "    └ Legal guardian consent form — seal (ingam) of the Korea-resident guardian + signature of the visiting guardian",
+      "    └ Korea-resident guardian's seal certificate (ingam jeungmyeong)",
+      "    └ Korea-resident guardian's passport copy",
+      "    └ Visiting guardian's passport original + copy",
       "【Case B — both parents reside in Canada (cannot obtain a seal certificate)】",
-      "  ▸ Both parents visit the consulate",
-      "  ▸ Legal guardian consent form — signed by both parents",
+      "    └ Both parents visit the consulate",
+      "    └ Legal guardian consent form — signed by both parents",
       "Residency-status proof (one applicable to the child):",
-      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
-      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
       renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
@@ -7701,8 +7701,8 @@ const EN_TRANSLATIONS: any = {
       "Visiting guardian's passport original + 1 copy",
       "Sole-custody proof — child's basic/family relation certificate (bereavement confirmable if applicable)",
       "Residency-status proof (one applicable to the child):",
-      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
-      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
       renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
@@ -7734,11 +7734,11 @@ const EN_TRANSLATIONS: any = {
       "Parents' passport copies",
       "Child's (minor's) basic & family relation certificate, 1 each",
       "【If a proxy applies, add】",
-      "  ▸ Power of attorney (stating delegation to the proxy)",
-      "  ▸ Proxy's passport original + copy (proxy must be an adult 18+: grandparent, sibling)",
+      "    └ Power of attorney (stating delegation to the proxy)",
+      "    └ Proxy's passport original + copy (proxy must be an adult 18+: grandparent, sibling)",
       "Residency-status proof (one applicable to the child):",
-      "  ▸ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
-      "  ▸ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
+      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
       renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
@@ -7926,7 +7926,9 @@ const EN_TRANSLATIONS: any = {
       "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
       "Legal guardian consent form — signed by the representative guardian",
       "Visiting representative guardian's (father or mother) passport original + 1 copy",
-      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Residency-status proof (one applicable to the child):",
+      "    └ PR: PR Card original+copy / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
       "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
     ],
     stateDocs: {
@@ -7958,7 +7960,9 @@ const EN_TRANSLATIONS: any = {
       "Legal guardian consent form — signed by the sole-custody guardian",
       "Visiting guardian's (father or mother) passport original + 1 copy",
       "Sole-custody proof — child's basic/family relation certificate",
-      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Residency-status proof (one applicable to the child):",
+      "    └ PR: PR Card original+copy / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
       "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
     ],
     stateDocs: {
@@ -7988,9 +7992,17 @@ const EN_TRANSLATIONS: any = {
       "Urgent passport issuance reason statement (complete and submit the form)",
       "1 passport photo (within 6 months; infants under 6 must use a photo studio)",
       "Child's basic & family relation certificate, 1 each",
-      "【Case A — one parent resides in Korea】 Legal guardian consent form (seal of the Korea-resident guardian + signature of the visiting guardian) + Korea-resident guardian's seal certificate + Korea-resident guardian's passport copy + visiting guardian's passport original+copy",
-      "【Case B — both parents reside in Canada (cannot obtain a seal certificate)】 Both parents visit + legal guardian consent form signed by both parents",
-      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "【Case A — one parent resides in Korea】",
+      "    └ Legal guardian consent form — seal of the Korea-resident guardian + signature of the visiting guardian",
+      "    └ Korea-resident guardian's seal certificate",
+      "    └ Korea-resident guardian's passport copy",
+      "    └ Visiting guardian's passport original + copy",
+      "【Case B — both parents reside in Canada (cannot obtain a seal certificate)】",
+      "    └ Both parents visit the consulate",
+      "    └ Legal guardian consent form — signed by both parents",
+      "Residency-status proof (one applicable to the child):",
+      "    └ PR: PR Card original+copy / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
       "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
     ],
     stateDocs: {
@@ -8022,7 +8034,9 @@ const EN_TRANSLATIONS: any = {
       "Legal guardian consent form — signed by the guardian",
       "Visiting guardian's passport original + 1 copy",
       "Sole-custody proof — child's basic/family relation certificate",
-      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "Residency-status proof (one applicable to the child):",
+      "    └ PR: PR Card original+copy / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
       "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
     ],
     stateDocs: {
@@ -8055,8 +8069,12 @@ const EN_TRANSLATIONS: any = {
       "Representative guardian's seal certificate",
       "Parents' passport copies",
       "Child's (minor's) basic & family relation certificate, 1 each",
-      "【If a proxy applies, add】 Power of attorney + proxy's passport original+copy (proxy must be an adult 18+: grandparent, sibling)",
-      "Residency-status proof (one applicable to the child): PR = PR Card / Long-term = residence visa / Short-term = eTA / Congenital dual = Canadian passport or birth certificate",
+      "【If a proxy applies, add】",
+      "    └ Power of attorney (stating delegation to the proxy)",
+      "    └ Proxy's passport original + copy (proxy must be an adult 18+: grandparent, sibling)",
+      "Residency-status proof (one applicable to the child):",
+      "    └ PR: PR Card original+copy / Long-term: residence visa original+copy",
+      "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
       "Flight ticket copy — itinerary printout showing the child's name, schedule, and completed payment",
     ],
     stateDocs: {
@@ -11120,6 +11138,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.includes("여권 분실 신고서") || t.includes("분실신고서") || t.includes("Lost passport")) {
       return "/forms/lost_passport_report.pdf";
     }
+    // 긴급여권 발급신청 사유서
+    if (t.includes("긴급여권 발급신청 사유서") || t.includes("Urgent passport issuance reason")) {
+      return "/forms/urgent_passport_reason.pdf";
+    }
     return null;
   };
   const baseDocs = L("docs", Array.isArray(page.docs) ? page.docs : []);
@@ -13113,7 +13135,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   rel="noreferrer"
                   style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: "6px", background: "#fff", border: "1px solid #dde3ef", borderRadius: "10px", padding: "10px", fontSize: "13px", color: "#445", textDecoration: "none", fontWeight: 500 }}
                 >
-                  📥 {lang === "ko" ? "양식 다운로드" : "Download Forms"}
+                  📥 {lang === "ko" ? "전체 양식 보기" : "View All Forms"}
                 </a>
                 <button
                   onClick={() => window.print()}

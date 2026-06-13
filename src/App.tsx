@@ -306,6 +306,21 @@ const STYLES = `
   }
   .doc-item > span { min-width: 0; }
   .doc-item:last-child { border-bottom: none; }
+  .form-dl {
+    flex-shrink: 0; align-self: center;
+    display: inline-flex; align-items: center; gap: 3px;
+    margin-left: 8px; padding: 3px 9px;
+    background: #eef4fb; color: #003478;
+    border: 1px solid #cdddef; border-radius: 6px;
+    font-size: 12px; font-weight: 600; text-decoration: none;
+    white-space: nowrap; cursor: pointer;
+  }
+  .form-dl:hover { background: #dceaf8; }
+  .form-dl .form-label { font-size: 12px; }
+  @media (max-width: 400px) {
+    .form-dl { padding: 3px 7px; }
+    .form-dl .form-label { display: none; }
+  }
   .doc-num {
     width: 20px; height: 20px; border-radius: 50%;
     background: #e6eef8; color: #1a5fa5;
@@ -11069,6 +11084,16 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     history.some((h: string) => /_lost(_|$)/.test(h)) ? "lost" :
     history.some((h: string) => /_new(_|$)/.test(h))  ? "new"  :
     history.some((h: string) => /_renew(_|$)|_have(_|$)/.test(h)) ? "renew" : null;
+  // 서류명 → 양식 PDF 경로 매핑 (양식이 있는 서류만 다운로드 아이콘 표시)
+  const getFormUrl = (docText: string): string | null => {
+    if (typeof docText !== "string") return null;
+    const t = docText.trim();
+    // 여권발급신청서
+    if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {
+      return "/forms/passport_application_A4.pdf";
+    }
+    return null;
+  };
   const baseDocs = L("docs", Array.isArray(page.docs) ? page.docs : []);
   const stateSrc = (lang === "en" && T_EN && T_EN.stateDocs) ? T_EN.stateDocs : page.stateDocs;
   const stateExtra = (stateSrc && ppState && Array.isArray(stateSrc[ppState]))
@@ -12755,23 +12780,40 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   {mainDocs.length > 0 && <span className="info-card-count">{mainDocs.length}{lang === "ko" ? "개" : ""}</span>}
                 </div>
                 <div className="info-card-body">
-                  {mainDocs.map((doc: any, i: number) => (
+                  {mainDocs.map((doc: any, i: number) => {
+                    const formUrl = getFormUrl(doc);
+                    return (
                     <div key={i} className="doc-item">
                       <div className="doc-num">{i + 1}</div>
-                      <span style={{ fontWeight: 500 }}>{doc}</span>
+                      <span style={{ fontWeight: 500, flex: 1 }}>{doc}</span>
+                      {formUrl && (
+                        <a className="form-dl" href={formUrl} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
+                          📥<span className="form-label">{lang === "ko" ? "양식" : "Form"}</span>
+                        </a>
+                      )}
                     </div>
-                  ))}
+                    );
+                  })}
                   {extraDocs.length > 0 && (
                     <>
                       <div style={{ fontSize: "11px", fontWeight: 700, color: "#889", textTransform: "uppercase", letterSpacing: "0.05em", margin: "10px 0 4px", paddingTop: "8px", borderTop: "1px solid #f0f2f7" }}>
                         {lang === "ko" ? "해당자 추가 서류" : "Additional (if applicable)"}
                       </div>
-                      {extraDocs.map((doc: any, i: number) => (
+                      {extraDocs.map((doc: any, i: number) => {
+                        const cleanDoc = doc.replace(/^\s*▸\s*/, "");
+                        const formUrl = getFormUrl(cleanDoc);
+                        return (
                         <div key={i} className="doc-item" style={{ opacity: 0.75 }}>
                           <span className="doc-bullet" style={{ color: "#aab" }}>▸</span>
-                          <span style={{ fontSize: "12px" }}>{doc.replace(/^\s*▸\s*/, "")}</span>
+                          <span style={{ fontSize: "12px", flex: 1 }}>{cleanDoc}</span>
+                          {formUrl && (
+                            <a className="form-dl" href={formUrl} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
+                              📥<span className="form-label">{lang === "ko" ? "양식" : "Form"}</span>
+                            </a>
+                          )}
                         </div>
-                      ))}
+                        );
+                      })}
                     </>
                   )}
                 </div>

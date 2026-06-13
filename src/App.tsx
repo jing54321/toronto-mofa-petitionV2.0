@@ -11116,6 +11116,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.includes("법정대리인 동의서") || t.includes("Legal guardian consent")) {
       return "/forms/legal_guardian_consent.pdf";
     }
+    // 여권 분실 신고서
+    if (t.includes("여권 분실 신고서") || t.includes("분실신고서") || t.includes("Lost passport")) {
+      return "/forms/lost_passport_report.pdf";
+    }
     return null;
   };
   const baseDocs = L("docs", Array.isArray(page.docs) ? page.docs : []);
@@ -12901,6 +12905,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       </div>
                       <div className="pickup-opt-desc">{lang === "ko" ? "추가: DHL 결제 영수증 출력본 · 배송비 별도 · 가족 1회 결제" : "Add: DHL payment receipt · shipping extra · one payment per family"}</div>
                       <div className="pickup-warn">⚠️ {lang === "ko" ? "자택 배송 아님 — 영사관 또는 우편으로 최종 수령" : "Not home delivery — final pickup at consulate or by mail"}</div>
+                      <div style={{ marginTop: "6px" }}>
+                        <a className="form-dl" href="https://kr-epassport.dhl.com/passport" target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "DHL 결제 페이지로 이동" : "Go to DHL payment page"}>
+                          💳<span className="form-label">{lang === "ko" ? "DHL 결제하기" : "Pay DHL"}</span>
+                        </a>
+                      </div>
                     </div>
                     )}
                   </div>

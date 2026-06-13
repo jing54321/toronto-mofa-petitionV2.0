@@ -298,7 +298,7 @@ const STYLES = `
 
   /* ── 서류 항목 — 순번 번호 ── */
   .doc-item {
-    display: flex; align-items: flex-start; gap: 9px;
+    display: flex; align-items: center; gap: 9px;
     padding: 6px 0;
     border-bottom: 1px solid #f2f4f9;
     font-size: 13px; line-height: 1.55; color: #334;
@@ -328,9 +328,9 @@ const STYLES = `
     background: #e6eef8; color: #1a5fa5;
     font-size: 10.5px; font-weight: 700;
     display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; margin-top: 2px;
+    flex-shrink: 0;
   }
-  .doc-bullet { font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .doc-bullet { font-weight: 700; flex-shrink: 0; }
 
   .cost-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid #f2f4f9; font-size: 13px; }
   .cost-row:last-child { border-bottom: none; }
@@ -1136,8 +1136,8 @@ const TREE = {
       "법정대리인 동의서 — 대표 친권자가 서명",
       "방문하는 대표 친권자(부 또는 모)의 여권 원본 + 사본 1부",
       "체류신분별 증명서류 (자녀 해당분 1가지):",
-      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
-      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
     stateDocs: {
       renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
@@ -1170,8 +1170,8 @@ const TREE = {
       "방문하는 친권자(부 또는 모)의 여권 원본 + 사본 1부",
       "단독친권 증빙 — 자녀의 기본증명서·가족관계증명서 (친권 확인)",
       "체류신분별 증명서류 (자녀 해당분 1가지):",
-      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
-      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
     stateDocs: {
       renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
@@ -1201,16 +1201,16 @@ const TREE = {
       "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
       "자녀의 기본증명서·가족관계증명서 각 1부",
       "【경우 A — 부모 일방이 한국 거주】",
-      "  ▸ 법정대리인 동의서 — 한국 거주 친권자 인감 날인 + 방문 친권자 서명",
-      "  ▸ 한국 거주 친권자의 인감증명서",
-      "  ▸ 한국 거주 친권자의 여권 사본",
-      "  ▸ 방문 친권자의 여권 원본 + 사본",
+      "    └ 법정대리인 동의서 — 한국 거주 친권자 인감 날인 + 방문 친권자 서명",
+      "    └ 한국 거주 친권자의 인감증명서",
+      "    └ 한국 거주 친권자의 여권 사본",
+      "    └ 방문 친권자의 여권 원본 + 사본",
       "【경우 B — 부모 모두 캐나다 거주(인감 발급 불가)】",
-      "  ▸ 부모 모두 영사관 방문",
-      "  ▸ 법정대리인 동의서 — 부모 모두 서명",
+      "    └ 부모 모두 영사관 방문",
+      "    └ 법정대리인 동의서 — 부모 모두 서명",
       "체류신분별 증명서류 (자녀 해당분 1가지):",
-      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
-      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
     stateDocs: {
       renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
@@ -1242,8 +1242,8 @@ const TREE = {
       "방문하는 친권자의 여권 원본 + 사본 1부",
       "단독 양육·친권 증빙 — 자녀의 기본증명서·가족관계증명서 (사별 시 사망 사실 확인 가능)",
       "체류신분별 증명서류 (자녀 해당분 1가지):",
-      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
-      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
     stateDocs: {
       renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
@@ -1277,11 +1277,11 @@ const TREE = {
       "부모 여권 사본",
       "자녀(미성년자)의 기본증명서·가족관계증명서 각 1부",
       "【대리인이 신청하는 경우 추가】",
-      "  ▸ 위임장 (대리인에게 위임한다는 내용)",
-      "  ▸ 대리인의 여권 원본 + 사본 (대리인 범위: 18세 이상 (외)조부모·형제·자매)",
+      "    └ 위임장 (대리인에게 위임한다는 내용)",
+      "    └ 대리인의 여권 원본 + 사본 (대리인 범위: 18세 이상 (외)조부모·형제·자매)",
       "체류신분별 증명서류 (자녀 해당분 1가지):",
-      "  ▸ 영주권자: PR Card 원본+사본(앞뒷면) / 장기체류자: 체류비자 원본+사본",
-      "  ▸ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
     ],
     stateDocs: {
       renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
@@ -1479,7 +1479,9 @@ const TREE = {
       "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
       "법정대리인 동의서 — 대표 친권자가 서명",
       "방문하는 대표 친권자(부 또는 모)의 여권 원본 + 사본 1부",
-      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
       "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
     stateDocs: {
@@ -1513,7 +1515,9 @@ const TREE = {
       "법정대리인 동의서 — 단독친권자가 서명",
       "방문하는 친권자(부 또는 모)의 여권 원본 + 사본 1부",
       "단독친권 증빙 — 자녀의 기본증명서·가족관계증명서",
-      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
       "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
     stateDocs: {
@@ -1545,9 +1549,17 @@ const TREE = {
       "긴급여권 발급신청 사유서 (양식 작성·제출)",
       "여권용 사진 1매 (6개월 이내; 6세 미만 영·유아는 사진관 촬영)",
       "자녀의 기본증명서·가족관계증명서 각 1부",
-      "【경우 A — 부모 일방이 한국 거주】 법정대리인 동의서(한국 거주 친권자 인감 날인 + 방문 친권자 서명) + 한국 거주 친권자 인감증명서 + 한국 거주 친권자 여권 사본 + 방문 친권자 여권 원본+사본",
-      "【경우 B — 부모 모두 캐나다 거주(인감 발급 불가)】 부모 모두 방문 + 법정대리인 동의서 부모 모두 서명",
-      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "【경우 A — 부모 일방이 한국 거주】",
+      "    └ 법정대리인 동의서 — 한국 거주 친권자 인감 날인 + 방문 친권자 서명",
+      "    └ 한국 거주 친권자의 인감증명서",
+      "    └ 한국 거주 친권자의 여권 사본",
+      "    └ 방문 친권자의 여권 원본 + 사본",
+      "【경우 B — 부모 모두 캐나다 거주(인감 발급 불가)】",
+      "    └ 부모 모두 영사관 방문",
+      "    └ 법정대리인 동의서 — 부모 모두 서명",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
       "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
     stateDocs: {
@@ -1581,7 +1593,9 @@ const TREE = {
       "법정대리인 동의서 — 친권자가 서명",
       "방문하는 친권자의 여권 원본 + 사본 1부",
       "단독 양육·친권 증빙 — 자녀의 기본증명서·가족관계증명서",
-      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
       "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
     stateDocs: {
@@ -1616,8 +1630,12 @@ const TREE = {
       "대표 친권자의 인감증명서",
       "부모 여권 사본",
       "자녀(미성년자)의 기본증명서·가족관계증명서 각 1부",
-      "【대리인 신청 시 추가】 위임장 + 대리인 여권 원본+사본 (대리인 범위: 18세 이상 (외)조부모·형제·자매)",
-      "체류신분별 증명서류 (자녀 해당분 1가지): 영주권자=PR카드 / 장기=체류비자 / 단기=eTA / 선천복수국적=캐나다여권 또는 출생증명서",
+      "【대리인 신청 시 추가】",
+      "    └ 위임장 (대리인에게 위임한다는 내용)",
+      "    └ 대리인의 여권 원본 + 사본 (대리인 범위: 18세 이상 (외)조부모·형제·자매)",
+      "체류신분별 증명서류 (자녀 해당분 1가지):",
+      "    └ 영주권자: PR Card 원본+사본 / 장기체류자: 체류비자 원본+사본",
+      "    └ 단기방문(eTA): eTA 허가서 / 선천적 복수국적자: 캐나다여권 또는 출생증명서",
       "항공권 사본 — 자녀 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
     stateDocs: {
@@ -12783,14 +12801,35 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 <div className="info-card-header">
                   <span className="info-card-icon">📂</span>
                   <span className="info-card-title">{lang === "ko" ? "필요 서류" : "Required Documents"}</span>
-                  {mainDocs.length > 0 && <span className="info-card-count">{mainDocs.length}{lang === "ko" ? "개" : ""}</span>}
+                  {mainDocs.length > 0 && (() => { const realCount = mainDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("└")).length; return <span className="info-card-count">{realCount}{lang === "ko" ? "개" : ""}</span>; })()}
                 </div>
                 <div className="info-card-body">
-                  {mainDocs.map((doc: any, i: number) => {
+                  {(() => { let docNum = 0; return mainDocs.map((doc: any, i: number) => {
+                    const isSub = typeof doc === "string" && doc.trim().startsWith("└");
                     const formUrl = getFormUrl(doc);
+                    if (isSub) {
+                      const subText = doc.replace(/^\s*└\s*/, "");
+                      const nextIsSub = typeof mainDocs[i + 1] === "string" && mainDocs[i + 1].trim().startsWith("└");
+                      const subIsLast = i === mainDocs.length - 1;
+                      const subForm = getFormUrl(subText);
+                      return (
+                        <div key={i} className="doc-item" style={{ paddingLeft: "30px", borderBottom: (nextIsSub || subIsLast) ? "none" : "1px solid #f2f4f9", paddingTop: "2px", paddingBottom: "2px" }}>
+                          <span style={{ color: "#aab", flexShrink: 0 }}>└</span>
+                          <span style={{ fontSize: "12.5px", color: "#445", flex: 1 }}>{subText}</span>
+                          {subForm && (
+                            <a className="form-dl" href={subForm} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
+                              📥<span className="form-label">{lang === "ko" ? "양식" : "Form"}</span>
+                            </a>
+                          )}
+                        </div>
+                      );
+                    }
+                    docNum += 1;
+                    const mainNextIsSub = typeof mainDocs[i + 1] === "string" && mainDocs[i + 1].trim().startsWith("└");
+                    const isLastMain = i === mainDocs.length - 1;
                     return (
-                    <div key={i} className={formUrl ? "doc-item has-form" : "doc-item"}>
-                      <div className="doc-num">{i + 1}</div>
+                    <div key={i} className={formUrl ? "doc-item has-form" : "doc-item"} style={mainNextIsSub ? { borderBottom: "none" } : undefined}>
+                      <div className="doc-num">{docNum}</div>
                       <span style={{ fontWeight: 500, flex: 1 }}>{doc}</span>
                       {formUrl && (
                         <a className="form-dl" href={formUrl} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
@@ -12799,10 +12838,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       )}
                     </div>
                     );
-                  })}
+                  }); })()}
                   {extraDocs.length > 0 && (
                     <>
-                      <div style={{ fontSize: "11px", fontWeight: 700, color: "#889", textTransform: "uppercase", letterSpacing: "0.05em", margin: "10px 0 4px", paddingTop: "8px", borderTop: "1px solid #f0f2f7" }}>
+                      <div style={{ fontSize: "11px", fontWeight: 700, color: "#889", textTransform: "uppercase", letterSpacing: "0.05em", margin: "10px 0 4px" }}>
                         {lang === "ko" ? "해당자 추가 서류" : "Additional (if applicable)"}
                       </div>
                       {extraDocs.map((doc: any, i: number) => {
@@ -12845,7 +12884,13 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         <span className="pickup-opt-name">✉️ {lang === "ko" ? "우편 수령 (Xpresspost)" : "Mail (Xpresspost)"}</span>
                         <span className="pickup-badge">{lang === "ko" ? "3~4주 + 배송" : "3–4 wks + post"}</span>
                       </div>
-                      <div className="pickup-opt-desc">{lang === "ko" ? "추가: 등기봉투(1인당 1매) + 우편수령신청서 · 봉투값 별도" : "Add: Xpresspost envelope (1 per person) + mail-receipt form"}</div>
+                      <div className="pickup-opt-desc">{lang === "ko" ? "추가: Prepaid Xpresspost 등기봉투(small, 1인당 1매·Canada Post 구매, 방문 전 준비) + 우편수령 신청서" : "Add: Prepaid Xpresspost envelope (small, 1 per person, from Canada Post) + mail-receipt form"}</div>
+                      <div className="pickup-warn" style={{ color: "#556" }}>💡 {lang === "ko" ? "온타리오주 외 수령 시 \"National\" 봉투를 준비하세요." : "For pickup outside Ontario, use a \"National\" envelope."}</div>
+                      <div style={{ marginTop: "6px" }}>
+                        <a className="form-dl" href="/forms/mail_receipt_form.pdf" download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "우편수령 신청서 양식 다운로드" : "Download mail-receipt form"}>
+                          📥<span className="form-label">{lang === "ko" ? "우편수령 신청서" : "Mail-receipt form"}</span>
+                        </a>
+                      </div>
                     </div>
                     )}
                     {deliveryChoice !== "mail_visit" && (

@@ -306,8 +306,10 @@ const STYLES = `
   }
   .doc-item > span { min-width: 0; }
   .doc-item:last-child { border-bottom: none; }
+  .doc-item.has-form { align-items: center; }
+  .doc-item.has-form .doc-num, .doc-item.has-form .doc-bullet { margin-top: 0; }
   .form-dl {
-    flex-shrink: 0; align-self: center;
+    flex-shrink: 0;
     display: inline-flex; align-items: center; gap: 3px;
     margin-left: 8px; padding: 3px 9px;
     background: #eef4fb; color: #003478;
@@ -11092,6 +11094,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {
       return "/forms/passport_application_A4.pdf";
     }
+    // 법정대리인 동의서 (문구가 포함된 모든 줄)
+    if (t.includes("법정대리인 동의서") || t.includes("Legal guardian consent")) {
+      return "/forms/legal_guardian_consent.pdf";
+    }
     return null;
   };
   const baseDocs = L("docs", Array.isArray(page.docs) ? page.docs : []);
@@ -12783,7 +12789,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   {mainDocs.map((doc: any, i: number) => {
                     const formUrl = getFormUrl(doc);
                     return (
-                    <div key={i} className="doc-item">
+                    <div key={i} className={formUrl ? "doc-item has-form" : "doc-item"}>
                       <div className="doc-num">{i + 1}</div>
                       <span style={{ fontWeight: 500, flex: 1 }}>{doc}</span>
                       {formUrl && (
@@ -12803,7 +12809,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         const cleanDoc = doc.replace(/^\s*▸\s*/, "");
                         const formUrl = getFormUrl(cleanDoc);
                         return (
-                        <div key={i} className="doc-item" style={{ opacity: 0.75 }}>
+                        <div key={i} className={formUrl ? "doc-item has-form" : "doc-item"} style={{ opacity: 0.75 }}>
                           <span className="doc-bullet" style={{ color: "#aab" }}>▸</span>
                           <span style={{ fontSize: "12px", flex: 1 }}>{cleanDoc}</span>
                           {formUrl && (

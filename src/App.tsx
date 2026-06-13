@@ -739,7 +739,7 @@ const TREE = {
   pp_urgent_age: {
     type: "question",
     service: "passport",
-    breadcrumb: ["홈", "여권", "긴급"],
+    breadcrumb: ["홈", "여권", "비전자"],
     question: "신청자의 연령은?",
     sub: "비전자 단수여권(유효기간 1년)을 당일 발급합니다.",
     options: [
@@ -777,9 +777,9 @@ const TREE = {
   pp_u_adult_state: {
     type: "question",
     service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인"],
+    breadcrumb: ["홈", "여권", "비전자", "성인"],
     question: "현재 여권 상태는?",
-    sub: "긴급 비전자 단수여권 — 상태에 따라 분실신고서 등이 달라집니다.",
+    sub: "비전자 단수여권 — 상태에 따라 분실신고서 등이 달라집니다.",
     options: [
       { id: "pp_u_adult_have", icon: "🔄", title: "여권 있음 (재발급)", desc: "만료·훼손 등" },
       { id: "pp_u_adult_lost", icon: "❌", title: "여권 분실", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
@@ -790,9 +790,9 @@ const TREE = {
   pp_u_minor_state: {
     type: "question",
     service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자"],
+    breadcrumb: ["홈", "여권", "비전자", "미성년자"],
     question: "자녀의 현재 여권 상태는?",
-    sub: "긴급 비전자 단수여권 — 친권 상황은 결과 페이지에서 안내합니다.",
+    sub: "비전자 단수여권 — 친권 상황은 결과 페이지에서 안내합니다.",
     options: [
       { id: "pp_u_minor_have", icon: "🔄", title: "여권 있음 (재발급)", desc: "만료·훼손 등" },
       { id: "pp_u_minor_lost", icon: "❌", title: "여권 분실", desc: "경찰 분실 신고(Police Report) 먼저 필수" },
@@ -879,12 +879,12 @@ const TREE = {
     ],
   },
 
-  // ───────── ④ 긴급·성인: 상태별 체류신분 선택 (3개 → 같은 결과 5개) ─────────
+  // ───────── ④ 비전자·성인: 상태별 체류신분 선택 (3개 → 같은 결과 5개) ─────────
   pp_u_adult_have: {
     type: "question", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "재발급"],
+    breadcrumb: ["홈", "여권", "비전자", "성인", "재발급"],
     question: "체류 신분을 선택하세요",
-    sub: "긴급 비전자 단수여권 — 신분에 따라 증명서류가 달라집니다.",
+    sub: "비전자 단수여권 — 신분에 따라 증명서류가 달라집니다.",
     options: [
       { id: "pp_u_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
       { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
@@ -895,9 +895,9 @@ const TREE = {
   },
   pp_u_adult_lost: {
     type: "question", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "분실"],
+    breadcrumb: ["홈", "여권", "비전자", "성인", "분실"],
     question: "체류 신분을 선택하세요",
-    sub: "긴급 비전자 단수여권 (분실) — 경찰 분실 신고 먼저. 신분에 따라 증명서류가 달라집니다.",
+    sub: "비전자 단수여권 (분실) — 경찰 분실 신고 먼저. 신분에 따라 증명서류가 달라집니다.",
     options: [
       { id: "pp_u_adult_pr", icon: "🍁", title: "영주권자 (PR Card)", desc: "캐나다 영주권 — PR Card 소지" },
       { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
@@ -908,7 +908,7 @@ const TREE = {
   },
   pp_u_adult_new: {
     type: "question", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "신규"],
+    breadcrumb: ["홈", "여권", "비전자", "성인", "신규"],
     question: "체류 신분을 선택하세요",
     sub: "성인이 한국 여권을 생애 최초로 신규 발급받는 경우는, 한국 국적을 보유한 다음 두 경우에 해당합니다.",
     options: [
@@ -917,12 +917,12 @@ const TREE = {
     ],
   },
 
-  // ───────── ④ 긴급·미성년: 상태별 친권 선택 (3개 → 같은 결과 5개) ─────────
+  // ───────── ④ 비전자·미성년: 상태별 친권 선택 (3개 → 같은 결과 5개) ─────────
   pp_u_minor_have: {
     type: "question", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "재발급"],
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "재발급"],
     question: "친권 상황을 선택하세요",
-    sub: "긴급 비전자 단수여권 — 상황에 따라 추가 서류가 달라집니다.",
+    sub: "비전자 단수여권 — 상황에 따라 추가 서류가 달라집니다.",
     options: [
       { id: "pp_u_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
       { id: "pp_u_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
@@ -933,9 +933,9 @@ const TREE = {
   },
   pp_u_minor_lost: {
     type: "question", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "분실"],
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "분실"],
     question: "친권 상황을 선택하세요",
-    sub: "긴급 비전자 단수여권 (분실) — 경찰 분실 신고 먼저. 상황에 따라 추가 서류가 달라집니다.",
+    sub: "비전자 단수여권 (분실) — 경찰 분실 신고 먼저. 상황에 따라 추가 서류가 달라집니다.",
     options: [
       { id: "pp_u_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
       { id: "pp_u_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
@@ -946,9 +946,9 @@ const TREE = {
   },
   pp_u_minor_new: {
     type: "question", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "신규"],
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "신규"],
     question: "친권 상황을 선택하세요",
-    sub: "긴급 비전자 단수여권 (신규) — 상황에 따라 추가 서류가 달라집니다.",
+    sub: "비전자 단수여권 (신규) — 상황에 따라 추가 서류가 달라집니다.",
     options: [
       { id: "pp_u_minor_married", icon: "👨‍👩‍👧", title: "부모 혼인 중 (공동친권)", desc: "대표 친권자 1명이 방문하여 신청" },
       { id: "pp_u_minor_sole", icon: "👤", title: "이혼 — 단독친권", desc: "이혼 후 단독친권자가 신청" },
@@ -1285,11 +1285,11 @@ const TREE = {
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  // ═══════════ 결과: 긴급 비전자 단수여권 · 성인 (5) — pickup 없음 ═══════════
+  // ═══════════ 결과: 비전자 단수여권 · 성인 (5) — pickup 없음 ═══════════
   pp_u_adult_pr: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "영주권자"],
-    title: "긴급 단수여권 — 영주권자",
+    breadcrumb: ["홈", "여권", "비전자", "성인", "영주권자"],
+    title: "비전자 단수여권 — 영주권자",
     sub: "비전자 단수여권 (유효기간 1년) · 1주일 이내 필요 시",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
@@ -1311,7 +1311,7 @@ const TREE = {
     notices: [
       "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유로 한국에 가야 하면 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
-      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "수수료는 긴급사유 인정 시 C$22.95, 일반사유 C$67.50. 긴급 여행목적 증빙(사망증명서·상해진단서·입원증명 등) 제출 시 긴급사유로 인정됩니다.",
       "긴급사유 환급은 신청 후 6개월 이내 증빙 제출 시, 신청한 공관에서만 가능합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
@@ -1321,8 +1321,8 @@ const TREE = {
 
   pp_u_adult_longterm: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "장기체류자"],
-    title: "긴급 단수여권 — 장기체류자",
+    breadcrumb: ["홈", "여권", "비전자", "성인", "장기체류자"],
+    title: "비전자 단수여권 — 장기체류자",
     sub: "비전자 단수여권 (유효기간 1년) · 1주일 이내 필요 시",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
@@ -1344,7 +1344,7 @@ const TREE = {
     notices: [
       "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
-      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "수수료는 긴급사유 인정 시 C$22.95, 일반사유 C$67.50. 긴급 여행목적 증빙 제출 시 긴급사유로 인정됩니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
@@ -1353,8 +1353,8 @@ const TREE = {
 
   pp_u_adult_eta: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "단기방문(eTA)"],
-    title: "긴급 단수여권 — 단기방문자 (eTA)",
+    breadcrumb: ["홈", "여권", "비전자", "성인", "단기방문(eTA)"],
+    title: "비전자 단수여권 — 단기방문자 (eTA)",
     sub: "비전자 단수여권 (유효기간 1년) · 1주일 이내 필요 시",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
@@ -1377,7 +1377,7 @@ const TREE = {
       "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권(약 1주) 또는 캐나다발 한국 직항을 이용하세요.",
       "⚠️ eTA(무비자 입국)는 캐나다 입국 후 6개월 이내만 인정됩니다.",
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
-      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
     bookingLabel: "사전 예약하기 (여권과) →",
@@ -1385,8 +1385,8 @@ const TREE = {
 
   pp_u_adult_dual: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "선천적 복수국적자"],
-    title: "긴급 단수여권 — 선천적 복수국적자",
+    breadcrumb: ["홈", "여권", "비전자", "성인", "선천적 복수국적자"],
+    title: "비전자 단수여권 — 선천적 복수국적자",
     sub: "비전자 단수여권 (유효기간 1년) · 출생지에 따라 증빙서류가 다릅니다",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
@@ -1418,8 +1418,8 @@ const TREE = {
 
   pp_u_adult_acq: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "성인", "후천적 시민권자"],
-    title: "긴급 단수여권 — 후천적 시민권자",
+    breadcrumb: ["홈", "여권", "비전자", "성인", "후천적 시민권자"],
+    title: "비전자 단수여권 — 후천적 시민권자",
     sub: "비전자 단수여권 (유효기간 1년) · 국적 확인이 먼저입니다",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
@@ -1450,11 +1450,11 @@ const TREE = {
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
-  // ═══════════ 결과: 긴급 비전자 단수여권 · 미성년 (5) — pickup 없음 ═══════════
+  // ═══════════ 결과: 비전자 단수여권 · 미성년 (5) — pickup 없음 ═══════════
   pp_u_minor_married: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "부모 혼인 중"],
-    title: "긴급 단수여권 — 미성년자 (부모 혼인 중)",
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "부모 혼인 중"],
+    title: "비전자 단수여권 — 미성년자 (부모 혼인 중)",
     sub: "비전자 단수여권 (유효기간 1년) · 공동친권, 대표 친권자 1명 방문",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
@@ -1478,7 +1478,7 @@ const TREE = {
     notices: [
       "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
-      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
     bookingLabel: "사전 예약하기 (여권과) →",
@@ -1486,8 +1486,8 @@ const TREE = {
 
   pp_u_minor_sole: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "단독친권"],
-    title: "긴급 단수여권 — 미성년자 (이혼·단독친권)",
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "단독친권"],
+    title: "비전자 단수여권 — 미성년자 (이혼·단독친권)",
     sub: "비전자 단수여권 (유효기간 1년) · 단독친권자 방문",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
@@ -1512,7 +1512,7 @@ const TREE = {
     notices: [
       "⚠️ 비전자 단수여권은 미국 입국·경유가 불가합니다. 미국 경유 시 DHL 전자여권 또는 캐나다발 한국 직항을 이용하세요.",
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
-      "1주일 이상 여유가 있으면 긴급여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
+      "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
     bookingLabel: "사전 예약하기 (여권과) →",
@@ -1520,8 +1520,8 @@ const TREE = {
 
   pp_u_minor_joint: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "공동친권"],
-    title: "긴급 단수여권 — 미성년자 (이혼·공동친권)",
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "공동친권"],
+    title: "비전자 단수여권 — 미성년자 (이혼·공동친권)",
     sub: "비전자 단수여권 (유효기간 1년) · 거주 상황에 따라 서류가 다릅니다",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
@@ -1554,8 +1554,8 @@ const TREE = {
 
   pp_u_minor_single: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "한부모"],
-    title: "긴급 단수여권 — 미성년자 (한부모·사별·미혼)",
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "한부모"],
+    title: "비전자 단수여권 — 미성년자 (한부모·사별·미혼)",
     sub: "비전자 단수여권 (유효기간 1년) · 단독 양육 친권자 방문",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
@@ -1588,8 +1588,8 @@ const TREE = {
 
   pp_u_minor_study: {
     type: "result", service: "passport",
-    breadcrumb: ["홈", "여권", "긴급", "미성년자", "유학생"],
-    title: "긴급 단수여권 — 미성년 유학생 (부모 한국 거주)",
+    breadcrumb: ["홈", "여권", "비전자", "미성년자", "유학생"],
+    title: "비전자 단수여권 — 미성년 유학생 (부모 한국 거주)",
     sub: "비전자 단수여권 (유효기간 1년) · 본인 또는 대리인 신청",
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력)",
@@ -3643,7 +3643,7 @@ const TREE = {
   visa_ko_heritage_yes: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통"], question: "어떤 상황이신가요?", sub: "한국 혈통이 있으시면 비자 신청 전 국적 상태를 먼저 확인해야 합니다.", options: [{ id: "visa_dual_check_en", icon: "⚠️", title: "국적 상태를 아직 확인하지 않았어요", desc: "선천적 한국 국적 보유 여부 — 먼저 확인 필수" }, { id: "visa_f4_family_en", icon: "👨‍👩‍👧", title: "배우자 또는 자녀가 F-4 재외동포 비자 소지자예요", desc: "동반 비자 (F-3) 신청" }, { id: "visa_f4_en", icon: "🇰🇷", title: "국적상실 확인 완료 — F-4 비자 신청하러 왔어요", desc: "해당 케이스 선택" }] },
   visa_ko_heritage_unsure: { type: "result", service: "visa", breadcrumb: ["홈", "비자 (사증)", "혈통 불확실"], title: "⚠️ 비자 신청 전 부모님께 먼저 확인하세요", docs: ["부모님 중 한 분이라도 한국 국적이었던 적이 있는지 확인하세요", "  ▸ 현재 캐나다 시민권자이더라도, 본인 출생 당시 한국인이었다면 해당됩니다", "  ▸ 출생신고를 한 적 없어도, 출생 당시 부모 중 한 명이 한국인이었으면 본인도 한국 국적입니다", "확인 결과에 따라:", "  ▸ 한국 혈통 있음 → 뒤로 가서 '네' 선택", "  ▸ 한국 혈통 없음 → 뒤로 가서 '전혀 없어요' 선택"], costs: [{ label: "수수료", value: "해당 없음 — 상담 안내" }], time: "부모님께 확인 후 다시 방문", notices: ["⚠️ 한국 국적을 보유한 상태에서 비자를 신청하면 접수가 거부됩니다.", "⚠️ 만 18~37세 남성이고 한국 국적이라면 병역 의무가 있을 수 있습니다.", "여전히 불확실하다면 영사관(416-920-3809) 또는 국적과 상담 예약을 이용하세요."], booking: "https://www.torbooking.com/book", bookingLabel: "국적 상담 예약하기 →" },
 
-  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🇨🇦 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월).", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·경유 (캐나다 국적자)", desc: "무비자 · K-ETA · 경유(TWOV)" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-9 관광, C-3-4 출장, C-3-1 일반, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
+  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🇨🇦 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 그 외 국적은 사증면제 여부·체류 기간이 다르므로 공식 안내를 확인하세요.", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·경유 (무비자)", desc: "무비자 · K-ETA · 경유(TWOV)" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-9 관광, C-3-4 출장, C-3-1 일반, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
   visa_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa"], question: "Do you have Korean heritage?", sub: "Under Korean law, if either of your parents is/was EVER a Korean national — even if they later became Canadian — you may hold Korean citizenship automatically. This affects whether you need a visa at all.", options: [
     { id: "visa_heritage_yes_en", icon: "🧬", title: "Yes — a parent or grandparent was Korean", desc: "Includes cases where they later gave up Korean citizenship" },
     { id: "visa_heritage_unsure_en", icon: "🤔", title: "Not sure — one of my parents may have been Korean", desc: "Best to confirm before applying for any visa" },
@@ -3694,9 +3694,9 @@ const TREE = {
     service: "visa",
     breadcrumb: ["Home", "Visa", "No Korean Heritage"],
     question: "What brings you to Korea?",
-    sub: "Since you have no Korean heritage, select your purpose of visit. Canadian citizens can enter Korea visa-free for up to 6 months.",
+    sub: "Since you have no Korean heritage, select your purpose of visit. Canadian citizens can enter Korea visa-free for up to 6 months; other nationalities have different visa-free terms — check the official guide.",
     options: [
-      { id: "visa_visit_transit_en", icon: "🌏", title: "Visa-Free / Transit (Canadian citizens)", desc: "Visa-free · K-ETA · Transit (TWOV)" },
+      { id: "visa_visit_transit_en", icon: "🌏", title: "Visa-Free / Transit", desc: "Visa-free · K-ETA · Transit (TWOV)" },
       { id: "visa_short_term_en", icon: "🤝", title: "Short-Term Visit", desc: "Tourism (C-3-9), Business (C-3-4), General (C-3-1), Medical (C-3-3)" },
       { id: "visa_work_en", icon: "💼", title: "Work", desc: "E-2-1 English teacher, E-2-2 EPIK/TALK, E-1~E-7, H-1 Working Holiday, F-1-D Digital Nomad" },
       { id: "visa_study_en", icon: "🎓", title: "Study", desc: "D-2-6 Exchange, D-2-8 Short-term, D-4-1 Korean Language, D-4-3 Elementary/Secondary" },
@@ -4189,9 +4189,9 @@ const TREE = {
     service: "visa",
     breadcrumb: ["Home", "Visa", "No Korean Heritage", "Visiting / Transit"],
     question: "What type of visit?",
-    sub: "🇨🇦 Canadian passport holders are visa-free for up to 6 months — no visa needed. K-ETA exempted until December 31, 2026.",
+    sub: "🇨🇦 Canadian passport holders are visa-free for up to 6 months — no visa needed. K-ETA exempted until December 31, 2026. Other nationalities have different visa-free terms — check your nationality at the official Seoul visa guide (visitseoul.net/visa).",
     options: [
-      { id: "visa_visit_en", icon: "🇨🇦", title: "Tourism / Short-Term Stay — Canadian citizen", desc: "Visa-free up to 6 months — no Consulate visit needed" },
+      { id: "visa_visit_en", icon: "🇨🇦", title: "Tourism / Short-Term Stay — Canadian citizen", desc: "Visa-free up to 6 months — no Consulate visit needed / varies by nationality (30 days–6 months)" },
       { id: "visa_transit_en", icon: "🔄", title: "Transiting Through Korea (TWOV)", desc: "Passing through Korea on the way to another country — up to 30 days" },
       { id: "visa_keta_en", icon: "📱", title: "K-ETA — Do I need one?", desc: "Canadians currently exempted until Dec 31, 2026" },
     ],
@@ -6052,7 +6052,7 @@ const KO_TRANSLATIONS = {
     question: "한국 방문 목적은 무엇인가요?",
     sub: "한국 혈통이 없으시므로 방문 목적을 선택하세요. 캐나다 국적자는 최대 6개월간 무비자로 한국에 입국할 수 있습니다.",
     options: {
-      visa_visit_transit_en: { title: "무비자 / 경유 (캐나다 국적자)", desc: "무비자 · K-ETA · 경유(TWOV)" },
+      visa_visit_transit_en: { title: "무비자 / 경유", desc: "무비자 · K-ETA · 경유(TWOV)" },
       visa_short_term_en:    { title: "단기 방문", desc: "관광(C-3-9), 출장(C-3-4), 일반(C-3-1), 의료(C-3-3)" },
       visa_work_en:          { title: "취업", desc: "E-2-1 원어민 교사, E-2-2 EPIK/TALK, E-1~E-7, H-1 워킹홀리데이, F-1-D 디지털노마드" },
       visa_study_en:         { title: "유학", desc: "D-2-6 교환, D-2-8 단기, D-4-1 한국어연수, D-4-3 초·중·고" },
@@ -6822,9 +6822,9 @@ const KO_TRANSLATIONS = {
   visa_visit_transit_en: {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "방문 / 경유"],
     question: "어떤 종류의 방문인가요?",
-    sub: "🇨🇦 캐나다 여권 소지자는 최대 6개월 무비자 — 비자가 필요 없습니다. K-ETA는 2026년 12월 31일까지 면제.",
+    sub: "🇨🇦 캐나다 여권 소지자는 최대 6개월 무비자 — 비자가 필요 없습니다. K-ETA는 2026년 12월 31일까지 면제. 그 외 국적은 무비자 가능 여부·체류 기간이 다르므로, 서울시 공식 비자 안내(visitseoul.net/visa)에서 본인 국적 기준을 확인하세요.",
     options: {
-      visa_visit_en:        { title: "관광 / 단기체류 — 캐나다 국적자", desc: "최대 6개월 무비자 — 영사관 방문 불필요" },
+      visa_visit_en:        { title: "관광 / 단기체류 — 캐나다 국적자", desc: "최대 6개월 무비자 — 영사관 방문 불필요 / 국적별 상이 (30일~6개월)" },
       visa_transit_en:      { title: "한국 경유 (TWOV)", desc: "다른 나라로 가는 길에 한국 경유 — 최대 30일" },
       visa_keta_en:         { title: "K-ETA — 필요한가요?", desc: "캐나다인은 2026년 12월 31일까지 면제" },
     },
@@ -7227,7 +7227,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_urgent_age: {
-    breadcrumb: ["Home", "Passport", "Urgent"],
+    breadcrumb: ["Home", "Passport", "Non-electronic"],
     question: "Applicant's age?",
     sub: "A non-electronic single-use passport (valid 1 year) is issued same-day.",
     options: {
@@ -7256,9 +7256,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_adult_state: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult"],
     question: "Current passport status?",
-    sub: "Urgent non-electronic single-use passport — loss report etc. differ by status.",
+    sub: "Non-electronic single-use passport — loss report etc. differ by status.",
     options: {
       pp_u_adult_have: { title: "Have passport (renewal)", desc: "Expired · damaged, etc." },
       pp_u_adult_lost: { title: "Passport lost", desc: "Police report (Police Report) required first" },
@@ -7266,9 +7266,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_minor_state: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor"],
     question: "Child's current passport status?",
-    sub: "Urgent non-electronic single-use passport — custody is explained on the result page.",
+    sub: "Non-electronic single-use passport — custody is explained on the result page.",
     options: {
       pp_u_minor_have: { title: "Have passport (renewal)", desc: "Expired · damaged, etc." },
       pp_u_minor_lost: { title: "Passport lost", desc: "Police report (Police Report) required first" },
@@ -7346,9 +7346,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_adult_have: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Renewal"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Renewal"],
     question: "Select your residency status",
-    sub: "Urgent non-electronic single-use passport — proof documents differ by status.",
+    sub: "Non-electronic single-use passport — proof documents differ by status.",
     options: {
       pp_u_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
       pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
@@ -7358,9 +7358,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_adult_lost: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Lost"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Lost"],
     question: "Select your residency status",
-    sub: "Urgent non-electronic single-use passport (lost) — police report first. Proof documents differ by status.",
+    sub: "Non-electronic single-use passport (lost) — police report first. Proof documents differ by status.",
     options: {
       pp_u_adult_pr: { title: "Permanent Resident (PR Card)", desc: "Canadian permanent residency — holds a PR Card" },
       pp_u_adult_longterm: { title: "Long-term resident", desc: "Study Permit · Work Permit and other long-term visas" },
@@ -7370,7 +7370,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_adult_new: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "New"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "New"],
     question: "Select your residency status",
     sub: "An adult getting a Korean passport for the very first time falls into one of these two cases, both holding Korean nationality.",
     options: {
@@ -7379,9 +7379,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_minor_have: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Renewal"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Renewal"],
     question: "Select the custody situation",
-    sub: "Urgent non-electronic single-use passport — additional documents differ by situation.",
+    sub: "Non-electronic single-use passport — additional documents differ by situation.",
     options: {
       pp_u_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
       pp_u_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
@@ -7391,9 +7391,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_minor_lost: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Lost"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Lost"],
     question: "Select the custody situation",
-    sub: "Urgent non-electronic single-use passport (lost) — police report first. Additional documents differ by situation.",
+    sub: "Non-electronic single-use passport (lost) — police report first. Additional documents differ by situation.",
     options: {
       pp_u_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
       pp_u_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
@@ -7403,9 +7403,9 @@ const EN_TRANSLATIONS: any = {
     },
   },
   pp_u_minor_new: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "New"],
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "New"],
     question: "Select the custody situation",
-    sub: "Urgent non-electronic single-use passport (new) — additional documents differ by situation.",
+    sub: "Non-electronic single-use passport (new) — additional documents differ by situation.",
     options: {
       pp_u_minor_married: { title: "Parents married (joint custody)", desc: "One representative guardian visits to apply" },
       pp_u_minor_sole: { title: "Divorced — sole custody", desc: "Sole-custody guardian applies" },
@@ -7724,10 +7724,10 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
 
-  // ───────── 결과: 긴급 비전자 단수여권 · 성인 (5) ─────────
+  // ───────── 결과: 비전자 단수여권 · 성인 (5) ─────────
   pp_u_adult_pr: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Permanent Resident"],
-    title: "Urgent single-use passport — Permanent Resident",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Permanent Resident"],
+    title: "Non-electronic single-use passport — Permanent Resident",
     sub: "Non-electronic single-use passport (valid 1 year) · when needed within 1 week",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
@@ -7757,8 +7757,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_adult_longterm: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Long-term resident"],
-    title: "Urgent single-use passport — Long-term resident",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Long-term resident"],
+    title: "Non-electronic single-use passport — Long-term resident",
     sub: "Non-electronic single-use passport (valid 1 year) · when needed within 1 week",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
@@ -7787,8 +7787,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_adult_eta: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Short-term (eTA)"],
-    title: "Urgent single-use passport — Short-term visitor (eTA)",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Short-term (eTA)"],
+    title: "Non-electronic single-use passport — Short-term visitor (eTA)",
     sub: "Non-electronic single-use passport (valid 1 year) · when needed within 1 week",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
@@ -7817,8 +7817,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_adult_dual: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Congenital dual citizen"],
-    title: "Urgent single-use passport — Congenital dual citizen",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Congenital dual citizen"],
+    title: "Non-electronic single-use passport — Congenital dual citizen",
     sub: "Non-electronic single-use passport (valid 1 year) · proof differs by birthplace",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
@@ -7848,8 +7848,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_adult_acq: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Adult", "Acquired citizen"],
-    title: "Urgent single-use passport — Acquired citizen",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Adult", "Acquired citizen"],
+    title: "Non-electronic single-use passport — Acquired citizen",
     sub: "Non-electronic single-use passport (valid 1 year) · a nationality check comes first",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
@@ -7880,10 +7880,10 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
 
-  // ───────── 결과: 긴급 비전자 단수여권 · 미성년 (5) ─────────
+  // ───────── 결과: 비전자 단수여권 · 미성년 (5) ─────────
   pp_u_minor_married: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Parents married"],
-    title: "Urgent single-use passport — Minor (parents married)",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Parents married"],
+    title: "Non-electronic single-use passport — Minor (parents married)",
     sub: "Non-electronic single-use passport (valid 1 year) · joint custody, one representative guardian visits",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size)",
@@ -7913,8 +7913,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_minor_sole: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Sole custody"],
-    title: "Urgent single-use passport — Minor (divorced · sole custody)",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Sole custody"],
+    title: "Non-electronic single-use passport — Minor (divorced · sole custody)",
     sub: "Non-electronic single-use passport (valid 1 year) · sole-custody guardian visits",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size)",
@@ -7945,8 +7945,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_minor_joint: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Joint custody"],
-    title: "Urgent single-use passport — Minor (divorced · joint custody)",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Joint custody"],
+    title: "Non-electronic single-use passport — Minor (divorced · joint custody)",
     sub: "Non-electronic single-use passport (valid 1 year) · documents differ by residence situation",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size)",
@@ -7977,8 +7977,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_minor_single: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Single parent"],
-    title: "Urgent single-use passport — Minor (single parent · bereaved/unwed)",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Single parent"],
+    title: "Non-electronic single-use passport — Minor (single parent · bereaved/unwed)",
     sub: "Non-electronic single-use passport (valid 1 year) · sole-custody guardian visits",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size)",
@@ -8009,8 +8009,8 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Passport) →",
   },
   pp_u_minor_study: {
-    breadcrumb: ["Home", "Passport", "Urgent", "Minor", "Student"],
-    title: "Urgent single-use passport — Minor student (parents in Korea)",
+    breadcrumb: ["Home", "Passport", "Non-electronic", "Minor", "Student"],
+    title: "Non-electronic single-use passport — Minor student (parents in Korea)",
     sub: "Non-electronic single-use passport (valid 1 year) · self or proxy application",
     docs: [
       "Passport application form (consulate form recommended / print in color on A4 at original size)",
@@ -11221,7 +11221,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "answer",
             text: lang === "ko"
-              ? "신청 후 처리 기간은 여권 종류에 따라 다릅니다:\n• 일반 전자여권 — 약 3~4주 (DHL 특급 이용 시 약 1~2주)\n• 긴급 단수여권 — 1주일 이내 (긴급 출국 사유 증빙 필요)"
+              ? "신청 후 처리 기간은 여권 종류에 따라 다릅니다:\n• 일반 전자여권 — 약 3~4주 (DHL 특급 이용 시 약 1~2주)\n• 비전자 단수여권 — 1주일 이내 (긴급 출국 사유 증빙 필요)"
               : "Processing time depends on the passport type:\n• Regular e-passport — about 3–4 weeks (1–2 weeks with DHL express)\n• Emergency single-use passport — within 1 week (proof of urgent departure required)",
             goId: "passport_start",
             goLabel: lang === "ko" ? "여권 안내 자세히 보기" : "View passport guide",
@@ -12774,7 +12774,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
 
               {page.pickup && (
                 <div className="pickup-card">
-                  <div className="pickup-head">📦 {lang === "ko" ? "여권 어떻게 받으시겠어요?" : "How would you like to receive it?"}</div>
+                  <div className="pickup-head">📦 {lang === "ko" ? "배송 방법에 따른 추가 서류" : "Additional documents by pickup method"}</div>
                   <div className="pickup-body">
                     {deliveryChoice !== "dhl" && (
                     <div className="pickup-opt">

@@ -378,7 +378,7 @@ const STYLES = `
   }
   .booking-btn {
     display: block; width: 100%;
-    background: linear-gradient(135deg, #CD2E3A 0%, #b0222d 100%);
+    background: linear-gradient(135deg, #1a4d8f 0%, #003478 100%);
     color: #fff;
     border: none; border-radius: 12px;
     padding: 14px;
@@ -388,7 +388,7 @@ const STYLES = `
     text-decoration: none;
     transition: opacity 0.15s, transform 0.1s;
     letter-spacing: 0.01em;
-    box-shadow: 0 3px 12px rgba(205,46,58,0.30);
+    box-shadow: 0 3px 12px rgba(0,52,120,0.25);
   }
   .booking-btn:hover { opacity: 0.92; transform: translateY(-1px); }
   .booking-btn:active { transform: scale(0.99); }
@@ -640,12 +640,12 @@ const STYLES = `
   .modal-footer { padding: 0 20px 20px; display: flex; flex-direction: column; gap: 8px; }
   .modal-confirm-btn {
     display: block; width: 100%;
-    background: #b8192a; color: #fff;
+    background: #003478; color: #fff;
     border: none; border-radius: 12px;
     padding: 15px; font-size: 15px; font-weight: 700;
     cursor: pointer; text-align: center; text-decoration: none;
     letter-spacing: .01em;
-    box-shadow: 0 3px 12px rgba(184,25,42,0.28);
+    box-shadow: 0 3px 12px rgba(0,52,120,0.25);
     transition: opacity .15s;
   }
   .modal-confirm-btn:hover { opacity: .92; }
@@ -1002,6 +1002,7 @@ const TREE = {
       "결제: 현금(CAD)·Debit·신용카드.",
       "신청서에 카카오톡 연결 번호 기재 시 발급 진행상황을 알림으로 받을 수 있습니다.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1031,6 +1032,7 @@ const TREE = {
       "결제: 현금(CAD)·Debit·신용카드.",
       "신청서에 카카오톡 연결 번호 기재 시 발급 진행상황을 알림으로 받을 수 있습니다.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1060,6 +1062,7 @@ const TREE = {
       "결제: 현금(CAD)·Debit·신용카드.",
       "신청서에 카카오톡 연결 번호 기재 시 발급 진행상황을 알림으로 받을 수 있습니다.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1090,6 +1093,7 @@ const TREE = {
       "혹시 과거에 국적이탈·국적선택 신고를 한 적이 있다면 국적 상태가 다를 수 있으니, 불확실하면 신청 전 확인하세요. (영사관 416-920-3809)",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1121,6 +1125,7 @@ const TREE = {
       "국적회복이 완료되어 기본증명서에 기재된 경우 한국 여권 신청이 가능합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1155,6 +1160,7 @@ const TREE = {
       "자녀가 후천적으로 외국국적을 취득한 경우 국적 확인이 필요할 수 있습니다 — 불확실하면 상담하세요. (416-920-3809)",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1188,6 +1194,7 @@ const TREE = {
       "이혼 후 단독친권자는 혼자 방문해 신청할 수 있습니다. 친권이 기본증명서에 확인되어야 합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1227,6 +1234,7 @@ const TREE = {
       "공동친권은 거주 상황(경우 A/B)에 따라 서류가 다릅니다. 본인 상황에 맞는 쪽을 준비하세요.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1261,6 +1269,7 @@ const TREE = {
       "구체적인 증빙이 불확실하면 방문 전 영사관에 문의하세요. (416-920-3809)",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1299,6 +1308,7 @@ const TREE = {
       "대리인은 18세 이상의 (외)조부모·형제·자매만 가능합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1333,6 +1343,7 @@ const TREE = {
       "긴급사유 환급은 신청 후 6개월 이내 증빙 제출 시, 신청한 공관에서만 가능합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1365,6 +1376,7 @@ const TREE = {
       "수수료는 긴급사유 인정 시 C$22.95, 일반사유 C$67.50. 긴급 여행목적 증빙 제출 시 긴급사유로 인정됩니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1397,6 +1409,7 @@ const TREE = {
       "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1430,6 +1443,7 @@ const TREE = {
       "선천적 복수국적자는 한국 국적을 보유하므로 발급에 문제가 없습니다. 과거 국적이탈·국적선택을 한 적이 있으면 확인이 필요합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1464,6 +1478,7 @@ const TREE = {
       "국적회복이 완료되어 기본증명서에 기재된 경우 한국 여권 신청이 가능합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1500,6 +1515,7 @@ const TREE = {
       "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1536,6 +1552,7 @@ const TREE = {
       "1주일 이상 여유가 있으면 비전자 단수여권 대신 DHL 전자여권 배송서비스를 권장합니다.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1578,6 +1595,7 @@ const TREE = {
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1614,6 +1632,7 @@ const TREE = {
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -1654,6 +1673,7 @@ const TREE = {
       "⚠️ 발급 불가 대상: 본인 확인이 불가능한 사람 / 최근 5년 이내 3회 이상 여권 분실자.",
       "결제: 현금(CAD)·Debit·신용카드.",
     ],
+    booking: "https://www.torbooking.com/book",
     bookingLabel: "사전 예약하기 (여권과) →",
   },
 
@@ -13021,16 +13041,28 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 </div>
               )}
 
-              {page.onlineRenewal && (
-                <div className="highlight-box">
-                  <span>💡</span>
-                  <div>
-                    <strong>{lang === "ko" ? "온라인 재발급도 가능합니다" : "Online Renewal Available"}</strong><br />
-                    {lang === "ko" ? "기존 전자여권 소지자는 공동인증서로 온라인 신청 가능." : "Existing e-passport holders can apply online with a Gong-dong Certificate."}{" "}
-                    <a href={page.onlineRenewal} target="_blank" rel="noreferrer" style={{ color: "#7a5000" }}>
-                      {lang === "ko" ? "자세히 보기 →" : "Learn more →"}
-                    </a>
+              {pageId.startsWith("pp_n_adult_") && ppState === "renew" && (
+                <div style={{ border: "1px solid #cdddef", background: "#f4f8fd", borderRadius: "12px", padding: "14px 16px", marginBottom: "12px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "7px", fontSize: "14px", fontWeight: 700, color: "#003478", marginBottom: "6px" }}>
+                    💻 {lang === "ko" ? "온라인 신청도 가능합니다" : "Online application available"}
                   </div>
+                  <div style={{ fontSize: "12.5px", color: "#445", lineHeight: 1.6 }}>
+                    {lang === "ko"
+                      ? "기존 전자여권을 발급받은 성인은 영사민원24에서 온라인으로 재발급 신청할 수 있습니다 (공동인증서 필요). 신청 후 수령을 위한 방문 예약이 필요합니다 (일반 약 4주 · DHL 약 10일 뒤)."
+                      : "Adults who previously held an e-passport can apply for renewal online via G4K (joint certificate required). A pickup appointment is needed after applying (about 4 weeks for standard · 10 days for DHL)."}
+                  </div>
+                  <div style={{ fontSize: "11.5px", color: "#889", marginTop: "5px" }}>
+                    {lang === "ko" ? "※ 미성년·생애최초·긴급·상습분실·로마자성명 변경은 온라인 불가 (방문 신청)" : "※ Not available online for minors, first-time, urgent, frequent-loss, or romanized-name changes (visit in person)"}
+                  </div>
+                  <div style={{ fontSize: "12px", color: "#445", marginTop: "8px", paddingTop: "8px", borderTop: "1px solid #e3ecf6", lineHeight: 1.6 }}>
+                    <strong style={{ color: "#003478" }}>{lang === "ko" ? "수령 방문 시 준비서류" : "Documents for pickup visit"}</strong><br />
+                    {lang === "ko"
+                      ? "① 구 여권 원본  ② 캐나다 체류 자격증명 (영주권자: 영주권 카드 / 장기체류자: 비자 원본)"
+                      : "① Old passport original  ② Proof of Canadian residency status (PR: PR Card / Long-term: residence visa original)"}
+                  </div>
+                  <a href="https://www.g4k.go.kr/biz/main/main.do" target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: "9px", fontSize: "13px", fontWeight: 600, color: "#fff", background: "#003478", padding: "8px 14px", borderRadius: "8px", textDecoration: "none" }}>
+                    {lang === "ko" ? "영사민원24 바로가기 →" : "Go to G4K →"}
+                  </a>
                 </div>
               )}
 
@@ -13120,12 +13152,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </div>
                 );
               })()}
-
-              <div style={{ marginTop: "16px", fontSize: "12px", color: "#889", textAlign: "center", lineHeight: "1.6" }}>
-                {lang === "ko"
-                  ? "※ 안내 내용은 참고용입니다. 중요한 사항은 반드시 총영사관(416-920-3809)에 확인하세요."
-                  : "※ This is for reference only. Please confirm important matters with the Consulate (416-920-3809)."}
-              </div>
 
               {/* 양식 다운로드 + 인쇄 버튼 */}
               <div style={{ display: "flex", gap: "8px", marginTop: "12px" }}>

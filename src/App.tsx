@@ -4455,9 +4455,17 @@ const TREE = {
     breadcrumb: ["홈", "공증"],
     question: "어떤 서류의 공증·인증이 필요하신가요?",
     sub: "찾으시는 서류 이름으로 골라보세요. ⚠️ 영사관 공증은 모든 서명을 반드시 영사 앞에서 직접 해야 하며, 사전 서명·대리 신청은 불가합니다.",
+    footer: [
+      "💡 헷갈리기 쉬운 두 가지를 먼저 구분하세요:",
+      "  ▸ 아포스티유 = 문서가 진짜임을 보증하는 국제 인증 (번역 아님). 발행 국가에서 받습니다.",
+      "  ▸ 번역 공증 = 한국어 문서를 영문으로 옮긴 번역본을 영사관이 확인. 진위 보증은 아닙니다.",
+      "  ▸ 제출처가 둘 다 요구하기도 하니, '아포스티유가 필요한지 / 번역만 되면 되는지'를 제출 기관에 먼저 확인하세요.",
+    ],
     options: [
-      { id: "notarization_canada_doc", icon: "🍁", title: "캐나다에서 발행된 문서를 한국에 제출", desc: "출생·혼인·사망·RCMP 범죄경력·대학/College·고용계약서 등 → 아포스티유 안내" },
+      { id: "notarization_canada_doc", icon: "🍁", title: "캐나다에서 발행된 문서를 한국에 제출", desc: "【캐나다 → 한국】 출생·혼인·사망·RCMP 범죄경력·대학/College·고용계약서 등 → 아포스티유 안내" },
+      { id: "notarization_korea_doc", icon: "📤", title: "한국에서 발행된 문서를 해외에 제출", desc: "【한국 → 해외】 가족관계·기본·주민등록·범죄경력·연금 등 → 온라인 아포스티유(apostille.go.kr) 안내" },
       { id: "notarization_translation", icon: "🌐", title: "한국 증명서를 영문으로 번역", desc: "가족관계·기본·혼인·출생·졸업증명서 등 영문 번역 인증" },
+      { id: "notarization_translation_license_start", icon: "🚗", title: "운전면허 (영문번역·운전경력·면허교환)", desc: "한국 면허 영문번역 인증서·영문 운전경력증명서·한↔온타리오 면허 교환 안내" },
       { id: "notarization_saseo", icon: "✍️", title: "직접 작성한 서류의 서명 인증", desc: "위임장·상속포기서·거주확인서·재직·진술서 등" },
       { id: "notarization_ingam", icon: "🔏", title: "인감 관련", desc: "인감증명서 발급 위임장·인감신고·변경신고" },
       { id: "notarization_school", icon: "🏫", title: "초·중·고 학적서류", desc: "졸업·재학·성적증명서 (대학·College는 맨 위 항목으로)" },
@@ -4498,26 +4506,76 @@ const TREE = {
     onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
   },
 
+  // ── 한국 발행 문서 → 해외 제출(온라인 아포스티유) ──
+  notarization_korea_doc: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "한국 발행 문서 해외 제출"],
+    title: "한국에서 발행된 문서를 해외에 제출 — 온라인 아포스티유",
+    sub: "한국 정부·기관이 발행한 공문서를 캐나다 등 아포스티유 협약국에 제출할 때는 영사관이 아니라 한국에서 온라인으로 아포스티유를 발급받습니다.",
+    docs: [
+      "📌 영사관 방문이 필요 없습니다 — 아래 한국 사이트에서 본인이 직접 온라인 발급받으세요.",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "【발급 사이트】",
+      "대한민국 아포스티유: apostille.go.kr",
+      "재외동포 365민원포털: g4k.go.kr",
+      "  ▸ 본인인증(공동인증서) 필요 → 발급기관·문서종류·문서발급번호·발급일자 입력",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "【온라인 아포스티유 가능 문서 (총 42종, 발급기관별)】",
+      "대법원: 가족관계·기본·혼인관계·입양·친양자입양 증명서, 제적등본/초본, 영문증명서 (무인발급기 발급분 제외)",
+      "행정안전부: 주민등록표 등본·초본 (정부24 발급분만)",
+      "외교부: 여권발급기록·여권실효확인서·여권발급신청서류·여권증명서",
+      "교육부: 졸업·재학증명서, 검정고시 성적·합격증명서, 중·고 성적증명서 (수기 발급분 제외)",
+      "병무청: 병적증명서",
+      "국세청: 사업자등록·납세·소득금액·부가가치세 증명 등",
+      "경찰청: 범죄·수사경력·운전경력 회보서 ('19.10.28 이후 발급된 외국 입국/체류용만)",
+      "국민연금공단: 가입증명·수급(지급내역)증명·연금산정용 가입내역 확인서 (정부24 발급분 제외)",
+      "질병관리청: 예방접종증명서 / 산업인력공단: 국가기술자격취득사항확인서 / 해양경찰청: 수상구조사·조종면허 (정부24 발급분만)",
+    ],
+    costs: [{ label: "영사관 수수료", value: "해당 없음 (영사관 업무 아님)" }],
+    time: "온라인 즉시 발급 (사이트 안내에 따름)",
+    notices: [
+      "⚠️ 이 안내는 한국 발행 문서를 '해외에 제출'하는 경우입니다 — 캐나다 발행 문서를 한국에 내는 경우는 첫 화면의 '캐나다 발행 문서' 메뉴를 이용하세요.",
+      "영문 번역본도 필요하면 '한국 증명서를 영문으로 번역' 메뉴를 함께 이용하세요 (아포스티유와 번역은 별개 절차이며, 제출처가 둘 다 요구하기도 합니다).",
+      "공동인증서가 없어 온라인 발급이 어려운 경우: 한국 내 대리인을 통해 발급 가능 (아포스티유 신청서 + 대상문서 + 대리인·신청인 신분증 사본 + 전자수입인지 1건당 1,000원).",
+      "한국 아포스티유 발급기관은 재외동포청 또는 법무부입니다 — 재외동포청 (02) 6399-7100~7101 / 법무부 (02) 6399-7110.",
+      "문서 종류별 발급 제한(무인발급기·정부24·수기 발급분 등)이 있으니 위 목록의 비고를 확인하세요.",
+    ],
+    onlineLink: "https://www.apostille.go.kr",
+  },
+
   // ── 사문서 인증(사서증서) 분기 ──
   notarization_saseo: {
     type: "question",
     service: "notarization",
     breadcrumb: ["홈", "공증", "사문서 인증"],
     question: "어떤 종류의 서류인가요?",
-    sub: "사문서 인증(사서증서 인증)은 개인이 작성한 서류의 서명·날인이 본인 의사에 의한 것임을 영사가 확인해 주는 업무입니다. 서류 내용의 진위를 확인하는 것은 아닙니다.",
+    sub: "사문서 인증(사서증서 인증)은 개인이 작성한 서류의 서명·날인이 본인 의사에 의한 것임을 영사가 확인해 주는 업무입니다. 서류 내용의 진위를 확인하는 것은 아닙니다. 어느 메뉴인지 모르겠으면 아래 예시 서류명으로 골라보세요.",
     options: [
       { id: "notarization_pow", icon: "📜", title: "위임장", desc: "부동산 매매·등기·은행·상속·증명서 발급 등 한국 업무 대리 위임" },
-      { id: "notarization_legal_act", icon: "⚖️", title: "법률행위 증서", desc: "상속재산분할협의서·매매계약서·은행대출약정서·상속포기서 등" },
-      { id: "notarization_sign", icon: "✍️", title: "사실행위 증서", desc: "서명진술서·동일인진술서·거주사실진술서·재직증명서 등" },
+      { id: "notarization_legal_act", icon: "⚖️", title: "법률행위 증서 (상속·계약·대출 등)", desc: "상속재산분할협의서·상속포기서·매매계약서·은행대출약정서 등" },
+      { id: "notarization_sign", icon: "✍️", title: "사실행위 증서 (서명·거주·재직 등)", desc: "서명인증서·동일인증명서·거주증명서·재직증명서 등" },
     ],
   },
 
-  // ── 위임장 ──
+  // ── 위임장 (성인/미성년 분기) ──
   notarization_pow: {
-    type: "result",
+    type: "question",
     service: "notarization",
     breadcrumb: ["홈", "공증", "사문서 인증", "위임장"],
-    title: "위임장 공증 (사문서 인증)",
+    question: "위임자(신청인)의 연령은?",
+    sub: "만 19세 미만 미성년자는 본인과 법정대리인이 함께 방문하고 법정대리인 동의서가 필요합니다.",
+    options: [
+      { id: "notarization_pow_adult", icon: "👤", title: "만 19세 이상 (성인)", desc: "본인 직접 방문" },
+      { id: "notarization_pow_minor", icon: "👶", title: "만 19세 미만 (미성년자)", desc: "본인 + 법정대리인 함께 방문 필수" },
+    ],
+  },
+
+  notarization_pow_adult: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "사문서 인증", "위임장", "성인"],
+    title: "위임장 공증 (사문서 인증) — 성인",
     docs: [
       "위임장 — 사전에 작성, 단 서명란은 반드시 공백으로 (영사 앞에서 서명)",
       "  ▸ 피위임자 성명·주민등록번호·주소·연락처·위임 목적(용도)·발급 통수 기재 필수",
@@ -4535,12 +4593,45 @@ const TREE = {
     time: "방문 당일 즉시 발급 (약 30분~1시간)",
     notices: [
       "⚠️ 서명은 반드시 영사 앞에서 — 사전 서명 또는 타인 대리 서명 불가.",
+      "✅ 캐나다 시민권자도 위임장·상속재산분할협의서·상속포기서는 본인이 직접 방문 시 캐나다 공증인 공증 없이 영사 인증이 가능합니다 (영주권자와 동일, 2008.6.1 시행).",
+      "  ▸ 단, 한국 여권이 없는 시민권자는 신분 확인을 위해 방문 전 전화 문의 권장 (416-920-3809).",
+      "  ▸ 한국 제출처(법원 등)가 캐나다 공증인 공증을 요구하는 경우도 있으니 제출 기관에 먼저 확인하세요.",
       "동일 위임장에 여러 명이 서명하는 경우 각 서명마다 수수료 발생.",
       "인감증명서 발급 위임장은 별도 메뉴(인감 관련 공증)를 이용하세요.",
       "한국 부동산 등기 목적: 캐나다 공증인(Notary Public) + 아포스티유로 대체 가능한 경우도 있으니 제출 기관에 먼저 확인하세요.",
-      "시민권자: 한국 여권이 없는 경우 방문 전 전화 문의 필수 (416-920-3809).",
       "법인 신청 시: 법인 대표자가 직접 방문 — 법인등기부등본 + 사업자등록증 지참 필수.",
       "해외 거주사실 증명이 필요한 경우: 재외국민등록 후 재외국민등록부등본으로 대체 가능 (별도 메뉴 참조).",
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (공증 → 위임장) →",
+  },
+
+  notarization_pow_minor: {
+    type: "result",
+    service: "notarization",
+    breadcrumb: ["홈", "공증", "사문서 인증", "위임장", "미성년자"],
+    title: "위임장 공증 (사문서 인증) — 만 19세 미만 미성년자",
+    docs: [
+      "위임장 — 미성년자 본인과 법정대리인(부 또는 모/법정후견인)이 함께 방문, 영사 앞에서 자필 작성 (서명란 공백)",
+      "  ▸ 피위임자 성명·주민등록번호·주소·연락처·위임 목적·발급 통수 기재 필수",
+      "공증촉탁서 (소정 양식 — 자필 작성 필수)",
+      "미성년자 당사자의 한국 여권 원본",
+      "미성년자 당사자의 캐나다 체류비자 원본 또는 유효한 PR Card 원본",
+      "미성년자 당사자의 기본증명서 + 가족관계증명서 — 3개월 이내 발급",
+      "법정대리인 동의서 (첨부 양식 — 부모 작성·서명)",
+      "  ▸ '동의 구분'란에 \"위 미성년 자녀의 위임장 등 공증 촉탁에 대해 동의합니다\" 기재",
+      "  ▸ 법정대리인 정보는 부·모 모두 작성 후 대표 1인 서명",
+      "법정대리인의 유효한 여권 원본",
+    ],
+    costs: [
+      { label: "위임장 1부당", value: "CAD $2.70 (현금, Debit, 신용카드)" },
+      { label: "여권정보증명서 (해당자)", value: "CAD $1.00 추가" },
+    ],
+    time: "방문 당일 즉시 발급",
+    notices: [
+      "⚠️ 미성년자 본인과 법정대리인이 반드시 함께 직접 방문 — 둘 중 한 명만 방문 불가.",
+      "⚠️ 서명은 반드시 영사 앞에서 — 사전 서명·대리 서명 불가.",
+      "법정대리인 동의서 양식은 영사관 홈페이지에서 다운로드(여권 외 업무 시 법정대리인 동의서).",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (공증 → 위임장) →",
@@ -4585,7 +4676,7 @@ const TREE = {
     service: "notarization",
     breadcrumb: ["홈", "공증", "사문서 인증", "사실행위 증서"],
     question: "신청인의 신분은?",
-    sub: "서명진술서·거주사실진술서·동일인진술서 등은 신청인 신분에 따라 처리 방법이 다릅니다. (2024.1.11 캐나다 아포스티유 시행)",
+    sub: "서명인증서·거주증명서·동일인증명서 등은 신청인 신분에 따라 처리 방법이 다릅니다. (2024.1.11 캐나다 아포스티유 시행)",
     options: [
       { id: "notarization_sign_passport", icon: "🇰🇷", title: "한국 여권 소지자 (한국 국적자)", desc: "영사관에서 서명 인증 가능" },
       { id: "notarization_sign_citizen", icon: "🍁", title: "캐나다 시민권자", desc: "영사확인 불가 → 캐나다 공증인 + 아포스티유" },
@@ -4596,12 +4687,12 @@ const TREE = {
     type: "result",
     service: "notarization",
     breadcrumb: ["홈", "공증", "사문서 인증", "사실행위 증서", "한국 여권 소지자"],
-    title: "사실행위 증서 공증 — 진술서·동일인진술서·거주사실진술서 등 (한국 여권 소지자)",
+    title: "사실행위 증서 공증 — 서명인증서·동일인증명서·거주증명서 등 (한국 여권 소지자)",
     docs: [
       "공증받을 서류 — 서명란 공백으로 준비 (영사 앞에서 서명)",
-      "  ▸ 서명진술서 (Signature Statement)",
-      "  ▸ 동일인진술서 (Identity Statement — 이름이 다를 때)",
-      "  ▸ 거주사실진술서",
+      "  ▸ 서명인증서 (Signature Certificate)",
+      "  ▸ 동일인증명서 (Identity Certificate — 이름이 다를 때)",
+      "  ▸ 거주증명서 (거주사실확인서)",
       "  ▸ 재직증명서·재학증명서 등 각종 진술 서류",
       "  ▸ 영사관 홈페이지에 소정 양식 있는 경우 해당 양식 사용",
       "공증촉탁서 (소정 양식 — 자필 작성 필수, 타이핑 불가)",
@@ -4877,12 +4968,17 @@ const TREE = {
     service: "notarization",
     breadcrumb: ["홈", "공증", "번역 공증"],
     question: "번역 공증한 서류를 어디에 제출할 예정인가요?",
-    sub: "제출 기관에 따라 영사관 번역 공증이 인정되지 않는 경우가 있습니다. 먼저 확인하세요.",
+    sub: "여기는 한국어 문서를 '영문으로 번역'해 영사관이 확인하는 업무입니다. 문서 진위 국제 인증(아포스티유)이 필요하면 시작 화면의 '한국 발행 문서 → 해외 제출'을 이용하세요.",
+    intro: [
+      "⚠️ 먼저 확인하세요 — 영사관 번역 공증이 인정되지 않는 제출처가 있습니다:",
+      "  ▸ 캐나다 이민국(IRCC) 제출(비자·영주권·시민권) → 영사관 번역 공증 불인정, 전문 번역사 필요",
+      "  ▸ ServiceOntario 성명변경(Name Change) 제출 → 영사관 번역 공증 불인정",
+      "  ▸ 위 두 경우라면 아래에서 해당 항목을 선택해 자세한 안내를 확인하세요.",
+    ],
     options: [
       { id: "notarization_translation_ircc_no", icon: "🇨🇦", title: "캐나다 이민국 (IRCC) 제출", desc: "비자·영주권·시민권 신청 관련 서류" },
       { id: "notarization_translation_namechange_no", icon: "📋", title: "ServiceOntario — 성명변경 제출", desc: "Name Change 신청 관련 출생증명서 번역" },
       { id: "notarization_translation_type", icon: "✅", title: "그 외 기관 제출 (한국 기관·학교·회사 등)", desc: "영사관 번역 공증 가능" },
-      { id: "notarization_translation_license_start", icon: "🚗", title: "운전면허 관련", desc: "영문번역 인증서·영문 운전경력증명서·면허 교환 안내" },
     ],
   },
 
@@ -5094,7 +5190,7 @@ const TREE = {
   notarization_translation_license_start: {
     type: "question",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "번역 공증", "운전면허 관련"],
+    breadcrumb: ["홈", "공증", "운전면허"],
     question: "어떤 운전면허 업무가 필요하신가요?",
     sub: "온타리오주-한국 간 면허 상호교환 약정이 있습니다. 필요한 업무를 선택하세요.",
     options: [
@@ -5107,7 +5203,7 @@ const TREE = {
   notarization_translation_license: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "번역 공증", "운전면허", "영문번역 인증서"],
+    breadcrumb: ["홈", "공증", "운전면허", "영문번역 인증서"],
     title: "운전면허 영문번역 인증서",
     docs: [
       "신청서 1부 (영사관 홈페이지 양식 다운로드 또는 영사관 비치)",
@@ -5130,7 +5226,7 @@ const TREE = {
   notarization_translation_driving_record: {
     type: "question",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "번역 공증", "운전면허", "영문 운전경력증명서"],
+    breadcrumb: ["홈", "공증", "운전면허", "영문 운전경력증명서"],
     question: "공동인증서(공인인증서)가 있으신가요?",
     sub: "공동인증서 보유 여부에 따라 발급 방법이 달라집니다.",
     options: [
@@ -5142,7 +5238,7 @@ const TREE = {
   notarization_translation_driving_online: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "번역 공증", "운전면허", "영문 운전경력증명서 (온라인)"],
+    breadcrumb: ["홈", "공증", "운전면허", "영문 운전경력증명서 (온라인)"],
     title: "영문 운전경력증명서 — 온라인 직접 발급",
     docs: [
       "공동인증서(공인인증서) 로그인 후 아래 사이트에서 직접 발급:",
@@ -5161,7 +5257,7 @@ const TREE = {
   notarization_translation_driving_visit: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "번역 공증", "운전면허", "영문 운전경력증명서 (방문)"],
+    breadcrumb: ["홈", "공증", "운전면허", "영문 운전경력증명서 (방문)"],
     title: "영문 운전경력증명서 — 영사관 방문 신청",
     docs: [
       "여권 원본",
@@ -5179,7 +5275,7 @@ const TREE = {
   notarization_translation_license_exchange: {
     type: "result",
     service: "notarization",
-    breadcrumb: ["홈", "공증", "번역 공증", "운전면허", "면허 교환 안내"],
+    breadcrumb: ["홈", "공증", "운전면허", "면허 교환 안내"],
     title: "한국 ↔ 온타리오주 운전면허 교환 안내",
     docs: [
       "📌 한국·온타리오주 간 운전면허 상호교환 약정 (1998.12.17 시행):",
@@ -5206,7 +5302,7 @@ const TREE = {
     service: "notarization",
     breadcrumb: ["홈", "공증", "학적서류 공증"],
     question: "어떻게 신청하시겠어요?",
-    sub: "⚠️ 온타리오주·마니토바주 정규 교육기관 발행 서류만 공증 가능합니다. 공증 가능 서류 여부를 먼저 확인하세요.",
+    sub: "⚠️ 온타리오주·마니토바주 정규 교육기관 발행 서류만 공증 가능합니다. 공증 가능 서류 여부를 먼저 확인하세요. 📅 서류가 많으면 10건당 1자리로 예약하세요 (예: 13장 → 2자리, 26장 → 3자리).",
     intro: [
       "💡 공증이 불필요할 수 있습니다 — 먼저 확인하세요:",
       "  ▸ 국내 초·중·고 편입학용: 교육부가 인정한 외국소재 학력인정학교 서류는 아포스티유·영사확인 없이 학교장 발급 원본으로 갈음됩니다 (2014.9.16~). 교육부 학력인정학교 리스트를 확인하세요.",
@@ -8121,9 +8217,17 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Notarization"],
     question: "Which document do you need notarized/certified?",
     sub: "Pick by the document you're looking for. ⚠️ For consular notarization, all signatures must be made in person before the consul — pre-signed or proxy applications are not accepted.",
+    footer: [
+      "💡 First, tell these two apart — they're easy to confuse:",
+      "  ▸ Apostille = an international certification that a document is genuine (not a translation). Obtained in the issuing country.",
+      "  ▸ Translation certification = the consulate confirms an English translation of a Korean document. It does not vouch for authenticity.",
+      "  ▸ A receiver may require both — ask the receiving institution whether you need an Apostille, a translation, or both.",
+    ],
     options: {
-      notarization_canada_doc: { title: "Canadian-issued document for use in Korea", desc: "Birth·marriage·death·RCMP·university/College·employment, etc. → Apostille guide" },
+      notarization_canada_doc: { title: "Canadian-issued document for use in Korea", desc: "【Canada → Korea】 Birth·marriage·death·RCMP·university/College·employment, etc. → Apostille guide" },
+      notarization_korea_doc: { title: "Korean-issued document for use abroad", desc: "【Korea → Abroad】 Family relation·basic·resident registration·criminal record·pension, etc. → online Apostille (apostille.go.kr)" },
       notarization_translation: { title: "Translate a Korean certificate into English", desc: "Family relation·basic·marriage·birth·graduation certificates, etc." },
+      notarization_translation_license_start: { title: "Driver's license (translation·record·exchange)", desc: "Korean license English translation·English driving record·Korea↔Ontario license exchange guide" },
       notarization_saseo: { title: "Certify the signature on a document you wrote", desc: "Power of attorney·inheritance waiver·residence statement·employment·declarations" },
       notarization_ingam: { title: "Seal (ingam) matters", desc: "Seal certificate power of attorney·seal registration·change report" },
       notarization_school: { title: "Elementary/middle/high school records", desc: "Diploma·enrollment·transcript (university/College → top item)" },
@@ -8159,19 +8263,61 @@ const EN_TRANSLATIONS: any = {
     ],
     onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
   },
+  notarization_korea_doc: {
+    breadcrumb: ["Home", "Notarization", "Korean document for use abroad"],
+    title: "Korean-issued document for use abroad — online Apostille",
+    sub: "To submit a public document issued by a Korean government body or agency to Canada or another Apostille Convention country, get the Apostille online in Korea — not at the consulate.",
+    docs: [
+      "📌 No consulate visit needed — issue it yourself online at the Korean sites below.",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "【Issuing sites】",
+      "Republic of Korea Apostille: apostille.go.kr",
+      "Overseas Koreans 365 Portal: g4k.go.kr",
+      "  ▸ Identity verification (joint/digital certificate) required → enter issuing body, document type, document number, and issue date",
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+      "【Documents eligible for online Apostille (42 types, by issuer)】",
+      "Supreme Court: family relation·basic·marriage·adoption·full-adoption certificates, removed-register copy/abstract, English certificates (machine-issued excluded)",
+      "Ministry of the Interior: resident registration copy/abstract (Gov24-issued only)",
+      "Ministry of Foreign Affairs: passport issuance record·invalidation·application·passport certificate",
+      "Ministry of Education: graduation·enrollment, GED score·pass certificates, middle/high school transcript (hand-issued excluded)",
+      "Military Manpower Administration: military service certificate",
+      "National Tax Service: business registration·tax payment·income·VAT certificates, etc.",
+      "Police: criminal·investigation·driving record reports (only those issued after Oct 28, 2019 for foreign entry/stay)",
+      "National Pension Service: enrollment·benefit·calculation certificates (Gov24-issued excluded)",
+      "KDCA: vaccination certificate / HRD Korea: national technical qualification certificate / Coast Guard: rescue·boating licenses (Gov24-issued only)",
+    ],
+    costs: [{ label: "Consulate fee", value: "N/A (not a consular service)" }],
+    time: "Issued instantly online (per the site's guidance)",
+    notices: [
+      "⚠️ This is for submitting a Korean document ABROAD — to submit a Canadian document in Korea, use the 'Canadian-issued document' menu on the first screen.",
+      "If you also need an English translation, use the 'Translate a Korean certificate into English' menu (Apostille and translation are separate steps, and some receivers require both).",
+      "If you cannot issue online (no digital certificate): an agent in Korea can apply (Apostille application + target document + copies of agent's & applicant's IDs + electronic revenue stamp KRW 1,000 per document).",
+      "Korea's Apostille issuers are the Overseas Koreans Agency or the Ministry of Justice — OKA (02) 6399-7100~7101 / MOJ (02) 6399-7110.",
+      "Some document types have issuance restrictions (machine-issued / Gov24 / hand-issued) — check the notes in the list above.",
+    ],
+    onlineLink: "https://www.apostille.go.kr",
+  },
   notarization_saseo: {
-    breadcrumb: ["Home", "Notarization", "Private document certification"],
     question: "What type of document is it?",
-    sub: "Private document certification is where the consul confirms that the signature/seal was made by your own will. It does not verify the truthfulness of the document's contents.",
+    sub: "Private document certification is where the consul confirms that the signature/seal was made by your own will. It does not verify the truthfulness of the document's contents. Not sure which menu? Pick by the example document names below.",
     options: {
       notarization_pow: { title: "Power of attorney", desc: "Delegating Korean matters: real estate sale, registration, banking, inheritance, certificate issuance, etc." },
-      notarization_legal_act: { title: "Legal-act document", desc: "Inheritance division agreement, sales contract, bank loan agreement, inheritance waiver, etc." },
-      notarization_sign: { title: "Factual-act document", desc: "Signature statement, identity statement, residence statement, employment certificate, etc." },
+      notarization_legal_act: { title: "Legal-act document (inheritance·contract·loan, etc.)", desc: "Inheritance division agreement, inheritance waiver, sales contract, bank loan agreement, etc." },
+      notarization_sign: { title: "Factual-act document (signature·residence·employment, etc.)", desc: "Signature certificate, identity certificate, residence certificate, employment certificate, etc." },
     },
   },
   notarization_pow: {
     breadcrumb: ["Home", "Notarization", "Private document certification", "Power of attorney"],
-    title: "Power of attorney certification (private document certification)",
+    question: "What is the applicant's (grantor's) age?",
+    sub: "A minor under 19 must visit together with a legal guardian, and a legal-guardian consent form is required.",
+    options: {
+      notarization_pow_adult: { title: "Age 19 or older (adult)", desc: "Applies in person" },
+      notarization_pow_minor: { title: "Under 19 (minor)", desc: "Must visit together with legal guardian" },
+    },
+  },
+  notarization_pow_adult: {
+    breadcrumb: ["Home", "Notarization", "Private document certification", "Power of attorney", "Adult"],
+    title: "Power of attorney certification (private document certification) — adult",
     docs: [
       "Power of attorney — prepared in advance, but the signature field must be left blank (sign before the consul)",
       "  ▸ Must state the agent's name, resident registration number, address, contact, purpose of delegation, and number of copies",
@@ -8189,12 +8335,41 @@ const EN_TRANSLATIONS: any = {
     time: "Issued same day on visit (about 30 min–1 hour)",
     notices: [
       "⚠️ Signature must be made before the consul — pre-signing or signing by another person is not allowed.",
+      "✅ Canadian citizens may also have a power of attorney, inheritance division agreement, and inheritance waiver certified by the consul in person, without a Canadian notary (same as permanent residents, effective Jun 1, 2008).",
+      "  ▸ However, citizens without a Korean passport should call before visiting for identity verification (416-920-3809).",
+      "  ▸ Some receivers in Korea (courts, etc.) may still require a Canadian notary's notarization — confirm first.",
       "If multiple people sign the same power of attorney, a fee applies for each signature.",
       "For a seal certificate power of attorney, use the separate menu (Seal notarization).",
       "For Korean real estate registration: a Canadian Notary Public + Apostille may sometimes substitute — confirm with the receiving institution first.",
-      "Citizens: if you have no Korean passport, you must call before visiting (416-920-3809).",
       "For a corporation: the corporate representative must visit in person — bring the corporate register and business registration certificate.",
       "If proof of overseas residence is needed: it can be replaced by an overseas Korean registration extract after registering (see separate menu).",
+    ],
+    bookingLabel: "Book Appointment (Notarization → Power of attorney) →",
+  },
+  notarization_pow_minor: {
+    breadcrumb: ["Home", "Notarization", "Private document certification", "Power of attorney", "Minor"],
+    title: "Power of attorney certification — minor under 19",
+    docs: [
+      "Power of attorney — the minor and the legal guardian (parent or legal custodian) visit together and handwrite it before the consul (signature field blank)",
+      "  ▸ Must state the agent's name, resident registration number, address, contact, purpose, and number of copies",
+      "Notarization request form (designated form — must be handwritten)",
+      "The minor's original Korean passport",
+      "The minor's original Canadian residence visa or valid PR Card",
+      "The minor's basic certificate + family relation certificate — issued within 3 months",
+      "Legal-guardian consent form (attached form — completed and signed by the parent(s))",
+      "  ▸ In the 'consent' section, state that you consent to the minor child's power-of-attorney notarization request",
+      "  ▸ Both parents complete their information; one representative signs",
+      "The legal guardian's valid passport, original",
+    ],
+    costs: [
+      { label: "Per power of attorney", value: "CAD $2.70 (Cash, Debit, Credit)" },
+      { label: "Passport information certificate (if applicable)", value: "CAD $1.00 added" },
+    ],
+    time: "Issued same day on visit",
+    notices: [
+      "⚠️ The minor and the legal guardian must visit together in person — one of them alone cannot apply.",
+      "⚠️ Signature must be made before the consul — pre-signing or proxy signing not allowed.",
+      "Download the legal-guardian consent form from the consulate website (legal-guardian consent for non-passport services).",
     ],
     bookingLabel: "Book Appointment (Notarization → Power of attorney) →",
   },
@@ -8229,7 +8404,7 @@ const EN_TRANSLATIONS: any = {
   notarization_sign: {
     breadcrumb: ["Home", "Notarization", "Private document certification", "Factual-act document"],
     question: "What is the applicant's status?",
-    sub: "Signature, residence, and identity statements are handled differently by applicant status. (Canada Apostille effective Jan 11, 2024)",
+    sub: "Signature, residence, and identity certificates are handled differently by applicant status. (Canada Apostille effective Jan 11, 2024)",
     options: {
       notarization_sign_passport: { title: "Korean passport holder (Korean national)", desc: "Signature can be certified at the consulate" },
       notarization_sign_citizen: { title: "Canadian citizen", desc: "Consular authentication not available → Canadian notary + Apostille" },
@@ -8237,12 +8412,12 @@ const EN_TRANSLATIONS: any = {
   },
   notarization_sign_passport: {
     breadcrumb: ["Home", "Notarization", "Private document certification", "Factual-act document", "Korean passport holder"],
-    title: "Factual-act document certification — statement, identity statement, residence statement, etc. (Korean passport holder)",
+    title: "Factual-act document certification — signature certificate, identity certificate, residence certificate, etc. (Korean passport holder)",
     docs: [
       "Document to be notarized — prepare with the signature field blank (sign before the consul)",
-      "  ▸ Signature statement",
-      "  ▸ Identity statement (when names differ)",
-      "  ▸ Residence statement",
+      "  ▸ Signature certificate",
+      "  ▸ Identity certificate (when names differ)",
+      "  ▸ Residence certificate",
       "  ▸ Employment certificate, enrollment certificate, and other statement documents",
       "  ▸ If a designated form exists on the consulate website, use that form",
       "Notarization request form (designated form — must be handwritten, not typed)",
@@ -8475,12 +8650,17 @@ const EN_TRANSLATIONS: any = {
   notarization_translation: {
     breadcrumb: ["Home", "Notarization", "Translation certification"],
     question: "Where will you submit the translation-certified document?",
-    sub: "Depending on the receiving institution, consular translation certification may not be accepted. Check first.",
+    sub: "This service translates a Korean document into English and has the consulate certify it. If you need an international authenticity certification (Apostille), use 'Korean-issued document for use abroad' on the first screen instead.",
+    intro: [
+      "⚠️ Check first — some receivers do NOT accept consular translation certification:",
+      "  ▸ Canadian immigration (IRCC) submissions (visa·PR·citizenship) → consular translation NOT accepted; a certified translator is required",
+      "  ▸ ServiceOntario name-change submissions → consular translation NOT accepted",
+      "  ▸ If either applies, select that item below for details.",
+    ],
     options: {
       notarization_translation_ircc_no: { title: "Submit to Canadian immigration (IRCC)", desc: "Documents for visa, PR, or citizenship applications" },
       notarization_translation_namechange_no: { title: "ServiceOntario — name change submission", desc: "Birth certificate translation for a Name Change application" },
       notarization_translation_type: { title: "Other institutions (Korean agencies, schools, companies, etc.)", desc: "Consular translation certification available" },
-      notarization_translation_license_start: { title: "Driver's license related", desc: "English translation certificate · English driving record · license exchange guide" },
     },
   },
   notarization_translation_ircc_no: {
@@ -8651,7 +8831,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book 1st Appointment (marriage relation certificate) →",
   },
   notarization_translation_license_start: {
-    breadcrumb: ["Home", "Notarization", "Translation certification", "Driver's license"],
+    breadcrumb: ["Home", "Notarization", "Driver's license"],
     question: "What driver's license service do you need?",
     sub: "There is a mutual license exchange agreement between Ontario and Korea. Select the service you need.",
     options: {
@@ -8661,7 +8841,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   notarization_translation_license: {
-    breadcrumb: ["Home", "Notarization", "Translation certification", "Driver's license", "English translation certificate"],
+    breadcrumb: ["Home", "Notarization", "Driver's license", "English translation certificate"],
     title: "Driver's license English translation certificate",
     docs: [
       "1 application form (download from the consulate website or available at the consulate)",
@@ -8679,7 +8859,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Notarization → license translation) →",
   },
   notarization_translation_driving_record: {
-    breadcrumb: ["Home", "Notarization", "Translation certification", "Driver's license", "English driving record"],
+    breadcrumb: ["Home", "Notarization", "Driver's license", "English driving record"],
     title: "Do you have a joint certificate (digital certificate)?",
     sub: "The issuance method differs depending on whether you have a joint certificate.",
     options: {
@@ -8688,7 +8868,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   notarization_translation_driving_online: {
-    breadcrumb: ["Home", "Notarization", "Translation certification", "Driver's license", "English driving record (online)"],
+    breadcrumb: ["Home", "Notarization", "Driver's license", "English driving record (online)"],
     title: "English driving record — issue online yourself",
     docs: [
       "After logging in with a joint certificate (digital certificate), issue directly at the sites below:",
@@ -8702,7 +8882,7 @@ const EN_TRANSLATIONS: any = {
     ],
   },
   notarization_translation_driving_visit: {
-    breadcrumb: ["Home", "Notarization", "Translation certification", "Driver's license", "English driving record (visit)"],
+    breadcrumb: ["Home", "Notarization", "Driver's license", "English driving record (visit)"],
     title: "English driving record — apply at the consulate",
     docs: [
       "Passport original",
@@ -8716,7 +8896,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment →",
   },
   notarization_translation_license_exchange: {
-    breadcrumb: ["Home", "Notarization", "Translation certification", "Driver's license", "Exchange guide"],
+    breadcrumb: ["Home", "Notarization", "Driver's license", "Exchange guide"],
     title: "Korea ↔ Ontario driver's license exchange guide",
     docs: [
       "📌 Korea–Ontario mutual license exchange agreement (effective Dec 17, 1998):",
@@ -8737,7 +8917,7 @@ const EN_TRANSLATIONS: any = {
   notarization_school: {
     breadcrumb: ["Home", "Notarization", "School record notarization"],
     question: "How would you like to apply?",
-    sub: "⚠️ Only documents issued by accredited Ontario/Manitoba educational institutions can be notarized. Check eligibility first.",
+    sub: "⚠️ Only documents issued by accredited Ontario/Manitoba educational institutions can be notarized. Check eligibility first. 📅 For many documents, book one slot per 10 items (e.g., 13 sheets → 2 slots, 26 → 3 slots).",
     intro: [
       "💡 Notarization may not be needed — check first:",
       "  ▸ For transfer into a Korean elementary/middle/high school: documents from foreign schools recognized by Korea's Ministry of Education are accepted as the principal-issued original, without Apostille or consular authentication (since Sep 16, 2014). Check the Ministry's accredited-school list.",
@@ -12645,6 +12825,20 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   );
                 })}
               </div>
+              {(() => {
+                const footerArr = L("footer", Array.isArray(page.footer) ? page.footer : []);
+                if (!footerArr || footerArr.length === 0) return null;
+                return (
+                  <div style={{ background: "#fffdf5", border: "1px solid #efe6cc", borderRadius: "10px", padding: "10px 12px", marginTop: "1.1rem" }}>
+                    {footerArr.map((line: string, i: number) => {
+                      const sub = line.trim().startsWith("▸");
+                      return (
+                        <div key={i} style={{ fontSize: sub ? "12px" : "13px", color: sub ? "#6b6450" : "#7a5b00", fontWeight: sub ? 400 : 600, lineHeight: 1.55, paddingLeft: sub ? "10px" : 0, marginTop: i === 0 ? 0 : "4px" }}>{line}</div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
               {pageId === "military_start" && (() => {
                 const Y = new Date().getFullYear();
                 const thisYearBirth = Y - 24;
@@ -13079,7 +13273,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               )}
 
               <div className="booking-sticky">
-              {page.booking ? (
+              {page.booking && (
                 <>
                   <button className="booking-btn" onClick={() => setShowBookingModal(true)}>
                     📅 {L("bookingLabel", page.bookingLabel) ?? (lang === "ko" ? "사전 예약하기 (torbooking.com) →" : "Book Appointment (torbooking.com) →")}
@@ -13088,10 +13282,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     {lang === "ko" ? "총영사관 홈페이지 →" : "Official Consulate Website →"}
                   </a>
                 </>
-              ) : (
-                <div style={{ background: "#e8eef7", border: "1px solid #b8caea", borderRadius: "10px", padding: "12px 14px", fontSize: "13px", color: "#223", marginTop: "4px" }}>
-                  {lang === "ko" ? "📧 이메일 신청 가능: 방문 예약 불필요" : "📧 Email application available — no appointment needed"}
-                </div>
               )}
               </div>
 

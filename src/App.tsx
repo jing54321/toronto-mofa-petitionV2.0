@@ -550,15 +550,34 @@ const STYLES = `
   .search-count { font-size: 12px; color: #889; margin-bottom: 10px; }
 
   /* ── FAQ ────────────────────────────────────────────── */
-  .faq-btn {
-    background: none; border: none; cursor: pointer;
-    font-size: 20px; padding: 8px; line-height: 1;
-    min-width: 40px; min-height: 40px;
-    display: flex; align-items: center; justify-content: center;
-    opacity: 0.55; transition: opacity 0.15s, transform 0.15s;
-    flex-shrink: 0;
+  .subtitle-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 5px; }
+  .subtitle-row p { margin-top: 0; }
+  .faq-link {
+    background: none; border: none; cursor: pointer; font-family: inherit;
+    font-size: 12.5px; font-weight: 600; color: #185fa5;
+    display: inline-flex; align-items: center; gap: 3px; white-space: nowrap;
+    flex-shrink: 0; padding: 0;
+    transition: color 0.15s;
   }
-  .faq-btn:hover { opacity: 1; transform: scale(1.15); }
+  .faq-link:hover { color: #003478; text-decoration: underline; }
+  .faq-link-arrow { font-size: 15px; font-weight: 300; line-height: 1; }
+
+  .faq-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.1rem; }
+  .faq-tab {
+    background: #f1f4f9; border: 1px solid #e0e6f0; color: #556;
+    font-size: 12.5px; font-weight: 600; font-family: inherit;
+    padding: 6px 12px; border-radius: 999px; cursor: pointer;
+    white-space: nowrap; transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .faq-tab:hover { background: #e7edf6; }
+  .faq-tab.active { background: #003478; border-color: #003478; color: #fff; }
+
+  /* 부드럽게 펼쳐지는 아코디언 (grid-rows 트랜지션) */
+  .faq-answer-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
+  .faq-answer-wrap.open { grid-template-rows: 1fr; }
+  .faq-answer-inner { overflow: hidden; }
+
+  .faq-empty { text-align: center; padding: 2rem 1rem; color: #99a; font-size: 13.5px; line-height: 1.6; white-space: pre-line; background: #fafbfd; border: 1.5px dashed #e0e6f0; border-radius: 12px; }
 
   .faq-item {
     background: #fff;
@@ -4618,7 +4637,7 @@ const TREE = {
       "미성년자 당사자의 한국 여권 원본",
       "미성년자 당사자의 캐나다 체류비자 원본 또는 유효한 PR Card 원본",
       "미성년자 당사자의 기본증명서 + 가족관계증명서 — 3개월 이내 발급",
-      "법정대리인 동의서 (첨부 양식 — 부모 작성·서명)",
+      "법정대리인 동의서 (여권 외 업무용 양식 — 부모 작성·서명)",
       "  ▸ '동의 구분'란에 \"위 미성년 자녀의 위임장 등 공증 촉탁에 대해 동의합니다\" 기재",
       "  ▸ 법정대리인 정보는 부·모 모두 작성 후 대표 1인 서명",
       "법정대리인의 유효한 여권 원본",
@@ -5206,7 +5225,7 @@ const TREE = {
     breadcrumb: ["홈", "공증", "운전면허", "영문번역 인증서"],
     title: "운전면허 영문번역 인증서",
     docs: [
-      "신청서 1부 (영사관 홈페이지 양식 다운로드 또는 영사관 비치)",
+      "운전면허 영문번역 신청서 1부 (영사관 홈페이지 양식 다운로드 또는 영사관 비치)",
       "유효한 한국 운전면허증 원본",
       "한국 운전면허증 복사본 (앞면·뒷면 각 1부)",
       "여권 원본 + 복사본 각 1부",
@@ -6028,10 +6047,39 @@ const TREE = {
 
   // ══ FAQ ══
   faq_start: {
-    type: "faq",
+    type: "faq_tabs",
     breadcrumb: ["홈", "자주 묻는 질문"],
-    title: "자주 묻는 질문",
-    title_en: "Frequently Asked Questions",
+    title: "자주 묻는 질문 (Q&A)",
+    title_en: "Frequently Asked Questions (Q&A)",
+    cats: [
+      { id: "faq_general",      icon: "📋", ko: "일반",             en: "General" },
+      { id: "faq_passport",     icon: "🛂", ko: "여권",             en: "Passport" },
+      { id: "faq_visa",         icon: "✈️", ko: "비자(사증)",        en: "Visa" },
+      { id: "faq_notarization", icon: "📜", ko: "공증",             en: "Notarization" },
+      { id: "faq_military",     icon: "🎖️", ko: "병역",             en: "Military service" },
+      { id: "faq_family",       icon: "👪", ko: "가족관계등록",      en: "Family register" },
+      { id: "faq_nationality",  icon: "🇰🇷", ko: "국적",             en: "Nationality" },
+      { id: "faq_cert_auth",    icon: "🔐", ko: "공동·금융 인증서",  en: "Digital/financial certificates" },
+      { id: "faq_various_cert", icon: "📑", ko: "각종 증명서 발급",   en: "Various certificates" },
+      { id: "faq_etc",          icon: "📌", ko: "기타",             en: "Other" },
+    ],
+  },
+
+  faq_passport:     { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "여권"],            title: "여권 — 자주 묻는 질문",            title_en: "Passport — FAQ",                        items: [] },
+  faq_visa:         { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "비자(사증)"],      title: "비자(사증) — 자주 묻는 질문",      title_en: "Visa — FAQ",                            items: [] },
+  faq_notarization: { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공증"],            title: "공증 — 자주 묻는 질문",            title_en: "Notarization — FAQ",                    items: [] },
+  faq_military:     { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "병역"],            title: "병역 — 자주 묻는 질문",            title_en: "Military service — FAQ",                items: [] },
+  faq_family:       { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "가족관계등록"],    title: "가족관계등록 — 자주 묻는 질문",    title_en: "Family register — FAQ",                 items: [] },
+  faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [] },
+  faq_cert_auth:    { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공동·금융 인증서"], title: "공동·금융 인증서 — 자주 묻는 질문", title_en: "Digital/financial certificates — FAQ",  items: [] },
+  faq_various_cert: { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "각종 증명서 발급"], title: "각종 증명서 발급 — 자주 묻는 질문", title_en: "Various certificates — FAQ",            items: [] },
+  faq_etc:          { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "기타"],            title: "기타 — 자주 묻는 질문",            title_en: "Other — FAQ",                           items: [] },
+
+  faq_general: {
+    type: "faq",
+    breadcrumb: ["홈", "자주 묻는 질문", "일반"],
+    title: "일반 — 자주 묻는 질문",
+    title_en: "General — FAQ",
     items: [
       {
         q: "예약은 어떻게 하나요?",
@@ -8356,7 +8404,7 @@ const EN_TRANSLATIONS: any = {
       "The minor's original Korean passport",
       "The minor's original Canadian residence visa or valid PR Card",
       "The minor's basic certificate + family relation certificate — issued within 3 months",
-      "Legal-guardian consent form (attached form — completed and signed by the parent(s))",
+      "Legal guardian consent (non-passport services) — attached form, completed and signed by the parent(s)",
       "  ▸ In the 'consent' section, state that you consent to the minor child's power-of-attorney notarization request",
       "  ▸ Both parents complete their information; one representative signs",
       "The legal guardian's valid passport, original",
@@ -8844,7 +8892,7 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Notarization", "Driver's license", "English translation certificate"],
     title: "Driver's license English translation certificate",
     docs: [
-      "1 application form (download from the consulate website or available at the consulate)",
+      "Driver's license translation application form (download from the consulate website or available at the consulate)",
       "Valid Korean driver's license original",
       "Korean driver's license photocopy (front and back, 1 each)",
       "Passport original + photocopy, 1 each",
@@ -11280,6 +11328,7 @@ function AppInner() {
   // 검색바 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
   const SEARCH_ENABLED = false;
   const [openFaq, setOpenFaq] = useState<any>(null);
+  const [faqCat, setFaqCat] = useState<number>(0);
   const [showBookingModal, setShowBookingModal] = useState(false);
   const [chatOpen, setChatOpen] = useState(false);
   // 챗봇 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
@@ -11330,6 +11379,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {
       return "/forms/passport_application_A4.pdf";
     }
+    // 법정대리인 동의서 (여권 외 업무용 — 공증 등)
+    if (t.startsWith("법정대리인 동의서 (여권 외 업무") || t.startsWith("Legal guardian consent (non-passport")) {
+      return "/forms/legal_guardian_consent_notary.pdf";
+    }
     // 법정대리인 동의서 (문구가 포함된 모든 줄)
     if (t.includes("법정대리인 동의서") || t.includes("Legal guardian consent")) {
       return "/forms/legal_guardian_consent.pdf";
@@ -11341,6 +11394,39 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // 긴급여권 발급신청 사유서
     if (t.includes("긴급여권 발급신청 사유서") || t.includes("Urgent passport issuance reason")) {
       return "/forms/urgent_passport_reason.pdf";
+    }
+    // 공증촉탁서 (공증 공통 양식 — 위임장·법률행위·사실행위·학적서류 등)
+    if (t.startsWith("공증촉탁서") || t.startsWith("Notarization request form")) {
+      return "/forms/notary_request_form.pdf";
+    }
+    // 인감증명서 발급 위임장
+    if (t.startsWith("인감증명서 발급 위임장") || t.startsWith("Seal certificate power of attorney form")) {
+      return "/forms/seal_issuance_poa.pdf";
+    }
+    // 인감(변경)신고서
+    if (t.startsWith("인감(변경)신고서") || t.startsWith("Seal (change) registration form")) {
+      return "/forms/seal_change_report.pdf";
+    }
+    // 인감보호(해제)신청서
+    if (t.startsWith("인감보호(해제)신청서") || t.startsWith("Seal protection (release) request form")) {
+      return "/forms/seal_protect_release.pdf";
+    }
+    // 운전면허 영문번역 신청서
+    if (t.startsWith("운전면허 영문번역 신청서") || t.startsWith("Driver's license translation application form")) {
+      return "/forms/driver_license_translation_form.pdf";
+    }
+    // 번역문 인증 4종 — 영사관 영문 양식
+    if (t.startsWith("영사관 비치 양식 (출생증명서") || t.startsWith("Consulate form (English birth certificate")) {
+      return "/forms/notary_birth_cert_en.pdf";
+    }
+    if (t.startsWith("영사관 비치 양식 (혼인증명서") || t.startsWith("Consulate form (English marriage certificate")) {
+      return "/forms/notary_marriage_cert_en.pdf";
+    }
+    if (t.startsWith("영사관 비치 양식 (이혼증명서") || t.startsWith("Consulate form (English divorce certificate")) {
+      return "/forms/notary_divorce_cert_en.pdf";
+    }
+    if (t.startsWith("영사관 비치 양식 (사망증명서") || t.startsWith("Consulate form (English death certificate")) {
+      return "/forms/notary_death_cert_en.pdf";
     }
     return null;
   };
@@ -11399,6 +11485,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
       return;
     }
     setShowBookingModal(false);
+    setOpenFaq(null);
     setHistory((h: any) => [...h, resolved]);
     setPageId(resolved);
     window.scrollTo(0, 0);
@@ -12316,7 +12403,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     return null;
   };
 
-  // FAQ 매칭: 자주 묻는 질문(faq_start.items)에서 키워드가 겹치면 그 답을 즉답으로
+  // FAQ 매칭: 자주 묻는 질문(faq_general.items)에서 키워드가 겹치면 그 답을 즉답으로
   const FAQ_KW: any = {
     0: ["예약", "appointment", "booking", "book"],
     1: ["사진", "규격", "반려", "거부", "사진 때문", "사진이 안", "photo", "picture", "size", "rejected", "reject"],
@@ -12330,7 +12417,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     9: ["영사관 주소", "영사관 위치", "어디에 있", "어디 있", "찾아가", "address", "where is the consulate", "location of"],
   };
   const matchFaq = (q: string) => {
-    const items = (TREE as any).faq_start?.items ?? [];
+    const items = (TREE as any).faq_general?.items ?? [];
     for (let i = 0; i < items.length; i++) {
       const kws = FAQ_KW[i] || [];
       if (kws.some((k: string) => q.includes(k.toLowerCase()))) {
@@ -12583,19 +12670,19 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
 
             return (
               <>
-                <div className="page-title" style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: "8px" }}>
-                  <div>
-                    <h1>{lang === "ko" ? "어떤 서비스가 필요하신가요?" : "What service do you need?"}</h1>
+                <div className="page-title">
+                  <h1>{lang === "ko" ? "어떤 서비스가 필요하신가요?" : "What service do you need?"}</h1>
+                  <div className="subtitle-row">
                     <p>{lang === "ko" ? "업무를 선택하여 필요한 문서를 확인하세요." : "Select a service to see the required documents."}</p>
+                    <button
+                      className="faq-link"
+                      onClick={() => { setOpenFaq(null); setFaqCat(0); goTo("faq_start"); }}
+                      aria-label={lang === "ko" ? "자주 묻는 질문" : "Frequently Asked Questions"}
+                    >
+                      {lang === "ko" ? "자주 묻는 질문" : "FAQ"}
+                      <span className="faq-link-arrow" aria-hidden="true">›</span>
+                    </button>
                   </div>
-                  <button
-                    className="faq-btn"
-                    onClick={() => { setOpenFaq(null); goTo("faq_start"); }}
-                    title={lang === "ko" ? "자주 묻는 질문" : "FAQ"}
-                    aria-label={lang === "ko" ? "자주 묻는 질문" : "FAQ"}
-                  >
-                    ❓
-                  </button>
                 </div>
 
                 {/* 검색창 */}
@@ -12735,6 +12822,64 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           })()}
 
           {/* FAQ */}
+          {page.type === "faq_tabs" && (() => {
+            const cats = page.cats ?? [];
+            const active = cats[faqCat] ?? cats[0];
+            const items = active ? ((TREE as any)[active.id]?.items ?? []) : [];
+            return (
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1.2rem" }}>
+                  <div style={{ fontSize: "28px" }}>❓</div>
+                  <div>
+                    <div style={{ fontSize: "20px", fontWeight: 700, color: "#1a1a2e" }}>
+                      {lang === "ko" ? page.title : page.title_en}
+                    </div>
+                    <div style={{ fontSize: "12.5px", color: "#889", marginTop: "2px" }}>
+                      {lang === "ko" ? "분야를 선택하고 질문을 누르면 답변이 펼쳐집니다." : "Pick a topic, then tap a question to expand the answer."}
+                    </div>
+                  </div>
+                </div>
+                <div className="faq-tabs">
+                  {cats.map((c: any, idx: number) => (
+                    <button
+                      key={c.id}
+                      className={`faq-tab ${idx === faqCat ? "active" : ""}`}
+                      onClick={() => { setFaqCat(idx); setOpenFaq(null); }}
+                    >
+                      {lang === "ko" ? c.ko : c.en}
+                    </button>
+                  ))}
+                </div>
+                {items.length === 0 && (
+                  <div className="faq-empty">
+                    {lang === "ko" ? "이 분야의 질문이 아직 준비 중입니다.\n곧 추가될 예정입니다." : "Questions for this topic are being prepared and will be added soon."}
+                  </div>
+                )}
+                {items.map((item: any, i: number) => (
+                  <div key={i} className="faq-item">
+                    <button
+                      className={`faq-question ${openFaq === i ? "open" : ""}`}
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    >
+                      <span>{lang === "ko" ? item.q : item.q_en}</span>
+                      <span className={`faq-chevron ${openFaq === i ? "open" : ""}`}>▼</span>
+                    </button>
+                    <div className={`faq-answer-wrap ${openFaq === i ? "open" : ""}`}>
+                      <div className="faq-answer-inner">
+                        <div className="faq-answer">{lang === "ko" ? item.a : item.a_en}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                <div style={{ marginTop: "1rem", fontSize: "12px", color: "#99a", textAlign: "center" }}>
+                  {lang === "ko"
+                    ? "더 궁금한 사항은 영사관(416-920-3809)으로 문의하세요."
+                    : "For further inquiries, contact the Consulate at 416-920-3809."}
+                </div>
+              </div>
+            );
+          })()}
+
           {page.type === "faq" && (
             <div>
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "1.2rem" }}>
@@ -12748,6 +12893,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </div>
                 </div>
               </div>
+              {(page.items ?? []).length === 0 && (
+                <div className="faq-empty">
+                  {lang === "ko" ? "이 분야의 질문이 아직 준비 중입니다.\n곧 추가될 예정입니다." : "Questions for this topic are being prepared and will be added soon."}
+                </div>
+              )}
               {(page.items ?? []).map((item: any, i: number) => (
                 <div key={i} className="faq-item">
                   <button

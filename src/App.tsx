@@ -323,6 +323,21 @@ const STYLES = `
     .form-dl { padding: 3px 7px; }
     .form-dl .form-label { display: none; }
   }
+  .sample-dl {
+    flex-shrink: 0;
+    display: inline-flex; align-items: center; gap: 3px;
+    margin-left: 6px; padding: 3px 9px;
+    background: #fff6e9; color: #9a5b00;
+    border: 1px solid #f0dcae; border-radius: 6px;
+    font-size: 12px; font-weight: 600; text-decoration: none;
+    white-space: nowrap; cursor: pointer;
+  }
+  .sample-dl:hover { background: #fdeccd; }
+  .sample-dl .form-label { font-size: 12px; }
+  @media (max-width: 400px) {
+    .sample-dl { padding: 3px 7px; }
+    .sample-dl .form-label { display: none; }
+  }
   .doc-num {
     width: 20px; height: 20px; border-radius: 50%;
     background: #e6eef8; color: #1a5fa5;
@@ -5633,7 +5648,8 @@ const TREE = {
     breadcrumb: ["홈", "병역", "병적증명서 발급", "본인 방문"],
     title: "병적증명서 발급 — 본인 영사관 방문",
     docs: [
-      "신청서 + 개인정보 수집·이용 동의서 (영사관 비치)",
+      "병적증명서 신청서 (영사관 비치)",
+      "개인정보 수집·이용 동의서 (영사관 비치)",
       "주민등록증·여권 등 신분증",
       "  ▸ 영문 병적증명서 신청 시: 영문 성명이 표기된 여권 등 신분증 제출",
     ],
@@ -5653,12 +5669,13 @@ const TREE = {
     breadcrumb: ["홈", "병역", "병적증명서 발급", "가족 대리 신청"],
     title: "병적증명서 발급 — 가족 대리 신청",
     docs: [
-      "신청서 + 개인정보 수집·이용 동의서 (영사관 비치)",
+      "병적증명서 신청서 (영사관 비치)",
+      "개인정보 수집·이용 동의서 (영사관 비치)",
       "대리인(가족)의 신분증",
       "신청 대상자의 신분증 사본",
       "본인과의 관계를 증명할 수 있는 서류",
       "  ▸ 가족관계증명서 또는 제적등본 등",
-      "  ▸ 관계 확인 불가 시: 위임장(별지 제3호서식) + 위임자 신분증 + 대리인 신분증",
+      "  ▸ 관계 확인 불가 시: 병적증명서용 위임장(별지 제3호서식) + 위임자 신분증 + 대리인 신분증",
     ],
     costs: [{ label: "수수료", value: "무료" }],
     time: "약 10일",
@@ -5676,10 +5693,11 @@ const TREE = {
     breadcrumb: ["홈", "병역", "병적증명서 발급", "대리인 신청"],
     title: "병적증명서 발급 — 대리인 신청",
     docs: [
-      "신청서 + 개인정보 수집·이용 동의서 (영사관 비치)",
+      "병적증명서 신청서 (영사관 비치)",
+      "개인정보 수집·이용 동의서 (영사관 비치)",
       "신청 대상자(위임자) 신분증(주민등록증 또는 여권) 사본",
       "대리인 신분증 원본 + 사본",
-      "위임장 (별지 제3호서식)",
+      "병적증명서용 위임장 (별지 제3호서식)",
     ],
     costs: [{ label: "수수료", value: "무료" }],
     time: "약 10일",
@@ -9221,7 +9239,8 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Military Service", "Military service certificate", "In person"],
     title: "Military service certificate — apply in person",
     docs: [
-      "Application + personal information collection/use consent form (available at the consulate)",
+      "Military service certificate application form (available at the consulate)",
+      "Personal information collection/use consent form (available at the consulate)",
       "ID such as a resident registration card or passport",
       "  ▸ For the English certificate: submit ID such as a passport showing your name in English",
     ],
@@ -9237,12 +9256,13 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Military Service", "Military service certificate", "Family on behalf"],
     title: "Military service certificate — family applies on behalf",
     docs: [
-      "Application + personal information collection/use consent form (available at the consulate)",
+      "Military service certificate application form (available at the consulate)",
+      "Personal information collection/use consent form (available at the consulate)",
       "The family member (proxy)'s ID",
       "A copy of the subject person's ID",
       "A document that can prove your relationship",
       "  ▸ Family relation certificate or removed family register, etc.",
-      "  ▸ If the relationship cannot be confirmed: power of attorney (Form No. 3) + delegator's ID + proxy's ID",
+      "  ▸ If the relationship cannot be confirmed: military service certificate power of attorney (Form No. 3) + delegator's ID + proxy's ID",
     ],
     costs: [{ label: "Fee", value: "Free" }],
     time: "About 10 days",
@@ -9256,10 +9276,11 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Military Service", "Military service certificate", "Proxy"],
     title: "Military service certificate — proxy application",
     docs: [
-      "Application + personal information collection/use consent form (available at the consulate)",
+      "Military service certificate application form (available at the consulate)",
+      "Personal information collection/use consent form (available at the consulate)",
       "A copy of the subject person (delegator)'s ID (resident registration card or passport)",
       "Proxy's ID original + copy",
-      "Power of attorney (Form No. 3)",
+      "Military service certificate power of attorney (Form No. 3)",
     ],
     costs: [{ label: "Fee", value: "Free" }],
     time: "About 10 days",
@@ -11372,6 +11393,14 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     history.some((h: string) => /_new(_|$)/.test(h))  ? "new"  :
     history.some((h: string) => /_renew(_|$)|_have(_|$)/.test(h)) ? "renew" : null;
   // 서류명 → 양식 PDF 경로 매핑 (양식이 있는 서류만 다운로드 아이콘 표시)
+  const getSampleUrl = (docText: string): string | null => {
+    const t = (docText || "").trim();
+    // 병적증명서 신청서 작성 샘플
+    if (t.startsWith("병적증명서 신청서") || t.startsWith("Military service certificate application form")) {
+      return "/forms/military_cert_application_sample.pdf";
+    }
+    return null;
+  };
   const getFormUrl = (docText: string): string | null => {
     if (typeof docText !== "string") return null;
     const t = docText.trim();
@@ -11427,6 +11456,31 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     }
     if (t.startsWith("영사관 비치 양식 (사망증명서") || t.startsWith("Consulate form (English death certificate")) {
       return "/forms/notary_death_cert_en.pdf";
+    }
+    // ── 병역 양식 ──
+    if (t.startsWith("국외여행허가 신청서") || t.startsWith("국외여행(기간연장)허가 신청서") || t.startsWith("Overseas travel permit application") || t.startsWith("Overseas travel (period extension) permit application")) {
+      return "/forms/overseas_travel_permit_form.pdf";
+    }
+    if (t.startsWith("가족 거주사실 확인서") || t.startsWith("Family residence confirmation form")) {
+      return "/forms/family_residence_confirmation.pdf";
+    }
+    if (t.startsWith("개인정보제공동의서") || t.startsWith("Personal information consent form")) {
+      return "/forms/personal_info_consent.pdf";
+    }
+    if (t.startsWith("재외국민 2세 확인신청서") || t.startsWith("Second-generation overseas Korean confirmation application")) {
+      return "/forms/overseas_korean_2ndgen_form.pdf";
+    }
+    if (t.startsWith("허가의무 위반") || t.startsWith("Confirmation of sanctions for violating")) {
+      return "/forms/travel_permit_violation_notice.pdf";
+    }
+    if (t.startsWith("병적증명서 신청서") || t.startsWith("Military service certificate application form")) {
+      return "/forms/military_cert_application.pdf";
+    }
+    if (t.startsWith("개인정보 수집·이용 동의서") || t.startsWith("Personal information collection/use consent form")) {
+      return "/forms/military_cert_privacy_consent.pdf";
+    }
+    if (t.includes("병적증명서용 위임장") || t.includes("Military service certificate power of attorney")) {
+      return "/forms/proxy_poa_form3.pdf";
     }
     return null;
   };
@@ -13197,6 +13251,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   {(() => { let docNum = 0; return mainDocs.map((doc: any, i: number) => {
                     const isSub = typeof doc === "string" && doc.trim().startsWith("└");
                     const formUrl = getFormUrl(doc);
+                    const sampleUrl = getSampleUrl(doc);
                     if (isSub) {
                       const subText = doc.replace(/^\s*└\s*/, "");
                       const nextIsSub = typeof mainDocs[i + 1] === "string" && mainDocs[i + 1].trim().startsWith("└");
@@ -13224,6 +13279,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       {formUrl && (
                         <a className="form-dl" href={formUrl} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
                           📥<span className="form-label">{lang === "ko" ? "양식" : "Form"}</span>
+                        </a>
+                      )}
+                      {sampleUrl && (
+                        <a className="sample-dl" href={sampleUrl} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "작성 샘플" : "Sample"}>
+                          📄<span className="form-label">{lang === "ko" ? "작성 샘플" : "Sample"}</span>
                         </a>
                       )}
                     </div>

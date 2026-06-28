@@ -124,6 +124,12 @@ const STYLES = `
     white-space: nowrap; max-width: 90px; overflow: hidden; text-overflow: ellipsis;
   }
   .p-label.active { color: #003478; font-weight: 700; }
+  .crumb-short { display: none; }
+  @media (max-width: 640px) {
+    .crumb-full { display: none; }
+    .crumb-short { display: inline; }
+    .p-label { max-width: 64px; }
+  }
   .p-label.clickable { cursor: pointer; text-decoration: underline dotted; text-underline-offset: 2px; }
   .p-label.clickable:hover { color: #CD2E3A; }
   .p-line {
@@ -2458,7 +2464,7 @@ const TREE = {
   nationality_renounce_start: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고"],
     question: "신청자의 성별은?",
     sub: "남성과 여성은 국적이탈 신고 기간이 다릅니다.",
     options: [
@@ -2470,7 +2476,7 @@ const TREE = {
   nationality_renounce_male_birth: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고", "남성"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "남성"],
     question: "출생 당시 부모님의 체류 상황은?",
     sub: "출생 당시 부 또는 모가 외국 영주권·시민권을 보유(또는 신청)했는지에 따라 신고 기간이 완전히 달라집니다.",
     options: [
@@ -2482,7 +2488,7 @@ const TREE = {
   nationality_renounce_male_a: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고", "남성", "영주 목적 출생"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "남성", "영주 목적 출생"],
     question: "현재 시기는?",
     sub: "남성은 만 18세가 되는 해 3월 31일까지만 일반 국적이탈신고가 가능합니다.",
     options: [
@@ -2531,7 +2537,7 @@ const TREE = {
   nationality_renounce_male_intime: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고", "남성", "기간 내"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "남성", "영주 목적 출생", "기간 내"],
     title: "국적이탈신고 — 남성 (기간 내)",
     sub: "선천적 복수국적자 · 만 18세 되는 해 3월 31일까지",
     docs: [
@@ -2569,7 +2575,7 @@ const TREE = {
   nationality_renounce_male_done: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고", "남성", "병역 해소 후"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "남성", "영주 목적 출생", "병역 해소 후"],
     title: "국적이탈신고 — 남성 (병역 해소 후)",
     sub: "병역의무를 마친 뒤 한국 국적을 포기하는 경우",
     docs: [
@@ -2604,7 +2610,7 @@ const TREE = {
   nationality_renounce_male_b: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고", "남성", "영주 목적 없이 출생"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "남성", "영주 목적 없이 출생"],
     title: "국적이탈신고 — 남성 (영주 목적 없이 체류 중 출생)",
     sub: "병역의무를 해소한 뒤에만 국적이탈신고가 가능합니다",
     docs: [
@@ -2639,7 +2645,7 @@ const TREE = {
   nationality_renounce_female: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적이탈신고", "여성"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "여성"],
     title: "국적이탈신고 — 여성",
     sub: "선천적 복수국적 여성 · 이탈 시기에 제한이 없습니다",
     docs: [
@@ -2675,11 +2681,12 @@ const TREE = {
   nationality_renounce_exception: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "예외적 국적이탈 허가"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적이탈신고", "남성", "영주 목적 출생", "예외적 허가"],
     title: "예외적 국적이탈 허가 — 신고 기간을 넘긴 병역미필 남성 (국적법 제14조의2)",
     sub: "2022.10.1 시행 · 우편·대리 불가, 본인이 직접 방문",
     docs: [
       "국적이탈허가 신청서 (양식)",
+      "국적이탈허가 신속심사 요청서 (양식 — 신속심사 대상자만)",
       "증명사진 1매 (3.5×4.5cm, 흰색배경, 6개월 이내, 사진관 촬영)",
       "캐나다 출생증명서 원본 + 사본 (부모 이름 모두 표시) / 한국 출생자는 시민권증서로 대체",
       "출생증명서 한글 번역문 (공증 불필요)",
@@ -2687,7 +2694,7 @@ const TREE = {
       "부·모 여권 사본 + 체류자격 증명서류 사본 각 1부",
       "당사자 기본증명서 + 가족관계증명서 (상세, 3개월 이내)",
       "부·모 기본증명서 각 1부 / 부의 혼인관계증명서 (해당 시)",
-      "동일인증명서 (이름 변경 시 — 4촌 이내 2명 서명)",
+      "동일인증명서 (이름 변경 시 — 가족 2명 서명)",
       "병적증명서",
       "출생 이후(또는 6세 미만 이주 후) 계속 외국 거주 사실 증명서류 (부동산·임대차·공공요금·세금납부·출입국기록 등)",
       "3개월 내 국적이탈 신고를 못 한 데 책임 묻기 어려운 사정 입증자료 (이주 상황·거주·재직·재학 서류 등)",
@@ -2697,7 +2704,7 @@ const TREE = {
       "통보 및 송달 동의서 (양식)",
     ],
     costs: [{ label: "수수료", value: "CAD $121.50 (현금, Debit, 신용카드)" }],
-    time: "약 6~12개월 (신속심사 대상: 접수일부터 3개월 이내)",
+    time: "신속심사 대상: 접수일부터 3개월 이내 (일반 심사는 사안에 따라 소요)",
     notices: [
       "대상: 병역 미해소 복수국적자로서 국적이탈 신고기간(만 18세 되는 해 3월 31일)을 넘긴 남성.",
       "신청요건: ① 외국 출생(또는 6세 미만 이주) 후 계속 외국 거주 + ② 3개월 내 신고 못 한 데 책임 묻기 어려운 사정. (국내체류 연 90일 이내면 계속 외국거주로 간주)",
@@ -2705,16 +2712,17 @@ const TREE = {
       "허가 고려: 출생지·복수국적 취득경위·주소·입국 횟수·목적·기간·한국 국민 권리 행사 여부·직업 제한 불이익·병역 형평성.",
       "⚠️ 우편·대리 접수 불가 — 본인이 거주지 관할 재외공관(토론토) 직접 방문.",
       "부 또는 모가 시민권 취득 후 국적상실신고를 안 한 경우 동시 접수.",
+      "출생증명서에 부모 이름이 없으면 새로 발급받아 제출 (서비스온타리오 / 마니토바 주정부 증명서 신청).",
+      "제출하신 원본은 확인 후 즉시 반환합니다. 사본만 제출하는 서류는 추후 원본을 요청할 수 있습니다.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (국적 → 예외적 국적이탈 허가) →",
-    onlineLink: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5400/view.do?seq=1338937",
   },
 
   nationality_choice: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고"],
     title: "국적선택신고 — 외국국적불행사 서약 (복수국적 유지)",
     sub: "선천적 복수국적자가 한국 국적을 유지하는 신고 · 무료",
     docs: [
@@ -2749,7 +2757,7 @@ const TREE = {
   nationality_choice_start: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고"],
     question: "신청자의 성별은?",
     sub: "선천적 복수국적자의 국적선택신고는 성별과 시기에 따라 기한이 달라집니다.",
     options: [
@@ -2761,7 +2769,7 @@ const TREE = {
   nationality_choice_male_birth: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "남성"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "남성"],
     question: "출생 당시 부모님의 체류 상황은?",
     sub: "이른바 '원정출산'에 해당하면 외국국적불행사 서약(국적선택)이 제한됩니다.",
     options: [
@@ -2773,7 +2781,7 @@ const TREE = {
   nationality_choice_female_birth: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "여성"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "여성"],
     question: "출생 당시 부모님의 체류 상황은?",
     sub: "이른바 '원정출산'에 해당하면 외국국적불행사 서약(국적선택)이 제한됩니다.",
     options: [
@@ -2785,7 +2793,7 @@ const TREE = {
   nationality_choice_male_a: {
     type: "question",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "남성", "영주 목적 출생"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "남성", "영주 목적 출생"],
     question: "현재 시기·병역 상황은?",
     sub: "남성은 만 22세가 되는 해 생일 전까지, 또는 병역의무를 마친 경우 그로부터 2년 이내에 국적선택신고가 가능합니다.",
     options: [
@@ -2798,7 +2806,7 @@ const TREE = {
   nationality_choice_male_intime: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "남성", "기간 내"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "남성", "기간 내"],
     title: "국적선택신고 — 남성 (만 22세 되는 해 생일 전)",
     sub: "선천적 복수국적자가 한국 국적을 유지하는 신고(외국국적불행사 서약) · 무료",
     docs: [
@@ -2831,7 +2839,7 @@ const TREE = {
   nationality_choice_male_served: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "남성", "병역 해소 후"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "남성", "병역 해소 후"],
     title: "국적선택신고 — 남성 (병역 해소 후 2년 이내)",
     sub: "병역의무를 마친 남성이 그로부터 2년 이내에 한국 국적을 유지하는 신고 · 무료",
     docs: [
@@ -2862,7 +2870,7 @@ const TREE = {
   nationality_choice_female: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "여성"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "여성", "영주 목적 출생"],
     title: "국적선택신고 — 여성 (만 22세 되는 해 생일 전)",
     sub: "선천적 복수국적 여성이 한국 국적을 유지하는 신고(외국국적불행사 서약) · 무료",
     docs: [
@@ -2895,7 +2903,7 @@ const TREE = {
   nationality_choice_excluded: {
     type: "result",
     service: "nationality",
-    breadcrumb: ["홈", "국적", "국적선택신고", "서약 제한"],
+    breadcrumb: ["홈", "국적", "선천적 복수국적", "국적선택신고", "영주 목적 없이 출생"],
     title: "외국국적불행사 서약 제한 — 영주 목적 없이 체류 중 출생 (원정출산 등)",
     sub: "원칙적으로 외국국적불행사 서약(국적선택)이 불가하나, 예외 조건에 해당하면 가능합니다.",
     docs: [],
@@ -10083,7 +10091,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_choice_start: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report"],
     question: "Applicant's sex?",
     sub: "For a congenital dual national, the nationality-choice report deadline depends on sex and timing.",
     options: {
@@ -10092,7 +10100,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_choice_male_birth: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Male"],
     question: "Parents' residence status at the time of birth?",
     sub: "If it counts as 'birth tourism,' the pledge not to exercise foreign nationality (nationality choice) is restricted.",
     options: {
@@ -10101,7 +10109,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_choice_female_birth: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Female"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Female"],
     question: "Parents' residence status at the time of birth?",
     sub: "If it counts as 'birth tourism,' the pledge not to exercise foreign nationality (nationality choice) is restricted.",
     options: {
@@ -10110,7 +10118,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_choice_male_a: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male", "Permanent-purpose birth"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Male", "Permanent-purpose birth"],
     question: "Current timing / military status?",
     sub: "Males can file until the birthday of the year they turn 22, or within 2 years of completing their military obligation.",
     options: {
@@ -10120,7 +10128,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_choice_male_intime: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male", "In time"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Male", "In time"],
     title: "Nationality-choice report — Male (before the birthday of the year turning 22)",
     sub: "A congenital dual national keeps Korean nationality (pledge not to exercise foreign nationality) · free",
     docs: [
@@ -10150,7 +10158,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book (Nationality → Nationality-choice report) →",
   },
   nationality_choice_male_served: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Male", "After military service"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Male", "After military service"],
     title: "Nationality-choice report — Male (within 2 years of completing military service)",
     sub: "A male who completed his military obligation keeps Korean nationality within 2 years · free",
     docs: [
@@ -10178,7 +10186,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book (Nationality → Nationality-choice report) →",
   },
   nationality_choice_female: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Female"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Female", "Born for permanent settlement"],
     title: "Nationality-choice report — Female (before the birthday of the year turning 22)",
     sub: "A congenital dual-national female keeps Korean nationality (pledge not to exercise foreign nationality) · free",
     docs: [
@@ -10208,7 +10216,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book (Nationality → Nationality-choice report) →",
   },
   nationality_choice_excluded: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report", "Pledge restricted"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report", "Born without settlement intent"],
     title: "Pledge restricted — born without permanent-residence purpose (birth tourism, etc.)",
     sub: "In principle the pledge (nationality choice) is not allowed, but it is possible if an exception applies.",
     docs: [],
@@ -10225,7 +10233,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book (Nationality → Nationality-choice report) →",
   },
   nationality_renounce_start: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report"],
     question: "Applicant's sex?",
     sub: "Males and females have different nationality-exit report periods.",
     options: {
@@ -10234,7 +10242,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_renounce_male_birth: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Male"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Male"],
     question: "Your parents' residence situation at your birth?",
     sub: "Whether a parent held (or had applied for) foreign PR/citizenship at your birth completely changes the report period.",
     options: {
@@ -10243,7 +10251,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_renounce_male_a: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Male", "Born for permanent settlement"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Male", "Born for permanent settlement"],
     question: "Where are you now in time?",
     sub: "A male may file a normal nationality-exit report only until Mar 31 of the year he turns 18.",
     options: {
@@ -10280,7 +10288,7 @@ const EN_TRANSLATIONS: any = {
     },
   },
   nationality_renounce_male_intime: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Male", "In time"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Male", "Born for permanent settlement", "In time"],
     title: "Nationality-exit report — Male (in time)",
     sub: "Congenital dual national · by Mar 31 of the year turning 18",
     docs: [
@@ -10315,7 +10323,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Nationality → Exit report) →",
   },
   nationality_renounce_male_done: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Male", "After military resolved"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Male", "Born for permanent settlement", "After military resolved"],
     title: "Nationality-exit report — Male (after military resolved)",
     sub: "Giving up Korean nationality after completing military duty",
     docs: [
@@ -10347,7 +10355,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Nationality → Exit report) →",
   },
   nationality_renounce_male_b: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Male", "Born without settlement intent"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Male", "Born without settlement intent"],
     title: "Nationality-exit report — Male (born while residing without permanent-settlement intent)",
     sub: "A nationality-exit report is possible only after military duty is resolved",
     docs: [
@@ -10379,7 +10387,7 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Consultation →",
   },
   nationality_renounce_female: {
-    breadcrumb: ["Home", "Nationality", "Nationality-exit report", "Female"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Female"],
     title: "Nationality-exit report — Female",
     sub: "Congenital dual-national female · there is no time limit for the exit report",
     docs: [
@@ -10412,11 +10420,12 @@ const EN_TRANSLATIONS: any = {
     bookingLabel: "Book Appointment (Nationality → Exit report) →",
   },
   nationality_renounce_exception: {
-    breadcrumb: ["Home", "Nationality", "Exceptional nationality-exit permit"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-exit report", "Male", "Born for permanent settlement", "Exceptional permit"],
     title: "Exceptional nationality-exit permit — male (military unfulfilled) past the deadline (Nationality Act Art. 14-2)",
     sub: "Effective Oct 1, 2022 · no mail/proxy, must visit in person",
     docs: [
       "Nationality-exit permit application (form)",
+      "Nationality-exit expedited-review request (form — expedited applicants only)",
       "1 ID photo (3.5×4.5cm, white background, within 6 months, photo studio)",
       "Canadian birth certificate original + copy (both parents' names) / born in Korea: citizenship certificate instead",
       "Korean translation of the birth certificate (no notarization)",
@@ -10424,7 +10433,7 @@ const EN_TRANSLATIONS: any = {
       "Parents' passport copies + residency-status proof copies, 1 each",
       "Subject's basic + family relation certificate (detailed, within 3 months)",
       "Parents' basic certificates, 1 each / father's marriage relation certificate (if applicable)",
-      "Identity confirmation certificate (if name changed — 2 relatives within the 4th degree sign)",
+      "Identity confirmation certificate (if name changed — signed by 2 family members)",
       "Military service certificate",
       "Proof of continuous foreign residence since birth (or since pre-age-6 emigration) — property, lease, utility/tax records, entry-exit records, etc.",
       "Evidence of circumstances making it hard to hold you responsible for not reporting within 3 months (migration, residence, employment, enrollment documents, etc.)",
@@ -10434,7 +10443,7 @@ const EN_TRANSLATIONS: any = {
       "Notification & service consent form (form)",
     ],
     costs: [{ label: "Fee", value: "CAD $121.50 (Cash, Debit, Credit)" }],
-    time: "About 6–12 months (expedited review: within 3 months of receipt)",
+    time: "Expedited review: within 3 months of receipt (standard review varies by case)",
     notices: [
       "Eligibility: a military-unfulfilled dual-national male past the exit-report deadline (Mar 31 of the year turning 18).",
       "Requirements: ① born abroad (or emigrated before age 6) with continuous foreign residence + ② circumstances making it hard to hold you responsible for missing the deadline. (Stays in Korea within 90 days/year count as continuous foreign residence.)",
@@ -10442,13 +10451,14 @@ const EN_TRANSLATIONS: any = {
       "Permit considerations: place of birth, how dual nationality arose, address, number of entries, purpose, period, exercise of Korean-national rights, career disadvantage, military fairness.",
       "⚠️ No mail/proxy — visit the consulate (Toronto) in person.",
       "If a parent acquired citizenship but did not file a loss report, file together.",
+      "If the birth certificate lacks parents’ names, obtain a new one (ServiceOntario / Manitoba provincial certificate).",
+      "Submitted originals are returned immediately after verification. For copy-only documents, the original may be requested later.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "Book Appointment (Nationality → Exceptional exit permit) →",
-    onlineLink: "https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5400/view.do?seq=1338937",
   },
   nationality_choice: {
-    breadcrumb: ["Home", "Nationality", "Nationality-choice report"],
+    breadcrumb: ["Home", "Nationality", "Congenital dual national", "Nationality-choice report"],
     title: "Nationality-choice report — pledge not to exercise foreign nationality (keep dual nationality)",
     sub: "A congenital dual national's report to keep Korean nationality · free",
     docs: [
@@ -12788,7 +12798,56 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
 
   const breadcrumb = Array.isArray(page.breadcrumb) ? page.breadcrumb : [];
   const breadcrumbL = L("breadcrumb", breadcrumb);
-  const progressPct = pageId === "home" ? 0 : Math.min(100, (breadcrumb.length / 5) * 100);
+
+  // ── 동적 breadcrumb: 실제 거쳐온 경로(history) 기반 ──
+  // 각 노드의 '자기 자신 crumb'(그 노드 고유 breadcrumb의 마지막 요소)을 현재 언어로 반환
+  const crumbLabelFor = (id: string): string | null => {
+    if (id === "home") return lang === "ko" ? "홈" : "Home";
+    const n = (TREE as any)[id];
+    if (!n) return null;
+    const tko = (KO_TRANSLATIONS as any)[id];
+    const ten = (EN_TRANSLATIONS as any)[id];
+    const bc = (lang === "ko" ? (tko && tko.breadcrumb) : (ten && ten.breadcrumb)) ?? n.breadcrumb;
+    if (Array.isArray(bc) && bc.length) return bc[bc.length - 1];
+    return null;
+  };
+  // history가 현재 페이지와 일치하면 동적 경로 사용, 아니면 정적 breadcrumb로 폴백(안전)
+  const histValid = Array.isArray(history) && history.length > 0 && history[history.length - 1] === pageId;
+  const CRUMB_SHORT: any = {
+    // 국적
+    "국적": "국적", "외국국적 취득": "외국국적", "선천적 복수국적": "선천적",
+    "국적이탈신고": "이탈", "국적선택신고": "선택", "남성": "남", "여성": "여",
+    "영주 목적 출생": "영주", "영주 목적 없이 출생": "비영주", "기간 내": "기간내",
+    "병역 해소 후": "병역필", "예외적 허가": "예외", "인지에 의한 국적취득": "인지취득",
+    "국적회복": "회복", "후천적 취득": "후천적", "부모와 함께 취득": "수반취득",
+    "국적상실신고": "상실", "사망자": "사망", "국적 선택": "선택", "국적보유신고": "보유",
+    // 공통/서비스
+    "여권": "여권", "비자 (사증)": "비자", "병역": "병역",
+    // 여권
+    "일반": "일반", "비전자": "비전자", "성인": "성인", "미성년자": "미성년",
+    "신규": "신규", "재발급": "재발급", "분실": "분실", "유학생": "유학생",
+    "영주권자": "영주권", "장기체류자": "장기체류", "단기방문(eTA)": "eTA",
+    "선천적 복수국적자": "선천적", "후천적 시민권자": "후천적", "한부모": "한부모",
+    "공동친권": "공동친권", "단독친권": "단독친권", "부모 혼인 중": "혼인중",
+    // 병역
+    "국외여행허가": "국외여행", "단기 여행 허가": "단기여행", "병적증명서 발급": "병적증명",
+    "복수국적자": "복수국적", "부모와 5년 이상 거주": "5년거주", "재외국민 2세 확인": "2세확인",
+    "본인 방문": "본인", "대리인 신청": "대리", "가족 대리 신청": "가족대리", "온라인": "온라인",
+    // 비자(긴 한글 위주)
+    "재외동포(F-4)": "F-4", "단기방문(C-3-1)": "C-3-1", "동반(F-3)": "F-3",
+    "이중국적 확인": "이중국적", "취업·유학·기타": "취업·유학", "여성/41세 이상": "여성41+",
+    "18~59세 남성": "18~59남", "41세 미만 남성": "41미만남", "한국 혈통 없음": "혈통없음",
+    "한국계 2세": "한국계2세", "긴급 인도적 사유": "긴급",
+  };
+  const shortCrumb = (label: any) => {
+    if (!label || typeof label !== "string" || lang !== "ko") return label;
+    return CRUMB_SHORT[label] ?? label.split(/\s+/)[0];
+  };
+  const trail: any[] = histValid
+    ? history.map((hid: string, idx: number) => { const label = crumbLabelFor(hid); return { id: hid, idx, label, short: shortCrumb(label) }; }).filter((x: any) => x.label != null)
+    : breadcrumbL.map((label: any, i: number) => ({ id: history[i] ?? "home", idx: i, label, short: shortCrumb(label) }));
+
+  const progressPct = pageId === "home" ? 0 : Math.min(100, (trail.length / 5) * 100);
   const serviceColor = (page.service && (SERVICE_COLORS as any)[page.service]) ? (SERVICE_COLORS as any)[page.service] : "#003478";
 
   // 언어에 따라 서비스 카드 배열 선택
@@ -12819,25 +12878,26 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         {pageId !== "home" && (
           <div className="progress-wrap">
             <div className="progress-steps">
-              {breadcrumbL.map((label: any, i: number) => {
-                const isActive = i === breadcrumbL.length - 1;
-                const historyTarget = history[i] ?? "home";
+              {trail.map((crumb: any, i: number) => {
+                const isActive = i === trail.length - 1;
+                const historyTarget = crumb.id ?? "home";
                 return (
                   <div key={i} className="p-step">
-                    {i > 0 && <div className={`p-line ${i <= breadcrumbL.length - 1 ? "done" : ""}`} />}
+                    {i > 0 && <div className={`p-line ${i <= trail.length - 1 ? "done" : ""}`} />}
                     <div className={`p-dot ${isActive ? "active" : "done"}`}>
                       {isActive ? i + 1 : "✓"}
                     </div>
                     <span
                       className={`p-label ${isActive ? "active" : "clickable"}`}
                       onClick={!isActive ? () => {
-                        setHistory(history.slice(0, i + 1));
+                        setHistory(history.slice(0, (crumb.idx ?? i) + 1));
                         setPageId(historyTarget);
                         window.scrollTo(0, 0);
                       } : undefined}
                       title={!isActive ? (lang === "ko" ? "이 단계로 돌아가기" : "Go back to this step") : undefined}
                     >
-                      {label}
+                      <span className="crumb-full">{crumb.label}</span>
+                      <span className="crumb-short">{crumb.short ?? crumb.label}</span>
                     </span>
                   </div>
                 );

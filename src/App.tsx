@@ -5421,6 +5421,7 @@ const TREE = {
     sub: "병역의무는 대한민국 국적 남성에게 해당됩니다. 선천적 복수국적 남성의 국적이탈(병역 면탈 목적이 아닌 국적 포기)은 '국적' 메뉴에서 확인하세요 — 만 18세가 되는 해 3월 31일까지만 신청할 수 있는 기한이 있습니다.",
     options: [
       { id: "military_permit_start", icon: "✈️", title: "국외여행허가 신청·연장", desc: "캐나다 체류 중 병역 연기 허가 신청" },
+      { id: "military_permit_2ndgen", icon: "👶", title: "재외국민 2세 확인", desc: "외국 출생·어릴 때 이민 — 확인 시 국외여행허가 불필요" },
       { id: "military_cert_start", icon: "📄", title: "병적증명서 발급", desc: "비자·취업·국적이탈 등에 필요한 병역사항 증명서" },
     ],
   },
@@ -5436,7 +5437,6 @@ const TREE = {
       { id: "military_permit_pr", icon: "🟢", title: "영주권자 (본인 또는 부모)", desc: "PR카드 보유 — 37세까지 또는 3년 범위" },
       { id: "military_permit_dual", icon: "🇨🇦", title: "복수국적자 (캐나다 시민권 보유)", desc: "부모와 거주 or 10년 이상 국외 거주 — 37세까지" },
       { id: "military_permit_family5", icon: "👨‍👩‍👦", title: "부모와 5년 이상 국외 거주 (기타)", desc: "영주권·시민권 없이 부모와 장기 거주" },
-      { id: "military_permit_2ndgen", icon: "👶", title: "재외국민 2세", desc: "외국 출생 or 어릴 때 이민 + 17세까지 국외 거주" },
       { id: "military_permit_short", icon: "✈️", title: "단기 여행 허가", desc: "일시 출국·단기 체재 — 27세 이내, 병무청 온라인 신청 원칙" },
     ],
   },
@@ -5468,12 +5468,14 @@ const TREE = {
       "  ▸ 영주권 취득 후 거주기간 3년 미만 → 3년 범위에서 1회",
       "  ▸ 조건부·임시 영주권자 → 영주권 유효기간 초과 6개월 범위 내",
       "25세 이전 영주권 취득 + 계속 거주 중인 경우 별도 신청 없이 37세까지 허가로 간주될 수 있습니다 (병역법 시행령 제149조) — 병무청에 확인하세요.",
-      "허가 취소 주의: 귀국 후 3개월 이상 계속 국내 체재 시 허가 취소 및 병역의무 부과.",
-      "국내 영리활동 주의: 1년 중 60일 이상 취업·사업·공연 수입 활동 시 허가 취소.",
+      "허가 취소 주의: 1년의 기간 중 통산 6개월 이상 국내 체재 시 허가 취소 및 병역의무 부과.",
+      "허가 취소 주의: 「해외이주법」에 따라 영주귀국 신고 시 허가 취소 및 병역의무 부과.",
+      "국내 영리활동 주의: 1년 중 통산 60일 이상 취업·사업(부동산 임대 포함)·공연 수입 활동 시 허가 취소.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (병역 → 국외여행허가) →",
     onlineLink: "https://www.mma.go.kr",
+    onlineLabel: "병무청 웹사이트 바로가기",
   },
 
   // ── 복수국적자 ──
@@ -5504,13 +5506,15 @@ const TREE = {
       "  ▸ 국외에서 10년 이상 계속 거주",
       "⚠️ 신청 시기: 만 24세가 되는 해 1월 1일 ~ 만 25세 되는 해 1월 15일까지",
       "  ▸ 2001년생: 2025.1.1 ~ 2026.1.15 / 2002년생: 2026.1.1 ~ 2027.1.15",
+      "⚠️ 허가 기간 만료 최소 3개월 전에 신청하세요 (서류 심사 기간 감안).",
       "⚠️ 2026.5.3부터: 허가기간 만료 후 15일 이내 미귀국 시 고발.",
-      "허가 취소 주의: 1년 중 6개월 이상 국내 체재 또는 영리활동 시 허가 취소 및 병역의무 부과.",
-      "부 또는 모가 영주귀국 신고를 하거나 1년 중 6개월 이상 국내 체재 시 허가 취소.",
+      "허가 취소 주의: 1년의 기간 중 통산 6개월 이상 국내 체재 또는 영리활동(연 60일 이상, 부동산 임대 포함) 시 허가 취소 및 병역의무 부과.",
+      "부 또는 모가 영주귀국 신고를 하거나 1년의 기간 중 통산 6개월 이상 국내 체재 시 허가 취소.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (병역 → 국외여행허가) →",
     onlineLink: "https://www.mma.go.kr",
+    onlineLabel: "병무청 웹사이트 바로가기",
   },
 
   // ── 부모와 5년 이상 국외 거주 ──
@@ -5541,13 +5545,14 @@ const TREE = {
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (병역 → 국외여행허가) →",
     onlineLink: "https://www.mma.go.kr",
+    onlineLabel: "병무청 웹사이트 바로가기",
   },
 
   // ── 재외국민 2세 ──
   military_permit_2ndgen: {
     type: "result",
     service: "military",
-    breadcrumb: ["홈", "병역", "국외여행허가", "재외국민 2세"],
+    breadcrumb: ["홈", "병역", "재외국민 2세 확인"],
     title: "재외국민 2세 확인 신청",
     docs: [
       "재외국민 2세 확인신청서 (소정 양식)",
@@ -5577,7 +5582,8 @@ const TREE = {
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (병역 → 재외국민2세) →",
-    onlineLink: "https://www.mma.go.kr",
+    onlineLink: "https://www.mma.go.kr/contents.do?mc=mma0000802",
+    onlineLabel: "병무청 재외국민 2세 안내",
   },
 
   // ── 단기 여행 허가 ──
@@ -6240,7 +6246,20 @@ const TREE = {
       },
     ],
   },
-  faq_military:     { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "병역"],            title: "병역 — 자주 묻는 질문",            title_en: "Military service — FAQ",                items: [] },
+  faq_military: {
+    type: "faq",
+    breadcrumb: ["홈", "자주 묻는 질문", "병역"],
+    title: "병역 — 자주 묻는 질문",
+    title_en: "Military service — FAQ",
+    items: [
+      {
+        q: "현재 영주권자로 37세까지 국외여행허가를 받은 상태입니다. 한국에 자주 들어가도 되나요?",
+        q_en: "I'm a permanent resident with an overseas travel permit until age 37. Can I visit Korea frequently?",
+        a: "단기 방문은 가능합니다. 다만 1년 중 통산 6개월 이상 국내 체재, 영리활동(연 60일 이상), 영주귀국 신고 시에는 허가가 취소되고 병역의무가 부과됩니다. 자주 오시는 건 괜찮지만, 연간 누적 체재가 6개월을 넘지 않도록 주의하세요.",
+        a_en: "Short visits are fine. However, the permit is revoked and military duty reimposed if you stay in Korea a cumulative 6+ months in a year, do profit-making activity (60+ days/year), or file a permanent-return report. Visiting often is OK, but keep your annual cumulative stay under 6 months.",
+      },
+    ],
+  },
   faq_family:       { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "가족관계등록"],    title: "가족관계등록 — 자주 묻는 질문",    title_en: "Family register — FAQ",                 items: [] },
   faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [] },
   faq_cert_auth:    { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공동·금융 인증서"], title: "공동·금융 인증서 — 자주 묻는 질문", title_en: "Digital/financial certificates — FAQ",  items: [] },
@@ -9205,6 +9224,7 @@ const EN_TRANSLATIONS: any = {
     sub: "Military service applies to male Korean nationals. For a congenital dual-national male, the nationality-exit report (giving up nationality, not for evading service) is in the 'Nationality' menu — note the deadline: it can be filed only until Mar 31 of the year he turns 18.",
     options: {
       military_permit_start: { title: "Overseas travel permit — apply/extend", desc: "Apply to defer military service while residing in Canada" },
+      military_permit_2ndgen: { title: "Overseas Korean (2nd generation)", desc: "Born abroad / emigrated young — once confirmed, no travel permit needed" },
       military_cert_start: { title: "Military service certificate issuance", desc: "Certificate of military status for visa, employment, nationality exit, etc." },
     },
   },
@@ -9216,7 +9236,6 @@ const EN_TRANSLATIONS: any = {
       military_permit_pr: { title: "Permanent resident (self or parents)", desc: "Holds a PR Card — until age 37 or within a 3-year range" },
       military_permit_dual: { title: "Dual citizen (holds Canadian citizenship)", desc: "Living with parents or 10+ years abroad — until age 37" },
       military_permit_family5: { title: "Lived abroad 5+ years with parents (other)", desc: "Long-term residence with parents without PR/citizenship" },
-      military_permit_2ndgen: { title: "Second-generation overseas Korean", desc: "Born abroad or emigrated young + lived abroad until age 17" },
       military_permit_short: { title: "Short-term travel permit", desc: "Temporary departure/short stay — under age 27, apply online via MMA as a rule" },
     },
   },
@@ -9244,10 +9263,12 @@ const EN_TRANSLATIONS: any = {
       "  ▸ Resided less than 3 years after obtaining PR → once within a 3-year range",
       "  ▸ Conditional/temporary PR holders → within 6 months beyond the PR validity",
       "If you obtained PR before age 25 and have resided continuously, you may be deemed permitted until age 37 without a separate application (Enforcement Decree of the Military Service Act, Art. 149) — confirm with the MMA.",
-      "Cancellation warning: staying in Korea continuously for 3+ months after return cancels the permit and imposes military duty.",
-      "Domestic profit activity warning: working/business/performance income for 60+ days in a year cancels the permit.",
+      "Cancellation warning: staying in Korea for a cumulative 6+ months within any 1-year period cancels the permit and imposes military duty.",
+      "Cancellation warning: filing a permanent-return report under the Overseas Migration Act cancels the permit and imposes military duty.",
+      "Domestic profit activity warning: a cumulative 60+ days of employment/business (including real estate rental)/performance income in a year cancels the permit.",
     ],
     bookingLabel: "Book Appointment (Military → Overseas travel permit) →",
+    onlineLabel: "Go to the MMA website",
   },
   military_permit_dual: {
     breadcrumb: ["Home", "Military Service", "Overseas travel permit", "Dual citizen"],
@@ -9274,11 +9295,13 @@ const EN_TRANSLATIONS: any = {
       "  ▸ Resided abroad continuously for 10+ years",
       "⚠️ Application window: from Jan 1 of the year you turn 24 to Jan 15 of the year you turn 25.",
       "  ▸ Born 2001: Jan 1, 2025 – Jan 15, 2026 / Born 2002: Jan 1, 2026 – Jan 15, 2027",
+      "⚠️ Apply at least 3 months before the permit period expires (allowing time for document review).",
       "⚠️ From May 3, 2026: failure to return within 15 days after the permit expires results in prosecution.",
-      "Cancellation warning: staying in Korea 6+ months in a year, or profit activity, cancels the permit and imposes military duty.",
-      "If a parent files a permanent-return report or stays in Korea 6+ months in a year, the permit is cancelled.",
+      "Cancellation warning: staying in Korea a cumulative 6+ months in a year, or profit activity (60+ days/year, including real estate rental), cancels the permit and imposes military duty.",
+      "If a parent files a permanent-return report or stays in Korea a cumulative 6+ months in a year, the permit is cancelled.",
     ],
     bookingLabel: "Book Appointment (Military → Overseas travel permit) →",
+    onlineLabel: "Go to the MMA website",
   },
   military_permit_family5: {
     breadcrumb: ["Home", "Military Service", "Overseas travel permit", "5+ years with parents"],
@@ -9303,9 +9326,10 @@ const EN_TRANSLATIONS: any = {
       "Check the result: 2 weeks after applying, via real-time overseas travel permit lookup at the MMA website (www.mma.go.kr).",
     ],
     bookingLabel: "Book Appointment (Military → Overseas travel permit) →",
+    onlineLabel: "Go to the MMA website",
   },
   military_permit_2ndgen: {
-    breadcrumb: ["Home", "Military Service", "Overseas travel permit", "2nd-gen overseas Korean"],
+    breadcrumb: ["Home", "Military Service", "2nd-gen overseas Korean"],
     title: "Second-generation overseas Korean — confirmation application",
     docs: [
       "Second-generation overseas Korean confirmation application (designated form)",
@@ -9334,6 +9358,7 @@ const EN_TRANSLATIONS: any = {
       "Cancellation conditions: total stays in Korea exceeding 3 years after the reference date, or a parent's permanent-return report.",
     ],
     bookingLabel: "Book Appointment (Military → 2nd-gen overseas Korean) →",
+    onlineLabel: "MMA 2nd-gen overseas Korean info",
   },
   military_permit_short: {
     breadcrumb: ["Home", "Military Service", "Overseas travel permit", "Short-term travel permit"],
@@ -13628,7 +13653,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 <div className="highlight-box">
                   <span>💡</span>
                   <div>
-                    <strong>{lang === "ko" ? "온라인 신청 / 바로가기" : "Online Application / Link"}</strong><br />
+                    <strong>{L("onlineLabel", page.onlineLabel) ?? (lang === "ko" ? "온라인 신청 / 바로가기" : "Online Application / Link")}</strong><br />
                     <a href={page.onlineLink} target="_blank" rel="noreferrer" style={{ color: "#7a5000" }}>
                       {lang === "ko" ? "바로가기 →" : "Go →"}
                     </a>

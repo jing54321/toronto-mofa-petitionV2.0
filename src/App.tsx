@@ -577,15 +577,22 @@ const STYLES = `
   .faq-link:hover { color: #003478; text-decoration: underline; }
   .faq-link-arrow { font-size: 15px; font-weight: 300; line-height: 1; }
 
-  .faq-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.1rem; }
+  .faq-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.35rem; }
   .faq-tab {
-    background: #f1f4f9; border: 1px solid #e0e6f0; color: #556;
-    font-size: 12.5px; font-weight: 600; font-family: inherit;
-    padding: 6px 12px; border-radius: 999px; cursor: pointer;
-    white-space: nowrap; transition: background 0.15s, color 0.15s, border-color 0.15s;
+    background: #ffffff; border: 1px solid #dde4ef; color: #46546b;
+    font-size: 13px; font-weight: 600; font-family: inherit; letter-spacing: -0.01em;
+    padding: 7px 14px; border-radius: 10px; cursor: pointer;
+    white-space: nowrap; box-shadow: 0 1px 2px rgba(16,32,64,0.04);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
   }
-  .faq-tab:hover { background: #e7edf6; }
-  .faq-tab.active { background: #003478; border-color: #003478; color: #fff; }
+  .faq-tab:hover { border-color: #b9c9e4; color: #003478; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,52,120,0.10); }
+  .faq-tab:active { transform: translateY(0); }
+  .faq-tab.active {
+    background: linear-gradient(135deg, #0a3f86, #003478);
+    border-color: #003478; color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,52,120,0.28);
+  }
+  .faq-tab.active:hover { color: #ffffff; transform: translateY(-1px); }
 
   /* 부드럽게 펼쳐지는 아코디언 (grid-rows 트랜지션) */
   .faq-answer-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }
@@ -3719,9 +3726,9 @@ const TREE = {
     service: "various_cert",
     breadcrumb: ["홈", "각종 증명서 발급", "재외국민등록부 등본"],
     question: "어떻게 발급받으시겠어요?",
-    sub: "공동인증서가 있으면 영사민원24에서 온라인으로 즉시 발급 가능합니다.",
+    sub: "공동인증서가 있으면 재외동포365 민원포털에서 온라인으로 즉시 발급 가능합니다.",
     options: [
-      { id: "registration_copy_online", icon: "💻", title: "온라인 발급 (영사민원24)", desc: "공동인증서 필요 — 즉시 발급" },
+      { id: "registration_copy_online", icon: "💻", title: "온라인 발급 (재외동포365 민원포털)", desc: "공동인증서 필요 — 즉시 발급" },
       { id: "registration_copy_visit", icon: "🏛️", title: "영사관 방문 발급", desc: "당일 즉시 — CAD $0.65/부" },
       { id: "registration_copy_mail", icon: "📮", title: "우편 신청", desc: "변호사 공증 사본 필요" },
     ],
@@ -5838,9 +5845,9 @@ const TREE = {
     service: "registration",
     breadcrumb: ["홈", "재외국민 등록", "등록부 등본 발급"],
     question: "어떻게 발급받으시겠어요?",
-    sub: "공동인증서가 있으면 영사민원24에서 온라인으로 즉시 발급 가능합니다.",
+    sub: "공동인증서가 있으면 재외동포365 민원포털에서 온라인으로 즉시 발급 가능합니다.",
     options: [
-      { id: "registration_copy_online", icon: "💻", title: "온라인 발급 (영사민원24)", desc: "공동인증서 필요 — 즉시 발급" },
+      { id: "registration_copy_online", icon: "💻", title: "온라인 발급 (재외동포365 민원포털)", desc: "공동인증서 필요 — 즉시 발급" },
       { id: "registration_copy_visit", icon: "🏛️", title: "영사관 방문 발급", desc: "당일 즉시 — CAD $0.65/부" },
       { id: "registration_copy_mail", icon: "📮", title: "우편 신청", desc: "변호사 공증 사본 필요" },
     ],
@@ -5852,7 +5859,7 @@ const TREE = {
     breadcrumb: ["홈", "재외국민 등록", "등록부 등본", "온라인"],
     title: "재외국민등록부 등본 — 온라인 발급",
     docs: [
-      "영사민원24 접속 → 재외국민등록부 등본 신청",
+      "재외동포365 민원포털 접속 → 재외국민등록부 등본 신청",
     ],
     costs: [{ label: "수수료", value: "무료" }],
     time: "즉시",
@@ -5861,7 +5868,7 @@ const TREE = {
       "재외국민등록부 등본은 해외 체류기간을 직접 증명하는 서류로는 활용 불가.",
     ],
     booking: null,
-    onlineLink: "https://consul.mofa.go.kr",
+    onlineLink: "https://www.g4k.go.kr",
   },
 
   registration_copy_visit: {
@@ -6083,9 +6090,156 @@ const TREE = {
     ],
   },
 
-  faq_passport:     { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "여권"],            title: "여권 — 자주 묻는 질문",            title_en: "Passport — FAQ",                        items: [] },
-  faq_visa:         { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "비자(사증)"],      title: "비자(사증) — 자주 묻는 질문",      title_en: "Visa — FAQ",                            items: [] },
-  faq_notarization: { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공증"],            title: "공증 — 자주 묻는 질문",            title_en: "Notarization — FAQ",                    items: [] },
+  faq_passport: {
+    type: "faq",
+    breadcrumb: ["홈", "자주 묻는 질문", "여권"],
+    title: "여권 — 자주 묻는 질문",
+    title_en: "Passport — FAQ",
+    items: [
+      {
+        q: "여권 발급 구비서류가 무엇입니까?",
+        q_en: "What documents are required to apply for a passport?",
+        a: "여권 종류와 신청자에 따라 구비서류가 다릅니다. 영사관 홈페이지 '여권 발급 구비서류 안내'에서 확인하세요. (https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/list.do)",
+        a_en: "Required documents vary by passport type and applicant. Please check the 'Passport Required Documents' guide on the consulate website. (https://overseas.mofa.go.kr/ca-toronto-ko/brd/m_5389/list.do)",
+      },
+      {
+        q: "여권 발급 소요기간이 얼마나 되나요?",
+        q_en: "How long does passport issuance take?",
+        a: "일반적으로 약 4주 소요됩니다. DHL 긴급여권 신청 시 10일 이내, 순회영사 신청 시에는 1~2주 정도 추가로 소요됩니다.",
+        a_en: "Generally about 4 weeks. With a DHL urgent passport, within 10 days; for mobile consular service, 1-2 weeks longer.",
+      },
+      {
+        q: "여권 잔여기간이 2년 정도 남았는데 비자 연장 때문에 재발급 받기를 원합니다. 가능한가요?",
+        q_en: "About 2 years remain on my passport, but I want to reissue it for a visa extension. Is that possible?",
+        a: "가능합니다. 여권은 잔여기간과 상관없이 재발급 신청이 가능합니다.",
+        a_en: "Yes. A passport can be reissued regardless of the remaining validity period.",
+      },
+      {
+        q: "원거리에 거주하는 교민인데 우편으로 여권 신청이 가능합니까?",
+        q_en: "I live far away - can I apply for a passport by mail?",
+        a: "불가합니다. 여권 신청은 반드시 직접 방문해야 합니다(본인 확인·지문 취득). 재외동포365 민원포털을 통한 온라인 신청의 경우에도 수령은 직접 방문해야 합니다.",
+        a_en: "No. Passport applications must be made in person (identity verification and fingerprinting). Even with online application via the Overseas Koreans 365 Portal, you must collect the passport in person.",
+      },
+      {
+        q: "여권이 발급되면 우편으로 배송이 됩니까?",
+        q_en: "Can the issued passport be mailed to me?",
+        a: "가능합니다. Canada Post에서 판매하는 등기봉투(XpressPost prepaid envelope)를 미리 구입해 여권 신청 시 함께 제출하면 됩니다. 단, 온라인 여권 신청은 우편 수령이 불가합니다.",
+        a_en: "Yes. Buy a registered envelope (XpressPost prepaid) from Canada Post in advance and submit it with your application. Note: online passport applications cannot be received by mail.",
+      },
+      {
+        q: "여권 사진은 영사관에서 무료 촬영이 가능합니까?",
+        q_en: "Can I get a passport photo taken for free at the consulate?",
+        a: "가능합니다. 단, 만 5세 미만 유아는 사진관에서 촬영해야 합니다.",
+        a_en: "Yes. However, infants under age 5 must have their photo taken at a photo studio.",
+      },
+      {
+        q: "여행 일정 때문에 긴급여권을 받을 수 있는 방법이 있나요?",
+        q_en: "Can I get an urgent passport due to my travel schedule?",
+        a: "가능합니다. DHL 특급배송으로 신청하면 받을 수 있습니다(약 7~8일 소요). 신청방법: 영사관 홈페이지 여권 신청 구비서류의 'DHL 결제하기'에서 신용카드로 결제 후 영수증을 출력해 여권 신청 시 함께 제출하면 됩니다.",
+        a_en: "Yes. Apply with DHL express delivery (about 7-8 days). How: on the consulate website's passport documents page, use 'DHL Payment', pay by credit card, print the receipt, and submit it with your application.",
+      },
+      {
+        q: "여권 발급 시 기존 여권번호와 동일하게 사용할 수 있나요?",
+        q_en: "Can I keep the same passport number when reissuing?",
+        a: "지정할 수 없습니다. 재발급 시 여권번호가 새로 생성되므로 구여권과 동일한 번호를 부여받을 수 없습니다.",
+        a_en: "No. A new passport number is generated upon reissuance, so the same number as the old passport cannot be assigned.",
+      },
+      {
+        q: "복수국적자가 한국 방문 시 캐나다 여권을 사용해도 되나요?",
+        q_en: "Can a dual citizen use a Canadian passport when visiting Korea?",
+        a: "복수국적자는 한국 방문 시 한국 여권을 사용해야 합니다. 캐나다 여권을 사용하면 벌금이 부과될 수 있으며, 캐나다 출입국 시에는 캐나다 여권을, 한국 출입국 시에는 한국 여권을 사용해야 합니다.",
+        a_en: "Dual citizens must use their Korean passport when visiting Korea. Using a Canadian passport may result in a fine. Use the Canadian passport for Canadian immigration and the Korean passport for Korean immigration.",
+      },
+      {
+        q: "영주권 카드가 만료된 경우는 어떻게 하나요?",
+        q_en: "What if my PR card has expired?",
+        a: "영주권 카드 갱신 신청을 먼저 해야 합니다. 갱신 시 여권번호 등 개인정보를 입력하기 '전'에 수수료 $50를 지불하고 영수증을 받을 수 있는데, 그 영수증과 만료된 영주권 카드를 함께 지참해 여권을 신청하면 1년 전자단수여권 발급이 가능합니다. 이 여권이 나오면 영주권 카드 갱신을 완료하고 실물 카드를 받은 후, 다시 일반 10년 여권을 신청해야 합니다.",
+        a_en: "First apply to renew your PR card. During renewal, before entering personal information such as your passport number, you can pay the $50 fee and obtain a receipt; bring that receipt with your expired PR card to apply for a passport, and a 1-year electronic single-use passport can be issued. Once you receive it, complete the PR card renewal, obtain the physical card, then apply for a regular 10-year passport.",
+      },
+    ],
+  },
+  faq_visa: {
+    type: "faq",
+    breadcrumb: ["홈", "자주 묻는 질문", "비자(사증)"],
+    title: "비자(사증) — 자주 묻는 질문",
+    title_en: "Visa — FAQ",
+    items: [
+      {
+        q: "범죄경력증명서 등 몇 개월 내에 발급받은 것이어야 하나요?",
+        q_en: "How recent must documents like a criminal record certificate be?",
+        a: "각종 증명서는 유효기간이 6개월입니다.",
+        a_en: "Various certificates are valid for 6 months.",
+      },
+      {
+        q: "사진은 영사관에서 찍을 수 있나요? 사진 규격은 어떤가요?",
+        q_en: "Can I take the photo at the consulate? What are the photo specifications?",
+        a: "사진관에서 찍어오셔야 합니다. 영사관에 비치된 촬영장비는 한국 여권 발급용이라 비자용으로는 인화되지 않습니다.",
+        a_en: "You must have it taken at a photo studio. The consulate's photo equipment is for Korean passport issuance only and cannot print photos for visas.",
+      },
+      {
+        q: "우편 접수도 되나요?",
+        q_en: "Can I apply by mail?",
+        a: "결혼이민(F-6-1) 비자는 우편신청이 불가합니다. 그 외에는 관할지역(온타리오(오타와 제외)·마니토바) 거주자 중 차량으로 2시간 이상 떨어진 곳에 거주하는 경우에만 우편신청이 가능합니다.",
+        a_en: "Marriage migration (F-6-1) visas cannot be applied for by mail. Otherwise, mail application is allowed only for residents of the jurisdiction (Ontario excluding Ottawa, and Manitoba) who live more than a 2-hour drive away.",
+      },
+      {
+        q: "비자 찾으러 갈 때는 뭐가 필요한가요? 직접 가야 하나요?",
+        q_en: "What do I need to collect my visa? Do I have to go in person?",
+        a: "대한민국 비자는 더 이상 여권에 부착되지 않으며, 수령하러 오실 필요가 없습니다. 본인이 집에서 프린터로 출력하시면 됩니다.",
+        a_en: "Korean visas are no longer affixed to the passport, and you do not need to come to collect it. You can simply print it at home.",
+      },
+      {
+        q: "여권은 원본을 제출해야 하나요?",
+        q_en: "Do I need to submit my original passport?",
+        a: "여권 원본을 비자 신청서와 함께 제출하셔야 합니다. 접수 시 원본 확인 후 즉시 돌려드립니다.",
+        a_en: "You must submit your original passport with the visa application. It is verified at intake and returned to you immediately.",
+      },
+      {
+        q: "F-4 비자를 받으려면 어떻게 하나요?",
+        q_en: "How do I get an F-4 visa?",
+        a: "국적상실이 선행되어야 합니다. 먼저 국적상실에 필요한 기본증명서·가족관계증명서를 신청하고, 2주 뒤 픽업하면서 다른 구비서류가 준비되었다면 국적상실신고와 F-4 비자를 같은 날 신청하시면 됩니다.",
+        a_en: "Loss of Korean nationality must come first. First apply for the basic certificate and family relation certificate needed for the nationality loss; then, when you pick them up 2 weeks later, if your other documents are ready, you can file the nationality-loss report and apply for the F-4 visa on the same day.",
+      },
+    ],
+  },
+  faq_notarization: {
+    type: "faq",
+    breadcrumb: ["홈", "자주 묻는 질문", "공증"],
+    title: "공증 — 자주 묻는 질문",
+    title_en: "Notarization — FAQ",
+    items: [
+      {
+        q: "한국에서 출생한 한국 국적자입니다. 캐나다 이민 신청을 위해 출생증명서(Birth Certificate)를 발급받고 싶습니다.",
+        q_en: "I'm a Korean national born in Korea. I'd like a Birth Certificate for a Canadian immigration application.",
+        a: "당사자의 기본증명서 및 가족관계증명서 한글본을 번역 공증하여 사용하실 수 있습니다. 다만 현재 캐나다 이민국(CIC)에 제출하는 서류는 캐나다에서 번역 자격증을 소지한 전문 번역사를 통한 번역공증을 요구하므로, 지정 번역기관은 캐나다 이민국에 문의하시기 바랍니다.",
+        a_en: "You can use a notarized translation of the Korean basic certificate and family relation certificate. However, documents submitted to Canadian immigration (IRCC/CIC) currently require a notarized translation by a certified translator in Canada, so please ask Canadian immigration about designated translation agencies.",
+      },
+      {
+        q: "캐나다 시민권자이며 노인연금 신청에 필요한 혼인증명서(Marriage Certificate)를 발급받고 싶습니다.",
+        q_en: "I'm a Canadian citizen and need a Marriage Certificate for an old-age pension application.",
+        a: "최근 3개월 이내 발급된 혼인관계증명서 한글본과 여권을 지참하여 영사관에 방문하시면 됩니다. 수수료는 $5.40입니다.",
+        a_en: "Bring a Korean marriage relation certificate issued within the last 3 months and your passport, and visit the consulate. The fee is $5.40.",
+      },
+      {
+        q: "한국 국적자입니다. 인감증명서 위임장 및 일반위임장을 발급받고 싶습니다.",
+        q_en: "I'm a Korean national. I'd like a seal certificate power of attorney and a general power of attorney.",
+        a: "위임장은 본인 방문이 원칙입니다. 본인이 직접 영사관을 방문해 위임장 양식을 작성하시고, 방문 시 유효한 여권과 유효한 캐나다 비자 또는 PR카드를 지참하셔야 합니다.",
+        a_en: "Powers of attorney require the principal to apply in person. Visit the consulate yourself to complete the form, and bring a valid passport and a valid Canadian visa or PR card.",
+      },
+      {
+        q: "캐나다 시민권자입니다. 영사확인이 가능한 서류는 무엇이 있나요?",
+        q_en: "I'm a Canadian citizen. Which documents can receive consular certification?",
+        a: "위임장, 상속포기서, 상속재산분할협의서입니다.",
+        a_en: "Power of attorney, inheritance waiver, and inheritance division agreement.",
+      },
+      {
+        q: "아포스티유는 어디서 받나요?",
+        q_en: "Where do I get an Apostille?",
+        a: "서명인증서·거주증명서·동일인증명서 등은 캐나다 공증인으로부터 공증을 받은 후 아포스티유를 받아야 합니다(영사확인 불가). 아포스티유는 777 Bay St, Lower Level의 Official Documents Service에서 받으시면 됩니다.",
+        a_en: "Documents such as a signature certificate, residence certificate, and identity certificate must first be notarized by a Canadian notary, then receive an Apostille (consular certification is not available). Apostilles are issued at Official Documents Services, 777 Bay St, Lower Level.",
+      },
+    ],
+  },
   faq_military:     { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "병역"],            title: "병역 — 자주 묻는 질문",            title_en: "Military service — FAQ",                items: [] },
   faq_family:       { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "가족관계등록"],    title: "가족관계등록 — 자주 묻는 질문",    title_en: "Family register — FAQ",                 items: [] },
   faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [] },
@@ -10554,9 +10708,9 @@ const EN_TRANSLATIONS: any = {
   registration_copy: {
     breadcrumb: ["Home", "Overseas Korean Registration", "Registration record copy"],
     question: "How would you like to obtain it?",
-    sub: "With a joint certificate you can issue it instantly online at Consular Services 24.",
+    sub: "With a joint certificate you can issue it instantly online at the Overseas Koreans 365 Portal.",
     options: {
-      registration_copy_online: { title: "Online issuance (Consular Services 24)", desc: "Joint certificate required — issued instantly" },
+      registration_copy_online: { title: "Online issuance (the Overseas Koreans 365 Portal)", desc: "Joint certificate required — issued instantly" },
       registration_copy_visit: { title: "Issue in person at the consulate", desc: "Same day — CAD $0.65/copy" },
       registration_copy_mail: { title: "Apply by mail", desc: "Lawyer-notarized copies required" },
     },
@@ -10565,7 +10719,7 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Overseas Korean Registration", "Record copy", "Online"],
     title: "Overseas Korean Registration record copy — online",
     docs: [
-      "Go to Consular Services 24 → apply for an overseas Korean registration record copy",
+      "Go to the Overseas Koreans 365 Portal → apply for an overseas Korean registration record copy",
     ],
     costs: [{ label: "Fee", value: "Free" }],
     time: "Immediate",
@@ -10573,7 +10727,7 @@ const EN_TRANSLATIONS: any = {
       "Issuable only if your overseas Korean registration is complete.",
       "The registration record copy cannot be used as direct proof of your period of overseas stay.",
     ],
-    onlineLink: "https://consul.mofa.go.kr",
+    onlineLink: "https://www.g4k.go.kr",
   },
   registration_copy_visit: {
     breadcrumb: ["Home", "Overseas Korean Registration", "Record copy", "In person"],
@@ -11252,9 +11406,9 @@ const EN_TRANSLATIONS: any = {
   vcert_overseas_reg: {
     breadcrumb: ["Home", "Various Certificates", "Overseas Korean registration record copy"],
     question: "How would you like to obtain it?",
-    sub: "With a joint certificate, it can be issued instantly online at Consular Services 24.",
+    sub: "With a joint certificate, it can be issued instantly online at the Overseas Koreans 365 Portal.",
     options: {
-      registration_copy_online: { title: "Online issuance (Consular Services 24)", desc: "Joint certificate required — issued instantly" },
+      registration_copy_online: { title: "Online issuance (the Overseas Koreans 365 Portal)", desc: "Joint certificate required — issued instantly" },
       registration_copy_visit: { title: "Issue in person at the consulate", desc: "Same day — CAD $0.65/copy" },
       registration_copy_mail: { title: "Apply by mail", desc: "Lawyer-notarized copies required" },
     },
@@ -12358,8 +12512,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           build: () => ({
             kind: "reask",
             text: lang === "ko"
-              ? "재외국민등록부 등본은 온라인(영사민원24), 영사관 방문, 우편 중에서 선택해 발급받으실 수 있습니다. 아래에서 방법을 선택해 주세요."
-              : "A copy of the overseas-Korean registration record can be issued online (Consular Services 24), by Consulate visit, or by mail. Choose a method below.",
+              ? "재외국민등록부 등본은 온라인(재외동포365 민원포털), 영사관 방문, 우편 중에서 선택해 발급받으실 수 있습니다. 아래에서 방법을 선택해 주세요."
+              : "A copy of the overseas-Korean registration record can be issued online (the Overseas Koreans 365 Portal), by Consulate visit, or by mail. Choose a method below.",
             goId: "registration_copy",
             goLabel: lang === "ko" ? "등본 발급 시작하기" : "Start copy issuance",
           }),
@@ -13452,7 +13606,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </div>
                   <div style={{ fontSize: "12.5px", color: "#445", lineHeight: 1.6 }}>
                     {lang === "ko"
-                      ? "기존 전자여권을 발급받은 성인은 영사민원24에서 온라인으로 재발급 신청할 수 있습니다 (공동인증서 필요). 신청 후 수령을 위한 방문 예약이 필요합니다 (일반 약 4주 · DHL 약 10일 뒤)."
+                      ? "기존 전자여권을 발급받은 성인은 재외동포365 민원포털에서 온라인으로 재발급 신청할 수 있습니다 (공동인증서 필요). 신청 후 수령을 위한 방문 예약이 필요합니다 (일반 약 4주 · DHL 약 10일 뒤)."
                       : "Adults who previously held an e-passport can apply for renewal online via G4K (joint certificate required). A pickup appointment is needed after applying (about 4 weeks for standard · 10 days for DHL)."}
                   </div>
                   <div style={{ fontSize: "11.5px", color: "#889", marginTop: "5px" }}>
@@ -13465,7 +13619,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       : "① Old passport original  ② Proof of Canadian residency status (PR: PR Card / Long-term: residence visa original)"}
                   </div>
                   <a href="https://www.g4k.go.kr/biz/main/main.do" target="_blank" rel="noreferrer" style={{ display: "inline-block", marginTop: "9px", fontSize: "13px", fontWeight: 600, color: "#fff", background: "#003478", padding: "8px 14px", borderRadius: "8px", textDecoration: "none" }}>
-                    {lang === "ko" ? "영사민원24 바로가기 →" : "Go to G4K →"}
+                    {lang === "ko" ? "재외동포365 민원포털 바로가기 →" : "Go to G4K →"}
                   </a>
                 </div>
               )}

@@ -3066,7 +3066,7 @@ const TREE = {
       "부·모 체류자격 증명서류 사본 각 1부 (시민권증서 / 캐나다 출생=Birth Certificate / 영주권=PR카드 앞뒷면 / 장기체류=비자)",
       "부의 기본증명서 + 가족관계증명서 + 혼인관계증명서 각 1부 (상세, 주민번호 전부공개, 3개월 이내)",
       "가족관계통보서 (양식)",
-      "인지경위서",
+      "인지경위서 (양식) — 부가 직접 작성",
       "XpressPost 등기봉투 (통지서 수령용)",
     ],
     costs: [{ label: "수수료", value: "CAD $24.30 (현금, Debit, 신용카드)" }],
@@ -6098,8 +6098,6 @@ const TREE = {
       { id: "faq_military",     icon: "🎖️", ko: "병역",             en: "Military service" },
       { id: "faq_family",       icon: "👪", ko: "가족관계등록",      en: "Family register" },
       { id: "faq_nationality",  icon: "🇰🇷", ko: "국적",             en: "Nationality" },
-      { id: "faq_cert_auth",    icon: "🔐", ko: "공동·금융 인증서",  en: "Digital/financial certificates" },
-      { id: "faq_various_cert", icon: "📑", ko: "각종 증명서 발급",   en: "Various certificates" },
       { id: "faq_etc",          icon: "📌", ko: "기타",             en: "Other" },
     ],
   },
@@ -6265,6 +6263,18 @@ const TREE = {
         q_en: "I'm a permanent resident with an overseas travel permit until age 37. Can I visit Korea frequently?",
         a: "단기 방문은 가능합니다. 다만 1년 중 통산 6개월 이상 국내 체재, 영리활동(연 60일 이상), 영주귀국 신고 시에는 허가가 취소되고 병역의무가 부과됩니다. 자주 오시는 건 괜찮지만, 연간 누적 체재가 6개월을 넘지 않도록 주의하세요.",
         a_en: "Short visits are fine. However, the permit is revoked and military duty reimposed if you stay in Korea a cumulative 6+ months in a year, do profit-making activity (60+ days/year), or file a permanent-return report. Visiting often is OK, but keep your annual cumulative stay under 6 months.",
+      },
+      {
+        q: "복수국적자가 병무청의 국외여행허가를 받지 않고 외국 여권으로 출·입국할 수 있나요?",
+        q_en: "Can a dual national enter or leave Korea on a foreign passport without the MMA's overseas travel permit?",
+        a: "아니요. 복수국적자도 국외여행을 하려면 국외여행허가를 받아야 합니다. 허가를 받지 않고 외국 여권으로 출·입국하는 것은 국외여행허가의무 위반으로, 이후 출국이 제한될 수 있습니다.",
+        a_en: "No. Dual nationals must also obtain the overseas travel permit before traveling. Entering or leaving Korea on a foreign passport without the permit violates the travel-permit duty and may lead to future departure restrictions.",
+      },
+      {
+        q: "만 20세 학생입니다. 국외여행허가는 언제 신청해야 하나요?",
+        q_en: "I'm a 20-year-old student. When should I apply for an overseas travel permit?",
+        a: "만 24세까지는 국외여행허가 없이 국외여행·체재가 가능합니다. 25세가 되기 전 출국해 계속 국외에 머무르려면, 만 24세가 되는 해 1월 1일부터 만 25세가 되는 해 1월 15일까지 국외여행(기간연장)허가를 신청해야 합니다. (올해 {Y}년 기준: {B24}년생이 올해 만 24세 → {Y}.1.1부터 신청, {Y1}.1.15까지) 만 20세는 아직 신청 시기가 아니며, 만 24세가 되는 해부터 신청하시면 됩니다.",
+        a_en: "You can travel and stay abroad without a permit until age 24. To keep staying abroad after leaving before age 25, apply for an overseas travel (extension) permit from January 1 of the year you turn 24 until January 15 of the year you turn 25. (This year {Y}: those born in {B24} turn 24 → apply from {Y}.1.1, deadline {Y1}.1.15.) At age 20 it isn't time yet — apply starting the year you turn 24.",
       },
     ],
   },
@@ -10621,7 +10631,7 @@ const EN_TRANSLATIONS: any = {
       "Parents' residency-status proof copies, 1 each (citizenship certificate / born in Canada = Birth Certificate / PR = PR Card both sides / long-term = visa)",
       "Father's basic + family relation + marriage relation certificate, 1 each (detailed, full resident number, within 3 months)",
       "Family relationship notification (form)",
-      "Statement of acknowledgment circumstances",
+      "Statement of acknowledgment circumstances (form) — written by the father",
       "Xpresspost registered envelope (to receive the notice)",
     ],
     costs: [{ label: "Fee", value: "CAD $24.30 (Cash, Debit, Credit)" }],
@@ -11588,11 +11598,68 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("병적증명서 신청서") || t.startsWith("Military service certificate application form")) {
       return "/forms/military_cert_application_sample.pdf";
     }
+    // 국적상실신고서 작성 샘플 (본인용)
+    if (t.startsWith("국적상실신고서 (양식, 작성예시") || t.startsWith("Nationality-loss report form (see the example")) {
+      return "/forms/nationality_loss_report_sample.pdf";
+    }
     return null;
   };
   const getFormUrl = (docText: string): string | null => {
     if (typeof docText !== "string") return null;
     const t = docText.trim();
+    // ── 국적: 인지에 의한 국적취득 ──
+    if (t.startsWith("국적취득신고서") || t.startsWith("Nationality acquisition report")) {
+      return "/forms/nationality_acquisition_report.pdf";
+    }
+    if (t.startsWith("가족관계통보서") || t.startsWith("Family relationship notification")) {
+      return "/forms/family_relation_notification.pdf";
+    }
+    if (t.startsWith("인지경위서") || t.startsWith("Statement of acknowledgment circumstances")) {
+      return "/forms/acknowledgment_statement.pdf";
+    }
+    // ── 국적: 상실 (사망자용 먼저 → 본인용) ──
+    if (t.startsWith("국적상실신고서 (사망자용") || t.startsWith("Nationality-loss report form (deceased")) {
+      return "/forms/nationality_loss_report_deceased.pdf";
+    }
+    if (t.startsWith("국적상실신고서") || t.startsWith("Nationality-loss report form")) {
+      return "/forms/nationality_loss_report.pdf";
+    }
+    // ── 국적: 이탈 허가(예외적) — 신속심사 먼저 → 신청서 ──
+    if (t.startsWith("국적이탈허가 신속심사 요청서") || t.startsWith("Nationality-exit expedited-review request")) {
+      return "/forms/expedited_review_request.pdf";
+    }
+    if (t.startsWith("국적이탈허가 신청서") || t.startsWith("Nationality-exit permit application")) {
+      return "/forms/nationality_exit_permit_application.pdf";
+    }
+    // ── 국적: 이탈 신고 ──
+    if (t.startsWith("국적이탈신고서") || t.startsWith("Nationality-exit report form")) {
+      return "/forms/nationality_exit_report.pdf";
+    }
+    if (t.startsWith("국적이탈 안내문 확인서") || t.startsWith("Nationality-exit notice confirmation")) {
+      return "/forms/nationality_exit_guide_confirmation.pdf";
+    }
+    if (t.startsWith("외국거주사실증명서") || t.startsWith("Overseas residence confirmation")) {
+      return "/forms/overseas_residence_certificate.pdf";
+    }
+    // ── 국적: 동일인증명서 (이름 변경 시 — 이탈·상실·인지 등 공용) ──
+    if (t.startsWith("동일인증명서") || t.startsWith("Identity confirmation certificate")) {
+      return "/forms/identity_confirmation.pdf";
+    }
+    // ── 국적: 선택 신고 ──
+    if (t.startsWith("국적선택신고서") || t.startsWith("Nationality-choice report form")) {
+      return "/forms/nationality_choice_report.pdf";
+    }
+    if (t.startsWith("외국국적불행사서약서") || t.startsWith("Pledge not to exercise foreign nationality")) {
+      return "/forms/foreign_nationality_nonexercise_pledge.pdf";
+    }
+    // ── 국적: 보유 신고 ──
+    if (t.startsWith("국적보유신고서") || t.startsWith("Nationality-retention report form")) {
+      return "/forms/nationality_retention_report.pdf";
+    }
+    // ── 국적: 공통 통보 및 송달 동의서 ──
+    if (t.startsWith("통보 및 송달 동의서") || t.startsWith("Notification & service consent") || t.startsWith("Notification and service consent")) {
+      return "/forms/notification_service_consent.pdf";
+    }
     // 여권발급신청서
     if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {
       return "/forms/passport_application_A4.pdf";
@@ -12659,6 +12726,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     8: ["전화번호", "연락처", "전화 번호", "phone number", "contact number"],
     9: ["영사관 주소", "영사관 위치", "어디에 있", "어디 있", "찾아가", "address", "where is the consulate", "location of"],
   };
+  const faqDynamic = (t: any): any => {
+    if (typeof t !== "string") return t;
+    const Y = new Date().getFullYear();
+    return t.replace(/\{Y1\}/g, String(Y + 1)).replace(/\{B24\}/g, String(Y - 24)).replace(/\{Y\}/g, String(Y));
+  };
   const matchFaq = (q: string) => {
     const items = (TREE as any).faq_general?.items ?? [];
     for (let i = 0; i < items.length; i++) {
@@ -13159,7 +13231,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     </button>
                     <div className={`faq-answer-wrap ${openFaq === i ? "open" : ""}`}>
                       <div className="faq-answer-inner">
-                        <div className="faq-answer">{lang === "ko" ? item.a : item.a_en}</div>
+                        <div className="faq-answer">{faqDynamic(lang === "ko" ? item.a : item.a_en)}</div>
                       </div>
                     </div>
                   </div>
@@ -13202,7 +13274,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </button>
                   {openFaq === i && (
                     <div className="faq-answer">
-                      {lang === "ko" ? item.a : item.a_en}
+                      {faqDynamic(lang === "ko" ? item.a : item.a_en)}
                     </div>
                   )}
                 </div>

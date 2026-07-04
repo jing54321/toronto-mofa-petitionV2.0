@@ -11688,6 +11688,23 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("금융인증서 발급 신청서") || t.startsWith("Financial certificate application")) {
       return "/forms/financial_cert_application.pdf";
     }
+    // ── 재외국민 등록 ──
+    if (t.startsWith("신규등록 신청서") || t.startsWith("New registration form")) {
+      return "/forms/overseas_registration_form1.pdf";
+    }
+    if (t.startsWith("이동·변경 신청서") || t.startsWith("Move/change form")) {
+      return "/forms/overseas_registration_change_form5.pdf";
+    }
+    if (t.startsWith("재외국민등록부등본 교부신청서") || t.startsWith("Application for a registration record copy")) {
+      return "/forms/overseas_registration_copy_request.pdf";
+    }
+    // ── 해외이주 신고 ──
+    if (t.startsWith("해외이주신고서") || t.startsWith("Emigration report form")) {
+      return "/forms/overseas_migration_report.pdf";
+    }
+    if (t.startsWith("친권자의 해외이주 동의서") || t.startsWith("The custodial parent's emigration consent")) {
+      return "/forms/overseas_migration_guardian_consent.pdf";
+    }
     // 여권발급신청서
     if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {
       return "/forms/passport_application_A4.pdf";

@@ -3159,7 +3159,7 @@ const TREE = {
     title: "공동인증서 발급 — 성인",
     docs: [
       "공동인증서 발급 신청서 (양식) — 서명은 여권 서명과 동일하게",
-      "공동인증서비스 이용약관 (양식)",
+      "법정대리인 동의서 (신청서에 포함됨)",
       "여권 원본 + 사본 1부",
       "캐나다 체류자격 증명서류 원본 + 사본",
       "  ▸ 단기방문자: ETA 확인증",
@@ -3191,7 +3191,7 @@ const TREE = {
     title: "공동인증서 발급 — 만 19세 미만 미성년자",
     docs: [
       "공동인증서 발급 신청서 (양식) — 미성년자 본인이 직접 서명",
-      "공동인증서비스 이용약관 (양식)",
+      "법정대리인 동의서 (신청서에 포함됨)",
       "미성년자 여권 원본 + 사본",
       "미성년자 캐나다 체류자격 증명서류 (ETA·비자·영주권 등)",
       "  ▸ 시민권자: 발급 불가",
@@ -3199,7 +3199,6 @@ const TREE = {
       "기본증명서 (상세, 주민번호 전부공개, 3개월 이내) — 신청대상자 이름으로 발급, 열람용 불가",
       "  ▸ 미성년자 2인 이상 신청 시 신청자별 각각 별도 원본 제출",
       "  ▸ 영사관 신청 시 2주 소요 — 미리 발급받아 제출",
-      "법정대리인 동의서 (양식)",
       "법정대리인의 대한민국 여권 원본 + 사본",
     ],
     costs: [{ label: "수수료", value: "무료" }],
@@ -3235,7 +3234,8 @@ const TREE = {
     breadcrumb: ["홈", "인증서", "금융인증서", "성인"],
     title: "금융인증서 발급 — 성인",
     docs: [
-      "금융인증서 발급 신청서 + 금융인증서비스 이용약관 (양식) — 서명은 여권 서명과 동일하게",
+      "금융인증서 발급 신청서 (양식) — 서명은 여권 서명과 동일하게",
+      "법정대리인 동의서 (신청서에 포함됨)",
       "여권 원본 + 사본 1부",
       "캐나다 체류자격 증명서류 원본 + 사본",
       "  ▸ 단기방문자: ETA 확인증",
@@ -3267,14 +3267,14 @@ const TREE = {
     breadcrumb: ["홈", "인증서", "금융인증서", "미성년자"],
     title: "금융인증서 발급 — 만 19세 미만 미성년자",
     docs: [
-      "금융인증서 발급 신청서 + 이용약관 (양식) — 미성년자 본인이 직접 서명",
+      "금융인증서 발급 신청서 (양식) — 미성년자 본인이 직접 서명",
+      "법정대리인 동의서 (신청서에 포함됨)",
       "미성년자 여권 원본 + 사본",
       "미성년자 캐나다 체류자격 증명서류 (ETA·비자·영주권 등)",
       "  ▸ 시민권자: 발급 불가",
       "가족관계증명서 (상세, 주민번호 전부공개, 3개월 이내) — 열람용 불가",
       "기본증명서 (상세, 주민번호 전부공개, 3개월 이내) — 열람용 불가",
       "  ▸ 미성년자 2인 이상 신청 시 신청자별 각각 별도 원본 제출",
-      "법정대리인 동의서 (양식)",
       "법정대리인의 대한민국 여권 원본 + 사본",
     ],
     costs: [{ label: "수수료", value: "무료" }],
@@ -6282,7 +6282,26 @@ const TREE = {
   faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [] },
   faq_cert_auth:    { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공동·금융 인증서"], title: "공동·금융 인증서 — 자주 묻는 질문", title_en: "Digital/financial certificates — FAQ",  items: [] },
   faq_various_cert: { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "각종 증명서 발급"], title: "각종 증명서 발급 — 자주 묻는 질문", title_en: "Various certificates — FAQ",            items: [] },
-  faq_etc:          { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "기타"],            title: "기타 — 자주 묻는 질문",            title_en: "Other — FAQ",                           items: [] },
+  faq_etc:          { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "기타"],            title: "기타 — 자주 묻는 질문",            title_en: "Other — FAQ",                           items: [
+      {
+        q: "재외국민등록을 꼭 해야 하나요?",
+        q_en: "Is overseas Korean registration mandatory?",
+        a: "네. 외국의 일정한 지역에 90일을 초과하여 거주·체류하려는 대한민국 국민은 재외국민등록이 법적 의무입니다. 주민등록번호가 없는 해외 출생자도 대상입니다.",
+        a_en: "Yes. Any Korean national intending to live or stay in one area abroad for more than 90 days must register — including those born abroad without a Korean resident registration number.",
+      },
+      {
+        q: "재외국민등록을 하면 주민등록이 말소되나요?",
+        q_en: "Will my resident registration be cancelled if I register?",
+        a: "아니요. 재외국민등록을 해도 주민등록은 말소되지 않으며, 기존 주민등록번호도 그대로 유지됩니다.",
+        a_en: "No. Your resident registration stays active and your existing resident registration number is unchanged.",
+      },
+      {
+        q: "재외국민등록이 건강보험·국민연금에 영향을 주나요?",
+        q_en: "Does it affect my national health insurance or pension?",
+        a: "아니요. 건강보험·국민연금 모두 한국 거주 내국인과 동일하게 관리·적용되어 변동이 없습니다.",
+        a_en: "No. Both national health insurance and the national pension are maintained exactly the same as for residents in Korea.",
+      },
+    ] },
 
   faq_general: {
     type: "faq",
@@ -10967,7 +10986,7 @@ const EN_TRANSLATIONS: any = {
     title: "Joint Certificate issuance — adult",
     docs: [
       "Joint certificate application (form) — sign the same as your passport signature",
-      "Joint certificate service terms (form)",
+      "Legal guardian consent (included in the application form)",
       "Passport original + 1 copy",
       "Canadian residency-status proof original + copy",
       "  ▸ Short-term visitor: eTA confirmation",
@@ -10996,7 +11015,7 @@ const EN_TRANSLATIONS: any = {
     title: "Joint Certificate issuance — minor under 19",
     docs: [
       "Joint certificate application (form) — the minor signs in person",
-      "Joint certificate service terms (form)",
+      "Legal guardian consent (included in the application form)",
       "Minor's passport original + copy",
       "Minor's Canadian residency-status proof (eTA, visa, PR, etc.)",
       "  ▸ Citizen: not eligible",
@@ -11004,7 +11023,6 @@ const EN_TRANSLATIONS: any = {
       "Basic certificate (detailed, full resident number, within 3 months) — issued in the minor's name, not the viewing-only type",
       "  ▸ For 2+ minors applying, submit a separate original per applicant",
       "  ▸ Issuance at the consulate takes 2 weeks — obtain in advance and submit",
-      "Legal guardian's consent form (form)",
       "Legal guardian's Korean passport original + copy",
     ],
     costs: [{ label: "Fee", value: "Free" }],
@@ -11033,7 +11051,8 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Certificates", "Financial Certificate", "Adult"],
     title: "Financial Certificate issuance — adult",
     docs: [
-      "Financial certificate application + service terms (form) — sign the same as your passport signature",
+      "Financial certificate application (form) — sign the same as your passport signature",
+      "Legal guardian consent (included in the application form)",
       "Passport original + 1 copy",
       "Canadian residency-status proof original + copy",
       "  ▸ Short-term visitor: eTA confirmation",
@@ -11062,14 +11081,14 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Certificates", "Financial Certificate", "Minor"],
     title: "Financial Certificate issuance — minor under 19",
     docs: [
-      "Financial certificate application + service terms (form) — the minor signs in person",
+      "Financial certificate application (form) — the minor signs in person",
+      "Legal guardian consent (included in the application form)",
       "Minor's passport original + copy",
       "Minor's Canadian residency-status proof (eTA, visa, PR, etc.)",
       "  ▸ Citizen: not eligible",
       "Family relation certificate (detailed, full resident number, within 3 months) — not the viewing-only type",
       "Basic certificate (detailed, full resident number, within 3 months) — not the viewing-only type",
       "  ▸ For 2+ minors applying, submit a separate original per applicant",
-      "Legal guardian's consent form (form)",
       "Legal guardian's Korean passport original + copy",
     ],
     costs: [{ label: "Fee", value: "Free" }],
@@ -11607,6 +11626,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
   const getFormUrl = (docText: string): string | null => {
     if (typeof docText !== "string") return null;
     const t = docText.trim();
+    // 신청서에 포함된 서류(별도 다운로드 불필요)는 버튼 표시 안 함
+    if (t.includes("신청서에 포함됨") || t.includes("included in the application")) return null;
     // ── 국적: 인지에 의한 국적취득 ──
     if (t.startsWith("국적취득신고서") || t.startsWith("Nationality acquisition report")) {
       return "/forms/nationality_acquisition_report.pdf";
@@ -11659,6 +11680,13 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // ── 국적: 공통 통보 및 송달 동의서 ──
     if (t.startsWith("통보 및 송달 동의서") || t.startsWith("Notification & service consent") || t.startsWith("Notification and service consent")) {
       return "/forms/notification_service_consent.pdf";
+    }
+    // ── 인증서: 공동/금융 발급 신청서 (약관·동의서 포함본) ──
+    if (t.startsWith("공동인증서 발급 신청서") || t.startsWith("Joint certificate application")) {
+      return "/forms/joint_cert_application.pdf";
+    }
+    if (t.startsWith("금융인증서 발급 신청서") || t.startsWith("Financial certificate application")) {
+      return "/forms/financial_cert_application.pdf";
     }
     // 여권발급신청서
     if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {

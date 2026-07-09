@@ -4254,39 +4254,38 @@ const TREE = {
     breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Tourism (C-3-9)"],
     title: "C-3-9 Tourist Visa — Non-Canadian Nationals",
     docs: [
-      "Visa Application Form (form)",
-      "Valid passport — original + photocopy (min. 6 months validity)",
-      "1 passport photo (3.5×4.5cm, white background, taken within 6 months)",
-      "Canadian PR Card or long-term Canadian visa — original + photocopy",
-      "Return flight itinerary (round-trip ticket or reservation)",
-      "Hotel booking or accommodation confirmation",
-      "Proof of financial means (recent bank statement — last 3–6 months)",
-      "  ▸ If visiting friends/relatives in Korea: invitation letter + copy of host's Korean ID or Residence Card",
+      "Visa Application Checklist — complete it and submit with your application package",
+      "Visa Application Form (form) — print and fill out (use the sample for reference)",
+      "Valid passport — original + photocopy (min. 6 months validity; copy the photo/personal-info page)",
+      "Passport-type colour photo — professional studio, ICAO standard (NOT Canadian passport size): 3.5×4.5cm, white background, date-stamped on back, within 6 months",
+      "Proof of Residency in Canada (original + photocopy) — Permanent Resident: valid PR Card / Long-term visitor: valid Work Permit or Study Permit (paper version)",
+      "Proof of Funding (one of the following) — ① employment letter issued within 3 months + 3 months' pay stubs, OR ② recent 3 months' Canadian bank statement (applicant's name must be visible)",
     ],
     costs: [
-      { label: "Standard fee (most nationalities)", value: "CAD $26 — single entry / CAD $52 — multiple entry" },
-      { label: "Iran", value: "USD $90 equivalent" },
-      { label: "Uzbekistan / Kyrgyzstan", value: "USD $80 equivalent" },
-      { label: "Note", value: "Fee varies by nationality — verify at torvisa@mofa.go.kr before applying" },
+      { label: "Single-entry", value: "CAD $54 (Cash, Debit, Credit)" },
+      { label: "Double-entry", value: "CAD $94.50 (Cash, Debit, Credit)" },
+      { label: "Multiple-entry", value: "CAD $121.50 (Cash, Debit, Credit)" },
+      { label: "Note", value: "Fee may vary by nationality" },
     ],
-    time: "Approx. 5–10 business days",
+    time: "Approx. 2 weeks (additional documents may be requested upon review)",
     notices: [
-      "C-3-9 is the standard tourist visa for sightseeing, visiting relatives, and short-term leisure — up to 90 days.",
-      "⚠️ Visa valid for 3 months from issue date — must enter Korea within this period.",
-      "⚠️ C-3 visas cannot be extended or converted to another visa type inside Korea.",
-      "⚠️ Fee varies significantly by nationality — the standard CAD $26 does NOT apply to all nationalities (e.g. Iran: ~USD $90).",
-      "⚠️ C-3-9 is NOT a fully online visa — complete the application form at visa.go.kr, print it, and submit in person at the Consulate (or by mail if you live 2+ hours away).",
-      "Mail applications accepted (residents 2+ hours from consulate) — include Certified Cheque + Prepaid Xpresspost return envelope.",
-      "Check visa.go.kr for the most current requirements, or email torvisa@mofa.go.kr for nationality-specific questions.",
+      { text: "Transiting through Korea? Check visa-free transit (TWOV) eligibility", goId: "visa_transit_en" },
+      "Check visa-free options first: Transit passengers (China, Mongolia, Vietnam, Philippines, India, etc.) may stay up to 30 days visa-free; K-ETA covers Canada, Australia, France and 100+ countries.",
+      "Visa types — Single: valid 3 months / stay 90 days · Double: valid 6 months / stay 30 days each · Multiple: valid 5 years / stay 90 days each.",
+      "Eligible: residents of our jurisdiction (Ontario & Manitoba) visiting Korea short-term for tourism, leisure, transit, visiting friends/family, conferences, etc. (not for profit-making).",
+      "⚠️ Applicants from certain countries currently in Canada (e.g. temporary workers, international students) must have resided in Canada for at least 2 years (730 days) at the time of application.",
+      "⚠️ Expired Canadian visa/PR card = not eligible (an immigration letter is not accepted). No residency proof, or only a short-term visitor visa = apply in your home country instead.",
+      "Multiple-entry eligibility (by country): China 5yr/90d · Philippines·Vietnam·India·Myanmar·Cambodia·Sri Lanka·Indonesia·Laos·Nepal·Pakistan·Bangladesh 5yr/30d · Mongolia tiered (1yr→3yr→5yr by visit history). Others: Single or Double only.",
+      "C-3 visas cannot be extended or converted to another visa type inside Korea.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "Book Appointment (Visa Section) →",
     onlineLink: "https://www.visa.go.kr",
   },
   visa_short_term_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit"], question: "What is the purpose of your short-term visit?", sub: "🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — you may NOT need a visa. A short-term visa (C-3) is mainly required for non-Canadian nationals residing in Canada, or for specific activities.", options: [{ id: "visa_c34_en", icon: "🤝", title: "Business Trip (C-3-4)", desc: "Market research, contract signing, consulting, meetings with Korean companies" },{ id: "visa_c31_en", icon: "📋", title: "General Short-Term Visit (C-3-1)", desc: "Conference, academic research, medical treatment, training, religious activities" },{ id: "visa_c33_en", icon: "🏥", title: "Medical Treatment (C-3-3)", desc: "Non-Canadians visiting Korea for medical treatment — up to 90 days" },{ id: "visa_c39_tourist_en", icon: "🌏", title: "Tourism / Short-Term Stay (C-3-9)", desc: "Sightseeing, visiting relatives, short-term leisure — for non-Canadian nationals" }] },
-  visa_c33_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Medical Treatment (C-3-3)"], title: "Medical Treatment Visa — C-3-3", docs: ["Visa Application Form (form)","Valid original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo — must be taken at a professional photo shop","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Proof of Residency in Canada — original + photocopy","  ▸ Permanent Resident: valid PR Card","  ▸ Long-term visitor: valid Work Permit or Study Permit","Medical Purpose Documentation (의료목적 입증서류) — issued within 3 months","  ▸ Invitation letter or doctor's appointment confirmation issued by a Korean hospital","Business Registration Certificate of the Korean hospital or medical facility (사업자등록증)","Certificate of Medical Travel Facilitator Registration (의료관광 유치기관 등록증)","  ▸ Available from the Korean hospital or medical facility","Proof of Funding (one of the following):","  ▸ Employment letter issued within 3 months + 2 months' recent pay stubs","  ▸ OR recent 2 months' Canadian bank statement"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" },{ label: "Other nationalities", value: "Fee may vary by nationality" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days from date of entry.", notices: ["⚠️ This visa is primarily for NON-Canadian nationals residing in Canada — Canadian passport holders can enter Korea visa-free for medical treatment.", "⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","All medical documents must be issued within 3 months of your application date.","Transit passengers: check the TWOV conditions at the Consulate website before applying.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Business (C-3-4)"], title: "Short-Term Business Visa — C-3-4", docs: ["Visa Application Form (form)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Invitation letter from the Korean company — on company letterhead, signed","Business Registration Certificate of the Korean inviting company (사업자등록증명원)","Employment letter from your Canadian employer (confirming your role and that the company is paying you)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, Credit)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can enter Korea visa-free for up to 90 days for business purposes — confirm whether you actually need this visa.","You must be paid by your Canadian employer — NOT by the Korean company.","Stay: up to 90 days. C-3 visas cannot be converted to another visa type inside Korea.","Plan at least 2 weeks ahead as processing may take longer during peak periods."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c31_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "General (C-3-1)"], title: "General Short-Term Visitor Visa — C-3-1", docs: ["Visa Application Form (form)","Valid passport — original + photocopy (min. 6 months validity)","1 passport-type photo (3.5×4.5cm, white background, within 6 months)","Supporting documents for your purpose of visit (one of the following):","  ▸ Conference / event: invitation letter or event registration confirmation","  ▸ Medical treatment: letter from Korean hospital or clinic confirming your appointment","  ▸ Academic research: letter from Korean university or institution","  ▸ Training: training program acceptance letter","  ▸ Religious activities: invitation from Korean religious organization","Proof of financial means (recent bank statement)","Return flight itinerary","  ▸ Canadian PR Card or long-term visa — original + photocopy (if applicable)"], costs: [{ label: "Single-entry", value: "CAD $26 (Cash, Debit, Credit)" },{ label: "Multiple-entry", value: "CAD $52 (Cash, Debit, Credit)" }], time: "Approx. 5–7 business days", notices: ["🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","Stay: up to 90 days per entry. C-3 visas cannot be converted to another visa type inside Korea.","All documents must be submitted together — missing even one document means your application will not be accepted."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c33_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Medical Treatment (C-3-3)"], title: "Medical Treatment Visa — C-3-3", docs: ["Visa Application Form (form)","Valid original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo — must be taken at a professional photo shop","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Proof of Residency in Canada — original + photocopy","  ▸ Permanent Resident: valid PR Card","  ▸ Long-term visitor: valid Work Permit or Study Permit","Medical Purpose Documentation (의료목적 입증서류) — issued within 3 months","  ▸ Invitation letter or doctor's appointment confirmation issued by a Korean hospital","Business Registration Certificate of the Korean hospital or medical facility (사업자등록증)","Certificate of Medical Travel Facilitator Registration (의료관광 유치기관 등록증)","  ▸ Available from the Korean hospital or medical facility","Proof of Funding (one of the following):","  ▸ Employment letter issued within 3 months + 2 months' recent pay stubs","  ▸ OR recent 2 months' Canadian bank statement"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" },{ label: "Other nationalities", value: "Fee may vary by nationality" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days from date of entry.", notices: ["⚠️ This visa is primarily for NON-Canadian nationals residing in Canada — Canadian passport holders can enter Korea visa-free for medical treatment.", "⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","All medical documents must be issued within 3 months of your application date.",{ text: "Transiting through Korea? Check visa-free transit (TWOV) eligibility", goId: "visa_transit_en" },"Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Business (C-3-4)"], title: "Short-Term Business Visa — C-3-4", docs: ["Visa Application Form (form) — print, fill out, and sign","Valid passport — original (min. 6 months validity)","Photocopy of passport — photo/personal-info page","1 passport-type colour photo (3.5×4.5cm, white background, date-stamped on back, within 6 months)","Proof of residency — PR Card, Work Permit, or Study Permit","Business invitation letter — issued by the Korean company (fax or scan accepted); must include date, purpose, and duration of visit","Copy of Business Registration Certificate — 사업자등록증 or 등기부등본 (from the Korean company)","Employment letter from your Canadian employer — must confirm the company is paying your expenses and that you are NOT paid/employed by the Korean inviting organization","  ▸ The invitation letter and/or the employment letter must clearly state the purpose and period of your business trip","If you are of Korean descent: additional documents required — see the step-by-step guide"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" }], time: "Approx. 2 weeks (additional documents may be requested upon review)", notices: ["Single-entry, valid 3 months from issue (enter Korea within 3 months). Stay up to 90 days.","Eligible: short business stays (90 days or less) for market research, liaison, consulting, contract signing, or installing/repairing/learning to operate imported/exported machinery, etc.","⚠️ You must be paid by your Canadian company (own business or as an employee). NOT eligible if you are hired or paid by the Korean inviting organization.","⚠️ If you previously held Korean nationality, you must first file the Nationality Loss Report (국적상실신고) before applying for any Korean visa.","🇨🇦 Canadian citizens can enter Korea visa-free for up to 90 days for business — confirm whether you actually need this visa.","C-3 visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c31_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "General (C-3-1)"], title: "General Short-Term Visitor Visa — C-3-1", docs: ["Visa Application Form (form) — print, fill out, and sign","Valid passport — original + photocopy (min. 6 months validity; copy the photo/personal-info page)","1 passport-type colour photo (3.5×4.5cm, white background, date-stamped on back, within 6 months)","Proof of residency — Permanent Resident (PR) Card, OR Work Permit / Study Permit","Proof of employment or school enrollment — issued within 3 months","Invitation letter — issued by the Korean company / event organizer (fax or scan accepted); must include name, date, purpose, and duration of visit","Copy of Business Registration Certificate (if applicable) — 사업자등록증 or 등기부등본, obtained from the Korean company/organizer"], costs: [{ label: "Visa Fee", value: "CAD $54 (Debit, Cash, or Money Order only)" }], time: "Approx. 2 weeks (additional documents may be requested upon review)", notices: ["Single-entry, valid 3 months from issue (enter Korea within 3 months). Stay up to 90 days from entry.","Eligible: short-term visitors for conferences, competitions, training, etc. (not for profit-making activities).","⚠️ Applicants from certain countries currently in Canada (e.g. temporary workers, international students) must have resided in Canada for at least 2 years (730 days) at the time of application.","🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","C-3 visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
   // ── C-3-1 Event / Conference Visa ──
   visa_c31_event_en: {
@@ -6225,7 +6224,32 @@ const TREE = {
       },
     ],
   },
-  faq_family:       { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "가족관계등록"],    title: "가족관계등록 — 자주 묻는 질문",    title_en: "Family register — FAQ",                 items: [] },
+  faq_family:       { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "가족관계등록"],    title: "가족관계등록 — 자주 묻는 질문",    title_en: "Family register — FAQ",                 items: [
+      {
+        q: "우리나라는 출생증명서가 없나요?",
+        q_en: "Does Korea not have a birth certificate?",
+        a: "한국에는 출생증명서가 없고, 기본증명서(본인의 출생·사망·국적상실 등)와 가족관계증명서(부모·배우자·현재 혼인 중의 자녀 관계)로 갈음합니다.",
+        a_en: "Korea has no 'birth certificate.' Instead, the basic certificate (your birth, death, nationality loss, etc.) and the family relation certificate (parents, spouse, current children) serve that purpose.",
+      },
+      {
+        q: "가족관계등록부(기본·가족·혼인·입양·제적)는 즉시 발급되나요?",
+        q_en: "Are family register certificates (basic, family, marriage, adoption, removed register) issued on the spot?",
+        a: "아니요. 신청 후 2주 뒤에 예약하여 방문·수령하시면 됩니다.",
+        a_en: "No. After you apply, book an appointment and collect them in person about 2 weeks later.",
+      },
+      {
+        q: "가족관계등록부를 영어로 발급받을 수 있나요?",
+        q_en: "Can family register certificates be issued in English?",
+        a: "한글만 가능합니다. '영문 가족관계증명서'가 있지만, 이는 가족관계증명서의 영문판이 아니라 별도 형태의 증명서이니 유의하세요.",
+        a_en: "Korean only. There is an 'English family relation certificate,' but note it is not an English version of the family relation certificate — it is a separate, different form.",
+      },
+      {
+        q: "캐나다 연금 신청용으로 혼인관계증명서를 발급받고 영문 번역해 주시나요?",
+        q_en: "For a Canadian pension application, can you issue a marriage certificate and translate it into English?",
+        a: "혼인관계증명서 신청 후 2주 뒤 '공증'으로 다시 예약하여 방문하시고, 본인이 직접 하는 '제3자 번역문 인증'을 진행하시면 됩니다. ⚠️ 다만 캐나다 이민국 등 일부 기관은 제3자 번역문 인증을 인정하지 않으니, 제출기관 안내를 먼저 확인하세요.",
+        a_en: "After applying for the marriage certificate, book a 'notarization' appointment ~2 weeks later, then complete the self-done 'third-party translation verification.' ⚠️ Note: some bodies (e.g. Canadian immigration) do not accept third-party translation verification — check with the receiving organization first.",
+      },
+    ] },
   faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [] },
   faq_cert_auth:    { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공동·금융 인증서"], title: "공동·금융 인증서 — 자주 묻는 질문", title_en: "Digital/financial certificates — FAQ",  items: [] },
   faq_various_cert: { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "각종 증명서 발급"], title: "각종 증명서 발급 — 자주 묻는 질문", title_en: "Various certificates — FAQ",            items: [] },
@@ -6247,6 +6271,18 @@ const TREE = {
         q_en: "Does it affect my national health insurance or pension?",
         a: "아니요. 건강보험·국민연금 모두 한국 거주 내국인과 동일하게 관리·적용되어 변동이 없습니다.",
         a_en: "No. Both national health insurance and the national pension are maintained exactly the same as for residents in Korea.",
+      },
+      {
+        q: "캐나다 시민권자인데 출입국사실증명서를 발급받을 수 있나요?",
+        q_en: "I'm a Canadian citizen — can I get an entry-exit record certificate?",
+        a: "외국국적자(거소증 소지 재외동포 포함)는 재외공관에서 출입국사실증명 발급이 불가합니다. 위임장을 작성해 공증(영사확인)을 받은 뒤 한국으로 보내, 대리인이 관계기관에서 발급받을 수 있습니다.",
+        a_en: "Foreign nationals (including overseas Koreans with a domestic residence card) cannot be issued an entry-exit record certificate at an overseas mission. You can prepare a power of attorney, have it notarized (consular confirmation), send it to Korea, and have a proxy obtain it from the relevant agency.",
+      },
+      {
+        q: "한국 운전면허증을 온타리오 면허로 어떻게 교환하나요?",
+        q_en: "How do I exchange my Korean driver's license for an Ontario one?",
+        a: "교환 절차·수수료·구비서류는 온타리오 주정부 페이지(ontario.ca/page/exchange-out-province-drivers-licence)를 참고하세요. 운전면허 영문번역 공증이 필요하면 서류 지참 후 영사관 방문, 영문 운전경력증명서가 필요하면 공동인증서로 정부24에서 발급받거나 영사관을 방문하시면 됩니다.",
+        a_en: "See the Ontario government page for the procedure, fee, and required documents (ontario.ca/page/exchange-out-province-drivers-licence). If you need a notarized English translation of your Korean license, visit the consulate with the documents; for an English driving-record certificate, issue it yourself on Gov24 with a joint certificate, or visit the consulate.",
       },
     ] },
 
@@ -6692,25 +6728,28 @@ const KO_TRANSLATIONS = {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "단기 방문", "출장 (C-3-4)"],
     title: "단기 출장 비자 — C-3-4",
     docs: [
-      "비자신청서 (양식)",
-      "유효한 여권 — 원본 + 사본 (잔여 유효기간 6개월 이상)",
-      "여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)",
-      "한국 회사의 초청장 — 회사 레터헤드에 서명",
-      "한국 초청 회사의 사업자등록증명원",
-      "캐나다 고용주의 재직증명서 (직책 및 급여 지급 주체가 캐나다 회사임을 확인)",
-      "왕복 항공 일정",
-      "  ▸ 캐나다 PR카드 또는 장기 비자 — 원본 + 사본 (해당 시)",
+      "비자신청서 (양식) — 출력·작성·서명",
+      "유효한 여권 — 원본 (잔여 유효기간 6개월 이상)",
+      "여권 사본 — 사진·인적사항 면",
+      "여권용 컬러사진 1매 (3.5×4.5cm, 흰 배경, 뒷면 날짜 스탬프, 6개월 이내)",
+      "거주 증명 — PR카드, 취업허가서 또는 유학허가서",
+      "상용 초청장 — 한국 회사 발행 (팩스·스캔 가능), 날짜·목적·기간 포함",
+      "사업자등록증 사본 — 사업자등록증 또는 등기부등본 (한국 회사에서 발급)",
+      "캐나다 고용주의 재직증명서 — 캐나다 회사가 비용·급여를 지급하며, 한국 초청기관이 고용·급여 지급하지 않음을 확인",
+      "  ▸ 초청장 또는 재직증명서(또는 둘 다)에 출장 목적·기간이 명확히 기재돼야 함",
+      "한국계(Korean-descent)인 경우: 추가 서류 필요 — 단계별 안내 참고",
     ],
     costs: [
-      { label: "단수", value: "CAD $26 (현금, Debit, 신용카드)" },
-      { label: "복수", value: "CAD $52 (현금, Debit, 신용카드)" },
+      { label: "수수료", value: "CAD $54 (현금, Debit, 신용카드)" },
     ],
-    time: "약 5~7 영업일",
+    time: "약 2주 (심사 중 추가 서류 요청 가능)",
     notices: [
+      "단수 비자, 발급일로부터 3개월 이내 입국. 최대 90일 체류.",
+      "발급 대상: 90일 이하 단기 출장 — 시장조사·연락업무·상담·계약체결·수출입 기계 설치/수리/조작 교육 등.",
+      "⚠️ 급여는 반드시 캐나다 회사가 지급해야 함(본인 사업체 또는 직원). 한국 초청기관이 고용·급여 지급 시 신청 불가.",
+      "⚠️ 과거 한국 국적자는 비자 신청 전 반드시 국적상실신고를 먼저 완료해야 합니다.",
       "🇨🇦 캐나다 국적자는 업무 목적으로 최대 90일 무비자 입국 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
-      "급여는 반드시 캐나다 고용주가 지급해야 함 — 한국 회사가 아님.",
-      "체류: 최대 90일. C-3 비자는 한국 내에서 다른 비자로 전환 불가.",
-      "성수기에는 처리가 더 걸릴 수 있으니 최소 2주 전 준비.",
+      "C-3 비자는 한국 내에서 다른 비자로 전환 불가.",
     ],
   },
 
@@ -6718,28 +6757,24 @@ const KO_TRANSLATIONS = {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "단기 방문", "일반 (C-3-1)"],
     title: "일반 단기방문 비자 — C-3-1",
     docs: [
-      "비자신청서 (양식)",
-      "유효한 여권 — 원본 + 사본 (잔여 유효기간 6개월 이상)",
-      "여권용 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내)",
-      "방문 목적별 증빙서류 (아래 중 하나):",
-      "  ▸ 회의·행사: 초청장 또는 행사 등록 확인서",
-      "  ▸ 치료: 한국 병원·클리닉의 예약 확인 서한",
-      "  ▸ 학술연구: 한국 대학·기관의 서한",
-      "  ▸ 연수: 연수 프로그램 입학허가서",
-      "  ▸ 종교활동: 한국 종교단체 초청장",
-      "재정능력 증빙 (최근 은행 거래내역서)",
-      "왕복 항공 일정",
-      "  ▸ 캐나다 PR카드 또는 장기 비자 — 원본 + 사본 (해당 시)",
+      "비자신청서 (양식) — 출력·작성·서명",
+      "유효한 여권 — 원본 + 사본 (잔여 유효기간 6개월 이상, 사진·인적사항 면 사본)",
+      "여권용 컬러사진 1매 (3.5×4.5cm, 흰 배경, 뒷면 날짜 스탬프, 6개월 이내)",
+      "거주 증명 — 영주권(PR)카드 또는 취업허가서/유학허가서",
+      "재직 또는 재학 증명 — 3개월 이내 발급",
+      "초청장 — 한국 회사/행사 주최자 발행 (팩스·스캔 가능), 이름·날짜·목적·기간 포함",
+      "사업자등록증 사본 (해당 시) — 사업자등록증 또는 등기부등본 (한국 회사/주최자에서 발급)",
     ],
     costs: [
-      { label: "단수", value: "CAD $26 (현금, Debit, 신용카드)" },
-      { label: "복수", value: "CAD $52 (현금, Debit, 신용카드)" },
+      { label: "수수료", value: "CAD $54 (Debit·현금·Money Order만 가능)" },
     ],
-    time: "약 5~7 영업일",
+    time: "약 2주 (심사 중 추가 서류 요청 가능)",
     notices: [
+      "단수 비자, 발급일로부터 3개월 이내 입국. 입국일로부터 최대 90일 체류.",
+      "발급 대상: 회의·대회·연수 등 단기 방문 (영리 목적 불가).",
+      "⚠️ 일부 국적자(캐나다 내 임시취업자·유학생 등)는 신청 시점에 캐나다 2년(730일) 이상 거주해야 합니다.",
       "🇨🇦 캐나다 국적자는 최대 6개월 무비자 방문 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
-      "체류: 1회 입국당 최대 90일. C-3 비자는 한국 내에서 다른 비자로 전환 불가.",
-      "모든 서류는 한 번에 함께 제출 — 한 가지라도 누락되면 접수되지 않습니다.",
+      "C-3 비자는 한국 내에서 다른 비자로 전환 불가.",
     ],
   },
 
@@ -6773,7 +6808,7 @@ const KO_TRANSLATIONS = {
       "⚠️ 이 비자는 주로 캐나다 거주 비(非)캐나다 국적자용 — 캐나다 여권 소지자는 치료 목적 무비자 입국 가능.",
       "⚠️ 특정 국가 출신으로 현재 캐나다 체류 중인 신청자는 신청 전 캐나다에 최소 2년(730일) 연속 거주해야 함.",
       "모든 의료 서류는 신청일 기준 3개월 이내 발급분이어야 함.",
-      "경유 승객: 신청 전 영사관 홈페이지에서 TWOV 조건 확인.",
+      { text: "한국을 경유만 하시나요? 무비자 환승(TWOV) 가능 여부 확인하기", goId: "visa_transit_en" },
       "심사 과정에서 추가 서류가 요청될 수 있음.",
     ],
   },
@@ -7241,30 +7276,29 @@ const KO_TRANSLATIONS = {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "단기 방문", "관광 (C-3-9)"],
     title: "C-3-9 관광비자 — 비(非)캐나다 국적자",
     docs: [
-      "비자신청서 (양식)",
-      "유효한 여권 — 원본 + 사본 (잔여 유효기간 6개월 이상)",
-      "여권 사진 1매 (3.5×4.5cm, 흰 배경, 6개월 이내 촬영)",
-      "캐나다 PR카드 또는 장기 캐나다 비자 — 원본 + 사본",
-      "왕복 항공 일정 (왕복 항공권 또는 예약)",
-      "호텔 예약 또는 숙소 확인서",
-      "재정능력 증빙 (최근 은행 거래내역서 — 최근 3~6개월)",
-      "  ▸ 한국 내 친지 방문 시: 초청장 + 초청인의 한국 신분증·거주증 사본",
+      "비자 신청 체크리스트 — 작성 후 신청 서류와 함께 제출",
+      "비자신청서 (양식) — 출력·작성 (작성 샘플 참고)",
+      "유효한 여권 — 원본 + 사본 (잔여 유효기간 6개월 이상, 사진·인적사항 면 사본)",
+      "여권용 컬러사진 — 사진관 촬영, ICAO 규격(캐나다 여권 규격과 다름): 3.5×4.5cm, 흰 배경, 뒷면 날짜 스탬프, 6개월 이내",
+      "캐나다 거주 증명 (원본 + 사본) — 영주권자: 유효한 PR카드 / 장기 체류자: 유효한 취업허가서 또는 유학허가서(종이)",
+      "재정 증명 (아래 중 하나) — ① 3개월 이내 재직증명서 + 3개월 급여명세, 또는 ② 최근 3개월 캐나다 은행 거래내역서(본인 이름 확인 가능)",
     ],
     costs: [
-      { label: "표준 수수료 (대부분 국적)", value: "CAD $26 — 단수 / CAD $52 — 복수" },
-      { label: "이란", value: "USD $90 상당" },
-      { label: "우즈베키스탄 / 키르기스스탄", value: "USD $80 상당" },
-      { label: "참고", value: "국적별 수수료 상이 — 신청 전 torvisa@mofa.go.kr 확인" },
+      { label: "단수", value: "CAD $54 (현금, Debit, 신용카드)" },
+      { label: "더블", value: "CAD $94.50 (현금, Debit, 신용카드)" },
+      { label: "복수", value: "CAD $121.50 (현금, Debit, 신용카드)" },
+      { label: "참고", value: "국적별 수수료 상이 가능" },
     ],
-    time: "약 5~10 영업일",
+    time: "약 2주 (심사 중 추가 서류 요청 가능)",
     notices: [
-      "C-3-9는 관광, 친지 방문, 단기 여가를 위한 표준 관광비자 — 최대 90일.",
-      "⚠️ 비자는 발급일로부터 3개월 유효 — 기간 내 입국 필수.",
-      "⚠️ C-3 비자는 한국 내에서 연장·전환 불가.",
-      "⚠️ 국적별 수수료 차이가 큼 — 표준 CAD $26이 모든 국적에 적용되지 않음 (예: 이란 약 USD $90).",
-      "⚠️ C-3-9는 완전 온라인 비자가 아님 — visa.go.kr에서 신청서 작성·출력 후 영사관에 직접 제출 (차로 2시간 이상 거주자는 우편).",
-      "우편 신청 가능 (영사관에서 차로 2시간 이상 거주자) — Certified Cheque + Prepaid Xpresspost 반송봉투 동봉.",
-      "최신 요건은 visa.go.kr 확인, 국적별 문의는 torvisa@mofa.go.kr.",
+      { text: "한국을 경유만 하시나요? 무비자 환승(TWOV) 가능 여부 확인하기", goId: "visa_transit_en" },
+      "무비자 여부 먼저 확인: 환승객(중국·몽골·베트남·필리핀·인도 등)은 최대 30일 무비자 / K-ETA는 캐나다·호주·프랑스 등 100개국 이상.",
+      "비자 종류 — 단수: 유효 3개월 / 체류 90일 · 더블: 유효 6개월 / 매회 30일 · 복수: 유효 5년 / 매회 90일.",
+      "발급 대상: 관할(온타리오·매니토바) 거주자 중 관광·레저·환승·친지방문·회의 등 단기 방문 (영리 목적 불가).",
+      "⚠️ 일부 국적자(캐나다 내 임시취업자·유학생 등)는 신청 시점에 캐나다 2년(730일) 이상 거주해야 합니다.",
+      "⚠️ 만료된 캐나다 비자·PR카드는 신청 불가 (이민국 레터 불인정). 거주 증명이 없거나 단기방문비자만 있으면 본국에서 신청하세요.",
+      "복수비자 자격(국가별): 중국 5년/90일 · 필리핀·베트남·인도·미얀마·캄보디아·스리랑카·인니·라오스·네팔·파키스탄·방글라데시 5년/30일 · 몽골 단계별(1년→3년→5년, 방문 실적에 따라). 그 외 국가는 단수 또는 더블만.",
+      "C-3 비자는 한국 내에서 연장·전환 불가.",
     ],
     bookingLabel: "예약하기 (비자과) →",
   },
@@ -11641,6 +11675,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("영문 운전경력증명서 발급 신청서") || t.startsWith("Application for the English driving record certificate")) {
       return "/forms/driving_record_application.pdf";
     }
+    // ── 비자 신청 체크리스트 ──
+    if (t.startsWith("비자 신청 체크리스트") || t.startsWith("Visa Application Checklist")) {
+      return "/forms/visa_application_checklist.pdf";
+    }
     // ── 비자신청서 (영사관 보유 양식) ──
     if (t.startsWith("비자신청서 (양식)") || t.startsWith("사증발급인정서 소지자용 비자신청서 (양식)") || t.startsWith("Visa Application Form (form)")) {
       return "/forms/visa_application_form.pdf";
@@ -13683,12 +13721,17 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </div>
                   <div className="info-card-body">
                     {pageNotices.map((n: any, i: number) => {
-                      const text = typeof n === "string" ? n : "";
+                      const text = typeof n === "string" ? n : (n?.text ?? "");
+                      const goId = (n && typeof n === "object") ? n.goId : null;
                       const isWarn = text.startsWith("⚠️");
                       return (
                         <div key={i} className={`notice-item${isWarn ? " warn" : ""}`}>
-                          <span className="notice-icon">{isWarn ? "" : "•"}</span>
-                          <span>{text}</span>
+                          <span className="notice-icon">{isWarn ? "" : (goId ? "🔗" : "•")}</span>
+                          {goId ? (
+                            <span onClick={() => goTo(goId)} style={{ cursor: "pointer", color: "#003478", textDecoration: "underline", fontWeight: 600 }}>{text} ›</span>
+                          ) : (
+                            <span>{text}</span>
+                          )}
                         </div>
                       );
                     })}

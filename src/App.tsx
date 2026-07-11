@@ -1031,7 +1031,7 @@ const TREE = {
     docs: [
       "여권발급신청서 (영사관 비치 양식 권장 / 미리 작성 시 컬러·A4 원본크기 출력, Letter 불가)",
       "여권용 사진 1매 (6개월 이내, 흰색·연한색 상의 불가, 영사관 무료 촬영 가능)",
-      "PR Card 원본 + 사본 (앞뒷면 모두 복사)",
+      "PR Card 원본 + 사본 (앞면 복사)",
     ],
     stateDocs: {
       renew: ["현재 여권 원본 + 사본 1부 (반납 후 새 여권 교부 시 반환)"],
@@ -1369,7 +1369,7 @@ const TREE = {
       "여권발급신청서 (영사관 비치 양식 권장 / 컬러·A4 원본크기 출력, Letter 불가)",
       "긴급여권 발급신청 사유서 (양식 작성·제출)",
       "여권용 사진 1매 (6개월 이내, 영사관 무료 촬영 가능)",
-      "PR Card 원본 + 사본 (앞뒷면). 만료 시: 연장 신청 영수증 + 만료된 PR카드 지참 (담당자 상담)",
+      "PR Card 원본 + 사본 (앞면). 만료 시: 연장 신청 영수증 + 만료된 PR카드 지참 (담당자 상담)",
       "항공권 사본 — 본인 이름·일정·결제 완료가 표시된 여행일정표 출력",
     ],
     stateDocs: {
@@ -2390,11 +2390,11 @@ const TREE = {
     service: "nationality",
     breadcrumb: ["홈", "국적"],
     question: "해당하는 상황을 선택하세요",
-    sub: "국적 업무는 상황에 따라 완전히 달라집니다. 본인 상황에 맞는 항목을 선택하세요.",
+    sub: "국적 업무는 상황에 따라 절차가 크게 다릅니다. 해당하는 항목을 선택하세요.",
     options: [
-      { id: "nationality_citizen_start", icon: "🍁", title: "나 또는 가족이 외국 국적(시민권)을 취득했어요", desc: "국적이탈·상실·보유·선택 — 내 상황에 맞게 안내" },
-      { id: "nationality_acquire", icon: "👶", title: "한국인 아버지와 외국인 어머니 사이의 혼외자예요", desc: "인지에 의한 국적취득 (미성년) · CAD $24.30" },
-      { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적을 되찾고 싶어요 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
+      { id: "nationality_citizen_start", icon: "🍁", title: "본인 또는 가족이 외국 국적(시민권)을 취득한 경우", desc: "국적이탈·상실·보유·선택 — 내 상황에 맞게 안내" },
+      { id: "nationality_acquire", icon: "👶", title: "한국인 부(父)와 외국인 모(母) 사이의 혼외자", desc: "인지에 의한 국적취득 (미성년) · CAD $24.30" },
+      { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적 회복을 원하는 경우 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
     ],
   },
 
@@ -3696,9 +3696,9 @@ const TREE = {
 
   visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🇨🇦 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 그 외 국적은 사증면제 여부·체류 기간이 다르므로 공식 안내를 확인하세요.", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·경유 (무비자)", desc: "무비자 · K-ETA · 경유(TWOV)" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-9 관광, C-3-4 출장, C-3-1 일반, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
   visa_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa"], question: "Do you have Korean heritage?", sub: "Under Korean law, if either of your parents is/was EVER a Korean national — even if they later became Canadian — you may hold Korean citizenship automatically. This affects whether you need a visa at all.", options: [
-    { id: "visa_heritage_yes_en", icon: "🧬", title: "Yes — a parent or grandparent was Korean", desc: "Includes cases where they later gave up Korean citizenship" },
-    { id: "visa_heritage_unsure_en", icon: "🤔", title: "Not sure — one of my parents may have been Korean", desc: "Best to confirm before applying for any visa" },
-    { id: "visa_heritage_no_en", icon: "🌐", title: "No Korean heritage at all", desc: "Neither parent nor grandparent was ever Korean" },
+    { id: "visa_heritage_yes_en", icon: "🧬", title: "Yes — a parent or grandparent held Korean nationality", desc: "Applies even if they later became a foreign national" },
+    { id: "visa_heritage_no_en", icon: "🌐", title: "No — no Korean heritage", desc: "No parent or grandparent held Korean nationality" },
+    { id: "visa_heritage_unsure_en", icon: "🤔", title: "Unsure — needs to be verified", desc: "If a parent's Korean nationality status is unclear" },
   ] },
 
   visa_heritage_yes_en: {
@@ -6158,6 +6158,18 @@ const TREE = {
         a: "국적상실이 선행되어야 합니다. 먼저 국적상실에 필요한 기본증명서·가족관계증명서를 신청하고, 2주 뒤 픽업하면서 다른 구비서류가 준비되었다면 국적상실신고와 F-4 비자를 같은 날 신청하시면 됩니다.",
         a_en: "Loss of Korean nationality must come first. First apply for the basic certificate and family relation certificate needed for the nationality loss; then, when you pick them up 2 weeks later, if your other documents are ready, you can file the nationality-loss report and apply for the F-4 visa on the same day.",
       },
+      {
+        q: "외국국적 동포의 거소증 발급·갱신을 영사관에서 처리하나요?",
+        q_en: "Do you issue or renew the domestic residence card (거소증) for overseas Koreans at the consulate?",
+        a: "아니요. 해당 업무는 한국의 출입국·외국인관서에서만 가능하며, 방문하시고자 하는 출입국·외국인청(사무소)으로 직접 문의하여 주시기 바랍니다.",
+        a_en: "No. This is handled only by Korea's immigration offices. Please contact the immigration office you plan to visit directly.",
+      },
+      {
+        q: "비자 발급(심사 결과)은 어떻게 확인하나요?",
+        q_en: "How do I check whether my visa has been issued?",
+        a: "① 대한민국 비자포털(www.visa.go.kr)에 접속해 '조회/발급 → 진행현황 조회 및 출력' 메뉴를 클릭하세요. ② 신청종류는 '재외공관', 구분은 여권번호 / 영문성명(성-이름 순) / 생년월일(연-월-일 순)로 입력 후 조회합니다. ③ 정상 발급 시 화면 오른쪽 하단 '비자 발급 확인서' 버튼을 눌러 출력한 뒤 출입국 시 지참하세요. (확인서에 제출한 증명사진이 표시되지 않아도 정상 발급된 것입니다.)",
+        a_en: "① Go to the Korea Visa Portal (www.visa.go.kr) and click 'Check/Issuance → Check application status & print.' ② Set application type to 'Diplomatic mission (재외공관)', then enter your passport number, English name (surname-given order), and date of birth (year-month-day) to search. ③ If issued, click the 'Visa Grant Notice' button at the bottom right to print it, and carry it when entering/leaving Korea. (The document is valid even if your submitted photo does not appear on it.)",
+      },
     ],
   },
   faq_notarization: {
@@ -6221,6 +6233,12 @@ const TREE = {
         q_en: "I'm a 20-year-old student. When should I apply for an overseas travel permit?",
         a: "만 24세까지는 국외여행허가 없이 국외여행·체재가 가능합니다. 25세가 되기 전 출국해 계속 국외에 머무르려면, 만 24세가 되는 해 1월 1일부터 만 25세가 되는 해 1월 15일까지 국외여행(기간연장)허가를 신청해야 합니다. (올해 {Y}년 기준: {B24}년생이 올해 만 24세 → {Y}.1.1부터 신청, {Y1}.1.15까지) 만 20세는 아직 신청 시기가 아니며, 만 24세가 되는 해부터 신청하시면 됩니다.",
         a_en: "You can travel and stay abroad without a permit until age 24. To keep staying abroad after leaving before age 25, apply for an overseas travel (extension) permit from January 1 of the year you turn 24 until January 15 of the year you turn 25. (This year {Y}: those born in {B24} turn 24 → apply from {Y}.1.1, deadline {Y1}.1.15.) At age 20 it isn't time yet — apply starting the year you turn 24.",
+      },
+      {
+        q: "만 24세 전에 국외여행허가를 신청할 수 있나요?",
+        q_en: "Can I apply for an overseas travel permit before age 24?",
+        a: "아니요. 병무청은 만 24세가 되는 해부터 국외여행허가를 접수합니다. 병무청 방침에 따라 만 24세 전에는 신청이 불가능합니다.",
+        a_en: "No. The Military Manpower Administration (MMA) accepts overseas travel permit applications only from the year you turn 24. Under MMA policy, you cannot apply before age 24.",
       },
     ],
   },
@@ -6417,9 +6435,9 @@ const KO_TRANSLATIONS = {
     question: "한국 혈통이 있으신가요?",
     sub: "한국법상 부모 중 한 분이라도 과거에 한국 국적이었던 적이 있으면 — 이후 캐나다인이 되셨더라도 — 본인이 자동으로 한국 국적을 보유할 수 있습니다. 이에 따라 비자가 아예 필요 없을 수도 있습니다.",
     options: {
-      visa_heritage_yes_en:    { title: "네 — 부모 또는 조부모가 한국인이었어요", desc: "이후 한국 국적을 포기한 경우도 포함됩니다" },
-      visa_heritage_unsure_en: { title: "잘 모르겠어요 — 부모님 중 한 분이 한국인이었을 수 있어요", desc: "비자 신청 전 확인하는 것이 좋습니다" },
-      visa_heritage_no_en:     { title: "한국 혈통이 전혀 없어요", desc: "부모·조부모 모두 한국 국적인 적 없음" },
+      visa_heritage_yes_en:    { title: "예 — 부모 또는 조부모가 한국 국적을 보유한 적이 있음", desc: "현재 외국 국적이더라도 해당됩니다" },
+      visa_heritage_no_en:     { title: "아니오 — 한국 혈통 없음", desc: "부모·조부모 모두 한국 국적 보유 이력 없음" },
+      visa_heritage_unsure_en: { title: "불확실 — 확인이 필요함", desc: "부모의 한국 국적 보유 여부가 분명하지 않은 경우" },
     },
   },
 
@@ -7831,7 +7849,7 @@ const EN_TRANSLATIONS: any = {
     docs: [
       "Passport application form (consulate form recommended / if prepared in advance, print in color on A4 at original size; Letter size not accepted)",
       "1 passport photo (within 6 months, no white/light-colored top, free photo at consulate available)",
-      "PR Card original + copy (both front and back)",
+      "PR Card original + copy (front side only)",
     ],
     stateDocs: {
       renew: ["Current passport original + 1 copy (returned with the new passport after surrender)"],
@@ -7974,7 +7992,7 @@ const EN_TRANSLATIONS: any = {
       "Legal guardian consent form — signed by the representative guardian",
       "Visiting representative guardian's (father or mother) passport original + 1 copy",
       "Residency-status proof (one applicable to the child):",
-      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ PR: PR Card original+copy (front only) / Long-term: residence visa original+copy",
       "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
@@ -8006,7 +8024,7 @@ const EN_TRANSLATIONS: any = {
       "Visiting guardian's (father or mother) passport original + 1 copy",
       "Sole-custody proof — child's basic/family relation certificate (to confirm custody)",
       "Residency-status proof (one applicable to the child):",
-      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ PR: PR Card original+copy (front only) / Long-term: residence visa original+copy",
       "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
@@ -8043,7 +8061,7 @@ const EN_TRANSLATIONS: any = {
       "    └ Both parents visit the consulate",
       "    └ Legal guardian consent form — signed by both parents",
       "Residency-status proof (one applicable to the child):",
-      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ PR: PR Card original+copy (front only) / Long-term: residence visa original+copy",
       "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
@@ -8074,7 +8092,7 @@ const EN_TRANSLATIONS: any = {
       "Visiting guardian's passport original + 1 copy",
       "Sole-custody proof — child's basic/family relation certificate (bereavement confirmable if applicable)",
       "Residency-status proof (one applicable to the child):",
-      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ PR: PR Card original+copy (front only) / Long-term: residence visa original+copy",
       "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
@@ -8110,7 +8128,7 @@ const EN_TRANSLATIONS: any = {
       "    └ Power of attorney (stating delegation to the proxy)",
       "    └ Proxy's passport original + copy (proxy must be an adult 18+: grandparent, sibling)",
       "Residency-status proof (one applicable to the child):",
-      "    └ PR: PR Card original+copy (both sides) / Long-term: residence visa original+copy",
+      "    └ PR: PR Card original+copy (front only) / Long-term: residence visa original+copy",
       "    └ Short-term (eTA): eTA approval / Congenital dual citizen: Canadian passport or birth certificate",
     ],
     stateDocs: {
@@ -8141,7 +8159,7 @@ const EN_TRANSLATIONS: any = {
       "Passport application form (consulate form recommended / print in color on A4 at original size; Letter not accepted)",
       "Urgent passport issuance reason statement (complete and submit the form)",
       "1 passport photo (within 6 months, free photo at consulate available)",
-      "PR Card original + copy (both sides). If expired: renewal application receipt + the expired PR Card (consult staff)",
+      "PR Card original + copy (front side only). If expired: renewal application receipt + the expired PR Card (consult staff)",
       "Flight ticket copy — itinerary printout showing your name, schedule, and completed payment",
     ],
     stateDocs: {
@@ -10041,9 +10059,9 @@ const EN_TRANSLATIONS: any = {
     question: "Select the situation that applies",
     sub: "Nationality services differ completely by situation. Select the item that matches your case.",
     options: {
-      nationality_citizen_start: { title: "I or my family acquired a foreign nationality (citizenship)", desc: "Exit / loss / retention / choice — guided to your situation" },
+      nationality_citizen_start: { title: "You or a family member acquired a foreign nationality (citizenship)", desc: "Exit / loss / retention / choice — guided to your situation" },
       nationality_acquire: { title: "Child of a Korean father & foreign mother born out of wedlock", desc: "Nationality acquisition by acknowledgment (minor) · CAD $24.30" },
-      nationality_recover: { title: "I want to restore Korean nationality (age 65+)", desc: "Dual-nationality restoration — only at a Korean immigration office" },
+      nationality_recover: { title: "Restoring Korean nationality (age 65+)", desc: "Dual-nationality restoration — only at a Korean immigration office" },
     },
   },
   nationality_terms: {

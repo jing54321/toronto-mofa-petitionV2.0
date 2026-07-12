@@ -1927,7 +1927,7 @@ const TREE = {
     breadcrumb: ["홈", "가족관계등록", "증명서 발급", "영문 증명서", "영사관 방문"],
     title: "영문 증명서 발급 — 영사관 방문",
     docs: [
-      "가족관계 등록사항별 증명서 교부 등 신청서 (영사관 비치)",
+      "[별지11-1호] 가족관계 영문증명서 발급신청서 (영사관 비치)",
       "  ▸ 등록기준지(본적) 정확히 기재 필수 — 미기재 또는 오기재 시 발급 불가",
       "신청자 신분증 원본 + 사본",
     ],
@@ -1988,6 +1988,8 @@ const TREE = {
       "  ▸ 부모 이름이 표시된 증명서라면 종류 무관",
       "  ▸ 혼인 후 200일 이내 출생 시: Long-form 출생증명서 + Long-form 혼인증명서 사본",
       "출생증명서 한글 번역문 (본인 직접 번역 가능, 공증 불필요, 하단에 번역일자·번역자 이름·서명)",
+      "└ 출생증명서 번역문 작성 샘플 — 온타리오",
+      "└ 출생증명서 번역문 작성 샘플 — 마니토바",
       "동일인확인서 (해당자만) — 한국 등록 이름과 캐나다 등록 이름이 다른 경우",
       "부·모 여권 원본 + 사본 각 1부",
       "  ▸ 방문하는 부/모만 원본 제출(확인 후 즉시 반환), 미방문자는 사본만 제출",
@@ -2023,6 +2025,8 @@ const TREE = {
       "  ▸ 기타란: 외국성명 한글로 기재",
       "Birth Certificate Long-form (Certified copy of birth registration) 원본 (반환 불가)",
       "출생증명서 한글 번역문 (공증 불필요, 하단에 번역일자·이름·서명)",
+      "└ 출생증명서 번역문 작성 샘플 — 온타리오",
+      "└ 출생증명서 번역문 작성 샘플 — 마니토바",
       "동일인확인서 (해당자만)",
       "부·모 여권 원본 + 사본 각 1부",
       "  ▸ 방문하는 부/모만 원본 제출(확인 후 즉시 반환), 미방문자는 사본만 제출",
@@ -2055,6 +2059,8 @@ const TREE = {
       "  ▸ 기타란: 외국성명 한글로 기재",
       "Birth Certificate Long-form 원본 (반환 불가)",
       "출생증명서 한글 번역문 (공증 불필요)",
+      "└ 출생증명서 번역문 작성 샘플 — 온타리오",
+      "└ 출생증명서 번역문 작성 샘플 — 마니토바",
       "동일인확인서 (해당자만)",
       "부·모 여권 원본 + 사본 각 1부",
       "  ▸ 방문하는 부/모만 원본 제출(확인 후 즉시 반환), 미방문자는 사본만 제출",
@@ -2088,6 +2094,8 @@ const TREE = {
       "  ▸ 한국인 부의 성·본을 따르는 경우: 부의 성·본에 따라 신고 가능 (단, 가족관계등록부에 부 기록 불가)",
       "Birth Certificate 원본 (부모 이름 표시된 것)",
       "출생증명서 한글 번역문",
+      "└ 출생증명서 번역문 작성 샘플 — 온타리오",
+      "└ 출생증명서 번역문 작성 샘플 — 마니토바",
       "신고인(부 또는 모) 여권 원본 + 사본",
       "  ▸ 방문자 원본은 확인 후 즉시 반환",
       "신고인 캐나다 체류자격 증명서류 사본",
@@ -2131,6 +2139,9 @@ const TREE = {
       "  ▸ 쌍방 한국인: Short-form 또는 Long-form 무관",
       "  ▸ 혼인 후 200일 이내 출생 자녀 있는 경우: Long-form 필수",
       "혼인증명서 한글 번역문 (공증 불필요, 하단에 번역일자·이름·서명)",
+      "└ 혼인증명서 번역문 작성 샘플 — 온타리오",
+      "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Short-form",
+      "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Long-form",
       "혼인 당사자 두 사람의 여권 원본 + 사본 각 1부",
       "  ▸ 원본은 방문하는 당사자만 제출(확인 후 즉시 반환), 사본은 두 사람 모두 제출",
       "  ▸ 복수국적자: 모든 국가 유효 여권 사본",
@@ -2165,6 +2176,9 @@ const TREE = {
       "Marriage Certificate Long-form 원본 1부 (반환 불가)",
       "  ▸ 혼인 당사자 중 일방이 외국인인 경우 Long-form 필수",
       "혼인증명서 한글 번역문 (공증 불필요)",
+      "└ 혼인증명서 번역문 작성 샘플 — 온타리오",
+      "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Short-form",
+      "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Long-form",
       "혼인 당사자 두 사람의 여권 원본 + 사본 각 1부",
       "  ▸ 원본은 방문하는 당사자만 제출(확인 후 즉시 반환), 사본은 두 사람 모두 제출",
       "  ▸ 시민권자: 시민권증서 (카드형·Search of Citizenship Record 불가, 선서일 년월일 표시 필수)",
@@ -2203,6 +2217,7 @@ const TREE = {
     service: "family",
     breadcrumb: ["홈", "가족관계등록", "신고", "이혼신고", "협의이혼"],
     title: "협의이혼의사확인 신청",
+    guideDoc: { href: "/forms/family_divorce_system_guide.pdf", label: "협의이혼제도 안내", label_en: "Consensual Divorce System Guide (Korean PDF)" },
     docs: [
       "협의이혼의사확인 신청서 (양식) — 한글로 작성",
       "이혼신고서 3부 — 한글·아라비아숫자만 기재",
@@ -2242,8 +2257,10 @@ const TREE = {
       "  ▸ 재판확정일자: 판결일이 아닌 효력발생일 기재 (일반적으로 판결일로부터 한달 뒤)",
       "  ▸ 친권: 판결문에 Custody 미기재 시 친권란 공란",
       "이혼증명서 (Certificate of Divorce) 원본 등본 (반환 불가)",
+      "└ 온타리오 이혼증명서 예시",
       "이혼증명서 한글 번역문 (공증 불필요, 하단에 번역일자·이름·서명)",
       "이혼판결문 (Certificate of Judgement 또는 Divorce Order) 원본 등본 (반환 불가)",
+      "└ 온타리오 이혼판결문 예시",
       "이혼판결문 한글 번역문",
       "Separation Agreement 원본 등본 + 번역문 (미성년 자녀 있는 경우, 판결문에 상세 양육권 기재 시 불필요)",
       "이혼 당사자 여권 사본 각 1부 (원본은 방문하는 신고 당사자만 확인 후 즉시 반환)",
@@ -2280,6 +2297,8 @@ const TREE = {
       "  ▸ 가급적 Long-form (Certified Copy of Death Registration, Form 15) 제출",
       "  ▸ 성명·생년월일·사망일자 정확해야 함 — 오류 시 주정부에 정정 후 제출",
       "사망증명서 한글 번역문 (공증 불필요, 하단에 번역일자·이름·서명)",
+      "└ 사망증명서 번역문 작성 샘플 — 온타리오 (Form 15)",
+      "└ 사망증명서 번역문 작성 샘플 — 마니토바",
       "신고자 여권 원본 + 사본 (유효한 여권)",
       "신고자 체류자격 증명서류 원본 + 사본",
       "  ▸ 방문자: 체류비자 또는 ETA / 영주권자: PR카드 / 시민권자: 시민권증서 / 캐나다 출생 시민권자: Birth Certificate (Short/Long form 무관)",
@@ -2312,6 +2331,8 @@ const TREE = {
       "출생증명서 원본 (부모 이름 표시된 것, 반환 불가)",
       "  ▸ 심사 후 필요시 Long-form 추가 요청될 수 있음",
       "출생증명서 한글 번역문 (번역예시 참고, 공증 불필요)",
+      "└ 출생증명서 번역문 작성 샘플 — 온타리오",
+      "└ 출생증명서 번역문 작성 샘플 — 마니토바",
       "동일인확인서 (해당자만) — 한국 등록 이름과 캐나다 이름이 다른 경우",
       "부·모 여권 원본 + 사본 각 1부",
       "부·모 캐나다 체류자격 증명서류 원본 + 사본 각 1부",
@@ -2355,6 +2376,8 @@ const TREE = {
       "가족관계등록부 직권정정신청서 (양식)",
       "외국인 가족 사망증명서 (주재국 사망증명서)",
       "사망증명서 한글 번역문 — 전체 내용 번역 (전문번역가 또는 본인 직접, 하단에 이름·서명·번역일자)",
+      "└ 사망증명서 번역문 작성 샘플 — 온타리오 (Form 15)",
+      "└ 사망증명서 번역문 작성 샘플 — 마니토바",
       "외국인 가족의 여권",
       "신청인의 대한민국 여권 원본",
       "가족관계증명서 + 혼인관계증명서 각 1부 (대상자가 배우자인 경우)",
@@ -2380,6 +2403,8 @@ const TREE = {
       "가족관계등록부 직권정정신청서 (양식)",
       "외국인 가족의 출생증명서 사본",
       "출생증명서 한글 번역문 (전문번역가 또는 본인 직접, 하단에 이름·서명·번역일자)",
+      "└ 출생증명서 번역문 작성 샘플 — 온타리오",
+      "└ 출생증명서 번역문 작성 샘플 — 마니토바",
       "외국인 가족의 시민권증서 사본 (후천적 캐나다 시민권 취득자)",
       "외국인 가족의 여권 사본",
       "신청인(한국 국민) 대한민국 여권 원본 + 사본",
@@ -11593,6 +11618,16 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("비자신청서") || t.startsWith("사증발급인정서 소지자용 비자신청서") || t.startsWith("Visa Application Form")) {
       return "/forms/visa_application_form_sample.pdf";
     }
+    // 가족관계등록: 번역문 작성 샘플 / 이혼 원본 예시
+    if (t.startsWith("출생증명서 번역문 작성 샘플 — 온타리오")) return "/forms/family_birth_cert_translation_sample_on.pdf";
+    if (t.startsWith("출생증명서 번역문 작성 샘플 — 마니토바")) return "/forms/family_birth_cert_translation_sample_mb.pdf";
+    if (t.startsWith("혼인증명서 번역문 작성 샘플 — 온타리오")) return "/forms/family_marriage_cert_translation_sample_on.pdf";
+    if (t.startsWith("혼인증명서 번역문 작성 샘플 — 마니토바 Short")) return "/forms/family_marriage_cert_translation_sample_mb_short.pdf";
+    if (t.startsWith("혼인증명서 번역문 작성 샘플 — 마니토바 Long")) return "/forms/family_marriage_cert_translation_sample_mb_long.pdf";
+    if (t.startsWith("사망증명서 번역문 작성 샘플 — 온타리오")) return "/forms/family_death_cert_translation_sample_on.pdf";
+    if (t.startsWith("사망증명서 번역문 작성 샘플 — 마니토바")) return "/forms/family_death_cert_translation_sample_mb.pdf";
+    if (t.startsWith("온타리오 이혼증명서 예시")) return "/forms/family_ontario_divorce_cert_example.pdf";
+    if (t.startsWith("온타리오 이혼판결문 예시")) return "/forms/family_ontario_divorce_judgment_example.pdf";
     return null;
   };
   const getFormUrl = (docText: string): string | null => {
@@ -11715,6 +11750,19 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("비자신청서 (양식)") || t.startsWith("사증발급인정서 소지자용 비자신청서 (양식)") || t.startsWith("Visa Application Form (form)")) {
       return "/forms/visa_application_form.pdf";
     }
+    // ── 가족관계등록: 양식 ──
+    if (t.startsWith("전자적송부신청서")) return "/forms/family_electronic_transfer_form.pdf";
+    if (t.startsWith("동일인확인서") || t.startsWith("동일인증명")) return "/forms/family_same_person_confirmation.pdf";
+    if (t.startsWith("출생신고서")) return "/forms/family_birth_report_form.pdf";
+    if (t.startsWith("혼인신고서")) return "/forms/family_marriage_report_form.pdf";
+    if (t.startsWith("이혼신고서")) return "/forms/family_divorce_report_form.pdf";
+    if (t.startsWith("사망신고서")) return "/forms/family_death_report_form.pdf";
+    if (t.startsWith("인지신고서")) return "/forms/family_acknowledgment_report_form.pdf";
+    if (t.startsWith("협의이혼의사확인 신청서")) return "/forms/family_divorce_agreement_application.pdf";
+    if (t.startsWith("자녀양육과 친권자 결정에 관한 협의서")) return "/forms/family_child_custody_agreement.pdf";
+    if (t.startsWith("[별지11-1호] 가족관계 영문증명서 발급신청서")) return "/forms/family_english_cert_application.pdf";
+    if (t.startsWith("가족관계 등록사항별 증명서 교부 등 신청서")) return "/forms/family_cert_issuance_application.pdf";
+    if (t.startsWith("가족관계등록부 직권정정신청서")) return "/forms/family_record_correction_application.pdf";
     // 여권발급신청서
     if (t.startsWith("여권발급신청서") || t.startsWith("Passport application")) {
       return "/forms/passport_application_A4.pdf";
@@ -13543,6 +13591,14 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
                 {svcIcon && <span style={{ fontSize: "28px", lineHeight: 1, flexShrink: 0 }}>{svcIcon}</span>}
                 <div className="result-title" style={{ fontSize: "21px", marginBottom: 0 }}>{L("title", page.title ?? "")}</div>
+                {page.guideDoc && (
+                  <a href={page.guideDoc.href} download target="_blank" rel="noopener noreferrer" title={lang === "ko" ? page.guideDoc.label : (page.guideDoc.label_en ?? page.guideDoc.label)}
+                     style={{ display: "flex", alignItems: "center", gap: "5px", flexShrink: 0, marginLeft: "auto", textDecoration: "none",
+                              background: "linear-gradient(135deg, #eaf1fb 0%, #f5f8fe 100%)", border: "1px solid #cdddf5",
+                              borderRadius: "9px", padding: "6px 10px", color: "#003478", fontSize: "12px", fontWeight: 700, whiteSpace: "nowrap" }}>
+                    📄 {lang === "ko" ? "제도 안내" : "Guide"} <span style={{ fontSize: "13px" }}>↓</span>
+                  </a>
+                )}
               </div>
 
               <div className="result-sub">
@@ -13599,6 +13655,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       const nextIsSub = typeof mainDocs[i + 1] === "string" && mainDocs[i + 1].trim().startsWith("└");
                       const subIsLast = i === mainDocs.length - 1;
                       const subForm = getFormUrl(subText);
+                      const subSample = getSampleUrl(subText);
                       return (
                         <div key={i} className="doc-item" style={{ paddingLeft: "30px", borderBottom: (nextIsSub || subIsLast) ? "none" : "1px solid #f2f4f9", paddingTop: "2px", paddingBottom: "2px" }}>
                           <span style={{ color: "#aab", flexShrink: 0 }}>└</span>
@@ -13606,6 +13663,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                           {subForm && (
                             <a className="form-dl" href={subForm} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
                               📥<span className="form-label">{lang === "ko" ? "양식" : "Form"}</span>
+                            </a>
+                          )}
+                          {subSample && (
+                            <a className="sample-dl" href={subSample} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "작성 샘플" : "Sample"}>
+                              📄<span className="form-label">{lang === "ko" ? "샘플" : "Sample"}</span>
                             </a>
                           )}
                         </div>
@@ -13625,7 +13687,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       )}
                       {sampleUrl && (
                         <a className="sample-dl" href={sampleUrl} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "작성 샘플" : "Sample"}>
-                          📄<span className="form-label">{lang === "ko" ? "작성 샘플" : "Sample"}</span>
+                          📄<span className="form-label">{lang === "ko" ? "샘플" : "Sample"}</span>
                         </a>
                       )}
                     </div>
@@ -13755,12 +13817,15 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                     {pageNotices.map((n: any, i: number) => {
                       const text = typeof n === "string" ? n : (n?.text ?? "");
                       const goId = (n && typeof n === "object") ? n.goId : null;
+                      const href = (n && typeof n === "object") ? n.href : null;
                       const isWarn = text.startsWith("⚠️");
                       return (
                         <div key={i} className={`notice-item${isWarn ? " warn" : ""}`}>
-                          <span className="notice-icon">{isWarn ? "" : (goId ? "🔗" : "•")}</span>
+                          <span className="notice-icon">{isWarn ? "" : (goId ? "🔗" : (href ? "📄" : "•"))}</span>
                           {goId ? (
                             <span onClick={() => goTo(goId)} style={{ cursor: "pointer", color: "#003478", textDecoration: "underline", fontWeight: 600 }}>{text} ›</span>
+                          ) : href ? (
+                            <a href={href} download target="_blank" rel="noopener noreferrer" style={{ color: "#003478", textDecoration: "underline", fontWeight: 600 }}>{text} ↓</a>
                           ) : (
                             <span>{text}</span>
                           )}

@@ -13047,10 +13047,12 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                           {lookupResult.category && (<div style={{ fontSize: "11.5px", color: "#8a94a8", marginTop: "4px" }}>{lookupResult.category}</div>)}
                         </div>
                         <div style={{ padding: "14px" }}>
+                          <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#5a6a85", marginBottom: "6px" }}>{lang === "ko" ? "내 질문" : "My Question"}</div>
+                          <div style={{ fontSize: "13.5px", color: "#334", lineHeight: 1.6, whiteSpace: "pre-wrap", background: "#f7f9fd", borderRadius: "8px", padding: "10px 12px", marginBottom: "14px" }}>{lookupResult.content}</div>
                           {lookupResult.status === "answered" ? (
                             <>
                               <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#5a6a85", marginBottom: "6px" }}>{lang === "ko" ? "답변" : "Reply"}</div>
-                              <div style={{ fontSize: "13.5px", color: "#1a1a2e", lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{lookupResult.answer}</div>
+                              <div style={{ fontSize: "13.5px", color: "#1a1a2e", lineHeight: 1.6, whiteSpace: "pre-wrap", background: "#eef6ff", borderRadius: "8px", padding: "10px 12px" }}>{lookupResult.answer}</div>
                             </>
                           ) : (
                             <div style={{ fontSize: "13px", color: "#667", lineHeight: 1.55 }}>{lang === "ko" ? "아직 답변이 등록되지 않았습니다. 영업일 기준 2~3일 내에 이메일 또는 전화로 안내드립니다." : "No reply yet. We will respond within 2–3 business days by email or phone."}</div>

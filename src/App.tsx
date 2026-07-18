@@ -1,6 +1,6 @@
 //import { useState, Component } from "react";
 import React, { useState, ReactNode } from "react";
-import { submitInquiry } from "./firebase";
+import { submitInquiry, lookupInquiry } from "./firebase";
 // ─── COLOR PALETTE ────────────────────────────────────────────────────────────
 // Navy: #003478  Red: #CD2E3A  Light blue: #E8EEF7  Gray: #F5F6F8
 
@@ -5975,6 +5975,11 @@ const TREE = {
   },
 
   // ══ FAQ ══
+  inquiry_lookup: {
+    type: "inquiry_lookup",
+    breadcrumb: ["홈", "내 문의 조회"],
+    title: "내 문의 조회",
+  },
   faq_start: {
     type: "faq_tabs",
     breadcrumb: ["홈", "자주 묻는 질문"],
@@ -11382,6 +11387,11 @@ function AppInner() {
   const [vocStep, setVocStep] = useState<"form" | "done">("form");
   const [vocSending, setVocSending] = useState(false);
   const [vocInquiryId, setVocInquiryId] = useState("");
+  const [lookupTab, setLookupTab] = useState<"id" | "info">("id");
+  const [lookupId, setLookupId] = useState("");
+  const [lookupLoading, setLookupLoading] = useState(false);
+  const [lookupResult, setLookupResult] = useState<any>(null);
+  const [lookupError, setLookupError] = useState("");
   const [vocForm, setVocForm] = useState({ name: "", email: "", phone: "", title: "", question: "" });
   // 챗봇 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
 
@@ -12862,7 +12872,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                       </button>
                       <button
                         className="home-btn"
-                        onClick={() => alert(lang === "ko" ? "준비 중입니다." : "Coming soon.")}
+                        onClick={() => { setLookupTab("id"); setLookupId(""); setLookupResult(null); setLookupError(""); goTo("inquiry_lookup"); }}
                         aria-label={lang === "ko" ? "내 문의 조회" : "My Inquiries"}
                       >
                         🔍 {lang === "ko" ? "내 문의 조회" : "My Inquiries"}
@@ -12971,6 +12981,102 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               </div>
             );
           })()}
+
+          {page.type === "inquiry_lookup" && (
+            <div>
+              <div className="page-title">
+                <h1>{lang === "ko" ? "내 문의 조회" : "My Inquiries"}</h1>
+                <p style={{ marginTop: "5px" }}>{lang === "ko" ? "접수하신 문의의 처리 상태와 답변을 확인하실 수 있습니다." : "Check the status and reply to your inquiry."}</p>
+              </div>
+
+              {/* 탭 */}
+              <div style={{ display: "flex", gap: "6px", marginBottom: "16px" }}>
+                <button onClick={() => { setLookupTab("id"); setLookupResult(null); setLookupError(""); }}
+                  style={{ flex: 1, padding: "11px", borderRadius: "10px", border: lookupTab === "id" ? "1.5px solid #003478" : "1px solid #dde5f2", background: lookupTab === "id" ? "#003478" : "#fff", color: lookupTab === "id" ? "#fff" : "#667", fontSize: "13px", fontWeight: 700, cursor: "pointer" }}>
+                  🔢 {lang === "ko" ? "문의번호로 조회" : "By Inquiry No."}
+                </button>
+                <button onClick={() => { setLookupTab("info"); setLookupResult(null); setLookupError(""); }}
+                  style={{ flex: 1, padding: "11px", borderRadius: "10px", border: lookupTab === "info" ? "1.5px solid #003478" : "1px solid #dde5f2", background: lookupTab === "info" ? "#003478" : "#fff", color: lookupTab === "info" ? "#fff" : "#667", fontSize: "13px", fontWeight: 700, cursor: "pointer" }}>
+                  📇 {lang === "ko" ? "정보로 조회" : "By Info"}
+                </button>
+              </div>
+
+              {lookupTab === "id" ? (
+                <div className="info-card">
+                  <div className="info-card-body" style={{ padding: "16px" }}>
+                    <label style={{ display: "block", fontSize: "12px", fontWeight: 700, color: "#5a6a85", marginBottom: "6px" }}>{lang === "ko" ? "문의번호" : "Inquiry Number"}</label>
+                    <div style={{ display: "flex", gap: "8px", marginBottom: "6px" }}>
+                      <input value={lookupId} disabled={lookupLoading}
+                        onChange={(e) => setLookupId(e.target.value)}
+                        placeholder={lang === "ko" ? "제출 시 받으신 문의번호 입력" : "Enter your inquiry number"}
+                        style={{ flex: 1, boxSizing: "border-box", padding: "11px 12px", borderRadius: "10px", border: "1px solid #dde5f2", fontSize: "13.5px" }} />
+                      <button disabled={lookupLoading || !lookupId.trim()}
+                        onClick={async () => {
+                          setLookupLoading(true); setLookupError(""); setLookupResult(null);
+                          try {
+                            const r = await lookupInquiry(lookupId);
+                            if (!r.found) { setLookupError(lang === "ko" ? "문의 내역을 찾을 수 없습니다. 번호를 다시 확인해 주세요." : "Inquiry not found. Please check the number."); }
+                            else { setLookupResult(r); }
+                          } catch (e) {
+                            setLookupError(lang === "ko" ? "조회 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." : "An error occurred. Please try again.");
+                          } finally { setLookupLoading(false); }
+                        }}
+                        style={{ flexShrink: 0, padding: "11px 16px", borderRadius: "10px", border: "none", background: (lookupLoading || !lookupId.trim()) ? "#9db4d6" : "#003478", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: (lookupLoading || !lookupId.trim()) ? "not-allowed" : "pointer" }}>
+                        {lookupLoading ? "..." : (lang === "ko" ? "조회" : "Search")}
+                      </button>
+                    </div>
+
+                    {lookupError && (
+                      <div style={{ fontSize: "12.5px", color: "#cd2e3a", background: "#fdeef0", borderRadius: "8px", padding: "10px 12px", marginTop: "8px" }}>{lookupError}</div>
+                    )}
+
+                    {lookupResult && (
+                      <div style={{ marginTop: "12px", border: "1px solid #e4eaf6", borderRadius: "12px", overflow: "hidden" }}>
+                        <div style={{ background: "#f5f8fd", padding: "12px 14px", borderBottom: "1px solid #e4eaf6" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }}>
+                            <span style={{ fontSize: "14px", fontWeight: 700, color: "#1a1a2e" }}>{lookupResult.title}</span>
+                            <span style={{ fontSize: "11px", fontWeight: 700, padding: "3px 9px", borderRadius: "20px",
+                              background: lookupResult.status === "answered" ? "#e3f6ea" : "#fff3e0",
+                              color: lookupResult.status === "answered" ? "#1a7a43" : "#b26a00" }}>
+                              {lookupResult.status === "answered" ? (lang === "ko" ? "✓ 답변 완료" : "✓ Answered") : (lang === "ko" ? "⏳ 답변 대기 중" : "⏳ Pending")}
+                            </span>
+                          </div>
+                          {lookupResult.category && (<div style={{ fontSize: "11.5px", color: "#8a94a8", marginTop: "4px" }}>{lookupResult.category}</div>)}
+                        </div>
+                        <div style={{ padding: "14px" }}>
+                          {lookupResult.status === "answered" ? (
+                            <>
+                              <div style={{ fontSize: "11.5px", fontWeight: 700, color: "#5a6a85", marginBottom: "6px" }}>{lang === "ko" ? "답변" : "Reply"}</div>
+                              <div style={{ fontSize: "13.5px", color: "#1a1a2e", lineHeight: 1.6, whiteSpace: "pre-wrap" }}>{lookupResult.answer}</div>
+                            </>
+                          ) : (
+                            <div style={{ fontSize: "13px", color: "#667", lineHeight: 1.55 }}>{lang === "ko" ? "아직 답변이 등록되지 않았습니다. 영업일 기준 2~3일 내에 이메일 또는 전화로 안내드립니다." : "No reply yet. We will respond within 2–3 business days by email or phone."}</div>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ) : (
+                <div className="info-card">
+                  <div className="info-card-body" style={{ padding: "16px" }}>
+                    {["이름", "이메일", "전화번호"].map((f, idx) => (
+                      <input key={idx} disabled
+                        placeholder={lang === "ko" ? f : ["Name", "Email", "Phone"][idx]}
+                        style={{ width: "100%", boxSizing: "border-box", padding: "11px 12px", marginBottom: "9px", borderRadius: "10px", border: "1px solid #e4eaf6", fontSize: "13.5px", background: "#f6f8fb", color: "#aab" }} />
+                    ))}
+                    <button disabled
+                      style={{ width: "100%", padding: "12px", borderRadius: "10px", border: "none", background: "#c3cede", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: "not-allowed" }}>
+                      {lang === "ko" ? "조회" : "Search"}
+                    </button>
+                    <div style={{ fontSize: "12px", color: "#8a94a8", background: "#f5f8fd", borderRadius: "8px", padding: "10px 12px", marginTop: "12px", lineHeight: 1.5, textAlign: "center" }}>
+                      {lang === "ko" ? "🚧 준비 중입니다. 문의번호로 조회를 이용해 주세요." : "🚧 Coming soon. Please use inquiry number lookup."}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {page.type === "faq" && (
             <div>

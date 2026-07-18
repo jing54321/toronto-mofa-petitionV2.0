@@ -13065,8 +13065,8 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               ) : (
                 <div className="info-card">
                   <div className="info-card-body" style={{ padding: "16px" }}>
-                    <div style={{ fontSize: "11.5px", color: "#8a94a8", background: "#fff7e6", border: "1px solid #ffe2a8", borderRadius: "8px", padding: "8px 10px", marginBottom: "12px", lineHeight: 1.5 }}>
-                      {lang === "ko" ? "🚧 이 기능은 준비 중입니다. 아래 [조회]는 현재 디자인 확인용 예시 데이터를 표시합니다." : "🚧 Coming soon. The Search button currently shows sample data for design preview."}
+                    <div style={{ fontSize: "11.5px", color: "#8a94a8", background: "#f5f8fd", borderRadius: "8px", padding: "8px 10px", marginBottom: "12px", lineHeight: 1.5 }}>
+                      {lang === "ko" ? "접수 시 입력하신 이름·이메일·전화번호를 동일하게 입력해 주세요. 본인이 접수한 문의만 조회됩니다." : "Enter the same name, email, and phone you used when submitting. Only your own inquiries will be shown."}
                     </div>
                     {[["name", "이름", "Name"], ["email", "이메일", "Email"], ["phone", "전화번호", "Phone"]].map(([k, ko, en]) => (
                       <input key={k} value={(lookupInfo as any)[k]}
@@ -13074,18 +13074,34 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         placeholder={lang === "ko" ? ko : en}
                         style={{ width: "100%", boxSizing: "border-box", padding: "11px 12px", marginBottom: "9px", borderRadius: "10px", border: "1px solid #dde5f2", fontSize: "13.5px" }} />
                     ))}
-                    <button
-                      onClick={() => {
-                        setLookupError(""); setLookupOpen(null);
-                        // TODO: 저쪽 서버 URL 받으면 fetch('/lookup-inquiries', {name,email,phone})로 교체
-                        setLookupList([
-                          { id: "abc123EXAMPLE", title: "여권 재발급 관련 문의", category: "여권", status: "answered", content: "영주권 카드가 만료됐는데 여권 재발급이 가능한가요?", answer: "네, 가능합니다. 만료된 PR카드와 연장 신청 영수증을 지참해 방문 예약 후 접수해 주세요.", createdAt: "2026-01-14T10:00:00Z" },
-                          { id: "def456EXAMPLE", title: "혼인신고 서류 문의", category: "가족관계등록", status: "pending", content: "캐나다에서 혼인했는데 한국 혼인신고에 필요한 서류가 궁금합니다.", answer: null, createdAt: "2026-01-10T09:00:00Z" },
-                        ]);
+                    <button disabled={lookupLoading}
+                      onClick={async () => {
+                        if (!lookupInfo.name.trim() || !lookupInfo.email.trim() || !lookupInfo.phone.trim()) {
+                          alert(lang === "ko" ? "이름, 이메일, 전화번호를 모두 입력해 주세요." : "Please enter your name, email, and phone."); return;
+                        }
+                        setLookupLoading(true); setLookupError(""); setLookupOpen(null); setLookupList(null);
+                        try {
+                          const res = await fetch("https://torontokc-survey-dashboard.netlify.app/.netlify/functions/lookup-inquiries", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ name: lookupInfo.name.trim(), email: lookupInfo.email.trim(), phone: lookupInfo.phone.trim() }),
+                          });
+                          const data = await res.json();
+                          if (!res.ok) throw new Error(data?.error || "lookup failed");
+                          setLookupList(Array.isArray(data.results) ? data.results : []);
+                        } catch (e) {
+                          setLookupError(lang === "ko" ? "조회 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." : "An error occurred. Please try again.");
+                        } finally {
+                          setLookupLoading(false);
+                        }
                       }}
-                      style={{ width: "100%", padding: "12px", borderRadius: "10px", border: "none", background: "#003478", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: "pointer" }}>
-                      {lang === "ko" ? "조회" : "Search"}
+                      style={{ width: "100%", padding: "12px", borderRadius: "10px", border: "none", background: lookupLoading ? "#5b83bd" : "#003478", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: lookupLoading ? "wait" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                      {lookupLoading ? (<><span className="voc-spinner" />{lang === "ko" ? "조회 중..." : "Searching..."}</>) : (lang === "ko" ? "조회" : "Search")}
                     </button>
+
+                    {lookupError && (
+                      <div style={{ fontSize: "12.5px", color: "#cd2e3a", background: "#fdeef0", borderRadius: "8px", padding: "10px 12px", marginTop: "10px" }}>{lookupError}</div>
+                    )}
 
                     {lookupList && lookupList.length === 0 && (
                       <div style={{ fontSize: "12.5px", color: "#667", textAlign: "center", padding: "20px 0" }}>{lang === "ko" ? "일치하는 문의 내역이 없습니다. 입력하신 정보를 다시 확인해 주세요." : "No matching inquiries. Please check your information."}</div>

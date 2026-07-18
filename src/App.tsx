@@ -236,6 +236,11 @@ const STYLES = `
   }
   .q-title { font-size: 19px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; line-height: 1.35; }
   .q-sub { font-size: 13px; color: #667; margin-bottom: 1.1rem; line-height: 1.55; background: #f7f9fd; border-left: 3px solid #c8d3e8; padding: 8px 10px; border-radius: 0 8px 8px 0; }
+  .voc-btn { flex-shrink: 0; padding: 6px 11px; border-radius: 8px; border: 1.5px solid #cdddf5; background: linear-gradient(135deg, #f0f6ff 0%, #e4eefb 100%); color: #003478; font-size: 12px; font-weight: 700; cursor: pointer; transition: all .15s ease; white-space: nowrap; }
+  .voc-btn:hover { background: linear-gradient(135deg, #003478 0%, #1b6ec2 100%); color: #fff; border-color: #003478; box-shadow: 0 4px 12px rgba(0,52,120,0.28); transform: translateY(-1px); }
+  .voc-btn:active { transform: translateY(0); box-shadow: 0 1px 4px rgba(0,52,120,0.2); }
+  @keyframes voc-spin { to { transform: rotate(360deg); } }
+  .voc-spinner { width: 18px; height: 18px; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: voc-spin .7s linear infinite; display: inline-block; }
 
   /* ── 옵션 카드 — 이모지 박스 통일 ── */
   .option-list { display: flex; flex-direction: column; gap: 8px; }
@@ -512,66 +517,9 @@ const STYLES = `
   }
 
   /* ── Search ──────────────────────────────────────────── */
-  .search-wrap {
-    position: relative;
-    margin-bottom: 1rem;
-  }
-  .search-input {
-    width: 100%;
-    padding: 11px 42px 11px 40px;
-    border: 1.5px solid #dde3ef;
-    border-radius: 12px;
-    font-size: 14px;
-    font-family: inherit;
-    background: #fff;
-    color: #1a1a2e;
-    outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .search-input:focus {
-    border-color: #003478;
-    box-shadow: 0 0 0 3px rgba(0,52,120,0.1);
-  }
-  .search-input::placeholder { color: #aab; }
-  .search-icon {
-    position: absolute; left: 13px; top: 50%;
-    transform: translateY(-50%);
-    font-size: 16px; pointer-events: none;
-  }
-  .search-clear {
-    position: absolute; right: 6px; top: 50%;
-    transform: translateY(-50%);
-    background: #e8eef7; border: none; border-radius: 50%;
-    width: 22px; height: 22px; font-size: 12px;
-    cursor: pointer; color: #667;
-    display: flex; align-items: center; justify-content: center;
-    transition: background 0.12s;
-    box-sizing: content-box; padding: 9px;
-    background-clip: content-box;
-  }
-  .search-clear:hover { background: #c8d3e8; }
-
-  .search-results { display: flex; flex-direction: column; gap: 9px; }
-  .search-result-card {
-    background: #fff;
-    border: 1.5px solid #dde3ef;
-    border-radius: 12px;
-    padding: 12px 14px;
-    cursor: pointer;
-    transition: border-color 0.14s, box-shadow 0.14s;
-    text-align: left;
-    width: 100%;
-  }
-  .search-result-card:hover { border-color: #003478; box-shadow: 0 2px 10px rgba(0,52,120,0.09); }
-  .search-result-title { font-size: 14.5px; font-weight: 700; color: #003478; margin-bottom: 3px; }
-  .search-result-path { font-size: 11.5px; color: #99a; line-height: 1.4; }
-  .search-result-snippet { font-size: 12px; color: #667; margin-top: 5px; line-height: 1.45; }
-  .search-result-snippet mark { background: #fff3b0; color: #333; border-radius: 2px; padding: 0 1px; font-style: normal; }
-  .search-empty { text-align: center; padding: 2rem 1rem; color: #889; font-size: 14px; }
-  .search-count { font-size: 12px; color: #889; margin-bottom: 10px; }
 
   /* ── FAQ ────────────────────────────────────────────── */
-  .subtitle-row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-top: 5px; }
+  .subtitle-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 5px; flex-wrap: wrap; }
   .subtitle-row p { margin-top: 0; }
   .faq-link {
     background: none; border: none; cursor: pointer; font-family: inherit;
@@ -582,6 +530,16 @@ const STYLES = `
   }
   .faq-link:hover { color: #003478; text-decoration: underline; }
   .faq-link-arrow { font-size: 15px; font-weight: 300; line-height: 1; }
+  .home-btn-row { display: flex; gap: 6px; flex-shrink: 0; }
+  .home-btn {
+    background: linear-gradient(135deg, #f0f6ff 0%, #e4eefb 100%);
+    border: 1.5px solid #cdddf5; border-radius: 9px; cursor: pointer; font-family: inherit;
+    font-size: 12px; font-weight: 700; color: #003478;
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 7px 10px; white-space: nowrap; transition: all 0.15s ease;
+  }
+  .home-btn:hover { background: linear-gradient(135deg, #003478 0%, #1b6ec2 100%); color: #fff; border-color: #003478; box-shadow: 0 4px 12px rgba(0,52,120,0.25); transform: translateY(-1px); }
+  .home-btn:active { transform: translateY(0); box-shadow: 0 2px 5px rgba(0,52,120,0.2); }
 
   .faq-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.35rem; }
   .faq-tab {
@@ -714,60 +672,6 @@ const STYLES = `
   }
 
   /* ── 채팅 도우미 (FAB + 패널) ───────────────────────── */
-  .chat-fab {
-    position: fixed; right: 18px; bottom: 18px; z-index: 200;
-    width: 56px; height: 56px; border-radius: 50%;
-    background: #003478; color: #fff; border: none; cursor: pointer;
-    font-size: 24px; box-shadow: 0 4px 16px rgba(0,52,120,0.32);
-    display: flex; align-items: center; justify-content: center;
-    transition: transform 0.15s, background 0.15s;
-  }
-  .chat-fab:hover { transform: scale(1.06); background: #004ba0; }
-  .chat-panel {
-    position: fixed; right: 18px; bottom: 84px; z-index: 200;
-    width: 360px; max-width: calc(100vw - 36px);
-    height: 520px; max-height: calc(100vh - 120px);
-    background: #fff; border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.22);
-    display: flex; flex-direction: column; overflow: hidden;
-    border: 1px solid #e4eaf6;
-  }
-  .chat-head {
-    background: linear-gradient(135deg, #003478 0%, #004ba0 100%);
-    color: #fff; padding: 13px 16px;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-shrink: 0;
-  }
-  .chat-head-title { font-size: 14px; font-weight: 700; }
-  .chat-head-sub { font-size: 11px; opacity: 0.8; margin-top: 1px; }
-  .chat-close { background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; opacity: 0.85; padding: 4px 6px; }
-  .chat-close:hover { opacity: 1; }
-  .chat-body { flex: 1; overflow-y: auto; padding: 14px; background: #f7f9fd; display: flex; flex-direction: column; gap: 12px; }
-  .chat-row { display: flex; gap: 7px; align-items: flex-start; }
-  .chat-row.user { justify-content: flex-end; }
-  .chat-avatar { width: 28px; height: 28px; border-radius: 50%; background: #e6f1fb; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
-  .chat-bubble-bot { background: #fff; border: 0.5px solid #e4eaf6; padding: 10px 12px; border-radius: 4px 13px 13px 13px; font-size: 13px; line-height: 1.55; color: #1a1a2e; max-width: 85%; }
-  .chat-bubble-user { background: #003478; color: #fff; padding: 9px 12px; border-radius: 13px 13px 4px 13px; font-size: 13px; line-height: 1.5; max-width: 85%; }
-  .chat-result-card { width: 100%; text-align: left; background: #fff; border: 0.5px solid #dde3ef; border-radius: 12px; padding: 11px 13px; cursor: pointer; margin-top: 7px; transition: border-color 0.12s; }
-  .chat-result-card:hover { border-color: #003478; }
-  .chat-result-path { font-size: 11px; color: #99a; margin-bottom: 3px; }
-  .chat-result-title { font-size: 13.5px; font-weight: 600; color: #003478; line-height: 1.4; }
-  .chat-result-go { font-size: 11.5px; color: #185fa5; margin-top: 6px; font-weight: 600; }
-  .chat-option-btn { width: 100%; text-align: left; background: #fff; border: 0.5px solid #dde3ef; border-radius: 9px; padding: 10px 12px; cursor: pointer; font-size: 13px; color: #1a1a2e; margin-top: 6px; transition: border-color 0.12s, background 0.12s; }
-  .chat-option-btn:hover { border-color: #003478; background: #f7f9fd; }
-  .chat-disclaim { font-size: 11px; color: #99a; line-height: 1.45; margin-top: 4px; }
-  .chat-foot { flex-shrink: 0; border-top: 1px solid #e4eaf6; padding: 10px; display: flex; gap: 8px; background: #fff; }
-  .chat-text-input { flex: 1; border: 1px solid #c8d3e8; border-radius: 10px; padding: 9px 12px; font-size: 13px; outline: none; min-width: 0; }
-  .chat-text-input:focus { border-color: #003478; }
-  .chat-send { background: #003478; color: #fff; border: none; border-radius: 10px; padding: 0 14px; font-size: 14px; cursor: pointer; flex-shrink: 0; }
-  .chat-send:hover { background: #004ba0; }
-  .chat-suggest { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-  .chat-chip { background: #eef3fb; color: #185fa5; border: 0.5px solid #dde3ef; border-radius: 14px; padding: 5px 11px; font-size: 12px; cursor: pointer; }
-  .chat-chip:hover { background: #e0eaf8; }
-  @media (max-width: 480px) {
-    .chat-panel { right: 10px; left: 10px; width: auto; max-width: none; bottom: 78px; height: calc(100vh - 150px); }
-    .chat-fab { right: 14px; bottom: 14px; }
-  }
 `;
 
 // ─── DATA: Decision tree ───────────────────────────────────────────────────
@@ -6413,61 +6317,6 @@ const TREE = {
   },
 };
 
-// ─── SEARCH INDEX ─────────────────────────────────────────────────────────────
-// result 노드 전체를 미리 인덱싱 (title + breadcrumb + docs + notices)
-// 비자 코드 등 언어 무관 식별자 추출 (예: B-2, C-3-9, E-2-1, F-6-1, H-1, D-2, K-ETA)
-const extractCodes = (s: string) => {
-  const m = s.match(/\b[A-Z]-?\d(?:-\d)*\b|\bK-ETA\b|\bTWOV\b/g);
-  return m ? m.join(" ") : "";
-};
-
-// 언어별 검색 인덱스 빌더.
-//  - 결과로 표시할 텍스트(title/breadcrumb)는 해당 언어 번역을 사용
-//  - 검색 대상 text 에는 (해당 언어 번역) + (언어 무관 코드) 를 함께 포함
-const buildSearchIndex = (lng: "ko" | "en") =>
-  Object.entries(TREE as any)
-    .filter(([, node]: any) => node.type === "result" || node.type === "question")
-    .map(([id, node]: [any, any]) => {
-      const tk: any = (KO_TRANSLATIONS as any)[id];
-      const te: any = (EN_TRANSLATIONS as any)[id];
-      const tr: any = lng === "ko" ? tk : te;
-      if (node.type === "question") {
-        // question 노드: question/sub/옵션 제목/breadcrumb를 검색 대상에 포함
-        const qText = (tr && tr.question) ?? node.question ?? "";
-        const subText = (tr && tr.sub) ?? node.sub ?? "";
-        const breadcrumb = (tr && tr.breadcrumb) ?? node.breadcrumb ?? [];
-        // 표시 제목: question 텍스트(없으면 breadcrumb 마지막)
-        const title = qText || (Array.isArray(breadcrumb) && breadcrumb.length ? breadcrumb[breadcrumb.length - 1] : id);
-        // 옵션 제목들 (번역 우선)
-        const trOpts = (tr && tr.options) ?? {};
-        const optTitles: string[] = [];
-        if (Array.isArray(node.options)) {
-          for (const o of node.options) {
-            const ot = (trOpts && trOpts[o.id] && trOpts[o.id].title) ?? o.title ?? "";
-            const od = (trOpts && trOpts[o.id] && trOpts[o.id].desc) ?? o.desc ?? "";
-            if (ot) optTitles.push(ot);
-            if (od) optTitles.push(od);
-          }
-        }
-        const codeBag = extractCodes([node.question ?? "", ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : [])].join(" "));
-        const text = [title, subText, ...(Array.isArray(breadcrumb) ? breadcrumb : []), ...optTitles, codeBag]
-          .join(" ").toLowerCase();
-        return { id, node, title, breadcrumb, docs: [], notices: [], text };
-      }
-      // result 노드 (기존 로직)
-      const title = (tr && tr.title) ?? node.title ?? "";
-      const breadcrumb = (tr && tr.breadcrumb) ?? node.breadcrumb ?? [];
-      const docs = (tr && tr.docs) ?? node.docs ?? [];
-      const notices = (tr && tr.notices) ?? node.notices ?? [];
-      const codeBag = extractCodes([node.title ?? "", ...(Array.isArray(node.breadcrumb) ? node.breadcrumb : [])].join(" "));
-      const text = [title, ...(Array.isArray(breadcrumb) ? breadcrumb : []), ...(Array.isArray(docs) ? docs : []), ...(Array.isArray(notices) ? notices : []), codeBag]
-        .join(" ").toLowerCase();
-      return { id, node, title, breadcrumb, docs, notices, text };
-    });
-
-// ─── 비자 한국어 번역 테이블 ──────────────────────────────────────────────
-// 영문 _en 노드 그래프를 한국어로 렌더하기 위한 번역 (영문 TREE 원본은 미수정).
-// 노드 id별로 한국어 텍스트만 보관 — 없는 노드는 자동으로 영문으로 표시(graceful fallback).
 const KO_TRANSLATIONS = {
   visa_start_en: {
     breadcrumb: ["홈", "비자 (사증)"],
@@ -11472,40 +11321,8 @@ const EN_TRANSLATIONS: any = {
   },
 };
 
-const SEARCH_INDEX_KO = buildSearchIndex("ko");
-const SEARCH_INDEX_EN = buildSearchIndex("en");
 
 // 검색어 → 서비스 매핑 (서비스 핵심어). 검색 결과 정렬 시 해당 서비스 노드를 우대.
-const SEARCH_SVC_KW: Record<string, string[]> = {
-  nationality: ["국적", "시민권", "복수국적", "이중국적", "이탈", "상실", "귀화", "nationality", "citizenship", "dual"],
-  passport: ["여권", "passport"],
-  visa: ["비자", "사증", "체류", "visa"],
-  family: ["출생", "혼인", "이혼", "사망", "가족관계", "인지", "출생신고", "혼인신고", "birth", "marriage", "divorce", "death"],
-  military: ["병역", "국외여행허가", "병적", "군대", "military"],
-  notarization: ["공증", "인증", "위임", "아포스티유", "인감", "notar", "apostille"],
-  various_cert: ["범죄경력", "출입국사실", "주민등록", "납세", "criminal"],
-};
-const queryToService = (q: string): string | null => {
-  const ql = q.toLowerCase();
-  for (const [svc, kws] of Object.entries(SEARCH_SVC_KW)) {
-    if (kws.some((k) => k === ql || ql.includes(k) || k.includes(ql))) return svc;
-  }
-  return null;
-};
-// 검색 결과 관련도 점수 (높을수록 상위)
-const scoreSearchEntry = (entry: any, q: string, qSvc: string | null): number => {
-  const title = (entry.title ?? "").toLowerCase();
-  const bc = Array.isArray(entry.breadcrumb) ? entry.breadcrumb.map((b: string) => b.toLowerCase()) : [];
-  const text = (entry.text ?? "").toLowerCase();
-  let sc = 0;
-  if (title.includes(q)) sc += 10;
-  if (bc.some((b: string) => b.includes(q))) sc += 5;
-  if (text.includes(q)) sc += 1;
-  const nodeSvc = entry.node && entry.node.service ? entry.node.service : "";
-  if (qSvc && nodeSvc === qSvc) sc += 12;
-  if (typeof entry.id === "string" && entry.id.endsWith("_start")) sc += 2;
-  return sc;
-};
 
 const SERVICE_COLORS = {
   passport: "#003478", family: "#1a6b3c", nationality: "#7b2d2d",
@@ -11556,17 +11373,15 @@ function AppInner() {
   const [history, setHistory] = useState(["home"]);
   // 여권 첫 화면에서 고른 수령 방법(우편·방문 / DHL)을 결과 수령 블록에 반영. null이면 전체 표시.
   const [deliveryChoice, setDeliveryChoice] = useState<null | "mail_visit" | "dhl">(null);
-  const [searchQuery, setSearchQuery] = useState("");
   // 검색바 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
-  const SEARCH_ENABLED = false;
   const [openFaq, setOpenFaq] = useState<any>(null);
   const [faqCat, setFaqCat] = useState<number>(0);
   const [showBookingModal, setShowBookingModal] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
+  const [vocOpen, setVocOpen] = useState(false);
+  const [vocStep, setVocStep] = useState<"form" | "done">("form");
+  const [vocSending, setVocSending] = useState(false);
+  const [vocForm, setVocForm] = useState({ name: "", email: "", phone: "", title: "", question: "" });
   // 챗봇 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
-  const CHAT_ENABLED = false;
-  const [chatInput, setChatInput] = useState("");
-  const [chatMsgs, setChatMsgs] = useState<any[]>([]);
 
   const [lang, setLang] = useState(() => {
     // ⭕ navigator를 'as any'로 형변환하여 TypeScript 에러를 방지합니다.
@@ -11888,6 +11703,18 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     visa_short_term_en: "visa_short_term_en",
   };
 
+  const VOC_CATEGORY: any = {
+    passport: { ko: "여권", en: "Passport" },
+    visa: { ko: "비자", en: "Visa" },
+    nationality: { ko: "국적", en: "Nationality" },
+    military: { ko: "병역", en: "Military Service" },
+    notarization: { ko: "공증", en: "Notarization" },
+    family: { ko: "가족관계등록", en: "Family Register" },
+    various_cert: { ko: "각종 증명서", en: "Certificates" },
+    registration: { ko: "재외국민등록", en: "Overseas Registration" },
+    emigration: { ko: "해외이주", en: "Emigration" },
+    cert: { ko: "인증서", en: "Digital Certificate" },
+  };
   const goTo = (id: any) => {
     if (!id || typeof id !== "string") return;
     // 별칭: DHL 특급 옵션은 일반 전자여권과 동일한 흐름으로 합류
@@ -11905,7 +11732,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
   };
 
   // ── 채팅 도우미: 질문을 받아 현재 언어 인덱스에서 매칭 (1단계: 검색 기반) ──
-  const chatGoTo = (id: any) => { setChatOpen(false); goTo(id); };
 
   // ── 시나리오 정의 (서비스별 핵심 질문 → 되묻기/즉답) ──
   // 확장: 각 시나리오는 keywords(any 1개 매칭) + must(서비스 키워드, 1개 필수) + 응답 빌더.
@@ -12869,58 +12695,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     return null;
   };
 
-  const handleChatSend = (raw?: string) => {
-    const text = (raw ?? chatInput).trim();
-    if (!text) return;
-    const q = text.toLowerCase();
-    setChatInput("");
-    // 입력 언어 감지: 한글이 있으면 ko, 영문 알파벳만 있으면 en, 둘 다/없으면 현재 lang
-    const hasKo = /[가-힣]/.test(text);
-    const hasEn = /[a-zA-Z]/.test(text);
-    const replyLang = hasKo ? "ko" : (hasEn ? "en" : lang);
-    // 0) 인사·간단한 잡담 → 가볍게 받고 서비스 유도
-    const smalltalk = matchSmalltalk(q, replyLang);
-    if (smalltalk) {
-      setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...smalltalk }]);
-      return;
-    }
-    // 1) 시나리오 우선
-    const sc = matchScenario(q);
-    if (sc) {
-      setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...sc }]);
-      return;
-    }
-    // 1.5) FAQ 매칭 (일반 질문: 운영시간·주차·전화번호 등)
-    const faq = matchFaq(q);
-    if (faq) {
-      setChatMsgs((m: any) => [...m, { role: "user", text }, { role: "bot", ...faq }]);
-      return;
-    }
-    // 2) 검색 폴백 (감지된 언어 기준)
-    const idx = replyLang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
-    const words = q.split(/\s+/).filter(Boolean);
-    const qNoSpace = q.replace(/\s+/g, "");
-    const fbSvc = queryToService(q);
-    const scored = idx
-      .map((e: any) => {
-        const t = e.text;
-        const tNoSpace = t.replace(/\s+/g, "");
-        let score = 0;
-        for (const w of words) { if (t.includes(w)) score += w.length >= 2 ? 2 : 1; }
-        if (qNoSpace.length >= 2 && tNoSpace.includes(qNoSpace)) score += 3;
-        // 제목·경로·서비스 일치 가중치 (앱 검색과 동일한 관련도 반영)
-        score += scoreSearchEntry(e, q, fbSvc);
-        return { e, score };
-      })
-      .filter((x: any) => x.score > 0)
-      .sort((a: any, b: any) => b.score - a.score)
-      .slice(0, 3)
-      .map((x: any) => x.e);
-    const reply = scored.length > 0
-      ? { role: "bot", kind: "results", results: scored }
-      : { role: "bot", kind: "noresult", replyLang };
-    setChatMsgs((m: any) => [...m, { role: "user", text }, reply]);
-  };
 
   const goBack = (): void => {
     if (history.length <= 1) return;
@@ -12933,7 +12707,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
   const goHome = (): void => {
     setHistory(["home"]);
     setPageId("home");
-    setSearchQuery("");
     setDeliveryChoice(null);
     window.scrollTo(0, 0);
   };
@@ -12942,7 +12715,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     setLang((l: any) => (l === "ko" ? "en" : "ko"));
     setHistory(["home"]);
     setPageId("home");
-    setSearchQuery("");
     setDeliveryChoice(null);
     window.scrollTo(0, 0);
   };
@@ -13072,160 +12844,34 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
 
           {/* HOME */}
           {page.type === "home" && (() => {
-            // 검색 로직
-            const q = searchQuery.trim().toLowerCase();
-            const activeIndex = lang === "ko" ? SEARCH_INDEX_KO : SEARCH_INDEX_EN;
-            const qSvc = q.length >= 1 ? queryToService(q) : null;
-            const searchResults = q.length >= 1
-              ? activeIndex
-                  .filter(({ text }: any) => {
-                    // 방법 1: 띄어쓰기로 분리 후 AND 검색 ("여권 분실" → 둘 다 포함)
-                    const words = q.split(/\s+/).filter(Boolean);
-                    const andMatch = words.every((w: any) => text.includes(w));
-                    // 방법 2: 공백 제거 후 통째로 검색 ("여권분실" → 공백 제거한 텍스트에서 검색)
-                    const qNoSpace = q.replace(/\s+/g, "");
-                    const textNoSpace = text.replace(/\s+/g, "");
-                    const noSpaceMatch = qNoSpace.length >= 2 && textNoSpace.includes(qNoSpace);
-                    return andMatch || noSpaceMatch;
-                  })
-                  // 관련도 점수로 정렬 (제목·경로·서비스 일치 우대) 후 상위 12개
-                  .map((e: any) => ({ e, s: scoreSearchEntry(e, q, qSvc) }))
-                  .sort((a: any, b: any) => b.s - a.s)
-                  .slice(0, 12)
-                  .map((x: any) => x.e)
-              : [];
-
-            // 결과에서 스니펫 추출 (매칭 텍스트 앞뒤 30자) — 현재 언어 docs/notices 사용
-            const getSnippet = (entry:any) => {
-              const candidates = [
-                ...(Array.isArray(entry.docs) ? entry.docs.filter((d:any) => !d.trim().startsWith("▸")) : []),
-                ...(Array.isArray(entry.notices) ? entry.notices.slice(0, 2) : []),
-              ];
-              const matched = candidates.find((t: any) => t.toLowerCase().includes(q));
-              if (!matched) return null;
-              const idx = matched.toLowerCase().indexOf(q);
-              const start = Math.max(0, idx - 30);
-              const end = Math.min(matched.length, idx + q.length + 30);
-              const snippet = (start > 0 ? "…" : "") + matched.slice(start, end) + (end < matched.length ? "…" : "");
-              // highlight
-              const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, "gi");
-              return snippet.replace(re, "<mark>$1</mark>");
-            };
-
             return (
               <>
                 <div className="page-title">
                   <h1>{lang === "ko" ? "어떤 서비스가 필요하신가요?" : "What service do you need?"}</h1>
                   <div className="subtitle-row">
                     <p>{lang === "ko" ? "업무를 선택하여 필요한 문서를 확인하세요." : "Select a service to see the required documents."}</p>
-                    <button
-                      className="faq-link"
-                      onClick={() => { setOpenFaq(null); setFaqCat(0); goTo("faq_start"); }}
-                      aria-label={lang === "ko" ? "자주 묻는 질문" : "Frequently Asked Questions"}
-                    >
-                      {lang === "ko" ? "자주 묻는 질문" : "FAQ"}
-                      <span className="faq-link-arrow" aria-hidden="true">›</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* 검색창 */}
-                {SEARCH_ENABLED && (
-                <div className="search-wrap">
-                  <span className="search-icon">🔍</span>
-                  <input
-                    className="search-input"
-                    aria-label={lang === "ko" ? "민원 업무 검색" : "Search consular services"}
-                    type="text"
-                    placeholder={lang === "ko" ? "위임장, 여권, 공증, 병적증명서…" : "POA, passport, notarization…"}
-                    value={searchQuery}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                    autoComplete="off"
-                  />
-                  {searchQuery && (
-                    <button className="search-clear" onClick={() => setSearchQuery("")}>✕</button>
-                  )}
-                </div>
-                )}
-
-                {/* 검색 결과 */}
-                {SEARCH_ENABLED && q.length >= 1 ? (
-                  <div>
-                    {searchResults.length > 0 ? (
-                      <>
-                        <div className="search-count">
-                          {lang === "ko"
-                            ? `"${searchQuery}" 검색 결과 ${searchResults.length}건`
-                            : `${searchResults.length} result${searchResults.length > 1 ? "s" : ""} for "${searchQuery}"`}
-                        </div>
-                        <div className="search-results">
-                          {searchResults.map((entry: any) => {
-                            const { id, title, breadcrumb } = entry;
-                            const snippet = getSnippet(entry);
-                            const path = (Array.isArray(breadcrumb) ? breadcrumb : []).join(" › ");
-                            return (
-                              <button
-                                key={id}
-                                className="search-result-card"
-                                onClick={() => { setSearchQuery(""); goTo(id); }}
-                              >
-                                <div className="search-result-title">{title ?? ""}</div>
-                                <div className="search-result-path">{path}</div>
-                                {snippet && (
-                                  <div
-                                    className="search-result-snippet"
-                                    dangerouslySetInnerHTML={{ __html: snippet }}
-                                  />
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </>
-                    ) : (
-                      <div className="search-empty">
-                        <div style={{ fontSize: "32px", marginBottom: "8px" }}>🔍</div>
-                        <div>
-                          {lang === "ko"
-                            ? `"${searchQuery}"에 대한 결과가 없어요.`
-                            : `No results for "${searchQuery}".`}
-                        </div>
-                        <div style={{ fontSize: "12px", marginTop: "6px", color: "#aab" }}>
-                          {lang === "ko" ? "다른 키워드로 검색하거나 아래 메뉴를 이용하세요." : "Try a different keyword or browse the menu below."}
-                        </div>
-                      </div>
-                    )}
-                    {/* 결과 없거나 있어도 아래 카드 그리드 유지 */}
-                    <div style={{ marginTop: "1.25rem", borderTop: "1px solid #e4eaf6", paddingTop: "1rem" }}>
-                      <div style={{ fontSize: "12px", color: "#99a", marginBottom: "10px" }}>
-                        {lang === "ko" ? "또는 메뉴에서 선택하세요" : "Or browse by category"}
-                      </div>
-                      <div className="service-grid">
-                        {services.map((s: any) => (
-                          <button
-                              key={s.id}
-                              className="service-card"
-                              style={{
-                                "--sc-accent": (SERVICE_COLORS as any)[
-                                  s.id.replace("_start", "").replace("_en", "")
-                                ] ?? "#003478",
-                              } as React.CSSProperties}
-                              onClick={() => {
-                                setSearchQuery("");
-                                goTo(s.id);
-                              }}>
-                            <div className="sc-header">
-                              <div className="sc-icon-box">{s.icon}</div>
-                              <div className="sc-title">{s.title}</div>
-                            </div>
-                            <div className="sc-desc">{s.desc}</div>
-                            <div className="sc-arrow">›</div>
-                          </button>
-                        ))}
-                      </div>
+                    <div className="home-btn-row">
+                      <button
+                        className="home-btn"
+                        onClick={() => { setOpenFaq(null); setFaqCat(0); goTo("faq_start"); }}
+                        aria-label={lang === "ko" ? "자주 묻는 질문" : "Frequently Asked Questions"}
+                      >
+                        ❓ {lang === "ko" ? "자주 묻는 질문" : "FAQ"}
+                      </button>
+                      <button
+                        className="home-btn"
+                        onClick={() => alert(lang === "ko" ? "준비 중입니다." : "Coming soon.")}
+                        aria-label={lang === "ko" ? "내 문의 조회" : "My Inquiries"}
+                      >
+                        🔍 {lang === "ko" ? "내 문의 조회" : "My Inquiries"}
+                      </button>
                     </div>
                   </div>
-                ) : (
+                </div>
+
+
+                {/* 검색 결과 */}
+                {(
                   /* 검색어 없을 때 기본 카드 그리드 */
                   <div className="service-grid">
                     {services.map((s: any) => (
@@ -13591,13 +13237,22 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "4px" }}>
                 {svcIcon && <span style={{ fontSize: "28px", lineHeight: 1, flexShrink: 0 }}>{svcIcon}</span>}
                 <div className="result-title" style={{ fontSize: "21px", marginBottom: 0 }}>{L("title", page.title ?? "")}</div>
-                {page.guideDoc && (
-                  <a href={page.guideDoc.href} download target="_blank" rel="noopener noreferrer" title={lang === "ko" ? page.guideDoc.label : (page.guideDoc.label_en ?? page.guideDoc.label)}
-                     style={{ display: "flex", alignItems: "center", gap: "5px", flexShrink: 0, marginLeft: "auto", textDecoration: "none",
-                              background: "linear-gradient(135deg, #eaf1fb 0%, #f5f8fe 100%)", border: "1px solid #cdddf5",
-                              borderRadius: "9px", padding: "6px 10px", color: "#003478", fontSize: "12px", fontWeight: 700, whiteSpace: "nowrap" }}>
-                    📄 {lang === "ko" ? "제도 안내" : "Guide"} <span style={{ fontSize: "13px" }}>↓</span>
-                  </a>
+                {(page.guideDoc || page.type === "result") && (
+                  <span style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0, marginLeft: "auto" }}>
+                    {page.guideDoc && (
+                      <a href={page.guideDoc.href} download target="_blank" rel="noopener noreferrer" title={lang === "ko" ? page.guideDoc.label : (page.guideDoc.label_en ?? page.guideDoc.label)}
+                         style={{ display: "flex", alignItems: "center", gap: "5px", flexShrink: 0, textDecoration: "none",
+                                  background: "linear-gradient(135deg, #eaf1fb 0%, #f5f8fe 100%)", border: "1px solid #cdddf5",
+                                  borderRadius: "9px", padding: "6px 10px", color: "#003478", fontSize: "12px", fontWeight: 700, whiteSpace: "nowrap" }}>
+                        📄 {lang === "ko" ? "제도 안내" : "Guide"} <span style={{ fontSize: "13px" }}>↓</span>
+                      </a>
+                    )}
+                    {page.type === "result" && (
+                      <button className="voc-btn" onClick={() => { setVocForm({ name: "", email: "", phone: "", title: "", question: "" }); setVocStep("form"); setVocOpen(true); }}>
+                        ❓ {lang === "ko" ? "추가 질문" : "Ask"}
+                      </button>
+                    )}
+                  </span>
                 )}
               </div>
 
@@ -13907,6 +13562,117 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               )}
               </div>
 
+              {/* VOC(추가 질문) 모달 */}
+              {vocOpen && (
+                <div onClick={() => { if (!vocSending) setVocOpen(false); }}
+                  style={{ position: "fixed", inset: 0, background: "rgba(15,23,42,0.55)", backdropFilter: "blur(2px)", zIndex: 1000, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px" }}>
+                  <div onClick={(e) => e.stopPropagation()}
+                    style={{ background: "#fff", borderRadius: "18px", width: "100%", maxWidth: "440px", maxHeight: "92vh", overflowY: "auto", boxShadow: "0 24px 60px rgba(0,0,0,0.3)" }}>
+                    {vocStep === "form" ? (
+                      <>
+                        {/* 헤더 */}
+                        <div style={{ background: "linear-gradient(135deg, #003478 0%, #1b6ec2 100%)", padding: "18px 20px", borderRadius: "18px 18px 0 0" }}>
+                          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                            <span style={{ fontSize: "18px" }}>❓</span>
+                            <span style={{ fontSize: "16.5px", fontWeight: 700, color: "#fff" }}>{lang === "ko" ? "추가 질문하기" : "Ask a Question"}</span>
+                            <span style={{ marginLeft: "auto", background: "rgba(255,255,255,0.2)", color: "#fff", fontSize: "11.5px", fontWeight: 700, padding: "4px 9px", borderRadius: "6px" }}>
+                              {VOC_CATEGORY[page.service] ? (lang === "ko" ? VOC_CATEGORY[page.service].ko : VOC_CATEGORY[page.service].en) : (lang === "ko" ? "기타" : "Other")}
+                            </span>
+                          </div>
+                          <div style={{ fontSize: "11.5px", color: "rgba(255,255,255,0.85)", marginTop: "6px" }}>
+                            {lang === "ko" ? "영업일 기준 2~3일 내에 답변드릴 예정입니다." : "We aim to reply within 2–3 business days."}
+                          </div>
+                        </div>
+
+                        {/* 폼 */}
+                        <div style={{ padding: "18px 20px 20px" }}>
+                          {[
+                            { k: "name", ko: "이름", en: "Name", type: "text" },
+                            { k: "email", ko: "이메일", en: "Email", type: "email" },
+                            { k: "phone", ko: "전화번호", en: "Phone", type: "tel" },
+                            { k: "title", ko: "제목", en: "Subject", type: "text" },
+                          ].map((f) => (
+                            <div key={f.k} style={{ marginBottom: "10px" }}>
+                              <label style={{ display: "block", fontSize: "11.5px", fontWeight: 700, color: "#5a6a85", marginBottom: "4px" }}>
+                                {lang === "ko" ? f.ko : f.en} <span style={{ color: "#cd2e3a" }}>*</span>
+                              </label>
+                              <input type={f.type} value={(vocForm as any)[f.k]} disabled={vocSending}
+                                onChange={(e) => setVocForm({ ...vocForm, [f.k]: e.target.value })}
+                                style={{ width: "100%", boxSizing: "border-box", padding: "11px 12px", borderRadius: "10px", border: "1px solid #dde5f2", fontSize: "13.5px", background: vocSending ? "#f6f8fb" : "#fff", outlineColor: "#003478" }} />
+                            </div>
+                          ))}
+                          <div style={{ marginBottom: "10px" }}>
+                            <label style={{ display: "block", fontSize: "11.5px", fontWeight: 700, color: "#5a6a85", marginBottom: "4px" }}>
+                              {lang === "ko" ? "내용" : "Message"} <span style={{ color: "#cd2e3a" }}>*</span>
+                            </label>
+                            <textarea value={vocForm.question} disabled={vocSending} rows={4}
+                              onChange={(e) => setVocForm({ ...vocForm, question: e.target.value })}
+                              placeholder={lang === "ko" ? "궁금한 내용을 자세히 적어주세요" : "Describe your question"}
+                              style={{ width: "100%", boxSizing: "border-box", padding: "11px 12px", borderRadius: "10px", border: "1px solid #dde5f2", fontSize: "13.5px", resize: "vertical", background: vocSending ? "#f6f8fb" : "#fff", outlineColor: "#003478" }} />
+                          </div>
+                          <div style={{ fontSize: "11.5px", color: "#8a94a8", background: "#f5f8fd", borderRadius: "8px", padding: "8px 10px", marginBottom: "14px", lineHeight: 1.5 }}>
+                            {lang === "ko" ? "답변은 입력하신 이메일 또는 전화로 안내드립니다." : "We will reply via the email or phone you provide."}
+                          </div>
+                          <div style={{ display: "flex", gap: "8px" }}>
+                            <button onClick={() => setVocOpen(false)} disabled={vocSending}
+                              style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "1px solid #dde5f2", background: "#fff", color: "#667", fontSize: "13.5px", fontWeight: 600, cursor: vocSending ? "not-allowed" : "pointer", opacity: vocSending ? 0.5 : 1 }}>
+                              {lang === "ko" ? "취소" : "Cancel"}
+                            </button>
+                            <button disabled={vocSending}
+                              onClick={async () => {
+                                if (!vocForm.name.trim() || !vocForm.email.trim() || !vocForm.phone.trim() || !vocForm.title.trim() || !vocForm.question.trim()) {
+                                  alert(lang === "ko" ? "모든 항목(이름, 이메일, 전화번호, 제목, 내용)을 입력해 주세요." : "Please fill in all fields."); return;
+                                }
+                                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(vocForm.email.trim())) {
+                                  alert(lang === "ko" ? "이메일 형식이 올바르지 않습니다. 예: name@example.com" : "Please enter a valid email address. e.g. name@example.com"); return;
+                                }
+                                if (!window.confirm(lang === "ko" ? "제출하시겠습니까?" : "Submit?")) return;
+                                setVocSending(true);
+                                try {
+                                  // TODO: Firebase 등 서버 전송으로 교체
+                                  await new Promise((r) => setTimeout(r, 900));
+                                  const prev = JSON.parse(localStorage.getItem("voc_submissions") || "[]");
+                                  prev.push({ ...vocForm, service: page.service, category: VOC_CATEGORY[page.service]?.ko ?? "기타", at: new Date().toISOString() });
+                                  localStorage.setItem("voc_submissions", JSON.stringify(prev));
+                                  setVocStep("done");
+                                } catch (e) {
+                                  alert(lang === "ko" ? "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." : "An error occurred. Please try again.");
+                                } finally {
+                                  setVocSending(false);
+                                }
+                              }}
+                              style={{ flex: 1.5, padding: "12px", borderRadius: "10px", border: "none", background: vocSending ? "#5b83bd" : "#003478", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: vocSending ? "wait" : "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                              {vocSending ? (<><span className="voc-spinner" />{lang === "ko" ? "전송 중..." : "Sending..."}</>) : (lang === "ko" ? "제출하기" : "Submit")}
+                            </button>
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <div style={{ textAlign: "center", padding: "34px 24px 24px" }}>
+                        <div style={{ width: "62px", height: "62px", margin: "0 auto 14px", borderRadius: "50%", background: "linear-gradient(135deg, #eaf7ee 0%, #d7f0e0 100%)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "30px" }}>✅</div>
+                        <div style={{ fontSize: "17px", fontWeight: 700, color: "#1a1a2e", marginBottom: "7px" }}>{lang === "ko" ? "전송 완료되었습니다" : "Submitted"}</div>
+                        <div style={{ fontSize: "13px", color: "#667", lineHeight: 1.55, marginBottom: "12px" }}>
+                          {lang === "ko" ? "영업일 기준 2~3일 내에 이메일 또는 전화로 답변드리겠습니다." : "We will reply by email or phone within 2–3 business days."}
+                        </div>
+                        <div style={{ fontSize: "11.5px", color: "#8a94a8", lineHeight: 1.5, marginBottom: "18px", background: "#f5f8fd", borderRadius: "8px", padding: "8px 10px" }}>
+                          {lang === "ko" ? "처리 상태는 추후 '내 문의 조회'에서 접수 시 입력하신 이메일·전화번호로 확인하실 수 있습니다." : "You will later be able to check the status under 'My Inquiries' using the email and phone you submitted."}
+                        </div>
+                        <div style={{ display: "flex", gap: "8px" }}>
+                          <button onClick={() => setVocOpen(false)}
+                            style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "1px solid #dde5f2", background: "#fff", color: "#003478", fontSize: "13.5px", fontWeight: 700, cursor: "pointer" }}>
+                            {lang === "ko" ? "닫기" : "Close"}
+                          </button>
+                          <button onClick={() => { setVocOpen(false); goTo("home"); }}
+                            style={{ flex: 1, padding: "12px", borderRadius: "10px", border: "none", background: "#003478", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: "pointer" }}>
+                            {lang === "ko" ? "홈으로" : "Home"}
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* 예약 모달 */}
               {showBookingModal && page.booking && (() => {
                 const checkDocs = pageDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("▸"));
@@ -14003,109 +13769,6 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           </a>
         </footer>
 
-        {/* CHAT HELPER */}
-        {CHAT_ENABLED && !chatOpen && (
-          <button className="chat-fab" onClick={() => setChatOpen(true)} aria-label={lang === "ko" ? "도우미 열기" : "Open helper"}>💬</button>
-        )}
-        {CHAT_ENABLED && chatOpen && (
-          <div className="chat-panel">
-            <div className="chat-head">
-              <div>
-                <div className="chat-head-title">{lang === "ko" ? "민원 도우미" : "Consular Helper"}</div>
-                <div className="chat-head-sub">{lang === "ko" ? "찾으시는 업무를 물어보세요" : "Ask what you're looking for"}</div>
-              </div>
-              <button className="chat-close" onClick={() => setChatOpen(false)} aria-label={lang === "ko" ? "닫기" : "Close"}>✕</button>
-            </div>
-            <div className="chat-body">
-              {chatMsgs.length === 0 && (
-                <div className="chat-row">
-                  <div className="chat-avatar">💬</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div className="chat-bubble-bot">
-                      {lang === "ko"
-                        ? "안녕하세요! 필요하신 업무를 입력해 주세요. 예를 들어 이렇게요:"
-                        : "Hello! Tell me what you need. For example:"}
-                    </div>
-                    <div className="chat-suggest">
-                      {(lang === "ko"
-                        ? ["여권 잃어버렸어요", "워킹홀리데이 비자", "위임장 공증", "아이 한국 국적"]
-                        : ["Lost my passport", "Working holiday visa", "Power of attorney", "Child's Korean nationality"]
-                      ).map((s) => (
-                        <button key={s} className="chat-chip" onClick={() => handleChatSend(s)}>{s}</button>
-                      ))}
-                    </div>
-                    <div className="chat-disclaim">
-                      {lang === "ko" ? "ⓘ 앱에 담긴 안내만 보여드립니다. 정확한 내용은 영사관 공식 확인이 필요합니다." : "ⓘ Shows only what's in this app. Please confirm details with the Consulate."}
-                    </div>
-                  </div>
-                </div>
-              )}
-              {chatMsgs.map((m: any, i: number) => (
-                m.role === "user" ? (
-                  <div key={i} className="chat-row user">
-                    <div className="chat-bubble-user">{m.text}</div>
-                  </div>
-                ) : (
-                  <div key={i} className="chat-row">
-                    <div className="chat-avatar">💬</div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      {m.kind === "results" ? (
-                        <>
-                          <div className="chat-bubble-bot">
-                            {lang === "ko" ? "이 안내가 관련 있어 보여요:" : "These look relevant:"}
-                          </div>
-                          {m.results.map((r: any) => (
-                            <button key={r.id} className="chat-result-card" onClick={() => chatGoTo(r.id)}>
-                              <div className="chat-result-path">{(Array.isArray(r.breadcrumb) ? r.breadcrumb : []).join(" › ")}</div>
-                              <div className="chat-result-title">{r.title}</div>
-                              <div className="chat-result-go">{lang === "ko" ? "자세히 보기 ›" : "View details ›"}</div>
-                            </button>
-                          ))}
-                        </>
-                      ) : m.kind === "answer" ? (
-                        <>
-                          <div className="chat-bubble-bot" style={{ whiteSpace: "pre-line" }}>{m.text}</div>
-                          {m.goId && (
-                            <button className="chat-option-btn" style={{ color: "#185fa5", fontWeight: 600 }} onClick={() => chatGoTo(m.goId)}>
-                              {m.goLabel} ›
-                            </button>
-                          )}
-                        </>
-                      ) : m.kind === "reask" ? (
-                        <>
-                          <div className="chat-bubble-bot" style={{ whiteSpace: "pre-line" }}>{m.text}</div>
-                          {m.goId && (
-                            <button className="chat-result-card" onClick={() => chatGoTo(m.goId)} style={{ marginTop: "7px" }}>
-                              <div className="chat-result-title" style={{ color: "#003478" }}>{m.goLabel}</div>
-                              <div className="chat-result-go">{lang === "ko" ? "여기서 시작 ›" : "Start here ›"}</div>
-                            </button>
-                          )}
-                        </>
-                      ) : (
-                        <div className="chat-bubble-bot">
-                          {(m.replyLang ?? lang) === "ko"
-                            ? "말씀하신 내용과 꼭 맞는 안내를 찾지 못했습니다. 다른 표현으로 다시 입력해 주시거나, 찾으시는 업무(예: 여권, 비자, 공증, 증명서)를 알려 주세요."
-                            : "I couldn't find an exact match. Please try rephrasing, or tell me the service you need (e.g. passport, visa, notarization, certificate)."}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )
-              ))}
-            </div>
-            <div className="chat-foot">
-              <input
-                className="chat-text-input"
-                type="text"
-                placeholder={lang === "ko" ? "예: 여권 재발급, 비자, 공증…" : "e.g. passport, visa, notarization…"}
-                value={chatInput}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setChatInput(e.target.value)}
-                onKeyDown={(e: React.KeyboardEvent) => { if (e.key === "Enter") handleChatSend(); }}
-              />
-              <button className="chat-send" onClick={() => handleChatSend()} aria-label={lang === "ko" ? "보내기" : "Send"}>➤</button>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );

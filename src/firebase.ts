@@ -66,6 +66,7 @@ export async function lookupInquiry(inquiryId: string): Promise<{
   status?: "pending" | "answered";
   title?: string;
   category?: string;
+  content?: string;
   answer?: string | null;
   createdAt?: any;
 }> {
@@ -79,6 +80,7 @@ export async function lookupInquiry(inquiryId: string): Promise<{
     status: data.status,
     title: data.title,
     category: data.category,
+    content: data.content,
     answer: data.answer ?? null,
     createdAt: data.createdAt ?? null,
   };

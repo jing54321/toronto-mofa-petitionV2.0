@@ -1,5 +1,6 @@
 //import { useState, Component } from "react";
 import React, { useState, ReactNode } from "react";
+import { submitInquiry } from "./firebase";
 // ─── COLOR PALETTE ────────────────────────────────────────────────────────────
 // Navy: #003478  Red: #CD2E3A  Light blue: #E8EEF7  Gray: #F5F6F8
 
@@ -11380,6 +11381,7 @@ function AppInner() {
   const [vocOpen, setVocOpen] = useState(false);
   const [vocStep, setVocStep] = useState<"form" | "done">("form");
   const [vocSending, setVocSending] = useState(false);
+  const [vocInquiryId, setVocInquiryId] = useState("");
   const [vocForm, setVocForm] = useState({ name: "", email: "", phone: "", title: "", question: "" });
   // 챗봇 표시 여부 (false=숨김). 추후 다시 켜려면 true로 변경.
 
@@ -11704,16 +11706,16 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
   };
 
   const VOC_CATEGORY: any = {
-    passport: { ko: "여권", en: "Passport" },
-    visa: { ko: "비자", en: "Visa" },
-    nationality: { ko: "국적", en: "Nationality" },
-    military: { ko: "병역", en: "Military Service" },
-    notarization: { ko: "공증", en: "Notarization" },
-    family: { ko: "가족관계등록", en: "Family Register" },
-    various_cert: { ko: "각종 증명서", en: "Certificates" },
-    registration: { ko: "재외국민등록", en: "Overseas Registration" },
-    emigration: { ko: "해외이주", en: "Emigration" },
-    cert: { ko: "인증서", en: "Digital Certificate" },
+    passport: { ko: "여권", en: "Passport", db: "여권" },
+    visa: { ko: "비자", en: "Visa", db: "비자" },
+    nationality: { ko: "국적", en: "Nationality", db: "국적" },
+    military: { ko: "병역", en: "Military Service", db: "병역" },
+    notarization: { ko: "공증", en: "Notarization", db: "공증" },
+    family: { ko: "가족관계등록", en: "Family Register", db: "가족관계등록" },
+    various_cert: { ko: "각종 증명서", en: "Certificates", db: "각종증명서발급" },
+    registration: { ko: "재외국민등록", en: "Overseas Registration", db: "재외국민" },
+    emigration: { ko: "해외이주", en: "Emigration", db: "해외이주" },
+    cert: { ko: "인증서", en: "Digital Certificate", db: "공동금융인증서" },
   };
   const goTo = (id: any) => {
     if (!id || typeof id !== "string") return;
@@ -13629,11 +13631,16 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                                 if (!window.confirm(lang === "ko" ? "제출하시겠습니까?" : "Submit?")) return;
                                 setVocSending(true);
                                 try {
-                                  // TODO: Firebase 등 서버 전송으로 교체
-                                  await new Promise((r) => setTimeout(r, 900));
-                                  const prev = JSON.parse(localStorage.getItem("voc_submissions") || "[]");
-                                  prev.push({ ...vocForm, service: page.service, category: VOC_CATEGORY[page.service]?.ko ?? "기타", at: new Date().toISOString() });
-                                  localStorage.setItem("voc_submissions", JSON.stringify(prev));
+                                  const inquiryId = await submitInquiry({
+                                    name: vocForm.name.trim(),
+                                    phone: vocForm.phone.trim(),
+                                    email: vocForm.email.trim(),
+                                    title: vocForm.title.trim(),
+                                    content: vocForm.question.trim(),
+                                    category: VOC_CATEGORY[page.service]?.db ?? "기타",
+                                    lang,
+                                  });
+                                  setVocInquiryId(inquiryId);
                                   setVocStep("done");
                                 } catch (e) {
                                   alert(lang === "ko" ? "전송 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." : "An error occurred. Please try again.");
@@ -13654,8 +13661,23 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         <div style={{ fontSize: "13px", color: "#667", lineHeight: 1.55, marginBottom: "12px" }}>
                           {lang === "ko" ? "영업일 기준 2~3일 내에 이메일 또는 전화로 답변드리겠습니다." : "We will reply by email or phone within 2–3 business days."}
                         </div>
+                        {vocInquiryId && (
+                          <div style={{ background: "#eaf1fb", border: "1px solid #cdddf5", borderRadius: "10px", padding: "12px 14px", marginBottom: "12px" }}>
+                            <div style={{ fontSize: "11.5px", color: "#5a6a85", fontWeight: 700, marginBottom: "4px" }}>{lang === "ko" ? "문의번호" : "Inquiry No."}</div>
+                            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                              <code style={{ flex: 1, fontSize: "13px", fontWeight: 700, color: "#003478", wordBreak: "break-all", fontFamily: "monospace" }}>{vocInquiryId}</code>
+                              <button onClick={() => { try { navigator.clipboard.writeText(vocInquiryId); alert(lang === "ko" ? "문의번호가 복사되었습니다." : "Copied."); } catch (e) {} }}
+                                style={{ flexShrink: 0, padding: "6px 10px", borderRadius: "8px", border: "1px solid #003478", background: "#fff", color: "#003478", fontSize: "11.5px", fontWeight: 700, cursor: "pointer" }}>
+                                {lang === "ko" ? "복사" : "Copy"}
+                              </button>
+                            </div>
+                            <div style={{ fontSize: "11px", color: "#7a8aa5", marginTop: "6px", lineHeight: 1.4 }}>
+                              {lang === "ko" ? "이 번호로 나중에 답변을 조회할 수 있으니 보관해 주세요." : "Keep this number to check the reply later."}
+                            </div>
+                          </div>
+                        )}
                         <div style={{ fontSize: "11.5px", color: "#8a94a8", lineHeight: 1.5, marginBottom: "18px", background: "#f5f8fd", borderRadius: "8px", padding: "8px 10px" }}>
-                          {lang === "ko" ? "처리 상태는 추후 '내 문의 조회'에서 접수 시 입력하신 이메일·전화번호로 확인하실 수 있습니다." : "You will later be able to check the status under 'My Inquiries' using the email and phone you submitted."}
+                          {lang === "ko" ? "처리 상태는 추후 '내 문의 조회'에서 문의번호 또는 접수 시 입력하신 정보로 확인하실 수 있습니다." : "You will later be able to check the status under 'My Inquiries' using the inquiry number or the info you submitted."}
                         </div>
                         <div style={{ display: "flex", gap: "8px" }}>
                           <button onClick={() => setVocOpen(false)}

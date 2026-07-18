@@ -8,6 +8,8 @@ import {
   collection,
   addDoc,
   serverTimestamp,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -55,4 +57,29 @@ export async function submitInquiry(formData: {
   });
 
   return docRef.id; // 문의번호
+}
+
+// ── 문의번호(문서 ID)로 조회 ────────────────────────────────
+// 보안 규칙: allow get: if true (개별 조회는 누구나 가능)
+export async function lookupInquiry(inquiryId: string): Promise<{
+  found: boolean;
+  status?: "pending" | "answered";
+  title?: string;
+  category?: string;
+  answer?: string | null;
+  createdAt?: any;
+}> {
+  const id = inquiryId.trim();
+  if (!id) return { found: false };
+  const snap = await getDoc(doc(db, "inquiries", id));
+  if (!snap.exists()) return { found: false };
+  const data: any = snap.data();
+  return {
+    found: true,
+    status: data.status,
+    title: data.title,
+    category: data.category,
+    answer: data.answer ?? null,
+    createdAt: data.createdAt ?? null,
+  };
 }

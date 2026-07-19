@@ -1,5 +1,5 @@
 //import { useState, Component } from "react";
-import React, { useState, ReactNode } from "react";
+import React, { useState, useEffect, ReactNode } from "react";
 import { submitInquiry, lookupInquiry } from "./firebase";
 // ─── COLOR PALETTE ────────────────────────────────────────────────────────────
 // Navy: #003478  Red: #CD2E3A  Light blue: #E8EEF7  Gray: #F5F6F8
@@ -11746,6 +11746,38 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     window.scrollTo(0, 0);
   };
 
+  // ── 문의번호 조회 실행 (버튼·URL 공용) ──
+  const runLookupById = async (rawId: string) => {
+    const id = (rawId || "").trim();
+    if (!id) return;
+    setLookupLoading(true); setLookupError(""); setLookupResult(null);
+    try {
+      const r = await lookupInquiry(id);
+      if (!r.found) { setLookupError(lang === "ko" ? "문의 내역을 찾을 수 없습니다. 번호를 다시 확인해 주세요." : "Inquiry not found. Please check the number."); }
+      else { setLookupResult(r); }
+    } catch (e) {
+      setLookupError(lang === "ko" ? "조회 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." : "An error occurred. Please try again.");
+    } finally { setLookupLoading(false); }
+  };
+
+  // ── 이메일 링크(?inquiry=문의번호) 접속 시 자동 조회 ──
+  useEffect(() => {
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const inquiryId = params.get("inquiry");
+      if (inquiryId && inquiryId.trim()) {
+        const id = inquiryId.trim();
+        setLookupTab("id");
+        setLookupId(id);
+        setPageId("inquiry_lookup");
+        setHistory((h: any) => [...h, "inquiry_lookup"]);
+        runLookupById(id);
+        // 주소창 정리(뒤로가기 등에서 재조회 방지)
+        window.history.replaceState({}, "", window.location.pathname);
+      }
+    } catch (e) {}
+  }, []);
+
   // ── 채팅 도우미: 질문을 받아 현재 언어 인덱스에서 매칭 (1단계: 검색 기반) ──
 
   // ── 시나리오 정의 (서비스별 핵심 질문 → 되묻기/즉답) ──
@@ -13014,16 +13046,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                         placeholder={lang === "ko" ? "제출 시 받으신 문의번호 입력" : "Enter your inquiry number"}
                         style={{ flex: 1, boxSizing: "border-box", padding: "11px 12px", borderRadius: "10px", border: "1px solid #dde5f2", fontSize: "13.5px" }} />
                       <button disabled={lookupLoading || !lookupId.trim()}
-                        onClick={async () => {
-                          setLookupLoading(true); setLookupError(""); setLookupResult(null);
-                          try {
-                            const r = await lookupInquiry(lookupId);
-                            if (!r.found) { setLookupError(lang === "ko" ? "문의 내역을 찾을 수 없습니다. 번호를 다시 확인해 주세요." : "Inquiry not found. Please check the number."); }
-                            else { setLookupResult(r); }
-                          } catch (e) {
-                            setLookupError(lang === "ko" ? "조회 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요." : "An error occurred. Please try again.");
-                          } finally { setLookupLoading(false); }
-                        }}
+                        onClick={() => runLookupById(lookupId)}
                         style={{ flexShrink: 0, padding: "11px 16px", borderRadius: "10px", border: "none", background: (lookupLoading || !lookupId.trim()) ? "#9db4d6" : "#003478", color: "#fff", fontSize: "13.5px", fontWeight: 700, cursor: (lookupLoading || !lookupId.trim()) ? "not-allowed" : "pointer" }}>
                         {lookupLoading ? "..." : (lang === "ko" ? "조회" : "Search")}
                       </button>

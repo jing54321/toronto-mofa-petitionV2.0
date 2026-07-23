@@ -1639,7 +1639,7 @@ const TREE = {
     sub: "가족관계등록 업무는 크게 신고, 증명서 발급, 기록 정정으로 나뉩니다.",
     options: [
       { id: "family_report", icon: "📝", title: "신고", desc: "출생·혼인·이혼·사망·인지 신고" },
-      { id: "family_cert", icon: "📄", title: "증명서 발급", desc: "가족관계·기본·혼인관계·영문증명서 등" },
+      { id: "family_cert", icon: "📄", title: "증명서 발급", desc: "기본·가족관계·혼인·입양·제적 등 서류 발급" },
       { id: "family_fix", icon: "✏️", title: "기록 정정", desc: "외국인 가족 등록사항 직권정정" },
     ],
   },
@@ -1663,6 +1663,14 @@ const TREE = {
     breadcrumb: ["홈", "가족관계등록", "증명서 발급", "국문 증명서"],
     question: "어떻게 발급받으시겠어요?",
     sub: "공동인증서가 있으면 온라인으로 즉시 무료 발급 가능합니다.",
+    intro: [
+      "📎 증명서별 발급예시 보기",
+      { text: "기본증명서 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007002" },
+      { text: "가족관계증명서 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007001" },
+      { text: "혼인관계증명서 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007003" },
+      { text: "입양관계증명서 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007004" },
+      { text: "제적 등·초본 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007007" },
+    ],
     options: [
       { id: "family_cert_online", icon: "💻", title: "온라인 발급 (공동인증서)", desc: "즉시·무료·영사관 방문 불필요" },
       { id: "family_cert_family_kr", icon: "👨‍👩‍👧", title: "한국 직계가족 통해 발급", desc: "한국 거주 직계가족이 주민센터에서 즉시 발급" },
@@ -1679,13 +1687,12 @@ const TREE = {
     docs: [
       "공동인증서로 로그인 후 발급:",
       "  ▸ 전자가족관계등록시스템: efamily.scourt.go.kr",
-      "  ▸ 정부24: gov.kr",
     ],
     costs: [{ label: "수수료", value: "무료" }],
     time: "즉시",
     notices: [
       "한국 국적 보유자만 발급 가능 — 시민권 취득 후 국적상실신고를 하지 않아도 국적이 없으면 발급 불가.",
-      "공동인증서가 없는 경우 영사관 방문 신청 가능 (공동인증서 발급 메뉴 참조).",
+      { text: "공동인증서가 없으신가요? 인증서 발급 안내 바로가기", goId: "cert_start" },
       "2008년 이전 국적상실신고 완료자: 가족관계증명서·기본증명서 발급 불가 — 제적등본만 가능.",
     ],
     booking: null,
@@ -1706,7 +1713,8 @@ const TREE = {
     time: "즉시",
     notices: [
       "가장 빠른 방법입니다 — 한국에 직계가족이 있다면 이 방법을 우선 이용하세요.",
-      "신청대상자가 혼인 전 외국국적 취득으로 국적상실한 경우: 가족관계등록부에 배우자·자녀가 표시되지 않을 수 있어 추가 서류 필요 (예: 캐나다 혼인증명서 원본 + 한글 번역문).",
+      "신청대상자가 혼인 전 외국국적 취득으로 국적상실한 경우: 가족관계등록부(제적등본)에 배우자·자녀 등이 표시되지 않으므로 가족관계 확인용 추가 서류가 필요합니다.",
+      "  ▸ 예) 1985년 캐나다 시민권 취득 후 1990년 캐나다에서 혼인한 경우 — 배우자 이름이 가족관계등록부에 없으므로, 캐나다 정부 발행 혼인증명(Marriage Certificate) 원본 + 한글 번역문 제출 (공증 불필요, 본인 번역 가능).",
       "2008년 이전 국적상실신고 완료자: 제적등본만 발급 가능.",
     ],
     booking: null,
@@ -1750,11 +1758,13 @@ const TREE = {
     title: "국문 증명서 발급 — 영사관 방문",
     docs: [
       "가족관계 등록사항별 증명서 교부 등 신청서 (영사관 비치 양식)",
-      "  ▸ 주민등록번호 반드시 기재 (모르는 경우 등록기준지 기재)",
+      "  ▸ 주민등록번호 반드시 기재 (1975년 이전 해외 이주로 번호가 없거나 모르는 경우 등록기준지 기재)",
       "신청자 신분증 원본 + 사본 (여권·영주권카드·운전면허 등)",
-      "동일인확인서 (해당자만) — 한국 등록 성명과 캐나다 신분증 성명이 다른 경우",
+      "동일인확인서 (해당자만) — 대한민국 등록 성명과 캐나다 신분증 성명이 다른 경우 (남편 성을 따른 경우, 개명한 경우 등)",
       "  ▸ 가족 4촌 이내 2명 서명 필요",
-      "Marriage Certificate 원본+사본 — 한국에 혼인신고 안 된 상태에서 남편 성을 따른 경우",
+      "Marriage Certificate 원본+사본 (해당자만) — 한국에 혼인신고가 안 되어 있고 캐나다 신분증상 남편 성을 따른 경우에만 제출 (동일인확인서와 함께)",
+      "  ▸ 남편 성을 따르지 않았거나, 따랐더라도 한국에 혼인신고가 되어 있으면 제출 불필요 (동일인확인서만 제출)",
+      "우편 수령용 등기봉투 (선택) — XpressPost Prepaid Envelope, 방문 수령 대신 우편으로 받고 싶은 경우 (Canada Post 구매)",
     ],
     costs: [{ label: "통당 수수료", value: "CAD $1.30 (현금, Debit, 신용카드)" }],
     time: "약 2주 (발급 완료 후 별도 안내 전화 없음 — 예정일에 방문 수령)",
@@ -1779,15 +1789,18 @@ const TREE = {
       "가족관계 등록사항별 증명서 교부 등 신청서 (양식)",
       "신청자 신분증 사본",
       "발급대상자 신분증 사본 (신청자와 다른 경우)",
-      "동일인확인서 (해당자만) — 한국 등록 성명과 캐나다 신분증 성명이 다른 경우",
+      "동일인확인서 (해당자만) — 대한민국 등록 성명과 캐나다 신분증 성명이 다른 경우 (남편 성을 따른 경우, 개명한 경우 등)",
+      "  ▸ 가족 4촌 이내 2명 서명 필요",
       "수수료: CAD $1.30/통 — 현금 또는 Money Order",
       "반송용 XpressPost 등기봉투 (Canada Post 구매) — 보내는 주소·받는 주소 모두 본인 주소 기재",
     ],
     costs: [{ label: "통당 수수료", value: "CAD $1.30 (현금 또는 Money Order)" }],
     time: "약 2주 + 우편 배송기간",
     notices: [
-      "2008년 이전 국적상실신고 완료자: 제적등본만 신청 가능.",
+      "2008년 1월 1일 이전 국적상실신고 완료자: 가족관계증명서·기본증명서 발급 불가 → 제적등본만 신청 (신청서에 등록기준지·호주 이름·관계 정확히 기재 필수).",
+      "국적상실신고 여부 불분명한 경우: 기본증명서·가족관계증명서·제적등본 모두 신청.",
       "반송봉투 미동봉 시 서류를 받을 수 없습니다.",
+      "💡 현재 한국에 거주 중이시면 영사관 절차 없이 신분증(주민등록증·운전면허증·여권 등) 지참 후 가까운 구청·읍면동 사무소에서 신청서 작성 즉시 발급 가능합니다.",
     ],
     booking: null,
   },
@@ -1798,6 +1811,9 @@ const TREE = {
     breadcrumb: ["홈", "가족관계등록", "증명서 발급", "영문 증명서"],
     question: "어떻게 발급받으시겠어요?",
     sub: "영문증명서는 본인·부모·배우자 정보를 하나의 증명서에 담은 서류입니다. 자녀 정보는 포함되지 않습니다.",
+    intro: [
+      "📌 영문증명서는 기존 기본증명서·가족관계증명서·혼인관계증명서를 번역한 것이 아니라, 외국에서 수요가 많은 정보(본인·부모·배우자)를 하나로 담은 새로운 증명서입니다.",
+    ],
     options: [
       { id: "family_cert_english_online", icon: "💻", title: "온라인 발급 (공동인증서)", desc: "전자가족관계등록시스템에서 즉시 무료 발급" },
       { id: "family_cert_english_visit", icon: "🏛️", title: "영사관 방문", desc: "약 10일 처리 — 등록기준지 정확히 기재 필수" },
@@ -1840,6 +1856,7 @@ const TREE = {
     time: "약 10일",
     notices: [
       "영문증명서 포함 정보: 본인·부모·배우자 — 자녀 정보 미포함.",
+      "사망·국적상실 등으로 가족관계등록부가 폐쇄된 경우 발급 불가.",
       "상세 정보가 필요한 경우 국문 증명서 + 번역 공증을 이용하세요.",
       "외국인 가족이 있는 경우: 해당 가족 여권 지참 필수.",
     ],
@@ -9406,7 +9423,7 @@ const EN_TRANSLATIONS: any = {
     question: "What do you need?",
     sub: "Family register services fall into three areas: reports, certificate issuance, and record correction.",
     options: {
-      family_cert: { title: "Certificate issuance", desc: "Family relation, basic, marriage relation, English certificate, etc." },
+      family_cert: { title: "Certificate issuance", desc: "Basic, family relation, marriage, adoption, excluded register, etc." },
       family_report: { title: "Reports", desc: "Birth, marriage, divorce, death, acknowledgment reports" },
       family_fix: { title: "Record correction", desc: "Ex officio correction of a foreign family member's record" },
     },
@@ -9424,6 +9441,14 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Family Register", "Certificate issuance", "Korean certificate"],
     question: "How would you like to obtain it?",
     sub: "With a joint certificate, you can issue it online instantly and free.",
+    intro: [
+      "📎 View certificate sample images",
+      { text: "Basic certificate sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007002" },
+      { text: "Family relation certificate sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007001" },
+      { text: "Marriage relation certificate sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007003" },
+      { text: "Adoption relation certificate sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007004" },
+      { text: "Removed family register sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007007" },
+    ],
     options: {
       family_cert_online: { title: "Online issuance (joint certificate)", desc: "Instant · free · no consulate visit needed" },
       family_cert_family_kr: { title: "Through immediate family in Korea", desc: "Immediate family in Korea issues it instantly at a community center" },
@@ -9437,13 +9462,12 @@ const EN_TRANSLATIONS: any = {
     docs: [
       "Log in with a joint certificate and issue at:",
       "  ▸ Electronic Family Relation Registration System: efamily.scourt.go.kr",
-      "  ▸ Gov24: gov.kr",
     ],
     costs: [{ label: "Fee", value: "Free" }],
     time: "Immediate",
     notices: [
       "Only Korean nationals can issue — if you have no nationality (even without filing a loss report after acquiring citizenship), issuance is not possible.",
-      "If you have no joint certificate, you can apply at the consulate (see the joint certificate issuance menu).",
+      { text: "No joint certificate? See the certificate issuance guide", goId: "cert_start" },
       "Those who completed a nationality-loss report before 2008: family relation/basic certificates cannot be issued — only the removed family register.",
     ],
     onlineLink: "https://efamily.scourt.go.kr",
@@ -9460,7 +9484,8 @@ const EN_TRANSLATIONS: any = {
     time: "Immediate",
     notices: [
       "This is the fastest method — if you have immediate family in Korea, use it first.",
-      "If the subject lost nationality by acquiring a foreign nationality before marriage: spouse/children may not appear in the family register, so additional documents are needed (e.g., Canadian marriage certificate original + Korean translation).",
+      "If the subject lost nationality by acquiring a foreign nationality before marriage: spouse/children may not appear in the family register (removed register), so additional documents confirming the relationship are needed.",
+      "  ▸ e.g. If citizenship was acquired in 1985 and marriage took place in Canada in 1990 — the spouse's name won't appear in the family register, so submit the original Canadian Marriage Certificate + Korean translation (no notarization needed, self-translation allowed).",
       "Those who completed a nationality-loss report before 2008: only the removed family register can be issued.",
     ],
   },
@@ -9493,11 +9518,13 @@ const EN_TRANSLATIONS: any = {
     title: "Korean certificate — consulate visit",
     docs: [
       "Application for issuance of family register certificates (consulate form)",
-      "  ▸ Must state the resident registration number (if unknown, state the registration base address)",
+      "  ▸ Must state the resident registration number (if unknown due to emigration before 1975, state the registration base address)",
       "Applicant's ID original + copy (passport, PR Card, driver's license, etc.)",
-      "Identity confirmation statement (if applicable) — when the Korean-registered name differs from the Canadian ID name",
+      "Identity confirmation statement (if applicable) — when the Korean-registered name differs from the Canadian ID name (e.g., took husband's surname, changed name)",
       "  ▸ Signatures of 2 relatives within the 4th degree required",
-      "Marriage Certificate original + copy — if you took your husband's surname while the marriage is unreported in Korea",
+      "Marriage Certificate original + copy (if applicable) — only if the marriage is unreported in Korea AND you took your husband's surname on your Canadian ID (submit together with the identity confirmation statement)",
+      "  ▸ Not required if you didn't take your husband's surname, or if you did but the marriage is reported in Korea — submit only the identity confirmation statement",
+      "Return-by-mail registered envelope (optional) — Xpresspost Prepaid Envelope, if you'd like the certificate mailed instead of picked up (buy at Canada Post)",
     ],
     costs: [{ label: "Fee per copy", value: "CAD $1.30 (Cash, Debit, Credit)" }],
     time: "About 2 weeks (no notification call when ready — visit to pick up on the scheduled date)",
@@ -9518,21 +9545,27 @@ const EN_TRANSLATIONS: any = {
       "Application for issuance of family register certificates (form)",
       "Applicant's ID copy",
       "Subject's ID copy (if different from the applicant)",
-      "Identity confirmation statement (if applicable) — when the Korean-registered name differs from the Canadian ID name",
+      "Identity confirmation statement (if applicable) — when the Korean-registered name differs from the Canadian ID name (e.g., took husband's surname, changed name)",
+      "  ▸ Signatures of 2 relatives within the 4th degree required",
       "Fee: CAD $1.30/copy — cash or Money Order",
       "Return Xpresspost registered envelope (buy at Canada Post) — write your own address as both sender and recipient",
     ],
     costs: [{ label: "Fee per copy", value: "CAD $1.30 (Cash or Money Order)" }],
     time: "About 2 weeks + mail delivery",
     notices: [
-      "Those who completed a nationality-loss report before 2008: only the removed family register can be requested.",
+      "Those who completed a nationality-loss report before January 1, 2008: family relation/basic certificates cannot be issued → apply only for the removed family register (must accurately state registration base address, head-of-household name, and relationship).",
+      "If nationality-loss reporting status is unclear: apply for the basic certificate, family relation certificate, and removed family register all together.",
       "If no return envelope is enclosed, you cannot receive the documents.",
+      "💡 If you currently reside in Korea, you don't need to go through the consulate — bring an ID (resident card, driver's license, passport, etc.) to any nearby district/town office for instant issuance.",
     ],
   },
   family_cert_english: {
     breadcrumb: ["Home", "Family Register", "Certificate issuance", "English certificate"],
     question: "How would you like to obtain it?",
     sub: "The English certificate contains your, your parents', and your spouse's information on one document. Children's information is not included.",
+    intro: [
+      "📌 The English certificate is not a translation of the existing basic/family relation/marriage certificates — it is a new, separate certificate combining the information (self, parents, spouse) most commonly needed abroad.",
+    ],
     options: {
       family_cert_english_online: { title: "Online issuance (joint certificate)", desc: "Issued instantly and free at the Electronic Family Relation Registration System" },
       family_cert_english_visit: { title: "Consulate visit", desc: "About 10 days — must state the registration base address accurately" },
@@ -9568,6 +9601,7 @@ const EN_TRANSLATIONS: any = {
     time: "About 10 days",
     notices: [
       "Information included: self, parents, spouse — children's information not included.",
+      "If the family register is closed due to death, loss of nationality, etc., this certificate cannot be issued.",
       "If you need detailed information, use the Korean certificate + translation certification.",
       "If you have a foreign family member: bringing that member's passport is required.",
     ],
@@ -11741,7 +11775,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     }
     setShowBookingModal(false);
     setOpenFaq(null);
-    setHistory((h: any) => [...h, resolved]);
+    setHistory((h: any) => (resolved === "home" ? ["home"] : [...h, resolved]));
     setPageId(resolved);
     window.scrollTo(0, 0);
   };
@@ -13234,10 +13268,15 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 if (!introArr || introArr.length === 0) return null;
                 return (
                   <div style={{ background: "#fffdf5", border: "1px solid #efe6cc", borderRadius: "10px", padding: "10px 12px", marginBottom: "1.1rem" }}>
-                    {introArr.map((line: string, i: number) => {
-                      const sub = line.trim().startsWith("▸");
+                    {introArr.map((line: any, i: number) => {
+                      const isObj = line && typeof line === "object";
+                      const text = isObj ? line.text : line;
+                      const href = isObj ? line.href : null;
+                      const sub = !isObj && line.trim().startsWith("▸");
                       return (
-                        <div key={i} style={{ fontSize: sub ? "12px" : "13px", color: sub ? "#6b6450" : "#7a5b00", fontWeight: sub ? 400 : 600, lineHeight: 1.55, paddingLeft: sub ? "10px" : 0, marginTop: i === 0 ? 0 : "4px" }}>{line}</div>
+                        <div key={i} style={{ fontSize: sub ? "12px" : "13px", color: sub ? "#6b6450" : "#7a5b00", fontWeight: sub ? 400 : 600, lineHeight: 1.55, paddingLeft: sub ? "10px" : 0, marginTop: i === 0 ? 0 : "4px" }}>
+                          {href ? (<a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "#7a5b00", textDecoration: "underline" }}>🔗 {text}</a>) : text}
+                        </div>
                       );
                     })}
                   </div>

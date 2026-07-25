@@ -6250,7 +6250,32 @@ const TREE = {
         a_en: "After applying for the marriage certificate, book a 'notarization' appointment ~2 weeks later, then complete the self-done 'third-party translation verification.' ⚠️ Note: some bodies (e.g. Canadian immigration) do not accept third-party translation verification — check with the receiving organization first.",
       },
     ] },
-  faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [] },
+  faq_nationality:  { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "국적"],            title: "국적 — 자주 묻는 질문",            title_en: "Nationality — FAQ",                     items: [
+      {
+        q: "국적상실 신고는 반드시 해야 하나요?",
+        q_en: "Is it mandatory to report loss of Korean nationality?",
+        a: "국적법(제16조)상 국적상실 신고는 의무이나, 신고 기한이 없고 지연에 대한 과태료 규정도 없어 신고하지 않는 경우가 많습니다. 다만 ① 한국에 90일 이상 장기체류할 사증(비자)을 신청할 때, ② 자녀의 국적이탈 신고를 할 때(부모 국적상실 신고가 선행되어야 함)처럼 장기적으로 반드시 필요한 상황이 생깁니다.",
+        a_en: "Under Article 16 of the Nationality Act, reporting loss of nationality is mandatory, but there is no filing deadline or penalty for delay, so many people don't report it. However, it becomes necessary later in cases such as: ① applying for a visa to stay in Korea 90+ days, or ② reporting a child's renunciation of Korean nationality (the parent's loss report must be filed first).",
+      },
+      {
+        q: "캐나다 시민권을 취득하고 국적상실 신고를 아직 안 했습니다. 한국 여권 만료기간이 남았는데 사용할 수 있나요?",
+        q_en: "I acquired Canadian citizenship but haven't reported loss of nationality yet. My Korean passport hasn't expired — can I still use it?",
+        a: "사용할 수 없습니다. 대한민국 국민이 자진해서 외국국적을 취득하면 그 즉시 대한민국 국적이 상실되며, 국적상실 신고 여부와 관계없이 한국여권도 만료기간과 무관하게 즉시 무효가 됩니다. 외국 시민권 취득 후 한국여권을 사용하면 여권부정사용 등으로 처벌받을 수 있습니다.",
+        a_en: "No, you cannot. When a Korean citizen voluntarily acquires a foreign nationality, Korean nationality is lost immediately at that point — regardless of whether a loss report has been filed. The Korean passport also becomes invalid immediately, regardless of its printed expiry date. Using a Korean passport after acquiring foreign citizenship can result in penalties for passport misuse.",
+      },
+      {
+        q: "65세 이상 복수국적 신청 절차는 어떻게 되나요?",
+        q_en: "What is the procedure for dual nationality application for those aged 65 and older?",
+        a: "① 국적상실신고 → ② 재외동포비자 신청 → ③ 거소증 신청 → ④ 국적회복허가 신청 (한국 내 출입국사무소 신청 가능) → ⑤ 국적회복허가 통지서 수령 후 외국국적불행사 서약서 제출 → ⑥ 모든 절차 완료 후 가까운 동사무소·구청에서 주민등록증 및 한국여권 발급 신청, 순서로 진행합니다.",
+        a_en: "① Report loss of nationality → ② Apply for an Overseas Korean visa → ③ Apply for a Domestic Residence Report (Geosojeung) → ④ Apply for restoration of nationality (can be filed at an immigration office in Korea) → ⑤ After receiving the restoration approval notice, submit a pledge not to exercise foreign nationality → ⑥ Once all steps are complete, apply for a resident registration card and Korean passport at a nearby community/district office.",
+      },
+      {
+        q: "선천적 복수국적자는 언제 어떻게 국적선택을 하여야 하나요?",
+        q_en: "When and how must a person with dual nationality by birth choose a nationality?",
+        a: "세 가지 방식이 있습니다: ①한국 국적 선택+외국국적 포기(국적선택 신고), ②한국 국적 선택+외국국적불행사 서약(복수국적 신청, 외국국적은 유지), ③한국 국적 이탈+외국국적 선택(국적이탈 신고). 시기: ①·②는 여자는 만 22세 전까지, 남자는 병역의무 해소(병역면제 등 포함) 후 2년 이내까지 가능. ③은 여자는 만 22세 전까지(이후엔 국적선택명령 이행기간 내), 남자는 병역법상 만 18세가 되는 해의 3월 31일까지(이후엔 병역의무 해소자에 한해 해소 후 2년간) 신고해야 합니다.",
+        a_en: "There are three options: ①Choose Korean nationality and renounce the foreign one (nationality selection report), ②Choose Korean nationality while keeping the foreign one via a pledge not to exercise foreign nationality (dual nationality application), ③Renounce Korean nationality and choose the foreign one (nationality renunciation report). Timing: For ①/②, women must do so before turning 22; men, within 2 years after completing military service obligations (including exemption). For ③, women must do so before turning 22 (afterward, within the nationality-selection order compliance period); men must do so by March 31 of the year they turn 18 under the Military Service Act (afterward, only those who have completed their military service obligation may do so, within 2 years of completion).",
+      },
+    ] },
   faq_cert_auth:    { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "공동·금융 인증서"], title: "공동·금융 인증서 — 자주 묻는 질문", title_en: "Digital/financial certificates — FAQ",  items: [] },
   faq_various_cert: { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "각종 증명서 발급"], title: "각종 증명서 발급 — 자주 묻는 질문", title_en: "Various certificates — FAQ",            items: [] },
   faq_etc:          { type: "faq", breadcrumb: ["홈", "자주 묻는 질문", "기타"],            title: "기타 — 자주 묻는 질문",            title_en: "Other — FAQ",                           items: [

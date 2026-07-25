@@ -1663,7 +1663,7 @@ const TREE = {
     breadcrumb: ["홈", "가족관계등록", "증명서 발급", "국문 증명서"],
     question: "어떻게 발급받으시겠어요?",
     sub: "공동인증서가 있으면 온라인으로 즉시 무료 발급 가능합니다.",
-    intro: [
+    footer: [
       "📎 증명서별 발급예시 보기",
       { text: "기본증명서 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007002" },
       { text: "가족관계증명서 발급예시", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007001" },
@@ -1675,7 +1675,7 @@ const TREE = {
       { id: "family_cert_online", icon: "💻", title: "온라인 발급 (공동인증서)", desc: "즉시·무료·영사관 방문 불필요" },
       { id: "family_cert_family_kr", icon: "👨‍👩‍👧", title: "한국 직계가족 통해 발급", desc: "한국 거주 직계가족이 주민센터에서 즉시 발급" },
       { id: "family_cert_proxy", icon: "📋", title: "위임장 공증 후 대리인 발급", desc: "영사관에서 위임장 공증 → 한국 대리인이 발급" },
-      { id: "family_cert_visit", icon: "🏛️", title: "영사관 방문 또는 우편", desc: "공동인증서 없는 경우 — 약 2주, 수수료 $1.30/통" },
+      { id: "family_cert_visit", icon: "🏛️", title: "영사관 방문 또는 우편", desc: "공동인증서 없는 경우 — 약 2주" },
     ],
   },
 
@@ -1758,12 +1758,13 @@ const TREE = {
     title: "국문 증명서 발급 — 영사관 방문",
     docs: [
       "가족관계 등록사항별 증명서 교부 등 신청서 (영사관 비치 양식)",
-      "  ▸ 주민등록번호 반드시 기재 (1975년 이전 해외 이주로 번호가 없거나 모르는 경우 등록기준지 기재)",
+      "  └ 주민등록번호 반드시 기재 (1975년 이전 해외 이주로 번호가 없거나 모르는 경우 등록기준지 기재)",
       "신청자 신분증 원본 + 사본 (여권·영주권카드·운전면허 등)",
-      "동일인확인서 (해당자만) — 대한민국 등록 성명과 캐나다 신분증 성명이 다른 경우 (남편 성을 따른 경우, 개명한 경우 등)",
-      "  ▸ 가족 4촌 이내 2명 서명 필요",
+      "동일인확인서 (해당자만)",
+      "  └ 대한민국 등록 성명과 캐나다 신분증 성명이 다른 경우에만 제출 (남편 성을 따른 경우, 개명한 경우 등)",
+      "  └ 동일인확인서(양식) 작성 후 가족(4촌 이내) 2명 서명하여 제출",
       "Marriage Certificate 원본+사본 (해당자만) — 한국에 혼인신고가 안 되어 있고 캐나다 신분증상 남편 성을 따른 경우에만 제출 (동일인확인서와 함께)",
-      "  ▸ 남편 성을 따르지 않았거나, 따랐더라도 한국에 혼인신고가 되어 있으면 제출 불필요 (동일인확인서만 제출)",
+      "  └ 남편 성을 따르지 않았거나, 따랐더라도 한국에 혼인신고가 되어 있으면 제출 불필요 (동일인확인서만 제출)",
       "우편 수령용 등기봉투 (선택) — XpressPost Prepaid Envelope, 방문 수령 대신 우편으로 받고 싶은 경우 (Canada Post 구매)",
     ],
     costs: [{ label: "통당 수수료", value: "CAD $1.30 (현금, Debit, 신용카드)" }],
@@ -1773,7 +1774,7 @@ const TREE = {
       "형제자매·며느리는 직계가족 해당 없음.",
       "2008년 이전 국적상실신고 완료자: 가족관계증명서·기본증명서 발급 불가 → 제적등본만 신청 (신청서에 등록기준지·호주 이름·관계 기재 필수).",
       "국적상실신고 여부 불분명한 경우: 기본증명서·가족관계증명서·제적등본 모두 신청.",
-      "수령은 예약 없이 방문 가능하나, 예약자 우선 처리로 대기 시간이 길 수 있습니다.",
+      "수령은 예약 없이 방문 가능하나, 해당 시간대 예약자 업무를 우선 처리하므로 장시간 대기하실 수 있습니다. (예약하고 방문하시면 해당 시간대에 즉시 수령 가능)",
       "💡 캐나다 연금(CPP/OAS) 신청용 혼인관계증명서가 필요한 경우: 발급 후 공증 → 번역 공증 메뉴에서 추가 절차 안내를 확인하세요.",
     ],
     booking: "https://www.torbooking.com/book",
@@ -1789,8 +1790,9 @@ const TREE = {
       "가족관계 등록사항별 증명서 교부 등 신청서 (양식)",
       "신청자 신분증 사본",
       "발급대상자 신분증 사본 (신청자와 다른 경우)",
-      "동일인확인서 (해당자만) — 대한민국 등록 성명과 캐나다 신분증 성명이 다른 경우 (남편 성을 따른 경우, 개명한 경우 등)",
-      "  ▸ 가족 4촌 이내 2명 서명 필요",
+      "동일인확인서 (해당자만)",
+      "  └ 대한민국 등록 성명과 캐나다 신분증 성명이 다른 경우에만 제출 (남편 성을 따른 경우, 개명한 경우 등)",
+      "  └ 동일인확인서(양식) 작성 후 가족(4촌 이내) 2명 서명하여 제출",
       "수수료: CAD $1.30/통 — 현금 또는 Money Order",
       "반송용 XpressPost 등기봉투 (Canada Post 구매) — 보내는 주소·받는 주소 모두 본인 주소 기재",
     ],
@@ -9441,7 +9443,7 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Family Register", "Certificate issuance", "Korean certificate"],
     question: "How would you like to obtain it?",
     sub: "With a joint certificate, you can issue it online instantly and free.",
-    intro: [
+    footer: [
       "📎 View certificate sample images",
       { text: "Basic certificate sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007002" },
       { text: "Family relation certificate sample", href: "https://efamily.scourt.go.kr/cs/CsGuideSampleP.do?guideCd=0000007001" },
@@ -9453,7 +9455,7 @@ const EN_TRANSLATIONS: any = {
       family_cert_online: { title: "Online issuance (joint certificate)", desc: "Instant · free · no consulate visit needed" },
       family_cert_family_kr: { title: "Through immediate family in Korea", desc: "Immediate family in Korea issues it instantly at a community center" },
       family_cert_proxy: { title: "Proxy after notarizing a power of attorney", desc: "Notarize a power of attorney at the consulate → agent in Korea issues it" },
-      family_cert_visit: { title: "Consulate visit or mail", desc: "If you have no joint certificate — about 2 weeks, fee $1.30/copy" },
+      family_cert_visit: { title: "Consulate visit or mail", desc: "If you have no joint certificate — about 2 weeks" },
     },
   },
   family_cert_online: {
@@ -9518,12 +9520,13 @@ const EN_TRANSLATIONS: any = {
     title: "Korean certificate — consulate visit",
     docs: [
       "Application for issuance of family register certificates (consulate form)",
-      "  ▸ Must state the resident registration number (if unknown due to emigration before 1975, state the registration base address)",
+      "  └ Must state the resident registration number (if unknown due to emigration before 1975, state the registration base address)",
       "Applicant's ID original + copy (passport, PR Card, driver's license, etc.)",
-      "Identity confirmation statement (if applicable) — when the Korean-registered name differs from the Canadian ID name (e.g., took husband's surname, changed name)",
-      "  ▸ Signatures of 2 relatives within the 4th degree required",
+      "Identity confirmation statement (if applicable)",
+      "  └ Required only when the Korean-registered name differs from the Canadian ID name (e.g., took husband's surname, changed name)",
+      "  └ Complete the form and have 2 relatives within the 4th degree sign it",
       "Marriage Certificate original + copy (if applicable) — only if the marriage is unreported in Korea AND you took your husband's surname on your Canadian ID (submit together with the identity confirmation statement)",
-      "  ▸ Not required if you didn't take your husband's surname, or if you did but the marriage is reported in Korea — submit only the identity confirmation statement",
+      "  └ Not required if you didn't take your husband's surname, or if you did but the marriage is reported in Korea — submit only the identity confirmation statement",
       "Return-by-mail registered envelope (optional) — Xpresspost Prepaid Envelope, if you'd like the certificate mailed instead of picked up (buy at Canada Post)",
     ],
     costs: [{ label: "Fee per copy", value: "CAD $1.30 (Cash, Debit, Credit)" }],
@@ -9533,7 +9536,7 @@ const EN_TRANSLATIONS: any = {
       "Siblings and daughters-in-law are not immediate family.",
       "Those who completed a nationality-loss report before 2008: family relation/basic certificates cannot be issued → apply only for the removed family register (must state registration base address, head-of-household name, and relationship).",
       "If nationality-loss reporting status is unclear: apply for the basic certificate, family relation certificate, and removed family register all together.",
-      "You may pick up without an appointment, but appointment holders are prioritized, so wait times can be long.",
+      "You may pick up without an appointment, but appointment holders for that time slot are served first, so wait times can be long. (If you book an appointment, you can pick up immediately at that time.)",
       "💡 If you need a marriage relation certificate for a Canadian pension (CPP/OAS) application: after issuance, see the additional steps under Notarization → Translation certification.",
     ],
     bookingLabel: "Book Appointment (family relation certificate) →",
@@ -9545,8 +9548,9 @@ const EN_TRANSLATIONS: any = {
       "Application for issuance of family register certificates (form)",
       "Applicant's ID copy",
       "Subject's ID copy (if different from the applicant)",
-      "Identity confirmation statement (if applicable) — when the Korean-registered name differs from the Canadian ID name (e.g., took husband's surname, changed name)",
-      "  ▸ Signatures of 2 relatives within the 4th degree required",
+      "Identity confirmation statement (if applicable)",
+      "  └ Required only when the Korean-registered name differs from the Canadian ID name (e.g., took husband's surname, changed name)",
+      "  └ Complete the form and have 2 relatives within the 4th degree sign it",
       "Fee: CAD $1.30/copy — cash or Money Order",
       "Return Xpresspost registered envelope (buy at Canada Post) — write your own address as both sender and recipient",
     ],
@@ -13310,10 +13314,15 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 if (!footerArr || footerArr.length === 0) return null;
                 return (
                   <div style={{ background: "#fffdf5", border: "1px solid #efe6cc", borderRadius: "10px", padding: "10px 12px", marginTop: "1.1rem" }}>
-                    {footerArr.map((line: string, i: number) => {
-                      const sub = line.trim().startsWith("▸");
+                    {footerArr.map((line: any, i: number) => {
+                      const isObj = line && typeof line === "object";
+                      const text = isObj ? line.text : line;
+                      const href = isObj ? line.href : null;
+                      const sub = !isObj && line.trim().startsWith("▸");
                       return (
-                        <div key={i} style={{ fontSize: sub ? "12px" : "13px", color: sub ? "#6b6450" : "#7a5b00", fontWeight: sub ? 400 : 600, lineHeight: 1.55, paddingLeft: sub ? "10px" : 0, marginTop: i === 0 ? 0 : "4px" }}>{line}</div>
+                        <div key={i} style={{ fontSize: sub ? "12px" : "13px", color: sub ? "#6b6450" : "#7a5b00", fontWeight: sub ? 400 : 600, lineHeight: 1.55, paddingLeft: sub ? "10px" : 0, marginTop: i === 0 ? 0 : "4px" }}>
+                          {href ? (<a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "#7a5b00", textDecoration: "underline" }}>🔗 {text}</a>) : text}
+                        </div>
                       );
                     })}
                   </div>

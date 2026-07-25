@@ -1782,11 +1782,6 @@ const TREE = {
       "2008년 이전에 국적상실신고 여부가 불분명한 경우: 기본증명서, 가족관계증명서, 제적등본 모두 신청.",
       "수령은 예약 없이 방문 가능하나, 해당 시간대 예약자 업무를 우선 처리하므로 장시간 대기하실 수 있습니다. (예약하고 방문하시면 해당 시간대에 즉시 수령 가능)",
       "💡 캐나다 연금(CPP/OAS) 신청용 혼인관계증명서가 필요한 경우: 발급 후 공증 → 번역 공증 메뉴에서 추가 절차 안내를 확인하세요.",
-
-      "2008년 이전 국적상실신고 완료자: 가족관계증명서·기본증명서 발급 불가 → 제적등본만 신청 (신청서에 등록기준지·호주 이름·관계 기재 필수).",
-      "2008년 이전에 국적상실신고 여부가 불분명한 경우: 기본증명서, 가족관계증명서, 제적등본 모두 신청.",
-      "수령은 예약 없이 방문 가능하나, 해당 시간대 예약자 업무를 우선 처리하므로 장시간 대기하실 수 있습니다. (예약하고 방문하시면 해당 시간대에 즉시 수령 가능)",
-      "💡 캐나다 연금(CPP/OAS) 신청용 혼인관계증명서가 필요한 경우: 발급 후 공증 → 번역 공증 메뉴에서 추가 절차 안내를 확인하세요.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (가족관계증명서 발급) →",
@@ -1799,6 +1794,7 @@ const TREE = {
     title: "국문 증명서 발급 — 우편 신청",
     docs: [
       "가족관계 등록사항별 증명서 교부 등 신청서 (양식)",
+      "  └ 주민등록번호 반드시 기재 (1975년 이전 해외 이주로 번호가 없거나 모르는 경우 등록기준지 기재)",
       "신청자 신분증 사본",
       "발급대상자 신분증 사본 (신청자와 다른 경우)",
       "동일인확인서 (해당자만)",
@@ -1813,6 +1809,10 @@ const TREE = {
     costs: [{ label: "통당 수수료", value: "CAD $1.30 (현금 또는 Money Order)" }],
     time: "약 2주 + 우편 배송기간",
     notices: [
+      "직계가족(조부모·부모·자녀·손자·배우자)은 위임장 없이 신청 가능.",
+      "형제자매·며느리는 직계가족에 해당하지 않음.",
+      "직계가족이 대신 신청하는데 신청대상자가 혼인 전 외국국적 취득으로 국적상실한 경우: 가족관계등록부(제적등본)에 배우자·자녀 등이 표시되지 않으므로 가족관계 확인용 추가 서류가 필요합니다.",
+      "  ▸ 예) 1985년 캐나다 시민권 취득 후 1990년 캐나다에서 혼인한 경우 — 배우자 이름이 가족관계등록부에 없으므로, 캐나다 정부 발행 혼인증명(Marriage Certificate) 원본 + 한글 번역문 제출 (공증 불필요, 본인 번역 가능).",
       "2008년 1월 1일 이전 국적상실신고 완료자: 가족관계증명서·기본증명서 발급 불가 → 제적등본만 신청 (신청서에 등록기준지·호주 이름·관계 정확히 기재 필수).",
       "2008년 이전에 국적상실신고 여부가 불분명한 경우: 기본증명서, 가족관계증명서, 제적등본 모두 신청.",
       "반송봉투 미동봉 시 서류를 받을 수 없습니다.",
@@ -9566,6 +9566,7 @@ const EN_TRANSLATIONS: any = {
     title: "Korean certificate — mail application",
     docs: [
       "Application for issuance of family register certificates (form)",
+      "  └ Must state the resident registration number (if unknown due to emigration before 1975, state the registration base address)",
       "Applicant's ID copy",
       "Subject's ID copy (if different from the applicant)",
       "Identity confirmation statement (if applicable)",
@@ -9580,6 +9581,10 @@ const EN_TRANSLATIONS: any = {
     costs: [{ label: "Fee per copy", value: "CAD $1.30 (Cash or Money Order)" }],
     time: "About 2 weeks + mail delivery",
     notices: [
+      "Immediate family (grandparents, parents, children, grandchildren, spouse) may apply without a power of attorney.",
+      "Siblings and daughters-in-law are not immediate family.",
+      "If an immediate family member applies on the subject's behalf and the subject lost nationality by acquiring a foreign nationality before marriage: the spouse/children may not appear in the family register (removed register), so additional documents confirming the relationship are needed.",
+      "  ▸ e.g. If citizenship was acquired in 1985 and marriage took place in Canada in 1990 — the spouse's name won't appear in the family register, so submit the original Canadian Marriage Certificate + Korean translation (no notarization needed, self-translation allowed).",
       "Those who completed a nationality-loss report before January 1, 2008: family relation/basic certificates cannot be issued → apply only for the removed family register (must accurately state registration base address, head-of-household name, and relationship).",
       "If it is unclear whether a nationality-loss report was filed before 2008: apply for the basic certificate, family relation certificate, and removed family register all together.",
       "If no return envelope is enclosed, you cannot receive the documents.",

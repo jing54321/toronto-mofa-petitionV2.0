@@ -533,31 +533,34 @@ const STYLES = `
   .faq-link-arrow { font-size: 15px; font-weight: 300; line-height: 1; }
   .home-btn-row { display: flex; gap: 6px; flex-shrink: 0; }
   .home-btn {
-    background: linear-gradient(135deg, #f0f6ff 0%, #e4eefb 100%);
-    border: 1.5px solid #cdddf5; border-radius: 9px; cursor: pointer; font-family: inherit;
-    font-size: 12px; font-weight: 700; color: #003478;
+    background: #f0f4fa;
+    border: none; border-radius: 9px; cursor: pointer; font-family: inherit;
+    font-size: 12px; font-weight: 600; color: #003478;
     display: inline-flex; align-items: center; gap: 4px;
     padding: 7px 10px; white-space: nowrap; transition: all 0.15s ease;
   }
-  .home-btn:hover { background: linear-gradient(135deg, #003478 0%, #1b6ec2 100%); color: #fff; border-color: #003478; box-shadow: 0 4px 12px rgba(0,52,120,0.25); transform: translateY(-1px); }
-  .home-btn:active { transform: translateY(0); box-shadow: 0 2px 5px rgba(0,52,120,0.2); }
+  .home-btn:hover { background: #e4ebf7; }
+  .home-btn:active { background: #d8e2f2; }
 
-  .faq-tabs { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 1.35rem; }
+  .faq-tabs {
+    display: flex; gap: 2px; margin-bottom: 1.35rem;
+    background: #f0f4fa; border-radius: 11px; padding: 3px;
+    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  .faq-tabs::-webkit-scrollbar { display: none; }
   .faq-tab {
-    background: #ffffff; border: 1px solid #dde4ef; color: #46546b;
-    font-size: 13px; font-weight: 600; font-family: inherit; letter-spacing: -0.01em;
-    padding: 7px 14px; border-radius: 10px; cursor: pointer;
-    white-space: nowrap; box-shadow: 0 1px 2px rgba(16,32,64,0.04);
-    transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, background 0.16s ease, color 0.16s ease;
+    background: transparent; border: none; color: #7a8aa0;
+    font-size: 12.5px; font-weight: 600; font-family: inherit; letter-spacing: -0.01em;
+    padding: 7px 13px; border-radius: 8px; cursor: pointer;
+    white-space: nowrap; flex-shrink: 0;
+    transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease;
   }
-  .faq-tab:hover { border-color: #b9c9e4; color: #003478; transform: translateY(-1px); box-shadow: 0 4px 10px rgba(0,52,120,0.10); }
-  .faq-tab:active { transform: translateY(0); }
+  .faq-tab:hover { color: #003478; }
   .faq-tab.active {
-    background: linear-gradient(135deg, #0a3f86, #003478);
-    border-color: #003478; color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,52,120,0.28);
+    background: #ffffff; color: #003478;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   }
-  .faq-tab.active:hover { color: #ffffff; transform: translateY(-1px); }
+  .faq-tab.active:hover { color: #003478; }
 
   /* 부드럽게 펼쳐지는 아코디언 (grid-rows 트랜지션) */
   .faq-answer-wrap { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.28s ease; }

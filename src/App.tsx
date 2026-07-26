@@ -3542,13 +3542,18 @@ const TREE = {
       "⚠️ 한국 국적자만 신청 가능.",
       "⚠️ 우편 접수 불가 — 반드시 본인이 영사관 방문.",
       "⚠️ 현금만 가능 — Debit·신용카드 불가.",
-      "📋 신청 가능 여부 (면허 종류·연령별)",
-      "  ▸ 1종 면허 (70세 갱신기간 전): 갱신 ❌ / 재발급 ✅ — 적성검사 대상",
-      "  ▸ 2종 면허 (69세 이하): 갱신 ✅ / 재발급 ✅",
-      "  ▸ 2종 면허 (70~74세): 갱신 ❌ / 재발급 ✅ — 적성검사 대상",
-      "  ▸ 2종 면허 (75세~, 갱신기간 중): 갱신 ❌ / 재발급 ❌ — 국내 적성검사·고령운전자 교육 필요",
-      "  ▸ 1·2종 통합면허 (69세 이하): 갱신 ❌ / 재발급 ✅ — 적성검사 필요",
-      "  ▸ 면허 정지·취소자: 갱신 ❌ / 재발급 ❌ (행정처분 집행)",
+      {
+        title: "📋 신청 가능 여부 (면허 종류·연령별)",
+        cols: ["면허 종류", "갱신", "재발급", "비고"],
+        table: [
+          ["1종 (70세 갱신기간 전)", "❌", "✅", "적성검사 대상"],
+          ["2종 (69세 이하)", "✅", "✅", "—"],
+          ["2종 (70~74세)", "❌", "✅", "적성검사 대상"],
+          ["2종 (75세~, 갱신기간 중)", "❌", "❌", "국내 적성검사·고령운전자 교육 필요"],
+          ["1·2종 통합면허 (69세 이하)", "❌", "✅", "적성검사 필요"],
+          ["면허 정지·취소자", "❌", "❌", "행정처분 집행"],
+        ],
+      },
       "1종 면허 적성검사 기간 연장: 한국도로교통공단(safedriving.or.kr)에서 본인 인증 후 온라인 신청 가능.",
       "국제운전면허증 발급 및 적성검사 연기 신청 불가.",
     ],
@@ -11312,13 +11317,18 @@ const EN_TRANSLATIONS: any = {
       "⚠️ Only Korean nationals may apply.",
       "⚠️ No mail submission — you must visit the consulate in person.",
       "⚠️ Cash only — Debit/credit not accepted.",
-      "📋 Eligibility (by license type & age)",
-      "  ▸ Class 1 (before age-70 renewal period): renew ❌ / reissue ✅ — aptitude test applies",
-      "  ▸ Class 2 (69 or under): renew ✅ / reissue ✅",
-      "  ▸ Class 2 (ages 70–74): renew ❌ / reissue ✅ — aptitude test applies",
-      "  ▸ Class 2 (75+, renewal period started): renew ❌ / reissue ❌ — aptitude test & senior-driver education in Korea required",
-      "  ▸ Class 1·2 combined (69 or under): renew ❌ / reissue ✅ — aptitude test required",
-      "  ▸ Suspended/revoked: renew ❌ / reissue ❌ (administrative action)",
+      {
+        title: "📋 Eligibility (by license type & age)",
+        cols: ["License Type", "Renew", "Reissue", "Notes"],
+        table: [
+          ["Class 1 (before age-70 renewal period)", "❌", "✅", "Aptitude test applies"],
+          ["Class 2 (69 or under)", "✅", "✅", "—"],
+          ["Class 2 (ages 70–74)", "❌", "✅", "Aptitude test applies"],
+          ["Class 2 (75+, renewal period started)", "❌", "❌", "Aptitude test & senior-driver education in Korea required"],
+          ["Class 1·2 combined (69 or under)", "❌", "✅", "Aptitude test required"],
+          ["Suspended/revoked license holders", "❌", "❌", "Administrative action in effect"],
+        ],
+      },
       "Class 1 aptitude-test extension: apply online after identity verification at the Korea Road Traffic Authority (safedriving.or.kr).",
       "International driving permit issuance and aptitude-test postponement cannot be applied for here.",
     ],
@@ -11437,7 +11447,7 @@ const KO_SERVICES = [
   { id: "family_start", icon: "👨‍👩‍👧", title: "가족관계등록", desc: "증명서 · 출생 · 혼인 · 이혼 · 사망" },
   { id: "nationality_start", icon: "🇰🇷", title: "국적", desc: "상실 · 이탈 · 선택 · 보유 신고" },
   { id: "cert_start", icon: "🔐", title: "공동/금융 인증서", desc: "공동인증서 · 금융인증서" },
-  { id: "various_cert_start", icon: "📄", title: "각종 증명서 발급", desc: "출입국 · 운전경력 · 병적증명서" },
+  { id: "various_cert_start", icon: "📄", title: "각종 증명서 발급", desc: "출입국 · 범죄경력 · 영문 운전경력 · 한국면허 갱신 · 여권 사실증명 등" },
   { id: "registration_start", icon: "🏠", title: "재외국민 등록", desc: "등록 · 주소 변경" },
   { id: "emigration_start", icon: "🛫", title: "해외이주 신고", desc: "해외이주 · 귀국 신고" },
 ];
@@ -11450,7 +11460,7 @@ const EN_SERVICES = [
   { id: "family_start", icon: "👨‍👩‍👧", title: "Family Register", desc: "Certificates · Birth · Marriage · Divorce · Death" },
   { id: "nationality_start", icon: "🇰🇷", title: "Nationality", desc: "Loss · Renunciation · Choice · Retention" },
   { id: "cert_start", icon: "🔐", title: "Digital Certificate", desc: "Certificate · Financial Certificate" },
-  { id: "various_cert_start", icon: "📄", title: "Various Certificates", desc: "Entry/Exit · Driving History · Military Record" },
+  { id: "various_cert_start", icon: "📄", title: "Various Certificates", desc: "Entry/Exit · Criminal Record · English Driving History · Korean License Renewal · Passport Facts, etc." },
   { id: "registration_start", icon: "🏠", title: "Overseas Korean Reg.", desc: "Registration · Address Change" },
   { id: "emigration_start", icon: "🛫", title: "Emigration Report", desc: "Emigration · Return Report" },
 ];
@@ -13772,6 +13782,34 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   </div>
                   <div className="info-card-body">
                     {pageNotices.map((n: any, i: number) => {
+                      if (n && typeof n === "object" && Array.isArray(n.table)) {
+                        const cols = n.cols || [];
+                        return (
+                          <div key={i} style={{ margin: "10px 0 14px" }}>
+                            {n.title && <div style={{ fontSize: "13px", fontWeight: 700, color: "#003478", marginBottom: "8px" }}>{n.title}</div>}
+                            <div style={{ overflowX: "auto", borderRadius: "10px", border: "1px solid #e4eaf6" }}>
+                              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "12px", minWidth: "420px" }}>
+                                <thead>
+                                  <tr style={{ background: "#eaf1fb" }}>
+                                    {cols.map((c: string, ci: number) => (
+                                      <th key={ci} style={{ padding: "8px 10px", textAlign: ci === 0 ? "left" : "center", color: "#003478", fontWeight: 700, borderBottom: "1px solid #cdddf5", whiteSpace: "nowrap" }}>{c}</th>
+                                    ))}
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {n.table.map((row: any[], ri: number) => (
+                                    <tr key={ri} style={{ background: ri % 2 === 1 ? "#f7f9fd" : "#fff" }}>
+                                      {row.map((cell: any, ci: number) => (
+                                        <td key={ci} style={{ padding: "8px 10px", textAlign: ci === 0 ? "left" : "center", borderBottom: "1px solid #eef2f8", color: ci === 0 ? "#1a1a2e" : "#334", fontWeight: ci === 0 ? 600 : 400, whiteSpace: ci === 0 ? "nowrap" : "normal" }}>{cell}</td>
+                                      ))}
+                                    </tr>
+                                  ))}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        );
+                      }
                       const text = typeof n === "string" ? n : (n?.text ?? "");
                       const goId = (n && typeof n === "object") ? n.goId : null;
                       const href = (n && typeof n === "object") ? n.href : null;

@@ -5376,6 +5376,7 @@ const TREE = {
       { id: "military_permit_pr", icon: "🟢", title: "영주권자 (본인 또는 부모)", desc: "PR카드 보유 — 37세까지 또는 3년 범위" },
       { id: "military_permit_dual", icon: "🇨🇦", title: "복수국적자 (캐나다 시민권 보유)", desc: "부모와 거주 or 10년 이상 국외 거주 — 37세까지" },
       { id: "military_permit_family5", icon: "👨‍👩‍👦", title: "부모와 5년 이상 국외 거주 (기타)", desc: "영주권·시민권 없이 부모와 장기 거주" },
+      { id: "military_permit_student", icon: "🎓", title: "유학생 (학생비자)", desc: "해외 대학·대학원 재학 — 수학과정별 허가기간 상이" },
       { id: "military_permit_short", icon: "✈️", title: "단기 여행 허가", desc: "일시 출국·단기 체재 — 27세 이내, 병무청 온라인 신청 원칙" },
     ],
   },
@@ -5523,6 +5524,49 @@ const TREE = {
     bookingLabel: "예약하기 (병역 → 재외국민2세) →",
     onlineLink: "https://www.mma.go.kr/contents.do?mc=mma0000802",
     onlineLabel: "병무청 재외국민 2세 안내",
+  },
+
+  // ── 유학생(학생비자) ──
+  military_permit_student: {
+    type: "result",
+    service: "military",
+    breadcrumb: ["홈", "병역", "국외여행허가", "유학생"],
+    title: "국외여행허가 — 유학생 (학생비자)",
+    docs: [
+      "국외여행(기간연장)허가 신청서 (병역법 시행규칙 별지 제132호서식)",
+      "  └ 신청서 작성예시 참고",
+      "재학증명서 원본 또는 입학허가서 (학교 발행)",
+      "  └ 이름·생년월일·입학일·학년·전공·졸업예정일·이수과정(학제) 반드시 명기",
+      "재학사실확인서 및 진술서 (양식)",
+      "국외학력에 관한 사실확인서증명서 발급 동의서 (양식)",
+      "허가의무 위반 시 제재사항 확인서 (양식)",
+      "여권 원본 및 사본 1부",
+      "체류사증(학생비자) 원본 및 사본 1부",
+    ],
+    costs: [{ label: "수수료", value: "무료" }],
+    time: "약 1~2주",
+    notices: [
+      "본인이 직접 방문 신청.",
+      {
+        title: "📋 수학과정별 허가기간",
+        cols: ["수학 과정", "허가 기간"],
+        table: [
+          ["대학교 4년제", "25세까지"],
+          ["대학교 5년제", "26세까지"],
+          ["대학교 6년제 (의·치·한의·수의대)", "28세까지"],
+          ["대학원 석사 2년제", "27세까지"],
+          ["대학원 석사 2년 초과", "28세까지"],
+          ["일반대학원 의학·치의학·한의학·수의학과 및 의학전문대학원·치의학전문대학원 박사과정", "29세까지"],
+        ],
+      },
+      "▸ 허가기간은 입학예정일 6개월 전부터 졸업예정일 경과 6개월 범위 내에서 산정됩니다.",
+      "▸ 상급학교 진학예정자는 졸업예정일부터 6개월까지 연장됩니다.",
+      "▸ 30세가 되는 해 6월 말까지 박사학위를 취득할 수 있는 경우, 그때까지 추가 기간연장 허가가 가능합니다.",
+      "신청서 작성 시 등록기준지(구 본적)·주민등록주소·전화번호·E-mail 등을 정확히 기재하세요.",
+      { text: "병무청 홈페이지에서 국외여행허가 안내 확인", href: "https://www.mma.go.kr/index.do" },
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "예약하기 (병역 → 국외여행허가) →",
   },
 
   // ── 단기 여행 허가 ──
@@ -9232,6 +9276,7 @@ const EN_TRANSLATIONS: any = {
       military_permit_pr: { title: "Permanent resident (self or parents)", desc: "Holds a PR Card — until age 37 or within a 3-year range" },
       military_permit_dual: { title: "Dual citizen (holds Canadian citizenship)", desc: "Living with parents or 10+ years abroad — until age 37" },
       military_permit_family5: { title: "Lived abroad 5+ years with parents (other)", desc: "Long-term residence with parents without PR/citizenship" },
+      military_permit_student: { title: "International student (student visa)", desc: "Enrolled at a university/graduate school abroad — permit period varies by program" },
       military_permit_short: { title: "Short-term travel permit", desc: "Temporary departure/short stay — under age 27, apply online via MMA as a rule" },
     },
   },
@@ -9355,6 +9400,45 @@ const EN_TRANSLATIONS: any = {
     ],
     bookingLabel: "Book Appointment (Military → 2nd-gen overseas Korean) →",
     onlineLabel: "MMA 2nd-gen overseas Korean info",
+  },
+  military_permit_student: {
+    breadcrumb: ["Home", "Military Service", "Overseas travel permit", "International student"],
+    title: "Overseas travel permit — International student (student visa)",
+    docs: [
+      "Overseas travel (period extension) permit application form (MSA Enforcement Rule Annex Form No. 132)",
+      "  └ See the sample of a completed form",
+      "Certificate of enrollment original or letter of admission (issued by the school)",
+      "  └ Must clearly state name, date of birth, admission date, year/grade, major, expected graduation date, and program type",
+      "Enrollment confirmation and statement (form)",
+      "Consent for issuance of a fact-confirmation certificate on overseas academic history (form)",
+      "Confirmation of sanctions for violating permit obligations (form)",
+      "Passport original + 1 copy",
+      "Student visa original + 1 copy",
+    ],
+    costs: [{ label: "Fee", value: "Free" }],
+    time: "About 1–2 weeks",
+    notices: [
+      "Must apply in person.",
+      {
+        title: "📋 Permit period by program",
+        cols: ["Program", "Permit period"],
+        table: [
+          ["4-year university", "Until age 25"],
+          ["5-year university", "Until age 26"],
+          ["6-year university (medicine, dentistry, Korean medicine, veterinary)", "Until age 28"],
+          ["2-year master's program", "Until age 27"],
+          ["Master's program over 2 years", "Until age 28"],
+          ["PhD program in medicine, dentistry, Korean medicine, veterinary medicine (incl. professional graduate schools)", "Until age 29"],
+        ],
+      },
+      "▸ The permit period is calculated within a range from 6 months before the expected admission date to 6 months after the expected graduation date.",
+      "▸ Those planning further study extend to 6 months after the expected graduation date.",
+      "▸ If a doctoral degree can be completed by the end of June of the year the applicant turns 30, an additional extension may be granted until then.",
+      "When filling out the form, accurately state the registration base address, resident address, phone number, and email.",
+      { text: "Check overseas travel permit info on the MMA website", href: "https://www.mma.go.kr/index.do" },
+    ],
+    booking: "https://www.torbooking.com/book",
+    bookingLabel: "Book Appointment (Military → Overseas travel permit) →",
   },
   military_permit_short: {
     breadcrumb: ["Home", "Military Service", "Overseas travel permit", "Short-term travel permit"],
@@ -11544,6 +11628,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     if (t.startsWith("병적증명서 신청서") || t.startsWith("Military service certificate application form")) {
       return "/forms/military_cert_application_sample.pdf";
     }
+    // 유학생 국외여행허가 신청서 작성예시
+    if (t.startsWith("신청서 작성예시") || t.startsWith("See the sample of a completed form")) {
+      return "/forms/military_permit_student_application_sample.pdf";
+    }
     // 국적상실신고서 작성 샘플 (본인용)
     if (t.startsWith("국적상실신고서 (양식, 작성예시") || t.startsWith("Nationality-loss report form (see the example")) {
       return "/forms/nationality_loss_report_sample.pdf";
@@ -11753,6 +11841,15 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // ── 병역 양식 ──
     if (t.startsWith("국외여행허가 신청서") || t.startsWith("국외여행(기간연장)허가 신청서") || t.startsWith("Overseas travel permit application") || t.startsWith("Overseas travel (period extension) permit application")) {
       return "/forms/overseas_travel_permit_form.pdf";
+    }
+    if (t.startsWith("재학사실확인서 및 진술서") || t.startsWith("Enrollment confirmation and statement")) {
+      return "/forms/military_enrollment_confirmation_statement.pdf";
+    }
+    if (t.startsWith("국외학력에 관한 사실확인서증명서 발급 동의서") || t.startsWith("Consent for issuance of a fact-confirmation certificate on overseas academic history")) {
+      return "/forms/military_overseas_education_confirmation_consent.pdf";
+    }
+    if (t.startsWith("허가의무 위반 시 제재사항 확인서") || t.startsWith("Confirmation of sanctions for violating permit obligations")) {
+      return "/forms/military_permit_violation_sanctions_confirmation.pdf";
     }
     if (t.startsWith("가족 거주사실 확인서") || t.startsWith("Family residence confirmation form")) {
       return "/forms/family_residence_confirmation.pdf";

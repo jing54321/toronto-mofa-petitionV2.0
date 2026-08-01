@@ -2373,8 +2373,8 @@ const TREE = {
     sub: "국적 업무는 상황에 따라 절차가 크게 다릅니다. 해당하는 항목을 선택하세요.",
     options: [
       { id: "nationality_citizen_start", icon: "🍁", title: "본인 또는 가족이 외국 국적(시민권)을 취득한 경우", desc: "국적이탈·상실·보유·선택 — 내 상황에 맞게 안내" },
-      { id: "nationality_acquire", icon: "👶", title: "한국인 부(父)와 외국인 모(母) 사이의 혼외자", desc: "인지에 의한 국적취득 (미성년) · CAD $24.30" },
       { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적 회복을 원하는 경우 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
+      { id: "nationality_acquire", icon: "👶", title: "한국인 부(父)와 외국인 모(母) 사이의 혼외자", desc: "인지에 의한 국적취득 (미성년)" },
     ],
   },
 
@@ -3006,22 +3006,20 @@ const TREE = {
     breadcrumb: ["홈", "국적", "국적회복"],
     title: "국적회복 — 만 65세 이상 복수국적 취득 (영사관 업무 아님)",
     sub: "한국 내 출입국사무소에서만 신청 가능 · 영사관 접수 불가",
-    docs: [
-      "⚠️ 국적회복(복수국적) 신청은 한국 내 출입국사무소에서만 가능 — 재외공관(영사관) 접수 불가.",
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "절차 안내 (한국 방문 시):",
-      "  ① 국적상실신고 (출입국사무소 또는 재외공관 — 이미 했으면 생략)",
-      "  ② 재외동포비자(F-4) 신청 (출입국사무소 또는 재외공관, 거주 예정지 관할 출입국)",
-      "  ③ 거소증 신청 (출입국사무소만 가능, F-4와 동시 신청 가능, 약 3주)",
-      "  ▸ ①②③은 출입국사무소에서 동시 신청 가능",
-      "  ④ 국적회복허가 신청 (출입국사무소, 약 7~8개월, 관할마다 상이)",
-      "  ⑤ 허가 통지서 수령 후 1년 이내 외국국적불행사 서약서 제출",
-      "  ⑥ 동사무소·구청에서 주민등록증·한국여권 발급 신청",
-    ],
+    docs: [],
     costs: [{ label: "수수료", value: "출입국사무소 안내 참조" }],
     time: "약 7~8개월 (출입국사무소 처리)",
     notices: [
+      "⚠️ 국적회복(복수국적) 신청은 한국 내 출입국사무소에서만 가능 — 재외공관(영사관) 접수 불가.",
       "2011년 1월 1일부터 만 65세 이상 외국국적동포가 국적회복허가를 통해 복수국적 취득 가능 (외국국적 포기 없이 한국국적 보유).",
+      "절차 안내:",
+      "① 국적상실신고 (출입국사무소 또는 재외공관 — 이미 했으면 생략)",
+      "② 재외동포비자(F-4) 신청 (출입국사무소 또는 재외공관, 거주 예정지 관할 출입국)",
+      "③ 거소증 신청 (출입국사무소만 가능, F-4와 동시 신청 가능, 약 3주)",
+      "  ▸ ①②③은 출입국사무소에서 동시 신청 가능",
+      "④ 국적회복허가 신청 (출입국사무소, 약 7~8개월, 관할마다 상이)",
+      "⑤ 허가 통지서 수령 후 1년 이내 외국국적불행사 서약서 제출",
+      "⑥ 주민센터·구청에서 주민등록증·한국여권 발급 신청",
       "⚠️ 허가 통지서 수령 후 1년 이내에 외국국적불행사 서약을 하지 않으면 회복된 국적이 자동 상실됩니다.",
       "출입국 시 양국 여권 모두 소지 — 한국 출입국은 한국여권, 캐나다 출입국은 캐나다여권 사용.",
       "출입국사무소 위치·연락처 및 자세한 내용은 hikorea.go.kr 참고.",
@@ -6318,7 +6316,7 @@ const TREE = {
       {
         q: "65세 이상 복수국적 신청 절차는 어떻게 되나요?",
         q_en: "What is the procedure for dual nationality application for those aged 65 and older?",
-        a: "① 국적상실신고 → ② 재외동포비자 신청 → ③ 거소증 신청 → ④ 국적회복허가 신청 (한국 내 출입국사무소 신청 가능) → ⑤ 국적회복허가 통지서 수령 후 외국국적불행사 서약서 제출 → ⑥ 모든 절차 완료 후 가까운 동사무소·구청에서 주민등록증 및 한국여권 발급 신청, 순서로 진행합니다.",
+        a: "① 국적상실신고 → ② 재외동포비자 신청 → ③ 거소증 신청 → ④ 국적회복허가 신청 (한국 내 출입국사무소 신청 가능) → ⑤ 국적회복허가 통지서 수령 후 외국국적불행사 서약서 제출 → ⑥ 모든 절차 완료 후 가까운 주민센터·구청에서 주민등록증 및 한국여권 발급 신청, 순서로 진행합니다.",
         a_en: "① Report loss of nationality → ② Apply for an Overseas Korean visa → ③ Apply for a Domestic Residence Report (Geosojeung) → ④ Apply for restoration of nationality (can be filed at an immigration office in Korea) → ⑤ After receiving the restoration approval notice, submit a pledge not to exercise foreign nationality → ⑥ Once all steps are complete, apply for a resident registration card and Korean passport at a nearby community/district office.",
       },
       {
@@ -10137,7 +10135,7 @@ const EN_TRANSLATIONS: any = {
     sub: "Nationality services differ completely by situation. Select the item that matches your case.",
     options: {
       nationality_citizen_start: { title: "You or a family member acquired a foreign nationality (citizenship)", desc: "Exit / loss / retention / choice — guided to your situation" },
-      nationality_acquire: { title: "Child of a Korean father & foreign mother born out of wedlock", desc: "Nationality acquisition by acknowledgment (minor) · CAD $24.30" },
+      nationality_acquire: { title: "Child of a Korean father & foreign mother born out of wedlock", desc: "Nationality acquisition by acknowledgment (minor)" },
       nationality_recover: { title: "Restoring Korean nationality (age 65+)", desc: "Dual-nationality restoration — only at a Korean immigration office" },
     },
   },
@@ -10689,22 +10687,20 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Nationality", "Nationality restoration"],
     title: "Nationality restoration — dual nationality for age 65+ (not a consular service)",
     sub: "Can only be applied for at a Korean immigration office · not accepted at the consulate",
-    docs: [
-      "⚠️ Nationality restoration (dual nationality) can only be applied for at an immigration office in Korea — not accepted at a mission (consulate).",
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-      "Procedure (when visiting Korea):",
-      "  ① Nationality-loss report (immigration office or consulate — skip if already done)",
-      "  ② Overseas Korean (F-4) visa application (immigration office or consulate; office for your intended residence)",
-      "  ③ Residence card application (immigration office only; can file with F-4 together; about 3 weeks)",
-      "  ▸ Steps ①②③ can be filed together at the immigration office",
-      "  ④ Nationality restoration permit application (immigration office, about 7–8 months, varies by office)",
-      "  ⑤ Submit the pledge not to exercise foreign nationality within 1 year of receiving the permit notice",
-      "  ⑥ Apply for a resident registration card and Korean passport at a community/district office",
-    ],
+    docs: [],
     costs: [{ label: "Fee", value: "See the immigration office" }],
     time: "About 7–8 months (processed by the immigration office)",
     notices: [
+      "⚠️ Nationality restoration (dual nationality) can only be applied for at an immigration office in Korea — not accepted at a mission (consulate).",
       "Since Jan 1, 2011, overseas Koreans aged 65+ may obtain dual nationality via a nationality restoration permit (keeping the foreign nationality without giving it up).",
+      "Procedure:",
+      "① Nationality-loss report (immigration office or consulate — skip if already done)",
+      "② Overseas Korean (F-4) visa application (immigration office or consulate; office for your intended residence)",
+      "③ Residence card application (immigration office only; can file with F-4 together; about 3 weeks)",
+      "  ▸ Steps ①②③ can be filed together at the immigration office",
+      "④ Nationality restoration permit application (immigration office, about 7–8 months, varies by office)",
+      "⑤ Submit the pledge not to exercise foreign nationality within 1 year of receiving the permit notice",
+      "⑥ Apply for a resident registration card and Korean passport at a community center (jumin-center) or district office",
       "⚠️ If the pledge not to exercise foreign nationality is not submitted within 1 year of the permit notice, the restored nationality is automatically lost.",
       "Carry both passports when traveling — use the Korean passport for Korean immigration, the Canadian passport for Canadian immigration.",
       "For office locations/contacts and details, see hikorea.go.kr.",
@@ -11532,7 +11528,7 @@ const KO_SERVICES = [
   { id: "notarization_start", icon: "📝", title: "공증", desc: "서류 · 서명 · 번역 공증" },
   { id: "military_start", icon: "🪖", title: "병역", desc: "국외여행허가 · 귀국 신고" },
   { id: "family_start", icon: "👨‍👩‍👧", title: "가족관계등록", desc: "증명서 · 출생 · 혼인 · 이혼 · 사망" },
-  { id: "nationality_start", icon: "🇰🇷", title: "국적", desc: "상실 · 이탈 · 선택 · 보유 신고" },
+  { id: "nationality_start", icon: "🪪", title: "국적", desc: "상실 · 이탈 · 선택 · 보유 신고" },
   { id: "cert_start", icon: "🔐", title: "공동/금융 인증서", desc: "공동인증서 · 금융인증서" },
   { id: "various_cert_start", icon: "📄", title: "각종 증명서 발급", desc: "출입국 · 범죄경력 · 영문 운전경력 · 한국면허 갱신 · 여권 사실증명 등" },
   { id: "registration_start", icon: "🏠", title: "재외국민 등록", desc: "등록 · 주소 변경" },
@@ -11545,7 +11541,7 @@ const EN_SERVICES = [
   { id: "notarization_start", icon: "📝", title: "Notarization", desc: "Document · Signature · Translation" },
   { id: "military_start", icon: "🪖", title: "Military Service", desc: "Overseas Travel Permit · Return Report" },
   { id: "family_start", icon: "👨‍👩‍👧", title: "Family Register", desc: "Certificates · Birth · Marriage · Divorce · Death" },
-  { id: "nationality_start", icon: "🇰🇷", title: "Nationality", desc: "Loss · Renunciation · Choice · Retention" },
+  { id: "nationality_start", icon: "🪪", title: "Nationality", desc: "Loss · Renunciation · Choice · Retention" },
   { id: "cert_start", icon: "🔐", title: "Digital Certificate", desc: "Certificate · Financial Certificate" },
   { id: "various_cert_start", icon: "📄", title: "Various Certificates", desc: "Entry/Exit · Criminal Record · English Driving History · Korean License Renewal · Passport Facts, etc." },
   { id: "registration_start", icon: "🏠", title: "Overseas Korean Reg.", desc: "Registration · Address Change" },
@@ -13709,7 +13705,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
               <div className="info-card">
                 <div className="info-card-header">
                   <span className="info-card-icon">📂</span>
-                  <span className="info-card-title">{lang === "ko" ? "필요 서류" : "Required Documents"}</span>
+                  <span className="info-card-title">{lang === "ko" ? "구비서류" : "Required Documents"}</span>
                   {mainDocs.length > 0 && (() => { const realCount = mainDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("└")).length; return <span className="info-card-count">{realCount}{lang === "ko" ? "개" : ""}</span>; })()}
                 </div>
                 <div className="info-card-body">

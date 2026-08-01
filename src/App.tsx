@@ -76,7 +76,7 @@ const STYLES = `
     box-shadow: 0 2px 12px rgba(0,0,0,0.22);
   }
   .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; flex: 1; }
-  .header-flag { font-size: 22px; flex-shrink: 0; }
+  .header-flag { width: 24px; height: 24px; flex-shrink: 0; }
   .header-title { color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.25; min-width: 0; }
   .header-title span { display: block; font-size: 11px; font-weight: 400; opacity: 0.75; margin-top: 1px; }
   .header-tel { color: rgba(255,255,255,0.8); font-size: 12px; display: flex; align-items: center; gap: 4px; flex-shrink: 0; white-space: nowrap; }
@@ -783,7 +783,7 @@ const TREE = {
       { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_n_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
+      { id: "pp_n_adult_acq", icon: "🪪", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_n_adult_lost_status: {
@@ -796,7 +796,7 @@ const TREE = {
       { id: "pp_n_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_n_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_n_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
+      { id: "pp_n_adult_acq", icon: "🪪", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_n_adult_new_status: {
@@ -806,7 +806,7 @@ const TREE = {
     sub: "성인이 한국 여권을 생애 최초로 신규 발급받는 경우는, 한국 국적을 보유한 다음 두 경우에 해당합니다.",
     options: [
       { id: "pp_n_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유 — 국적이탈 신고를 하지 않은 경우" },
-      { id: "pp_n_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
+      { id: "pp_n_adult_acq", icon: "🪪", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
 
@@ -862,7 +862,7 @@ const TREE = {
       { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_u_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
+      { id: "pp_u_adult_acq", icon: "🪪", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_u_adult_lost: {
@@ -875,7 +875,7 @@ const TREE = {
       { id: "pp_u_adult_longterm", icon: "📄", title: "장기체류자", desc: "Study Permit · Work Permit 등 장기 비자" },
       { id: "pp_u_adult_eta", icon: "✈️", title: "단기방문 (eTA)", desc: "무비자 입국 — 입국 후 6개월 이내" },
       { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유" },
-      { id: "pp_u_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
+      { id: "pp_u_adult_acq", icon: "🪪", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
   pp_u_adult_new: {
@@ -885,7 +885,7 @@ const TREE = {
     sub: "성인이 한국 여권을 생애 최초로 신규 발급받는 경우는, 한국 국적을 보유한 다음 두 경우에 해당합니다.",
     options: [
       { id: "pp_u_adult_dual", icon: "👶", title: "선천적 복수국적자", desc: "태어날 때부터 한국·캐나다 국적 보유 — 국적이탈 신고를 하지 않은 경우" },
-      { id: "pp_u_adult_acq", icon: "🇰🇷", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
+      { id: "pp_u_adult_acq", icon: "🪪", title: "후천적 시민권자 (국적회복을 한 사람)", desc: "원래 한국 국적 → 캐나다 시민권 취득 → 이후 국적회복" },
     ],
   },
 
@@ -1655,7 +1655,7 @@ const TREE = {
     question: "어떤 증명서가 필요하신가요?",
     sub: "공동인증서가 있으면 온라인으로 즉시 무료 발급 가능합니다 — 영사관 방문 불필요.",
     options: [
-      { id: "family_cert_korean", icon: "🇰🇷", title: "국문 증명서", desc: "가족관계·기본·혼인관계·입양관계·제적등본 등" },
+      { id: "family_cert_korean", icon: "🪪", title: "국문 증명서", desc: "가족관계·기본·혼인관계·입양관계·제적등본 등" },
       { id: "family_cert_english", icon: "🌐", title: "영문 증명서", desc: "본인·부모·배우자 정보를 담은 영문 증명서" },
     ],
   },
@@ -1906,7 +1906,7 @@ const TREE = {
     question: "부모의 국적 상황은?",
     sub: "출생 후 1개월 이내 신고가 원칙입니다(기한이 지나도 신고는 가능하며, 지연 사유 설명이 필요할 수 있습니다). 부모 국적 조합에 따라 필요 서류가 달라집니다.",
     options: [
-      { id: "family_birth_both_korean", icon: "🇰🇷", title: "부모 모두 한국 국적", desc: "혼인신고 완료 후 신청 가능" },
+      { id: "family_birth_both_korean", icon: "🪪", title: "부모 모두 한국 국적", desc: "혼인신고 완료 후 신청 가능" },
       { id: "family_birth_father_korean", icon: "👨", title: "부(아버지)만 한국인 + 모(어머니)는 외국인", desc: "Long-form 출생증명서 필수 — 혼외자는 인지신고 별도" },
       { id: "family_birth_mother_korean", icon: "👩", title: "모(어머니)만 한국인 + 부(아버지)는 외국인", desc: "Long-form 출생증명서 필수" },
       { id: "family_birth_unmarried", icon: "👤", title: "미혼 한국인 (혼외자)", desc: "부를 모르는 경우 모의 성·본을 따름" },
@@ -2060,7 +2060,7 @@ const TREE = {
     breadcrumb: ["홈", "가족관계등록", "신고", "혼인신고"],
     question: "혼인 당사자의 국적 상황은?",
     options: [
-      { id: "family_marriage_korean", icon: "🇰🇷", title: "쌍방 모두 한국인", desc: "두 분 모두 한국 국적인 경우" },
+      { id: "family_marriage_korean", icon: "🪪", title: "쌍방 모두 한국인", desc: "두 분 모두 한국 국적인 경우" },
       { id: "family_marriage_mixed", icon: "🌏", title: "일방이 외국인", desc: "한국인 + 외국인 조합" },
     ],
   },
@@ -2145,11 +2145,11 @@ const TREE = {
     type: "question",
     service: "family",
     breadcrumb: ["홈", "가족관계등록", "신고", "이혼신고"],
-    question: "이혼 방식은?",
-    sub: "이혼 방식에 따라 절차와 서류가 완전히 달라집니다.",
+    question: "두 분의 국적은 어떻게 되시나요?",
+    sub: "⚠️ 이혼판결일 기준 두 사람 모두 캐나다 국적이면 이혼신고가 불가능합니다 (국적상실신고만 가능).",
     options: [
-      { id: "family_divorce_agreement", icon: "🤝", title: "협의이혼 (쌍방 합의)", desc: "쌍방 모두 한국 국적 필수 — 약 6개월 소요" },
-      { id: "family_divorce_court", icon: "⚖️", title: "재판이혼 (캐나다 법원 판결)", desc: "캐나다 법원 이혼 후 한국에 신고 — 약 3주" },
+      { id: "family_divorce_agreement", icon: "🤝", title: "두 사람 모두 한국 국적자", desc: "협의이혼의사확인 신청 — 약 6개월 (캐나다 법원 이혼했다면 재판이혼으로도 신고 가능)" },
+      { id: "family_divorce_court", icon: "⚖️", title: "두 사람 중 1명만 한국 국적자", desc: "캐나다 법원 이혼 후 재판이혼 신고 — 약 3~4주" },
     ],
   },
 
@@ -2373,7 +2373,7 @@ const TREE = {
     sub: "국적 업무는 상황에 따라 절차가 크게 다릅니다. 해당하는 항목을 선택하세요.",
     options: [
       { id: "nationality_citizen_start", icon: "🍁", title: "본인 또는 가족이 외국 국적(시민권)을 취득한 경우", desc: "국적이탈·상실·보유·선택 — 내 상황에 맞게 안내" },
-      { id: "nationality_recover", icon: "🇰🇷", title: "한국 국적 회복을 원하는 경우 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
+      { id: "nationality_recover", icon: "🪪", title: "한국 국적 회복을 원하는 경우 (만 65세 이상)", desc: "복수국적 회복 — 한국 출입국사무소에서만 신청 가능" },
       { id: "nationality_acquire", icon: "👶", title: "한국인 부(父)와 외국인 모(母) 사이의 혼외자", desc: "인지에 의한 국적취득 (미성년)" },
     ],
   },
@@ -2509,7 +2509,7 @@ const TREE = {
     question: "한국 국적을 어떻게 하시겠어요?",
     sub: "6개월 이내에는 한국 국적을 유지(보유신고)할 수도, 유지하지 않을 수도 있습니다.",
     options: [
-      { id: "nationality_retain", icon: "🇰🇷", title: "한국 국적을 유지하겠습니다", desc: "국적보유신고 — 한국 국적 유지 · CAD $24.30" },
+      { id: "nationality_retain", icon: "🪪", title: "한국 국적을 유지하겠습니다", desc: "국적보유신고 — 한국 국적 유지 · CAD $24.30" },
       { id: "nationality_loss", icon: "📤", title: "한국 국적을 유지하지 않겠습니다", desc: "국적상실신고 — 한국 국적 상실 · 무료" },
     ],
   },
@@ -3674,10 +3674,10 @@ const TREE = {
 
   visa_start: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)"], question: "한국 혈통이 있으신가요?", sub: "한국법상 부모 중 한 명이라도 한국 국적이었던 적이 있으면, 지금은 캐나다인이 되셨어도 본인이 선천적으로 한국 국적을 보유할 수 있습니다. 비자 신청 전 반드시 확인이 필요합니다.", options: [{ id: "visa_ko_heritage_yes", icon: "🧬", title: "네 — 부모 또는 조부모가 한국인이었던 적 있어요", desc: "현재 캐나다인이 되셨더라도 해당됩니다" },{ id: "visa_ko_heritage_unsure", icon: "🤔", title: "잘 모르겠어요", desc: "부모님 중 한 분이 한국인이었을 수도 있어요" },{ id: "visa_ko_heritage_no", icon: "🌐", title: "전혀 없어요", desc: "부모·조부모 모두 한국 국적인 적 없음" }] },
 
-  visa_ko_heritage_yes: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통"], question: "어떤 상황이신가요?", sub: "한국 혈통이 있으시면 비자 신청 전 국적 상태를 먼저 확인해야 합니다.", options: [{ id: "visa_dual_check_en", icon: "⚠️", title: "국적 상태를 아직 확인하지 않았어요", desc: "선천적 한국 국적 보유 여부 — 먼저 확인 필수" }, { id: "visa_f4_family_en", icon: "👨‍👩‍👧", title: "배우자 또는 자녀가 F-4 재외동포 비자 소지자예요", desc: "동반 비자 (F-3) 신청" }, { id: "visa_f4_en", icon: "🇰🇷", title: "국적상실 확인 완료 — F-4 비자 신청하러 왔어요", desc: "해당 케이스 선택" }] },
+  visa_ko_heritage_yes: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통"], question: "어떤 상황이신가요?", sub: "한국 혈통이 있으시면 비자 신청 전 국적 상태를 먼저 확인해야 합니다.", options: [{ id: "visa_dual_check_en", icon: "⚠️", title: "국적 상태를 아직 확인하지 않았어요", desc: "선천적 한국 국적 보유 여부 — 먼저 확인 필수" }, { id: "visa_f4_family_en", icon: "👨‍👩‍👧", title: "배우자 또는 자녀가 F-4 재외동포 비자 소지자예요", desc: "동반 비자 (F-3) 신청" }, { id: "visa_f4_en", icon: "🪪", title: "국적상실 확인 완료 — F-4 비자 신청하러 왔어요", desc: "해당 케이스 선택" }] },
   visa_ko_heritage_unsure: { type: "result", service: "visa", breadcrumb: ["홈", "비자 (사증)", "혈통 불확실"], title: "⚠️ 비자 신청 전 부모님께 먼저 확인하세요", docs: ["부모님 중 한 분이라도 한국 국적이었던 적이 있는지 확인하세요", "  ▸ 현재 캐나다 시민권자이더라도, 본인 출생 당시 한국인이었다면 해당됩니다", "  ▸ 출생신고를 한 적 없어도, 출생 당시 부모 중 한 명이 한국인이었으면 본인도 한국 국적입니다", "확인 결과에 따라:", "  ▸ 한국 혈통 있음 → 뒤로 가서 '네' 선택", "  ▸ 한국 혈통 없음 → 뒤로 가서 '전혀 없어요' 선택"], costs: [{ label: "수수료", value: "해당 없음 — 상담 안내" }], time: "부모님께 확인 후 다시 방문", notices: ["⚠️ 한국 국적을 보유한 상태에서 비자를 신청하면 접수가 거부됩니다.", "⚠️ 만 18~37세 남성이고 한국 국적이라면 병역 의무가 있을 수 있습니다.", "여전히 불확실하다면 영사관(416-920-3809) 또는 국적과 상담 예약을 이용하세요."], booking: "https://www.torbooking.com/book", bookingLabel: "국적 상담 예약하기 →" },
 
-  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🇨🇦 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 그 외 국적은 사증면제 여부·체류 기간이 다르므로 공식 안내를 확인하세요.", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·경유 (무비자)", desc: "무비자 · K-ETA · 경유(TWOV)" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-9 관광, C-3-4 출장, C-3-1 일반, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
+  visa_ko_heritage_no: { type: "question", service: "visa", breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음"], question: "방문 목적은 무엇인가요?", sub: "🍁 캐나다 국적자는 한국 무비자 입국 가능 (최대 6개월). 그 외 국적은 사증면제 여부·체류 기간이 다르므로 공식 안내를 확인하세요.", options: [{ id: "visa_visit_transit_en", icon: "🌏", title: "관광·경유 (무비자)", desc: "무비자 · K-ETA · 경유(TWOV)" }, { id: "visa_short_term_en", icon: "🤝", title: "단기 방문 (비자 필요)", desc: "C-3-9 관광, C-3-4 출장, C-3-1 일반, C-3-3 의료관광" }, { id: "visa_work_en", icon: "💼", title: "취업", desc: "E-2 원어민교사, H-1 워킹홀리데이, F-1-D 디지털노마드 등" }, { id: "visa_study_en", icon: "🎓", title: "유학·어학연수", desc: "D-2 유학, D-4 어학연수" }, { id: "visa_marriage_en", icon: "💍", title: "결혼이민 (F-6-1)", desc: "한국 국민의 배우자" }, { id: "visa_mail_en", icon: "📮", title: "우편 신청·비자 조회", desc: "우편 신청 안내 및 비자 진행 조회 방법" }] },
   visa_start_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa"], question: "Do you have Korean heritage?", sub: "Under Korean law, if either of your parents is/was EVER a Korean national — even if they later became Canadian — you may hold Korean citizenship automatically. This affects whether you need a visa at all.", options: [
     { id: "visa_heritage_yes_en", icon: "🧬", title: "Yes — a parent or grandparent held Korean nationality", desc: "Applies even if they later became a foreign national" },
     { id: "visa_heritage_no_en", icon: "🌐", title: "No — no Korean heritage", desc: "No parent or grandparent held Korean nationality" },
@@ -3693,7 +3693,7 @@ const TREE = {
     options: [
       { id: "visa_dual_check_en", icon: "⚠️", title: "I haven't checked my Korean citizenship status yet", desc: "You may still hold Korean nationality — check this first" },
       { id: "visa_f4_family_en", icon: "👨‍👩‍👧", title: "My spouse/child holds an F-4 Overseas Korean Visa", desc: "Accompanying family → F-3 Dependent Visa" },
-      { id: "visa_f4_en", icon: "🇰🇷", title: "Nationality loss/renunciation confirmed — applying for F-4 Visa", desc: "Select the case that matches your situation" },
+      { id: "visa_f4_en", icon: "🪪", title: "Nationality loss/renunciation confirmed — applying for F-4 Visa", desc: "Select the case that matches your situation" },
     ],
   },
 
@@ -3996,7 +3996,7 @@ const TREE = {
     breadcrumb: ["Home", "Visa", "No Korean Heritage", "Visiting Korea"],
     title: "Visiting Korea — Tourist / Short-Term Stay",
     docs: [
-      "🇨🇦 Canadian passport holders: NO VISA REQUIRED",
+      "🍁 Canadian passport holders: NO VISA REQUIRED",
       "  ▸ Simply enter Korea with your Canadian passport — no Consulate visit needed",
       "  ▸ Visa-free stay: up to 6 months per entry",
       "  ▸ K-ETA currently exempted for Canadians until December 31, 2026",
@@ -4016,7 +4016,7 @@ const TREE = {
     ],
     time: "Approx. 5–7 business days (visa applicants only)",
     notices: [
-      "🇨🇦 Canadian passport holders: entry is visa-free — no Consulate visit needed.",
+      "🍁 Canadian passport holders: entry is visa-free — no Consulate visit needed.",
       "Visa-free stay is subject to immigration officer's discretion at port of entry.",
       "Short-term visitor visas cannot be extended or converted to another visa type inside Korea.",
       "If you have Korean heritage (parent or grandparent was Korean): you may qualify for the F-4 Overseas Korean Visa — go back and select the Korean heritage option.",
@@ -4035,7 +4035,7 @@ const TREE = {
     question: "Step 1 — What is your nationality?",
     sub: "TWOV (Transit Without Visa) allows up to 30 days in Korea without a visa — but only for certain nationalities and travel routes.",
     options: [
-      { id: "visa_transit_canadian_en", icon: "🇨🇦", title: "Canadian citizen", desc: "Visa-free entry to Korea — TWOV not needed" },
+      { id: "visa_transit_canadian_en", icon: "🍁", title: "Canadian citizen", desc: "Visa-free entry to Korea — TWOV not needed" },
       { id: "visa_transit_ineligible_en", icon: "🚫", title: "One of the restricted nationalities", desc: "Pakistan · Bangladesh · Nepal · Nigeria · Ghana · Egypt · Syria · Sudan · Iran · Cuba · Afghanistan · Iraq · Uzbekistan · Kyrgyzstan · Sri Lanka · Myanmar · Cameroon · Senegal · Gambia · Yemen · Somalia · Kosovo · Palestine" },
       { id: "visa_transit_step2_en", icon: "🌏", title: "Other nationality (China, India, Philippines, Vietnam, etc.)", desc: "May be eligible for TWOV — proceed to check" },
     ],
@@ -4205,7 +4205,7 @@ const TREE = {
     costs: [{ label: "K-ETA fee", value: "USD $10 (online)" }],
     time: "Usually within 72 hours (apply at least 72 hours before departure)",
     notices: [
-      "🇨🇦 CANADIAN PASSPORT HOLDERS: K-ETA is currently EXEMPTED until December 31, 2026.",
+      "🍁 CANADIAN PASSPORT HOLDERS: K-ETA is currently EXEMPTED until December 31, 2026.",
       "  ▸ You may enter Korea visa-free without a K-ETA until that date.",
       "  ▸ Check k-eta.go.kr for the latest exemption status before travel — the exemption may be extended or ended.",
       "Who normally needs K-ETA: citizens of K-ETA eligible countries (112 countries including Canada) visiting Korea for tourism, transit, or short-term business — when the exemption period ends.",
@@ -4223,9 +4223,9 @@ const TREE = {
     service: "visa",
     breadcrumb: ["Home", "Visa", "No Korean Heritage", "Visiting / Transit"],
     question: "What type of visit?",
-    sub: "🇨🇦 Canadian passport holders are visa-free for up to 6 months — no visa needed. K-ETA exempted until December 31, 2026. Other nationalities have different visa-free terms — check your nationality at the official Seoul visa guide (visitseoul.net/visa).",
+    sub: "🍁 Canadian passport holders are visa-free for up to 6 months — no visa needed. K-ETA exempted until December 31, 2026. Other nationalities have different visa-free terms — check your nationality at the official Seoul visa guide (visitseoul.net/visa).",
     options: [
-      { id: "visa_visit_en", icon: "🇨🇦", title: "Tourism / Short-Term Stay — Canadian citizen", desc: "Visa-free up to 6 months — no Consulate visit needed / varies by nationality (30 days–6 months)" },
+      { id: "visa_visit_en", icon: "🍁", title: "Tourism / Short-Term Stay — Canadian citizen", desc: "Visa-free up to 6 months — no Consulate visit needed / varies by nationality (30 days–6 months)" },
       { id: "visa_transit_en", icon: "🔄", title: "Transiting Through Korea (TWOV)", desc: "Passing through Korea on the way to another country — up to 30 days" },
       { id: "visa_keta_en", icon: "📱", title: "K-ETA — Do I need one?", desc: "Canadians currently exempted until Dec 31, 2026" },
     ],
@@ -4265,10 +4265,10 @@ const TREE = {
     bookingLabel: "Book Appointment (Visa Section) →",
     onlineLink: "https://www.visa.go.kr",
   },
-  visa_short_term_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit"], question: "What is the purpose of your short-term visit?", sub: "🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — you may NOT need a visa. A short-term visa (C-3) is mainly required for non-Canadian nationals residing in Canada, or for specific activities.", options: [{ id: "visa_c34_en", icon: "🤝", title: "Business Trip (C-3-4)", desc: "Market research, contract signing, consulting, meetings with Korean companies" },{ id: "visa_c31_en", icon: "📋", title: "General Short-Term Visit (C-3-1)", desc: "Conference, academic research, medical treatment, training, religious activities" },{ id: "visa_c33_en", icon: "🏥", title: "Medical Treatment (C-3-3)", desc: "Non-Canadians visiting Korea for medical treatment — up to 90 days" },{ id: "visa_c39_tourist_en", icon: "🌏", title: "Tourism / Short-Term Stay (C-3-9)", desc: "Sightseeing, visiting relatives, short-term leisure — for non-Canadian nationals" }] },
+  visa_short_term_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit"], question: "What is the purpose of your short-term visit?", sub: "🍁 Canadian citizens can visit Korea visa-free for up to 6 months — you may NOT need a visa. A short-term visa (C-3) is mainly required for non-Canadian nationals residing in Canada, or for specific activities.", options: [{ id: "visa_c34_en", icon: "🤝", title: "Business Trip (C-3-4)", desc: "Market research, contract signing, consulting, meetings with Korean companies" },{ id: "visa_c31_en", icon: "📋", title: "General Short-Term Visit (C-3-1)", desc: "Conference, academic research, medical treatment, training, religious activities" },{ id: "visa_c33_en", icon: "🏥", title: "Medical Treatment (C-3-3)", desc: "Non-Canadians visiting Korea for medical treatment — up to 90 days" },{ id: "visa_c39_tourist_en", icon: "🌏", title: "Tourism / Short-Term Stay (C-3-9)", desc: "Sightseeing, visiting relatives, short-term leisure — for non-Canadian nationals" }] },
   visa_c33_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Medical Treatment (C-3-3)"], title: "Medical Treatment Visa — C-3-3", docs: ["Visa Application Form (form)","Valid original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 passport-type colour photo — must be taken at a professional photo shop","  ▸ 3.5×4.5cm, white background, within 6 months, date-stamped on back","Proof of Residency in Canada — original + photocopy","  ▸ Permanent Resident: valid PR Card","  ▸ Long-term visitor: valid Work Permit or Study Permit","Medical Purpose Documentation (의료목적 입증서류) — issued within 3 months","  ▸ Invitation letter or doctor's appointment confirmation issued by a Korean hospital","Business Registration Certificate of the Korean hospital or medical facility (사업자등록증)","Certificate of Medical Travel Facilitator Registration (의료관광 유치기관 등록증)","  ▸ Available from the Korean hospital or medical facility","Proof of Funding (one of the following):","  ▸ Employment letter issued within 3 months + 2 months' recent pay stubs","  ▸ OR recent 2 months' Canadian bank statement"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" },{ label: "Other nationalities", value: "Fee may vary by nationality" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issue. Stay up to 90 days from date of entry.", notices: ["⚠️ This visa is primarily for NON-Canadian nationals residing in Canada — Canadian passport holders can enter Korea visa-free for medical treatment.", "⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","All medical documents must be issued within 3 months of your application date.",{ text: "Transiting through Korea? Check visa-free transit (TWOV) eligibility", goId: "visa_transit_en" },"Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Business (C-3-4)"], title: "Short-Term Business Visa — C-3-4", docs: ["Visa Application Form (form) — print, fill out, and sign","Valid passport — original (min. 6 months validity)","Photocopy of passport — photo/personal-info page","1 passport-type colour photo (3.5×4.5cm, white background, date-stamped on back, within 6 months)","Proof of residency — PR Card, Work Permit, or Study Permit","Business invitation letter — issued by the Korean company (fax or scan accepted); must include date, purpose, and duration of visit","Copy of Business Registration Certificate — 사업자등록증 or 등기부등본 (from the Korean company)","Employment letter from your Canadian employer — must confirm the company is paying your expenses and that you are NOT paid/employed by the Korean inviting organization","  ▸ The invitation letter and/or the employment letter must clearly state the purpose and period of your business trip","If you are of Korean descent: additional documents required — see the step-by-step guide"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" }], time: "Approx. 2 weeks (additional documents may be requested upon review)", notices: ["Single-entry, valid 3 months from issue (enter Korea within 3 months). Stay up to 90 days.","Eligible: short business stays (90 days or less) for market research, liaison, consulting, contract signing, or installing/repairing/learning to operate imported/exported machinery, etc.","⚠️ You must be paid by your Canadian company (own business or as an employee). NOT eligible if you are hired or paid by the Korean inviting organization.","⚠️ If you previously held Korean nationality, you must first file the Nationality Loss Report (국적상실신고) before applying for any Korean visa.","🇨🇦 Canadian citizens can enter Korea visa-free for up to 90 days for business — confirm whether you actually need this visa.","C-3 visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_c31_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "General (C-3-1)"], title: "General Short-Term Visitor Visa — C-3-1", docs: ["Visa Application Form (form) — print, fill out, and sign","Valid passport — original + photocopy (min. 6 months validity; copy the photo/personal-info page)","1 passport-type colour photo (3.5×4.5cm, white background, date-stamped on back, within 6 months)","Proof of residency — Permanent Resident (PR) Card, OR Work Permit / Study Permit","Proof of employment or school enrollment — issued within 3 months","Invitation letter — issued by the Korean company / event organizer (fax or scan accepted); must include name, date, purpose, and duration of visit","Copy of Business Registration Certificate (if applicable) — 사업자등록증 or 등기부등본, obtained from the Korean company/organizer"], costs: [{ label: "Visa Fee", value: "CAD $54 (Debit, Cash, or Money Order only)" }], time: "Approx. 2 weeks (additional documents may be requested upon review)", notices: ["Single-entry, valid 3 months from issue (enter Korea within 3 months). Stay up to 90 days from entry.","Eligible: short-term visitors for conferences, competitions, training, etc. (not for profit-making activities).","⚠️ Applicants from certain countries currently in Canada (e.g. temporary workers, international students) must have resided in Canada for at least 2 years (730 days) at the time of application.","🇨🇦 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","C-3 visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c34_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "Business (C-3-4)"], title: "Short-Term Business Visa — C-3-4", docs: ["Visa Application Form (form) — print, fill out, and sign","Valid passport — original (min. 6 months validity)","Photocopy of passport — photo/personal-info page","1 passport-type colour photo (3.5×4.5cm, white background, date-stamped on back, within 6 months)","Proof of residency — PR Card, Work Permit, or Study Permit","Business invitation letter — issued by the Korean company (fax or scan accepted); must include date, purpose, and duration of visit","Copy of Business Registration Certificate — 사업자등록증 or 등기부등본 (from the Korean company)","Employment letter from your Canadian employer — must confirm the company is paying your expenses and that you are NOT paid/employed by the Korean inviting organization","  ▸ The invitation letter and/or the employment letter must clearly state the purpose and period of your business trip","If you are of Korean descent: additional documents required — see the step-by-step guide"], costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" }], time: "Approx. 2 weeks (additional documents may be requested upon review)", notices: ["Single-entry, valid 3 months from issue (enter Korea within 3 months). Stay up to 90 days.","Eligible: short business stays (90 days or less) for market research, liaison, consulting, contract signing, or installing/repairing/learning to operate imported/exported machinery, etc.","⚠️ You must be paid by your Canadian company (own business or as an employee). NOT eligible if you are hired or paid by the Korean inviting organization.","⚠️ If you previously held Korean nationality, you must first file the Nationality Loss Report (국적상실신고) before applying for any Korean visa.","🍁 Canadian citizens can enter Korea visa-free for up to 90 days for business — confirm whether you actually need this visa.","C-3 visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
+  visa_c31_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Short Term Visit", "General (C-3-1)"], title: "General Short-Term Visitor Visa — C-3-1", docs: ["Visa Application Form (form) — print, fill out, and sign","Valid passport — original + photocopy (min. 6 months validity; copy the photo/personal-info page)","1 passport-type colour photo (3.5×4.5cm, white background, date-stamped on back, within 6 months)","Proof of residency — Permanent Resident (PR) Card, OR Work Permit / Study Permit","Proof of employment or school enrollment — issued within 3 months","Invitation letter — issued by the Korean company / event organizer (fax or scan accepted); must include name, date, purpose, and duration of visit","Copy of Business Registration Certificate (if applicable) — 사업자등록증 or 등기부등본, obtained from the Korean company/organizer"], costs: [{ label: "Visa Fee", value: "CAD $54 (Debit, Cash, or Money Order only)" }], time: "Approx. 2 weeks (additional documents may be requested upon review)", notices: ["Single-entry, valid 3 months from issue (enter Korea within 3 months). Stay up to 90 days from entry.","Eligible: short-term visitors for conferences, competitions, training, etc. (not for profit-making activities).","⚠️ Applicants from certain countries currently in Canada (e.g. temporary workers, international students) must have resided in Canada for at least 2 years (730 days) at the time of application.","🍁 Canadian citizens can visit Korea visa-free for up to 6 months — confirm whether you actually need this visa.","C-3 visas cannot be converted to another visa type inside Korea."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
 
   // ── C-3-1 Event / Conference Visa ──
   visa_c31_event_en: {
@@ -4291,7 +4291,7 @@ const TREE = {
     costs: [{ label: "Visa Fee", value: "CAD $54 (Cash, Debit, Credit)" }],
     time: "Approx. 2 weeks (12–15 business days)",
     notices: [
-      "🇨🇦 Canadian citizens can enter Korea visa-free — confirm if you actually need this visa.",
+      "🍁 Canadian citizens can enter Korea visa-free — confirm if you actually need this visa.",
       "Eligible activities: friendly matches, events, large-scale conferences, music competitions, broadcasting appearances, etc.",
       "  ▸ Organizer may cover airfare and accommodation.",
       "  ▸ Prize money is allowed — but NOT pay that exceeds accommodation costs.",
@@ -4397,7 +4397,7 @@ const TREE = {
   visa_e1_e7_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "E-1 to E-7 (CVI)"], title: "E-1 to E-7 — Work Visas (CVI Holders)", docs: ["Visa Application Form — for Visa Eligibility Certificate holders (form)","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: also submit photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Signed employment contract — signed by both the applicant and the inviting party"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit)" }], time: "Approx. 1–2 weeks. Single-entry visa valid for 90 days from issue (stay duration as indicated on Visa Issuance Certificate).", notices: ["📌 Visa types covered:","  ▸ E-1 — Professor: Teaching at universities or educational facilities under the Higher Education Act","  ▸ E-3 — Research: Research at Korean public or private institutions in natural science, high technology, social science, humanities, arts or sports","  ▸ E-4 — Technological Guidance: Special technology or expertise in natural sciences / high-technology not available in Korea","  ▸ E-5 — Profession: Professionals certified abroad in law, accounting, medicine, or other areas approved by Korean law","  ▸ E-6 — Culture and Arts: Music, art, literature, sports, entertainment, advertising, or fashion modelling for profit","  ▸ E-7 — Specially Designated Activities: Roles specially designated by the Minister of Justice","⚠️ Your Korean employer or sponsor must apply at visa.go.kr first to obtain the CVI (Confirmation of Visa Issuance) — you cannot initiate the process alone.","Additional documents may be requested upon review depending on visa type and occupation.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_h1_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "H-1 Working Holiday"], title: "H-1 — Working Holiday Visa", docs: ["Visa Application Form (form)","Original passport + photocopy","  ▸ Must have remaining validity of at least 6 months","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Working Holiday Plan — specify travel schedule and activity plan with date and signature at the bottom","Resume (CV) — explaining work experience","Certificate from the most recent school attended — proof of highest academic qualifications or graduation","  ▸ Must be notarized by a lawyer or notary public if NOT within the Consulate's jurisdiction (Ontario, Manitoba)","RCMP Fingerprint Criminal Record Check — issued within 6 months","  ▸ Dual citizens: must also submit the other country's criminal record check with Apostille","  ▸ Lived in another country 1+ year within the past 5 years: must also submit that country's criminal record check with Apostille","Physical examination by a physician — issued within 3 months","  ▸ Must include: chest X-ray, urinalysis, blood test, and HIV test","Health / Medical Insurance — must remain valid throughout entire stay in Korea","  ▸ Minimum coverage: KRW 40,000,000","  ▸ Must cover return to home country AND medical treatment during stay","Bank statement with certified bank stamp — proving ability to cover travel expenses for at least the first 3 months","Round-trip flight schedule","Travel itinerary","  ▸ Do NOT purchase tickets until visa is approved"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $121.50 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Multiple-entry visa, valid up to 2 years.", notices: ["Eligibility: Canadian citizens aged 18–35 at the time of visa issuance, currently residing in Canada.","⚠️ You must NOT have previously participated in the Korea Working Holiday Program — only one participation allowed per lifetime.","⚠️ Dependent family members CANNOT accompany H-1 visa holders.","This program is primarily intended as a travel vacation — employment is only meant to supplement travel expenses.","Additional documents may be requested upon review.","⚠️ Dual citizens (holding both Korean and foreign citizenship) are NOT eligible — a Korean passport must be issued instead.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ If renunciation was reported after 2008: submit 가족관계증명서 (상세) + 기본증명서 (상세), issued within 3 months.","  ▸ If reported before 2008: submit 제적등본 instead."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_f1d_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Work", "F-1-D Digital Nomad"], title: "F-1-D — Digital Nomad (Workation) Visa", docs: ["Visa Application Form (form)","Original passport + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Employment letter — proves current employment and at least 1 year of employment history","  ▸ Must be issued within 2 weeks of application date","Salary / income proof (all 3 required):","  ▸ 3 months' pay stubs","  ▸ 3 months' bank balance statement","  ▸ 2 years' tax report (Notice of Assessment / NOA)","Apostilled RCMP Certificate — fingerprint-based, issued within 3 months","Medical insurance proof (including coverage details):","  ▸ Must cover approx. CAD $130,000 for medical treatment AND return flight to home country during stay","Family Relationship Certificate — only required if applying for accompanying family members","  ▸ Each family member requires their own original passport and application form","  ▸ Documents not in Korean or English must include a notarized English translation"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $121.50 (Cash, Debit, Credit)" }], time: "Approx. 1–2 weeks. Multiple-entry visa, valid up to 1 year from date of issue.", notices: ["Eligibility: employed by a foreign (non-Korean) company for 1+ year, or owner of a foreign-registered company — must be able to work remotely in Korea.","Income requirement (2024 GNI standard): must earn approx. KRW 99,900,000/year or KRW 8,325,000/month BEFORE tax deduction.","  ▸ Based on 2× Korea's GNI per capita — this figure updates annually. Verify the current standard before applying.","⚠️ Must have NO criminal record.","⚠️ You may NOT be employed by or receive income from a Korean company or entity while on this visa.","Stay: up to 1 year from date of issue, extendable by 1 additional year (max 2 years total).","For stays over 90 days: register with the local Korean immigration office (hikorea.go.kr) within 90 days of arrival.","Dependents (spouse and minor children) may accompany you — each requires a separate application.","If you previously held Korean nationality: complete the nationality renunciation (국적상실신고) process first.","  ▸ Submit 가족관계증명서 (상세) + 기본증명서 (상세) issued within 3 months (or 제적등본 if renunciation was before 2008)."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
-  visa_study_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study"], question: "What type of study program are you enrolling in?", sub: "All study visas below are single-entry, valid for 3 months from the date of issuance. Select the one that matches your program.", options: [{ id: "visa_d2_6_en", icon: "🔄", title: "D-2-6 — Exchange Student", desc: "University exchange program — at least 1 semester completed at current Canadian school required" },{ id: "visa_d2_8_en", icon: "🎓", title: "D-2-8 — Short-Term University Study", desc: "Less than 1 year including summer/winter school — NOT for Korean language programs" },{ id: "visa_d4_1_en", icon: "🇰🇷", title: "D-4-1 — Korean Language Study", desc: "Study Korean at a university-affiliated language institute — high school diploma minimum" },{ id: "visa_d4_3_en", icon: "🏫", title: "D-4-3 — Elementary / Secondary School", desc: "Study at a Korean elementary, middle, or high school" }] },
+  visa_study_en: { type: "question", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study"], question: "What type of study program are you enrolling in?", sub: "All study visas below are single-entry, valid for 3 months from the date of issuance. Select the one that matches your program.", options: [{ id: "visa_d2_6_en", icon: "🔄", title: "D-2-6 — Exchange Student", desc: "University exchange program — at least 1 semester completed at current Canadian school required" },{ id: "visa_d2_8_en", icon: "🎓", title: "D-2-8 — Short-Term University Study", desc: "Less than 1 year including summer/winter school — NOT for Korean language programs" },{ id: "visa_d4_1_en", icon: "🪪", title: "D-4-1 — Korean Language Study", desc: "Study Korean at a university-affiliated language institute — high school diploma minimum" },{ id: "visa_d4_3_en", icon: "🏫", title: "D-4-3 — Elementary / Secondary School", desc: "Study at a Korean elementary, middle, or high school" }] },
   visa_d2_6_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-2-6 Exchange Student"], title: "D-2-6 — Exchange Student Visa", docs: ["Visa Application Form (form)","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission (표준입학허가서) — issued by the dean or president of the Korean university","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the Korean institution (사업자등록증)","Documents proving exchange student status:","  ▸ Official documents from the host university","  ▸ Exchange student agreement between universities","Proof of at least one semester completed at current Canadian school:","  ▸ Official proof of enrollment letter (NOT a tuition receipt or screenshot)","Proof of financial ability (1 year tuition + living expenses):","  ▸ Certified bank statement with official bank stamp","  ▸ If using a parent's account: signed written permission from parent + Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ Applicants from certain countries currently in Canada (temporary workers, international students, etc.) must have resided continuously in Canada for at least 2 years (730 days) before applying.","Korean-descent or former Korean nationals must also submit:","  ▸ Korean-descent (parents received Canadian citizenship before your birth): photocopy of both parents' passport + Canadian Citizenship Certificate (not a card)","  ▸ Renunciation after 2008: 기본증명서 (상세, 전부공개) + 가족관계증명서 (상세, 전부공개) — within 3 months. Submit both pages if document has 2 pages.","  ▸ Renunciation before 2008: 제적등본 — within 3 months","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_d2_8_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-2-8 Short-Term University Study"], title: "D-2-8 — Short-Term University Study Visa (under 1 year)", docs: ["Visa Application Form (form)","  ▸ Address in Korea (section 8.4): use the NEW ADDRESS SYSTEM","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission (표준입학허가서) — issued by the dean or president of the Korean university","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the Korean institution (사업자등록증)","Proof of enrollment from current Canadian university or college:","  ▸ Must be an official letter — NOT a tuition payment confirmation or course page screenshot","Proof of financial ability (tuition + living expenses for the stay):","  ▸ Certified bank statement with official bank stamp","  ▸ If using a parent's account: signed written permission from parent + original and copy of Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Program under 90 days", value: "CAD $54 (Cash, Debit, Credit)" },{ label: "Program 90 days or more", value: "CAD $81 (Cash, Debit, Credit)" }], time: "Approx. 2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["⚠️ If your program is to study the Korean language, apply for D-4-1 instead — NOT this visa.","⚠️ D-2-8 holders are NOT permitted to engage in any paid activities (part-time work, etc.) — violations are penalised under Articles 94 or 95 of the Immigration Law.","⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
   visa_d4_1_en: { type: "result", service: "visa", breadcrumb: ["Home", "Visa", "No Korean Heritage", "Study", "D-4-1 Korean Language"], title: "D-4-1 — Korean Language Study Visa", docs: ["Visa Application Form (form)","Valid Canadian passport — original + photocopy of photo/info page","  ▸ Must have remaining validity of at least 6 months","  ▸ Non-Canadians: photocopy of PR Card or valid Canadian Work/Study Permit","1 colour photo (3.5×4.5cm, white background, within 6 months, date-stamped on back)","Certificate of Admission — issued by the dean or president of the language institute","  ▸ Must include the student's scholastic information and financial status","Business Registration Certificate of the institution (사업자등록증)","Training Plan — lecture schedule, lecturer profiles, training facility details, etc.","Certificate of enrollment or proof of highest level of education:","  ▸ Non-OECD country applicants: must submit documents notarized by Apostille, or confirmed by a Korean consul or the country's consul in Korea","Proof of financial ability (1 year tuition + living expenses):","  ▸ If using a parent's account: signed written permission from parent + Certified Copy of Birth Registration or Statement of Live Birth"], costs: [{ label: "Visa Fee (Canadians)", value: "CAD $81 (Cash, Debit, Credit or Money Order)" }], time: "Approx. 1–2 weeks. Single-entry, valid 3 months from issuance. Stay up to 1 year (per Certificate of Admission).", notices: ["Eligibility: must hold at least a high school diploma or equivalent.","Program must be at a language institution affiliated with a foreign educational institution in Korea, or at a higher education institution under the Higher Education Act.","⚠️ Applicants from certain countries currently in Canada must have resided continuously in Canada for at least 2 years (730 days) before applying.","Korean-descent or former Korean nationals must also submit:","  ▸ Korean-descent (parents received Canadian citizenship before your birth): photocopy of both parents' passport + Canadian Citizenship Certificate (not a card)","  ▸ Renunciation after 2008: 기본증명서 (상세, 전부공개) + 가족관계증명서 (상세, 전부공개) — within 3 months. Submit both pages if document has 2 pages.","  ▸ Renunciation before 2008: 제적등본 — within 3 months","Additional documents may be requested upon review."], booking: "https://www.torbooking.com/book", onlineLink: "https://www.visa.go.kr" },
@@ -4656,7 +4656,7 @@ const TREE = {
     question: "신청인의 신분은?",
     sub: "서명인증서·거주증명서·동일인증명서 등은 신청인 신분에 따라 처리 방법이 다릅니다. (2024.1.11 캐나다 아포스티유 시행)",
     options: [
-      { id: "notarization_sign_passport", icon: "🇰🇷", title: "한국 여권 소지자 (한국 국적자)", desc: "영사관에서 서명 인증 가능" },
+      { id: "notarization_sign_passport", icon: "🪪", title: "한국 여권 소지자 (한국 국적자)", desc: "영사관에서 서명 인증 가능" },
       { id: "notarization_sign_citizen", icon: "🍁", title: "캐나다 시민권자", desc: "영사확인 불가 → 캐나다 공증인 + 아포스티유" },
     ],
   },
@@ -4954,7 +4954,7 @@ const TREE = {
       "  ▸ 위 두 경우라면 아래에서 해당 항목을 선택해 자세한 안내를 확인하세요.",
     ],
     options: [
-      { id: "notarization_translation_ircc_no", icon: "🇨🇦", title: "캐나다 이민국 (IRCC) 제출", desc: "비자·영주권·시민권 신청 관련 서류" },
+      { id: "notarization_translation_ircc_no", icon: "🍁", title: "캐나다 이민국 (IRCC) 제출", desc: "비자·영주권·시민권 신청 관련 서류" },
       { id: "notarization_translation_namechange_no", icon: "📋", title: "ServiceOntario — 성명변경 제출", desc: "Name Change 신청 관련 출생증명서 번역" },
       { id: "notarization_translation_type", icon: "✅", title: "그 외 기관 제출 (한국 기관·학교·회사 등)", desc: "영사관 번역 공증 가능" },
     ],
@@ -5372,7 +5372,7 @@ const TREE = {
     sub: "상황에 따라 허가 기간·구비서류·신청 경로가 완전히 달라집니다. 정확한 유형을 선택하세요.",
     options: [
       { id: "military_permit_pr", icon: "🟢", title: "영주권자 (본인 또는 부모)", desc: "PR카드 보유 — 37세까지 또는 3년 범위" },
-      { id: "military_permit_dual", icon: "🇨🇦", title: "복수국적자 (캐나다 시민권 보유)", desc: "부모와 거주 or 10년 이상 국외 거주 — 37세까지" },
+      { id: "military_permit_dual", icon: "🍁", title: "복수국적자 (캐나다 시민권 보유)", desc: "부모와 거주 or 10년 이상 국외 거주 — 37세까지" },
       { id: "military_permit_family5", icon: "👨‍👩‍👦", title: "부모와 5년 이상 국외 거주 (기타)", desc: "영주권·시민권 없이 부모와 장기 거주" },
       { id: "military_permit_student", icon: "🎓", title: "유학생 (학생비자)", desc: "해외 대학·대학원 재학 — 수학과정별 허가기간 상이" },
       { id: "military_permit_short", icon: "✈️", title: "단기 여행 허가", desc: "일시 출국·단기 체재 — 27세 이내, 병무청 온라인 신청 원칙" },
@@ -6075,7 +6075,7 @@ const TREE = {
       { id: "faq_notarization", icon: "📜", ko: "공증",             en: "Notarization" },
       { id: "faq_military",     icon: "🎖️", ko: "병역",             en: "Military service" },
       { id: "faq_family",       icon: "👪", ko: "가족관계등록",      en: "Family register" },
-      { id: "faq_nationality",  icon: "🇰🇷", ko: "국적",             en: "Nationality" },
+      { id: "faq_nationality",  icon: "🪪", ko: "국적",             en: "Nationality" },
       { id: "faq_etc",          icon: "📌", ko: "기타",             en: "Other" },
     ],
   },
@@ -6735,7 +6735,7 @@ const KO_TRANSLATIONS = {
   visa_short_term_en: {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "단기 방문"],
     question: "단기 방문 목적은 무엇인가요?",
-    sub: "🇨🇦 캐나다 국적자는 최대 6개월간 무비자로 한국 방문 가능 — 비자가 필요 없을 수 있습니다. 단기비자(C-3)는 주로 캐나다 거주 비(非)캐나다 국적자이거나 특정 활동의 경우에 필요합니다.",
+    sub: "🍁 캐나다 국적자는 최대 6개월간 무비자로 한국 방문 가능 — 비자가 필요 없을 수 있습니다. 단기비자(C-3)는 주로 캐나다 거주 비(非)캐나다 국적자이거나 특정 활동의 경우에 필요합니다.",
     options: {
       visa_c34_en: { title: "출장 (C-3-4)", desc: "시장조사, 계약 체결, 컨설팅, 한국 기업과의 미팅" },
       visa_c31_en: { title: "일반 단기방문 (C-3-1)", desc: "회의, 학술연구, 치료, 연수, 종교활동" },
@@ -6768,7 +6768,7 @@ const KO_TRANSLATIONS = {
       "발급 대상: 90일 이하 단기 출장 — 시장조사·연락업무·상담·계약체결·수출입 기계 설치/수리/조작 교육 등.",
       "⚠️ 급여는 반드시 캐나다 회사가 지급해야 함(본인 사업체 또는 직원). 한국 초청기관이 고용·급여 지급 시 신청 불가.",
       "⚠️ 과거 한국 국적자는 비자 신청 전 반드시 국적상실신고를 먼저 완료해야 합니다.",
-      "🇨🇦 캐나다 국적자는 업무 목적으로 최대 90일 무비자 입국 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
+      "🍁 캐나다 국적자는 업무 목적으로 최대 90일 무비자 입국 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
       "C-3 비자는 한국 내에서 다른 비자로 전환 불가.",
     ],
   },
@@ -6793,7 +6793,7 @@ const KO_TRANSLATIONS = {
       "단수 비자, 발급일로부터 3개월 이내 입국. 입국일로부터 최대 90일 체류.",
       "발급 대상: 회의·대회·연수 등 단기 방문 (영리 목적 불가).",
       "⚠️ 일부 국적자(캐나다 내 임시취업자·유학생 등)는 신청 시점에 캐나다 2년(730일) 이상 거주해야 합니다.",
-      "🇨🇦 캐나다 국적자는 최대 6개월 무비자 방문 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
+      "🍁 캐나다 국적자는 최대 6개월 무비자 방문 가능 — 비자가 실제로 필요한지 먼저 확인하세요.",
       "C-3 비자는 한국 내에서 다른 비자로 전환 불가.",
     ],
   },
@@ -7251,7 +7251,7 @@ const KO_TRANSLATIONS = {
   visa_visit_transit_en: {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "방문 / 경유"],
     question: "어떤 종류의 방문인가요?",
-    sub: "🇨🇦 캐나다 여권 소지자는 최대 6개월 무비자 — 비자가 필요 없습니다. K-ETA는 2026년 12월 31일까지 면제. 그 외 국적은 무비자 가능 여부·체류 기간이 다르므로, 서울시 공식 비자 안내(visitseoul.net/visa)에서 본인 국적 기준을 확인하세요.",
+    sub: "🍁 캐나다 여권 소지자는 최대 6개월 무비자 — 비자가 필요 없습니다. K-ETA는 2026년 12월 31일까지 면제. 그 외 국적은 무비자 가능 여부·체류 기간이 다르므로, 서울시 공식 비자 안내(visitseoul.net/visa)에서 본인 국적 기준을 확인하세요.",
     options: {
       visa_visit_en:        { title: "관광 / 단기체류 — 캐나다 국적자", desc: "최대 6개월 무비자 — 영사관 방문 불필요 / 국적별 상이 (30일~6개월)" },
       visa_transit_en:      { title: "한국 경유 (TWOV)", desc: "다른 나라로 가는 길에 한국 경유 — 최대 30일" },
@@ -7263,7 +7263,7 @@ const KO_TRANSLATIONS = {
     breadcrumb: ["홈", "비자 (사증)", "한국 혈통 없음", "한국 방문"],
     title: "한국 방문 — 관광 / 단기체류",
     docs: [
-      "🇨🇦 캐나다 여권 소지자: 비자 불필요",
+      "🍁 캐나다 여권 소지자: 비자 불필요",
       "  ▸ 캐나다 여권으로 그냥 입국 — 영사관 방문 불필요",
       "  ▸ 무비자 체류: 1회 입국당 최대 6개월",
       "  ▸ 캐나다인은 2026년 12월 31일까지 K-ETA 면제",
@@ -7283,7 +7283,7 @@ const KO_TRANSLATIONS = {
     ],
     time: "약 5~7 영업일 (비자 신청자만 해당)",
     notices: [
-      "🇨🇦 캐나다 여권 소지자: 무비자 입국 — 영사관 방문 불필요.",
+      "🍁 캐나다 여권 소지자: 무비자 입국 — 영사관 방문 불필요.",
       "무비자 체류는 입국 시 출입국심사관의 재량에 따름.",
       "단기방문비자는 한국 내에서 연장·전환 불가.",
       "한국 혈통이 있으면(부모·조부모가 한국인): F-4 재외동포 비자 대상일 수 있음 — 뒤로 가서 한국 혈통 옵션 선택.",
@@ -7337,7 +7337,7 @@ const KO_TRANSLATIONS = {
     costs: [{ label: "K-ETA 수수료", value: "USD $10 (온라인)" }],
     time: "보통 72시간 이내 (출발 최소 72시간 전 신청)",
     notices: [
-      "🇨🇦 캐나다 여권 소지자: K-ETA는 2026년 12월 31일까지 면제.",
+      "🍁 캐나다 여권 소지자: K-ETA는 2026년 12월 31일까지 면제.",
       "  ▸ 해당 기간까지 K-ETA 없이 무비자 입국 가능.",
       "  ▸ 면제는 연장되거나 종료될 수 있으니 여행 전 k-eta.go.kr에서 최신 상태 확인.",
       "보통 K-ETA가 필요한 경우: K-ETA 대상국(캐나다 포함 112개국) 국민이 관광·경유·단기 업무로 방문 시 — 면제 기간 종료 후.",
@@ -7524,7 +7524,7 @@ const KO_TRANSLATIONS = {
     costs: [{ label: "비자 수수료", value: "CAD $54 (현금, Debit, 신용카드)" }],
     time: "약 2주 (12~15 영업일)",
     notices: [
-      "🇨🇦 캐나다 국적자는 무비자 입국 가능 — 비자가 실제로 필요한지 확인하세요.",
+      "🍁 캐나다 국적자는 무비자 입국 가능 — 비자가 실제로 필요한지 확인하세요.",
       "대상 활동: 친선경기, 행사, 대규모 컨퍼런스, 음악 대회, 방송 출연 등.",
       "  ▸ 주최측이 항공·숙박을 부담할 수 있음.",
       "  ▸ 상금은 허용 — 단, 숙박비를 초과하는 보수는 불가.",
@@ -9953,11 +9953,11 @@ const EN_TRANSLATIONS: any = {
   },
   family_divorce: {
     breadcrumb: ["Home", "Family Register", "Reports", "Divorce report"],
-    question: "Type of divorce?",
-    sub: "The procedure and documents differ completely by divorce type.",
+    question: "What is your nationality situation as a couple?",
+    sub: "⚠️ If both parties hold only Canadian nationality as of the divorce judgment date, a divorce report cannot be filed (only a nationality-loss report is possible).",
     options: {
-      family_divorce_agreement: { title: "Divorce by agreement (mutual consent)", desc: "Both parties must be Korean nationals — about 6 months" },
-      family_divorce_court: { title: "Judicial divorce (Canadian court judgment)", desc: "Report to Korea after a Canadian court divorce — about 3 weeks" },
+      family_divorce_agreement: { title: "Both parties are Korean nationals", desc: "Confirmation of divorce by agreement — about 6 months (if already divorced in a Canadian court, you may also report via judicial divorce)" },
+      family_divorce_court: { title: "Only 1 of the 2 is a Korean national", desc: "Report after a Canadian court divorce — about 3–4 weeks" },
     },
   },
   family_divorce_agreement: {
@@ -13027,7 +13027,11 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         {/* HEADER */}
         <header className="header">
           <button onClick={goHome} className="header-logo" aria-label={lang === "ko" ? "홈으로" : "Home"} style={{ background: "none", border: "none", cursor: "pointer" }}>
-            <span className="header-flag">🇰🇷</span>
+            <svg className="header-flag" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
+              <circle cx="18" cy="18" r="16" fill="#fff" stroke="#dde5f2" strokeWidth="1" />
+              <path d="M18 2 A16 16 0 0 1 18 34 A8 8 0 0 1 18 18 A8 8 0 0 0 18 2 Z" fill="#cd2e3a" />
+              <path d="M18 34 A16 16 0 0 1 18 2 A8 8 0 0 1 18 18 A8 8 0 0 0 18 34 Z" fill="#0047a0" />
+            </svg>
             <div className="header-title">
               {lang === "ko" ? "주토론토 대한민국 총영사관" : "Consulate General of the Republic of Korea in Toronto"}
               <span>{lang === "ko" ? "민원 안내 서비스" : "Consular Services Guide"}</span>

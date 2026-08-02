@@ -2076,28 +2076,40 @@ const TREE = {
       "  └ 등록기준지(본적) 정확히 기재 — 가족관계증명서 상단에 표시",
       "  └ 혼인 당사자 쌍방 서명",
       "  └ 주소: 한글로 소리나는 대로 기재",
-      "Marriage Certificate 원본 1부 (반환 불가)",
+      "Marriage Certificate 원본 1부 (반환 불가 — 한국으로 송부됨)",
       "  └ 쌍방 한국인: Short-form 또는 Long-form 무관",
       "  └ 혼인 후 200일 이내 출생 자녀 있는 경우: Long-form 필수",
+      "  └ 추가 등본이 필요하면 관할 주정부(온타리오·마니토바)에 재신청 가능",
       "혼인증명서 한글 번역문 (공증 불필요, 하단에 번역일자·이름·서명)",
+      "  └ 담당자 서명란 등 원문 서명 부분은 공란으로 (작성 불요)",
       "└ 혼인증명서 번역문 작성 샘플 — 온타리오",
       "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Short-form",
       "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Long-form",
       "혼인 당사자 두 사람의 여권 원본 + 사본 각 1부",
       "  └ 원본은 방문하는 당사자만 제출(확인 후 즉시 반환), 사본은 두 사람 모두 제출",
+      "  └ 여권은 모두 유효해야 함",
       "  └ 복수국적자: 모든 국가 유효 여권 사본",
       "혼인 당사자 두 사람의 캐나다 체류자격 증명서류 사본 각 1부",
       "  └ 방문자: 체류비자 / 영주권자: PR카드 / 시민권자: 시민권증서 (Search of Citizenship Record·카드형 불가, 선서일 표시, Letter 사이즈) / 캐나다 출생 시민권자: Birth Certificate",
+      "  └ 복수국적자: 국적을 보유한 모든 국가의 출생증명서 또는 시민권증서 제출",
       "동일인확인서 (해당자만) — 혼인증명서상 성명과 현재 여권 성명이 다른 경우",
     ],
     costs: [{ label: "수수료", value: "무료" }],
     time: "약 4주 (혼인신고 처리 완료 후 출생신고 접수 가능)",
+    altBoxTitle: "한국법으로 바로 혼인신고하는 경우",
+    altBox: [
+      "캐나다에서 별도의 혼인식·혼인신고 없이, 한국 혼인신고서만으로 곧바로 혼인을 성립시키는 경우 위 서류 구성이 달라집니다.",
+      "• Marriage Certificate 및 그 번역문은 제출 불요 — 캐나다 혼인 자체가 없으므로 존재하지 않는 서류입니다.",
+      "• 대신 증인 2명의 정보 기재 + 서명이 필요합니다 (주민등록이 있는 한국 국적자, 증인의 직접 방문은 불필요).",
+    ],
     notices: [
-      "⚠️ 혼인신고 장소: 혼인이 성립한 재외공관 관할 지역에 신고 (토론토 관할: 온타리오·마니토바주).",
+      "⚠️ 혼인신고 장소: 혼인이 성립한 지역 관할 재외공관 또는 재외국민 가족관계등록사무소에 신고 (온타리오·마니토바주에서 혼인 → 주토론토총영사관). 다른 주(예: 노바스코샤)에서 혼인했다면 해당 지역 관할 공관(예: 주몬트리얼총영사관)에 신고해야 합니다. 한국 거주 중이면 주소지 관할 주민센터 또는 재외국민 가족관계등록사무소 이용 가능.",
+      "우편 접수 시 여권·체류자격 증명서류는 사본만 제출하면 되며 공증이 필요하지 않습니다.",
       "혼인증명서 원본은 반환되지 않습니다.",
       "본(本): 한자로 반드시 기재 (예: 김해 김씨 → 金海).",
       "등록기준지 오기재 시 서류 반송 — 기본증명서 또는 가족관계증명서 상단 확인.",
       "자녀의 성본 협의 (모의 성·본을 따르는 경우) 협의서 별도 제출 가능.",
+      "서류 심사 후 필요 시 구비서류가 추가되거나 줄어들 수 있습니다.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (가족관계 → 혼인신고) →",
@@ -2113,28 +2125,34 @@ const TREE = {
       "혼인신고서 (양식) — 한글·아라비아숫자만 기재, 증인란 공란",
       "  └ 한국인의 등록기준지(본적) 정확히 기재",
       "  └ 외국인 배우자 이름: 성·이름 순, 미들네임 포함, 끝에 기재 (예: Last First Middle 한글)",
-      "  └ 혼인당시 한국국적자가 아닌 경우 등록기준지란에 해당 국적 기재 (예: '캐나다')",
-      "Marriage Certificate Long-form 원본 1부 (반환 불가)",
+      "  └ 등록기준지는 혼인 당시 국적 기준으로 기재 — 당시 한국국적자였다면 현재 외국국적이어도 등록기준지 기재, 당시 한국국적이 아니었다면 그 국적 기재",
+      "  └ 예) 혼인당시 중국국적 → '중국' 기재 / 한국출생했으나 혼인 전 캐나다시민권 취득 → '캐나다' 기재 / 복수국적자는 보유 국적 모두 기재",
+      "Marriage Certificate Long-form 원본 1부 (반환 불가 — 한국으로 송부됨)",
       "  └ 혼인 당사자 중 일방이 외국인인 경우 Long-form 필수",
+      "  └ 추가 등본이 필요하면 관할 주정부(온타리오·마니토바)에 재신청 가능",
       "혼인증명서 한글 번역문 (공증 불필요)",
+      "  └ 담당자 서명란 등 원문 서명 부분은 공란으로 (작성 불요)",
       "└ 혼인증명서 번역문 작성 샘플 — 온타리오",
       "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Short-form",
       "└ 혼인증명서 번역문 작성 샘플 — 마니토바 Long-form",
       "혼인 당사자 두 사람의 여권 원본 + 사본 각 1부",
       "  └ 원본은 방문하는 당사자만 제출(확인 후 즉시 반환), 사본은 두 사람 모두 제출",
+      "  └ 여권은 모두 유효해야 함",
       "  └ 시민권자: 시민권증서 (카드형·Search of Citizenship Record 불가, 선서일 년월일 표시 필수)",
       "  └ 캐나다 출생 시민권자: Birth Certificate (Short/Long form 무관)",
       "  └ 복수국적자: 모든 국가 유효 여권 사본 + 출생증명서 또는 시민권증서",
-      "동일인확인서 (해당자만)",
+      "동일인확인서 (해당자만) — 혼인증명서상 성명과 현재 여권 성명이 다른 경우",
       "  └ 이름 변경한 경우 Name Change Certificate도 함께 제출",
     ],
     costs: [{ label: "수수료", value: "무료" }],
-    time: "약 4주",
+    time: "약 4주 (혼인신고 처리 완료 후 출생신고 접수 가능)",
     notices: [
-      "⚠️ 혼인신고 장소: 혼인이 성립한 재외공관 관할 지역에 신고.",
-      "혼인증명서·혼인판결문 원본은 반환되지 않습니다.",
+      "⚠️ 혼인신고 장소: 혼인이 성립한 지역 관할 재외공관 또는 재외국민 가족관계등록사무소에 신고 (온타리오·마니토바주에서 혼인 → 주토론토총영사관). 다른 주(예: 노바스코샤)에서 혼인했다면 해당 지역 관할 공관(예: 주몬트리얼총영사관)에 신고해야 합니다. 한국 거주 중이면 주소지 관할 주민센터 또는 재외국민 가족관계등록사무소 이용 가능.",
+      "우편 접수 시 여권·체류자격 증명서류는 사본만 제출하면 되며 공증이 필요하지 않습니다.",
+      "혼인증명서 원본은 반환되지 않습니다.",
       "본(本): 한국인의 본을 한자로 기재, 외국인은 공란.",
       "등록기준지 오기재 시 서류 반송.",
+      "서류 심사 후 필요 시 구비서류가 추가되거나 줄어들 수 있습니다.",
     ],
     booking: "https://www.torbooking.com/book",
     bookingLabel: "예약하기 (가족관계 → 혼인신고) →",
@@ -2169,6 +2187,7 @@ const TREE = {
       "이혼 당사자들의 가족관계증명서(상세) + 혼인관계증명서(상세) 각 1부",
       "  ▸ 상세증명서·주민번호 전부공개, 이혼당사자 각각 발급",
       "재외국민등록부 등본 각 1부 (외국 거주자)",
+      { text: "재외국민이 등록되어 있지 않은 경우 재외국민 등록 선처리 필수", goId: "registration_start" },
       "주민등록등본 각 1부 (한국 거주자)",
       "이혼 당사자 여권 사본 각 1부 (여권 없으면 주민등록증 사본)",
       "체류자격 증명서류 사본 각 1부 (영주권카드 또는 체류비자 / 한국 거주자로 주민등록등본 제출 시 불요)",
@@ -2178,6 +2197,7 @@ const TREE = {
     notices: [
       "⚠️ 쌍방 모두 대한민국 국적 보유자여야 합니다 — 일방이 외국인이면 캐나다 법원에서 이혼 후 신고.",
       "이혼 당사자 쌍방이 영사관을 방문하여 면담해야 합니다.",
+      "영사 면담은 온라인 예약 후, 예약일 당일 면담 가능 여부를 다시 확인하고 방문하세요.",
       "다른 관할 지역 거주 시 (예: 남편-밴쿠버, 아내-토론토): 한 곳 선택 접수 후 쌍방 그 영사관 방문.",
       "일방이 한국 거주: 영사관 또는 한국 가정법원 선택 가능 — 한국 가정법원 접수가 더 빠를 수 있음.",
       "면접교섭권을 지나치게 제약하는 경우 반송.",
@@ -9909,23 +9929,36 @@ const EN_TRANSLATIONS: any = {
       "  └ State the registration base address (bonjeok) accurately — shown at the top of the family relation certificate",
       "  └ Both marrying parties sign",
       "  └ Address: write phonetically in Korean",
-      "Marriage Certificate original, 1 copy (non-returnable)",
+      "Marriage Certificate original, 1 copy (non-returnable — sent to Korea)",
       "  └ Both Korean: Short-form or Long-form, either is fine",
       "  └ If there is a child born within 200 days of marriage: Long-form required",
+      "  └ If you need an additional certified copy, you can reapply at the relevant provincial office (Ontario/Manitoba)",
       "Korean translation of the marriage certificate (no notarization; date, name, signature at the bottom)",
+      "  └ Leave the official/registrar signature section blank (no need to fill it in)",
       "Both parties' passport originals + copies, 1 each",
+      "  └ Originals checked only from the party visiting in person (returned immediately); copies from both parties",
+      "  └ All passports must be valid",
       "  └ Dual citizens: copies of valid passports of all countries",
       "Both parties' Canadian residency-status proof copies, 1 each",
+      "  └ Dual citizens: also submit a birth certificate or citizenship certificate for each nationality held",
       "Identity confirmation statement (if applicable) — when the marriage-certificate name differs from the current passport name",
     ],
     costs: [{ label: "Fee", value: "Free" }],
     time: "About 4 weeks (a birth report can be accepted after the marriage report is processed)",
+    altBoxTitle: "If registering the marriage directly under Korean law",
+    altBox: [
+      "If there was no separate marriage ceremony/registration in Canada, and the marriage is established solely through the Korean marriage report, the document set differs.",
+      "• The Marriage Certificate and its translation are not required — since there is no Canadian marriage, this document simply doesn't exist.",
+      "• Instead, you need the details and signatures of 2 witnesses (Korean nationals with a resident registration; the witnesses do not need to visit in person).",
+    ],
     notices: [
-      "⚠️ Where to report: file with the consular jurisdiction where the marriage was established (Toronto jurisdiction: Ontario, Manitoba).",
+      "⚠️ Where to report: file with the consular jurisdiction where the marriage was established, or an overseas family register office (Ontario/Manitoba → Consulate General of Korea in Toronto). If married in another province (e.g., Nova Scotia), file with the relevant jurisdiction (e.g., Consulate General in Montreal). If residing in Korea, you may use your local community center or an overseas family register office.",
+      "For mail submission, passport and residency-status documents only need to be submitted as copies — no notarization is required.",
       "The marriage certificate original is not returned.",
       "Origin (bon): must be written in Chinese characters (e.g., 김해 김씨 → 金海).",
       "If the registration base address is wrong, the documents are returned — check the top of the basic or family relation certificate.",
       "Agreement on the child's surname/origin (if taking the mother's): a separate agreement may be submitted.",
+      "Required documents may be added or reduced after document review.",
     ],
     bookingLabel: "Book Appointment (Family Register → Marriage report) →",
   },
@@ -9933,28 +9966,35 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Family Register", "Reports", "Marriage report", "Korean + foreigner"],
     title: "Marriage report — Korean + foreigner",
     docs: [
-      "Electronic transmission application (form)",
+      "Electronic transmission application (form) — enter a KakaoTalk-linked phone number to receive processing status alerts",
       "Marriage report form (form) — use only Korean and Arabic numerals; leave the witness fields blank",
       "  └ State the Korean party's registration base address (bonjeok) accurately",
       "  └ Foreign spouse's name: surname then given name, including middle name, in Korean at the end (e.g., Last First Middle in Korean)",
-      "  └ If not a Korean national at the time of marriage, write the relevant nationality in the registration base field (e.g., 'Canada')",
-      "Marriage Certificate Long-form original, 1 copy (non-returnable)",
+      "  └ The registration base is written based on nationality at the time of marriage — if the Korean party held Korean nationality at marriage, write the registration base address (even if now a foreign national); if not Korean at marriage, write that nationality instead",
+      "  └ e.g. Chinese national at marriage → write 'China'; born in Korea but acquired Canadian citizenship before marriage → write 'Canada'; dual nationals list all nationalities held",
+      "Marriage Certificate Long-form original, 1 copy (non-returnable — sent to Korea)",
       "  └ Long-form required when one of the parties is a foreigner",
+      "  └ If you need an additional certified copy, you can reapply at the relevant provincial office (Ontario/Manitoba)",
       "Korean translation of the marriage certificate (no notarization)",
+      "  └ Leave the official/registrar signature section blank (no need to fill it in)",
       "Both parties' passport originals + copies, 1 each",
+      "  └ Originals checked only from the party visiting in person (returned immediately); copies from both parties",
+      "  └ All passports must be valid",
       "  └ Citizen: citizenship certificate (card type / Search of Citizenship Record not allowed; oath date required)",
       "  └ Canada-born citizen: Birth Certificate (Short/Long form either)",
       "  └ Dual citizens: copies of valid passports of all countries + birth certificate or citizenship certificate",
-      "Identity confirmation statement (if applicable)",
+      "Identity confirmation statement (if applicable) — when the marriage-certificate name differs from the current passport name",
       "  └ If the name was changed, also submit a Name Change Certificate",
     ],
     costs: [{ label: "Fee", value: "Free" }],
-    time: "About 4 weeks",
+    time: "About 4 weeks (a birth report can be accepted after the marriage report is processed)",
     notices: [
-      "⚠️ Where to report: file with the consular jurisdiction where the marriage was established.",
-      "The marriage certificate/judgment original is not returned.",
+      "⚠️ Where to report: file with the consular jurisdiction where the marriage was established, or an overseas family register office (Ontario/Manitoba → Consulate General of Korea in Toronto). If married in another province (e.g., Nova Scotia), file with the relevant jurisdiction (e.g., Consulate General in Montreal). If residing in Korea, you may use your local community center or an overseas family register office.",
+      "For mail submission, passport and residency-status documents only need to be submitted as copies — no notarization is required.",
+      "The marriage certificate original is not returned.",
       "Origin (bon): write the Korean party's origin in Chinese characters; leave blank for the foreigner.",
       "If the registration base address is wrong, the documents are returned.",
+      "Required documents may be added or reduced after document review.",
     ],
     bookingLabel: "Book Appointment (Family Register → Marriage report) →",
   },
@@ -9980,6 +10020,7 @@ const EN_TRANSLATIONS: any = {
       "Both parties' family relation certificate (detailed) + marriage relation certificate (detailed), 1 each",
       "  ▸ Detailed certificate, full resident number disclosed, issued for each party",
       "Overseas Korean registration extract, 1 each (overseas residents)",
+      { text: "If not yet registered as an overseas Korean, registration must be completed first", goId: "registration_start" },
       "Resident registration extract, 1 each (residents in Korea)",
       "Both parties' passport copies, 1 each",
       "Residency-status proof copies, 1 each",
@@ -9989,6 +10030,7 @@ const EN_TRANSLATIONS: any = {
     notices: [
       "⚠️ Both parties must be Korean nationals — if one is a foreigner, divorce in a Canadian court and then report.",
       "Both parties must visit the consulate for an interview.",
+      "Book the consul interview online in advance, and reconfirm on the day that the interview is still available before visiting.",
       "If living in different jurisdictions (e.g., husband in Vancouver, wife in Toronto): file at one chosen consulate, then both visit that consulate.",
       "If one party lives in Korea: you may choose the consulate or a Korean family court — filing at a Korean family court may be faster.",
       "Returned if visitation rights are excessively restricted.",
@@ -13656,7 +13698,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
           {/* RESULT */}
           {page.type === "result" && (() => {
             const svcIcon = services.find(s => s.id === (page.service + "_start") || s.id.startsWith(page.service ?? ""))?.icon ?? "";
-            const mainDocs = pageDocs.filter((d: any) => typeof d === "string" && !d.trim().startsWith("▸"));
+            const mainDocs = pageDocs.filter((d: any) => typeof d !== "string" || !d.trim().startsWith("▸"));
             const extraDocs = pageDocs.filter((d: any) => typeof d === "string" && d.trim().startsWith("▸"));
             return (
             <div>
@@ -13731,19 +13773,25 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                 </div>
                 <div className="info-card-body">
                   {(() => { let docNum = 0; return mainDocs.map((doc: any, i: number) => {
-                    const isSub = typeof doc === "string" && doc.trim().startsWith("└");
-                    const formUrl = getFormUrl(doc);
-                    const sampleUrl = getSampleUrl(doc);
+                    const isObjSub = doc && typeof doc === "object";
+                    const isSub = isObjSub || (typeof doc === "string" && doc.trim().startsWith("└"));
+                    const formUrl = typeof doc === "string" ? getFormUrl(doc) : null;
+                    const sampleUrl = typeof doc === "string" ? getSampleUrl(doc) : null;
                     if (isSub) {
-                      const subText = doc.replace(/^\s*└\s*/, "");
-                      const nextIsSub = typeof mainDocs[i + 1] === "string" && mainDocs[i + 1].trim().startsWith("└");
+                      const subText = isObjSub ? doc.text : doc.replace(/^\s*└\s*/, "");
+                      const subGoId = isObjSub ? doc.goId : null;
+                      const nextIsSub = (mainDocs[i + 1] && typeof mainDocs[i + 1] === "object") || (typeof mainDocs[i + 1] === "string" && mainDocs[i + 1].trim().startsWith("└"));
                       const subIsLast = i === mainDocs.length - 1;
-                      const subForm = getFormUrl(subText);
-                      const subSample = getSampleUrl(subText);
+                      const subForm = subGoId ? null : getFormUrl(subText);
+                      const subSample = subGoId ? null : getSampleUrl(subText);
                       return (
                         <div key={i} className="doc-item" style={{ paddingLeft: "30px", borderBottom: (nextIsSub || subIsLast) ? "none" : "1px solid #f2f4f9", paddingTop: "2px", paddingBottom: "2px" }}>
                           <span style={{ color: "#aab", flexShrink: 0 }}>└</span>
-                          <span style={{ fontSize: "12.5px", color: "#445", flex: 1 }}>{subText}</span>
+                          {subGoId ? (
+                            <span onClick={() => goTo(subGoId)} style={{ fontSize: "12.5px", color: "#003478", flex: 1, cursor: "pointer", textDecoration: "underline", fontWeight: 600 }}>{subText} ›</span>
+                          ) : (
+                            <span style={{ fontSize: "12.5px", color: "#445", flex: 1 }}>{subText}</span>
+                          )}
                           {subForm && (
                             <a className="form-dl" href={subForm} download target="_blank" rel="noopener noreferrer" aria-label={lang === "ko" ? "양식 다운로드" : "Download form"}>
                               📥<span className="form-label">{lang === "ko" ? "양식" : "Form"}</span>
@@ -13801,6 +13849,15 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
                   )}
                 </div>
               </div>
+              )}
+
+              {page.altBox && (
+                <div style={{ background: "#f5f8fd", border: "1px solid #d8e4f5", borderRadius: "12px", padding: "14px 16px", marginBottom: "1.1rem" }}>
+                  <div style={{ fontSize: "13.5px", fontWeight: 700, color: "#003478", marginBottom: "8px" }}>📌 {L("altBoxTitle", page.altBoxTitle ?? "")}</div>
+                  {(Array.isArray(L("altBox", page.altBox)) ? L("altBox", page.altBox) : []).map((line: string, i: number) => (
+                    <div key={i} style={{ fontSize: "12.5px", color: "#334", lineHeight: 1.6, marginBottom: i === (page.altBox.length - 1) ? 0 : "4px" }}>{line}</div>
+                  ))}
+                </div>
               )}
 
               {page.pickup && (

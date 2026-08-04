@@ -4508,7 +4508,7 @@ const TREE = {
       "【2단계 — 발급처에서 아포스티유 받기】",
       "연방정부 발행 / 마니토바 발행·공증 문서 → Global Affairs Canada (오타와)",
       "  ▸ 125 Sussex Drive, Ottawa, ON K1A 0G2 · 1-833-928-1551 · docs@international.gc.ca",
-      "온타리오 발행·공증 문서 → ServiceOntario (Official Documents Services)",
+      "온타리오 발행·공증 문서 → ServiceOntario / Ministry of Public and Business Service Delivery of Ontario",
       "  ▸ 777 Bay Street, Lower Level, Toronto, ON M7A 2J8 · 416-325-8416",
       "  ▸ 오타와·윈저·Sault Ste. Marie·Thunder Bay ServiceOntario 지점에서도 접수 가능",
     ],
@@ -4518,9 +4518,10 @@ const TREE = {
       "⚠️ 캐나다 시민권자의 서명인증서·거주증명서·동일인증명서 등도 캐나다 공증인 공증 후 아포스티유로 진행 (영사확인 불가).",
       "단, 위임장·상속재산분할협의서·상속포기서는 본인이 직접 영사관 방문 시 공증인 공증 없이 영사 인증도 가능합니다 (직접 작성 서류 메뉴 참조).",
       "한국 내 제출 기관(법원·등기소 등)이 캐나다 공증인 공증을 별도로 요구하는 경우가 있으니 제출처에 먼저 확인하세요.",
+      { text: "온타리오주 문서 인증(아포스티유) 안내 페이지", href: "https://www.ontario.ca/page/authenticate-document-use-outside-canada" },
       "한국에서 발행된 문서를 캐나다 등에 제출하려는 경우는 apostille.go.kr에서 온라인 발급(공동인증서 필요).",
     ],
-    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
+    onlineLink: "https://www.international.gc.ca/gac-amc/about-a_propos/services/authentication-authentification/step-etape-1.aspx?lang=eng",
   },
 
   // ── 한국 발행 문서 → 해외 제출(온라인 아포스티유) ──
@@ -4752,8 +4753,9 @@ const TREE = {
       "위임장·상속재산분할협의서·상속포기서는 시민권자라도 본인이 직접 영사관 방문 시 공증인 공증 없이 영사 인증이 가능합니다 (해당 메뉴 참조).",
       "자세한 아포스티유 발급처·절차는 첫 화면의 '캐나다 발행 문서' 안내를 참고하세요.",
       "한국 제출처가 요구하는 형식을 먼저 확인하세요.",
+      { text: "온타리오주 문서 인증(아포스티유) 안내 페이지", href: "https://www.ontario.ca/page/authenticate-document-use-outside-canada" },
     ],
-    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
+    onlineLink: "https://www.international.gc.ca/gac-amc/about-a_propos/services/authentication-authentification/step-etape-1.aspx?lang=eng",
   },
 
   // ── 인감 관련 공증 ──
@@ -8565,7 +8567,7 @@ const EN_TRANSLATIONS: any = {
       "【Step 2 — get the Apostille from the issuer】",
       "Federal documents / Manitoba-issued·notarized → Global Affairs Canada (Ottawa)",
       "  ▸ 125 Sussex Drive, Ottawa, ON K1A 0G2 · 1-833-928-1551 · docs@international.gc.ca",
-      "Ontario-issued·notarized → ServiceOntario (Official Documents Services)",
+      "Ontario-issued·notarized → ServiceOntario / Ministry of Public and Business Service Delivery of Ontario",
       "  ▸ 777 Bay Street, Lower Level, Toronto, ON M7A 2J8 · 416-325-8416",
       "  ▸ Also accepted at Ottawa·Windsor·Sault Ste. Marie·Thunder Bay ServiceOntario locations",
     ],
@@ -8575,9 +8577,10 @@ const EN_TRANSLATIONS: any = {
       "⚠️ A Canadian citizen's signature certificate, residence certificate, identity certificate, etc. also go through a Canadian notary + Apostille (consular authentication not available).",
       "However, a power of attorney, inheritance division agreement, and inheritance waiver can still be certified by the consul if you visit in person (see the 'document you wrote' menu).",
       "Some receiving institutions in Korea (courts, registry offices) may separately require a Canadian notary's notarization — check with the receiver first.",
+      { text: "Ontario document authentication (Apostille) guide page", href: "https://www.ontario.ca/page/authenticate-document-use-outside-canada" },
       "To submit a Korean-issued document abroad, use the online Apostille at apostille.go.kr (joint certificate required).",
     ],
-    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
+    onlineLink: "https://www.international.gc.ca/gac-amc/about-a_propos/services/authentication-authentification/step-etape-1.aspx?lang=eng",
   },
   notarization_korea_doc: {
     breadcrumb: ["Home", "Notarization", "Korean document for use abroad"],
@@ -8772,8 +8775,9 @@ const EN_TRANSLATIONS: any = {
       "A power of attorney, inheritance division agreement, and inheritance waiver can still be certified by the consul even for citizens if you visit in person (see that menu).",
       "For detailed Apostille issuers and procedure, see the 'Canadian-issued document' guide on the first screen.",
       "Check the format required by the receiving institution in Korea first.",
+      { text: "Ontario document authentication (Apostille) guide page", href: "https://www.ontario.ca/page/authenticate-document-use-outside-canada" },
     ],
-    onlineLink: "https://www.international.gc.ca/gac-amc/authentication-authentification/index.aspx",
+    onlineLink: "https://www.international.gc.ca/gac-amc/about-a_propos/services/authentication-authentification/step-etape-1.aspx?lang=eng",
   },
   notarization_ingam: {
     breadcrumb: ["Home", "Notarization", "Seal (ingam)"],
@@ -11886,6 +11890,10 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
     // 공증촉탁서 (공증 공통 양식 — 위임장·법률행위·사실행위·학적서류 등)
     if (t.startsWith("공증촉탁서") || t.startsWith("Notarization request form")) {
       return "/forms/notary_request_form.pdf";
+    }
+    // 일반 위임장 (공증 > 사문서 인증 > 위임장, 성인/미성년자 공통)
+    if (t.startsWith("위임장") || t.startsWith("Power of attorney")) {
+      return "/forms/notarization_general_poa.pdf";
     }
     // 인감증명서 발급 위임장
     if (t.startsWith("인감증명서 발급 위임장") || t.startsWith("Seal certificate power of attorney form")) {

@@ -76,7 +76,7 @@ const STYLES = `
     box-shadow: 0 2px 12px rgba(0,0,0,0.22);
   }
   .header-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; min-width: 0; flex: 1; }
-  .header-flag { width: 24px; height: 24px; flex-shrink: 0; }
+  .header-flag { width: 28px; height: 28px; flex-shrink: 0; }
   .header-title { color: #fff; font-size: 13.5px; font-weight: 700; line-height: 1.25; min-width: 0; }
   .header-title span { display: block; font-size: 11px; font-weight: 400; opacity: 0.75; margin-top: 1px; }
   .header-tel { color: rgba(255,255,255,0.8); font-size: 12px; display: flex; align-items: center; gap: 4px; flex-shrink: 0; white-space: nowrap; }
@@ -13117,11 +13117,7 @@ const page = (TREE as any)[pageId] ?? { type: "home" };
         {/* HEADER */}
         <header className="header">
           <button onClick={goHome} className="header-logo" aria-label={lang === "ko" ? "홈으로" : "Home"} style={{ background: "none", border: "none", cursor: "pointer" }}>
-            <svg className="header-flag" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0 }}>
-              <circle cx="18" cy="18" r="16" fill="#fff" stroke="#dde5f2" strokeWidth="1" />
-              <path d="M18 2 A16 16 0 0 1 18 34 A8 8 0 0 1 18 18 A8 8 0 0 0 18 2 Z" fill="#cd2e3a" />
-              <path d="M18 34 A16 16 0 0 1 18 2 A8 8 0 0 1 18 18 A8 8 0 0 0 18 34 Z" fill="#0047a0" />
-            </svg>
+            <img className="header-flag" src="/images/narah_emblem.png" alt={lang === "ko" ? "대한민국 문장" : "Emblem of the Republic of Korea"} style={{ flexShrink: 0, objectFit: "contain" }} />
             <div className="header-title">
               {lang === "ko" ? "주토론토 대한민국 총영사관" : "Consulate General of the Republic of Korea in Toronto"}
               <span>{lang === "ko" ? "민원 안내 서비스" : "Consular Services Guide"}</span>

@@ -5007,7 +5007,8 @@ const TREE = {
     breadcrumb: ["홈", "공증", "번역 공증", "캐나다 이민국 제출 불가"],
     title: "❌ 캐나다 이민국(IRCC) 제출 — 영사관 번역 공증 불인정",
     docs: [
-      "캐나다 이민국은 영사관을 통한 '제3자 번역문 인증' 방식을 인정하지 않습니다.",
+      "캐나다 이민국은 영사관을 통한 번역문 인증서를 인정하지 않습니다.",
+      "  ▸ 재외공관의 번역문 인증서는 '번역문과 원문의 내용이 서로 일치한다'는 서약인의 서약에 대해 인증하는 것일 뿐, 공관이 번역 내용의 정확성을 보증하는 것이 아닙니다.",
       "비자·영주권·시민권 신청 시 한국어 서류(출생/혼인/가족관계/성적표 등)를 번역하여 제출하려면:",
       "  ▸ 캐나다에서 번역 자격증을 소지한 전문 번역사 번역 공증 필요",
       "  ▸ 또는 변호사를 통한 번역 공증 필요",
@@ -8987,7 +8988,8 @@ const EN_TRANSLATIONS: any = {
     breadcrumb: ["Home", "Notarization", "Translation certification", "IRCC not accepted"],
     title: "❌ Canadian immigration (IRCC) submission — consular translation not accepted",
     docs: [
-      "Canadian immigration does not accept the consulate's 'third-party translation certification' method.",
+      "Canadian immigration does not accept translation certification issued through the consulate.",
+      "  ▸ A mission's translation certification only certifies the declarant's oath that 'the translation matches the original' — it does not certify the accuracy of the translation itself.",
       "To translate and submit Korean documents (birth/marriage/family relation/transcript, etc.) for a visa, PR, or citizenship application:",
       "  ▸ Translation certification by a certified professional translator in Canada is required",
       "  ▸ Or translation certification through a lawyer is required",
